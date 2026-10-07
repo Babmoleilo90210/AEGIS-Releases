@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "channel": "stable",
+  "version": "1.0.1",
+  "minimumSupported": "1.0.0",
+  "publishedAt": "YYYY-MM-DDTHH:MM:SSZ",
+  "windows": {
+    "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.0.1/AEGIS-Setup-1.0.1-x64.exe",
+    "sha256": "REPLACE_WITH_SHA256",
+    "size": 0
+  },
+  "cachyos": {
+    "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.0.1/AEGIS-1.0.1-CachyOS-x86_64.AppImage",
+    "sha256": "REPLACE_WITH_SHA256",
+    "size": 0
+  },
+  "notesUrl": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/tag/v1.0.1"
+}
