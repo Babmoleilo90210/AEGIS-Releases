@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reportKind": "OWNER_ACCEPTANCE_PENDING",
   "version": "1.0.0",
-  "manifestSha256": "2a613cce6d31b30f2cad70dd89f21e692d788c4148bc564d47b16f30730aed57",
+  "manifestSha256": "438c8bfc1b4111cbbb5a09976af1e0785dabb6716889853de9804bb6d279d1cd",
   "productionReady": false,
   "nativeReports": [],
   "checks": {

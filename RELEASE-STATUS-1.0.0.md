@@ -1,21 +1,19 @@
-# Подготовка АЕГИС 1.0.0 — 2026-10-08
+# АЕГИС 1.0.0 — установка и проверки
 
-Готовы Windows portable ZIP, Windows Setup EXE, CachyOS AppImage, полный client-source ZIP, SHA256SUMS, unsigned manifest и отдельный owner-side native acceptance kit. Java21/Tor/Lyrebird/libsodium включены в клиентские пакеты. Все три бинарных артефакта сохранены с ранее проверенными SHA-256; текущая дополнительная работа обновила тестовый комплект, исходный архив и release metadata.
+Для запуска используются обычные Windows Setup EXE / portable ZIP и CachyOS AppImage. Java21/Tor включены. Обычному пользователю не нужно подписывать файлы перед установкой. Для публикации stable-релиза владелец подтвердил порядок: финальная приёмка, затем offline-подпись manifest. Автоматическая проверка и скачивание обновлений на новом профиле выключены. Проверка цифровой подписи при использовании необязательного встроенного updater сохраняется.
 
-Проверено:
+Сборки упакованы; проверены Windows PE/иконки, ZIP, полный payload AppImage, runtime21 и совпадение общих application JAR обеих ОС. Клиент запущен со встроенным runtime и настоящим MessengerApp.start в headless Linux: первая форма появляется без manifest/signature. Это не native Windows/CachyOS тест и не подтверждение Tor100%.
 
-- 54 исходных JUnit: PASS, без failures/errors/skips.
-- Расширенный JUnit прогон: 86 tests, 85 PASS, 1 native Windows DPAPI SKIP, 0 failures/errors.
-- 16 release/security tests: PASS.
-- 32 frozen server/protocol/config/deployment файла без изменений.
-- ZIP/PE/icons/AppImage/runtime/JAR identity и SHA-256 проверены.
-- JavaFX сцены проверены headless; это не native Windows DPI или CachyOS Wayland/X11 приёмка.
-- Native kit на buildhost со встроенным runtime: 6 PASS, Secret Service FAIL_OR_UNAVAILABLE; D-Bus блокируется запретом Unix sockets. Это не PASS системного хранилища.
+Результаты: 86 JUnit, 85 PASS / 1 Windows DPAPI SKIP, 0 failures/errors. После изменения повторно выполнены 75 client-core tests; сохранены успешные результаты 11 неизменённых common/relay/integration tests. Все 54 исходных случая присутствуют. Повторены 16 release/security tests и JavaFX UI regression. Все 32 frozen server/common/protocol/config/deployment файла неизменны: Relay0.2.0 / protocol1 сохраняется.
 
-Открыты native Windows11/DPAPI/DPI/installer/updater/reboot, CachyOS/KDE/SecretService/Wayland/X11/reboot, реальный Tor100% и обмен Windows ↔ действующий Debian relay ↔ CachyOS с offline/ACK/TTL/файлами.
+**productionReady=false:** реальная Windows11, CachyOS/KDE, Tor100%, обмен через действующий VPS из разных сетей, offline/TTL/файлы и OS/VPS reboot ещё не подтверждены. Формальная подпись для обычной установки не является блокирующим условием. Локальное remembered unlock действует 7 дней; прежняя серверная сессия — 12 часов и сбрасывается после reboot relay.
 
-Ограничения frozen Relay0.2.0: bearer12h в RAM не обеспечивает буквальную семидневную беспарольную сетевую reauthentication; новый client AUTH KDF несовместим с existing server password hashes. Сохраняется совместимость и отдельное семидневное локальное разблокирование, account password не сохраняется.
+**GitHub Release assets пока не загружены.** Пользователь получает готовые файлы в сообщении с результатом; ссылки releases/download/v1.0.0 в гайдах заработают после загрузки. GitHub содержит документацию и changelog, live update manifest/signature не публиковались.
 
-**productionReady=false.** Release assets ещё не загружены в GitHub Release. Release, live stable/beta и production signature не опубликованы. Private release key не запрашивался, не читался и не передавался. Подпись выполняет только владелец offline после закрытия обязательной приёмки.
+## SHA-256 текущих сборок
 
-Этот commit публикует документацию и changelog; он не включает binaries, stable.json или stable.json.sig. Скачивание из GitHub станет доступно после отдельной публикации подписанного и принятого v1.0.0.
+| Файл | SHA-256 |
+| --- | --- |
+| AEGIS-Setup-1.0.0-x64.exe | `65105ce90fc1e7f8e2bf9741a484ad2c9c291d43d11065d207ed1ce44ac0dfc7` |
+| AEGIS-1.0.0-Windows-x64.zip | `f8dd50b1365388a662df1ae9be30a3c14f9de3ce67db34fe53f179648e614205` |
+| AEGIS-1.0.0-CachyOS-x86_64.AppImage | `1e7b22de4ba40baef552093561d99171be1e95e8d89019008ad446fd3eefc7a3` |
