@@ -8,6 +8,7 @@
 - [Установка на CachyOS](docs/README-CACHYOS.md)
 - [Что нового в 1.0.0](CHANGELOG-1.0.0.md)
 - [Статус подготовки и проверки](RELEASE-STATUS-1.0.0.md)
+- [Как подтвердить приёмку и сделать offline-подпись](docs/OWNER-ACCEPTANCE-AND-SIGNING.md)
 - [Все релизы](https://github.com/Babmoleilo90210/AEGIS-Releases/releases)
 
 ## Что добавлено

@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "reportKind": "OWNER_ACCEPTANCE_PENDING",
+  "version": "1.0.0",
+  "manifestSha256": "2a613cce6d31b30f2cad70dd89f21e692d788c4148bc564d47b16f30730aed57",
+  "productionReady": false,
+  "nativeReports": [],
+  "checks": {
+    "artifactChecksums": "PENDING",
+    "windowsPortableNoExternalJavaTor": "PENDING",
+    "windowsSetupOrdinaryUser": "PENDING",
+    "windowsNativeDpapiAndDpi100125150175200": "PENDING",
+    "cachyosAppImageNoExternalJavaTor": "PENDING",
+    "cachyosSecretService": "PENDING",
+    "cachyosWayland": "PENDING",
+    "cachyosX11": "PENDING",
+    "realTorBootstrap100": "PENDING",
+    "registrationAndLoginAfterRestart": "PENDING",
+    "windowsToCachyosAndReplyAcrossNetworks": "PENDING",
+    "offlineDeliveryAckNoDuplicates": "PENDING",
+    "ttlAfterDeliveryAndClientRestart": "PENDING",
+    "fileHashesMatch": "PENDING",
+    "bothClientRestartsAndOsReboots": "PENDING",
+    "vpsRebootDbAndOnionPersist": "PENDING",
+    "onlyOwnTorStops": "PENDING",
+    "uiIconsThemesPopups": "PENDING",
+    "updaterStartupAckAndRollback": "PENDING"
+  },
+  "compatibilityDecisions": {
+    "acceptTwelveHourRelaySessionAndSevenDayLocalUnlock": false,
+    "preserveExistingRelay020Protocol1AccountAuthentication": false
+  },
+  "publicationApprovedAfterSignatureVerification": false,
+  "instructions": "Replace PENDING with actual PASS, FAIL or NOT_TESTED. Send only reports and results, no passwords, keys, account names, database or working Tor data. This template does not change the release audit."
+}
