@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "application": "AEGIS",
+  "channel": "stable",
+  "version": "1.0.0",
+  "tag": "v1.0.0",
+  "repository": "Babmoleilo90210/AEGIS-Releases",
+  "protocolVersion": 1,
+  "relayCompatibility": [
+    "0.2.0"
+  ],
+  "artifacts": [
+    {
+      "fileName": "AEGIS-Setup-1.0.0-x64.exe",
+      "size": 66052777,
+      "sha256": "65105ce90fc1e7f8e2bf9741a484ad2c9c291d43d11065d207ed1ce44ac0dfc7",
+      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.0.0/AEGIS-Setup-1.0.0-x64.exe",
+      "platform": "windows-x64",
+      "kind": "installer"
+    },
+    {
+      "fileName": "AEGIS-1.0.0-Windows-x64.zip",
+      "size": 74644285,
+      "sha256": "f8dd50b1365388a662df1ae9be30a3c14f9de3ce67db34fe53f179648e614205",
+      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.0.0/AEGIS-1.0.0-Windows-x64.zip",
+      "platform": "windows-x64",
+      "kind": "portable"
+    },
+    {
+      "fileName": "AEGIS-1.0.0-CachyOS-x86_64.AppImage",
+      "size": 73935352,
+      "sha256": "1e7b22de4ba40baef552093561d99171be1e95e8d89019008ad446fd3eefc7a3",
+      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.0.0/AEGIS-1.0.0-CachyOS-x86_64.AppImage",
+      "platform": "cachyos-x86_64",
+      "kind": "appimage"
+    },
+    {
+      "fileName": "AEGIS-1.0.0-client-source.zip",
+      "size": 3135017,
+      "sha256": "3745572f1261392a88b4ea4cfad7763d54e3fb9efb9a9d5a674eaa74abc5e2ee",
+      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.0.0/AEGIS-1.0.0-client-source.zip",
+      "platform": "source",
+      "kind": "source"
+    }
+  ],
+  "checksums": {
+    "fileName": "SHA256SUMS",
+    "size": 569,
+    "sha256": "ea3bbc309a5059df55c7243eb0ae3017b88e70d15d5da99d7684906dab60249d",
+    "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.0.0/SHA256SUMS"
+  },
+  "changelog": {
+    "fileName": "CHANGELOG-1.0.0.md",
+    "size": 8114,
+    "sha256": "e061316eefc80351c6f5a737e74d65db721cc293ecf7f0b18d270c09d6634c6b",
+    "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.0.0/CHANGELOG-1.0.0.md"
+  },
+  "minimumSupported": "1.0.0",
+  "updatePolicy": "optional",
+  "announcement": {
+    "title": "Обновление АЕГИС 1.0.0",
+    "summary": "Компактный интерфейс, локальные аватары и пресеты, signed Tor updater и защищённое локальное разблокирование.",
+    "showAsLetter": true
+  },
+  "releaseNotes": {
+    "publishedAt": "2026-10-08T00:00:00Z",
+    "type": "Feature",
+    "text": "# АЕГИС 1.0.0 — изменения\n\n## Уточнение первого запуска — 8 октября 2026\n\n- Обычный пользователь устанавливает EXE/AppImage без собственных signing keys и команд подготовки релиза. Offline-подпись release manifest выполняет владелец отдельно после приёмки.\n- Windows распространяется как один Setup EXE либо portable ZIP; CachyOS — один AppImage. Java21/Tor находятся внутри.\n- Автоматическая проверка и скачивание обновлений на новом профиле выключены по умолчанию. Ранее явно сохранённый выбор пользователя сохраняется.\n- Ручная установка не зависит от stable.json или сервиса обновлений. Проверка подписей при использовании встроенного updater сохраняется.\n- Упрощены пользовательские инструкции; техническое описание сохранено отдельно.\n- Relay0.2.0 / protocol1, серверные файлы и форматы локального хранилища не изменены.\n\n## Предыдущий журнал этой версии\n\n# АЕГИС 1.0.0\n\nКлиентское обновление 0.3.0. Relay 0.2.0/common-protocol/server deployment оставлены без изменений; Debian package не выпускается.\n\n- Один пароль входа; новый vault KDF с domain separation. Полная проверяемая миграция старого vault, backup до открытия, journal/rollback и AEB1/AEB2 identity backup.\n- Регистрация без второго постоянного пароля. Пароль каждого письма и FF1 code остаются независимыми.\n- Нативный searchable contact ComboBox, компактные контакты и fingerprint по отдельному действию.\n- TTL ComboBox перенесён выше composer, popup оформлен для пяти тем; большой список вложений прокручивается.\n- До 64 обычных файлов любых типов в одном письме. Совокупный лимит сохранён. Duplicate names получают суффикс; traversal/ADS/device names отклоняются.\n- Локальное скачивание всех вложений в один WinZip AES-256 AE-2 ZIP через Zip4j 2.11.6. Пароль совпадает с паролем письма. Нет незашифрованных временных файлов, overwrite или auto-execute.\n- GUI появляется до bootstrap. Сохранённый onion подключается автоматически. Tor state не удаляется, последний успешный mode запоминается. Stall watchdog: direct 30 s без роста progress, Snowflake 75 s; глобальные пределы 150/300 s. Режимы запускаются последовательно.\n- Безопасная классификация настоящих Lyrebird STATUS/LOG/stderr: broker errors/connected/status, без сохранения сырого текста.\n- Windows Setup обнаруживает установленную версию, делает backup и сохраняет старые binaries для rollback. HKCU/per-user installation и прежние shortcuts.\n- AppImage предлагает обновление известного установленного образа и заменяет его атомарно после миграции; стабильный desktop Exec без версии.\n- AppImage собирается в новый временный файл и проходит реальное извлечение, проверку ELF/SquashFS, сравнение всех payload SHA-256 и запуск Java21 до замены готового релиза.\n\nНайдено и исправлено при разработке: рекурсия value/editor при фильтрации editable ComboBox; повторный запуск Tor во время bootstrap; устаревший ответ проверки другого сервера; прежний whitelist файлов; отсутствие полного backup mail/sent; потенциальное рекурсивное копирование backup внутрь source; несогласованный PID view при host-mounted /proc (Linux updater теперь закрепляет namespace-aware pidfd).\n\nПроверки: TEST-REPORT-1.0.0.md. Независимый криптоаудит, настоящая Windows DPI/installer приёмка и native CachyOS/Wayland/X11 по Tor пока не выполнены.\n\n## Завершение текущего кандидата — 2026-10-08\n\n- Production client JAR теперь содержит pinned Ed25519 update verifier, Tor HTTPS transport, строгий manifest, anti-rollback, download/cancel/progress, optional/required policy, signed notes/history и локальные системные письма.\n- Windows пакет содержит реальный AMD64 AEGIS-Updater.exe; helper запускается вне старого Job Object, ожидает PID/start time и startup confirmation. Сохраняется Windows uninstaller. CachyOS использует постоянный AppImage с атомарной заменой и rollback.\n- Семидневный локальный unlock через DPAPI CurrentUser / Secret Service без password storage. Ограничение существующего relay: token 12 часов, при reboot теряется; для нового network login нужен пароль. Буквальная семидневная server reauthentication и client AEGIS-AUTH-v1 несовместимы с замороженным protocol/auth и остаются открытыми условиями.\n- Локальные encrypted PNG/JPEG/WebP avatars, placeholder и contact picker avatars, лимиты bytes/dimensions, удаление metadata.\n- Компактный NAV / MAIL LIST / MAIL PREVIEW; 5 presets, custom JSON CRUD/import/export, scale/density/sidebar/avatar/preview/subject/date.\n- Единый Selector для всех dropdown; исправлен CSS warning плотности списка, повышен контраст старого парольного поля и ссылок в светлых темах.\n- Добавлены runtime updater, session, avatar/preset и Tor HTTPS security tests; повторены исходные 54 теста и 16 release tooling tests. Native Windows/CachyOS/VPS acceptance отдельно отмечена pending, productionReady не повышен искусственно.\n- Relay/common-protocol/config/installer остаются byte-identical по 32 frozen SHA-256. Никаких публикаций, live unsigned manifests и production signatures не создано.\n\n## Дополнение к приёмке — 2026-10-08\n\n- Отдельный native acceptance kit запускается на Windows и CachyOS со встроенной Java готового клиента. Проверяет packaged JAR hashes, шифрование, libsodium, vault reopen, OS credential store и GUI; сохраняет локальный JSON без паролей/ключей и без upload.\n- Kit не входит в classpath обычного клиента и не меняет relay или рабочий профиль. Его buildhost проверка: 6 PASS, native Secret Service недоступен из-за запрета Unix sockets; это не считается native Windows/CachyOS приёмкой.\n"
+  }
+}
