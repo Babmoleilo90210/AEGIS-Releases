@@ -22,7 +22,7 @@ final class MailViewer implements AutoCloseable {
     void original(MailContext reference);
     boolean unknown();
   }
-  private final Stage stage=new Stage();
+  private final Stage stage;private InWindowDialog<Void> page;
   private final PlainMessage plain;
   private final TextArea text=new TextArea();
   private final PasswordField password=new PasswordField();
@@ -43,8 +43,7 @@ final class MailViewer implements AutoCloseable {
   }
   MailViewer(Stage owner,ThemeManager themes,PlainMessage plain,LocalStore.HistoryItem item,ExecutorService worker,LongSupplier now,VBox host,Actions actions) {
     this.host=host;
-    this.plain=plain;stage.initOwner(owner);stage.setTitle(plain.subject().isBlank()?"Письмо":plain.subject());
-    stage.getIcons().setAll(owner.getIcons());stage.setMinWidth(520);stage.setMinHeight(400);content.setPadding(new Insets(22));
+    this.plain=plain;stage=owner;content.setPadding(new Insets(22));
     Label heading=new Label(plain.subject().isBlank()?"Без темы":plain.subject());heading.getStyleClass().add("brand");
     Label lifetime=new Label();lifetime.getStyleClass().add("muted");
     text.setEditable(false);text.setWrapText(true);text.setPrefRowCount(16);VBox.setVgrow(text,Priority.ALWAYS);
@@ -57,7 +56,7 @@ final class MailViewer implements AutoCloseable {
       forward.setOnAction(e->{
         if(closed||item.expiresAt()<=now.getAsLong())return;
         if(plain.protectedLetter()&&(opened==null||code.value().length==0||text.getText().isEmpty())){error.setText("Сначала откройте письмо");if(!content.getChildren().contains(error))content.getChildren().add(error);return;}
-        Alert confirm=new Alert(Alert.AlertType.CONFIRMATION,"Переслать открытый текст новым письмом?",ButtonType.OK,ButtonType.CANCEL);confirm.initOwner(host==null?stage:owner);confirm.setHeaderText(null);themes.apply(confirm.getDialogPane());
+        InWindowAlert confirm=new InWindowAlert(Alert.AlertType.CONFIRMATION,"Переслать открытый текст новым письмом?",ButtonType.OK,ButtonType.CANCEL);confirm.initOwner(host==null?stage:owner);confirm.setHeaderText(null);themes.apply(confirm.getDialogPane());
         CheckBox files=new CheckBox("Включить вложения");if(!plain.files().isEmpty())confirm.getDialogPane().setContent(new VBox(10,new Label("Переслать это письмо выбранному получателю?"),files));
         if(confirm.showAndWait().orElse(ButtonType.CANCEL)==ButtonType.OK&&!closed&&item.expiresAt()>now.getAsLong())actions.forward(item,plain,text.getText(),files.isSelected()?plain.copyFiles():null);
       });
@@ -88,9 +87,9 @@ final class MailViewer implements AutoCloseable {
       download.setOnAction(e->{
         if(closed||item.expiresAt()<=now.getAsLong()||exporting)return;
         if(actions!=null&&actions.unknown()){
-          Alert confirm=new Alert(Alert.AlertType.CONFIRMATION,"Сохранить вложение неизвестного отправителя?",ButtonType.OK,ButtonType.CANCEL);confirm.initOwner(host==null?stage:owner);confirm.setHeaderText(null);themes.apply(confirm.getDialogPane());if(confirm.showAndWait().orElse(ButtonType.CANCEL)!=ButtonType.OK)return;
+          InWindowAlert confirm=new InWindowAlert(Alert.AlertType.CONFIRMATION,"Сохранить вложение неизвестного отправителя?",ButtonType.OK,ButtonType.CANCEL);confirm.initOwner(host==null?stage:owner);confirm.setHeaderText(null);themes.apply(confirm.getDialogPane());if(confirm.showAndWait().orElse(ButtonType.CANCEL)!=ButtonType.OK)return;
         }
-        String chosen=selectedFile.getValue();FileChooser chooser=new FileChooser();chooser.setInitialFileName(plain.protectedLetter()?"AEGIS_Documents_"+java.time.LocalDate.now()+".zip":chosen);var file=chooser.showSaveDialog(host==null?stage:owner);
+        String chosen=selectedFile.getValue();InWindowFileChooser chooser=new InWindowFileChooser();chooser.setInitialFileName(plain.protectedLetter()?"AEGIS_Documents_"+java.time.LocalDate.now()+".zip":chosen);var file=chooser.showSaveDialog(host==null?stage:owner);
         if(file==null||closed||item.expiresAt()<=now.getAsLong())return;
         if(java.nio.file.Files.exists(file.toPath())){error.setText("Файл уже существует. Выберите другое имя.");if(!content.getChildren().contains(error))content.getChildren().add(error);return;}
         char[] secret=archivePassword==null?new char[0]:archivePassword.clone();exporting=true;download.setDisable(true);download.setText("Сохранение…");
@@ -101,14 +100,14 @@ final class MailViewer implements AutoCloseable {
         finally{Arrays.fill(secret,'\0');Platform.runLater(()->{exporting=false;if(closed)plain.close();else{download.setDisable(false);download.setText(plain.protectedLetter()?"Скачать вложения":"Сохранить файл");}});}});
       });content.getChildren().add(download);
     }
-    themes.apply(content);if(host==null){stage.initStyle(StageStyle.UNDECORATED);BorderPane window=new BorderPane(content);window.setTop(new WindowChrome(stage));themes.apply(window);Scene scene=new Scene(window,720,600);stage.setScene(scene);WindowChrome.resize(stage,scene);}else {host.getChildren().setAll(content);VBox.setVgrow(content,Priority.ALWAYS);}
+    themes.apply(content);if(host==null){page=new InWindowDialog<>();page.initOwner(owner);page.setTitle(plain.subject().isBlank()?"Письмо":plain.subject());page.getDialogPane().setContent(content);themes.apply(page.getDialogPane());page.onClose(this::close);}else{host.getChildren().setAll(content);VBox.setVgrow(content,Priority.ALWAYS);}
     timer=new Timeline(new KeyFrame(Duration.seconds(1),e->{long left=item.expiresAt()-now.getAsLong();if(left<=0){close();return;}lifetime.setText("Удаление через "+java.time.Duration.ofMillis(left).toMinutes()+" мин");}));
-    timer.setCycleCount(Animation.INDEFINITE);timer.play();stage.setOnHidden(e->close());if(item.expiresAt()>now.getAsLong()){if(host==null)stage.show();}else close();
+    timer.setCycleCount(Animation.INDEFINITE);timer.play();if(item.expiresAt()>now.getAsLong()){if(host==null)page.show();}else close();
   }
-  boolean showing(){return !closed&&(host!=null||stage.isShowing());}
+  boolean showing(){return !closed&&(host!=null||page!=null&&page.isShowing());}
   @Override public void close(){
     if(closed)return;closed=true;timer.stop();if(live!=null)live.close();if(opened!=null)opened.close();
-    password.clear();code.clear();text.clear();content.getChildren().clear();if(archivePassword!=null){Arrays.fill(archivePassword,'\0');archivePassword=null;}if(!exporting)plain.close();stage.close();
+    password.clear();code.clear();text.clear();content.getChildren().clear();if(archivePassword!=null){Arrays.fill(archivePassword,'\0');archivePassword=null;}if(!exporting)plain.close();if(page!=null)page.close();
   }
 }
 

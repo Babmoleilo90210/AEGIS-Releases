@@ -58,3 +58,55 @@ jobs:
             candidates/evidence/
           retention-days: 14
           if-no-files-found: error
+
+  bug11-windows:
+    needs: candidates
+    runs-on: windows-2025
+    timeout-minutes: 23
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: AEGIS-1.1.0-unsigned-candidates
+          path: candidates
+      - uses: actions/download-artifact@v4
+        with:
+          name: AEGIS-1.1.0-unsigned-candidates
+          run-id: 37897799414
+          github-token: ${{ github.token }}
+          path: before-candidates
+      - name: Windows native one-window UI, packaged EXE, NSIS and real Tor updater
+        shell: pwsh
+        run: python aegis/tools/validate-bug11-packaged.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: AEGIS-1.1.0-BUG11-Windows-evidence
+          path: validation-evidence/
+          retention-days: 14
+          if-no-files-found: error
+  bug11-real-tor-linux:
+    needs: candidates
+    runs-on: ubuntu-24.04
+    timeout-minutes: 22
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: AEGIS-1.1.0-unsigned-candidates
+          path: candidates
+      - uses: actions/download-artifact@v4
+        with:
+          name: AEGIS-1.1.0-unsigned-candidates
+          run-id: 37897799414
+          github-token: ${{ github.token }}
+          path: before-candidates
+      - name: Exact AppImage runtime and embedded Tor old-feed regression
+        run: python3 aegis/tools/validate-bug11-packaged.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: AEGIS-1.1.0-BUG11-Linux-Tor-evidence
+          path: validation-evidence/
+          retention-days: 14
+          if-no-files-found: error

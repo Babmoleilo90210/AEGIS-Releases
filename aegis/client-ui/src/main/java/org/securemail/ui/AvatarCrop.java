@@ -14,7 +14,7 @@ final class AvatarCrop {
   private AvatarCrop(){}
   static byte[] show(Stage owner,ThemeManager themes,byte[] preview)throws java.io.IOException{
     Image image=new Image(new ByteArrayInputStream(preview));if(image.isError())throw new java.io.IOException("Не удалось открыть изображение");
-    Dialog<byte[]> dialog=new Dialog<>();dialog.initOwner(owner);dialog.setTitle("Обрезать аватар");
+    InWindowDialog<byte[]> dialog=new InWindowDialog<>();dialog.initOwner(owner);dialog.setTitle("Обрезать аватар");
     ImageView view=new ImageView(image);view.setFitWidth(256);view.setFitHeight(256);
     Slider x=new Slider(0,1,.5),y=new Slider(0,1,.5),zoom=new Slider(1,4,1);
     Runnable redraw=()->{double side=Math.min(image.getWidth(),image.getHeight())/zoom.getValue();view.setViewport(new Rectangle2D((image.getWidth()-side)*x.getValue(),(image.getHeight()-side)*y.getValue(),side,side));};

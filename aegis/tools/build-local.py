@@ -4,7 +4,7 @@
 Gradle remains the normal build. This script never downloads dependencies and does not
 mark a native platform acceptance successful. --deps may be repeated for runtime/test jars.
 """
-import argparse, os, pathlib, subprocess, sys
+import argparse, os, pathlib, subprocess, sys, shutil
 
 parser=argparse.ArgumentParser()
 parser.add_argument('--jdk',required=True,type=pathlib.Path)
@@ -24,7 +24,7 @@ if not version.startswith('javac 21.'):
 out=root/'build/local-java21';out.mkdir(parents=True,exist_ok=True)
 classpath=list(deps)
 for module in ['common-protocol','client-core','relay-server','client-ui']:
-    classes=out/module/'classes';classes.mkdir(parents=True,exist_ok=True)
+    classes=out/module/'classes';shutil.rmtree(classes,ignore_errors=True);classes.mkdir(parents=True)
     sources=sorted((root/module/'src/main/java').rglob('*.java'))
     source_list=out/(module+'.sources')
     source_list.write_text('\n'.join('"'+str(p).replace('\\','\\\\').replace('"','\\"')+'"' for p in sources)+'\n')
@@ -38,7 +38,7 @@ for module in ['common-protocol','client-core','relay-server','client-ui']:
     subprocess.run(command,check=True,timeout=30)
     classpath.append(jar)
 if not args.skip_tests:
-    testclasses=out/'tests';testclasses.mkdir(exist_ok=True)
+    testclasses=out/'tests';shutil.rmtree(testclasses,ignore_errors=True);testclasses.mkdir()
     sources=sorted(p for module in ['common-protocol','client-core','relay-server','integration-tests']
                    for p in (root/module/'src/test/java').rglob('*.java'))
     source_list=out/'tests.sources';source_list.write_text('\n'.join('"'+str(p)+'"' for p in sources)+'\n')

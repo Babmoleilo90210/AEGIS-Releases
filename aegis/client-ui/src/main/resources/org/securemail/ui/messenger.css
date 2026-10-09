@@ -20,3 +20,6 @@
 .window-chrome { -fx-background-color:-aegis-panel; -fx-padding:5 8 5 12; -fx-spacing:5; -fx-alignment:center-left; }
 .window-chrome .button { -fx-min-width:32; -fx-min-height:26; -fx-padding:3 8; -fx-background-color:transparent; }
 .window-chrome .button:hover { -fx-background-color:-aegis-control; }
+.in-window-page { -fx-background-color:-aegis-bg; }
+.in-window-page .heading { -fx-font-size:16px; -fx-padding:0; }
+.in-window-content { -fx-background-color:-aegis-bg; -fx-padding:12 16; }
