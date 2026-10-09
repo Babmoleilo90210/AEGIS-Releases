@@ -63,18 +63,21 @@ def main():
     oldimage=work/'AEGIS-1.0.0-CachyOS-x86_64.AppImage';oldimage.chmod(0o755)
     run([oldimage,'--appimage-extract'],cwd=work,log=evidence/'input-appimage-extract.log',timeout=120)
     linux=work/'squashfs-root';windows=work/'windows';unzip(work/'AEGIS-1.0.0-Windows-x64.zip',windows)
+    (linux/'tor/pluggable_transports/lyrebird').chmod(0o755)
     baseline=work/'baseline';unzip(work/'AEGIS-1.0.0-client-source.zip',baseline)
     deps=work/'deps';deps.mkdir(exist_ok=True)
     for coordinate,digest in MAVEN.items():download('https://repo.maven.apache.org/maven2/'+coordinate,deps/pathlib.PurePosixPath(coordinate).name,digest)
     common=[sys.executable,ROOT/'tools/build-local.py','--jdk',jdk,'--deps',linux/'app','--deps',deps,'--native-root',linux]
     run(common,timeout=600,log=evidence/'java21-build-tests.log')
+    build=ROOT/'build/local-java21'
+    jars=[jar for jar in (linux/'app').glob('*.jar') if not jar.name.startswith(('client-core-','client-ui-','common-protocol-','relay-server-'))]+list(deps.glob('*.jar'))+list(build.glob('*.jar'))
+    run([jdk/'bin/java','-Xmx256m','-cp',os.pathsep.join(map(str,jars+[build/'tests'])),'org.securemail.client.TorProcessSmoke',linux],timeout=60,log=evidence/'TorProcessSmoke.log')
     run([sys.executable,'-m','unittest','-v','test_release_manifest'],cwd=ROOT/'tools',log=evidence/'release-security-tests.log')
     ui=[sys.executable,ROOT/'tools/run-ui-regression.py','--jdk',jdk,'--deps',linux/'app','--deps',deps,'--native-root',linux]
     for test in ['ClientUiRegressionSmoke','Aegis11UiSmoke']:
         run(ui+['--test',test],log=evidence/(test+'.log'))
     if (ROOT/'tools/compatibility-matrix.py').exists():
         run([sys.executable,ROOT/'tools/compatibility-matrix.py','--jdk',jdk,'--baseline',baseline/'aegis','--base-app',linux,'--deps',deps],log=evidence/'compatibility-matrix.log',timeout=360)
-    build=ROOT/'build/local-java21'
     for platform,base in [('linux',linux),('win',windows/'AEGIS')]:
         target=ROOT/'client-ui/build/stage'/platform
         if target.exists():shutil.rmtree(target)

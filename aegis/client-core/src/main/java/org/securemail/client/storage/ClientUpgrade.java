@@ -12,8 +12,9 @@ public final class ClientUpgrade {
   private ClientUpgrade() {}
   public static Path beforeOpen(Path profile,Path backups)throws IOException {
     recover(profile);
-    if(!Files.exists(profile.resolve("state.vault"))||LocalStore.modernVault(profile))return null;
-    Path marker=backups.resolve("migration-backup-location");
+    if(!Files.exists(profile.resolve("state.vault")))return null;
+    // A 1.0 Argon2 vault still needs a full first-1.1 snapshot before creating sidecars.
+    Path marker=backups.resolve(LocalStore.modernVault(profile)?"upgrade-1.1-backup-location":"migration-backup-location");
     if(Files.exists(marker)){
       Path existing=Path.of(Files.readString(marker).strip());
       if(existing.getParent().equals(backups.toAbsolutePath())&&Files.exists(existing.resolve("snapshot.properties"))){ProfileSnapshot.verify(existing,org.securemail.client.ClientConfig.load(AppPaths.config()).withStorage(profile));return existing;}

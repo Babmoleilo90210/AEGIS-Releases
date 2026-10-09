@@ -10,11 +10,17 @@ import org.securemail.client.*;
 /** Complete ciphertext/settings snapshot. Caller holds the app lock with vault and Tor closed. */
 public final class ProfileSnapshot {
   private ProfileSnapshot(){}
-  private static Map<String,Path> sources(ClientConfig config){
+  private static boolean updateMetadata(String name){return name.matches("(?:stable|beta)\\.floor|lastAnnouncementVersion-(?:stable|beta)|(?:stable|beta)-[A-Za-z0-9.-]{1,100}\\.(?:json|sig)");}
+  private static Map<String,Path> sources(ClientConfig config)throws IOException{
     var result=new LinkedHashMap<String,Path>();
     result.put("vault",config.storagePath());result.put("client-config",AppPaths.config());
     for(String name:List.of("ui-preferences.json","theme.txt","mail-mode.txt","tor-mode.txt","update-preferences.json","session","tor/state","tor/transport-state"))
       result.put("app/"+name,AppPaths.root().resolve(name));
+    Path updates=AppPaths.root().resolve("updates");
+    if(Files.isSymbolicLink(updates))throw new IOException("Snapshot symlink rejected");
+    if(Files.isDirectory(updates))try(var files=Files.list(updates)){
+      for(Path file:files.toList())if(updateMetadata(file.getFileName().toString()))result.put("app/updates/"+file.getFileName(),file);
+    }
     return result;
   }
   public static Path create(ClientConfig config,Path backups)throws IOException{
@@ -43,8 +49,12 @@ public final class ProfileSnapshot {
   /** Previous failed state is preserved by rename; no existing identity is destroyed. */
   public static void restore(Path snapshot,ClientConfig config)throws IOException{
     verify(snapshot,config);var p=new Properties();try(var input=Files.newInputStream(snapshot.resolve("snapshot.properties"))){p.load(input);}
-    for(var target:sources(config).values()){Path parent=target.toAbsolutePath().normalize();while(parent!=null){if(Files.isSymbolicLink(parent))throw new IOException("Profile restore symlink rejected");parent=parent.getParent();}}
-    for(var entry:sources(config).entrySet()){
+    var targets=sources(config);
+    for(String key:p.stringPropertyNames())if(key.startsWith("present/app/updates/")){
+      String name=key.substring("present/app/updates/".length());if(!updateMetadata(name))throw new IOException("Invalid update metadata backup");targets.put("app/updates/"+name,AppPaths.root().resolve("updates").resolve(name));
+    }
+    for(var target:targets.values()){Path parent=target.toAbsolutePath().normalize();while(parent!=null){if(Files.isSymbolicLink(parent))throw new IOException("Profile restore symlink rejected");parent=parent.getParent();}}
+    for(var entry:targets.entrySet()){
       Path target=entry.getValue().toAbsolutePath().normalize();AtomicFiles.directory(target.getParent());
       Path candidate=target.resolveSibling(target.getFileName()+".restore-"+UUID.randomUUID());
       boolean present="true".equals(p.getProperty("present/"+entry.getKey()));if(present)copy(snapshot.resolve(entry.getKey()),candidate);

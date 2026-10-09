@@ -80,7 +80,8 @@ with tempfile.TemporaryDirectory(prefix='.appimage-build-',dir=out) as directory
  candidate=pathlib.Path(directory)/image.name
  if a.mksquashfs:
   squash=pathlib.Path(directory)/'payload.squashfs'
-  run([a.mksquashfs.resolve(),linux,squash,'-noappend','-comp','xz','-b','131072','-all-root','-no-xattrs','-mkfs-time',env['SOURCE_DATE_EPOCH'],'-all-time',env['SOURCE_DATE_EPOCH']])
+  # The verified Type 2 runtime supports zlib/zstd, not xz. Validate by actual extraction.
+  run([a.mksquashfs.resolve(),linux,squash,'-noappend','-comp','zstd','-b','131072','-all-root','-no-xattrs','-mkfs-time',env['SOURCE_DATE_EPOCH'],'-all-time',env['SOURCE_DATE_EPOCH']])
   with candidate.open('wb') as output:
    for part in [a.appimage_runtime.resolve(),squash]:
     with part.open('rb') as input:shutil.copyfileobj(input,output)
