@@ -6,7 +6,7 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: aegis11-candidates
+  group: aegis11-candidates-${{ github.sha }}
   cancel-in-progress: false
 jobs:
   candidates:
@@ -37,8 +37,8 @@ jobs:
       - name: Install packaging tools only on the disposable build worker
         shell: bash
         run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends mingw-w64 nsis squashfs-tools
+          sudo timeout 90s apt-get -o Acquire::http::Timeout=15 -o Acquire::https::Timeout=15 -o Acquire::Retries=1 update
+          sudo env DEBIAN_FRONTEND=noninteractive timeout 180s apt-get -o Acquire::http::Timeout=15 -o Acquire::https::Timeout=15 -o Acquire::Retries=1 install -y --no-install-recommends gcc-mingw-w64-x86-64 nsis squashfs-tools
       - name: Build, test, and package unsigned candidates
         shell: bash
         run: |
