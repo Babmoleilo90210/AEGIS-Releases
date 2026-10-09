@@ -41,10 +41,10 @@ if windows:
  for n in ['JAVA_TOOL_OPTIONS','_JAVA_OPTIONS','JDK_JAVA_OPTIONS','CLASSPATH']:env.pop(n,None)
  check('packaged_runtime_native_cryptography_DPAPI_and_JavaFX',lambda:run([java,'-Xmx768m','-cp',str(kit/'aegis-native-tests.jar')+';'+cp,'org.securemail.client.security.NativeAcceptanceMain',app,kit,'--gui'],'native-acceptance.log',600,env, out))
  def install():
-  fixture=root/'installer fixture';fixture.mkdir(exist_ok=True)
+  fixture=root/'installer-fixture';fixture.mkdir(exist_ok=True)
   local=dict(env);local['LOCALAPPDATA']=str(fixture)
   run([inputs/'AEGIS-Setup-1.1.0-x64.exe','/S','/D='+str(fixture/'Programs/AEGIS')],'installer.log',100,local)
-  target=fixture/'Programs/AEGIS';assert (target/'AEGIS.exe').is_file()
+  target=fixture/'Programs/AEGIS';(out/'installer-files.json').write_text(json.dumps({'target':str(target),'exists':target.exists(),'files':[str(p.relative_to(target)) for p in target.rglob('*') if p.is_file()]},indent=2));assert (target/'AEGIS.exe').is_file()
   for p in (app/'app').glob('*.jar'):
    assert hashlib.sha256(p.read_bytes()).digest()==hashlib.sha256((target/'app'/p.name).read_bytes()).digest()
  check('real_NSIS_silent_install_with_isolated_profile',install)
