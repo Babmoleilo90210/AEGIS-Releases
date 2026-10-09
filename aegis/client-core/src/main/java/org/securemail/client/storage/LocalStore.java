@@ -158,6 +158,8 @@ public final class LocalStore implements AutoCloseable {
   public synchronized void cacheProfile(PublicProfile profile)throws IOException,GeneralSecurityException{
     ensureOpen();UserInfo owner=profile.nickname().equals(nickname)?new UserInfo(identity.userId(),nickname,identity.publicKey(),null):contact(profile.nickname());
     if(owner==null)throw new IOException("Verify contact before caching its profile");verifyProfileOwner(owner,profile);
+    // A valid owner signature does not make an image decoder input trustworthy.
+    byte[] avatar=profile.avatar();try{if(avatar.length!=0){byte[] checked=AvatarCodec.normalize(avatar);Arrays.fill(checked,(byte)0);}}finally{Arrays.fill(avatar,(byte)0);}
     var previous=cachedProfile(profile.nickname());if(previous!=null&&previous.revision()>profile.revision())throw new GeneralSecurityException("Profile replay");
     if(previous!=null&&previous.revision()==profile.revision()){
       if(!Arrays.equals(Binary.encode(previous::write),Binary.encode(profile::write)))throw new GeneralSecurityException("Profile revision conflict");return;

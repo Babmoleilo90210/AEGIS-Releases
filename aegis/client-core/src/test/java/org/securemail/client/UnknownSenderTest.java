@@ -42,4 +42,15 @@ class UnknownSenderTest {
       }
     }
   }
+  @Test void signedButDamagedUnknownCiphertextDoesNotSuppressOtherInboxResults()throws Exception{
+    var sender=Identity.create();var crypto=new AutomaticEncryption(Clock.systemUTC());
+    try(var local=new LocalStore(root,"damaged mail test password".toCharArray(),Clock.systemUTC(),200000,1000000)){
+      local.bindNickname("blackfox");var recipient=new UserInfo(local.identity().userId(),"blackfox",local.identity().publicKey(),null);EncryptedPacket bad,good;
+      try(var plain=PlainMessage.text("damaged content")){var p=crypto.encrypt(plain,300,60000,sender,"raven",recipient);byte[] altered=p.ciphertext();altered[altered.length-1]^=1;
+        bad=sender.signPacket(new EncryptedPacket(p.messageId(),p.senderId(),p.senderNickname(),p.recipientId(),p.createdAt(),p.deliveryDeadline(),p.ttlAfterDelivery(),p.algorithm(),p.salt(),p.nonce(),altered,p.senderPublicKey(),new byte[0]));}
+      try(var plain=PlainMessage.text("good content")){good=crypto.encrypt(plain,300,60000,sender,"raven",recipient);}
+      local.accept(bad);local.accept(good);var found=LocalMailSearch.find(local,new LocalFeatures(local),new LocalMailSearch.Query("","",0,Long.MAX_VALUE,LocalMailSearch.Scope.INBOX),100000);
+      assertEquals(2,found.size());assertTrue(found.stream().anyMatch(r->r.item().id().equals(bad.messageId())&&r.subject().equals("Повреждённое письмо")&&r.signatureValid()));assertTrue(found.stream().anyMatch(r->r.item().id().equals(good.messageId())));
+    }
+  }
 }
