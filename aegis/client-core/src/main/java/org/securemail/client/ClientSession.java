@@ -13,6 +13,7 @@ public final class ClientSession implements AutoCloseable {
   private final NetworkService network;
   private final LocalFeatures features;
   private int contactCursor;
+  private int revocationCursor;
   private volatile int relayCapabilities=-1;
   private volatile String publicStatus="";
   private final EncryptionService crypto = new EncryptionService(Clock.systemUTC());
@@ -127,6 +128,14 @@ public final class ClientSession implements AutoCloseable {
         var profile=local.identity().profile(local.nickname(),revision,features.visible(),features.about(),avatar==null?new byte[0]:avatar);
         network.publishProfile(profile);local.cacheProfile(profile);features.profilePublished();
       }finally{if(avatar!=null)java.util.Arrays.fill(avatar,(byte)0);}
+    }
+    if((relayCapabilities&2)!=0){
+      var revoked=features.revokedConsentTargets();
+      if(!revoked.isEmpty()){
+        String target=revoked.get(Math.floorMod(revocationCursor++,revoked.size()));var ours=network.relationship(target).ours();
+        if(ours!=null&&(!ours.ownerId().equals(local.identity().userId())||!ours.targetId().equals(target)||!java.security.MessageDigest.isEqual(ours.publicKey(),local.identity().publicKey())||!Identity.verify(ours.publicKey(),ours.signingBytes(),ours.signature())))throw new java.security.GeneralSecurityException("Invalid own consent");
+        if(ours==null||ours.active())network.publishConsent(local.identity().consent(target,Math.max(local.now(),ours==null?1:Math.addExact(ours.revision(),1)),false));
+      }
     }
     var contacts=local.contacts();if(selected==null&&!contacts.isEmpty())selected=contacts.get(Math.floorMod(contactCursor++,contacts.size()));
     if(selected!=null){

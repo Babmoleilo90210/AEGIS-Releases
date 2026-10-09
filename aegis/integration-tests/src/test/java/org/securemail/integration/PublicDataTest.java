@@ -11,6 +11,7 @@ import org.securemail.client.net.*;
 import org.securemail.client.storage.*;
 import org.securemail.protocol.*;
 import org.securemail.relay.*;
+import org.securemail.client.*;
 
 /** Real SQLite and wire protocol through a controlled SOCKS harness, not native Tor acceptance. */
 class PublicDataTest {
@@ -47,6 +48,19 @@ class PublicDataTest {
       var visible=LocalMailSearch.find(b,features,new LocalMailSearch.Query("","",0,Long.MAX_VALUE,LocalMailSearch.Scope.INBOX),1000000);assertEquals(1,visible.size());assertEquals("raven",visible.getFirst().item().contact());
       var blocked=LocalMailSearch.find(b,features,new LocalMailSearch.Query("","",0,Long.MAX_VALUE,LocalMailSearch.Scope.BLOCKED),1000000);assertEquals(1,blocked.size());assertTrue(blocked.getFirst().unknown());assertTrue(blocked.getFirst().signatureValid());
       nu.deliver(first);assertEquals(0,nb.fetchAndAcknowledge());assertEquals(2,b.inbox().size());
+    }
+  }
+  @Test void offlineContactRemovalStillRevokesRelayConsentAfterReconnect()throws Exception{
+    Clock clock=Clock.systemUTC();var config=config();
+    try(var relay=new RelayStore(config,clock);var server=new RelayServer(config,relay,clock);var socks=new SocksHarness();var a=new LocalStore(root.resolve("a"),PASSWORD,clock,1000000,8000000);var b=new LocalStore(root.resolve("b"),PASSWORD,clock,1000000,8000000)){
+      server.start();socks.destinations.put(SocksHarness.RELAY,server.port());var na=network(socks,a);var nb=network(socks,b);na.authenticate("raven",PASSWORD,true);nb.authenticate("blackfox",PASSWORD,true);a.trust(na.find("blackfox"));b.trust(nb.find("raven"));
+      long now=clock.millis();na.publishConsent(a.identity().consent(b.identity().userId(),now,true));nb.publishConsent(b.identity().consent(a.identity().userId(),now,true));
+      var clientConfig=new ClientConfig("127.0.0.1",socks.port(),19051,root.resolve("no-control-cookie"),19120,300,SocksHarness.RELAY,80,root.resolve("b"),1000000,8000000,60000);
+      try(var session=new ClientSession(clientConfig,b)){
+        session.features().consent(a.identity().userId(),false);b.removeContact("raven");assertNull(b.contact("raven"));assertTrue(na.relationship(b.identity().userId()).theirs().active());
+        session.network().authenticate("blackfox",PASSWORD,false);session.syncPublicData(null);
+        assertFalse(na.relationship(b.identity().userId()).theirs().active());assertNull(b.contact("raven"));assertFalse(session.features().friend(a.identity().userId()));
+      }
     }
   }
 }

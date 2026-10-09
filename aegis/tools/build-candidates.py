@@ -36,7 +36,11 @@ def download(url, target, digest):
 
 def run(command, *, timeout=240, log=None, cwd=ROOT):
     if log:
-        with log.open('w') as stream: subprocess.run(list(map(str, command)), check=True, cwd=cwd, stdout=stream, stderr=subprocess.STDOUT, timeout=timeout)
+        try:
+            with log.open('w') as stream: subprocess.run(list(map(str, command)), check=True, cwd=cwd, stdout=stream, stderr=subprocess.STDOUT, timeout=timeout)
+        except (subprocess.CalledProcessError,subprocess.TimeoutExpired):
+            print(log.read_text(errors='replace')[-12000:],file=sys.stderr)
+            raise
     else: subprocess.run(list(map(str, command)), check=True, cwd=cwd, timeout=timeout)
 
 def unzip(path, destination):

@@ -54,6 +54,8 @@ public final class LocalFeatures {
   private static void change(Set<String> target,String id,boolean value){if(value)target.add(id);else target.remove(id);}
   public synchronized boolean friend(String id){return friends.contains(id)&&!revokedFriends.contains(id);}
   public synchronized boolean consent(String id){return !revokedFriends.contains(id);}
+  /** Keep revocations after contact removal so reconnect can withdraw the signed relay consent. */
+  public synchronized List<String> revokedConsentTargets(){return revokedFriends.stream().sorted().toList();}
   public synchronized void consent(String id,boolean active)throws IOException,GeneralSecurityException{Limits.userId(id);change(revokedFriends,id,!active);if(!active)friends.remove(id);save();}
   public synchronized boolean friendship(UserInfo peer,ContactAssertion ours,ContactAssertion theirs)throws IOException,GeneralSecurityException{
     UserInfo pinned=local.contact(peer.nickname());if(pinned==null||!pinned.userId().equals(peer.userId()))throw new GeneralSecurityException("Friend identity is not verified");

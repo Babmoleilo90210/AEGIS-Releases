@@ -1,0 +1,59 @@
+#!/usr/bin/env python3
+"""Prepare an unsigned 1.1.0 candidate from exact tested files; never sign or publish."""
+import argparse,json,re,shutil,xml.etree.ElementTree as ET
+from pathlib import Path
+from release_manifest import PUBLIC_KEY,REPOSITORY,sha256,parse_manifest,verify_assets
+
+p=argparse.ArgumentParser(description=__doc__);p.add_argument('--artifacts',required=True,type=Path);p.add_argument('--out',required=True,type=Path);p.add_argument('--verification',required=True,type=Path);p.add_argument('--repository-head',required=True);a=p.parse_args()
+assets=a.artifacts.resolve();out=a.out.resolve();source=Path(__file__).resolve().parents[1]
+if not re.fullmatch('[a-f0-9]{40}',a.repository_head):p.error('Exact application development commit required')
+if out==assets or out==source or (out.exists() and any(out.iterdir())):p.error('Use a separate empty output directory')
+number='1.1.0';names=[f'AEGIS-Setup-{number}-x64.exe',f'AEGIS-{number}-Windows-x64.zip',f'AEGIS-{number}-CachyOS-x86_64.AppImage',f'AEGIS-{number}-client-source.zip']
+checks={}
+for line in (assets/'SHA256SUMS').read_text('ascii').splitlines():
+    digest,name=line.split('  ',1)
+    if name in checks or not re.fullmatch('[a-f0-9]{64}',digest) or Path(name).name!=name:raise ValueError('Invalid SHA256SUMS')
+    checks[name]=digest
+for name in names:
+    file=assets/name
+    if file.is_symlink() or not file.is_file() or sha256(file)!=checks.get(name):raise ValueError('Artifact mismatch: '+name)
+proof=json.loads(a.verification.read_text())
+if {item['name'] for item in proof['artifacts']}!=set(names[:3]):raise ValueError('Structural verification incomplete')
+for item in proof['artifacts']:
+    if sha256(assets/item['name'])!=item['sha256']:raise ValueError('Structural proof refers to different bytes')
+totals={key:0 for key in ['tests','failures','errors','skipped']}
+evidence=assets/'evidence';junit=evidence/'junit'
+for module in ['common-protocol','client-core','relay-server','integration-tests']:
+    reports=list((junit/module).glob('TEST-*.xml'))
+    if not reports:raise ValueError('Fresh JUnit module missing: '+module)
+    for report in reports:
+        root=ET.parse(report).getroot()
+        for key in totals:totals[key]+=int(root.get(key,'0'))
+if totals['tests']<97 or totals['failures'] or totals['errors'] or totals['skipped']!=1:raise ValueError('Unexpected candidate tests')
+log=(evidence/'release-security-tests.log').read_text()
+if 'Ran 16 tests' not in log or not log.rstrip().endswith('OK'):raise ValueError('Release/security checks missing')
+compat=json.loads((evidence/'compatibility-matrix.json').read_text())
+if len(compat['matrix'])!=3 or any(item['result']!='PASS' for item in compat['matrix']) or compat['SQLite02to03andBack']!='PASS':raise ValueError('Compatibility matrix incomplete')
+provenance=json.loads((assets/'BUILD-PROVENANCE.json').read_text())
+if provenance['sourceCommit']!=a.repository_head or provenance['ownerPrivateKeyUsed'] or provenance['productionDeploymentOrPublication']:raise ValueError('Build provenance mismatch')
+out.mkdir(parents=True)
+for file in assets.iterdir():
+    if file.is_file():shutil.copy2(file,out/file.name)
+shutil.copytree(evidence,out/'evidence')
+(out/'tools').mkdir();(out/'updates').mkdir()
+for name in ['release_manifest.py','sign-release-manifest','verify-release-manifest','prepare-github-draft','prepare-release','test_release_manifest.py']:shutil.copy2(source/'tools'/name,out/'tools'/name)
+(out/'updates/release-public.pem').write_bytes(PUBLIC_KEY)
+shutil.copy2(out/'CHANGELOG-1.1.0.md',out/'RELEASE-NOTES.md')
+readiness={'version':number,'stage':'UNSIGNED_CANDIDATE_PENDING_NATIVE_ACCEPTANCE','productionReady':False,'signaturePresent':False,'githubReleasePublished':False,'productionRelayChanged':False,'productionManifestChanged':False,'sourceCommit':a.repository_head,'freshJUnit':totals,'releaseSecurityTests':16,'compatibility':compat,'nativeGates':json.loads((out/'RELEASE-GATES-1.1.0.json').read_text()),'blockers':['Windows 11 native acceptance including DPAPI/DPI/install/update/rollback NOT_RUN','CachyOS KDE Wayland and X11 native acceptance NOT_RUN','Real Tor Direct/Snowflake cross-network delivery and staging reboot NOT_RUN','Controlled production acceptance not authorized or performed','Owner offline Ed25519 signature and publication require separate approval']}
+(out/'RELEASE-READINESS.json').write_text(json.dumps(readiness,indent=2)+'\n')
+files=sorted(file for file in out.iterdir() if file.is_file() and file.name!='SHA256SUMS')
+(out/'SHA256SUMS').write_text(''.join(sha256(file)+'  '+file.name+'\n' for file in files),encoding='ascii')
+def record(name):
+    file=out/name
+    return {'fileName':name,'size':file.stat().st_size,'sha256':sha256(file),'url':f'https://github.com/{REPOSITORY}/releases/download/v{number}/{name}'}
+items=[{**record(name),'platform':platform,'kind':kind} for name,platform,kind in zip(names,['windows-x64','windows-x64','cachyos-x86_64','source'],['installer','portable','appimage','source'])]
+document={'schemaVersion':1,'application':'AEGIS','channel':'stable','version':number,'tag':'v'+number,'repository':REPOSITORY,'protocolVersion':1,'relayCompatibility':['0.2.0'],'artifacts':items,'checksums':record('SHA256SUMS'),'changelog':record('CHANGELOG-1.1.0.md'),'minimumSupported':'1.0.0','updatePolicy':'optional','announcement':{'title':'Обновление АЕГИС 1.1.0','summary':'Подписанные профили и друзья, ответы и цепочки, масштабирование всего интерфейса и проверяемый updater через Tor.','showAsLetter':True},'releaseNotes':{'publishedAt':'2026-10-09T00:00:00Z','type':'Feature','text':(out/'CHANGELOG-1.1.0.md').read_text('utf-8')}}
+data=(json.dumps(document,indent=2,ensure_ascii=False)+'\n').encode('utf-8');parse_manifest(data,'1.0.0');verify_assets(document,out)
+(out/'updates/stable.json').write_bytes(data)
+(out/'SIGNING-INPUT-SHA256').write_text(sha256(out/'updates/stable.json')+'  updates/stable.json\n')
+print('Unsigned candidate prepared. productionReady=false. No private key/signature/publication/production mutation.')

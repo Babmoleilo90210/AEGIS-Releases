@@ -207,8 +207,12 @@ public final class NetworkService {
   }
   public record Relationship(ContactAssertion ours,ContactAssertion theirs){}
   public Relationship relationship(UserInfo peer)throws IOException{
+    return relationship(peer.userId());
+  }
+  public Relationship relationship(String peerId)throws IOException{
+    Limits.userId(peerId);
     if((capabilities()&2)==0)return new Relationship(null,null);
-    return request(Operation.CONTACT_GET,o->Binary.text(o,peer.userId()),in->new Relationship(in.readBoolean()?ContactAssertion.read(in):null,in.readBoolean()?ContactAssertion.read(in):null));
+    return request(Operation.CONTACT_GET,o->Binary.text(o,peerId),in->new Relationship(in.readBoolean()?ContactAssertion.read(in):null,in.readBoolean()?ContactAssertion.read(in):null));
   }
   public void publishConsent(ContactAssertion assertion)throws IOException{
     if((capabilities()&2)==0)throw new IOException("Этот сервер не поддерживает дружбу");

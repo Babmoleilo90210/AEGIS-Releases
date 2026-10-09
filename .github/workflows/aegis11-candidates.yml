@@ -44,6 +44,7 @@ jobs:
         run: |
           python3 aegis/tools/build-candidates.py --jdk "$JAVA_HOME_21_X64" --work "$RUNNER_TEMP/aegis11-inputs" --out "$GITHUB_WORKSPACE/candidates"
       - name: Upload candidate files and test evidence, never a Release
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: AEGIS-1.1.0-unsigned-candidates
