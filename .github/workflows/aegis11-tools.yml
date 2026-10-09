@@ -1,0 +1,34 @@
+name: AEGIS 1.1 isolated build tools
+on:
+  push:
+    branches: [development/aegis-1.1.0]
+    paths: [.github/workflows/aegis11-tools.yml]
+permissions:
+  contents: read
+jobs:
+  tools:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Recover Java 21 and test dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p tools/dependencies
+          java_home="${JAVA_HOME_21_X64:?Java 21 absent}"
+          "$java_home/bin/java" -version
+          tar -czf tools/java21-linux.tar.gz -C "$java_home" .
+          curl --fail --location --max-time 120 --retry 2 -o tools/dependencies/junit-platform-console-standalone-1.13.4.jar https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-console-standalone/1.13.4/junit-platform-console-standalone-1.13.4.jar
+          curl --fail --location --max-time 120 --retry 2 -o tools/dependencies/sqlite-jdbc-3.53.4.0.jar https://repo.maven.apache.org/maven2/org/xerial/sqlite-jdbc/3.53.4.0/sqlite-jdbc-3.53.4.0.jar
+          curl --fail --location --max-time 120 --retry 2 -o tools/dependencies/slf4j-api-2.0.17.jar https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/2.0.17/slf4j-api-2.0.17.jar
+          curl --fail --location --max-time 120 --retry 2 -o tools/dependencies/slf4j-nop-2.0.17.jar https://repo.maven.apache.org/maven2/org/slf4j/slf4j-nop/2.0.17/slf4j-nop-2.0.17.jar
+          curl --fail --location --max-time 120 --retry 2 -o tools/dependencies/password4j-1.8.4.jar https://repo.maven.apache.org/maven2/com/password4j/password4j/1.8.4/password4j-1.8.4.jar
+          curl --fail --location --max-time 120 --retry 2 -o tools/dependencies/openjfx-monocle-21.0.2.jar https://repo.maven.apache.org/maven2/org/testfx/openjfx-monocle/21.0.2/openjfx-monocle-21.0.2.jar
+          (cd tools && find . -type f ! -name SHA256SUMS -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS)
+      - name: Preserve build tools
+        uses: actions/upload-artifact@v4
+        with:
+          name: aegis11-build-tools
+          path: tools/
+          retention-days: 7
+          if-no-files-found: error
