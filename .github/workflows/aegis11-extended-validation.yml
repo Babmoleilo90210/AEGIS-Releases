@@ -1,0 +1,49 @@
+name: AEGIS exact 1.1 packages extended validation
+on:
+  push:
+    branches: [validation/aegis-1.1.0-native]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  windows-packages:
+    runs-on: windows-2025
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: AEGIS-1.1.0-unsigned-candidates
+          run-id: 37897799414
+          github-token: ${{ github.token }}
+          path: candidates
+      - name: Exact packaged Windows runtime, DPAPI, JavaFX, NSIS and EXE
+        shell: pwsh
+        run: python validation/check-packaged.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: AEGIS-1.1.0-Windows-Server-2025-validation
+          path: validation-evidence/
+          if-no-files-found: error
+          retention-days: 14
+  tor-real-network:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 11
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: AEGIS-1.1.0-unsigned-candidates
+          run-id: 37897799414
+          github-token: ${{ github.token }}
+          path: candidates
+      - name: Bounded Direct and Snowflake bootstrap
+        run: python3 validation/check-packaged.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: AEGIS-1.1.0-real-Tor-validation
+          path: validation-evidence/
+          if-no-files-found: error
+          retention-days: 14
