@@ -28,7 +28,7 @@ if windows:
  report['WindowsVersion']=sys.getwindowsversion()._asdict() if hasattr(sys.getwindowsversion(),'_asdict') else str(sys.getwindowsversion())
  kit=root/'native-kit';kit.mkdir(exist_ok=True);classes=kit/'classes';classes.mkdir(exist_ok=True)
  natives=source/'client-core/src/test/java/org/securemail/client/security'
- main=(natives/'NativeAcceptanceMain.java').read_text().replace('1.0.0','1.1.0')
+ main=(natives/'NativeAcceptanceMain.java').read_text().replace('1.0.0','1.1.0').replace('app.resolve("app/*")','(app.resolve("app") + File.separator + "*")')
  (kit/'NativeAcceptanceMain.java').write_text(main,encoding='utf-8')
  sources=[kit/'NativeAcceptanceMain.java',natives/'NativeCredentialStoreSmoke.java',*sorted((source/'client-ui/src/smoke/java').glob('**/*.java'))]
  cp=str(app/'app/*');jdk=Path(os.environ['JAVA_HOME_21_X64'])
@@ -43,7 +43,7 @@ if windows:
  def install():
   fixture=root/'installer fixture';fixture.mkdir(exist_ok=True)
   local=dict(env);local['LOCALAPPDATA']=str(fixture)
-  run([inputs/'AEGIS-Setup-1.1.0-x64.exe','/S'],'installer.log',100,local)
+  run([inputs/'AEGIS-Setup-1.1.0-x64.exe','/S','/D='+str(fixture/'Programs/AEGIS')],'installer.log',100,local)
   target=fixture/'Programs/AEGIS';assert (target/'AEGIS.exe').is_file()
   for p in (app/'app').glob('*.jar'):
    assert hashlib.sha256(p.read_bytes()).digest()==hashlib.sha256((target/'app'/p.name).read_bytes()).digest()
@@ -96,11 +96,11 @@ else:
  appimage=root/'test.AppImage';shutil.copy2(inputs/'AEGIS-1.1.0-CachyOS-x86_64.AppImage',appimage);appimage.chmod(0o755)
  run([appimage,'--appimage-extract'],'appimage-extraction.log',60,cwd=root)
  app=root/'squashfs-root';java=app/'runtime/bin/java'
- test=(source/'client-core/src/test/java/org/securemail/client/TorProcessSmoke.java').read_text().replace('Duration.ofSeconds(3),Duration.ofSeconds(12)','Duration.ofSeconds(120),Duration.ofSeconds(300)')
+ test=(source/'client-core/src/test/java/org/securemail/client/TorProcessSmoke.java').read_text().replace('Duration.ofSeconds(3),Duration.ofSeconds(12)','Duration.ofSeconds(3),Duration.ofSeconds(150)')
  work=root/'tor-classes';work.mkdir(exist_ok=True);testfile=work/'TorProcessSmoke.java';testfile.write_text(test)
  jdk=Path(os.environ['JAVA_HOME_21_X64']);cp=str(app/'app/*')
  run([jdk/'bin/javac','--release','21','-cp',cp,'-d',work,testfile],'tor-test-compile.log',45)
- check('longer_real_Direct_Snowflake_lifecycle',lambda:run([java,'-Daegis.home='+str(app),'-cp',str(work)+':'+cp,'org.securemail.client.TorProcessSmoke',app],'real-tor-long.log',470))
+ check('real_Direct_timeout_Snowflake_lifecycle',lambda:run([java,'-Daegis.home='+str(app),'-cp',str(work)+':'+cp,'org.securemail.client.TorProcessSmoke',app],'real-tor-long.log',200))
  text=(out/'real-tor-long.log').read_text();report['realTor100']='PASS' if 'SNOWFLAKE bootstrap 100' in text or 'DIRECT bootstrap 100' in text else 'NOT_REACHED'
  report['realTorE2E']='NOT_RUN'
 (out/'RESULTS.json').write_text(json.dumps(report,indent=2)+'\n')
