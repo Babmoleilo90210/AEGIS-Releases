@@ -1,0 +1,16 @@
+{
+  "version": "1.1.0",
+  "protocolVersion": 1,
+  "productionReady": false,
+  "productionRelayChanged": false,
+  "productionManifestChanged": false,
+  "productionSignatureCreated": false,
+  "releasePublished": false,
+  "nativeWindows11": "NOT_RUN",
+  "nativeCachyOSKDEWayland": "NOT_RUN",
+  "nativeCachyOSKDEX11": "NOT_RUN",
+  "realTorE2E": "NOT_RUN",
+  "productionControlledTests": "NOT_RUN",
+  "serverReboot": "NOT_RUN",
+  "nativeUpdaterRestartRollback": "NOT_RUN"
+}

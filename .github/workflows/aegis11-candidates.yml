@@ -1,0 +1,59 @@
+name: AEGIS 1.1.0 unsigned candidates
+on:
+  push:
+    branches: [development/aegis-1.1.0]
+    paths: [aegis/**, .github/workflows/aegis11-candidates.yml]
+permissions:
+  contents: read
+concurrency:
+  group: aegis11-candidates
+  cancel-in-progress: false
+jobs:
+  candidates:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore SHA-pinned 1.0.0 source under the reviewed overlay
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib, pathlib, urllib.request, zipfile
+          target=pathlib.Path('aegis');target.mkdir(exist_ok=True)
+          path=pathlib.Path('/tmp/aegis-1.0-source.zip')
+          with urllib.request.urlopen('https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.0.0/AEGIS-1.0.0-client-source.zip',timeout=60) as response,path.open('wb') as output:
+              import shutil;shutil.copyfileobj(response,output)
+          assert hashlib.sha256(path.read_bytes()).hexdigest()=='3745572f1261392a88b4ea4cfad7763d54e3fb9efb9a9d5a674eaa74abc5e2ee'
+          with zipfile.ZipFile(path) as archive:
+              assert archive.testzip() is None
+              for entry in archive.infolist():
+                  p=pathlib.PurePosixPath(entry.filename)
+                  assert not p.is_absolute() and '..' not in p.parts and p.parts[0]=='aegis' and '\\' not in entry.filename
+                  destination=pathlib.Path(*p.parts)
+                  if entry.is_dir():destination.mkdir(parents=True,exist_ok=True)
+                  elif not destination.exists():
+                      destination.parent.mkdir(parents=True,exist_ok=True);destination.write_bytes(archive.read(entry))
+          PY
+      - name: Install packaging tools only on the disposable build worker
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends mingw-w64 nsis squashfs-tools
+      - name: Build, test, and package unsigned candidates
+        shell: bash
+        run: |
+          python3 aegis/tools/build-candidates.py --jdk "$JAVA_HOME_21_X64" --work "$RUNNER_TEMP/aegis11-inputs" --out "$GITHUB_WORKSPACE/candidates"
+      - name: Upload candidate files and test evidence, never a Release
+        uses: actions/upload-artifact@v4
+        with:
+          name: AEGIS-1.1.0-unsigned-candidates
+          path: |
+            candidates/*.zip
+            candidates/*.exe
+            candidates/*.AppImage
+            candidates/*.json
+            candidates/*.md
+            candidates/SHA256SUMS
+            candidates/evidence/
+          retention-days: 14
+          if-no-files-found: error
