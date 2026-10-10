@@ -60,6 +60,9 @@ def main():
     args=parser.parse_args();jdk=args.jdk.resolve();work=args.work.resolve();out=args.out.resolve()
     work.mkdir(parents=True,exist_ok=True);out.mkdir(parents=True,exist_ok=True);evidence=out/'evidence';evidence.mkdir(exist_ok=True)
     for name,digest in INPUTS.items():download(RELEASE+name,work/name,digest)
+    published=work/'published-1.1.0-source.zip'
+    download('https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.1.0/AEGIS-1.1.0-client-source.zip',published,'5297d563d3f3f492bab8b2d47435011173e704d67a4e37e2e117d38da93bb0b8')
+    run([sys.executable,ROOT/'tools/verify-demo-scope.py','--baseline',published,'--report',evidence/'demo-scope.json'],timeout=30,log=evidence/'demo-scope.log')
     oldimage=work/'AEGIS-1.0.0-CachyOS-x86_64.AppImage';oldimage.chmod(0o755)
     run([oldimage,'--appimage-extract'],cwd=work,log=evidence/'input-appimage-extract.log',timeout=120)
     linux=work/'squashfs-root';windows=work/'windows';unzip(work/'AEGIS-1.0.0-Windows-x64.zip',windows)
