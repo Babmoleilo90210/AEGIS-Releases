@@ -14,20 +14,20 @@ import java.util.concurrent.*;
  */
 public final class VisualCompatibilityProbe {
   public static void main(String[] args)throws Exception {
-    if(!SignedManifest.CURRENT.equals("1.1.0"))throw new AssertionError("Use the published 1.1.0 classpath");
+    String previous=SignedManifest.CURRENT;if(!Set.of("1.1.0","1.1.1").contains(previous))throw new AssertionError("Use the exact published previous classpath");
     byte[] json=Files.readAllBytes(Path.of(args[0]));Path windows=Path.of(args[1]),linux=Path.of(args[2]);
     var key=KeyPairGenerator.getInstance("Ed25519").generateKeyPair();Signature signer=Signature.getInstance("Ed25519");signer.initSign(key.getPrivate());signer.update(json);byte[] signature=signer.sign();
-    SignedManifest manifest=SignedManifest.verifyWithKey(json,signature,"stable","1.1.0","1.1.0",key.getPublic());
-    if(!manifest.version().equals("1.1.5")||manifest.requiredFor("1.1.0"))throw new AssertionError("Visual update policy mismatch");
-    manifest.requireInstallable("1.1.0","1.1.0");
-    try{SignedManifest.verify(json,signature,"stable","1.1.0","1.1.0");throw new AssertionError("Test key replaced production trust");}catch(SignatureException expected){}
+    SignedManifest manifest=SignedManifest.verifyWithKey(json,signature,"stable",previous,previous,key.getPublic());
+    if(!manifest.version().equals("1.1.5")||manifest.requiredFor(previous))throw new AssertionError("Visual update policy mismatch");
+    manifest.requireInstallable(previous,previous);
+    try{SignedManifest.verify(json,signature,"stable",previous,previous);throw new AssertionError("Test key replaced production trust");}catch(SignatureException expected){}
     if(!Base64.getEncoder().encodeToString(SignedManifest.embeddedPublicKey()).equals("MCowBQYDK2VwAyEAswWYCFStSEhQdrgqUJFF3x12ltmfUA0PvQtlh684B2g="))throw new AssertionError("Pinned key changed");
     for(var pair:List.of(Map.entry(windows,manifest.clientAsset(true)),Map.entry(linux,manifest.clientAsset(false)))) {
       UpdateService.verifyFile(pair.getKey(),pair.getValue());PackageSanity.check(pair.getKey(),pair.getValue(),manifest.version());
     }
     Path profile=Files.createTempDirectory("AEGIS demo old updater ");List<UpdateService.Snapshot> events=new CopyOnWriteArrayList<>();
     var files=new UpdateService.Downloads(){
-      public byte[] bytes(URI uri,int max)throws IOException{if(!uri.toString().endsWith("/main/updates/beta.json")&&!uri.toString().endsWith("/main/updates/beta.json.sig"))throw new IOException("Wrong channel endpoint");return uri.toString().endsWith(".sig")?signature:json;}
+      public byte[] bytes(URI uri,int max)throws IOException{if(!uri.toString().endsWith("/main/updates/stable.json")&&!uri.toString().endsWith("/main/updates/stable.json.sig"))throw new IOException("Wrong channel endpoint");return uri.toString().endsWith(".sig")?signature:json;}
       public void file(SignedManifest.Asset asset,Path target,java.util.function.BooleanSupplier cancelled,UpdateService.Progress progress)throws IOException {
         try(var in=Files.newInputStream(windows);var out=Files.newOutputStream(target)){byte[] buffer=new byte[65536];long n=0;int count;while((count=in.read(buffer))!=-1){if(cancelled.getAsBoolean())throw new InterruptedIOException();out.write(buffer,0,count);n+=count;progress.accept(n,asset.size());}}
       }

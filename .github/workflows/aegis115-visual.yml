@@ -54,6 +54,7 @@ jobs:
             candidates/*.AppImage
             candidates/*.json
             candidates/*.md
+            candidates/*.csv
             candidates/SHA256SUMS
             candidates/evidence/
             candidates/screenshots/

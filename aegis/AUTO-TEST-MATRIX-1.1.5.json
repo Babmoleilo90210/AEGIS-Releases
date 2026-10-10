@@ -8,7 +8,7 @@
       "evidence": "Appearance115Smoke + AppearanceTest"
     },
     "UI-02": {
-      "automatedStatus": "PASS",
+      "automatedStatus": "NOT_RUN",
       "scope": "model/storage tests; complete user interaction NOT_RUN",
       "nativeStatus": "NOT_RUN",
       "evidence": "Appearance115Smoke + AppearanceTest"
@@ -26,25 +26,25 @@
       "evidence": "Appearance115Smoke + AppearanceTest"
     },
     "UI-05": {
-      "automatedStatus": "PASS",
+      "automatedStatus": "NOT_RUN",
       "scope": "unit policy only; native OS theme NOT_RUN",
       "nativeStatus": "NOT_RUN",
       "evidence": "Appearance115Smoke + AppearanceTest"
     },
     "UI-06": {
-      "automatedStatus": "PASS",
+      "automatedStatus": "NOT_RUN",
       "scope": "unit schedule policy only; timed UI transition NOT_RUN",
       "nativeStatus": "NOT_RUN",
       "evidence": "Appearance115Smoke + AppearanceTest"
     },
     "UI-07": {
-      "automatedStatus": "PASS",
+      "automatedStatus": "NOT_RUN",
       "scope": "model/storage tests; complete user interaction NOT_RUN",
       "nativeStatus": "NOT_RUN",
       "evidence": "Appearance115Smoke + AppearanceTest"
     },
     "UI-08": {
-      "automatedStatus": "PASS",
+      "automatedStatus": "NOT_RUN",
       "scope": "model/storage tests; complete user interaction NOT_RUN",
       "nativeStatus": "NOT_RUN",
       "evidence": "Appearance115Smoke + AppearanceTest"
@@ -56,19 +56,19 @@
       "evidence": "Appearance115Smoke + AppearanceTest"
     },
     "UI-10": {
-      "automatedStatus": "PASS",
+      "automatedStatus": "NOT_RUN",
       "scope": "partial headless/model coverage; native rendering NOT_RUN",
       "nativeStatus": "NOT_RUN",
       "evidence": "Appearance115Smoke + AppearanceTest"
     },
     "UI-11": {
-      "automatedStatus": "PASS",
+      "automatedStatus": "NOT_RUN",
       "scope": "partial headless/model coverage; native rendering NOT_RUN",
       "nativeStatus": "NOT_RUN",
       "evidence": "Appearance115Smoke + AppearanceTest"
     },
     "UI-12": {
-      "automatedStatus": "PASS",
+      "automatedStatus": "NOT_RUN",
       "scope": "partial headless/model coverage; native rendering NOT_RUN",
       "nativeStatus": "NOT_RUN",
       "evidence": "Appearance115Smoke + AppearanceTest"
@@ -86,19 +86,19 @@
       "evidence": "Appearance115Smoke + AppearanceTest"
     },
     "UI-15": {
-      "automatedStatus": "PASS",
+      "automatedStatus": "NOT_RUN",
       "scope": "model/storage tests; complete user interaction NOT_RUN",
       "nativeStatus": "NOT_RUN",
       "evidence": "Appearance115Smoke + AppearanceTest"
     },
     "UI-16": {
-      "automatedStatus": "PASS",
+      "automatedStatus": "NOT_RUN",
       "scope": "model/storage tests; complete user interaction NOT_RUN",
       "nativeStatus": "NOT_RUN",
       "evidence": "Appearance115Smoke + AppearanceTest"
     },
     "UI-17": {
-      "automatedStatus": "PASS",
+      "automatedStatus": "NOT_RUN",
       "scope": "model/storage tests; complete user interaction NOT_RUN",
       "nativeStatus": "NOT_RUN",
       "evidence": "Appearance115Smoke + AppearanceTest"
@@ -122,19 +122,19 @@
       "evidence": "Appearance115Smoke + AppearanceTest"
     },
     "UI-21": {
-      "automatedStatus": "PASS",
+      "automatedStatus": "NOT_RUN",
       "scope": "partial headless/model coverage; native rendering NOT_RUN",
       "nativeStatus": "NOT_RUN",
       "evidence": "Appearance115Smoke + AppearanceTest"
     },
     "UI-22": {
-      "automatedStatus": "PASS",
+      "automatedStatus": "NOT_RUN",
       "scope": "partial headless/model coverage; native rendering NOT_RUN",
       "nativeStatus": "NOT_RUN",
       "evidence": "Appearance115Smoke + AppearanceTest"
     },
     "UI-23": {
-      "automatedStatus": "PASS",
+      "automatedStatus": "NOT_RUN",
       "scope": "partial headless/model coverage; native rendering NOT_RUN",
       "nativeStatus": "NOT_RUN",
       "evidence": "Appearance115Smoke + AppearanceTest"
@@ -164,7 +164,7 @@
       "evidence": "Appearance115Smoke + AppearanceTest"
     },
     "UI-28": {
-      "automatedStatus": "PASS",
+      "automatedStatus": "NOT_RUN",
       "scope": "bounded model and/or headless JavaFX",
       "nativeStatus": "NOT_RUN",
       "evidence": "Appearance115Smoke + AppearanceTest"

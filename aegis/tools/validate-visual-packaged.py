@@ -124,8 +124,24 @@ else:
 oldclasses=root/'published-110-probes';oldclasses.mkdir(exist_ok=True);oldcp=str(oldapp/'app')+os.sep+'*'
 run([jdk/('bin/javac.exe' if windows else 'bin/javac'),'--release','21','-encoding','UTF-8','-cp',oldcp,'-d',oldclasses,*[source/'client-core/src/test/java/org/securemail/client/update'/n for n in ['VisualCompatibilityProbe.java','DemoTorNetworkProbe.java']]],'published-110-probe-compile.log',60)
 probe=str(oldclasses)+os.pathsep+oldcp
-check('published_110_verifier_beta_schema_exact_111_packages_fixture',lambda:run([oldjava,'-cp',probe,'org.securemail.client.update.VisualCompatibilityProbe',inputs/'updates/stable.json',inputs/'AEGIS-1.1.5-Windows-x64.zip',inputs/'AEGIS-1.1.5-CachyOS-x86_64.AppImage'],'published-110-compatibility.log',120,env))
+check('published_110_verifier_stable_schema_exact_115_packages_fixture',lambda:run([oldjava,'-cp',probe,'org.securemail.client.update.VisualCompatibilityProbe',inputs/'updates/stable.json',inputs/'AEGIS-1.1.5-Windows-x64.zip',inputs/'AEGIS-1.1.5-CachyOS-x86_64.AppImage'],'published-110-compatibility.log',120,env))
 check('published_110_real_Tor_production_signature_download_resume_SHA256',lambda:run([oldjava,'-cp',probe,'org.securemail.client.update.DemoTorNetworkProbe',oldapp,out/'published-110-real-Tor'],'published-110-real-Tor.log',600,env))
 check('published_110_real_Snowflake_signature_download_resume_SHA256',lambda:run([oldjava,'-cp',probe,'org.securemail.client.update.DemoTorNetworkProbe',oldapp,out/'published-110-real-Snowflake','--snowflake'],'published-110-real-Snowflake.log',600,env))
+# Exact 1.1.1 Beta Demo is the appearance/migration base; never substitute a recompilation.
+previousName='AEGIS-1.1.1-Windows-x64.zip' if windows else 'AEGIS-1.1.1-CachyOS-x86_64.AppImage'
+previousDigest='d2c7b12248efed474a1c538f7f9707d3442446655230602d1d033e92c22c17a2' if windows else '7c471e7baf9f82d4198a2daaaadd498937bdc31b0595dec8b4dba286d312b3d3'
+previousFile=root/previousName
+with urllib.request.urlopen('https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.1.1/'+previousName,timeout=60) as response,previousFile.open('wb') as f:shutil.copyfileobj(response,f)
+with previousFile.open('rb') as f:assert hashlib.file_digest(f,'sha256').hexdigest()==previousDigest
+previousRoot=root/'published-111';previousRoot.mkdir(exist_ok=True)
+if windows:
+ with zipfile.ZipFile(previousFile) as z:z.extractall(previousRoot)
+ previousApp=previousRoot/'AEGIS';previousJava=previousApp/'runtime/bin/java.exe'
+else:
+ previousFile.chmod(0o755);run([previousFile,'--appimage-extract'],'published-111-extract.log',60,cwd=previousRoot)
+ previousApp=previousRoot/'squashfs-root';previousJava=previousApp/'runtime/bin/java'
+previousClasses=root/'published-111-probes';previousClasses.mkdir(exist_ok=True);previousCp=str(previousApp/'app')+os.sep+'*'
+run([jdk/('bin/javac.exe' if windows else 'bin/javac'),'--release','21','-encoding','UTF-8','-cp',previousCp,'-d',previousClasses,source/'client-core/src/test/java/org/securemail/client/update/VisualCompatibilityProbe.java'],'published-111-compile.log',60)
+check('published_111_verifier_stable_schema_exact_115_packages_fixture',lambda:run([previousJava,'-cp',str(previousClasses)+os.pathsep+previousCp,'org.securemail.client.update.VisualCompatibilityProbe',inputs/'updates/stable.json',inputs/'AEGIS-1.1.5-Windows-x64.zip',inputs/'AEGIS-1.1.5-CachyOS-x86_64.AppImage'],'published-111-compatibility.log',120,env))
 (out/'RESULTS.json').write_text(json.dumps(report,indent=2)+'\n')
 if any(x['result']!='PASS' for x in report['checks']):sys.exit(1)

@@ -77,7 +77,7 @@ def main():
     run([jdk/'bin/java','-Xmx256m','-cp',os.pathsep.join(map(str,jars+[build/'tests'])),'org.securemail.client.TorProcessSmoke',linux],timeout=60,log=evidence/'TorProcessSmoke.log')
     run([sys.executable,'-m','unittest','-v','test_release_manifest'],cwd=ROOT/'tools',log=evidence/'release-security-tests.log')
     ui=[sys.executable,ROOT/'tools/run-ui-regression.py','--jdk',jdk,'--deps',linux/'app','--deps',deps,'--native-root',linux]
-    for test in ['ClientUiRegressionSmoke','Aegis11UiSmoke','SingleWindowSmoke','DarkGreenThemeSmoke','Appearance115Smoke','AppearancePerformanceSmoke']:
+    for test in ['ClientUiRegressionSmoke','Aegis11UiSmoke','SingleWindowSmoke','DarkGreenThemeSmoke','MessengerSmoke','Appearance115Smoke','AppearancePerformanceSmoke']:
         run(ui+['--test',test],log=evidence/(test+'.log'))
     shutil.copytree(ROOT/'build/ui115-screenshots',out/'screenshots',dirs_exist_ok=True)
     shutil.copytree(build/'junit',evidence/'junit',dirs_exist_ok=True)

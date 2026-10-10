@@ -57,7 +57,7 @@ public final class MessengerSmoke {
    });
    try{
      until(()->((ListView<?>)get(app,"letters")).getItems().size()==1);
-     fx(()->{var change=MessengerApp.class.getDeclaredMethod("updateChanged",UpdateService.Snapshot.class);change.setAccessible(true);SignedManifest release=new SignedManifest("1.1.2","stable","1.0.0","optional",new SignedManifest.Announcement("Update","UI-only fixture",true),new SignedManifest.Notes("2026-10-08T00:00:00Z","Fix","UI-only fixture"),java.util.List.of(),null,null);change.invoke(app,new UpdateService.Snapshot(UpdateService.State.AVAILABLE,0,72,release,false,"Доступно обновление"));check(((Button)get(app,"updateBadge")).isVisible(),"Update badge absent");change.invoke(app,new UpdateService.Snapshot(UpdateService.State.FAILED,0,0,null,false,"Подпись отклонена"));check(!((Button)get(app,"updateBadge")).isVisible(),"Invalid update displayed trusted badge");return null;});
+     fx(()->{var change=MessengerApp.class.getDeclaredMethod("updateChanged",UpdateService.Snapshot.class);change.setAccessible(true);SignedManifest release=new SignedManifest("1.2.0","stable","1.0.0","optional",new SignedManifest.Announcement("Update","UI-only fixture",true),new SignedManifest.Notes("2026-10-08T00:00:00Z","Fix","UI-only fixture"),java.util.List.of(),null,null);change.invoke(app,new UpdateService.Snapshot(UpdateService.State.AVAILABLE,0,72,release,false,"Доступно обновление"));check(((Button)get(app,"updateBadge")).isVisible(),"Update badge absent");change.invoke(app,new UpdateService.Snapshot(UpdateService.State.FAILED,0,0,null,false,"Подпись отклонена"));check(!((Button)get(app,"updateBadge")).isVisible(),"Invalid update displayed trusted badge");return null;});
      fx(()->{snapshot(owner,out.resolve("inbox.png"));app.composePage();snapshot(owner,out.resolve("compose.png"));return null;});
      var themes=(ThemeManager)fx(()->get(app,"themes"));
      for(var theme:ThemeManager.Theme.values())fx(()->{themes.select(theme);snapshot(owner,out.resolve("theme-"+theme.name()+".png"));return null;});
@@ -66,7 +66,7 @@ public final class MessengerSmoke {
      MailViewer viewer=fx(()->new MailViewer(owner,themes,crypto.decrypt(packet,session.local().identity(),10000),item,worker,now::get));
      PasswordField password=(PasswordField)fx(()->get(viewer,"password"));TextArea text=(TextArea)fx(()->get(viewer,"text"));
      Label error=(Label)fx(()->get(viewer,"error"));
-     Button unlock=fx(()->((HBox)((VBox)get(viewer,"content")).getChildren().get(3)).getChildren().stream().filter(n->n instanceof Button).map(n->(Button)n).findFirst().orElseThrow());
+     Button unlock=fx(()->((VBox)get(viewer,"content")).getChildren().stream().filter(n->n instanceof HBox).map(n->(HBox)n).flatMap(row->row.getChildren().stream()).filter(n->n instanceof Button).map(n->(Button)n).filter(b->b.getText().equals("Открыть")).findFirst().orElseThrow());
      fx(()->{password.setText("wrong-password");unlock.fire();return null;});
      until(()->error.getText().equals("Неверный пароль письма."));
      check(fx(()->text.getText().isEmpty()),"Unauthenticated output was displayed");

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Write only the unsigned Beta manifest for the exact demo artifacts. No network/signing."""
+"""Write an unsigned Stable candidate manifest for the exact 1.1.5 artifacts. No network/signing."""
 import argparse,json
 from pathlib import Path
 from release_manifest import PUBLIC_KEY,REPOSITORY,sha256,parse_manifest,verify_assets

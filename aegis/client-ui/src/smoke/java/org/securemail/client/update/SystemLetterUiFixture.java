@@ -1,0 +1,17 @@
+package org.securemail.client.update;
+import com.google.gson.*;
+import java.nio.file.*;
+import java.security.*;
+import java.net.URI;
+import java.io.*;
+import java.util.concurrent.TimeUnit;
+/** Test-source only: ephemeral Ed25519-signed UI fixture. Never packaged in app JARs. */
+public final class SystemLetterUiFixture {
+ private SystemLetterUiFixture(){}
+ public static UpdateService create(Path profile)throws Exception{
+  String version="1.2.0";JsonObject o=new JsonObject();o.addProperty("schemaVersion",1);o.addProperty("application","AEGIS");o.addProperty("channel","stable");o.addProperty("version",version);o.addProperty("tag","v"+version);o.addProperty("repository",SignedManifest.REPOSITORY);o.addProperty("protocolVersion",1);JsonArray relay=new JsonArray();relay.add("0.2.0");o.add("relayCompatibility",relay);o.addProperty("minimumSupported","1.0.0");o.addProperty("updatePolicy","optional");JsonObject a=new JsonObject();a.addProperty("title","Тест оформления системного письма");a.addProperty("summary","Новая система оформления и макеты почтового центра.");a.addProperty("showAsLetter",true);o.add("announcement",a);JsonObject n=new JsonObject();n.addProperty("publishedAt","2026-10-10T00:00:00Z");n.addProperty("type","Feature");n.addProperty("text","16 пресетов. Пользовательские темы. Макеты писем. История обновлений.");o.add("releaseNotes",n);JsonArray artifacts=new JsonArray();
+  String[] names={"AEGIS-Setup-"+version+"-x64.exe","AEGIS-"+version+"-Windows-x64.zip","AEGIS-"+version+"-CachyOS-x86_64.AppImage","AEGIS-"+version+"-client-source.zip"};String[] platforms={"windows-x64","windows-x64","cachyos-x86_64","source"},kinds={"installer","portable","appimage","source"};for(int i=0;i<4;i++){JsonObject asset=asset(names[i],version);asset.addProperty("platform",platforms[i]);asset.addProperty("kind",kinds[i]);artifacts.add(asset);}o.add("artifacts",artifacts);o.add("checksums",asset("SHA256SUMS",version));o.add("changelog",asset("CHANGELOG-"+version+".md",version));byte[] exact=JsonData.encode(o);KeyPair key=KeyPairGenerator.getInstance("Ed25519").generateKeyPair();Signature sign=Signature.getInstance("Ed25519");sign.initSign(key.getPrivate());sign.update(exact);byte[] sig=sign.sign();
+  UpdateService service=new UpdateService(new UpdateService.Downloads(){public byte[] bytes(URI uri,int max){return uri.toString().endsWith(".sig")?sig:exact;}public void file(SignedManifest.Asset asset,Path target,java.util.function.BooleanSupplier c,UpdateService.Progress p)throws IOException{throw new IOException("UI fixture never downloads or installs");}},new UpdateStateStore(profile),true,(j,s,c,v,h)->SignedManifest.verifyWithKeyForCheck(j,s,c,v,key.getPublic()));service.check(false);long end=System.nanoTime()+TimeUnit.SECONDS.toNanos(5);while(System.nanoTime()<end&&service.snapshot().state()!=UpdateService.State.AVAILABLE){if(service.snapshot().state()==UpdateService.State.FAILED)throw new IOException("Fixture rejected");Thread.sleep(10);}if(service.snapshot().state()!=UpdateService.State.AVAILABLE)throw new IOException("Fixture timeout");return service;
+ }
+ private static JsonObject asset(String name,String version){JsonObject a=new JsonObject();a.addProperty("fileName",name);a.addProperty("size",1);a.addProperty("sha256","0".repeat(64));a.addProperty("url","https://github.com/"+SignedManifest.REPOSITORY+"/releases/download/v"+version+"/"+name);return a;}
+}
