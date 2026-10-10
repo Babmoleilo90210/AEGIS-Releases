@@ -28,6 +28,7 @@ final class MailViewer implements AutoCloseable {
   private final PasswordField password=new PasswordField();
   private final SecretField code=new SecretField("Код второго слоя");
   private final VBox content=new VBox(12);
+  private final VBox metadata=new VBox(4);private HBox actionBar;private final Map<String,Button> actionButtons=new HashMap<>();
   private final Label error=new Label();
   private final Timeline timer;
   private LetterEnvelope.Opened opened;
@@ -46,8 +47,8 @@ final class MailViewer implements AutoCloseable {
     this.plain=plain;stage=owner;content.setPadding(new Insets(22));
     Label heading=new Label(plain.subject().isBlank()?"Без темы":plain.subject());heading.getStyleClass().add("brand");
     Label lifetime=new Label();lifetime.getStyleClass().add("muted");
-    text.setEditable(false);text.setWrapText(true);text.setPrefRowCount(16);VBox.setVgrow(text,Priority.ALWAYS);
-    content.getChildren().addAll(heading,new Label((item.outgoing()?"Кому: ":"От: ")+item.contact()),lifetime);
+    text.getStyleClass().add("letter-body");heading.setWrapText(true);text.setEditable(false);text.setWrapText(true);text.setPrefRowCount(16);VBox.setVgrow(text,Priority.ALWAYS);
+    Label author=new Label((item.outgoing()?"Кому: ":"От: ")+item.contact());author.setWrapText(true);metadata.getChildren().addAll(author,lifetime);content.getChildren().addAll(heading,metadata);
     if(actions!=null){
       Label verification=new Label("Подпись проверена · "+(actions.unknown()?"Неизвестный отправитель":"Из контактов"));verification.getStyleClass().add("muted");content.getChildren().add(verification);
       if(plain.context()!=null){var reference=plain.context();Button original=new Button((reference.forwarded()?"Переслано: ":"Ответ на: ")+reference.author()+" · "+reference.subject());original.setTooltip(new Tooltip("Ссылка автора письма; исходное письмо проверяется на этом устройстве"));original.setOnAction(e->actions.original(reference));content.getChildren().add(original);}
@@ -61,7 +62,7 @@ final class MailViewer implements AutoCloseable {
         if(confirm.showAndWait().orElse(ButtonType.CANCEL)==ButtonType.OK&&!closed&&item.expiresAt()>now.getAsLong())actions.forward(item,plain,text.getText(),files.isSelected()?plain.copyFiles():null);
       });
       copy.setOnAction(e->{if(!closed&&!text.getText().isEmpty()){var value=new javafx.scene.input.ClipboardContent();value.putString(text.getText());javafx.scene.input.Clipboard.getSystemClipboard().setContent(value);}});
-      content.getChildren().add(new HBox(8,reply,forward,copy));
+      actionButtons.put("reply",reply);actionButtons.put("forward",forward);actionButtons.put("copy",copy);actionBar=new HBox(8,reply,forward,copy);content.getChildren().add(actionBar);
     }
     if(plain.protectedLetter()) {
       password.setPromptText("Пароль письма");Button unlock=new Button("Открыть");unlock.setDefaultButton(true);
@@ -100,11 +101,12 @@ final class MailViewer implements AutoCloseable {
         finally{Arrays.fill(secret,'\0');Platform.runLater(()->{exporting=false;if(closed)plain.close();else{download.setDisable(false);download.setText(plain.protectedLetter()?"Скачать вложения":"Сохранить файл");}});}});
       });content.getChildren().add(download);
     }
-    themes.apply(content);if(host==null){page=new InWindowDialog<>();page.initOwner(owner);page.setTitle(plain.subject().isBlank()?"Письмо":plain.subject());page.getDialogPane().setContent(content);themes.apply(page.getDialogPane());page.onClose(this::close);}else{host.getChildren().setAll(content);VBox.setVgrow(content,Priority.ALWAYS);}
+    appearance(themes.settings());themes.apply(content);if(host==null){page=new InWindowDialog<>();page.initOwner(owner);page.setTitle(plain.subject().isBlank()?"Письмо":plain.subject());page.getDialogPane().setContent(content);themes.apply(page.getDialogPane());page.onClose(this::close);}else{host.getChildren().setAll(content);VBox.setVgrow(content,Priority.ALWAYS);}
     timer=new Timeline(new KeyFrame(Duration.seconds(1),e->{long left=item.expiresAt()-now.getAsLong();if(left<=0){close();return;}lifetime.setText("Удаление через "+java.time.Duration.ofMillis(left).toMinutes()+" мин");}));
     timer.setCycleCount(Animation.INDEFINITE);timer.play();if(item.expiresAt()>now.getAsLong()){if(host==null)page.show();}else close();
   }
   boolean showing(){return !closed&&(host!=null||page!=null&&page.isShowing());}
+  void appearance(org.securemail.client.appearance.Appearance.Settings settings){if(closed)return;var layout=settings.layout();content.setPadding(new Insets(layout.viewPadding()));content.setMaxWidth(layout.textWidth());content.setMinWidth(0);text.setMinWidth(0);if(layout.viewCard()){if(!content.getStyleClass().contains("letter-card"))content.getStyleClass().add("letter-card");}else content.getStyleClass().remove("letter-card");content.getChildren().remove(metadata);if(layout.metadataTop())content.getChildren().add(Math.min(1,content.getChildren().size()),metadata);else content.getChildren().add(metadata);if(actionBar!=null){actionBar.getChildren().clear();for(String name:layout.actions()){Button button=actionButtons.get(name);if(button!=null)actionBar.getChildren().add(button);}actionBar.setSpacing(settings.components().spacing());}}
   @Override public void close(){
     if(closed)return;closed=true;timer.stop();if(live!=null)live.close();if(opened!=null)opened.close();
     password.clear();code.clear();text.clear();content.getChildren().clear();if(archivePassword!=null){Arrays.fill(archivePassword,'\0');archivePassword=null;}if(!exporting)plain.close();if(page!=null)page.close();

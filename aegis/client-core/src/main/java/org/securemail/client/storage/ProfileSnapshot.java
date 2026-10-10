@@ -14,7 +14,7 @@ public final class ProfileSnapshot {
   private static Map<String,Path> sources(ClientConfig config)throws IOException{
     var result=new LinkedHashMap<String,Path>();
     result.put("vault",config.storagePath());result.put("client-config",AppPaths.config());
-    for(String name:List.of("ui-preferences.json","theme.txt","mail-mode.txt","tor-mode.txt","update-preferences.json","session","tor/state","tor/transport-state"))
+    for(String name:List.of("ui-preferences.json","theme.txt","appearance","updates/events","mail-mode.txt","tor-mode.txt","update-preferences.json","session","tor/state","tor/transport-state"))
       result.put("app/"+name,AppPaths.root().resolve(name));
     Path updates=AppPaths.root().resolve("updates");
     if(Files.isSymbolicLink(updates))throw new IOException("Snapshot symlink rejected");
@@ -51,7 +51,7 @@ public final class ProfileSnapshot {
     verify(snapshot,config);var p=new Properties();try(var input=Files.newInputStream(snapshot.resolve("snapshot.properties"))){p.load(input);}
     var targets=sources(config);
     for(String key:p.stringPropertyNames())if(key.startsWith("present/app/updates/")){
-      String name=key.substring("present/app/updates/".length());if(!updateMetadata(name))throw new IOException("Invalid update metadata backup");targets.put("app/updates/"+name,AppPaths.root().resolve("updates").resolve(name));
+      String name=key.substring("present/app/updates/".length());if(name.equals("events"))continue;if(!updateMetadata(name))throw new IOException("Invalid update metadata backup");targets.put("app/updates/"+name,AppPaths.root().resolve("updates").resolve(name));
     }
     for(var target:targets.values()){Path parent=target.toAbsolutePath().normalize();while(parent!=null){if(Files.isSymbolicLink(parent))throw new IOException("Profile restore symlink rejected");parent=parent.getParent();}}
     for(var entry:targets.entrySet()){

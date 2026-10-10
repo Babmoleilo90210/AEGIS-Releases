@@ -12,7 +12,7 @@ import java.util.*;
 /** Immutable authenticated release metadata. The runtime trust key is compiled in. */
 public record SignedManifest(String version,String channel,String minimumSupported,String updatePolicy,
     Announcement announcement,Notes releaseNotes,List<Asset> artifacts,Asset checksums,Asset changelog) {
-  public static final String REPOSITORY="Babmoleilo90210/AEGIS-Releases",CURRENT="1.1.1";
+  public static final String REPOSITORY="Babmoleilo90210/AEGIS-Releases",CURRENT="1.1.5";
   public static final int MAX_BYTES=65536;
   private static final byte[] ROOT_KEY=Base64.getDecoder().decode("MCowBQYDK2VwAyEAswWYCFStSEhQdrgqUJFF3x12ltmfUA0PvQtlh684B2g=");
   public record Announcement(String title,String summary,boolean showAsLetter){}

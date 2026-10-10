@@ -6,7 +6,7 @@ Unicode true
  !error "Pass /DPAYLOAD=absolute AEGIS folder"
 !endif
 !ifndef OUTFILE
- !define OUTFILE "AEGIS-Setup-1.1.1-x64.exe"
+ !define OUTFILE "AEGIS-Setup-1.1.5-x64.exe"
 !endif
 Name "АЕГИС"
 OutFile "${OUTFILE}"
@@ -14,11 +14,11 @@ InstallDir "$LOCALAPPDATA\Programs\AEGIS"
 InstallDirRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\AEGIS" "InstallLocation"
 RequestExecutionLevel user
 SetCompressor /SOLID lzma
-BrandingText "АЕГИС 1.1.1"
-VIProductVersion "1.1.1.0"
+BrandingText "АЕГИС 1.1.5"
+VIProductVersion "1.1.5.0"
 VIAddVersionKey /LANG=1033 "ProductName" "AEGIS"
-VIAddVersionKey /LANG=1033 "ProductVersion" "1.1.1"
-VIAddVersionKey /LANG=1033 "FileVersion" "1.1.1"
+VIAddVersionKey /LANG=1033 "ProductVersion" "1.1.5"
+VIAddVersionKey /LANG=1033 "FileVersion" "1.1.5"
 VIAddVersionKey /LANG=1033 "FileDescription" "AEGIS Demo Installer"
 VIAddVersionKey /LANG=1033 "LegalCopyright" "AEGIS contributors"
 Icon "..\..\resources\icon.ico"
@@ -46,7 +46,7 @@ Function .onInit
  ${EndIf}
  ReadRegStr $ExistingVersion HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\AEGIS" "DisplayVersion"
  ${If} $ExistingVersion != ""
-  MessageBox MB_OKCANCEL|MB_ICONINFORMATION "AEGIS $ExistingVersion найден.$\r$\nОбновить до 1.1.1? Аккаунт и локальные данные сохраняются." IDOK continue
+  MessageBox MB_OKCANCEL|MB_ICONINFORMATION "AEGIS $ExistingVersion найден.$\r$\nОбновить до 1.1.5? Аккаунт и локальные данные сохраняются." IDOK continue
   Abort
   continue:
  ${EndIf}
@@ -74,12 +74,12 @@ Section "АЕГИС (обязательно)" Main
  ${EndIf}
  ; Preserve the previous program folder until the replacement is complete.
  IfFileExists "$INSTDIR\AEGIS.exe" 0 no_old
- IfFileExists "$INSTDIR.rollback-1.1.1\AEGIS.exe" 0 keep_old
+ IfFileExists "$INSTDIR.rollback-1.1.5\AEGIS.exe" 0 keep_old
   MessageBox MB_ICONSTOP "Существует предыдущая копия программы для отката. Завершите или отмените прежнее обновление перед повторной установкой."
   Abort
  keep_old:
  ClearErrors
- Rename "$INSTDIR" "$INSTDIR.rollback-1.1.1"
+ Rename "$INSTDIR" "$INSTDIR.rollback-1.1.5"
  ${If} ${Errors}
   MessageBox MB_ICONSTOP "Не удалось заменить программу. Проверьте, что АЕГИС закрыт."
   Abort
@@ -90,7 +90,7 @@ Section "АЕГИС (обязательно)" Main
  CopyFiles /SILENT "$PLUGINSDIR\AEGIS\*.*" "$INSTDIR"
  ${If} ${Errors}
   RMDir /r "$INSTDIR"
-  Rename "$INSTDIR.rollback-1.1.1" "$INSTDIR"
+  Rename "$INSTDIR.rollback-1.1.5" "$INSTDIR"
   MessageBox MB_ICONSTOP "Обновление не удалось. Предыдущая программа восстановлена."
   Abort
  ${EndIf}
@@ -102,7 +102,7 @@ Section "АЕГИС (обязательно)" Main
   CreateShortCut "$DESKTOP\АЕГИС.lnk" "$INSTDIR\AEGIS.exe" "" "$INSTDIR\AEGIS.exe" 0
  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\AEGIS" "DisplayName" "АЕГИС"
  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\AEGIS" "RollbackVersion" "$ExistingVersion"
- WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\AEGIS" "DisplayVersion" "1.1.1"
+ WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\AEGIS" "DisplayVersion" "1.1.5"
  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\AEGIS" "InstallLocation" "$INSTDIR"
  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\AEGIS" "DisplayIcon" "$INSTDIR\AEGIS.exe"
  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\AEGIS" "UninstallString" '"$INSTDIR\Uninstall.exe"'

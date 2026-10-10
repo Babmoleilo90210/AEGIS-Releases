@@ -40,6 +40,7 @@ public final class UpdaterMain {
     }public void stop()throws Exception{stopOwned(started);}});}
     catch(Exception failure){stopOwned(started);if(Files.exists(target.resolveSibling(target.getFileName()+".old"))){Path old=target.resolveSibling(target.getFileName()+".old");if(Files.exists(target))UpdateInstaller.deleteTree(target);Files.move(old,target,StandardCopyOption.ATOMIC_MOVE);}
       try(var appLock=AppPaths.lock()){org.securemail.client.storage.ProfileSnapshot.restore(backup,previousConfig);}
+      AtomicFiles.write(dir.resolve("rolled-back"),new byte[]{1});
       if(Files.exists(target)){new ProcessBuilder((AppPaths.windows()?target.resolve("AEGIS.exe"):target).toString()).start();}throw failure;}
     // Metadata/shortcut cleanup follows the commit and cannot roll back a working client.
     try{AtomicFiles.write(finalDir.resolve("installed"),release.version().getBytes(java.nio.charset.StandardCharsets.US_ASCII));if(AppPaths.windows()){String registry="Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\AEGIS";if(com.sun.jna.platform.win32.Advapi32Util.registryKeyExists(com.sun.jna.platform.win32.WinReg.HKEY_CURRENT_USER,registry))com.sun.jna.platform.win32.Advapi32Util.registrySetStringValue(com.sun.jna.platform.win32.WinReg.HKEY_CURRENT_USER,registry,"DisplayVersion",release.version());}else integrateLinux(target,finalDir.resolve("helper/resources/aegis.png"),release.version());}catch(Exception|LinkageError optionalMetadata){/* Binary replacement and startup confirmation already succeeded. */}

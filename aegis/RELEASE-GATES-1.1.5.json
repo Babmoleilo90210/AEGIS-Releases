@@ -1,0 +1,14 @@
+{
+  "version": "1.1.5",
+  "productionReady": false,
+  "productionRelayChanged": false,
+  "productionFeedChanged": false,
+  "productionPrivateKeyUsed": false,
+  "nativeWindows11": "NOT_RUN",
+  "nativeCachyOSWayland": "NOT_RUN",
+  "nativeCachyOSX11": "NOT_RUN",
+  "signedPreviousTo115EndToEnd": "NOT_RUN",
+  "nativeRollback": "NOT_RUN",
+  "persistentDraftMigration": "BLOCKED_REQUIRES_SEPARATE_SECRET_FORMAT_DECISION",
+  "publicationAuthorized": false
+}

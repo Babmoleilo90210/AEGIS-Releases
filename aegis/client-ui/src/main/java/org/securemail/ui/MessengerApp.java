@@ -24,6 +24,7 @@ import org.securemail.client.storage.*;
 import org.securemail.protocol.*;
 import org.securemail.client.update.*;
 import org.securemail.client.security.*;
+import org.securemail.client.appearance.Appearance;
 
 /** Desktop UI. Work that can block is confined to a single background executor. */
 public final class MessengerApp extends Application {
@@ -49,6 +50,7 @@ public final class MessengerApp extends Application {
   private Timeline timer;private Path pendingLinuxUpdate;
   private ComboBox<Ttl> ttl;
   private UiPresetStore presets;private UiPreferences layout=UiPreferences.builtins().get("Компактный");
+  private Appearance.Settings previousAppearance;private VBox mailListColumn,mailFolders;private SplitPane mailSplit;private boolean changingLayout,geometryBound,narrowNavigation;private ScrollPane composeContent;private Node composeBackdrop;private StackPane composeStack;
   private UpdateService updates;private UpdatePreferences updatePreferences;private UpdatesView updatesView;
   private Button updateBadge,accountReconnect;private VBox previewHost;private MailViewer embeddedViewer;
   private final Map<String,Image> avatarImages=new HashMap<>();private RememberedLogin remembered;
@@ -66,7 +68,7 @@ public final class MessengerApp extends Application {
   private LocalMailSearch.Scope mailScope=LocalMailSearch.Scope.INBOX;private boolean threads;
   private long lastMailboxScan,lastMailboxChange;
   private long lastAvatarRevision=-1;
-  private record MailRow(LocalStore.MailItem item,String subject,String file,boolean unknown,boolean signature,String thread){MailRow(LocalStore.MailItem item,String subject,String file){this(item,subject,file,false,true,item.id());}}
+  private record MailRow(LocalStore.MailItem item,String subject,String file,boolean unknown,boolean signature,String thread,boolean protectedLetter,String snippet){MailRow(LocalStore.MailItem item,String subject,String file){this(item,subject,file,false,true,item.id(),true,"");}}
   private record OpenedMail(LocalStore.HistoryItem item,PlainMessage plain,boolean unknown) implements AutoCloseable {public void close(){plain.close();}}
   private record Ttl(String label,long seconds){public String toString(){return label;}}
   @FunctionalInterface private interface Work<T>{T run()throws Exception;}
@@ -74,7 +76,7 @@ public final class MessengerApp extends Application {
   @Override public void start(Stage stage){
     this.stage=stage;stage.initStyle(StageStyle.UNDECORATED);stage.setTitle("АЕГИС");stage.setMinWidth(760);stage.setMinHeight(580);
     root=new BorderPane();notifications=new NotificationCenter(stage,root);BorderPane window=new BorderPane(root);window.setTop(new WindowChrome(stage));var scene=new Scene(window,1020,730);scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("messenger.css")).toExternalForm());themes.apply(window);themes.apply(root);stage.setScene(scene);InWindowDialog.bind(stage,window);WindowChrome.resize(stage,scene);
-    root.centerProperty().addListener((o,a,b)->{if(b!=null){b.setOpacity(0);FadeTransition fade=new FadeTransition(Duration.millis(150),b);fade.setFromValue(0);fade.setToValue(1);fade.play();}});
+    root.centerProperty().addListener((o,a,b)->{if(b!=null&&themes.settings().components().animations()){b.setOpacity(0);FadeTransition fade=new FadeTransition(Duration.millis(150),b);fade.setFromValue(0);fade.setToValue(1);fade.play();}});
     for(int n:new int[]{16,24,32,48,64,128,256}){var icon=getClass().getResourceAsStream("icons/icon-"+n+".png");if(icon!=null)stage.getIcons().add(new Image(icon));}
     stage.setOnCloseRequest(e->{e.consume();if(!installingUpdate&&updatePreferences!=null&&updatePreferences.installAtExit()&&updates!=null&&updates.snapshot().state()==UpdateService.State.READY_TO_INSTALL)installUpdate();else stop();});stage.show();
     try {config=ClientConfig.load(AppPaths.config());
@@ -90,7 +92,7 @@ public final class MessengerApp extends Application {
   }
   private void finishStartup(){
     try{instance=AppPaths.lock();
-      presets=new UiPresetStore(AppPaths.root());layout=presets.current();themes.layout(layout);try{threads=Files.readString(AppPaths.root().resolve("mail-mode.txt")).trim().equals("threads");}catch(IOException ignored){}
+      themes.initialize();layout=themes.settings().legacy();themes.workspace(root);themes.listener(this::appearanceChanged);try{presets=new UiPresetStore(AppPaths.root());}catch(IOException invalidOldAppearance){presets=null;}try{threads=Files.readString(AppPaths.root().resolve("mail-mode.txt")).trim().equals("threads");}catch(IOException ignored){}
       updatePreferences=UpdatePreferences.load(AppPaths.root());updates=new UpdateService(AppPaths.root(),config.torUpdateSocksPort());updates.channel(updatePreferences.channel());updates.listener(s->Platform.runLater(()->updateChanged(s)));
       updates.automatic(()->updatePreferences.automaticCheck(),()->updatePreferences.automaticDownload());
       // A private cookie path is always tied to this application's profile, including migrated Linux profiles.
@@ -102,7 +104,7 @@ public final class MessengerApp extends Application {
     }catch(Exception e){error(e);stage.close();Platform.exit();}
   }
   private void page(Node body){root.getChildren().clear();root.setTop(null);root.setLeft(null);root.setBottom(null);root.setCenter(body);}
-  private VBox form(String title,Node...nodes){Label heading=new Label(title);heading.getStyleClass().add("heading");VBox box=new VBox(14,heading);box.getChildren().addAll(nodes);box.setMaxWidth(350);box.setAlignment(Pos.CENTER_LEFT);box.setPadding(new Insets(24));return box;}
+  private VBox form(String title,Node...nodes){Label heading=new Label(title);heading.getStyleClass().add("heading");VBox box=new VBox(14,heading);box.getChildren().addAll(nodes);box.getStyleClass().add("settings-card");box.setMaxWidth(350);box.setAlignment(Pos.CENTER_LEFT);box.setPadding(new Insets(24));return box;}
   private void center(Node node){StackPane pane=new StackPane(node);page(pane);}
   private Button button(String text,Runnable action){Button b=new Button(text);b.setOnAction(e->action.run());return b;}
   private TextField field(String prompt){TextField f=new TextField();f.setPromptText(prompt);return f;}
@@ -207,14 +209,69 @@ public final class MessengerApp extends Application {
   }
   void mainPage(){
     if(timer!=null)timer.stop();if(notifications==null)notifications=new NotificationCenter(stage,root);page(null);clearCompose();
-    Label brand=new Label("АЕГИС");brand.getStyleClass().add("brand");Region space=new Region();HBox.setHgrow(space,Priority.ALWAYS);
-    connection=new Label("●");connection.setOnMouseClicked(event->connectionDialog());updateBadge=button("",this::updatesPage);updateBadge.getStyleClass().add("link");updateBadge.setVisible(false);updateBadge.setManaged(false);accountReconnect=button("Войти в сеть",this::reconnectAccount);accountReconnect.setVisible(false);accountReconnect.setManaged(false);
-    HBox top=new HBox(10,button("☰",()->{try{applyLayout(new UiPreferences(layout.scale(),layout.density(),!layout.sidebar(),layout.avatars(),layout.preview(),layout.subject(),layout.date()));}catch(IOException ex){error(ex);}}),brand,space,updateBadge,accountReconnect,button("Новое письмо",this::composePage),button("Настройки",this::settings),connection);top.setPadding(new Insets(8,12,8,12));root.setTop(top);
-    Region filler=new Region();VBox.setVgrow(filler,Priority.ALWAYS);
-    accountAvatar=new VBox(avatar(session.local().nickname()));
-    VBox nav=new VBox(7,button("↓ Входящие",()->mailboxPage(false)),button("↑ Отправленные",()->mailboxPage(true)),button("♡ Друзья",this::friendsPage),button("☆ Избранное",()->mailboxPage(false,LocalMailSearch.Scope.FAVORITES)),button("⊘ Заблокированные",()->mailboxPage(false,LocalMailSearch.Scope.BLOCKED)),button("⌕ Поиск",this::searchPage),button("Контакты",this::contactsPage),button("⚙ Системные",this::systemLetters),filler,new HBox(8,accountAvatar,button(session.local().nickname(),this::profile)),button("Настройки",this::settings));
-    nav.getStyleClass().add("navigation");nav.setPrefWidth(160);nav.setPadding(new Insets(10));nav.setVisible(layout.sidebar());nav.setManaged(layout.sidebar());root.setLeft(nav);
-    timer=new Timeline(new KeyFrame(Duration.seconds(1),e->refresh()));timer.setCycleCount(Animation.INDEFINITE);timer.play();mailboxPage(false);updateChanged(updates.snapshot());
+    themes.listener(this::appearanceChanged);previousAppearance=themes.settings();layout=previousAppearance.legacy();
+    if(!geometryBound){geometryBound=true;root.widthProperty().addListener((o,a,b)->{if(session==null||changingLayout)return;boolean narrow=b.doubleValue()<700;if(narrow!=narrowNavigation){arrangeNavigation();if(section.equals("mail"))arrangeMail();}if(section.equals("compose"))placeComposer();});}
+    arrangeNavigation();timer=new Timeline(new KeyFrame(Duration.seconds(1),e->refresh()));timer.setCycleCount(Animation.INDEFINITE);timer.play();mailboxPage(false);updateChanged(updates.snapshot());
+  }
+  private void appearanceChanged(Appearance.Settings value){
+    Appearance.Settings old=previousAppearance;previousAppearance=value;layout=value.legacy();
+    if(session==null)return;
+    boolean navigation=old==null||!old.layout().equals(value.layout())||!old.components().equals(value.components())||old.scale()!=value.scale();
+    if(navigation)arrangeNavigation();if(letters!=null)letters.refresh();if(contacts!=null)contacts.refresh();
+    if(accountAvatar!=null)accountAvatar.getChildren().setAll(avatar(session.local().nickname()));
+    if(section.equals("mail")&&navigation)arrangeMail();if(section.equals("compose"))placeComposer();
+    for(var viewer:viewers)viewer.appearance(value);
+  }
+  private void arrangeNavigation(){
+    if(session==null||changingLayout)return;changingLayout=true;
+    try{
+      var settings=themes.settings();var l=settings.layout();narrowNavigation=root.getWidth()>0&&root.getWidth()<700;
+      Appearance.Labels labelMode=l.collapsed()||narrowNavigation?Appearance.Labels.ICONS:l.labels();
+      Label brand=new Label("АЕГИС");brand.getStyleClass().add("brand");Region space=new Region();HBox.setHgrow(space,Priority.ALWAYS);
+      connection=new Label("●");connection.setOnMouseClicked(e->connectionDialog());
+      updateBadge=button("",this::updatesPage);updateBadge.getStyleClass().add("link");updateBadge.setVisible(false);updateBadge.setManaged(false);
+      accountReconnect=button("Войти в сеть",this::reconnectAccount);accountReconnect.setVisible(false);accountReconnect.setManaged(false);
+      Button collapse=button("☰",()->{try{var s=themes.settings();var v=s.layout();var next=new Appearance.Layout(v.zone(),v.labels(),v.order(),!v.collapsed(),v.navigationWidth(),v.mail(),v.rows(),v.foldersPercent(),v.listPercent(),v.composer(),v.textWidth(),v.viewPadding(),v.viewCard(),v.metadataTop(),v.actions(),v.fields(),v.previewBelow());themes.commit(s.layout(next));}catch(IOException ex){error(ex);}});
+      collapse.setTooltip(new Tooltip("Свернуть навигацию"));collapse.setAccessibleText("Свернуть навигацию");
+      HBox header=new HBox(8,collapse,brand,space,updateBadge,accountReconnect,button("Новое письмо",this::composePage),connection);header.setAlignment(Pos.CENTER_LEFT);header.setPadding(new Insets(8,12,8,12));header.getStyleClass().add("app-header");
+      Pane nav=l.zone()==Appearance.Zone.LEFT?new VBox(settings.components().spacing()):new FlowPane(settings.components().spacing(),6);nav.getStyleClass().add("navigation");nav.setPadding(new Insets(8));
+      for(String id:l.order()){
+        String name=switch(id){case "letters"->"Письма";case "contacts"->"Контакты";case "friends"->"Друзья";case "search"->"Поиск";case "profile"->"Профиль";default->"Настройки";};
+        Runnable action=switch(id){case "letters"->()->mailboxPage(false);case "contacts"->this::contactsPage;case "friends"->this::friendsPage;case "search"->this::searchPage;case "profile"->this::profile;default->this::settings;};
+        Button item=button(labelMode==Appearance.Labels.ICONS?"":name,action);item.setAccessibleText(name);item.setTooltip(new Tooltip(name));item.getStyleClass().add("nav-item");if(labelMode!=Appearance.Labels.TEXT)item.setGraphic(NavigationGlyph.create(id,settings.components().iconSize()));if(nav instanceof VBox)item.setMaxWidth(Double.MAX_VALUE);nav.getChildren().add(item);
+      }
+      root.setLeft(null);root.setBottom(null);root.setTop(null);
+      if(l.zone()==Appearance.Zone.LEFT){nav.setPrefWidth(labelMode==Appearance.Labels.ICONS?78:l.navigationWidth());ScrollPane scroll=new ScrollPane(nav);scroll.setFitToWidth(true);scroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);scroll.setPrefWidth(labelMode==Appearance.Labels.ICONS?82:l.navigationWidth()+4);root.setLeft(scroll);root.setTop(header);}
+      else if(l.zone()==Appearance.Zone.TOP)root.setTop(new VBox(header,nav));else{root.setTop(header);root.setBottom(nav);}
+      accountAvatar=null;if(updates!=null)updateChanged(updates.snapshot());
+    }finally{changingLayout=false;}
+  }
+  private VBox folders(){
+    VBox pane=new VBox(7);pane.getStyleClass().add("mail-folders");
+    pane.getChildren().addAll(button("Входящие",()->mailboxPage(false)),button("Отправленные",()->mailboxPage(true)),button("Черновики",this::draftsPage),button("Избранные",()->mailboxPage(false,LocalMailSearch.Scope.FAVORITES)),button("Неизвестные",()->mailboxPage(false,LocalMailSearch.Scope.UNKNOWN)),button("Заблокированные",()->mailboxPage(false,LocalMailSearch.Scope.BLOCKED)),button("Системные",this::systemLetters));
+    for(Node item:pane.getChildren())if(item instanceof Button b){b.setMaxWidth(Double.MAX_VALUE);b.setAlignment(Pos.CENTER_LEFT);}pane.setMinWidth(100);return pane;
+  }
+  private Selector<String> folderSelector(){
+    String active=section.equals("system")?"Системные":section.equals("drafts")?"Черновики":mailScope==LocalMailSearch.Scope.FAVORITES?"Избранные":mailScope==LocalMailSearch.Scope.UNKNOWN?"Неизвестные":mailScope==LocalMailSearch.Scope.BLOCKED?"Заблокированные":mailOutgoing?"Отправленные":"Входящие";
+    Selector<String> folder=new Selector<>(themes,List.of("Входящие","Отправленные","Черновики","Избранные","Неизвестные","Заблокированные","Системные"),active);folder.setOnAction(e->{switch(folder.getValue()){case "Отправленные"->mailboxPage(true);case "Черновики"->draftsPage();case "Избранные"->mailboxPage(false,LocalMailSearch.Scope.FAVORITES);case "Неизвестные"->mailboxPage(false,LocalMailSearch.Scope.UNKNOWN);case "Заблокированные"->mailboxPage(false,LocalMailSearch.Scope.BLOCKED);case "Системные"->systemLetters();default->mailboxPage(false);}});return folder;
+  }
+  private void draftsPage(){
+    clearCompose();section="drafts";viewGeneration++;VBox box=new VBox(12,folderSelector(),new Label("Черновики"));box.setPadding(new Insets(14));
+    if(draft==null||draft.body.isBlank()&&draft.subject.isBlank()&&draft.files.isEmpty())box.getChildren().add(new Label("Черновиков пока нет"));
+    else{Label subject=new Label(draft.subject.isBlank()?"Без темы":draft.subject);VBox card=new VBox(8,subject,new Label(draft.recipient.isBlank()?"Получатель не выбран":draft.recipient),button("Продолжить",this::composePage));card.getStyleClass().add("mail-card");box.getChildren().add(card);}
+    root.setCenter(box);
+  }
+  private void arrangeMail(){
+    if(mailListColumn==null||previewHost==null||!section.equals("mail"))return;
+    if(mailSplit!=null)mailSplit.getItems().clear();root.setCenter(null);Appearance.Layout value=themes.settings().layout();boolean narrow=root.getWidth()>0&&root.getWidth()<850;
+    boolean preview=value.mail()!=Appearance.MailLayout.COMPACT&&!narrow;
+    if(!preview){root.setCenter(mailListColumn);return;}
+    if((value.mail()==Appearance.MailLayout.THREE||value.mail()==Appearance.MailLayout.CUSTOM)&&!narrowNavigation){mailFolders=folders();mailSplit=new SplitPane(mailFolders,mailListColumn,previewHost);mailSplit.setDividerPositions(value.foldersPercent()/100.0,(value.foldersPercent()+value.listPercent())/100.0);}
+    else{mailSplit=new SplitPane(mailListColumn,previewHost);mailSplit.setDividerPositions(Math.min(.7,value.listPercent()/100.0));}
+    mailSplit.setOrientation(value.previewBelow()?javafx.geometry.Orientation.VERTICAL:javafx.geometry.Orientation.HORIZONTAL);mailListColumn.setMinWidth(180);previewHost.setMinWidth(200);root.setCenter(mailSplit);mailSplit.setOnMouseReleased(e->{if(!e.isPrimaryButtonDown())savePanelSizes();});
+  }
+  private void savePanelSizes(){
+    if(mailSplit==null)return;try{var s=themes.settings();var l=s.layout();double[] p=mailSplit.getDividerPositions();int f=l.foldersPercent(),n=l.listPercent();if(p.length==2){f=Math.max(12,Math.min(30,(int)Math.round(p[0]*100)));n=Math.max(25,Math.min(Math.min(55,75-f),(int)Math.round((p[1]-p[0])*100)));}else if(p.length==1)n=Math.max(25,Math.min(55,(int)Math.round(p[0]*100)));var next=l.panels(f,n);if(!next.equals(l))themes.commit(s.layout(next));}catch(IOException ex){error(ex);}
   }
   private void rememberDraft(){
     if(composer==null)return;if(draft!=null)draft.close();draft=new Draft();
@@ -228,6 +285,7 @@ public final class MessengerApp extends Application {
     if(remember)rememberDraft();else if(draft!=null){draft.close();draft=null;}
     previewTicket++;if(embeddedViewer!=null){embeddedViewer.close();embeddedViewer=null;}previewHost=null;
     if(composer!=null)composer.clear();if(letterPassword!=null)letterPassword.clear();if(secondCode!=null)secondCode.clear();
+    if(composeBackdrop!=null)composeBackdrop.setDisable(false);if(composeStack!=null)composeStack.getChildren().clear();composeStack=null;composeContent=null;composeBackdrop=null;
     composer=null;letterPassword=null;secondCode=null;additionalProtection=null;replyContext=null;sendButton=null;attachments.clear();attachmentsBox=null;attachmentLabel=null;
     replyNeedsProtection=false;if(forwardedFiles!=null){forwardedFiles.close();forwardedFiles=null;}
   }
@@ -241,13 +299,22 @@ public final class MessengerApp extends Application {
     Selector<String> mode=new Selector<>(themes,List.of("Письма","Цепочки"),threads?"Цепочки":"Письма");mode.setOnAction(e->{threads=mode.getValue().equals("Цепочки");try{AtomicFiles.write(AppPaths.root().resolve("mail-mode.txt"),(threads?"threads":"letters").getBytes(java.nio.charset.StandardCharsets.US_ASCII));}catch(IOException error){error(error);}rendered="";refresh();});
     letters=new ListView<>();letters.setPlaceholder(new Label("Писем пока нет"));
     letters.setCellFactory(list->new ListCell<>(){protected void updateItem(MailRow row,boolean empty){
-      super.updateItem(row,empty);setText(null);setGraphic(null);if(empty||row==null)return;
-      var item=row.item();Label subject=new Label(row.subject().isBlank()?"Без темы":row.subject());subject.getStyleClass().add("mail-subject");subject.setVisible(layout.subject());subject.setManaged(layout.subject());
+      super.updateItem(row,empty);setText(null);setGraphic(null);setContextMenu(null);if(empty||row==null)return;
+      var item=row.item();var appearance=themes.settings().layout();var fields=appearance.fields();
+      VBox text=new VBox(4);text.setMinWidth(0);HBox.setHgrow(text,Priority.ALWAYS);
+      Label subject=new Label(row.subject().isBlank()?"Без темы":row.subject());subject.getStyleClass().add("mail-subject");subject.setWrapText(true);if(fields.subject())text.getChildren().add(subject);
       String time=Instant.ofEpochMilli(item.time()).atZone(ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern("dd.MM HH:mm"));
-      Label meta=new Label(item.contact()+(row.unknown()?" · Неизвестный":"")+(layout.date()?" · "+time:"")+" · "+item.status());meta.getStyleClass().add("muted");meta.setTooltip(new Tooltip((row.signature()?"Подпись проверена":"Подпись не проверена")+(row.unknown()?" · Контакт не проверен":" · Из контактов")));
-      Label remaining=new Label("◷ "+Math.max(0,(item.expiresAt()-session.local().now())/60000)+" мин"+(row.file().isEmpty()?"":" · "+row.file()));remaining.getStyleClass().add("muted");
-      Button open=button("Открыть",()->{if(threads)threadPage(row);else openLetter(item);});
-      HBox body=new HBox(8,avatar(item.contact()),new VBox(3,subject,meta,remaining));if(layout.preview()==UiPreferences.Preview.OFF)body.getChildren().add(open);body.setAlignment(Pos.CENTER_LEFT);setGraphic(body);
+      String metadata=(fields.nickname()?item.contact():"")+(fields.date()?(fields.nickname()?" · ":"")+time:"")+(fields.status()?" · "+item.status():"");
+      Label meta=new Label(metadata);meta.getStyleClass().add("muted");meta.setWrapText(true);meta.setTooltip(new Tooltip((row.signature()?"Подпись проверена":"Подпись не проверена")+(row.unknown()?" · Контакт не проверен":" · Из контактов")));if(!metadata.isBlank())text.getChildren().add(meta);
+      if(row.unknown()||!row.signature()){Label warning=new Label(!row.signature()?"Подпись не проверена":"Неизвестный отправитель");warning.getStyleClass().add("security-warning");warning.setWrapText(true);text.getChildren().add(warning);}
+      if(row.protectedLetter()){Label lock=new Label("Защищённое письмо");lock.getStyleClass().add("muted");text.getChildren().add(lock);}
+      else if(fields.snippet()&&appearance.rows()==Appearance.Rows.PREVIEW&&!row.snippet().isBlank()){Label snippet=new Label(row.snippet());snippet.setWrapText(true);snippet.getStyleClass().add("mail-snippet");text.getChildren().add(snippet);}
+      Label remaining=new Label("◷ "+Math.max(0,(item.expiresAt()-session.local().now())/60000)+" мин"+(!fields.attachments()||row.file().isEmpty()?"":" · "+row.file()));remaining.getStyleClass().add("muted");text.getChildren().add(remaining);
+      Button open=button("Открыть",()->{if(threads)threadPage(row);else openLetter(item);});HBox body=new HBox(themes.settings().components().spacing());
+      if(fields.avatar())body.getChildren().add(avatar(item.contact()));body.getChildren().add(text);if(appearance.mail()==Appearance.MailLayout.COMPACT||root.getWidth()<850)body.getChildren().add(open);body.setAlignment(Pos.CENTER_LEFT);body.setMinWidth(0);
+      if(appearance.rows()==Appearance.Rows.CARDS||appearance.rows()==Appearance.Rows.PREVIEW)body.getStyleClass().add("mail-card");else body.getStyleClass().add("mail-row");
+      if(appearance.rows()==Appearance.Rows.COMPACT)text.setSpacing(1);
+      setGraphic(body);setOnMouseClicked(e->{if(e.getClickCount()==2){if(threads)threadPage(row);else openLetter(item);}});setOnKeyPressed(e->{if(e.getCode()==javafx.scene.input.KeyCode.ENTER){if(threads)threadPage(row);else openLetter(item);e.consume();}});
       MenuItem delete=new MenuItem("Удалить у меня");delete.setOnAction(e->work(null,"",()->{session.local().deleteHistory(item.id(),item.outgoing());return true;},x->{rendered="";refresh();}));
       MenuItem pin=new MenuItem(session.features().pinned("pinnedMail",item.id())?"Убрать из избранного":"В избранное");pin.setOnAction(e->work(null,"",()->{session.features().pin("pinnedMail",item.id(),!session.features().pinned("pinnedMail",item.id()));return true;},x->{rendered="";refresh();}));
       MenuItem block=new MenuItem(scope==LocalMailSearch.Scope.BLOCKED?"Разблокировать письмо":"Заблокировать письмо");block.setOnAction(e->work(null,"",()->{session.features().blockMail(item.id(),scope!=LocalMailSearch.Scope.BLOCKED);return true;},x->{rendered="";refresh();}));
@@ -256,10 +323,11 @@ public final class MessengerApp extends Application {
       }setContextMenu(menu);
       MenuItem pinThread=new MenuItem("Закрепить цепочку");pinThread.setOnAction(e->work(null,"",()->{session.features().pin("pinnedThreads",row.thread(),!session.features().pinned("pinnedThreads",row.thread()));return true;},x->{rendered="";refresh();}));menu.getItems().add(pinThread);
     }});
-    VBox box=new VBox(8,new HBox(12,heading,mode),letters);box.setPadding(new Insets(10));VBox.setVgrow(letters,Priority.ALWAYS);
-    if(layout.preview()==UiPreferences.Preview.OFF)root.setCenter(box);
-    else {previewHost=new VBox(new Label("Выберите письмо"));previewHost.setPadding(new Insets(12));SplitPane split=new SplitPane(box,previewHost);split.setOrientation(layout.preview()==UiPreferences.Preview.BOTTOM?Orientation.VERTICAL:Orientation.HORIZONTAL);split.setDividerPositions(layout.preview()==UiPreferences.Preview.BOTTOM?.45:.42);root.setCenter(split);
-      letters.getSelectionModel().selectedItemProperty().addListener((o,a,b)->{if(b!=null){if(threads)threadPage(b);else openLetter(b.item());}});}
+    FlowPane toolbar=new FlowPane(8,8,folderSelector(),mode);
+    mailListColumn=new VBox(10,toolbar,letters);mailListColumn.setPadding(new Insets(12));VBox.setVgrow(letters,Priority.ALWAYS);
+    previewHost=new VBox(new Label("Выберите письмо"));previewHost.setPadding(new Insets(12));
+    letters.getSelectionModel().selectedItemProperty().addListener((o,a,b)->{if(b!=null&&themes.settings().layout().mail()!=Appearance.MailLayout.COMPACT&&root.getWidth()>=850){if(threads)threadPage(b);else openLetter(b.item());}});
+    arrangeMail();
     refresh();
   }
   private void refresh(){
@@ -274,8 +342,9 @@ public final class MessengerApp extends Application {
     viewers.removeIf(v->!v.showing());
     if(section.equals("thread")&&threadResults!=null)threadResults.getItems().removeIf(r->r.item().expiresAt()<=session.local().now());
     if((section.equals("contacts")||section.equals("friends"))&&contactSearch!=null)fillContacts(contactSearch.getText());
+    if(letters!=null)letters.getItems().removeIf(row->row.item().expiresAt()<=session.local().now());
     if(!section.equals("mail")||letters==null)return;
-    letters.getItems().removeIf(row->row.item().expiresAt()<=session.local().now());letters.refresh();
+    letters.refresh();
     if(refreshing)return;refreshing=true;long generation=viewGeneration;boolean outgoing=mailOutgoing;ClientSession active=session;
     long change=active.local().changeCounter();if(!rendered.isEmpty()&&change==lastMailboxChange&&System.nanoTime()-lastMailboxScan<TimeUnit.SECONDS.toNanos(15)){refreshing=false;return;}
     worker.execute(()->{try{
@@ -286,7 +355,7 @@ public final class MessengerApp extends Application {
       Set<String> groups=new HashSet<>();for(var result:found){var item=result.item();
         if(threads&&!groups.add(result.peerId()+"/"+result.threadId()))continue;
         String subject=result.subject(),file=result.fileCount()==0?"":"Вложения: "+result.fileCount();
-        rows.add(new MailRow(item,subject,file,result.unknown(),result.signatureValid(),result.threadId()));
+        rows.add(new MailRow(item,subject,file,result.unknown(),result.signatureValid(),result.threadId(),result.protectedLetter(),result.snippet()));
       }
       Platform.runLater(()->{if(!stopping&&session==active&&generation==viewGeneration&&section.equals("mail")){letters.getItems().setAll(rows);rendered=signature;lastMailboxChange=change;lastMailboxScan=System.nanoTime();}});
     }catch(Exception|LinkageError failure){Platform.runLater(()->{if(!stopping&&generation==viewGeneration)letters.setPlaceholder(new Label("Не удалось загрузить письма"));});}
@@ -302,7 +371,7 @@ public final class MessengerApp extends Application {
     }catch(Exception ignored){/* The durable inbox is independent of optional notifications. */}finally{Platform.runLater(()->notifying=false);}});
   }
   private void openLetter(LocalStore.MailItem item){
-    long ticket=++previewTicket;VBox host=previewHost;
+    long ticket=++previewTicket;VBox host=section.equals("mail")&&themes.settings().layout().mail()!=Appearance.MailLayout.COMPACT&&root.getWidth()>=850?previewHost:null;
     if(embeddedViewer!=null){embeddedViewer.close();embeddedViewer=null;}
     if(viewers.size()>=4){info("Закройте одно из открытых писем");return;}
     work(null,"",()->{
@@ -344,9 +413,9 @@ public final class MessengerApp extends Application {
     work(null,"",()->LocalMailSearch.find(session.local(),session.features(),new LocalMailSearch.Query("","",0,Long.MAX_VALUE,mailScope==LocalMailSearch.Scope.BLOCKED?LocalMailSearch.Scope.BLOCKED:LocalMailSearch.Scope.ALL),config.maxFileSize()),found->{if(section.equals("thread")&&generation==viewGeneration){var anchor=found.stream().filter(r->r.item().id().equals(selectedRow.item().id())).findFirst();if(anchor.isPresent())chain.getItems().setAll(found.stream().filter(r->r.threadId().equals(selectedRow.thread())&&r.peerId().equals(anchor.get().peerId())).sorted(Comparator.comparingLong(r->r.item().time())).toList());}});
   }
   void composePage(){
-    clearCompose();section="compose";viewGeneration++;
+    Node before=section.equals("compose")?composeBackdrop:root.getCenter();clearCompose();composeBackdrop=before;section="compose";viewGeneration++;
     recipientPicker=new ContactPicker(session.local().contacts().stream().map(UserInfo::nickname).toList(),themes);recipientPicker.setCellFactory(list->contactCell());recipientPicker.setButtonCell(contactCell());recipientField=recipientPicker.getEditor();recipientField.setText(selected);
-    subjectField=field("Тема");composer=new TextArea();composer.setPromptText("Текст письма");composer.setWrapText(true);composer.setPrefRowCount(14);
+    subjectField=field("Тема");composer=new TextArea();composer.setPromptText("Текст письма");composer.setWrapText(true);composer.setPrefRowCount(14);composer.getStyleClass().add("composer");
     letterPassword=new SecretField("Пароль письма");secondCode=new SecretField("Код второго слоя");
     additionalProtection=new CheckBox("Дополнительная защита");additionalProtection.setSelected(false);
     letterPassword.visibleProperty().bind(additionalProtection.selectedProperty());letterPassword.managedProperty().bind(additionalProtection.selectedProperty());secondCode.visibleProperty().bind(additionalProtection.selectedProperty());secondCode.managedProperty().bind(additionalProtection.selectedProperty());
@@ -362,7 +431,14 @@ public final class MessengerApp extends Application {
     }
     additionalProtection.setDisable(replyNeedsProtection);if(replyContext!=null)box.getChildren().add(2,new Label((replyContext.forwarded()?"Пересылка: ":"Ответ: ")+replyContext.author()+" · "+replyContext.subject()));
     showAttachments();
-    box.setPadding(new Insets(22));VBox.setVgrow(composer,Priority.ALWAYS);ScrollPane scroll=new ScrollPane(box);scroll.setFitToWidth(true);scroll.setFitToHeight(true);root.setCenter(scroll);
+    box.setPadding(new Insets(18));box.getStyleClass().add("settings-card");VBox.setVgrow(composer,Priority.ALWAYS);composeContent=new ScrollPane(box);composeContent.setFitToWidth(true);composeContent.setFitToHeight(true);placeComposer();
+  }
+  private void placeComposer(){
+    if(composeContent==null||!section.equals("compose"))return;root.setCenter(null);if(composeStack!=null)composeStack.getChildren().clear();
+    boolean drawer=themes.settings().layout().composer()==Appearance.Composer.DRAWER&&root.getWidth()>=850;
+    if(!drawer){if(composeBackdrop!=null)composeBackdrop.setDisable(false);composeContent.setMaxWidth(Double.MAX_VALUE);root.setCenter(composeContent);return;}
+    if(composeBackdrop==null)composeBackdrop=new VBox(new Label("Письма"));composeBackdrop.setDisable(true);composeContent.setMaxWidth(Math.min(620,Math.max(420,root.getWidth()*.58)));
+    composeStack=new StackPane(composeBackdrop,composeContent);StackPane.setAlignment(composeContent,Pos.CENTER_RIGHT);root.setCenter(composeStack);
   }
   private void send(Button button){
     try{
@@ -447,7 +523,7 @@ public final class MessengerApp extends Application {
   }
   private void settings(){
     InWindowDialog<Void> d=new InWindowDialog<>();d.initOwner(stage);d.setTitle("Настройки");d.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);VBox items=new VBox(9);
-    items.getChildren().addAll(button("Профиль",()->{d.close();profile();}),button("Безопасность",()->info("Шифрование выполняется на устройстве. Сверяйте отпечатки контактов. Подробности — SECURITY.md.")),button("Завершить сохранённую сессию",()->{d.close();endRemembered();}),button("Уведомления",this::notificationSettings),button("Внешний вид",this::appearance),button("Обновления",this::updatesPage),button("Экспорт резервной копии идентичности",this::backup),button("О программе",()->info("АЕГИС "+SignedManifest.CURRENT+"\nАвтономная Единая Гибридная Информационная Система\n\nJava 21 · protocol 1")),button("Для разработчиков / Диагностика",this::diagnostics));items.setPadding(new Insets(14));d.getDialogPane().setContent(items);themes.apply(d.getDialogPane());d.showAndWait();
+    items.getChildren().addAll(button("Профиль",()->{d.close();profile();}),button("Безопасность",()->info("Шифрование выполняется на устройстве. Сверяйте отпечатки контактов. Подробности — SECURITY.md.")),button("Завершить сохранённую сессию",()->{d.close();endRemembered();}),button("Уведомления",this::notificationSettings),button("Внешний вид",this::appearance),button("Обновления",this::updatesPage),button("Экспорт резервной копии идентичности",this::backup),button("О программе",()->info("АЕГИС "+SignedManifest.CURRENT+"\nАвтономная Единая Гибридная Информационная Система\n\nJava 21 · protocol 1")),button("Для разработчиков / Диагностика",this::diagnostics));items.setPadding(new Insets(14));d.getDialogPane().setContent(items);themes.apply(d.getDialogPane());d.show();
   }
   private void notificationSettings(){
     InWindowDialog<Void> dialog=new InWindowDialog<>();dialog.initOwner(stage);dialog.setTitle("Уведомления");dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
@@ -456,32 +532,14 @@ public final class MessengerApp extends Application {
     Button save=new Button("Сохранить");save.setOnAction(e->{boolean a=mail.isSelected(),b=friends.isSelected(),c=events.isSelected(),d=releases.isSelected();work(save,"Сохранение…",()->{preferences.notifications(a,b,c,d);return true;},done->dialog.close());});
     dialog.getDialogPane().setContent(new VBox(12,mail,friends,events,releases,save));themes.apply(dialog.getDialogPane());dialog.showAndWait();
   }
-  private void appearance(){
-    InWindowDialog<Void> d=new InWindowDialog<>();d.initOwner(stage);d.setTitle("Внешний вид");d.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
-    boolean[] loading={false};Selector<ThemeManager.Theme> theme=new Selector<>(themes,List.of(ThemeManager.Theme.values()),themes.selected());theme.valueProperty().addListener((o,a,b)->{if(loading[0]||b==null)return;try{themes.select(b);}catch(IOException e){error(e);}});
-    Selector<String> preset=new Selector<>(themes,presets.presets().keySet(),null);
-    Selector<Integer> scale=new Selector<>(themes,List.of(80,90,100,110,125,150,175,200),layout.scale());
-    Selector<UiPreferences.Density> density=new Selector<>(themes,List.of(UiPreferences.Density.values()),layout.density());
-    Selector<UiPreferences.Avatars> avatars=new Selector<>(themes,List.of(UiPreferences.Avatars.values()),layout.avatars());
-    Selector<UiPreferences.Preview> preview=new Selector<>(themes,List.of(UiPreferences.Preview.values()),layout.preview());
-    CheckBox sidebar=new CheckBox("Показывать боковую панель"),subject=new CheckBox("Показывать тему"),date=new CheckBox("Показывать дату");sidebar.setSelected(layout.sidebar());subject.setSelected(layout.subject());date.setSelected(layout.date());
-    Runnable apply=()->{try{applyLayout(new UiPreferences(scale.getValue(),density.getValue(),sidebar.isSelected(),avatars.getValue(),preview.getValue(),subject.isSelected(),date.isSelected()));}catch(Exception e){error(e);}};
-    scale.valueProperty().addListener((o,a,b)->{if(b!=null&&!loading[0])apply.run();});
-    preset.setOnAction(e->{UiPreferences value=presets.presets().get(preset.getValue());if(value==null)return;try{loading[0]=true;scale.setValue(value.scale());density.setValue(value.density());avatars.setValue(value.avatars());preview.setValue(value.preview());sidebar.setSelected(value.sidebar());subject.setSelected(value.subject());date.setSelected(value.date());applyLayout(value);}catch(IOException ex){error(ex);}finally{loading[0]=false;}});
-    Button save=button("Сохранить как пресет",()->new InWindowTextInput().showAndWait().ifPresent(name->{try{apply.run();presets.add(name,layout);preset.getItems().setAll(presets.presets().keySet());preset.setValue(name);}catch(IOException ex){error(ex);}}));
-    Button rename=button("Переименовать",()->{String old=preset.getValue();if(!presets.customNames().contains(old))return;new InWindowTextInput(old).showAndWait().ifPresent(name->{try{presets.rename(old,name);preset.getItems().setAll(presets.presets().keySet());preset.setValue(name);}catch(IOException ex){error(ex);}});});
-    Button remove=button("Удалить",()->{try{presets.remove(preset.getValue());preset.getItems().setAll(presets.presets().keySet());}catch(IOException ex){error(ex);}});
-    Button export=button("Экспорт JSON",()->{InWindowFileChooser picker=new InWindowFileChooser();picker.setInitialFileName("AEGIS-preset.json");var file=picker.showSaveDialog(stage);if(file!=null)try{presets.exportPreset(preset.getValue(),file.toPath());}catch(IOException ex){error(ex);}});
-    Button imports=button("Импорт JSON",()->{InWindowFileChooser picker=new InWindowFileChooser();var file=picker.showOpenDialog(stage);if(file!=null)try{presets.importPreset(file.toPath());preset.getItems().setAll(presets.presets().keySet());}catch(IOException ex){error(ex);}});
-    VBox body=new VBox(8,new Label("Тема"),new HBox(8,theme,button("Как в системе",()->{try{loading[0]=true;themes.selectSystem();theme.setValue(themes.selected());}catch(IOException e){error(e);}finally{loading[0]=false;}})),new Label("Пресет"),preset,new Label("Масштаб, %"),scale,new Label("Плотность списка"),density,new Label("Аватары"),avatars,new Label("Предпросмотр"),preview,sidebar,subject,date,button("Применить",apply),save,new HBox(8,rename,remove),new HBox(8,export,imports));body.setPadding(new Insets(12));ScrollPane scroll=new ScrollPane(body);scroll.setFitToWidth(true);scroll.setPrefViewportHeight(520);d.getDialogPane().setContent(scroll);themes.apply(d.getDialogPane());d.showAndWait();
-  }
+  private void appearance(){try{new AppearanceView(stage,themes,worker).show();}catch(IOException e){error(e);}}
   private void applyLayout(UiPreferences value)throws IOException {
-    UiPreferences previous=layout;presets.apply(value);layout=value;themes.layout(value);
+    UiPreferences previous=layout;if(presets!=null)presets.apply(value);layout=value;themes.layout(value);
     // Appearance must not replace the active scene graph or clear a draft/password.
     Node sidebar=root.getLeft();if(sidebar!=null){sidebar.setVisible(value.sidebar());sidebar.setManaged(value.sidebar());}
     if(letters!=null)letters.refresh();if(contacts!=null)contacts.refresh();if(section.equals("mail")&&previous.preview()!=value.preview())mailboxPage(mailOutgoing,mailScope);
   }
-  private Node avatar(String nick){return AvatarView.create(nick,avatarImages,layout.avatars());}
+  private Node avatar(String nick){return AvatarView.create(nick,avatarImages,layout.avatars(),themes.settings().components());}
   private ListCell<String> contactCell(){return new ListCell<>(){protected void updateItem(String nick,boolean empty){super.updateItem(nick,empty);setText(null);setGraphic(empty||nick==null?null:new HBox(8,avatar(nick),new Label(nick)));}};}
   private void loadAvatars(){ClientSession active=session;work(null,"",()->{Map<String,Image> images=new HashMap<>();List<String> names=new ArrayList<>(active.local().contacts().stream().map(UserInfo::nickname).toList());names.add(active.local().nickname());for(String nick:names){byte[] data=null;try{data=active.local().avatar(nick);if(data!=null){byte[] bounded=AvatarCodec.normalize(data);try{Image image=new Image(new ByteArrayInputStream(bounded));if(!image.isError())images.put(nick,image);}finally{Arrays.fill(bounded,(byte)0);}}}catch(IOException|java.security.GeneralSecurityException invalidImage){/* One invalid image never suppresses other verified profiles. */}finally{if(data!=null)Arrays.fill(data,(byte)0);}}return images;},images->{if(active!=session)return;avatarImages.clear();avatarImages.putAll(images);if(contacts!=null)contacts.refresh();if(letters!=null)letters.refresh();if(accountAvatar!=null)accountAvatar.getChildren().setAll(avatar(active.local().nickname()));if(section.equals("profile")&&profileAvatar!=null)profileAvatar.getChildren().setAll(avatar(active.local().nickname()));});}
   private void chooseAvatar(String nick){
@@ -512,7 +570,15 @@ public final class MessengerApp extends Application {
   private void endRemembered(){if(timer!=null)timer.stop();ClientSession active=session;session=null;rememberedExpires=0;pendingRelayToken="";viewGeneration++;clearCompose(false);for(var view:viewers)view.close();viewers.clear();avatarImages.clear();loginPage();worker.execute(()->{try{if(active!=null&&active.network()!=null)active.network().logout();if(active!=null)active.close();if(remembered!=null)remembered.clear();else Files.deleteIfExists(AppPaths.root().resolve("session/resume.enc"));}catch(Exception failure){Platform.runLater(()->{if(!stopping)info("Не удалось полностью удалить сохранённую сессию. Проверьте доступ к хранилищу системы.");});}});}
   private void updateChanged(UpdateService.Snapshot snapshot){if(stopping)return;if(updatesView!=null&&updatesView.showing())updatesView.refresh(snapshot);if(updateBadge!=null){boolean available=snapshot.manifest()!=null&&snapshot.manifest().newerThan(SignedManifest.CURRENT);updateBadge.setVisible(available);updateBadge.setManaged(available);updateBadge.setText(available&&snapshot.manifest().requiredFor(SignedManifest.CURRENT)?"⬇ Требуется обновление":"⬇ Обновление");}if(snapshot.announcement()&&snapshot.manifest()!=null&&session!=null){try{if(session.features().updateNotifications())notifications.show(NotificationCenter.Kind.UPDATE);updates.announcementShown();}catch(IOException ignored){/* The verified history remains available; a failed marker cannot forge a letter. */}}}
   private void updatesPage(){updatesView=new UpdatesView(stage,themes,updates,updatePreferences,p->{try{if(!p.channel().equals(updatePreferences.channel()))updates.channel(p.channel());p.save(AppPaths.root());updatePreferences=p;}catch(Exception e){throw new IllegalStateException(e);}},this::installUpdate);updatesView.show();}
-  private void systemLetters(){clearCompose();section="system";viewGeneration++;long generation=viewGeneration;VBox body=new VBox(10,new Label("⚙ Системные"));body.setPadding(new Insets(14));ScrollPane scroll=new ScrollPane(body);scroll.setFitToWidth(true);root.setCenter(scroll);work(null,"",updates::history,history->{if(!section.equals("system")||viewGeneration!=generation)return;var newer=history.stream().filter(m->m.announcement().showAsLetter()&&m.newerThan(SignedManifest.CURRENT)).toList();if(newer.isEmpty())body.getChildren().add(new Label("Системных писем пока нет"));for(var release:newer){Label title=new Label(release.announcement().title()),summary=new Label(release.announcement().summary());summary.setWrapText(true);VBox letter=new VBox(7,new Label("⚙ АЕГИС · проверенная подпись"),title,summary,new HBox(8,button("Что нового",()->UpdatesView.notes(stage,themes,release)),button("Обновления",this::updatesPage)));letter.getStyleClass().add("system-letter");body.getChildren().add(letter);}});}
+  private void systemLetters(){clearCompose();section="system";viewGeneration++;long generation=viewGeneration;
+    ListView<UpdateEvents.Event> list=new ListView<>();list.setPlaceholder(new Label("Системных писем пока нет"));
+    list.setCellFactory(v->new ListCell<>(){@Override protected void updateItem(UpdateEvents.Event e,boolean empty){super.updateItem(e,empty);setText(null);setGraphic(null);if(empty||e==null)return;
+      Label trusted=new Label("АЕГИС · системное письмо"),title=new Label(e.title()),date=new Label(e.channel()+" · "+e.time());title.setWrapText(true);trusted.getStyleClass().add("muted");date.getStyleClass().add("muted");Label summary=new Label(e.kind()==UpdateEvents.Kind.INSTALLED?"Версия запущена, установка подтверждена.":e.release().announcement().summary());summary.setWrapText(true);
+      VBox letter=new VBox(8,trusted,title,date,summary,new HBox(8,button("Что нового",()->UpdatesView.notes(stage,themes,e.release())),button(e.kind()==UpdateEvents.Kind.AVAILABLE?"Обновить":"Обновления",()->{updatesPage();if(e.kind()==UpdateEvents.Kind.AVAILABLE&&updates.snapshot().state()==UpdateService.State.AVAILABLE)updates.download();})));letter.getStyleClass().add("system-letter");setGraphic(letter);
+    }});
+    VBox body=new VBox(12,new HBox(12,folderSelector(),button("История обновлений",this::updatesPage)),list);body.setPadding(new Insets(14));VBox.setVgrow(list,Priority.ALWAYS);root.setCenter(body);
+    work(null,"",updates::events,history->{if(section.equals("system")&&viewGeneration==generation)list.getItems().setAll(history.stream().filter(UpdateEvents.Event::systemLetter).toList());});
+  }
   private void installUpdate(){if(installingUpdate||updates.snapshot().state()!=UpdateService.State.READY_TO_INSTALL)return;InWindowAlert confirm=new InWindowAlert(Alert.AlertType.CONFIRMATION,"Установить проверенное обновление и перезапустить АЕГИС?",ButtonType.OK,ButtonType.CANCEL);confirm.setHeaderText(null);confirm.initOwner(stage);themes.apply(confirm.getDialogPane());if(confirm.showAndWait().orElse(ButtonType.CANCEL)!=ButtonType.OK)return;installingUpdate=true;worker.execute(()->{try{long launcher=AppPaths.windows()?ProcessHandle.current().parent().orElseThrow().pid():0;Path job=updates.prepareInstall(AppPaths.bundle(),ProcessHandle.current().pid(),launcher);UpdateInstaller.launch(job);updates.restarting();Platform.runLater(this::stop);}catch(Exception failure){updates.installFailed();Platform.runLater(()->{installingUpdate=false;if(!stopping)info("Обновление не установлено. Текущая версия сохранена.");});}});}
   private void backup(){InWindowFileChooser chooser=new InWindowFileChooser();chooser.setInitialFileName("AEGIS-identity.aegis-backup");var file=chooser.showSaveDialog(stage);if(file!=null)work(null,"",()->{session.local().exportIdentity(file.toPath());return true;},v->info("Резервная копия сохранена. Для восстановления используется пароль аккаунта на момент экспорта."));}
   private void restore(){InWindowFileChooser chooser=new InWindowFileChooser();chooser.setTitle("Восстановить идентичность");var file=chooser.showOpenDialog(stage);if(file==null)return;char[] pass=askPassword("Восстановить идентичность","Пароль резервной копии / хранилища");if(pass==null)return;Path target=AppPaths.root().resolve("restored-"+UUID.randomUUID());work(null,"",()->{try{LocalStore.restoreIdentity(file.toPath(),target,pass,config.maxCiphertext(),config.maxLocalStorage());var c=config.withStorage(target);c.save(AppPaths.config());return c;}finally{Arrays.fill(pass,'\0');}},c->{config=c;info("Идентичность восстановлена. Войдите в аккаунт.");loginPage();});}
@@ -535,5 +601,5 @@ public final class MessengerApp extends Application {
     else message="Не удалось выполнить действие. Проверьте соединение и доступ к локальным данным.";
     InWindowAlert d=new InWindowAlert(Alert.AlertType.ERROR,message,ButtonType.OK);d.initOwner(stage);d.setTitle("АЕГИС");d.setHeaderText(null);d.getDialogPane().setExpandableContent(new Label("Тип: "+error.getClass().getSimpleName()));themes.apply(d.getDialogPane());d.showAndWait();
   }
-  @Override public void stop(){if(stopping)return;stopping=true;if(stage!=null)InWindowDialog.closeAll(stage);if(timer!=null)timer.stop();clearCompose(false);for(var view:viewers)view.close();viewers.clear();avatarImages.clear();pendingRelayToken="";if(updates!=null)updates.close();if(notifications!=null)notifications.close();worker.shutdownNow();connectionWorker.shutdownNow();if(session!=null)try{session.close();}catch(IOException ignored){}if(tor!=null)tor.close();if(instance!=null)try{instance.close();}catch(IOException ignored){}Platform.exit();}
+  @Override public void stop(){if(stopping)return;stopping=true;if(stage!=null)InWindowDialog.closeAll(stage);if(timer!=null)timer.stop();clearCompose(false);for(var view:viewers)view.close();viewers.clear();avatarImages.clear();pendingRelayToken="";themes.close();if(updates!=null)updates.close();if(notifications!=null)notifications.close();worker.shutdownNow();connectionWorker.shutdownNow();if(session!=null)try{session.close();}catch(IOException ignored){}if(tor!=null)tor.close();if(instance!=null)try{instance.close();}catch(IOException ignored){}Platform.exit();}
 }

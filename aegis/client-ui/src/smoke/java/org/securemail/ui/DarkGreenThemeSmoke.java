@@ -43,12 +43,9 @@ public final class DarkGreenThemeSmoke {
     try {
       // Choose the preset through the existing Appearance page, not a new window.
       MessengerSmoke.fx(()->{
-        Platform.runLater(()->{
-          @SuppressWarnings("unchecked") Selector<ThemeManager.Theme> choice=(Selector<ThemeManager.Theme>)stage.getScene().getRoot().lookupAll(".combo-box").stream().filter(n->n instanceof Selector<?> s&&s.getItems().contains(ThemeManager.Theme.DARK_GREEN)).findFirst().orElseThrow();
-          choice.setValue(ThemeManager.Theme.DARK_GREEN);
-          stage.getScene().getRoot().lookupAll(".button").stream().filter(n->n instanceof Button b&&b.getText().equals("← Назад")&&b.isVisible()).map(n->(Button)n).findFirst().orElseThrow().fire();
-        });
-        Aegis11UiSmoke.invoke(app,"appearance",new Class<?>[]{});return null;
+        ThemeManager manager=(ThemeManager)MessengerSmoke.get(app,"themes");manager.initialize();
+        Aegis11UiSmoke.invoke(app,"appearance",new Class<?>[]{});
+        for(String caption:List.of("Тёмно-зелёная","Применить"))stage.getScene().getRoot().lookupAll(".button").stream().filter(n->n instanceof Button b&&caption.equals(b.getText())).map(n->(Button)n).findFirst().orElseThrow().fire();return null;
       });
       MessengerSmoke.fx(()->{
         ThemeManager themes=(ThemeManager)MessengerSmoke.get(app,"themes");MessengerSmoke.check(themes.selected()==ThemeManager.Theme.DARK_GREEN,"Appearance selector did not select the new preset");

@@ -7,4 +7,4 @@ Icon=aegis
 Categories=Network;InstantMessaging;
 Terminal=false
 StartupWMClass=org.securemail.ui.Launcher
-X-AppImage-Version=1.1.1
+X-AppImage-Version=1.1.5

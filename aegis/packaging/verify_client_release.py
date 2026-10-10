@@ -123,16 +123,16 @@ def pe_check(path, expected_icons, require_amd64=True):
             if numbers == (0x00010001, 0x00010000, 0x00010001, 0x00010000):
                 correct_version = True
     if not correct_version:
-        raise ValueError('EXE file/product version is not 1.1.1.0: ' + path.name)
+        raise ValueError('EXE file/product version is not 1.1.5.0: ' + path.name)
     return {'machine': 'AMD64' if machine == 0x8664 else 'I386', 'PE32_plus': magic == 0x20b,
             'GUI': True, 'ASLR': True, 'NX': True, 'asInvoker': True,
-            'icon_sizes': sorted(matched_sizes), 'icon_payload_matches_ICO': True, 'file_product_version': '1.1.1.0'}
+            'icon_sizes': sorted(matched_sizes), 'icon_payload_matches_ICO': True, 'file_product_version': '1.1.5.0'}
 
 
 def app_jars(app):
     if list(app.glob('*relay*')):
         raise ValueError('Relay JAR must not be shipped in a client')
-    names = ['client-core-1.1.1.jar', 'client-ui-1.1.1.jar', 'common-protocol-0.2.0.jar']
+    names = ['client-core-1.1.5.jar', 'client-ui-1.1.5.jar', 'common-protocol-0.2.0.jar']
     for name in names:
         with zipfile.ZipFile(app / name) as archive:
             if archive.testzip() is not None:
@@ -141,7 +141,7 @@ def app_jars(app):
                 raise ValueError('Test classes found in application JAR')
             if name.startswith('client-core'):
                 clazz = archive.read('org/securemail/client/update/SignedManifest.class')
-                if ROOT_KEY not in clazz or b'1.1.1' not in clazz or 'org/securemail/client/update/UpdaterMain.class' not in archive.namelist():
+                if ROOT_KEY not in clazz or b'1.1.5' not in clazz or 'org/securemail/client/update/UpdaterMain.class' not in archive.namelist():
                     raise ValueError('Pinned production public key or updater helper missing')
     return {name: sha256(app / name) for name in names}
 
@@ -152,9 +152,9 @@ def verify_release(output):
     linux = output / 'stage/AEGIS.AppDir'
     icons = ico_images((windows / 'resources/icon.ico').read_bytes())
     pe = {name: pe_check(windows / name, icons) for name in ['AEGIS.exe', 'AEGIS-Maintenance.exe', 'AEGIS-Updater.exe']}
-    setup = output / 'AEGIS-Setup-1.1.1-x64.exe'
+    setup = output / 'AEGIS-Setup-1.1.5-x64.exe'
     setup_check = pe_check(setup, icons, require_amd64=False)
-    payload = output / 'AEGIS-1.1.1-Windows-x64.zip'
+    payload = output / 'AEGIS-1.1.5-Windows-x64.zip'
     with zipfile.ZipFile(payload) as archive:
         if archive.testzip() is not None:
             raise ValueError('Windows ZIP CRC failure')
@@ -190,8 +190,8 @@ def verify_release(output):
         actual = {path.name: sha256(path) for path in (app / 'app').glob('*.jar')}
         if actual != expected:
             raise ValueError('Packaged JARs differ from final Gradle stage')
-    image = output / 'AEGIS-1.1.1-CachyOS-x86_64.AppImage'
-    if 'X-AppImage-Version=1.1.1\n' not in (linux / 'aegis.desktop').read_text('utf-8'):
+    image = output / 'AEGIS-1.1.5-CachyOS-x86_64.AppImage'
+    if 'X-AppImage-Version=1.1.5\n' not in (linux / 'aegis.desktop').read_text('utf-8'):
         raise ValueError('AppImage desktop metadata has the wrong version')
     appimage = verify(image, linux)
     names = [setup.name, payload.name, image.name]

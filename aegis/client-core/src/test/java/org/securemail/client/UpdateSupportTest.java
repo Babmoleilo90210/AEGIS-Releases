@@ -10,8 +10,8 @@ class UpdateSupportTest {
   String prior=System.getProperty("user.home");System.setProperty("user.home",root.toString());
   try{
    Path installed=UpdateSupport.installedImage();Files.createDirectories(installed.getParent());Files.writeString(installed,"old-image");Path downloaded=root.resolve("downloaded.AppImage"),icon=root.resolve("icon.png"),desktop=root.resolve(".local/share/applications/aegis.desktop");Files.writeString(downloaded,"new-image");Files.write(icon,new byte[]{1,2,3});
-   UpdateSupport.installLinux(downloaded,installed,desktop,icon);assertEquals("new-image",Files.readString(installed));assertTrue(Files.isExecutable(installed));assertTrue(Files.readString(desktop).contains(installed.toString()));assertEquals("old-image",Files.readString(installed.resolveSibling("AEGIS.pre-1.1.1.AppImage")));
-   Files.writeString(downloaded,"failed-image");assertThrows(java.io.IOException.class,()->UpdateSupport.installLinux(downloaded,installed,desktop,root.resolve("missing-icon")));assertEquals("new-image",Files.readString(installed));assertTrue(Files.readString(desktop).contains("X-AEGIS-Version=1.1.1"));
+   UpdateSupport.installLinux(downloaded,installed,desktop,icon);assertEquals("new-image",Files.readString(installed));assertTrue(Files.isExecutable(installed));assertTrue(Files.readString(desktop).contains(installed.toString()));assertEquals("old-image",Files.readString(installed.resolveSibling("AEGIS.pre-1.1.5.AppImage")));
+   Files.writeString(downloaded,"failed-image");assertThrows(java.io.IOException.class,()->UpdateSupport.installLinux(downloaded,installed,desktop,root.resolve("missing-icon")));assertEquals("new-image",Files.readString(installed));assertTrue(Files.readString(desktop).contains("X-AEGIS-Version=1.1.5"));
   }finally{System.setProperty("user.home",prior);}
  }
  @Test void backupCannotRecursivelyCopyItself()throws Exception{
