@@ -15,6 +15,12 @@ InstallDirRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\AEGIS
 RequestExecutionLevel user
 SetCompressor /SOLID lzma
 BrandingText "АЕГИС 1.1.1"
+VIProductVersion "1.1.1.0"
+VIAddVersionKey /LANG=1033 "ProductName" "AEGIS"
+VIAddVersionKey /LANG=1033 "ProductVersion" "1.1.1"
+VIAddVersionKey /LANG=1033 "FileVersion" "1.1.1"
+VIAddVersionKey /LANG=1033 "FileDescription" "AEGIS Demo Installer"
+VIAddVersionKey /LANG=1033 "LegalCopyright" "AEGIS contributors"
 Icon "..\..\resources\icon.ico"
 UninstallIcon "..\..\resources\icon.ico"
 Var ExistingVersion

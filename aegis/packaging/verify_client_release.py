@@ -114,9 +114,19 @@ def pe_check(path, expected_icons, require_amd64=True):
                 matched_sizes.add(width)
     if matched_sizes != ICON_SIZES:
         raise ValueError('Executable icon differs from the supplied seven-size ICO: ' + path.name)
+    versions = [value for key, value in leaves.items() if key[0] == 16]
+    correct_version = False
+    for value in versions:
+        at = value.find(struct.pack('<I', 0xFEEF04BD))
+        if at >= 0 and len(value) >= at + 24:
+            numbers = struct.unpack_from('<IIII', value, at + 8)
+            if numbers == (0x00010001, 0x00010000, 0x00010001, 0x00010000):
+                correct_version = True
+    if not correct_version:
+        raise ValueError('EXE file/product version is not 1.1.1.0: ' + path.name)
     return {'machine': 'AMD64' if machine == 0x8664 else 'I386', 'PE32_plus': magic == 0x20b,
             'GUI': True, 'ASLR': True, 'NX': True, 'asInvoker': True,
-            'icon_sizes': sorted(matched_sizes), 'icon_payload_matches_ICO': True}
+            'icon_sizes': sorted(matched_sizes), 'icon_payload_matches_ICO': True, 'file_product_version': '1.1.1.0'}
 
 
 def app_jars(app):
@@ -131,7 +141,7 @@ def app_jars(app):
                 raise ValueError('Test classes found in application JAR')
             if name.startswith('client-core'):
                 clazz = archive.read('org/securemail/client/update/SignedManifest.class')
-                if ROOT_KEY not in clazz or 'org/securemail/client/update/UpdaterMain.class' not in archive.namelist():
+                if ROOT_KEY not in clazz or b'1.1.1' not in clazz or 'org/securemail/client/update/UpdaterMain.class' not in archive.namelist():
                     raise ValueError('Pinned production public key or updater helper missing')
     return {name: sha256(app / name) for name in names}
 
@@ -181,6 +191,8 @@ def verify_release(output):
         if actual != expected:
             raise ValueError('Packaged JARs differ from final Gradle stage')
     image = output / 'AEGIS-1.1.1-CachyOS-x86_64.AppImage'
+    if 'X-AppImage-Version=1.1.1\n' not in (linux / 'aegis.desktop').read_text('utf-8'):
+        raise ValueError('AppImage desktop metadata has the wrong version')
     appimage = verify(image, linux)
     names = [setup.name, payload.name, image.name]
     return {'verification_type': 'offline_structural_and_payload', 'native_OS_acceptance': 'PENDING',
