@@ -1,42 +1,61 @@
-# АЕГИС 1.0.0
+# АЕГИС 1.1.0
 
-Автономная Единая Гибридная Информационная Система. Клиент для Windows 10/11 x64 и CachyOS x86_64.
+**АЕГИС (Автономная Единая Гибридная Информационная Система)** — клиент защищённой переписки и писем для Windows x64 и CachyOS x86_64. Использует встроенные Java и Tor, собственный Relay, локальное зашифрованное хранилище и дополнительную защиту отдельных писем.
 
-**Обычная установка:** на Windows скачайте Setup EXE и откройте его; на CachyOS скачайте AppImage, разрешите выполнение и запустите. Java и Tor уже включены. После запуска вставьте выданный владельцем сервера `.onion`, создайте аккаунт или войдите.
+**Последний опубликованный релиз:** [v1.1.0](https://github.com/Babmoleilo90210/AEGIS-Releases/releases/tag/v1.1.0) (10 октября 2026). Опубликован как GitHub stable release, но часть обязательных нативных и сквозных испытаний ещё не завершена; это не означает `productionReady=true`. Независимого аудита безопасности нет.
 
-Обычный пользователь не выполняет offline-подпись и команды подготовки релиза. Финальная offline-подпись manifest выполняется владельцем после приёмки. Автоматическая проверка и загрузка обновлений на новом профиле выключены по умолчанию. Ручная установка не зависит от update manifest.
+## Скачать
 
-- [Как установить на Windows](docs/README-WINDOWS.md)
-- [Как запустить на CachyOS](docs/README-CACHYOS.md)
-- [Что нового в 1.0.0](CHANGELOG-1.0.0.md)
-- [Статус сборок и проверок](RELEASE-STATUS-1.0.0.md)
+| Платформа | Файл |
+| --- | --- |
+| Windows 11 / Windows x64, установщик | [AEGIS-Setup-1.1.0-x64.exe](https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.1.0/AEGIS-Setup-1.1.0-x64.exe) |
+| Windows x64, portable | [AEGIS-1.1.0-Windows-x64.zip](https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.1.0/AEGIS-1.1.0-Windows-x64.zip) |
+| CachyOS x86_64 | [AEGIS-1.1.0-CachyOS-x86_64.AppImage](https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.1.0/AEGIS-1.1.0-CachyOS-x86_64.AppImage) |
+| Контрольные суммы | [SHA256SUMS](https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.1.0/SHA256SUMS) |
 
-Для владельца: [финальная приёмка и offline-подпись](docs/OWNER-ACCEPTANCE-AND-SIGNING.md).
+Полный список исходников, отчётов, релизных инструментов и документации находится в [GitHub Release v1.1.0](https://github.com/Babmoleilo90210/AEGIS-Releases/releases/tag/v1.1.0).
 
-GitHub Release assets пока не загружены; файлы предоставлены владельцу в итоговом сообщении. Постоянные ссылки в гайдах начнут работать после загрузки Release. Native Windows/CachyOS и реальный VPS/Tor/reboot пока не подтверждены; результаты сборки и автоматических тестов доступны в отчёте.
+## Установка
 
-Клиенты сохраняют совместимость с Relay 0.2.0 / protocol 1. Переустанавливать сервер не нужно.
+**Windows:** скачайте Setup EXE и запустите установщик. Альтернатива — распаковать весь portable ZIP и запустить `AEGIS.exe`. Отдельная установка Java или Tor не требуется. Не удаляйте существующий профиль при переходе с 1.0.0.
 
-## Политика распространения
+**CachyOS KDE:** скачайте AppImage и разрешите запуск:
 
-# AEGIS Releases
+```bash
+chmod +x AEGIS-1.1.0-CachyOS-x86_64.AppImage
+./AEGIS-1.1.0-CachyOS-x86_64.AppImage
+```
 
-Official binary releases and signed update manifests for AEGIS.
+Для постоянного запуска из меню KDE можно сохранить AppImage в `~/Applications` и создать файл `~/.local/share/applications/aegis.desktop` с `Exec`, указывающим на абсолютный путь к AppImage, и `Icon`, указывающим на фирменный `aegis.png` из AppImage. Для Fish Shell не используйте Bash heredoc `<<EOF` напрямую.
 
-This repository is intended for distribution only. It must never contain:
-- private release-signing keys;
-- account passwords;
-- letter passwords or FF1 codes;
-- private identity keys;
-- Tor onion-service private keys;
-- production database backups.
+После запуска войдите в существующий аккаунт либо зарегистрируйтесь, используя адрес Relay, предоставленный администратором. Пользователю не нужно вручную управлять криптографическими ключами.
 
-## Update channels
+## Что нового в 1.1.0
 
-Signed manifests will live under `updates/`:
-- `updates/stable.json` + `updates/stable.json.sig`
-- `updates/beta.json` + `updates/beta.json.sig`
+- Исправлен **BUG-11**: подписанный stable manifest более старой версии не должен ошибочно вызывать сообщение о сбое Tor. Сохранена строгая проверка Ed25519 и anti-rollback при установке.
+- Дополнена безопасная диагностика ошибок обновлений (транспорт, TLS, HTTP, подпись, схема, политика и локальное состояние).
+- Профиль, настройки, оформление, диалоги и работа с письмами перенесены в единое основное окно.
+- Улучшены масштабирование, темы, сохранение черновиков и управление окнами.
+- Добавлены ответы и цепочки писем, закрепления, поиск, обработка неизвестных и заблокированных отправителей и офлайн-доступ к локальным письмам.
+- Публичные профили и Friends требуют необязательного расширения Relay 0.3.0; на production Relay 0.2.0 эти возможности могут быть недоступны. Обычная почта сохраняет совместимость с protocol 1.
 
-Release binaries will be published as GitHub Release assets.
+Подробности: [CHANGELOG-1.1.0.md](https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.1.0/CHANGELOG-1.1.0.md) и [отчёт BUG-11](https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.1.0/AEGIS-1.1.0-BUG11-TEST-REPORT-RU.md).
 
-The AEGIS clients must verify the embedded Ed25519 release public key before trusting any update manifest.
+## Обновления
+
+АЕГИС проверяет подписанные манифесты и загрузки через Tor; GitHub — площадка распространения, **не корень доверия**. Клиент использует закреплённый публичный Ed25519-ключ и проверяет подпись, схему, политику версии, размеры и SHA-256 перед установкой.
+
+**Важно:** публикация v1.1.0 на GitHub и изменение `updates/stable.json` — разные операции. Пока production feed указывает на 1.0.0, приложение 1.1.0 корректно сообщает, что более нового обновления нет. Полный цикл установки будущего обновления, перезапуска и отката ещё требует отдельной проверки. Для перехода с 1.0.0 может понадобиться ручная установка из-за ошибки updater в старом клиенте.
+
+## Результаты проверок и ограничения
+
+- По отчёту сборщика: 103 JUnit PASS, 1 SKIP; 16 release/security PASS; 13 нативных проверок на Windows Server 2025.
+- Проверены сценарии Tor и BUG-11 на Linux и Windows Server; пользовательская проверка CachyOS KDE Wayland подтвердила запуск, UI и состояние «Новых обновлений нет».
+- **Не подтверждены полностью:** Windows 11 при всех DPI, CachyOS KDE X11, межплатформенная доставка через реальный staging Relay и сквозной updater с установкой/rollback.
+- Независимого security audit нет. Не заявляется эквивалентность Signal.
+
+## Безопасность репозитория
+
+Репозиторий распространяет бинарные файлы, исходники, документацию и подписанные манифесты. **Никогда не размещайте здесь:** приватные release-signing keys, пароли аккаунтов, letter passwords, FF1 codes, приватные identity keys, приватные ключи Tor onion-service или резервные копии production-базы.
+
+Публичный ключ подписи находится в `updates/release-public.pem`. Приватный release key хранится только у владельца офлайн. Production Relay и onion identity не изменяются при публикации клиентского релиза.
