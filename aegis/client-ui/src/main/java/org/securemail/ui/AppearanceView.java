@@ -50,7 +50,7 @@ final class AppearanceView {
     search.textProperty().addListener((o,a,b)->fillGallery());category.setOnAction(e->fillGallery());onlyFavorites.setOnAction(e->fillGallery());
     page.initOwner(owner);page.setTitle("Оформление");page.onClose(()->{if(!applied)themes.cancelPreview();});
     message.setWrapText(true);message.getStyleClass().add("security-warning");selection.getStyleClass().add("brand");
-    HBox filter=new HBox(8,search,category,onlyFavorites);HBox.setHgrow(search,Priority.ALWAYS);gallery.setPrefTileWidth(205);gallery.setPrefColumns(3);
+    HBox filter=new HBox(8,search,category,onlyFavorites);HBox.setHgrow(search,Priority.ALWAYS);gallery.setPrefTileWidth(230);gallery.setPrefColumns(3);
     VBox presets=new VBox(10,filter,gallery);presets.setPadding(new Insets(8));
     GridPane palette=new GridPane();palette.setHgap(12);palette.setVgap(8);int row=0;for(var e:colors.entrySet())entry(palette,row++,e.getKey(),e.getValue());
     entry(palette,row++,"Скругление",slider(radius));entry(palette,row++,"Прозрачность, %",slider(alpha));

@@ -1,0 +1,245 @@
+{
+  "productionReady": false,
+  "checks": {
+    "UI-01": {
+      "automatedStatus": "PASS",
+      "scope": "bounded model and/or headless JavaFX",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "Appearance115Smoke + AppearanceTest"
+    },
+    "UI-02": {
+      "automatedStatus": "PASS",
+      "scope": "model/storage tests; complete user interaction NOT_RUN",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "Appearance115Smoke + AppearanceTest"
+    },
+    "UI-03": {
+      "automatedStatus": "PASS",
+      "scope": "bounded model and/or headless JavaFX",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "Appearance115Smoke + AppearanceTest"
+    },
+    "UI-04": {
+      "automatedStatus": "PASS",
+      "scope": "bounded model and/or headless JavaFX",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "Appearance115Smoke + AppearanceTest"
+    },
+    "UI-05": {
+      "automatedStatus": "PASS",
+      "scope": "unit policy only; native OS theme NOT_RUN",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "Appearance115Smoke + AppearanceTest"
+    },
+    "UI-06": {
+      "automatedStatus": "PASS",
+      "scope": "unit schedule policy only; timed UI transition NOT_RUN",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "Appearance115Smoke + AppearanceTest"
+    },
+    "UI-07": {
+      "automatedStatus": "PASS",
+      "scope": "model/storage tests; complete user interaction NOT_RUN",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "Appearance115Smoke + AppearanceTest"
+    },
+    "UI-08": {
+      "automatedStatus": "PASS",
+      "scope": "model/storage tests; complete user interaction NOT_RUN",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "Appearance115Smoke + AppearanceTest"
+    },
+    "UI-09": {
+      "automatedStatus": "PASS",
+      "scope": "bounded model and/or headless JavaFX",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "Appearance115Smoke + AppearanceTest"
+    },
+    "UI-10": {
+      "automatedStatus": "PASS",
+      "scope": "partial headless/model coverage; native rendering NOT_RUN",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "Appearance115Smoke + AppearanceTest"
+    },
+    "UI-11": {
+      "automatedStatus": "PASS",
+      "scope": "partial headless/model coverage; native rendering NOT_RUN",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "Appearance115Smoke + AppearanceTest"
+    },
+    "UI-12": {
+      "automatedStatus": "PASS",
+      "scope": "partial headless/model coverage; native rendering NOT_RUN",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "Appearance115Smoke + AppearanceTest"
+    },
+    "UI-13": {
+      "automatedStatus": "PASS",
+      "scope": "bounded model and/or headless JavaFX",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "Appearance115Smoke + AppearanceTest"
+    },
+    "UI-14": {
+      "automatedStatus": "PASS",
+      "scope": "bounded model and/or headless JavaFX",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "Appearance115Smoke + AppearanceTest"
+    },
+    "UI-15": {
+      "automatedStatus": "PASS",
+      "scope": "model/storage tests; complete user interaction NOT_RUN",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "Appearance115Smoke + AppearanceTest"
+    },
+    "UI-16": {
+      "automatedStatus": "PASS",
+      "scope": "model/storage tests; complete user interaction NOT_RUN",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "Appearance115Smoke + AppearanceTest"
+    },
+    "UI-17": {
+      "automatedStatus": "PASS",
+      "scope": "model/storage tests; complete user interaction NOT_RUN",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "Appearance115Smoke + AppearanceTest"
+    },
+    "UI-18": {
+      "automatedStatus": "PASS",
+      "scope": "bounded model and/or headless JavaFX",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "Appearance115Smoke + AppearanceTest"
+    },
+    "UI-19": {
+      "automatedStatus": "PASS",
+      "scope": "bounded model and/or headless JavaFX",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "Appearance115Smoke + AppearanceTest"
+    },
+    "UI-20": {
+      "automatedStatus": "PASS",
+      "scope": "bounded model and/or headless JavaFX",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "Appearance115Smoke + AppearanceTest"
+    },
+    "UI-21": {
+      "automatedStatus": "PASS",
+      "scope": "partial headless/model coverage; native rendering NOT_RUN",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "Appearance115Smoke + AppearanceTest"
+    },
+    "UI-22": {
+      "automatedStatus": "PASS",
+      "scope": "partial headless/model coverage; native rendering NOT_RUN",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "Appearance115Smoke + AppearanceTest"
+    },
+    "UI-23": {
+      "automatedStatus": "PASS",
+      "scope": "partial headless/model coverage; native rendering NOT_RUN",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "Appearance115Smoke + AppearanceTest"
+    },
+    "UI-24": {
+      "automatedStatus": "PASS",
+      "scope": "bounded model and/or headless JavaFX",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "Appearance115Smoke + AppearanceTest"
+    },
+    "UI-25": {
+      "automatedStatus": "PASS",
+      "scope": "bounded model and/or headless JavaFX",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "Appearance115Smoke + AppearanceTest"
+    },
+    "UI-26": {
+      "automatedStatus": "PASS",
+      "scope": "bounded model and/or headless JavaFX",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "Appearance115Smoke + AppearanceTest"
+    },
+    "UI-27": {
+      "automatedStatus": "NOT_RUN",
+      "scope": "headless logical scale; physical DPI NOT_RUN",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "Appearance115Smoke + AppearanceTest"
+    },
+    "UI-28": {
+      "automatedStatus": "PASS",
+      "scope": "bounded model and/or headless JavaFX",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "Appearance115Smoke + AppearanceTest"
+    },
+    "UI-29": {
+      "automatedStatus": "PASS",
+      "scope": "bounded model and/or headless JavaFX",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "Appearance115Smoke + AppearanceTest"
+    },
+    "UI-30": {
+      "automatedStatus": "PASS",
+      "scope": "bounded model and/or headless JavaFX",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "Appearance115Smoke + AppearanceTest"
+    },
+    "SYS-01": {
+      "automatedStatus": "PASS",
+      "scope": "authenticated ephemeral-key event/receipt tests; real owner-signed install NOT_RUN",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "UpdateEventsTest + unchanged protocol scope"
+    },
+    "SYS-02": {
+      "automatedStatus": "PASS",
+      "scope": "authenticated ephemeral-key event/receipt tests; real owner-signed install NOT_RUN",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "UpdateEventsTest + unchanged protocol scope"
+    },
+    "SYS-03": {
+      "automatedStatus": "PASS",
+      "scope": "authenticated ephemeral-key event/receipt tests; real owner-signed install NOT_RUN",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "UpdateEventsTest + unchanged protocol scope"
+    },
+    "SYS-04": {
+      "automatedStatus": "PASS",
+      "scope": "authenticated ephemeral-key event/receipt tests; real owner-signed install NOT_RUN",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "UpdateEventsTest + unchanged protocol scope"
+    },
+    "SYS-05": {
+      "automatedStatus": "PASS",
+      "scope": "authenticated ephemeral-key event/receipt tests; real owner-signed install NOT_RUN",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "UpdateEventsTest + unchanged protocol scope"
+    },
+    "SYS-06": {
+      "automatedStatus": "PASS",
+      "scope": "authenticated ephemeral-key event/receipt tests; real owner-signed install NOT_RUN",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "UpdateEventsTest + unchanged protocol scope"
+    },
+    "SYS-07": {
+      "automatedStatus": "PASS",
+      "scope": "authenticated ephemeral-key event/receipt tests; real owner-signed install NOT_RUN",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "UpdateEventsTest + unchanged protocol scope"
+    },
+    "SYS-08": {
+      "automatedStatus": "NOT_RUN",
+      "scope": "internal type and unchanged wire reviewed; Relay impersonation native scenario NOT_RUN",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "UpdateEventsTest + unchanged protocol scope"
+    },
+    "SYS-09": {
+      "automatedStatus": "PASS",
+      "scope": "authenticated ephemeral-key event/receipt tests; real owner-signed install NOT_RUN",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "UpdateEventsTest + unchanged protocol scope"
+    },
+    "SYS-10": {
+      "automatedStatus": "NOT_RUN",
+      "scope": "internal type and unchanged wire reviewed; Relay impersonation native scenario NOT_RUN",
+      "nativeStatus": "NOT_RUN",
+      "evidence": "UpdateEventsTest + unchanged protocol scope"
+    }
+  }
+}

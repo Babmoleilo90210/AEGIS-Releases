@@ -96,7 +96,7 @@ def main():
     run([sys.executable,ROOT/'packaging/verify_client_release.py',out],timeout=180,log=out/'ARTIFACT-VERIFICATION.json')
     run([sys.executable,ROOT/'packaging/archive-clients.py',out],timeout=90)
     shutil.copytree(build/'junit',evidence/'junit',dirs_exist_ok=True)
-    for name in ['README-WINDOWS.md','README-CACHYOS.md','CHANGELOG-1.1.5.md','TEST-REPORT-1.1.5.md','NATIVE-ACCEPTANCE-1.1.5.md','APPEARANCE-1.1.5.md','MIGRATION-1.1.1-TO-1.1.5.md','BUILD-1.1.5.md','SECURITY.md','RELEASE-GATES-1.1.5.json']:
+    for name in ['README-WINDOWS.md','README-CACHYOS.md','CHANGELOG-1.1.5.md','TEST-REPORT-1.1.5.md','NATIVE-ACCEPTANCE-1.1.5.md','APPEARANCE-1.1.5.md','MIGRATION-1.1.1-TO-1.1.5.md','BUILD-1.1.5.md','SECURITY.md','RELEASE-GATES-1.1.5.json','PERFORMANCE-1.1.5.json','NATIVE-RESULTS-1.1.5.csv','AUTO-TEST-MATRIX-1.1.5.json']:
         shutil.copy2(ROOT/name,out/name)
     if (build/'compatibility-matrix.json').exists():shutil.copy2(build/'compatibility-matrix.json',evidence/'compatibility-matrix.json')
     provenance={'version':'1.1.5','productionReady':False,'sourceCommit':os.environ.get('GITHUB_SHA','local-uncommitted'),'nativeAcceptance':'NOT_RUN','JDK':subprocess.check_output([jdk/'bin/java','-version'],stderr=subprocess.STDOUT,text=True,timeout=15).strip(),'baseReleaseInputs':INPUTS,'testAndRelayDependencies':MAVEN,'runtimeConnectionsAdded':False,'ownerPrivateKeyUsed':False,'productionDeploymentOrPublication':False,'baseline':'1.1.1 Beta Demo','newDependencies':False}

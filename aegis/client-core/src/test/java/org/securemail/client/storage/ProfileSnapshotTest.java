@@ -14,14 +14,15 @@ class ProfileSnapshotTest {
     try{
       ClientConfig config=ClientConfig.load(AppPaths.config());config.save(AppPaths.config());String id;
       try(var vault=new LocalStore(config.storagePath(),"snapshot-account-password".toCharArray(),Clock.systemUTC(),100000,1000000)){vault.bindNickname("raven");id=vault.identity().userId();}
-      for(String name:new String[]{"ui-preferences.json","theme.txt","tor-mode.txt","update-preferences.json","session/resume.enc","session/device.dpapi","tor/state/state","tor/transport-state/state","updates/stable.floor","updates/stable-1.0.0.json","updates/stable-1.0.0.sig","updates/lastAnnouncementVersion-stable"}){
+      for(String name:new String[]{"ui-preferences.json","theme.txt","appearance/settings.json","appearance/images/fixture.png","updates/events/fixture.json","tor-mode.txt","update-preferences.json","session/resume.enc","session/device.dpapi","tor/state/state","tor/transport-state/state","updates/stable.floor","updates/stable-1.0.0.json","updates/stable-1.0.0.sig","updates/lastAnnouncementVersion-stable"}){
         Path file=root.resolve(name);Files.createDirectories(file.getParent());Files.writeString(file,"fixture-"+name);
       }
       Files.writeString(root.resolve("tor/state/control_auth_cookie"),"never-back-up-cookie");
       Path backup=ProfileSnapshot.create(config,root.resolve("backups"));ProfileSnapshot.verify(backup,config);
       assertFalse(Files.exists(backup.resolve("app/tor/state/control_auth_cookie")));
-      Files.writeString(root.resolve("ui-preferences.json"),"changed");Files.delete(root.resolve("session/resume.enc"));Files.delete(root.resolve("updates/stable-1.0.0.sig"));Files.writeString(root.resolve("updates/stable.floor"),"1.1.0");
+      Files.writeString(root.resolve("ui-preferences.json"),"changed");Files.delete(root.resolve("session/resume.enc"));Files.delete(root.resolve("appearance/settings.json"));Files.delete(root.resolve("updates/events/fixture.json"));Files.delete(root.resolve("updates/stable-1.0.0.sig"));Files.writeString(root.resolve("updates/stable.floor"),"1.1.0");
       ProfileSnapshot.restore(backup,config);assertEquals("fixture-ui-preferences.json",Files.readString(root.resolve("ui-preferences.json")));
+      assertEquals("fixture-appearance/settings.json",Files.readString(root.resolve("appearance/settings.json")));assertEquals("fixture-updates/events/fixture.json",Files.readString(root.resolve("updates/events/fixture.json")));
       assertEquals("fixture-session/resume.enc",Files.readString(root.resolve("session/resume.enc")));
       assertEquals("fixture-updates/stable.floor",Files.readString(root.resolve("updates/stable.floor")));assertEquals("fixture-updates/stable-1.0.0.sig",Files.readString(root.resolve("updates/stable-1.0.0.sig")));
       try(var vault=new LocalStore(config.storagePath(),"snapshot-account-password".toCharArray(),Clock.systemUTC(),100000,1000000)){assertEquals(id,vault.identity().userId());}

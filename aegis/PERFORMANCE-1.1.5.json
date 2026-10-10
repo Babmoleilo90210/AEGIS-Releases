@@ -1,0 +1,20 @@
+{
+  "baseline": {
+    "version": "1.1.1",
+    "environment": "Monocle headless 1280x900 sw",
+    "samples": 30,
+    "themeSwitchMedianMs": 6,
+    "themeSwitchP95Ms": 24,
+    "heapAfterGcBytes": 28081040,
+    "nativeAcceptance": false
+  },
+  "candidate": {
+    "version": "1.1.5",
+    "environment": "Monocle headless 1280x900 sw",
+    "samples": 30,
+    "themeSwitchMedianMs": 13,
+    "themeSwitchP95Ms": 45,
+    "heapAfterGcBytes": 30597856,
+    "nativeAcceptance": false
+  }
+}

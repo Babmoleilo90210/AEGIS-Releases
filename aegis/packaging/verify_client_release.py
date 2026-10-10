@@ -120,7 +120,7 @@ def pe_check(path, expected_icons, require_amd64=True):
         at = value.find(struct.pack('<I', 0xFEEF04BD))
         if at >= 0 and len(value) >= at + 24:
             numbers = struct.unpack_from('<IIII', value, at + 8)
-            if numbers == (0x00010001, 0x00010000, 0x00010001, 0x00010000):
+            if numbers == (0x00010001, 0x00050000, 0x00010001, 0x00050000):
                 correct_version = True
     if not correct_version:
         raise ValueError('EXE file/product version is not 1.1.5.0: ' + path.name)
