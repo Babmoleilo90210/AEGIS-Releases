@@ -1,0 +1,102 @@
+name: AEGIS 1.1.1 unsigned candidates
+on:
+  push:
+    branches: [development/aegis-1.1.1-demo]
+    paths: [aegis/**, .github/workflows/aegis111-demo.yml]
+permissions:
+  contents: read
+concurrency:
+  group: aegis111-demo-${{ github.sha }}
+  cancel-in-progress: false
+jobs:
+  candidates:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore exact published 1.1.0 source under the reviewed overlay
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib, pathlib, urllib.request, zipfile
+          target=pathlib.Path('aegis');target.mkdir(exist_ok=True)
+          path=pathlib.Path('/tmp/aegis-1.1-source.zip')
+          with urllib.request.urlopen('https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.1.0/AEGIS-1.1.0-client-source.zip',timeout=60) as response,path.open('wb') as output:
+              import shutil;shutil.copyfileobj(response,output)
+          assert hashlib.sha256(path.read_bytes()).hexdigest()=='5297d563d3f3f492bab8b2d47435011173e704d67a4e37e2e117d38da93bb0b8'
+          with zipfile.ZipFile(path) as archive:
+              assert archive.testzip() is None
+              for entry in archive.infolist():
+                  p=pathlib.PurePosixPath(entry.filename)
+                  assert not p.is_absolute() and '..' not in p.parts and p.parts[0]=='aegis' and '\\' not in entry.filename
+                  destination=pathlib.Path(*p.parts)
+                  if entry.is_dir():destination.mkdir(parents=True,exist_ok=True)
+                  elif not destination.exists():
+                      destination.parent.mkdir(parents=True,exist_ok=True);destination.write_bytes(archive.read(entry))
+          PY
+      - name: Install packaging tools only on the disposable build worker
+        shell: bash
+        run: |
+          sudo timeout 90s apt-get -o Acquire::http::Timeout=15 -o Acquire::https::Timeout=15 -o Acquire::Retries=1 update
+          sudo env DEBIAN_FRONTEND=noninteractive timeout 180s apt-get -o Acquire::http::Timeout=15 -o Acquire::https::Timeout=15 -o Acquire::Retries=1 install -y --no-install-recommends gcc-mingw-w64-x86-64 nsis squashfs-tools
+      - name: Build, test, and package unsigned candidates
+        shell: bash
+        run: |
+          python3 aegis/tools/build-demo.py --jdk "$JAVA_HOME_21_X64" --work "$RUNNER_TEMP/aegis111-inputs" --out "$GITHUB_WORKSPACE/candidates"
+      - name: Upload candidate files and test evidence, never a Release
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: AEGIS-1.1.1-unsigned-candidates
+          path: |
+            candidates/*.zip
+            candidates/*.exe
+            candidates/*.AppImage
+            candidates/*.json
+            candidates/*.md
+            candidates/SHA256SUMS
+            candidates/evidence/
+            candidates/updates/
+            candidates/SIGNING-INPUT-SHA256
+          retention-days: 14
+          if-no-files-found: error
+
+  demo-windows:
+    needs: candidates
+    runs-on: windows-2025
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: AEGIS-1.1.1-unsigned-candidates
+          path: candidates
+      - name: Native packaged UI, EXE, Setup and exact published 1.1.0 updater
+        shell: pwsh
+        run: python aegis/tools/validate-demo-packaged.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: AEGIS-1.1.1-Demo-Windows-evidence
+          path: validation-evidence/
+          retention-days: 14
+          if-no-files-found: error
+  demo-linux-tor:
+    needs: candidates
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: AEGIS-1.1.1-unsigned-candidates
+          path: candidates
+      - name: AppImage and exact published 1.1.0 Tor transport, resume and verifier
+        run: python3 aegis/tools/validate-demo-packaged.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: AEGIS-1.1.1-Demo-Linux-Tor-evidence
+          path: validation-evidence/
+          retention-days: 14
+          if-no-files-found: error

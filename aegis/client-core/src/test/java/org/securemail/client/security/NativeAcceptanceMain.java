@@ -151,6 +151,7 @@ public final class NativeAcceptanceMain {
         check("native_selectors_themes_presets_and_update_progress",()->child("org.securemail.ui.NativeGuiSmokeLauncher",150,"selectors"));
         check("native_messenger_password_FF1_preview_TTL",()->child("org.securemail.ui.NativeGuiSmokeLauncher",150,"messenger"));
         check("native_profile_scale_and_draft",()->child("org.securemail.ui.NativeGuiSmokeLauncher",150,"aegis11"));
+        check("native_dark_green_theme_and_restart_persistence",()->child("org.securemail.ui.NativeGuiSmokeLauncher",150,"dark-green"));
         check("native_single_window_navigation",()->child("org.securemail.ui.NativeGuiSmokeLauncher",150,"single-window"));
       }
     } else report.put("nativeGUI","NOT_REQUESTED");

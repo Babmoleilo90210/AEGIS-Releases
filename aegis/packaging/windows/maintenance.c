@@ -9,7 +9,7 @@ static BOOL CALLBACK close_window(HWND window,LPARAM unused){(void)unused;DWORD 
 static HANDLE owned(DWORD pid,const wchar_t *expected){HANDLE process=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,pid);if(!process)return NULL;wchar_t image[32768];DWORD length=32768;if(!QueryFullProcessImageNameW(process,0,image,&length)||_wcsicmp(image,expected)!=0){CloseHandle(process);return NULL;}return process;}
 static int rollback(LPWSTR *args){
  wchar_t java[32768],launcher[32768],old[32768],failed[32768],command[32768];
- if(swprintf(java,32768,L"%ls\\runtime\\bin\\javaw.exe",args[2])<0||swprintf(launcher,32768,L"%ls\\AEGIS.exe",args[2])<0||swprintf(old,32768,L"%ls.rollback-1.1.0",args[2])<0||swprintf(failed,32768,L"%ls.failed-1.1.0-%llu",args[2],(unsigned long long)GetTickCount64())<0)return 2;
+ if(swprintf(java,32768,L"%ls\\runtime\\bin\\javaw.exe",args[2])<0||swprintf(launcher,32768,L"%ls\\AEGIS.exe",args[2])<0||swprintf(old,32768,L"%ls.rollback-1.1.1",args[2])<0||swprintf(failed,32768,L"%ls.failed-1.1.1-%llu",args[2],(unsigned long long)GetTickCount64())<0)return 2;
  HANDLE client=owned(wcstoul(args[3],NULL,10),java),parent=owned(wcstoul(args[4],NULL,10),launcher);if(!client||!parent){if(client)CloseHandle(client);if(parent)CloseHandle(parent);return 2;}
  DWORD done=WaitForSingleObject(client,30000);CloseHandle(client);if(done!=WAIT_OBJECT_0){CloseHandle(parent);return 1;}done=WaitForSingleObject(parent,30000);CloseHandle(parent);if(done!=WAIT_OBJECT_0)return 1;
  if(!MoveFileExW(args[2],failed,MOVEFILE_WRITE_THROUGH))return 1;

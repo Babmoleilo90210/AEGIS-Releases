@@ -122,7 +122,7 @@ def pe_check(path, expected_icons, require_amd64=True):
 def app_jars(app):
     if list(app.glob('*relay*')):
         raise ValueError('Relay JAR must not be shipped in a client')
-    names = ['client-core-1.1.0.jar', 'client-ui-1.1.0.jar', 'common-protocol-0.2.0.jar']
+    names = ['client-core-1.1.1.jar', 'client-ui-1.1.1.jar', 'common-protocol-0.2.0.jar']
     for name in names:
         with zipfile.ZipFile(app / name) as archive:
             if archive.testzip() is not None:
@@ -142,9 +142,9 @@ def verify_release(output):
     linux = output / 'stage/AEGIS.AppDir'
     icons = ico_images((windows / 'resources/icon.ico').read_bytes())
     pe = {name: pe_check(windows / name, icons) for name in ['AEGIS.exe', 'AEGIS-Maintenance.exe', 'AEGIS-Updater.exe']}
-    setup = output / 'AEGIS-Setup-1.1.0-x64.exe'
+    setup = output / 'AEGIS-Setup-1.1.1-x64.exe'
     setup_check = pe_check(setup, icons, require_amd64=False)
-    payload = output / 'AEGIS-1.1.0-Windows-x64.zip'
+    payload = output / 'AEGIS-1.1.1-Windows-x64.zip'
     with zipfile.ZipFile(payload) as archive:
         if archive.testzip() is not None:
             raise ValueError('Windows ZIP CRC failure')
@@ -180,7 +180,7 @@ def verify_release(output):
         actual = {path.name: sha256(path) for path in (app / 'app').glob('*.jar')}
         if actual != expected:
             raise ValueError('Packaged JARs differ from final Gradle stage')
-    image = output / 'AEGIS-1.1.0-CachyOS-x86_64.AppImage'
+    image = output / 'AEGIS-1.1.1-CachyOS-x86_64.AppImage'
     appimage = verify(image, linux)
     names = [setup.name, payload.name, image.name]
     return {'verification_type': 'offline_structural_and_payload', 'native_OS_acceptance': 'PENDING',

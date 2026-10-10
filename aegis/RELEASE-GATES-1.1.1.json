@@ -1,0 +1,14 @@
+{
+  "version": "1.1.1",
+  "channel": "beta",
+  "protocolVersion": 1,
+  "productionReady": false,
+  "ownerSignature": "PENDING",
+  "nativeWindows11SignedUpdate": "NOT_RUN",
+  "nativeCachyOSKDEWaylandSignedUpdate": "NOT_RUN",
+  "nativeCachyOSKDEX11SignedUpdate": "NOT_RUN",
+  "nativeRestartRollback": "NOT_RUN",
+  "productionRelayChanged": false,
+  "productionManifestChanged": false,
+  "releasePublished": false
+}

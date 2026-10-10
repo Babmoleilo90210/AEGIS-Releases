@@ -16,7 +16,7 @@ public final class UpdateSupport {
     return ProfileSnapshot.create(config,AppPaths.root().resolve("backups"));
   }
   public static boolean scheduleWindowsRollback()throws IOException {
-    if(!AppPaths.windows())return false;Path program=AppPaths.bundle(),previous=program.resolveSibling(program.getFileName()+".rollback-1.1.0");
+    if(!AppPaths.windows())return false;Path program=AppPaths.bundle(),previous=program.resolveSibling(program.getFileName()+".rollback-1.1.1");
     Path expected=Path.of(System.getenv("LOCALAPPDATA"),"Programs","AEGIS").toAbsolutePath();
     if(!program.equals(expected)||!Files.isRegularFile(previous.resolve("AEGIS.exe")))return false;
     Path temp=AppPaths.root().resolve("tmp");AtomicFiles.directory(temp);Path helper=temp.resolve("rollback-"+UUID.randomUUID()+".exe");Files.copy(program.resolve("AEGIS-Maintenance.exe"),helper);
@@ -58,7 +58,7 @@ public final class UpdateSupport {
   /** Called after password migration has succeeded. Same-filesystem atomic replacement. */
   public static void installLinux(Path downloaded,Path old,Path desktop,Path icon)throws IOException {
     Path installed=installedImage();AtomicFiles.directory(installed.getParent());
-    Path staged=installed.resolveSibling(".AEGIS-1.1.0-"+UUID.randomUUID()+".AppImage"),rollback=installed.resolveSibling("AEGIS.pre-1.1.0.AppImage");
+    Path staged=installed.resolveSibling(".AEGIS-1.1.1-"+UUID.randomUUID()+".AppImage"),rollback=installed.resolveSibling("AEGIS.pre-1.1.1.AppImage");
     Path applications=desktop.getParent();AtomicFiles.directory(applications);Path iconTarget=Path.of(System.getProperty("user.home"),".local/share/icons/hicolor/256x256/apps/aegis.png");AtomicFiles.directory(iconTarget.getParent());
     byte[] previousDesktop=Files.exists(desktop)?AtomicFiles.read(desktop,16384):null,previousIcon=Files.exists(iconTarget)?AtomicFiles.read(iconTarget,1024*1024):null;
     boolean replaced=false;
@@ -68,7 +68,7 @@ public final class UpdateSupport {
       String path=installed.toAbsolutePath().toString();if(path.chars().anyMatch(c->c=='\n'||c=='\r'))throw new IOException("Недопустимый путь ярлыка");
       Files.move(staged,installed,StandardCopyOption.ATOMIC_MOVE,StandardCopyOption.REPLACE_EXISTING);replaced=true;AtomicFiles.syncDirectory(installed.getParent());
       String quoted=path.replace("\\","\\\\").replace("\"","\\\"").replace("`","\\`").replace("$","\\$").replace("%","%%");
-      String entry="[Desktop Entry]\nType=Application\nName=АЕГИС\nExec=\""+quoted+"\"\nIcon=aegis\nTerminal=false\nCategories=Network;Email;\nX-AEGIS-Version=1.1.0\n";
+      String entry="[Desktop Entry]\nType=Application\nName=АЕГИС\nExec=\""+quoted+"\"\nIcon=aegis\nTerminal=false\nCategories=Network;Email;\nX-AEGIS-Version=1.1.1\n";
       AtomicFiles.write(desktop,entry.getBytes(StandardCharsets.UTF_8));AtomicFiles.write(iconTarget,AtomicFiles.read(icon,1024*1024));
       // Retain the previous AppImage for an explicit rollback. No user profile directory is removed.
     }catch(IOException failure){

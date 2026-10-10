@@ -11,6 +11,7 @@ public final class NativeGuiSmokeLauncher {
       case "selectors" -> ClientUiRegressionSmoke.main(new String[0]);
       case "messenger" -> MessengerSmoke.main(new String[0]);
       case "aegis11" -> Aegis11UiSmoke.main(new String[0]);
+      case "dark-green" -> DarkGreenThemeSmoke.main(new String[0]);
       case "single-window" -> SingleWindowSmoke.main(new String[0]);
       default -> throw new IllegalArgumentException("Unknown native GUI test");
     }

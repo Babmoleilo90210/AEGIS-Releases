@@ -8,6 +8,7 @@ final class ThemeManager {
   enum Theme {
     BLACK("Чёрная","#090b0e","#111419","#20252d","#e5e8ee","#89949f"),
     DARK("Тёмно-серая","#15191f","#20262e","#303842","#e5e9ef","#a1acb8"),
+    DARK_GREEN("Тёмно-зелёная","#0c1812","#14271d","#263e30","#edf4ee","#a7bdae"),
     GREY("Серая","#353a41","#424951","#535d66","#f2f4f6","#c0c8cf"),
     LIGHT("Светло-серая","#d7dce1","#e4e8ec","#c5cdd4","#1a2630","#536371"),
     WHITE("Белая","#f6f8fa","#ffffff","#e0e6eb","#19232c","#64717c");
@@ -48,7 +49,8 @@ final class ThemeManager {
   }
   private void style(Parent root){
     root.getStyleClass().removeAll("density-compact","density-normal","density-large");root.getStyleClass().add("density-"+layout.density().name().toLowerCase(java.util.Locale.ROOT));
-    root.setStyle("-fx-base:"+selected.panel+";-aegis-bg:"+selected.bg+";-aegis-panel:"+selected.panel+";-aegis-control:"+selected.control+";-aegis-text:"+selected.text+";-aegis-muted:"+selected.muted+";-aegis-accent:"+(selected==Theme.LIGHT||selected==Theme.WHITE?"#205947":"#82cbb7")+";-fx-font-size:13px;");
+    boolean green=selected==Theme.DARK_GREEN;
+    root.setStyle("-fx-base:"+selected.panel+";-aegis-bg:"+selected.bg+";-aegis-panel:"+selected.panel+";-aegis-control:"+selected.control+";-aegis-text:"+selected.text+";-aegis-muted:"+selected.muted+";-aegis-accent:"+(green?"#85c89a":selected==Theme.LIGHT||selected==Theme.WHITE?"#205947":"#82cbb7")+";-aegis-action:"+(green?"#85c89a":"#68bca5")+";-aegis-incoming:"+(green?"#1b3024":"#232a34")+";-aegis-outgoing:"+(green?"#284a35":"#23423c")+";-fx-font-size:13px;");
   }
   void track(javafx.scene.Scene scene){
     if(scene==null||scenes.containsKey(scene))return;Parent original=scene.getRoot();

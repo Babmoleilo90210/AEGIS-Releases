@@ -1,10 +1,12 @@
-# АЕГИС 1.1.0
+# АЕГИС 1.1.1 Demo
 
-Автономная Единая Гибридная Информационная Система. Локальные Java 21 клиенты Windows/CachyOS и заменяемый protocol-1 relay. Это продолжаемый исходный код 1.0.0 с изменениями 1.1.0, не новая identity или новый wire protocol.
+Автономная Единая Гибридная Информационная Система. Локальные Java 21 клиенты Windows/CachyOS и заменяемый protocol-1 relay. Это продолжаемый исходный код опубликованной 1.1.0 с минимальным изменением темы в 1.1.1, не новая identity или новый wire protocol.
 
 Текущая сборка — **unsigned candidate**, `productionReady=false`. Реализация, JavaFX регрессии и staging совместимость проверяются отдельно от настоящих Windows/KDE/Tor/VPS испытаний. Production Relay, onion identity, опубликованные релизы и pinned release public key не изменены.
 
-Начало работы: [Windows](README-WINDOWS.md), [CachyOS](README-CACHYOS.md), [переход с 1.0.0](MIGRATION-1.0-TO-1.1.md). Для разработчика: [сборка](BUILD-1.1.0.md), [изменения](CHANGELOG-1.1.0.md), [отчёт тестирования](TEST-REPORT-1.1.0.md), [optional staging Relay](RELAY-0.3-STAGING.md), [угрозы](THREAT_MODEL.md).
+Начало работы: [Windows](README-WINDOWS.md), [CachyOS](README-CACHYOS.md), [переход с 1.0.0](MIGRATION-1.0-TO-1.1.md). Для разработчика: [сборка](BUILD-1.1.1.md), [изменения](CHANGELOG-1.1.1.md), [отчёт тестирования](TEST-REPORT-1.1.1.md), [optional staging Relay](RELAY-0.3-STAGING.md), [угрозы](THREAT_MODEL.md).
+
+Demo updater: [подпись, публикация Beta и нативное испытание](DEMO-UPDATER-TEST-RU.md).
 
 ## Приложения и данные
 
