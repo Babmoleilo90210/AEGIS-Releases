@@ -126,5 +126,6 @@ run([jdk/('bin/javac.exe' if windows else 'bin/javac'),'--release','21','-encodi
 probe=str(oldclasses)+os.pathsep+oldcp
 check('published_110_verifier_beta_schema_exact_111_packages_fixture',lambda:run([oldjava,'-cp',probe,'org.securemail.client.update.DemoCompatibilityProbe',inputs/'updates/beta.json',inputs/'AEGIS-1.1.1-Windows-x64.zip',inputs/'AEGIS-1.1.1-CachyOS-x86_64.AppImage'],'published-110-compatibility.log',120,env))
 check('published_110_real_Tor_production_signature_download_resume_SHA256',lambda:run([oldjava,'-cp',probe,'org.securemail.client.update.DemoTorNetworkProbe',oldapp,out/'published-110-real-Tor'],'published-110-real-Tor.log',600,env))
+check('published_110_real_Snowflake_signature_download_resume_SHA256',lambda:run([oldjava,'-cp',probe,'org.securemail.client.update.DemoTorNetworkProbe',oldapp,out/'published-110-real-Snowflake','--snowflake'],'published-110-real-Snowflake.log',600,env))
 (out/'RESULTS.json').write_text(json.dumps(report,indent=2)+'\n')
 if any(x['result']!='PASS' for x in report['checks']):sys.exit(1)

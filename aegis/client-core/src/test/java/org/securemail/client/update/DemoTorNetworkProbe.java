@@ -19,10 +19,13 @@ public final class DemoTorNetworkProbe {
     if(!SignedManifest.CURRENT.equals("1.1.0"))throw new AssertionError("Use the published 1.1.0 classpath");
     Path app=Path.of(args[0]).toAbsolutePath(),evidence=Path.of(args[1]).toAbsolutePath();Files.createDirectories(evidence);
     Path profile=Files.createTempDirectory("AEGIS demo Tor fixture ");System.setProperty("aegis.home",app.toString());System.setProperty("aegis.profile",profile.toString());
+    boolean snowflake=args.length==3&&args[2].equals("--snowflake");
+    if(snowflake)Files.writeString(profile.resolve("tor-mode.txt"),"snowflake\n");
     ClientConfig config=ClientConfig.load(profile.resolve("config/client.properties"));
     try(TorConnection tor=new TorConnection(config)) {
       TorTransport.requireAvailability(tor::ready);tor.start(Duration.ofSeconds(120),Duration.ofSeconds(240),(mode,n)->System.out.println("Tor "+mode+" "+n+"%"));
       if(!tor.ready())throw new AssertionError("Tor unavailable");
+      if(snowflake&&tor.mode()!=EmbeddedTor.Mode.SNOWFLAKE)throw new AssertionError("Snowflake test fell back to Direct Tor");
       String rc=Files.readString(profile.resolve("tor/torrc"));if(!rc.contains("127.0.0.1:19050 OnionTrafficOnly")||!rc.contains("127.0.0.1:19052\n")||rc.contains("0.0.0.0"))throw new AssertionError("Listener isolation failed");
       var https=new TorHttpsClient(config.torUpdateSocksPort());URI uri=URI.create("https://raw.githubusercontent.com/"+SignedManifest.REPOSITORY+"/main/updates/stable.json");
       byte[] exact=https.bytes(uri,SignedManifest.MAX_BYTES),sig=https.bytes(URI.create(uri+".sig"),64);SignedManifest signed=SignedManifest.verifyForCheck(exact,sig,"stable","1.1.0","1.1.0");
