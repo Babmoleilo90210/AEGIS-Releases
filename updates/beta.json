@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "application": "AEGIS",
+  "channel": "beta",
+  "version": "1.1.1",
+  "tag": "v1.1.1",
+  "repository": "Babmoleilo90210/AEGIS-Releases",
+  "protocolVersion": 1,
+  "relayCompatibility": [
+    "0.2.0"
+  ],
+  "artifacts": [
+    {
+      "fileName": "AEGIS-Setup-1.1.1-x64.exe",
+      "size": 66197697,
+      "sha256": "f62ebd34d7fb8c0d03e4e62e5b9085b79d1dc59661fc734a69d9f2a103f50048",
+      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.1.1/AEGIS-Setup-1.1.1-x64.exe",
+      "platform": "windows-x64",
+      "kind": "installer"
+    },
+    {
+      "fileName": "AEGIS-1.1.1-Windows-x64.zip",
+      "size": 74923853,
+      "sha256": "d2c7b12248efed474a1c538f7f9707d3442446655230602d1d033e92c22c17a2",
+      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.1.1/AEGIS-1.1.1-Windows-x64.zip",
+      "platform": "windows-x64",
+      "kind": "portable"
+    },
+    {
+      "fileName": "AEGIS-1.1.1-CachyOS-x86_64.AppImage",
+      "size": 73992696,
+      "sha256": "7c471e7baf9f82d4198a2daaaadd498937bdc31b0595dec8b4dba286d312b3d3",
+      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.1.1/AEGIS-1.1.1-CachyOS-x86_64.AppImage",
+      "platform": "cachyos-x86_64",
+      "kind": "appimage"
+    },
+    {
+      "fileName": "AEGIS-1.1.1-client-source.zip",
+      "size": 1420538,
+      "sha256": "c6148e46d30cfa277483810fbfe64ac7f7ddcec06b13c544f4c921716c7a8a6a",
+      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.1.1/AEGIS-1.1.1-client-source.zip",
+      "platform": "source",
+      "kind": "source"
+    }
+  ],
+  "checksums": {
+    "fileName": "SHA256SUMS",
+    "size": 1334,
+    "sha256": "067ef3fc8e9843d8f1a5b0afd1b30bacba3d254c49babffc37ade48ac543d44e",
+    "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.1.1/SHA256SUMS"
+  },
+  "changelog": {
+    "fileName": "CHANGELOG-1.1.1.md",
+    "size": 1594,
+    "sha256": "55a0695654a855e457f8a3fa0f7d214d4634332763fc44b4a121955bf5fa6263",
+    "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.1.1/CHANGELOG-1.1.1.md"
+  },
+  "minimumSupported": "1.1.0",
+  "updatePolicy": "optional",
+  "announcement": {
+    "title": "АЕГИС 1.1.1 Demo",
+    "summary": "Новый пресет «Тёмно-зелёная». Добровольное испытание подписанного автообновления через Tor.",
+    "showAsLetter": true
+  },
+  "releaseNotes": {
+    "publishedAt": "2026-10-10T00:00:00Z",
+    "type": "Feature",
+    "text": "# АЕГИС 1.1.1 Demo — Тёмно-зелёная\n\n- Новый цветовой UI preset «Тёмно-зелёная» в Настройки → Внешний вид → Тема.\n- Тёмно-зелёные фоны, умеренные зелёные акценты, светлый контрастный текст и зелёные цвета писем во всех страницах единого окна.\n- Выбор сохраняется после перезапуска. Все пять прежних тем и «Как в системе» сохранены. Пресеты геометрии и масштабирование продолжают работать независимо.\n- Версия клиента, EXE, Setup, AppImage, updater и desktop metadata — 1.1.1.\n- E2EE, Relay, protocol 1, identity keys, аккаунты и формат локального зашифрованного хранилища не менялись.\n- Добровольный тестовый канал Beta уже предусмотрен опубликованным клиентом 1.1.0. Для Demo подготовлен отдельный unsigned beta manifest; stable feed не меняется.\n\nЭто Demo для проверки обновлений, не обязательный security update. Owner-signed нативный переход 1.1.0 → 1.1.1 считается пройденным только после приёмки на Windows 11 и CachyOS KDE. До подписи и публикации владельцем productionReady=false.\n"
+  }
+}
