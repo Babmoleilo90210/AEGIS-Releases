@@ -27,6 +27,12 @@ public final class UpdateEvents {
     try(var files=Files.list(root)){if(files.limit(1025).count()>=1024)throw new IOException("Update history limit");}
     JsonObject o=new JsonObject();o.addProperty("schema",1);o.addProperty("id",identity);o.addProperty("version",version);o.addProperty("channel",channel);o.addProperty("kind",kind.name());o.addProperty("time",Instant.now().toString());o.addProperty("code",code);AtomicFiles.write(target,JsonData.encode(o));
   }
+  synchronized void migrateLegacy()throws IOException {
+    for(String channel:List.of("stable","beta")){Path floor=updates.resolve(channel+".floor");if(!Files.isRegularFile(floor,LinkOption.NOFOLLOW_LINKS))continue;
+      try{SemVersion highest=SemVersion.parse(new String(AtomicFiles.read(floor,100),StandardCharsets.US_ASCII).trim());try(var files=Files.newDirectoryStream(updates,channel+"-*.json")){int n=0;for(Path path:files){if(++n>256)break;try{String name=path.getFileName().toString();SignedManifest m=verifier.verify(AtomicFiles.read(path,SignedManifest.MAX_BYTES),AtomicFiles.read(updates.resolve(name.substring(0,name.length()-5)+".sig"),64),channel,"0.0.0","0.0.0");if(m.announcement().showAsLetter()&&SemVersion.parse(m.version()).compareTo(highest)<=0)record(m,Kind.AVAILABLE,channel,"");}catch(IOException|GeneralSecurityException|RuntimeException invalid){}}}}
+      catch(IOException|RuntimeException invalid){/* Preserve old metadata; an invalid floor is not a trusted event. */}
+    }
+  }
   /** A startup ACK alone is not an installation receipt: the helper must commit too. */
   synchronized void reconcile()throws IOException {
     try(var dirs=Files.newDirectoryStream(updates,"install-*")){int count=0;for(Path dir:dirs){if(++count>256)break;if(Files.isSymbolicLink(dir)||!Files.isDirectory(dir,LinkOption.NOFOLLOW_LINKS))continue;

@@ -56,6 +56,7 @@ jobs:
             candidates/*.md
             candidates/SHA256SUMS
             candidates/evidence/
+            candidates/screenshots/
             candidates/updates/
             candidates/SIGNING-INPUT-SHA256
           retention-days: 14
