@@ -124,7 +124,7 @@ else:
 oldclasses=root/'published-110-probes';oldclasses.mkdir(exist_ok=True);oldcp=str(oldapp/'app')+os.sep+'*'
 run([jdk/('bin/javac.exe' if windows else 'bin/javac'),'--release','21','-encoding','UTF-8','-cp',oldcp,'-d',oldclasses,*[source/'client-core/src/test/java/org/securemail/client/update'/n for n in ['VisualCompatibilityProbe.java','DemoTorNetworkProbe.java']]],'published-110-probe-compile.log',60)
 probe=str(oldclasses)+os.pathsep+oldcp
-check('published_110_verifier_stable_schema_exact_115_packages_fixture',lambda:run([oldjava,'-cp',probe,'org.securemail.client.update.VisualCompatibilityProbe',inputs/'updates/stable.json',inputs/'AEGIS-1.2.0-Windows-x64.zip',inputs/'AEGIS-1.2.0-CachyOS-x86_64.AppImage'],'published-110-compatibility.log',120,env))
+check('published_110_verifier_stable_schema_exact_120_packages_fixture',lambda:run([oldjava,'-cp',probe,'org.securemail.client.update.VisualCompatibilityProbe',inputs/'updates/stable.json',inputs/'AEGIS-1.2.0-Windows-x64.zip',inputs/'AEGIS-1.2.0-CachyOS-x86_64.AppImage'],'published-110-compatibility.log',120,env))
 check('published_110_real_Tor_production_signature_download_resume_SHA256',lambda:run([oldjava,'-cp',probe,'org.securemail.client.update.DemoTorNetworkProbe',oldapp,out/'published-110-real-Tor'],'published-110-real-Tor.log',600,env))
 check('published_110_real_Snowflake_signature_download_resume_SHA256',lambda:run([oldjava,'-cp',probe,'org.securemail.client.update.DemoTorNetworkProbe',oldapp,out/'published-110-real-Snowflake','--snowflake'],'published-110-real-Snowflake.log',600,env))
 # Exact 1.1.1 Beta Demo is the appearance/migration base; never substitute a recompilation.
@@ -142,6 +142,6 @@ else:
  previousApp=previousRoot/'squashfs-root';previousJava=previousApp/'runtime/bin/java'
 previousClasses=root/'published-111-probes';previousClasses.mkdir(exist_ok=True);previousCp=str(previousApp/'app')+os.sep+'*'
 run([jdk/('bin/javac.exe' if windows else 'bin/javac'),'--release','21','-encoding','UTF-8','-cp',previousCp,'-d',previousClasses,source/'client-core/src/test/java/org/securemail/client/update/VisualCompatibilityProbe.java'],'published-111-compile.log',60)
-check('published_111_verifier_stable_schema_exact_115_packages_fixture',lambda:run([previousJava,'-cp',str(previousClasses)+os.pathsep+previousCp,'org.securemail.client.update.VisualCompatibilityProbe',inputs/'updates/stable.json',inputs/'AEGIS-1.2.0-Windows-x64.zip',inputs/'AEGIS-1.2.0-CachyOS-x86_64.AppImage'],'published-111-compatibility.log',120,env))
+check('published_111_verifier_stable_schema_exact_120_packages_fixture',lambda:run([previousJava,'-cp',str(previousClasses)+os.pathsep+previousCp,'org.securemail.client.update.VisualCompatibilityProbe',inputs/'updates/stable.json',inputs/'AEGIS-1.2.0-Windows-x64.zip',inputs/'AEGIS-1.2.0-CachyOS-x86_64.AppImage'],'published-111-compatibility.log',120,env))
 (out/'RESULTS.json').write_text(json.dumps(report,indent=2)+'\n')
 if any(x['result']!='PASS' for x in report['checks']):sys.exit(1)

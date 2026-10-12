@@ -94,20 +94,26 @@ public final class MessengerApp extends Application {
     }catch(Exception e){error(e);stage.close();Platform.exit();}
   }
   private void finishStartup(){
-    try{instance=AppPaths.lock();
+    try{
+      instance=AppPaths.lock();center(form("АЕГИС",new Label("Подготовка локальных данных…")));
+      ClientConfig original=config;
+      worker.execute(()->{try{
+        ClientUpgrade.beforeOpen(original.storagePath(),AppPaths.root().resolve("backups"));
+        ClientUpgrade.beforeVersionOpen(SignedManifest.CURRENT,original,AppPaths.root().resolve("backups"));
+        LocalStore.cleanupLockedFiles(original.storagePath(),System.currentTimeMillis());
+        Platform.runLater(()->{if(!stopping)finishPreparedStartup();});
+      }catch(Exception failed){Platform.runLater(()->{if(!stopping){error(failed);stop();}});}});
+    }catch(Exception failed){error(failed);stop();}
+  }
+  private void finishPreparedStartup(){
+    try{
       themes.initialize();layout=themes.settings().legacy();themes.workspace(root);themes.listener(this::appearanceChanged);try{presets=new UiPresetStore(AppPaths.root());}catch(IOException invalidOldAppearance){presets=null;}try{threads=Files.readString(AppPaths.root().resolve("mail-mode.txt")).trim().equals("threads");}catch(IOException ignored){}
       updatePreferences=UpdatePreferences.load(AppPaths.root());updates=new UpdateService(AppPaths.root(),config.torUpdateSocksPort());updates.channel(updatePreferences.channel());updates.listener(s->Platform.runLater(()->updateChanged(s)));
       updates.automatic(()->updatePreferences.automaticCheck(),()->updatePreferences.automaticDownload());
       // A private cookie path is always tied to this application's profile, including migrated Linux profiles.
       config=new ClientConfig("127.0.0.1",config.torSocksPort(),config.torControlPort(),config.torUpdateSocksPort(),AppPaths.root().resolve("tor/control_auth_cookie"),config.localServicePort(),config.defaultTTL(),config.relayOnionAddress(),config.relayPort(),config.storagePath(),config.maxFileSize(),config.maxLocalStorage(),config.deliveryTTL());
-      center(form("АЕГИС",new Label("Подготовка локальных данных…")));
-      worker.execute(()->{try{
-        ClientUpgrade.beforeOpen(config.storagePath(),AppPaths.root().resolve("backups"));
-        ClientUpgrade.beforeVersionOpen(SignedManifest.CURRENT,config,AppPaths.root().resolve("backups"));
-        LocalStore.cleanupLockedFiles(config.storagePath(),System.currentTimeMillis());
-        Platform.runLater(()->{if(!stopping){startTor();tryRemembered();}});
-      }catch(Exception failed){Platform.runLater(()->{if(!stopping){error(failed);stop();}});}});
-    }catch(Exception e){error(e);stage.close();Platform.exit();}
+      startTor();tryRemembered();
+    }catch(Exception failed){error(failed);stop();}
   }
   private void page(Node body){root.getChildren().clear();root.setTop(null);root.setLeft(null);root.setBottom(null);root.setCenter(body);}
   private VBox form(String title,Node...nodes){Label heading=new Label(title);heading.getStyleClass().add("heading");VBox box=new VBox(14,heading);box.getChildren().addAll(nodes);box.getStyleClass().add("settings-card");box.setMaxWidth(350);box.setAlignment(Pos.CENTER_LEFT);box.setPadding(new Insets(24));return box;}

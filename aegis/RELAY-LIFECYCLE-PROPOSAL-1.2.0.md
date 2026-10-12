@@ -35,7 +35,7 @@ Legacy пакет допускает TTL максимум 7 суток и при
 
 Сначала отдельный staging Relay, копия схемы без production пользовательских данных. Новые таблицы consent/events/capabilities/lifecycle с SQL schema version и transaction; existing users/mailbox/receipts и onion identity сохраняются. Повторная migration идемпотентна, есть ciphertext/SQLite online-backup и rollback на предыдущий бинарник/совместимую схему. Никаких запросов на live VPS.
 
-Проверки: old client 1.1.5 ↔ new Relay обычная почта; new client ↔ old Relay обычная почта/unsupported lifecycle; два реальных staging аккаунта mutual/offline/revoke/block; durable event before ACK, forged signature, wrong party/digest, replay/duplicate/order/time regression; first display only after protected letter password+валидный FF1 и реальное содержимое; ordinary receipts off; expiring mandatory consent; 1мин/30д bounds, старые письма без новых таймеров, offline sender, restart/crash/corrupt sidecar/backup restore/attachments purge/tombstone; multi-device lease conflict; Windows/CachyOS updater snapshot/rekey/rollback.
+Проверки: old client 1.1.5 ↔ new Relay обычная почта; new client ↔ old Relay обычная почта/unsupported lifecycle; два реальных staging аккаунта mutual/offline/revoke/block; durable event before ACK, forged signature, wrong party/digest, replay/duplicate/order/time regression; first display only after protected letter password+ручной FF1 и явное отображение результата (см. ограничение отсутствия oracle ниже); ordinary receipts off; expiring mandatory consent; 1мин/30д bounds, старые письма без новых таймеров, offline sender, restart/crash/corrupt sidecar/backup restore/attachments purge/tombstone; multi-device lease conflict; Windows/CachyOS updater snapshot/rekey/rollback.
 
 ## Что необходимо утвердить
 
@@ -44,3 +44,7 @@ Legacy пакет допускает TTL максимум 7 суток и при
 - Версионированное локальное lifecycle состояние с existing AEAD, без изменения identity keys и шифров старых писем.
 
 До этого FEAT-15/16 и подтверждённый Friends на старом production Relay не считаются реализованными. Независимые клиентские bug fixes не требуют этого решения.
+
+## FF1: согласование события прочтения
+
+Существующий LetterEnvelope.VERSION=3 прямо запрещает проверку корректности второго кода: candidate всегда вычисляется и может быть plaintext или hex. Не считаем initial ciphertext/каждый live-keystroke прочтением. Рекомендуемое совместимое решение — после ввода секрета отдельное действие «Показать результат» и подписанное событие DISPLAYED только после отображения конечного candidate; статус не доказывает правильность FF1 и человеческое чтение. Это сохраняет криптографию/старые письма. Если требуется именно криптографическое доказательство правильного FF1, понадобится отдельно утверждённый новый защищённый envelope, который меняет нынешнее отсутствие correctness oracle; молча это не добавляется.
