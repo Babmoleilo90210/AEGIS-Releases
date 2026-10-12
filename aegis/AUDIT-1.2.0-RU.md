@@ -56,3 +56,7 @@ UpdateService.failed публиковал FAILED до записи events/diagno
 ## Поправка сборочного compatibility harness
 
 После замены нативного input на опубликованную 1.1.5 старый build harness ошибочно использовал её staging Relay 0.3 исходник под названием relay02. Настоящая проверка capability=0 обнаружила ошибку; assertion не ослаблялся. В 1.2.0 harness отдельно загружает SHA-pinned исходник опубликованной 1.0.0 (Relay 0.2.0), компилирует его независимо и обозначает фактические client версии 1.1.5/1.2.0. Production VPS не используется.
+
+## Проверки точных пакетов (первый прогон)
+
+Собранный EXE/NSIS/runtime/DPAPI и 15 GUI/runtime сценариев прошли на Windows Server 2025. Client 1.2.0 на Windows Server/Ubuntu через встроенный Tor100% успешно проверил TLS и production Ed25519 manifest 1.1.5 и вернул FEED_BEHIND_CLIENT. Это не Windows11/CachyOS native PASS. Исторический DemoTorNetworkProbe ошибочно запрещал скачивание опубликованного подписанного source новее 1.1.0; ожидание актуализировано до exact SHA-pinned 1.1.5, без установки/изменения feed и без ослабления клиентской anti-rollback политики. Старый 1.1.0 Snowflake на Linux не достиг100% и перешёл к Direct; этот FAIL сохранён, новый mandatory forced Snowflake тест выполняется именно на 1.2.0 с новыми таймаутами.

@@ -14,11 +14,11 @@ import java.util.concurrent.*;
  */
 public final class VisualCompatibilityProbe {
   public static void main(String[] args)throws Exception {
-    String previous=SignedManifest.CURRENT;if(!Set.of("1.1.0","1.1.1").contains(previous))throw new AssertionError("Use the exact published previous classpath");
+    String previous=SignedManifest.CURRENT;if(!Set.of("1.1.0","1.1.1","1.1.5").contains(previous))throw new AssertionError("Use the exact published previous classpath");
     byte[] json=Files.readAllBytes(Path.of(args[0]));Path windows=Path.of(args[1]),linux=Path.of(args[2]);
     var key=KeyPairGenerator.getInstance("Ed25519").generateKeyPair();Signature signer=Signature.getInstance("Ed25519");signer.initSign(key.getPrivate());signer.update(json);byte[] signature=signer.sign();
     SignedManifest manifest=SignedManifest.verifyWithKey(json,signature,"stable",previous,previous,key.getPublic());
-    if(!manifest.version().equals("1.2.0")||manifest.requiredFor(previous))throw new AssertionError("Visual update policy mismatch");
+    if(!manifest.version().equals("1.2.0")||manifest.requiredFor(previous))throw new AssertionError("Stability update policy mismatch");
     manifest.requireInstallable(previous,previous);
     try{SignedManifest.verify(json,signature,"stable",previous,previous);throw new AssertionError("Test key replaced production trust");}catch(SignatureException expected){}
     if(!Base64.getEncoder().encodeToString(SignedManifest.embeddedPublicKey()).equals("MCowBQYDK2VwAyEAswWYCFStSEhQdrgqUJFF3x12ltmfUA0PvQtlh684B2g="))throw new AssertionError("Pinned key changed");
@@ -40,6 +40,6 @@ public final class VisualCompatibilityProbe {
       if(events.stream().noneMatch(s->s.state()==UpdateService.State.DOWNLOADING&&s.downloaded()>0&&s.downloaded()<s.total()))throw new AssertionError("No actual byte progress");
       if(events.stream().filter(UpdateService.Snapshot::announcement).count()!=1)throw new AssertionError("Announcement was not deduplicated");
     }
-    System.out.println("Published 1.1.0 compatibility PASS: stable endpoint, 1.2.0 schema, actual ZIP/AppImage hash and package checks, byte progress, READY_TO_INSTALL, unchanged pinned key rejects ephemeral key. Fixture transport/signature; owner-signed native install NOT_RUN.");
+    System.out.println("Published "+previous+" compatibility PASS: stable endpoint, 1.2.0 schema, actual ZIP/AppImage hash and package checks, byte progress, READY_TO_INSTALL, unchanged pinned key rejects ephemeral key. Fixture transport/signature; owner-signed native install NOT_RUN.");
   }
 }
