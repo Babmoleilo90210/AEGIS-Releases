@@ -512,7 +512,7 @@ public final class MessengerApp extends Application {
     VBox body=new VBox(10,new Label("Поиск на устройстве"),nick,subject,new HBox(10,from,to),scope,search,results);body.setPadding(new Insets(20));VBox.setVgrow(results,Priority.ALWAYS);root.setCenter(body);
   }
   private void fillContacts(String term){
-    if(contacts==null)return;String old=selected;
+    if(contacts==null)return;String old=selected;contacts.setPlaceholder(new Label(section.equals("friends")?(session.relayCapabilities()==0?"Этот сервер пока не поддерживает подтверждённую дружбу":"Ожидается взаимное добавление в контакты"):"Добавьте контакт"));
     contacts.getItems().setAll(session.local().contacts().stream().filter(u->!section.equals("friends")||session.features().friend(u.userId())).sorted(Comparator.comparing((UserInfo u)->!session.features().pinned("pinnedContacts",u.userId())).thenComparing(UserInfo::nickname)).map(UserInfo::nickname).filter(s->s.contains(term.toLowerCase(Locale.ROOT))).toList());
     if(!old.isEmpty())contacts.getSelectionModel().select(old);
   }
