@@ -66,6 +66,10 @@ def main():
     linux=work/'squashfs-root';windows=work/'windows';unzip(work/'AEGIS-1.1.5-Windows-x64.zip',windows)
     (linux/'tor/pluggable_transports/lyrebird').chmod(0o755)
     baseline=work/'baseline';unzip(work/'AEGIS-1.1.5-client-source.zip',baseline)
+    # Published 1.1.5 source includes staging Relay 0.3.0, not the legacy 0.2.0.
+    legacy=work/'AEGIS-1.0.0-client-source.zip'
+    download('https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.0.0/'+legacy.name,legacy,'3745572f1261392a88b4ea4cfad7763d54e3fb9efb9a9d5a674eaa74abc5e2ee')
+    relaybaseline=work/'relay02-source';unzip(legacy,relaybaseline)
     deps=work/'deps';deps.mkdir(exist_ok=True)
     for coordinate,digest in MAVEN.items():download('https://repo.maven.apache.org/maven2/'+coordinate,deps/pathlib.PurePosixPath(coordinate).name,digest)
     common=[sys.executable,ROOT/'tools/build-local.py','--jdk',jdk,'--deps',linux/'app','--deps',deps,'--native-root',linux]
@@ -83,7 +87,7 @@ def main():
     shutil.copytree(ROOT/'build/ui115-screenshots',out/'screenshots',dirs_exist_ok=True)
     shutil.copytree(build/'junit',evidence/'junit',dirs_exist_ok=True)
     if (ROOT/'tools/compatibility-matrix.py').exists():
-        run([sys.executable,ROOT/'tools/compatibility-matrix.py','--jdk',jdk,'--baseline',baseline/'aegis','--base-app',linux,'--deps',deps],log=evidence/'compatibility-matrix.log',timeout=360)
+        run([sys.executable,ROOT/'tools/compatibility-matrix.py','--jdk',jdk,'--baseline',relaybaseline/'aegis','--base-app',linux,'--deps',deps,'--previous-client-version','1.1.5','--candidate-client-version','1.2.0'],log=evidence/'compatibility-matrix.log',timeout=360)
     for platform,base in [('linux',linux),('win',windows/'AEGIS')]:
         target=ROOT/'client-ui/build/stage'/platform
         if target.exists():shutil.rmtree(target)
@@ -101,7 +105,7 @@ def main():
     for name in ['README-WINDOWS.md','README-CACHYOS.md','CHANGELOG-1.2.0.md','TEST-REPORT-1.2.0.md','NATIVE-ACCEPTANCE-1.2.0.md','APPEARANCE-1.2.0.md','MIGRATION-1.1.5-TO-1.2.0.md','BUILD-1.2.0.md','SECURITY.md','RELEASE-GATES-1.2.0.json','PERFORMANCE-1.2.0.json','NATIVE-RESULTS-1.2.0.csv','AUTO-TEST-MATRIX-1.2.0.json','AUDIT-1.2.0-RU.md','RELAY-LIFECYCLE-PROPOSAL-1.2.0.md','OWNER-OFFLINE-SIGNING-1.2.0.md','PROTECTED-COMPONENTS-1.2.0.json']:
         shutil.copy2(ROOT/name,out/name)
     if (build/'compatibility-matrix.json').exists():shutil.copy2(build/'compatibility-matrix.json',evidence/'compatibility-matrix.json')
-    provenance={'version':'1.2.0','productionReady':False,'sourceCommit':os.environ.get('GITHUB_SHA','local-uncommitted'),'nativeAcceptance':'NOT_RUN','JDK':subprocess.check_output([jdk/'bin/java','-version'],stderr=subprocess.STDOUT,text=True,timeout=15).strip(),'baseReleaseInputs':INPUTS,'testAndRelayDependencies':MAVEN,'runtimeConnectionsAdded':False,'ownerPrivateKeyUsed':False,'productionDeploymentOrPublication':False,'baseline':'1.1.5 Stable','newJavaDependencies':False,'licensedFontsAdded':True,'lifecycleFeatures':'BLOCKED_ARCHITECTURE_APPROVAL'}
+    provenance={'version':'1.2.0','productionReady':False,'sourceCommit':os.environ.get('GITHUB_SHA','local-uncommitted'),'nativeAcceptance':'NOT_RUN','JDK':subprocess.check_output([jdk/'bin/java','-version'],stderr=subprocess.STDOUT,text=True,timeout=15).strip(),'baseReleaseInputs':INPUTS,'testAndRelayDependencies':MAVEN,'runtimeConnectionsAdded':False,'ownerPrivateKeyUsed':False,'productionDeploymentOrPublication':False,'baseline':'1.1.5 Stable','newJavaDependencies':False,'licensedFontsAdded':True,'lifecycleFeatures':'BLOCKED_ARCHITECTURE_APPROVAL','relay02SourceInputSha256':'3745572f1261392a88b4ea4cfad7763d54e3fb9efb9a9d5a674eaa74abc5e2ee'}
     (out/'BUILD-PROVENANCE.json').write_text(json.dumps(provenance,indent=2)+'\n')
     files=sorted(p for p in out.iterdir() if p.is_file() and p.name!='SHA256SUMS')
     (out/'SHA256SUMS').write_text(''.join(sha(p)+'  '+p.name+'\n' for p in files))

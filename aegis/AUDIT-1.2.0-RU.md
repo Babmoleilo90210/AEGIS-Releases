@@ -52,3 +52,7 @@
 ## Обнаруженная при регрессиях гонка updater
 
 UpdateService.failed публиковал FAILED до записи events/diagnostic.log; close лишь shutdownNow без ожидания завершения executor/periodic. В JUnit это воспроизвелось как повторная запись updates во время удаления temp profile. Изменены порядок commit→notification, cancellation/closed guards и ограниченное ожидание собственных задач; новый regression закрывает сервис во время прерванного fetch и проверяет отсутствие повторного создания удалённого тестового профиля. Проверка не отключает подпись, SHA-256 или anti-rollback.
+
+## Поправка сборочного compatibility harness
+
+После замены нативного input на опубликованную 1.1.5 старый build harness ошибочно использовал её staging Relay 0.3 исходник под названием relay02. Настоящая проверка capability=0 обнаружила ошибку; assertion не ослаблялся. В 1.2.0 harness отдельно загружает SHA-pinned исходник опубликованной 1.0.0 (Relay 0.2.0), компилирует его независимо и обозначает фактические client версии 1.1.5/1.2.0. Production VPS не используется.
