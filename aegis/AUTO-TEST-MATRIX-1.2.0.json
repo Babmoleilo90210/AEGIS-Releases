@@ -1,6 +1,210 @@
 {
   "version": "1.2.0",
-  "status": "NOT_RUN",
   "productionReady": false,
-  "nativeAcceptance": "NOT_RUN"
+  "buildRunId": "38228975781",
+  "buildSourceCommit": "b8cbeff6902c9f7db7a284f6ba7c590fc42203bc",
+  "junit": {
+    "client-core": {
+      "tests": 115,
+      "pass": 114,
+      "skip": 1,
+      "fail": 0,
+      "errors": 0
+    },
+    "common-protocol": {
+      "tests": 4,
+      "pass": 4,
+      "skip": 0,
+      "fail": 0,
+      "errors": 0
+    },
+    "integration-tests": {
+      "tests": 7,
+      "pass": 7,
+      "skip": 0,
+      "fail": 0,
+      "errors": 0
+    },
+    "relay-server": {
+      "tests": 3,
+      "pass": 3,
+      "skip": 0,
+      "fail": 0,
+      "errors": 0
+    }
+  },
+  "skipped": [
+    {
+      "test": "org.securemail.client.security.RememberedLoginTest.nativeDpapiCurrentUserRoundTrip()",
+      "reason": "Disabled on operating system: Linux"
+    }
+  ],
+  "releaseSecurity": {
+    "pass": 16
+  },
+  "headlessJavaFX": {
+    "passSuites": 8,
+    "names": [
+      "ClientUiRegressionSmoke",
+      "Aegis11UiSmoke",
+      "SingleWindowSmoke",
+      "DarkGreenThemeSmoke",
+      "MessengerSmoke",
+      "Appearance115Smoke",
+      "AppearancePerformanceSmoke",
+      "Stability120Smoke"
+    ]
+  },
+  "compatibility": {
+    "oldReleasedClientJARs": {
+      "common-protocol-0.2.0.jar": "90930aa557c6c5f5a833aeb748050b72c27c6a99836b36b5ea1a1b876807e7c9",
+      "client-core-1.1.5.jar": "6a71fbd54a7953f79e11b1cae1eb3d5a5144952543dfeb7eb7c9706df72cc6c4"
+    },
+    "matrix": [
+      {
+        "client": "1.1.5",
+        "relay": "0.2.0",
+        "result": "PASS",
+        "transport": "synthetic SOCKS, not real Tor",
+        "relay02_provenance": "independently compiled verified 1.0.0 source archive; not downloaded production server binary"
+      },
+      {
+        "client": "1.1.5",
+        "relay": "0.3.0",
+        "result": "PASS",
+        "transport": "synthetic SOCKS, not real Tor",
+        "relay02_provenance": "independently compiled verified 1.0.0 source archive; not downloaded production server binary"
+      },
+      {
+        "client": "1.2.0",
+        "relay": "0.2.0",
+        "result": "PASS",
+        "transport": "synthetic SOCKS, not real Tor",
+        "relay02_provenance": "independently compiled verified 1.0.0 source archive; not downloaded production server binary"
+      },
+      {
+        "client": "1.2.0",
+        "relay": "0.3.0",
+        "result": "PASS",
+        "transport": "synthetic SOCKS, not real Tor",
+        "relay02_provenance": "independently compiled verified 1.0.0 source archive; not downloaded production server binary"
+      }
+    ],
+    "candidateClientVersion": "1.2.0",
+    "previousClientVersion": "1.1.5",
+    "SQLite02to03andBack": "PASS",
+    "nativeTorAcceptance": "NOT_RUN",
+    "productionChanges": false
+  },
+  "exactPackageChecks": {
+    "windows": {
+      "productionReady": false,
+      "nativeWindows11": "NOT_RUN",
+      "nativeCachyOSKDE": "NOT_RUN",
+      "artifactSourceCommit": "b8cbeff6902c9f7db7a284f6ba7c590fc42203bc",
+      "actualOS": "nt",
+      "checks": [
+        {
+          "name": "packaged_runtime_native_cryptography_DPAPI_and_JavaFX",
+          "result": "PASS",
+          "elapsedSeconds": 47.17
+        },
+        {
+          "name": "real_NSIS_silent_install_with_isolated_profile",
+          "result": "PASS",
+          "elapsedSeconds": 8.84
+        },
+        {
+          "name": "real_AEGIS_EXE_no_global_Java_loopback_Tor_own_shutdown",
+          "result": "PASS",
+          "elapsedSeconds": 3.48
+        },
+        {
+          "name": "BUG11_real_embedded_Tor_TLS_production_Ed25519_old_feed",
+          "result": "PASS",
+          "elapsedSeconds": 17.97
+        },
+        {
+          "name": "published_110_verifier_stable_schema_exact_120_packages_fixture",
+          "result": "PASS",
+          "elapsedSeconds": 1.66
+        },
+        {
+          "name": "published_110_real_Tor_production_signature_download_resume_SHA256",
+          "result": "PASS",
+          "elapsedSeconds": 83.11
+        },
+        {
+          "name": "candidate_120_real_Tor_production_signature_download_resume_SHA256",
+          "result": "PASS",
+          "elapsedSeconds": 20.69
+        },
+        {
+          "name": "candidate_120_real_Snowflake_signature_download_resume_SHA256",
+          "result": "PASS",
+          "elapsedSeconds": 79.42
+        },
+        {
+          "name": "published_111_verifier_stable_schema_exact_120_packages_fixture",
+          "result": "PASS",
+          "elapsedSeconds": 1.88
+        },
+        {
+          "name": "published_115_verifier_stable_schema_exact_120_packages_fixture",
+          "result": "PASS",
+          "elapsedSeconds": 2.58
+        }
+      ],
+      "WindowsVersion": "sys.getwindowsversion(major=10, minor=0, build=26100, platform=2, service_pack='')"
+    },
+    "linux-tor": {
+      "productionReady": false,
+      "nativeWindows11": "NOT_RUN",
+      "nativeCachyOSKDE": "NOT_RUN",
+      "artifactSourceCommit": "b8cbeff6902c9f7db7a284f6ba7c590fc42203bc",
+      "actualOS": "posix",
+      "checks": [
+        {
+          "name": "BUG11_real_embedded_Tor_TLS_production_Ed25519_old_feed",
+          "result": "PASS",
+          "elapsedSeconds": 33.49
+        },
+        {
+          "name": "published_110_verifier_stable_schema_exact_120_packages_fixture",
+          "result": "PASS",
+          "elapsedSeconds": 1.97
+        },
+        {
+          "name": "published_110_real_Tor_production_signature_download_resume_SHA256",
+          "result": "PASS",
+          "elapsedSeconds": 25.98
+        },
+        {
+          "name": "candidate_120_real_Tor_production_signature_download_resume_SHA256",
+          "result": "PASS",
+          "elapsedSeconds": 24.48
+        },
+        {
+          "name": "candidate_120_real_Snowflake_signature_download_resume_SHA256",
+          "result": "PASS",
+          "elapsedSeconds": 71.78
+        },
+        {
+          "name": "published_111_verifier_stable_schema_exact_120_packages_fixture",
+          "result": "PASS",
+          "elapsedSeconds": 1.97
+        },
+        {
+          "name": "published_115_verifier_stable_schema_exact_120_packages_fixture",
+          "result": "PASS",
+          "elapsedSeconds": 2.02
+        }
+      ]
+    }
+  },
+  "nativeWindows11": "NOT_RUN",
+  "nativeCachyOSWayland": "NOT_RUN",
+  "nativeCachyOSX11": "NOT_RUN",
+  "signedPreviousTo120InstallRestartRollback": "NOT_RUN",
+  "lifecycleFeatures": "BLOCKED_ARCHITECTURE_APPROVAL"
 }

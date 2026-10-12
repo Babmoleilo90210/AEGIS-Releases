@@ -2,15 +2,14 @@
 > Friends на Relay0.2.0, receipts и timer-after-read ожидают архитектурного решения.
 > См. AUDIT-1.2.0-RU.md, RELAY-LIFECYCLE-PROPOSAL-1.2.0.md и TEST-REPORT-1.2.0.md.
 
-# АЕГИС 1.1.1 Demo
+# АЕГИС 1.2.0 — клиентский кандидат
 
-Автономная Единая Гибридная Информационная Система. Локальные Java 21 клиенты Windows/CachyOS и заменяемый protocol-1 relay. Это продолжаемый исходный код опубликованной 1.1.0 с минимальным изменением темы в 1.1.1, не новая identity или новый wire protocol.
+Автономная Единая Гибридная Информационная Система. Локальные Java 21 клиенты Windows/CachyOS и заменяемый protocol-1 relay. Продолжает фактически опубликованную 1.1.5 Stable: исправления подключения, интерфейса и обновлений, с сохранением идентичности и protocol 1. Lifecycle часть ждёт архитектурного согласования.
 
 Текущая сборка — **unsigned candidate**, `productionReady=false`. Реализация, JavaFX регрессии и staging совместимость проверяются отдельно от настоящих Windows/KDE/Tor/VPS испытаний. Production Relay, onion identity, опубликованные релизы и pinned release public key не изменены.
 
-Начало работы: [Windows](README-WINDOWS.md), [CachyOS](README-CACHYOS.md), [переход с 1.0.0](MIGRATION-1.0-TO-1.1.md). Для разработчика: [сборка](BUILD-1.1.1.md), [изменения](CHANGELOG-1.1.1.md), [отчёт тестирования](TEST-REPORT-1.1.1.md), [optional staging Relay](RELAY-0.3-STAGING.md), [угрозы](THREAT_MODEL.md).
+Начало работы: [Windows](README-WINDOWS.md), [CachyOS](README-CACHYOS.md), [переход с 1.1.5](MIGRATION-1.1.5-TO-1.2.0.md). Для разработчика: [сборка](BUILD-1.2.0.md), [изменения](CHANGELOG-1.2.0.md), [отчёт тестирования](TEST-REPORT-1.2.0.md), [optional staging Relay](RELAY-0.3-STAGING.md), [угрозы](THREAT_MODEL.md).
 
-Demo updater: [подпись, публикация Beta и нативное испытание](DEMO-UPDATER-TEST-RU.md).
 
 ## Приложения и данные
 
@@ -32,6 +31,8 @@ Demo updater: [подпись, публикация Beta и нативное и�
 
 Updater HTTPS допускает только `raw.githubusercontent.com`, `github.com`, `objects.githubusercontent.com`, `release-assets.githubusercontent.com`, ограниченные redirect и обязательную TLS hostname проверку. Почтовый SOCKS сохраняет `OnionTrafficOnly`. Прямого подключения Java к публичному IP/HTTPS, DNS fallback, телеметрии, аналитики, скрытого updater или cloud crash reporting нет.
 
-Сборка — отдельное явное действие разработчика: Gradle/Maven Central, GitHub release inputs, официальный JDK/Tor через перечисленные build scripts. Установщик Debian ставит только необходимые пакеты через настроенный apt; ОС/GRUB/DNS не перенастраивает. Эти developer/admin соединения не запускаются пользовательским клиентом.
+Сборка — отдельное явное действие разработчика: Gradle/Maven Central, GitHub release inputs и SHA-pinned официальные репозитории шрифтов, официальный JDK/Tor через перечисленные build scripts. Установщик Debian ставит только необходимые пакеты через настроенный apt; ОС/GRUB/DNS не перенастраивает. Эти developer/admin соединения не запускаются пользовательским клиентом.
 
-Production release не опубликован. Ветка разработки: https://github.com/Babmoleilo90210/AEGIS-Releases/tree/development/aegis-1.1.0 . Финальные проверки, offline подпись владельца и публикация требуют отдельного завершения приёмки.
+Кандидат 1.2.0 не опубликован; 1.1.5 Stable уже опубликована. Ветка разработки: https://github.com/Babmoleilo90210/AEGIS-Releases/tree/development/aegis-1.2.0 . Финальные проверки, offline подпись владельца и публикация требуют отдельного завершения приёмки.
+
+Пять новых лицензированных шрифтов находятся внутри client-ui JAR; установленное приложение не загружает их из сети. Предложение Friends/receipts/исчезновение: [отдельное архитектурное ТЗ](RELAY-LIFECYCLE-PROPOSAL-1.2.0.md). Не считать legacy TTL-after-delivery исчезновением-after-read.

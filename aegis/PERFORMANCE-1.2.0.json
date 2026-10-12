@@ -1,6 +1,25 @@
 {
   "version": "1.2.0",
-  "status": "NOT_RUN",
   "productionReady": false,
-  "nativeAcceptance": "NOT_RUN"
+  "status": "PASS_MEASURED_HEADLESS",
+  "baseline": {
+    "version": "1.1.5",
+    "environment": "Monocle headless 1280x900 sw",
+    "samples": 30,
+    "themeSwitchMedianMs": 15,
+    "themeSwitchP95Ms": 79,
+    "heapAfterGcBytes": 31202448,
+    "nativeAcceptance": false
+  },
+  "candidate": {
+    "version": "1.2.0",
+    "environment": "Monocle headless 1280x900 sw",
+    "samples": 30,
+    "themeSwitchMedianMs": 17,
+    "themeSwitchP95Ms": 71,
+    "heapAfterGcBytes": 30550344,
+    "nativeAcceptance": false
+  },
+  "samplesEach": 30,
+  "limitation": "One disposable CI worker, software-rendered Monocle. This is not physical DPI or native memory/latency acceptance."
 }
