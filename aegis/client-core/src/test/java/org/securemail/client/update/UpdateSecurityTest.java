@@ -68,4 +68,13 @@ class UpdateSecurityTest {
   }
   @Test void successfulInstallRequiresStartupAckAndRollsBackOnNoAck()throws Exception{Path old=root.resolve("AEGIS.AppImage"),candidate=root.resolve("download"),ack=root.resolve("confirmed");Files.writeString(old,"old");Files.writeString(candidate,"new");UpdateInstaller.replace(candidate,old,"token",ack,installed->{assertEquals("new",Files.readString(installed));Files.writeString(ack,"token\n");return true;},300);assertEquals("new",Files.readString(old));assertFalse(Files.exists(root.resolve("AEGIS.AppImage.old")));Files.delete(ack);Files.writeString(candidate,"next");assertThrows(IOException.class,()->UpdateInstaller.replace(candidate,old,"token",ack,p->true,100));assertEquals("new",Files.readString(old));assertFalse(Files.exists(root.resolve("AEGIS.AppImage.new")));}
   @Test void startupFailureRollsBackAndPreviousRecoveryCopyIsNeverOverwritten()throws Exception{Path old=root.resolve("AEGIS.AppImage"),candidate=root.resolve("download");Files.writeString(old,"old");Files.writeString(candidate,"new");assertThrows(IOException.class,()->UpdateInstaller.replace(candidate,old,"token",root.resolve("ack"),p->false,100));assertEquals("old",Files.readString(old));Files.writeString(root.resolve("AEGIS.AppImage.old"),"recovery");assertThrows(IOException.class,()->UpdateInstaller.replace(candidate,old,"token",root.resolve("ack"),p->true,100));assertEquals("recovery",Files.readString(root.resolve("AEGIS.AppImage.old")));}
+  @Test void closeQuiescesDiagnosticsAndNeverRecreatesRemovedProfile()throws Exception{
+    CountDownLatch entered=new CountDownLatch(1);
+    UpdateService.Downloads blocked=new UpdateService.Downloads(){
+      public byte[] bytes(URI uri,int max)throws IOException{entered.countDown();try{new CountDownLatch(1).await(5,TimeUnit.SECONDS);}catch(InterruptedException stopped){throw new InterruptedIOException("cancelled fixture");}throw new IOException("timeout fixture");}
+      public void file(SignedManifest.Asset a,Path p,java.util.function.BooleanSupplier c,UpdateService.Progress pr){fail("No verified manifest");}
+    };
+    UpdateService service=service(blocked);service.check(false);assertTrue(entered.await(2,TimeUnit.SECONDS));service.close();
+    UpdateInstaller.deleteTree(root);service.check(false);service.download();assertFalse(Files.exists(root));
+  }
 }

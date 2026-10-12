@@ -21,10 +21,11 @@ public final class UpdateService implements AutoCloseable {
   public interface Downloads{byte[] bytes(URI uri,int max)throws IOException;void file(SignedManifest.Asset asset,Path target,BooleanSupplier cancelled,Progress progress)throws IOException;default boolean resumable(){return false;}}
   @FunctionalInterface interface Verifier{SignedManifest verify(byte[] json,byte[] signature,String channel,String current,String highest)throws GeneralSecurityException,IOException;}
   private final Verifier verifier;private final UpdateEvents events;
-  private final Downloads downloads;private final UpdateStateStore store;private final boolean windows;private final ExecutorService executor=Executors.newSingleThreadExecutor(r->{var t=new Thread(r,"aegis-updates");t.setDaemon(true);return t;});
+  private volatile boolean closed;private volatile Thread taskThread,clockThread;
+  private final Downloads downloads;private final UpdateStateStore store;private final boolean windows;private final ExecutorService executor=Executors.newSingleThreadExecutor(r->{var t=new Thread(r,"aegis-updates");taskThread=t;t.setDaemon(true);return t;});
   private final AtomicBoolean cancelled=new AtomicBoolean();private volatile Snapshot snapshot=new Snapshot(State.UP_TO_DATE,0,0,null,false,"Обновления ещё не проверялись");private volatile Consumer<Snapshot> listener=s->{};private volatile boolean working;
   private byte[] exact,signature;private Path artifact;private volatile String channel="stable";
-  private final ScheduledExecutorService periodic=Executors.newSingleThreadScheduledExecutor(r->{var t=new Thread(r,"aegis-update-clock");t.setDaemon(true);return t;});
+  private final ScheduledExecutorService periodic=Executors.newSingleThreadScheduledExecutor(r->{var t=new Thread(r,"aegis-update-clock");clockThread=t;t.setDaemon(true);return t;});
   private volatile BooleanSupplier automaticCheck=()->false,automaticDownload=()->false;
   public UpdateService(Path profile,int port)throws IOException{this(new TorHttpsClient(port),new UpdateStateStore(profile),AppPaths.windows());}
   UpdateService(Downloads downloads,UpdateStateStore store,boolean windows){this(downloads,store,windows,SignedManifest::verifyForCheck);}
@@ -33,20 +34,22 @@ public final class UpdateService implements AutoCloseable {
   public void automatic(BooleanSupplier enabled,BooleanSupplier download){automaticCheck=Objects.requireNonNull(enabled);automaticDownload=Objects.requireNonNull(download);}
   public Snapshot snapshot(){return snapshot;}public void listener(Consumer<Snapshot> value){listener=Objects.requireNonNull(value);}
   public void channel(String value){if(!Set.of("stable","beta").contains(value))throw new IllegalArgumentException("Invalid update channel");if(working)throw new IllegalStateException("Update in progress");channel=value;artifact=null;exact=null;signature=null;emit(State.UP_TO_DATE,0,0,null,false,"Обновления ещё не проверялись");}
-  public synchronized void check(boolean autoDownload){if(working)return;working=true;cancelled.set(false);String selected=channel;executor.execute(()->{UpdateDiagnostic.Phase phase=UpdateDiagnostic.Phase.FETCH;try{
+  public synchronized void check(boolean autoDownload){if(closed||working)return;working=true;cancelled.set(false);String selected=channel;executor.execute(()->{UpdateDiagnostic.Phase phase=UpdateDiagnostic.Phase.FETCH;try{
     artifact=null;exact=null;signature=null;
     emit(State.CHECKING,0,0,snapshot.manifest(),false,"Проверка обновлений…");URI base=URI.create("https://raw.githubusercontent.com/"+SignedManifest.REPOSITORY+"/main/updates/"+selected+".json");
     byte[] json=downloads.bytes(base,SignedManifest.MAX_BYTES),sig=downloads.bytes(URI.create(base.toString()+".sig"),64);
+    if(closed||cancelled.get())throw new InterruptedIOException("Update cancelled");
     phase=UpdateDiagnostic.Phase.VERIFY;SignedManifest manifest=verifier.verify(json,sig,selected,SignedManifest.CURRENT,"0.0.0");
     if(!manifest.newerThan(SignedManifest.CURRENT)){
       snapshot=new Snapshot(State.UP_TO_DATE,0,0,null,false,"Новых обновлений нет. Установлена АЕГИС "+SignedManifest.CURRENT,new UpdateDiagnostic(UpdateDiagnostic.Category.POLICY,manifest.version().equals(SignedManifest.CURRENT)?"FEED_CURRENT":"FEED_BEHIND_CLIENT",""));listener.accept(snapshot);return;
     }
     phase=UpdateDiagnostic.Phase.POLICY;manifest.requireInstallable(SignedManifest.CURRENT,store.highest(selected));
+    if(closed||cancelled.get())throw new InterruptedIOException("Update cancelled");
     phase=UpdateDiagnostic.Phase.STORE;boolean announcement=store.remember(manifest,json,sig);exact=json;signature=sig;events.record(manifest,UpdateEvents.Kind.AVAILABLE,selected,"");
     if(manifest.newerThan(SignedManifest.CURRENT)){emit(State.AVAILABLE,0,manifest.clientAsset(windows).size(),manifest,announcement,"Доступно обновление АЕГИС "+manifest.version());if(autoDownload){phase=UpdateDiagnostic.Phase.DOWNLOAD;downloadNow(manifest);}}
     else emit(State.UP_TO_DATE,0,0,manifest,false,"У вас последняя версия АЕГИС "+SignedManifest.CURRENT);
   }catch(Exception failure){failed(failure,phase,null);}finally{working=false;}});}
-  public synchronized void download(){if(working||snapshot.manifest()==null||snapshot.state()!=State.AVAILABLE&&snapshot.state()!=State.FAILED)return;working=true;cancelled.set(false);SignedManifest manifest=snapshot.manifest();executor.execute(()->{try{downloadNow(manifest);}catch(Exception failure){failed(failure,UpdateDiagnostic.Phase.DOWNLOAD,manifest);}finally{working=false;}});}
+  public synchronized void download(){if(closed||working||snapshot.manifest()==null||snapshot.state()!=State.AVAILABLE&&snapshot.state()!=State.FAILED)return;working=true;cancelled.set(false);SignedManifest manifest=snapshot.manifest();executor.execute(()->{try{downloadNow(manifest);}catch(Exception failure){failed(failure,UpdateDiagnostic.Phase.DOWNLOAD,manifest);}finally{working=false;}});}
   private void downloadNow(SignedManifest manifest)throws Exception {
     manifest.requireInstallable(SignedManifest.CURRENT,store.highest(channel));
     SignedManifest.Asset asset=manifest.clientAsset(windows);Path file=store.root().resolve("download-"+asset.sha256()+".part");
@@ -76,12 +79,21 @@ public final class UpdateService implements AutoCloseable {
   public List<SignedManifest> history()throws IOException{return store.history(channel);}
   public List<UpdateEvents.Event> events()throws IOException{return events.history();}
   private void failed(Throwable failure,UpdateDiagnostic.Phase phase,SignedManifest manifest){
+    if(closed)return;
     UpdateDiagnostic d=cancelled.get()?new UpdateDiagnostic(UpdateDiagnostic.Category.CANCELLED,"CANCELLED",""):UpdateDiagnostic.failure(failure,phase);
-    snapshot=new Snapshot(State.FAILED,0,0,manifest,false,d.userMessage(),d);listener.accept(snapshot);
+    Snapshot result=new Snapshot(State.FAILED,0,0,manifest,false,d.userMessage(),d);
     try{events.record(manifest,UpdateEvents.Kind.FAILED,channel,d.code());}catch(IOException ignored){}
     // Public technical events only. No stack trace, exception text, URLs, cookies or payload.
     try{Path log=store.root().resolve("diagnostic.log");byte[] old=Files.exists(log,LinkOption.NOFOLLOW_LINKS)?AtomicFiles.read(log,65536):new byte[0];byte[] line=(d.category()+" "+d.code()+" "+d.exceptionType()+"\n").getBytes(java.nio.charset.StandardCharsets.US_ASCII);byte[] next=old.length+line.length>65536?line:Arrays.copyOf(old,old.length+line.length);if(next!=line)System.arraycopy(line,0,next,old.length,line.length);AtomicFiles.write(log,next);}catch(IOException ignored){/* Diagnostics cannot bypass verification or block normal mail. */}
+    if(!closed){snapshot=result;listener.accept(result);}
   }
-  private void emit(State state,long n,long total,SignedManifest manifest,boolean announce,String message){snapshot=new Snapshot(state,n,total,manifest,announce,message);listener.accept(snapshot);}
-  public void close(){cancelled.set(true);executor.shutdownNow();periodic.shutdownNow();}
+  private void emit(State state,long n,long total,SignedManifest manifest,boolean announce,String message){if(closed)return;snapshot=new Snapshot(state,n,total,manifest,announce,message);listener.accept(snapshot);}
+  public void close(){
+    synchronized(this){closed=true;cancelled.set(true);executor.shutdownNow();periodic.shutdownNow();}
+    awaitStopped(executor,taskThread);awaitStopped(periodic,clockThread);
+  }
+  private static void awaitStopped(ExecutorService pool,Thread owned){
+    if(Thread.currentThread()==owned)return;
+    try{pool.awaitTermination(3,TimeUnit.SECONDS);}catch(InterruptedException interrupted){Thread.currentThread().interrupt();}
+  }
 }
