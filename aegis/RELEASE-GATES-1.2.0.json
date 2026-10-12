@@ -1,0 +1,17 @@
+{
+  "version": "1.2.0",
+  "productionReady": false,
+  "productionRelayChanged": false,
+  "productionFeedChanged": false,
+  "productionPrivateKeyUsed": false,
+  "friendsOnRelay02": "BLOCKED_REQUIRES_APPROVED_RELAY_CAPABILITY",
+  "deliveryReadReceipts": "BLOCKED_REQUIRES_ARCHITECTURE_APPROVAL",
+  "expiringAfterRead": "BLOCKED_REQUIRES_ARCHITECTURE_APPROVAL",
+  "nativeWindows11": "NOT_RUN",
+  "nativeCachyOSWayland": "NOT_RUN",
+  "nativeCachyOSX11": "NOT_RUN",
+  "signedPreviousTo120EndToEnd": "NOT_RUN",
+  "nativeRollback": "NOT_RUN",
+  "persistentDrafts": "NOT_IMPLEMENTED_IN_BASE115",
+  "publicationAuthorized": false
+}

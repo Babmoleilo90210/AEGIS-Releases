@@ -24,6 +24,19 @@ public final class ClientUpgrade {
     ProfileSnapshot.verify(backup,org.securemail.client.ClientConfig.load(AppPaths.config()).withStorage(profile));
     AtomicFiles.write(marker,backup.toString().getBytes(StandardCharsets.UTF_8));return backup;
   }
+  /** Per-version full ciphertext/settings snapshot before any new-version sidecars or services. */
+  public static Path beforeVersionOpen(String version,org.securemail.client.ClientConfig config,Path backups)throws IOException {
+    if(!version.matches("[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}"))throw new IOException("Invalid migration version");
+    if(!Files.isRegularFile(config.storagePath().resolve("state.vault")))return null;
+    Path folder=backups.toAbsolutePath().normalize(),marker=folder.resolve("upgrade-"+version+"-backup-location");
+    if(Files.isRegularFile(marker,LinkOption.NOFOLLOW_LINKS)){
+      Path previous=Path.of(new String(AtomicFiles.read(marker,4096),StandardCharsets.UTF_8).strip()).toAbsolutePath().normalize();
+      if(!previous.getParent().equals(folder))throw new IOException("Invalid migration backup");
+      ProfileSnapshot.verify(previous,config);return previous;
+    }
+    Path backup=ProfileSnapshot.create(config,folder);ProfileSnapshot.verify(backup,config);
+    AtomicFiles.write(marker,backup.toAbsolutePath().toString().getBytes(StandardCharsets.UTF_8));return backup;
+  }
   public static void snapshot(Path source,Path target)throws IOException {
     if(target.toAbsolutePath().normalize().startsWith(source.toAbsolutePath().normalize()))throw new IOException("Backup cannot be inside its source");
     if(!Files.isDirectory(source,LinkOption.NOFOLLOW_LINKS))throw new IOException("Profile missing");

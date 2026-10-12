@@ -41,4 +41,16 @@ class ProfileSnapshotTest {
       try(var vault=new LocalStore(config.storagePath(),"modern vault passphrase".toCharArray(),Clock.systemUTC(),100000,1000000)){assertEquals(id,vault.identity().userId());}
     }finally{if(previous==null)System.clearProperty("aegis.profile");else System.setProperty("aegis.profile",previous);}
   }
+  @Test void version120SnapshotIsRepeatableAndDoesNotRewriteVault()throws Exception{
+    String previous=System.getProperty("aegis.profile");System.setProperty("aegis.profile",root.toString());
+    try{
+      ClientConfig config=ClientConfig.load(AppPaths.config());config.save(AppPaths.config());
+      try(var vault=new LocalStore(config.storagePath(),"modern vault passphrase".toCharArray(),Clock.systemUTC(),100000,1000000)){vault.bindNickname("raven");}
+      byte[] before=Files.readAllBytes(config.storagePath().resolve("state.vault"));
+      Path first=ClientUpgrade.beforeVersionOpen("1.2.0",config,root.resolve("backups"));
+      assertEquals(first,ClientUpgrade.beforeVersionOpen("1.2.0",config,root.resolve("backups")));
+      assertArrayEquals(before,Files.readAllBytes(config.storagePath().resolve("state.vault")));
+      ProfileSnapshot.verify(first,config);assertThrows(java.io.IOException.class,()->ClientUpgrade.beforeVersionOpen("../oops",config,root.resolve("backups")));
+    }finally{if(previous==null)System.clearProperty("aegis.profile");else System.setProperty("aegis.profile",previous);}
+  }
 }

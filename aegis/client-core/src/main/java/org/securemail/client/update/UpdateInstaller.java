@@ -16,7 +16,7 @@ public final class UpdateInstaller {
   private UpdateInstaller(){}
   public static Path prepare(Path updates,Path program,Path artifact,byte[] manifest,byte[] signature,SignedManifest release,long client,long launcher,boolean windows)throws Exception {
     Path transaction=updates.resolve("install-"+UUID.randomUUID());AtomicFiles.directory(transaction);Path helper=transaction.resolve("helper");AtomicFiles.directory(helper);
-    copyTree(program.resolve("runtime"),helper.resolve("runtime"));copyTree(program.resolve("app"),helper.resolve("app"));
+    copyTree(program.resolve("runtime"),helper.resolve("runtime"));copyHelperLibraries(program.resolve("app"),helper.resolve("app"));
     AtomicFiles.directory(helper.resolve("resources"));Files.copy(program.resolve("resources/aegis.png"),helper.resolve("resources/aegis.png"));
     if(windows)Files.copy(program.resolve("AEGIS-Updater.exe"),helper.resolve("AEGIS-Updater.exe"));
     Path target=windows?Path.of(Objects.requireNonNull(System.getenv("LOCALAPPDATA")),"Programs","AEGIS"):org.securemail.client.storage.UpdateSupport.installedImage();
@@ -29,6 +29,17 @@ public final class UpdateInstaller {
     if(!Files.isDirectory(source,LinkOption.NOFOLLOW_LINKS)||Files.isSymbolicLink(source))throw new IOException("Invalid helper source");Files.createDirectories(target);long size=0;
     try(var paths=Files.walk(source)){for(Path p:paths.toList()){if(Files.isSymbolicLink(p))throw new IOException("Helper symlink rejected");Path q=target.resolve(source.relativize(p));if(Files.isDirectory(p))Files.createDirectories(q);else{if((size+=Files.size(p))>768L*1024*1024)throw new IOException("Helper size limit");Files.copy(p,q,StandardCopyOption.COPY_ATTRIBUTES);}}}
   }
+  static void copyHelperLibraries(Path source,Path target)throws IOException {
+    AtomicFiles.directory(target);
+    try(var files=Files.list(source)){
+      for(Path p:files.toList()){
+        String name=p.getFileName().toString();
+        if(!name.endsWith(".jar")||name.startsWith("client-ui-")||name.startsWith("javafx-")||name.startsWith("relay-server-")||name.contains("tests"))continue;
+        if(Files.isSymbolicLink(p)||!Files.isRegularFile(p,LinkOption.NOFOLLOW_LINKS))throw new IOException("Invalid helper library");
+        Files.copy(p,target.resolve(name),StandardCopyOption.COPY_ATTRIBUTES);
+      }
+    }
+  }
   public static void launch(Path job)throws IOException,InterruptedException {
     Path helper=job.getParent().resolve("helper");
     if(AppPaths.windows()) {
@@ -36,7 +47,7 @@ public final class UpdateInstaller {
       WinBase.STARTUPINFO start=new WinBase.STARTUPINFO();start.cb=new WinDef.DWORD(start.size());WinBase.PROCESS_INFORMATION process=new WinBase.PROCESS_INFORMATION();
       if(!Kernel32.INSTANCE.CreateProcess(executable,command,null,null,false,new WinDef.DWORD(0x01000000|0x08000000),null,helper.toString(),start,process))throw new IOException("Не удалось запустить updater");
       Kernel32.INSTANCE.CloseHandle(process.hThread);Kernel32.INSTANCE.CloseHandle(process.hProcess);
-    }else new ProcessBuilder(helper.resolve("runtime/bin/java").toString(),"-Xmx256m","-XX:+DisableAttachMechanism","-XX:-HeapDumpOnOutOfMemoryError","-cp",helper.resolve("app/*").toString(),"org.securemail.client.update.UpdaterMain","--job",job.toString()).redirectOutput(ProcessBuilder.Redirect.DISCARD).redirectError(ProcessBuilder.Redirect.DISCARD).start();
+    }else new ProcessBuilder(helper.resolve("runtime/bin/java").toString(),"-Xmx256m","-Djava.awt.headless=true","-Daegis.process.role=updater","-XX:+DisableAttachMechanism","-XX:-HeapDumpOnOutOfMemoryError","-cp",helper.resolve("app/*").toString(),"org.securemail.client.update.UpdaterMain","--job",job.toString()).redirectOutput(ProcessBuilder.Redirect.DISCARD).redirectError(ProcessBuilder.Redirect.DISCARD).start();
     long end=System.nanoTime()+TimeUnit.SECONDS.toNanos(15);while(System.nanoTime()<end){if(Files.isRegularFile(job.getParent().resolve("ready")))return;if(Files.exists(job.getParent().resolve("failed")))throw new IOException("Updater отклонил установку");Thread.sleep(100);}throw new IOException("Updater не подтвердил готовность");
   }
   private static String quote(String value)throws IOException {if(value.contains("\"")||value.contains("\r")||value.contains("\n"))throw new IOException("Invalid updater path");return "\""+value+"\"";}

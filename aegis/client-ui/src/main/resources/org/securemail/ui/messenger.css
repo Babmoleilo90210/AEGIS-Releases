@@ -23,3 +23,6 @@
 .in-window-page { -fx-background-color:-aegis-bg; }
 .in-window-page .heading { -fx-font-size:16px; -fx-padding:0; }
 .in-window-content { -fx-background-color:-aegis-bg; -fx-padding:12 16; }
+
+.connection-card{-fx-background-color:-aegis-panel;-fx-background-radius:12;-fx-padding:14;}
+.connection-card .progress-bar{-fx-accent:-aegis-action;}

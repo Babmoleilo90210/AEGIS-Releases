@@ -47,13 +47,13 @@ public final class LocalFeatures {
   public synchronized boolean blocked(String messageId,String senderId){return blockedMail.contains(messageId)||blockedSenders.contains(senderId);}
   public synchronized boolean blockedSender(String id){return blockedSenders.contains(id);}
   public synchronized void blockMail(String id,boolean value)throws IOException,GeneralSecurityException{Limits.messageId(id);change(blockedMail,id,value);save();}
-  public synchronized void blockSender(String id,boolean value)throws IOException,GeneralSecurityException{Limits.userId(id);change(blockedSenders,id,value);save();}
+  public synchronized void blockSender(String id,boolean value)throws IOException,GeneralSecurityException{Limits.userId(id);change(blockedSenders,id,value);if(value)friends.remove(id);save();}
   public synchronized boolean pinned(String kind,String id){return set(kind).contains(id);}
   public synchronized void pin(String kind,String id,boolean value)throws IOException,GeneralSecurityException{Set<String> target=set(kind);validate(kind,id);if(value&&target.size()>=8192)throw new IOException("Pin quota");change(target,id,value);save();}
   private Set<String> set(String kind){return switch(kind){case "pinnedContacts"->pinnedContacts;case "pinnedMail"->pinnedMail;case "pinnedThreads"->pinnedThreads;default->throw new IllegalArgumentException("Unknown pin kind");};}
   private static void change(Set<String> target,String id,boolean value){if(value)target.add(id);else target.remove(id);}
-  public synchronized boolean friend(String id){return friends.contains(id)&&!revokedFriends.contains(id);}
-  public synchronized boolean consent(String id){return !revokedFriends.contains(id);}
+  public synchronized boolean friend(String id){return friends.contains(id)&&!revokedFriends.contains(id)&&!blockedSenders.contains(id)&&local.contacts().stream().anyMatch(p->p.userId().equals(id));}
+  public synchronized boolean consent(String id){return !revokedFriends.contains(id)&&!blockedSenders.contains(id);}
   /** Keep revocations after contact removal so reconnect can withdraw the signed relay consent. */
   public synchronized List<String> revokedConsentTargets(){return revokedFriends.stream().sorted().toList();}
   public synchronized void consent(String id,boolean active)throws IOException,GeneralSecurityException{Limits.userId(id);change(revokedFriends,id,!active);if(!active)friends.remove(id);save();}

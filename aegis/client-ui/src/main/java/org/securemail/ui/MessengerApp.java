@@ -28,6 +28,7 @@ import org.securemail.client.appearance.Appearance;
 
 /** Desktop UI. Work that can block is confined to a single background executor. */
 public final class MessengerApp extends Application {
+  private final ConnectionStatus connectivity=new ConnectionStatus();private ConnectionCard connectionCard,detailConnectionCard;private Node navigationNode;
   private Stage stage;private BorderPane root;private ClientConfig config;private AppPaths.Instance instance;
   private TorConnection tor;private ClientSession session;private volatile boolean stopping;
   private final ExecutorService worker=Executors.newSingleThreadExecutor(r->{var t=new Thread(r,"aegis-ui-work");t.setDaemon(true);return t;});
@@ -78,6 +79,8 @@ public final class MessengerApp extends Application {
     root=new BorderPane();notifications=new NotificationCenter(stage,root);BorderPane window=new BorderPane(root);window.setTop(new WindowChrome(stage));var scene=new Scene(window,1020,730);scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("messenger.css")).toExternalForm());themes.apply(window);themes.apply(root);stage.setScene(scene);InWindowDialog.bind(stage,window);WindowChrome.resize(stage,scene);
     root.centerProperty().addListener((o,a,b)->{if(b!=null&&themes.settings().components().animations()){b.setOpacity(0);FadeTransition fade=new FadeTransition(Duration.millis(150),b);fade.setFromValue(0);fade.setToValue(1);fade.play();}});
     for(int n:new int[]{16,24,32,48,64,128,256}){var icon=getClass().getResourceAsStream("icons/icon-"+n+".png");if(icon!=null)stage.getIcons().add(new Image(icon));}
+    connectivity.listener(s->Platform.runLater(()->{if(!stopping){if(connectionCard!=null)connectionCard.update(s);if(detailConnectionCard!=null)detailConnectionCard.update(s);}}));
+    root.setCenter(new StackPane(form("АЕГИС",new Label("Подготовка приложения…"))));window.applyCss();scene.setFill(javafx.scene.paint.Color.web("#15191f"));
     stage.setOnCloseRequest(e->{e.consume();if(!installingUpdate&&updatePreferences!=null&&updatePreferences.installAtExit()&&updates!=null&&updates.snapshot().state()==UpdateService.State.READY_TO_INSTALL)installUpdate();else stop();});stage.show();
     try {config=ClientConfig.load(AppPaths.config());
       if(!AppPaths.windows()){
@@ -97,10 +100,13 @@ public final class MessengerApp extends Application {
       updates.automatic(()->updatePreferences.automaticCheck(),()->updatePreferences.automaticDownload());
       // A private cookie path is always tied to this application's profile, including migrated Linux profiles.
       config=new ClientConfig("127.0.0.1",config.torSocksPort(),config.torControlPort(),config.torUpdateSocksPort(),AppPaths.root().resolve("tor/control_auth_cookie"),config.localServicePort(),config.defaultTTL(),config.relayOnionAddress(),config.relayPort(),config.storagePath(),config.maxFileSize(),config.maxLocalStorage(),config.deliveryTTL());
-      ClientUpgrade.beforeOpen(config.storagePath(),AppPaths.root().resolve("backups"));
-      LocalStore.cleanupLockedFiles(config.storagePath(),System.currentTimeMillis());
-      startTor();
-      tryRemembered();
+      center(form("АЕГИС",new Label("Подготовка локальных данных…")));
+      worker.execute(()->{try{
+        ClientUpgrade.beforeOpen(config.storagePath(),AppPaths.root().resolve("backups"));
+        ClientUpgrade.beforeVersionOpen(SignedManifest.CURRENT,config,AppPaths.root().resolve("backups"));
+        LocalStore.cleanupLockedFiles(config.storagePath(),System.currentTimeMillis());
+        Platform.runLater(()->{if(!stopping){startTor();tryRemembered();}});
+      }catch(Exception failed){Platform.runLater(()->{if(!stopping){error(failed);stop();}});}});
     }catch(Exception e){error(e);stage.close();Platform.exit();}
   }
   private void page(Node body){root.getChildren().clear();root.setTop(null);root.setLeft(null);root.setBottom(null);root.setCenter(body);}
@@ -114,7 +120,7 @@ public final class MessengerApp extends Application {
     worker.execute(()->{try{T value=action.run();Platform.runLater(()->{if(!stopping)done.accept(value);else if(value instanceof AutoCloseable closeable)try{closeable.close();}catch(Exception ignored){}});}catch(Exception|LinkageError e){Platform.runLater(()->{if(!stopping)error(e);});}finally{Platform.runLater(()->{if(button!=null){button.setDisable(false);button.setText(label);}});}});
   }
   private void startTor(){
-    if(connectingTor)return;TorConnection previous=tor;ClientSession active=session;connectingTor=true;relayReady=false;
+    if(connectingTor)return;TorConnection previous=tor;ClientSession active=session;connectingTor=true;relayReady=false;connectivity.bootstrap(EmbeddedTor.Mode.DIRECT,0);
     if(session==null){if(config.relayOnionAddress().isBlank())serverPage();else loginPage();}
     TorConnection candidate=new TorConnection(config);tor=candidate;TorTransport.requireAvailability(candidate::ready);
     connectionWorker.execute(()->{try{
@@ -122,25 +128,25 @@ public final class MessengerApp extends Application {
       // Availability is already fail-closed; never perform these waits on the FX thread.
       if(active!=null)active.torUnavailable();if(previous!=null)previous.close();
       candidate.start(java.time.Duration.ofSeconds(150),java.time.Duration.ofSeconds(300),(mode,n)->Platform.runLater(()->{
-        if(stopping||tor!=candidate)return;networkStatus("Подключение… "+n+"%");
+        if(stopping||tor!=candidate)return;connectivity.bootstrap(mode,n);networkStatus("Подключение… "+n+"%");
       }));
-      Platform.runLater(()->{if(stopping||tor!=candidate)return;networkStatus("Соединение готово");if(session!=null)session.torRestarted();if(connectButton!=null)connectButton.setDisable(false);if(!config.relayOnionAddress().isBlank())preconnect();if(updatePreferences.automaticCheck())updates.check(updatePreferences.automaticDownload());});
-    }catch(Exception e){candidate.close();Platform.runLater(()->{if(stopping||tor!=candidate)return;networkStatus("Нет соединения. Прямое подключение отключено.");if(loginButton!=null)loginButton.setDisable(true);});}finally{connectingTor=false;}});
+      Platform.runLater(()->{if(stopping||tor!=candidate)return;connectivity.torConnected();networkStatus("Соединение готово");if(session!=null)session.torRestarted();if(connectButton!=null)connectButton.setDisable(false);if(!config.relayOnionAddress().isBlank())preconnect();if(updatePreferences.automaticCheck())updates.check(updatePreferences.automaticDownload());});
+    }catch(Exception e){candidate.close();Platform.runLater(()->{if(stopping||tor!=candidate)return;connectivity.failed(ConnectionStatus.Failure.TOR_UNAVAILABLE);networkStatus("Нет соединения. Прямое подключение отключено.");if(loginButton!=null)loginButton.setDisable(true);});}finally{connectingTor=false;}});
   }
   private void networkStatus(String text){if(networkLabel!=null)networkLabel.setText(text);}
   private void preconnect(){
-    ClientConfig candidate=config;networkStatus("Подключение к серверу…");
+    ClientConfig candidate=config;TorConnection expectedTor=tor;if(tor==null||!tor.ready()){if(!connectingTor)startTor();return;}connectivity.relayConnecting();networkStatus("Подключение к серверу…");
     connectionWorker.execute(()->{try{TechnicalLog.record(TechnicalLog.Event.RELAY_CONNECT,0);RelayProbe.check(candidate);TechnicalLog.record(TechnicalLog.Event.RELAY_CONNECTED,0);
-      Platform.runLater(()->{if(stopping||candidate!=config)return;relayReady=true;networkStatus("● Подключено");if(loginButton!=null)loginButton.setDisable(false);resumeNetwork();});
-    }catch(Exception failure){TechnicalLog.record(TechnicalLog.Event.RELAY_FAILED,0);Platform.runLater(()->{if(!stopping&&candidate==config){relayReady=false;networkStatus("Нет соединения с сервером");}});}});
+      Platform.runLater(()->{if(stopping||candidate!=config||expectedTor!=tor)return;relayReady=true;connectivity.connected();networkStatus("● Подключено");if(loginButton!=null)loginButton.setDisable(false);resumeNetwork();});
+    }catch(Exception failure){TechnicalLog.record(TechnicalLog.Event.RELAY_FAILED,0);Platform.runLater(()->{if(!stopping&&candidate==config&&expectedTor==tor){relayReady=false;connectivity.failed(ConnectionStatus.Failure.RELAY_UNAVAILABLE);networkStatus("Нет соединения с сервером");}});}});
   }
   void serverPage(){
     TextField address=field("Адрес сервера .onion");address.setText(config.relayOnionAddress());networkLabel=new Label(tor!=null&&tor.ready()?"Соединение готово":"Подключение…");networkLabel.getStyleClass().add("muted");
     Button connect=new Button("Подключиться");connectButton=connect;connect.setDisable(tor==null||!tor.ready());connect.setDefaultButton(true);connect.setOnAction(e->{try{
       ClientConfig candidate=config.withRelay(OnionAddress.normalize(address.getText()));
-      work(connect,"Подключение…",()->{TechnicalLog.record(TechnicalLog.Event.RELAY_CONNECT,0);try{RelayProbe.check(candidate);}catch(Exception ex){TechnicalLog.record(TechnicalLog.Event.RELAY_FAILED,0);throw ex;}TechnicalLog.record(TechnicalLog.Event.RELAY_CONNECTED,0);candidate.save(AppPaths.config());return candidate;},value->{config=value;relayReady=true;loginPage();});
+      connectivity.relayConnecting();work(connect,"Подключение…",()->{TechnicalLog.record(TechnicalLog.Event.RELAY_CONNECT,0);try{RelayProbe.check(candidate);}catch(Exception ex){TechnicalLog.record(TechnicalLog.Event.RELAY_FAILED,0);return null;}TechnicalLog.record(TechnicalLog.Event.RELAY_CONNECTED,0);candidate.save(AppPaths.config());return candidate;},value->{if(value==null){relayReady=false;connectivity.failed(ConnectionStatus.Failure.RELAY_UNAVAILABLE);}else{config=value;relayReady=true;connectivity.connected();loginPage();}});
     }catch(Exception ex){error(ex);}});
-    var advanced=button("Расширенные настройки",this::diagnostics);advanced.getStyleClass().add("link");VBox setup=form("АЕГИС",new Label("Адрес сервера"),address,connect,networkLabel,advanced);if(Files.exists(config.storagePath().resolve("state.vault")))setup.getChildren().add(button("Открыть без сети",this::openOffline));center(setup);
+    var advanced=button("Расширенные настройки",this::diagnostics);advanced.getStyleClass().add("link");VBox setup=form("АЕГИС",new Label("Адрес сервера"),address,connect,connectionCard(),advanced);if(Files.exists(config.storagePath().resolve("state.vault")))setup.getChildren().add(button("Открыть без сети",this::openOffline));center(setup);
   }
   void loginPage(){
     connectButton=null;TextField nick=field("Ник");PasswordField account=password("Пароль");Button login=new Button("Войти");loginButton=login;login.setDisable(!relayReady);login.setDefaultButton(true);
@@ -153,7 +159,7 @@ public final class MessengerApp extends Application {
     var create=button("Нет аккаунта? Создать",this::registerPage);create.getStyleClass().add("link");
     var another=button("Другой сервер",this::serverPage);another.getStyleClass().add("link");
     var local=button("Открыть без сети",this::openOffline);local.setDisable(!Files.exists(config.storagePath().resolve("state.vault")));
-    center(form("АЕГИС",nick,account,remember,login,create,networkLabel,local,button("Повторить подключение",()->{if(tor==null||!tor.ready())startTor();else preconnect();}),button("Восстановить резервную копию",this::restore),another));
+    center(form("АЕГИС",nick,account,remember,login,create,connectionCard(),local,button("Восстановить резервную копию",this::restore),another));
   }
   private void openOffline(){char[] password=askPassword("Открыть хранилище","Пароль хранилища");if(password==null)return;
     work(null,"",()->{try{return AccountLogin.offline(config,password);}finally{Arrays.fill(password,'\0');}},opened->{session=opened;rememberRequested=false;afterLogin();});
@@ -210,7 +216,7 @@ public final class MessengerApp extends Application {
   void mainPage(){
     if(timer!=null)timer.stop();if(notifications==null)notifications=new NotificationCenter(stage,root);page(null);clearCompose();
     themes.listener(this::appearanceChanged);previousAppearance=themes.settings();layout=previousAppearance.legacy();
-    if(!geometryBound){geometryBound=true;root.widthProperty().addListener((o,a,b)->{if(session==null||changingLayout)return;boolean narrow=b.doubleValue()<700;if(narrow!=narrowNavigation){arrangeNavigation();if(section.equals("mail"))arrangeMail();}if(section.equals("compose"))placeComposer();});}
+    if(!geometryBound){geometryBound=true;root.widthProperty().addListener((o,a,b)->{adaptGeometry();if(session==null||changingLayout)return;boolean narrow=b.doubleValue()<700;if(narrow!=narrowNavigation){arrangeNavigation();if(section.equals("mail"))arrangeMail();}if(section.equals("compose"))placeComposer();});}
     arrangeNavigation();timer=new Timeline(new KeyFrame(Duration.seconds(1),e->refresh()));timer.setCycleCount(Animation.INDEFINITE);timer.play();mailboxPage(false);updateChanged(updates.snapshot());
   }
   private void appearanceChanged(Appearance.Settings value){
@@ -240,12 +246,19 @@ public final class MessengerApp extends Application {
         Runnable action=switch(id){case "letters"->()->mailboxPage(false);case "contacts"->this::contactsPage;case "friends"->this::friendsPage;case "search"->this::searchPage;case "profile"->this::profile;default->this::settings;};
         Button item=button(labelMode==Appearance.Labels.ICONS?"":name,action);item.setAccessibleText(name);item.setTooltip(new Tooltip(name));item.getStyleClass().add("nav-item");if(labelMode!=Appearance.Labels.TEXT)item.setGraphic(NavigationGlyph.create(id,settings.components().iconSize()));if(nav instanceof VBox)item.setMaxWidth(Double.MAX_VALUE);nav.getChildren().add(item);
       }
-      root.setLeft(null);root.setBottom(null);root.setTop(null);
+      navigationNode=nav;root.setLeft(null);root.setBottom(null);root.setTop(null);
       if(l.zone()==Appearance.Zone.LEFT){nav.setPrefWidth(labelMode==Appearance.Labels.ICONS?78:l.navigationWidth());ScrollPane scroll=new ScrollPane(nav);scroll.setFitToWidth(true);scroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);scroll.setPrefWidth(labelMode==Appearance.Labels.ICONS?82:l.navigationWidth()+4);root.setLeft(scroll);root.setTop(header);}
       else if(l.zone()==Appearance.Zone.TOP)root.setTop(new VBox(header,nav));else{root.setTop(header);root.setBottom(nav);}
-      accountAvatar=null;if(updates!=null)updateChanged(updates.snapshot());
+      adaptGeometry();accountAvatar=null;if(updates!=null)updateChanged(updates.snapshot());
     }finally{changingLayout=false;}
   }
+  private void adaptGeometry(){
+    if(session==null)return;double margin=ResponsiveGeometry.inset(root.getWidth());
+    root.setPadding(new Insets(margin));
+    if(navigationNode!=null){if(root.getLeft()!=null)BorderPane.setMargin(root.getLeft(),new Insets(0,margin,0,0));if(navigationNode instanceof VBox nav)nav.setSpacing(ResponsiveGeometry.spacing(root.getWidth(),themes.settings().components().spacing()));}
+    if(letters!=null)letters.refresh();
+  }
+  private ConnectionCard connectionCard(){connectionCard=new ConnectionCard(()->{if(connectingTor)return;if(tor==null||!tor.ready())startTor();else preconnect();});connectionCard.update(connectivity.snapshot());return connectionCard;}
   private Button composeAction(){Button b=button(narrowNavigation?"+":"Новое письмо",this::composePage);b.setAccessibleText("Новое письмо");b.setTooltip(new Tooltip("Новое письмо"));return b;}
   private VBox folders(){
     VBox pane=new VBox(7);pane.getStyleClass().add("mail-folders");
@@ -312,7 +325,7 @@ public final class MessengerApp extends Application {
       if(row.protectedLetter()){Label lock=new Label("Защищённое письмо");lock.getStyleClass().add("muted");text.getChildren().add(lock);}
       else if(fields.snippet()&&appearance.rows()==Appearance.Rows.PREVIEW&&!row.snippet().isBlank()){Label snippet=new Label(row.snippet());snippet.setWrapText(true);snippet.getStyleClass().add("mail-snippet");text.getChildren().add(snippet);}
       Label remaining=new Label("◷ "+Math.max(0,(item.expiresAt()-session.local().now())/60000)+" мин"+(!fields.attachments()||row.file().isEmpty()?"":" · "+row.file()));remaining.getStyleClass().add("muted");text.getChildren().add(remaining);
-      Button open=button("Открыть",()->{if(threads)threadPage(row);else openLetter(item);});HBox body=new HBox(themes.settings().components().spacing());
+      Button open=button("Открыть",()->{if(threads)threadPage(row);else openLetter(item);});HBox body=new HBox(ResponsiveGeometry.spacing(root.getWidth(),themes.settings().components().spacing()));
       if(fields.avatar())body.getChildren().add(avatar(item.contact()));body.getChildren().add(text);if(appearance.mail()==Appearance.MailLayout.COMPACT||root.getWidth()<850)body.getChildren().add(open);body.setAlignment(Pos.CENTER_LEFT);body.setMinWidth(0);
       if(appearance.rows()==Appearance.Rows.CARDS||appearance.rows()==Appearance.Rows.PREVIEW)body.getStyleClass().add("mail-card");else body.getStyleClass().add("mail-row");
       if(appearance.rows()==Appearance.Rows.COMPACT)text.setSpacing(1);
@@ -340,7 +353,8 @@ public final class MessengerApp extends Application {
     if(accountReconnect!=null){accountReconnect.setVisible(!session.online());accountReconnect.setManaged(!session.online());}
     if(sendButton!=null)sendButton.setDisable(!session.online()||tor==null||!tor.ready());
     boolean connected=tor!=null&&tor.ready()&&session.status().contains("Relay ●");
-    if(connection!=null){connection.setStyle("-fx-text-fill:"+(connected?"#469981":"#c38848"));connection.setText("●");connection.setTooltip(new Tooltip(connected?"Соединение защищено":"Нет соединения. Прямое подключение отключено."));}
+    if(tor!=null&&!tor.ready()&&!connectingTor)connectivity.offline();
+    if(connection!=null){connection.setStyle("-fx-text-fill:"+(connected?"#469981":"#c38848"));connection.setText("●");connection.setTooltip(new Tooltip(connected?"Соединение защищено":connectivity.snapshot().label()+(connectivity.snapshot().busy()?" · "+connectivity.snapshot().progress()+"%":". Прямое подключение отключено.")));}
     viewers.removeIf(v->!v.showing());
     if(section.equals("thread")&&threadResults!=null)threadResults.getItems().removeIf(r->r.item().expiresAt()<=session.local().now());
     if((section.equals("contacts")||section.equals("friends"))&&contactSearch!=null)fillContacts(contactSearch.getText());
@@ -475,7 +489,7 @@ public final class MessengerApp extends Application {
     contacts.setCellFactory(list->contactCell());TextField search=field(friends?"Поиск по друзьям":"Поиск по контактам");contactSearch=search;search.textProperty().addListener((o,a,b)->fillContacts(b));
     contacts.getSelectionModel().selectedItemProperty().addListener((o,a,b)->selected=b==null?"":b);
     Button verify=button("Отпечаток",()->{if(!selected.isBlank())info(selected+"\n\n"+fingerprint(session.local().contact(selected).userId()));});
-    Button remove=button(friends?"Убрать из друзей":"Удалить контакт",()->{if(!selected.isBlank()){String nick=selected;UserInfo peer=session.local().contact(nick);ClientSession active=session;work(null,"",()->{active.features().consent(peer.userId(),false);if(active.online())active.syncPublicData(peer);if(!friends)active.local().removeContact(nick);return true;},v->fillContacts(search.getText()));}});
+    Button remove=button(friends?"Убрать из друзей":"Удалить контакт",()->{if(!selected.isBlank()){String nick=selected;UserInfo peer=session.local().contact(nick);ClientSession active=session;work(null,"",()->{active.features().consent(peer.userId(),false);if(!friends)active.local().removeContact(nick);if(active.online())try{active.syncPublicData(null);}catch(Exception retryLater){/* Revocation is durable locally and retries separately. */}return true;},v->fillContacts(search.getText()));}});
     Button pin=button("☆ Избранное",()->{UserInfo peer=session.local().contact(selected);if(peer!=null)work(null,"",()->{session.features().pin("pinnedContacts",peer.userId(),!session.features().pinned("pinnedContacts",peer.userId()));return true;},v->fillContacts(search.getText()));});
     Button viewProfile=button("Профиль",()->{if(!selected.isBlank())contactProfile(selected);});
     VBox box=new VBox(12,search,contacts,new FlowPane(10,10,button("+ Контакт",this::addContact),verify,viewProfile,pin,remove),button("Написать письмо",this::composePage));box.setPadding(new Insets(16));VBox.setVgrow(contacts,Priority.ALWAYS);root.setCenter(box);fillContacts("");
@@ -541,9 +555,10 @@ public final class MessengerApp extends Application {
     Node sidebar=root.getLeft();if(sidebar!=null){sidebar.setVisible(value.sidebar());sidebar.setManaged(value.sidebar());}
     if(letters!=null)letters.refresh();if(contacts!=null)contacts.refresh();if(section.equals("mail")&&previous.preview()!=value.preview())mailboxPage(mailOutgoing,mailScope);
   }
-  private Node avatar(String nick){return AvatarView.create(nick,avatarImages,layout.avatars(),themes.settings().components());}
-  private ListCell<String> contactCell(){return new ListCell<>(){protected void updateItem(String nick,boolean empty){super.updateItem(nick,empty);setText(null);setGraphic(empty||nick==null?null:new HBox(8,avatar(nick),new Label(nick)));}};}
-  private void loadAvatars(){ClientSession active=session;work(null,"",()->{Map<String,Image> images=new HashMap<>();List<String> names=new ArrayList<>(active.local().contacts().stream().map(UserInfo::nickname).toList());names.add(active.local().nickname());for(String nick:names){byte[] data=null;try{data=active.local().avatar(nick);if(data!=null){byte[] bounded=AvatarCodec.normalize(data);try{Image image=new Image(new ByteArrayInputStream(bounded));if(!image.isError())images.put(nick,image);}finally{Arrays.fill(bounded,(byte)0);}}}catch(IOException|java.security.GeneralSecurityException invalidImage){/* One invalid image never suppresses other verified profiles. */}finally{if(data!=null)Arrays.fill(data,(byte)0);}}return images;},images->{if(active!=session)return;avatarImages.clear();avatarImages.putAll(images);if(contacts!=null)contacts.refresh();if(letters!=null)letters.refresh();if(accountAvatar!=null)accountAvatar.getChildren().setAll(avatar(active.local().nickname()));if(section.equals("profile")&&profileAvatar!=null)profileAvatar.getChildren().setAll(avatar(active.local().nickname()));});}
+  private Node avatar(String nick){return AvatarView.create(nick,avatarImages,layout.avatars(),themes.settings().components(),(int)Math.round(ResponsiveGeometry.avatar(root.getWidth(),themes.settings().components().avatarSize())));}
+  private ListCell<String> contactCell(){return new ListCell<>(){protected void updateItem(String nick,boolean empty){super.updateItem(nick,empty);setText(null);setGraphic(null);if(empty||nick==null)return;UserInfo peer=session.local().contact(nick);String status=peer==null?"":session.features().blockedSender(peer.userId())?"Заблокирован":session.features().friend(peer.userId())?"Друг":session.relayCapabilities()==0?"Дружба недоступна на этом сервере":"Ожидается подтверждение";Label label=new Label(status);label.getStyleClass().add("muted");setGraphic(new HBox(8,avatar(nick),new VBox(3,new Label(nick),label)));}};}
+  private void loadAvatars(){ClientSession active=session;work(null,"",()->{Map<String,Image> images=new HashMap<>();List<String> names=new ArrayList<>(active.local().contacts().stream().map(UserInfo::nickname).toList());names.add(active.local().nickname());for(String nick:names){byte[] data=null;try{data=active.local().avatar(nick);if(data!=null){byte[] bounded=AvatarCodec.normalize(data);try{Image image=new Image(new ByteArrayInputStream(bounded));if(!image.isError())images.put(nick,image);}finally{Arrays.fill(bounded,(byte)0);}}}catch(IOException|java.security.GeneralSecurityException invalidImage){/* One invalid image never suppresses other verified profiles. */}finally{if(data!=null)Arrays.fill(data,(byte)0);}}return images;},images->{if(active!=session)return;avatarImages.clear();avatarImages.putAll(images);if(contacts!=null)contacts.refresh();if(letters!=null)letters.refresh();if(accountAvatar!=null)accountAvatar.getChildren().setAll(avatar(active.local().nickname()));if(section.equals("profile")&&profileAvatar!=null)profileAvatar.getChildren().setAll(profileAvatar(active.local().nickname(),true));});}
+  private Node profileAvatar(String nick,boolean permitted){Image image=permitted?avatarImages.get(nick):null;return AvatarViewer.profile(nick,image,()->AvatarViewer.show(stage,themes,nick,image));}
   private void chooseAvatar(String nick){
     if(!nick.equals(session.local().nickname()))return;InWindowFileChooser picker=new InWindowFileChooser();picker.setTitle("Аватар");picker.getExtensionFilters().add(new FileChooser.ExtensionFilter("JPG, PNG, WebP · до 2 МБ","*.png","*.jpg","*.jpeg","*.webp"));var file=picker.showOpenDialog(stage);if(file==null)return;ClientSession active=session;
     work(null,"",()->AvatarCodec.preview(file.toPath()),preview->{try{byte[] png=AvatarCrop.show(stage,themes,preview);if(png==null)return;work(null,"",()->{try{active.local().avatar(nick,png);active.features().profileChanged();if(active.online())active.syncPublicData(null);return true;}finally{Arrays.fill(png,(byte)0);}},v->loadAvatars());}catch(Exception e){error(e);}finally{Arrays.fill(preview,(byte)0);}});
@@ -552,7 +567,7 @@ public final class MessengerApp extends Application {
     clearCompose();section="contact-profile";viewGeneration++;ClientSession active=session;
     work(null,"",()->{if(active.online())try{active.syncPublicData(active.local().contact(nick));}catch(Exception unavailable){}return active.local().cachedProfile(nick);},profile->{if(session!=active||!section.equals("contact-profile"))return;UserInfo peer=active.local().contact(nick);if(peer==null)return;
       Label about=new Label(profile!=null&&profile.visible()?profile.about():"Публичные данные скрыты или недоступны");about.setWrapText(true);
-      VBox content=new VBox(14,button("← Контакты",this::contactsPage),avatar(nick),new Label(nick),about,new Label(fingerprint(peer.userId())),new Label(profile==null?"Идентичность контакта проверена":"Подпись и идентичность проверены"));content.setPadding(new Insets(24));root.setCenter(content);
+      VBox content=new VBox(14,button("← Контакты",this::contactsPage),profileAvatar(nick,profile!=null&&profile.visible()),new Label(nick),about,new Label(fingerprint(peer.userId())),new Label(profile==null?"Идентичность контакта проверена":"Подпись и идентичность проверены"));content.setPadding(new Insets(24));root.setCenter(content);
     });
   }
   private void profile(){
@@ -561,7 +576,7 @@ public final class MessengerApp extends Application {
     TextArea about=new TextArea(session.features().about());about.setPromptText("О себе");about.setWrapText(true);about.setPrefRowCount(4);
     CheckBox visible=new CheckBox("Публичный профиль");visible.setSelected(session.features().visible());
     Label status=new Label(session.publicStatus());status.getStyleClass().add("muted");
-    profileAvatar=new VBox(avatar(nick));VBox body=new VBox(12,heading,profileAvatar,immutable,new HBox(8,button("Изменить аватар",()->chooseAvatar(nick)),button("Убрать",()->work(null,"",()->{session.local().avatar(nick,null);session.features().profileChanged();return true;},v->loadAvatars()))),about,visible);
+    profileAvatar=new VBox(profileAvatar(nick,true));VBox body=new VBox(12,heading,profileAvatar,immutable,new HBox(8,button("Изменить аватар",()->chooseAvatar(nick)),button("Убрать",()->work(null,"",()->{session.local().avatar(nick,null);session.features().profileChanged();return true;},v->loadAvatars()))),about,visible);
     Button save=new Button("Сохранить");save.setOnAction(e->{String text=about.getText();boolean show=visible.isSelected();ClientSession active=session;work(save,"Сохранение…",()->{active.features().profile(text,show);if(active.online())active.syncPublicData(null);return true;},v->status.setText(active.online()?active.publicStatus():"Сохранено на устройстве"));});
     body.getChildren().addAll(save,status);body.setPadding(new Insets(24));body.setMaxWidth(620);root.setCenter(new StackPane(body));
   }
@@ -590,9 +605,8 @@ public final class MessengerApp extends Application {
   private char[] askPassword(String title,String prompt){InWindowDialog<char[]> d=new InWindowDialog<>();d.initOwner(stage);d.setTitle(title);PasswordField p=password(prompt);p.getStyleClass().add("secret-entry");VBox body=form(title,new Label(prompt),p);if(title.equals("Обновление хранилища"))body.getChildren().add(new Label("Требуется один раз для переноса данных старой версии."));d.getDialogPane().setContent(body);d.getDialogPane().getButtonTypes().addAll(ButtonType.OK,ButtonType.CANCEL);d.setResultConverter(b->b==ButtonType.OK?p.getText().toCharArray():null);themes.apply(d.getDialogPane());var result=d.showAndWait().orElse(null);p.clear();return result;}
   private void connectionDialog(){
     InWindowDialog<Void> dialog=new InWindowDialog<>();dialog.initOwner(stage);dialog.setTitle("Соединение");dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
-    Label status=new Label(tor!=null&&tor.ready()&&relayReady?"Соединение защищено":"Нет соединения. Прямое подключение отключено.");status.setWrapText(true);
-    Button retry=button(connectingTor?"Подключение…":"Повторить соединение",()->{dialog.close();if(tor==null||!tor.ready())startTor();else preconnect();});retry.setDisable(connectingTor);
-    dialog.getDialogPane().setContent(new VBox(12,status,retry,button("Диагностика",this::diagnostics)));themes.apply(dialog.getDialogPane());dialog.showAndWait();
+    detailConnectionCard=new ConnectionCard(()->{if(connectingTor)return;if(tor==null||!tor.ready())startTor();else preconnect();});detailConnectionCard.update(connectivity.snapshot());
+    dialog.getDialogPane().setContent(new VBox(12,detailConnectionCard,button("Диагностика",this::diagnostics)));dialog.onClose(()->detailConnectionCard=null);themes.apply(dialog.getDialogPane());dialog.show();
   }
   private void diagnostics(){info("Версия: "+SignedManifest.CURRENT+" · protocol 1\nTor: "+(tor!=null&&tor.ready()?"100%":"не подключён")+"\nSOCKS: 127.0.0.1:"+config.torSocksPort()+"\nОбновления SOCKS: 127.0.0.1:"+config.torUpdateSocksPort()+"\nControlPort: 127.0.0.1:"+config.torControlPort()+"\nRelay: "+config.relayOnionAddress()+"\n"+(session==null?"":session.status())+"\nРежим: "+(tor==null?"—":tor.mode())+"\nЛоги: "+AppPaths.root().resolve("logs"));}
   private void info(String text){InWindowAlert d=new InWindowAlert(Alert.AlertType.INFORMATION,text,ButtonType.OK);d.setHeaderText(null);d.setTitle("АЕГИС");d.initOwner(stage);themes.apply(d.getDialogPane());d.showAndWait();}

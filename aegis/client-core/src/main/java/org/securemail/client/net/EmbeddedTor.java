@@ -14,7 +14,7 @@ public final class EmbeddedTor implements TorConnection.Attempt {
   public static final class BootstrapFailure extends IOException { private static final long serialVersionUID=1L; public BootstrapFailure(){super("Tor не смог подключиться");} }
   private final ClientConfig config;private final Path root,bundle;private volatile Process child;private volatile boolean ready,closed;private volatile SnowflakeProcess transport;
   public EmbeddedTor(ClientConfig config){this.config=config;root=AppPaths.root().resolve("tor");bundle=AppPaths.bundle().resolve("tor");}
-  public boolean ready(){return ready&&child!=null&&child.isAlive()&&(transport==null||transport.alive())&&!closed;}
+  public boolean ready(){Process running=child;SnowflakeProcess bridge=transport;return ready&&running!=null&&running.isAlive()&&(bridge==null||bridge.alive())&&!closed;}
   public void start(Mode mode,Duration timeout,IntConsumer progress)throws Exception{
     if(child!=null)throw new IOException("Tor уже запущен");if(closed)throw new IOException("Приложение закрывается");
     Path exe=bundle.resolve(AppPaths.windows()?"tor.exe":"tor");if(!Files.isRegularFile(exe))throw new IOException("Встроенный Tor отсутствует. Распакуйте полный пакет АЕГИС.");
@@ -31,11 +31,12 @@ public final class EmbeddedTor implements TorConnection.Attempt {
     synchronized(this){if(closed)throw new IOException("Приложение закрывается");child=builder(args).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.PIPE).start();
       TechnicalLog.record(mode==Mode.DIRECT?TechnicalLog.Event.TOR_DIRECT_START:TechnicalLog.Event.TOR_SNOWFLAKE_START,0);
       Process owned=child; Thread reader=new Thread(()->readSafeEvents(owned),"aegis-tor-events");reader.setDaemon(true);reader.start();}
+    Process running=child;
     long until=System.nanoTime()+timeout.toNanos();int previous=-1;
-    var watch=new BootstrapWatch(Duration.ofSeconds(mode==Mode.DIRECT?30:75),System.nanoTime());
+    var watch=new BootstrapWatch(Duration.ofSeconds(mode==Mode.DIRECT?75:120),System.nanoTime());
     while(System.nanoTime()<until){
       if(closed)throw new IOException("Приложение закрывается");
-      if(!child.isAlive()){TechnicalLog.record(TechnicalLog.Event.TOR_EXIT,child.exitValue());close();throw new BootstrapFailure();}
+      if(!running.isAlive()){TechnicalLog.record(TechnicalLog.Event.TOR_EXIT,running.exitValue());close();throw new BootstrapFailure();}
       if(transport!=null&&!transport.alive()){TechnicalLog.record(TechnicalLog.Event.TRANSPORT_ERROR,0);close();throw new BootstrapFailure();}
       try(var control=new TorControl(config.torControlPort(),config.torCookiePath())){
         int value=control.bootstrapProgress();watch.progress(value,System.nanoTime());if(previous!=value){previous=value;TechnicalLog.record(TechnicalLog.Event.TOR_BOOTSTRAP,value);progress.accept(value);}

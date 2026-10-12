@@ -1,3 +1,7 @@
+> АЕГИС 1.2.0: незавершённый клиентский кандидат. productionReady=false.
+> Friends на Relay0.2.0, receipts и timer-after-read ожидают архитектурного решения.
+> См. AUDIT-1.2.0-RU.md, RELAY-LIFECYCLE-PROPOSAL-1.2.0.md и TEST-REPORT-1.2.0.md.
+
 # АЕГИС 1.1.1 Demo
 
 Автономная Единая Гибридная Информационная Система. Локальные Java 21 клиенты Windows/CachyOS и заменяемый protocol-1 relay. Это продолжаемый исходный код опубликованной 1.1.0 с минимальным изменением темы в 1.1.1, не новая identity или новый wire protocol.

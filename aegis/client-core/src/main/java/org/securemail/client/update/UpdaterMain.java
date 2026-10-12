@@ -12,7 +12,7 @@ import org.securemail.client.storage.AtomicFiles;
 /** Internal detached updater: re-verifies pinned Ed25519, size, hash and package sanity. */
 public final class UpdaterMain {
   private UpdaterMain(){}
-  public static void main(String[] args){Path dir=null;try {
+  public static void main(String[] args){Path dir=null;String phase="VALIDATE";try {
     if(args.length!=2||!args[0].equals("--job"))throw new IOException("Invalid updater arguments");
     Path job=Path.of(args[1]).toAbsolutePath().normalize();Path allowed=AppPaths.root().resolve("updates").toAbsolutePath().normalize();
     if(!job.startsWith(allowed)||!job.getFileName().toString().equals("job.json")||Files.isSymbolicLink(job)||Files.isSymbolicLink(job.getParent()))throw new IOException("Invalid updater transaction");dir=job.getParent();
@@ -25,7 +25,8 @@ public final class UpdaterMain {
     Path artifact=dir.resolve(AppPaths.windows()?"package.zip":"package.AppImage");UpdateService.verifyFile(artifact,release.clientAsset(AppPaths.windows()));PackageSanity.check(artifact,release.clientAsset(AppPaths.windows()),release.version());
     long pid=JsonData.number(o,"clientPid"),launcher=JsonData.number(o,"launcherPid");Instant birth=Instant.parse(JsonData.text(o,"clientStart",60));
     ProcessHandle client=pin(pid,birth);ProcessHandle parent=launcher==0?null:pin(launcher,Instant.parse(JsonData.text(o,"launcherStart",60)));
-    AtomicFiles.write(dir.resolve("ready"),new byte[]{1});waitExit(client);if(parent!=null)waitExit(parent);
+    phase="WAIT_FOR_CLIENT";AtomicFiles.write(dir.resolve("phase"),phase.getBytes(java.nio.charset.StandardCharsets.US_ASCII));AtomicFiles.write(dir.resolve("ready"),new byte[]{1});waitExit(client);if(parent!=null)waitExit(parent);
+    phase="BACKUP";AtomicFiles.write(dir.resolve("phase"),phase.getBytes(java.nio.charset.StandardCharsets.US_ASCII));
     var previousConfig=org.securemail.client.ClientConfig.load(AppPaths.config());Path backup;
     try(var appLock=AppPaths.lock()){
       backup=org.securemail.client.storage.ProfileSnapshot.create(previousConfig,AppPaths.root().resolve("backups"));
@@ -35,6 +36,7 @@ public final class UpdaterMain {
     AtomicFiles.directory(target.getParent());Path candidate=artifact;
     if(AppPaths.windows()){candidate=dir.resolve("payload");PackageSanity.extractWindows(artifact,candidate);Path uninstall=target.resolve("Uninstall.exe");if(Files.isRegularFile(uninstall,LinkOption.NOFOLLOW_LINKS)&&!Files.isSymbolicLink(uninstall))Files.copy(uninstall,candidate.resolve("Uninstall.exe"));}
     Path confirmation=dir.resolve("confirmed");Path finalDir=dir;List<Process> started=new ArrayList<>();
+    phase="INSTALL_AND_STARTUP";AtomicFiles.write(dir.resolve("phase"),phase.getBytes(java.nio.charset.StandardCharsets.US_ASCII));
     try{UpdateInstaller.replace(candidate,target,token,confirmation,new UpdateInstaller.Starter(){public boolean start(Path installed)throws Exception{
       Path command=AppPaths.windows()?installed.resolve("AEGIS.exe"):installed;ProcessBuilder builder=new ProcessBuilder(command.toString());builder.environment().put("AEGIS_UPDATE_JOB",job.toString());builder.redirectOutput(ProcessBuilder.Redirect.DISCARD).redirectError(ProcessBuilder.Redirect.DISCARD);Process process=builder.start();started.add(process);return process.isAlive();
     }public void stop()throws Exception{stopOwned(started);}});}
@@ -44,7 +46,7 @@ public final class UpdaterMain {
       if(Files.exists(target)){new ProcessBuilder((AppPaths.windows()?target.resolve("AEGIS.exe"):target).toString()).start();}throw failure;}
     // Metadata/shortcut cleanup follows the commit and cannot roll back a working client.
     try{AtomicFiles.write(finalDir.resolve("installed"),release.version().getBytes(java.nio.charset.StandardCharsets.US_ASCII));if(AppPaths.windows()){String registry="Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\AEGIS";if(com.sun.jna.platform.win32.Advapi32Util.registryKeyExists(com.sun.jna.platform.win32.WinReg.HKEY_CURRENT_USER,registry))com.sun.jna.platform.win32.Advapi32Util.registrySetStringValue(com.sun.jna.platform.win32.WinReg.HKEY_CURRENT_USER,registry,"DisplayVersion",release.version());}else integrateLinux(target,finalDir.resolve("helper/resources/aegis.png"),release.version());}catch(Exception|LinkageError optionalMetadata){/* Binary replacement and startup confirmation already succeeded. */}
-  }catch(Exception failure){if(dir!=null)try{AtomicFiles.write(dir.resolve("failed"),"Установка не завершена. Предыдущая версия сохранена.\n".getBytes(java.nio.charset.StandardCharsets.UTF_8));}catch(IOException ignored){}System.exit(1);}}
+  }catch(Exception failure){if(dir!=null)try{AtomicFiles.write(dir.resolve("failed-code"),phase.getBytes(java.nio.charset.StandardCharsets.US_ASCII));AtomicFiles.write(dir.resolve("failed"),"Установка не завершена. Предыдущая версия сохранена.\n".getBytes(java.nio.charset.StandardCharsets.UTF_8));}catch(IOException ignored){}System.exit(1);}}
   private static ProcessHandle pin(long pid,Instant start)throws IOException{if(pid<=0||pid==ProcessHandle.current().pid())throw new IOException("Invalid old client PID");ProcessHandle p=ProcessHandle.of(pid).orElseThrow(()->new IOException("Old client disappeared"));if(!p.info().startInstant().orElseThrow().equals(start))throw new IOException("PID identity changed");return p;}
   private static void waitExit(ProcessHandle p)throws Exception{if(p.isAlive())p.onExit().get(90,TimeUnit.SECONDS);}
   private static void stopOwned(List<Process> processes)throws Exception{

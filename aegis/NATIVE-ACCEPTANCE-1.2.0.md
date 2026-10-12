@@ -1,0 +1,7 @@
+# АЕГИС 1.2.0 — набор приёмки
+
+Windows 11 x64 DPI100/125/150/200; CachyOS KDE Wayland/X11 и доступный fractional scale. Используйте тестовые профили/аккаунты. Перед updater закройте черновик и сохраните полный backup. Не вводите private release key на онлайн-машине.
+
+Тесты и поля evidence в NATIVE-RESULTS-1.2.0.csv. FR-01..04 и MSG-03..06/EXP-01..07 требуют согласованной lifecycle архитектуры/поддерживающего staging Relay; сейчас они NOT_RUN/BLOCKED, ложные статусы не допускаются. Остальные клиентские проверки выполняются независимо: реальный Direct/Snowflake и internet-loss/retry, Relay после100%, отсутствие ложного FAILED при bootstrap, online/offline mail/file/ACK/TTL, block/revoke, sidebar/maximize/fonts/profile zoom/ESC/privacy, один Stage, download/install helper без белого окна, migration/restart/rollback/data preservation.
+
+Для автоматизированных smoke используйте прилагаемые исходники и build scripts. Headless отчёт не заменяет эти испытания. Updater получает только owner-signed manifest: Ed25519 до JSON, exact size/SHA, подтверждение пользователя, backup/install/restart/healthy commit. Не изменяйте production feed для неподтверждённого кандидата.

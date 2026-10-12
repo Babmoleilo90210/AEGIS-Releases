@@ -37,4 +37,14 @@ class LocalFeaturesTest {
       state.purgeExpired(java.util.Set.of());assertFalse(state.pinned("pinnedMail",id));
     }
   }
+  @Test void blockingOverridesMutualConsentAndRemovingContactCannotLeaveFriend()throws Exception{
+    var peer=Identity.create();try(var local=new LocalStore(root,"feature-vault-password".toCharArray(),Clock.systemUTC(),100000,1000000)){
+      local.bindNickname("raven");var user=new UserInfo(peer.userId(),"blackfox",peer.publicKey(),null);local.trust(user);var state=new LocalFeatures(local);
+      long now=local.now();var ours=local.identity().consent(peer.userId(),now,true);var theirs=peer.consent(local.identity().userId(),now,true);
+      state.friendship(user,ours,theirs);assertTrue(state.friend(peer.userId()));state.blockSender(peer.userId(),true);
+      assertFalse(state.friend(peer.userId()));assertFalse(state.consent(peer.userId()));assertFalse(new LocalFeatures(local).friend(peer.userId()));
+      state.blockSender(peer.userId(),false);assertFalse(state.friend(peer.userId()));state.friendship(user,ours,theirs);assertTrue(state.friend(peer.userId()));
+      local.removeContact("blackfox");assertFalse(state.friend(peer.userId()));
+    }
+  }
 }

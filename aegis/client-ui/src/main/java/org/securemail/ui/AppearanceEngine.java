@@ -20,11 +20,12 @@ import static org.securemail.client.appearance.Appearance.*;
 /** One appearance state for all pages. Never owns a session, network or cryptographic service. */
 final class AppearanceEngine implements AutoCloseable {
   private final AppearanceStore store;private Settings active;private Theme theme,previewTheme;private String css="",recovery="";
-  private final Set<String> fonts=new HashSet<>(Font.getFamilies());
+  private final Set<String> fonts;
   private final ExecutorService imageWorker=Executors.newSingleThreadExecutor(r->{Thread t=new Thread(r,"aegis-appearance-image");t.setDaemon(true);return t;});
   private final Runnable changed;private final Timeline clock;
   private Image image;private String imageId="";private long imageTicket;
   AppearanceEngine(Path profile,Runnable changed)throws IOException{
+    BundledFonts.load();fonts=new HashSet<>(BundledFonts.families());
     this.changed=changed;store=new AppearanceStore(profile);active=store.current();
     if(!validFonts(active)){store.recover("Выбранный шрифт недоступен. Используется безопасное оформление.");active=store.current();}
     resolve();clock=new Timeline(new KeyFrame(Duration.seconds(30),event->{Theme before=theme;resolve();if(!Objects.equals(before,theme)){css="";changed.run();}}));clock.setCycleCount(Animation.INDEFINITE);clock.play();

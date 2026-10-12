@@ -1,0 +1,96 @@
+name: AEGIS 1.2.0 client-phase unsigned candidates
+on:
+  push:
+    branches: [development/aegis-1.2.0]
+    paths: [aegis/**, .github/workflows/aegis120-stability.yml]
+permissions:
+  contents: read
+concurrency:
+  group: aegis120-stability-${{ github.sha }}
+  cancel-in-progress: false
+jobs:
+  candidates:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore verified released 1.1.5 source below the reviewed client overlay
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib,pathlib,urllib.request,zipfile,shutil
+          target=pathlib.Path('aegis');target.mkdir(exist_ok=True)
+          path=pathlib.Path('/tmp/aegis-base115.zip')
+          with urllib.request.urlopen('https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.1.5/AEGIS-1.1.5-source.zip',timeout=60) as response,path.open('wb') as output:shutil.copyfileobj(response,output)
+          assert hashlib.sha256(path.read_bytes()).hexdigest()=='9a564f5bb0638a55d1378d2601e5f8949012a725409a19792c6dd7630c74efd9'
+          with zipfile.ZipFile(path) as archive:
+              assert archive.testzip() is None
+              for entry in archive.infolist():
+                  p=pathlib.PurePosixPath(entry.filename)
+                  assert not p.is_absolute() and '..' not in p.parts and p.parts[0]=='aegis' and '\\' not in entry.filename
+                  dest=pathlib.Path(*p.parts)
+                  if entry.is_dir():dest.mkdir(parents=True,exist_ok=True)
+                  elif not dest.exists():dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes(archive.read(entry))
+          PY
+      - name: Packaging tools on disposable worker only
+        shell: bash
+        run: |
+          sudo timeout 90s apt-get -o Acquire::http::Timeout=15 -o Acquire::https::Timeout=15 -o Acquire::Retries=1 update
+          sudo env DEBIAN_FRONTEND=noninteractive timeout 180s apt-get -o Acquire::http::Timeout=15 -o Acquire::https::Timeout=15 -o Acquire::Retries=1 install -y --no-install-recommends gcc-mingw-w64-x86-64 nsis squashfs-tools
+      - name: Build, tests and unsigned packages
+        run: python3 aegis/tools/build-stability.py --jdk "$JAVA_HOME_21_X64" --work "$RUNNER_TEMP/aegis120-inputs" --out "$GITHUB_WORKSPACE/candidates"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: AEGIS-1.2.0-client-phase-candidates
+          path: |
+            candidates/*.zip
+            candidates/*.exe
+            candidates/*.AppImage
+            candidates/*.json
+            candidates/*.md
+            candidates/*.csv
+            candidates/SHA256SUMS
+            candidates/evidence/
+            candidates/screenshots/
+            candidates/updates/
+            candidates/SIGNING-INPUT-SHA256
+          retention-days: 14
+          if-no-files-found: error
+  packaged-windows:
+    needs: candidates
+    runs-on: windows-2025
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: AEGIS-1.2.0-client-phase-candidates
+          path: candidates
+      - run: python aegis/tools/validate-stability-packaged.py
+        shell: pwsh
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: AEGIS-1.2.0-Windows-Server-evidence
+          path: validation-evidence/
+          retention-days: 14
+          if-no-files-found: error
+  packaged-linux-tor:
+    needs: candidates
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: AEGIS-1.2.0-client-phase-candidates
+          path: candidates
+      - run: python3 aegis/tools/validate-stability-packaged.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: AEGIS-1.2.0-Linux-Tor-evidence
+          path: validation-evidence/
+          retention-days: 14
+          if-no-files-found: error

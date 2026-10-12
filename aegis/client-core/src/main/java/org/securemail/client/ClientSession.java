@@ -122,13 +122,15 @@ public final class ClientSession implements AutoCloseable {
   public synchronized void syncPublicData(org.securemail.protocol.UserInfo selected)throws Exception{
     if(!online()||deliverySuspended)return;relayCapabilities=network.capabilities();
     if(relayCapabilities==0){publicStatus="Сервер поддерживает базовую почту";return;}
-    if((relayCapabilities&1)!=0&&features.profilePending()){
+    boolean profileSynced=true;
+    try{if((relayCapabilities&1)!=0&&features.profilePending()){
       var previous=network.profile(local.nickname());long revision=Math.max(local.now(),previous==null?1:previous.revision()+1);
       byte[] avatar=local.avatar(local.nickname());try{
         var profile=local.identity().profile(local.nickname(),revision,features.visible(),features.about(),avatar==null?new byte[0]:avatar);
         network.publishProfile(profile);local.cacheProfile(profile);features.profilePublished();
       }finally{if(avatar!=null)java.util.Arrays.fill(avatar,(byte)0);}
     }
+    }catch(IOException|java.security.GeneralSecurityException profileFailure){profileSynced=false;}
     if((relayCapabilities&2)!=0){
       var revoked=features.revokedConsentTargets();
       if(!revoked.isEmpty()){
@@ -139,7 +141,7 @@ public final class ClientSession implements AutoCloseable {
     }
     var contacts=local.contacts();if(selected==null&&!contacts.isEmpty())selected=contacts.get(Math.floorMod(contactCursor++,contacts.size()));
     if(selected!=null){
-      var profile=network.profile(selected.nickname());if(profile!=null)local.cacheProfile(profile);
+      if((relayCapabilities&1)!=0)try{var profile=network.profile(selected.nickname());if(profile!=null)local.cacheProfile(profile);}catch(IOException|java.security.GeneralSecurityException profileFailure){profileSynced=false;}
       if((relayCapabilities&2)!=0){
         var relationship=network.relationship(selected);boolean active=features.consent(selected.userId());
         if(relationship.ours()==null||relationship.ours().active()!=active){
@@ -150,7 +152,7 @@ public final class ClientSession implements AutoCloseable {
         if(features.friendship(selected,relationship.ours(),relationship.theirs()))friendshipChanged.set(true);
       }
     }
-    publicStatus="Публичные данные синхронизированы";
+    publicStatus=profileSynced?"Публичные данные синхронизированы":"Профиль пока не синхронизирован";
   }
   public LocalFeatures features(){return features;}
   public int relayCapabilities(){return relayCapabilities;}

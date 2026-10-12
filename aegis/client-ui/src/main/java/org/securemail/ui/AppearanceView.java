@@ -45,7 +45,7 @@ final class AppearanceView {
     search.setPromptText("Найти оформление");themeName.setPromptText("Название темы");layoutName.setPromptText("Название макета");
     for(String name:List.of("Фон","Панели","Элементы","Текст","Подписи","Акцент","Входящие","Отправленные"))colors.put(name,new TextField());
     for(String name:List.of("Аватар","Ник","Тема","Дата","Статус","Вложения","Фрагмент"))fields.put(name,new CheckBox(name));
-    List<String> fonts=new ArrayList<>();fonts.add("System");Font.getFamilies().stream().filter(s->s.matches("[\\p{L}\\p{N} _.-]{1,64}")).sorted().forEach(fonts::add);
+    List<String> fonts=new ArrayList<>();fonts.add("System");BundledFonts.families().stream().filter(s->s.matches("[\\p{L}\\p{N} _.-]{1,64}")).sorted().forEach(fonts::add);
     for(String name:List.of("Навигация","Заголовки","Письма")){fontFamily.put(name,new Selector<>(themes,fonts,"System"));fontSize.put(name,new Slider(11,26,14));fontWeight.put(name,selector(Weight.values(),Weight.NORMAL));}
     search.textProperty().addListener((o,a,b)->fillGallery());category.setOnAction(e->fillGallery());onlyFavorites.setOnAction(e->fillGallery());
     page.initOwner(owner);page.setTitle("Оформление");page.onClose(()->{if(!applied)themes.cancelPreview();});
