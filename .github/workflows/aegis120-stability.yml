@@ -11,7 +11,7 @@ concurrency:
 jobs:
   candidates:
     runs-on: ubuntu-24.04
-    timeout-minutes: 25
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - name: Restore verified released 1.1.5 source below the reviewed client overlay
@@ -36,7 +36,7 @@ jobs:
         shell: bash
         run: |
           sudo timeout 90s apt-get -o Acquire::http::Timeout=15 -o Acquire::https::Timeout=15 -o Acquire::Retries=1 update
-          sudo env DEBIAN_FRONTEND=noninteractive timeout 180s apt-get -o Acquire::http::Timeout=15 -o Acquire::https::Timeout=15 -o Acquire::Retries=1 install -y --no-install-recommends gcc-mingw-w64-x86-64 nsis squashfs-tools
+          sudo env DEBIAN_FRONTEND=noninteractive timeout 600s apt-get -o Acquire::http::Timeout=15 -o Acquire::https::Timeout=15 -o Acquire::Retries=1 install -y --no-install-recommends gcc-mingw-w64-x86-64-posix nsis squashfs-tools
       - name: Build, tests and unsigned packages
         run: python3 aegis/tools/build-stability.py --jdk "$JAVA_HOME_21_X64" --work "$RUNNER_TEMP/aegis120-inputs" --out "$GITHUB_WORKSPACE/candidates"
       - uses: actions/upload-artifact@v4
