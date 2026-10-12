@@ -153,6 +153,7 @@ public final class NativeAcceptanceMain {
         check("native_profile_scale_and_draft",()->child("org.securemail.ui.NativeGuiSmokeLauncher",150,"aegis11"));
         check("native_dark_green_theme_and_restart_persistence",()->child("org.securemail.ui.NativeGuiSmokeLauncher",150,"dark-green"));
         check("native_single_window_navigation",()->child("org.securemail.ui.NativeGuiSmokeLauncher",150,"single-window"));
+        check("native_120_cyrillic_fonts_connection_card_avatar",()->child("org.securemail.ui.NativeGuiSmokeLauncher",150,"stability120"));
       }
     } else report.put("nativeGUI","NOT_REQUESTED");
     report.put("checks",checks);
@@ -160,7 +161,7 @@ public final class NativeAcceptanceMain {
     report.put("productionReady",false);
     report.put("stillRequires",List.of("Real client launch/installer, all Windows DPI settings and native reboot acceptance",
         "Real Tor100% and Windows-to-CachyOS exchange/offline/files/TTL through the owner's relay",
-        "Explicit decision for frozen relay12h/auth compatibility constraints", "Owner-only offline manifest signature"));
+        "Approved Friends/receipt/expiring architecture and real staging-account checks", "Owner-only offline manifest signature"));
     report.put("secretsOrPasswordsIncluded",false);report.put("automaticUpload",false);report.put("networkConnectionsInitiated",false);
   }
   public static void main(String[] args) throws Exception {

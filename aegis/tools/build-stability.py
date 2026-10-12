@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Rebuild candidate binaries from source and SHA-pinned 1.0.0 native inputs.
+"""Rebuild candidate binaries from source and SHA-pinned released 1.1.5 package inputs.
 
 Explicit networked build command, never called by the installed client. No publication,
 owner-key signing, VPS deployment, production manifest write, or user profiles involved.
@@ -77,6 +77,9 @@ def main():
     ui=[sys.executable,ROOT/'tools/run-ui-regression.py','--jdk',jdk,'--deps',linux/'app','--deps',deps,'--native-root',linux]
     for test in ['ClientUiRegressionSmoke','Aegis11UiSmoke','SingleWindowSmoke','DarkGreenThemeSmoke','MessengerSmoke','Appearance115Smoke','AppearancePerformanceSmoke','Stability120Smoke']:
         run(ui+['--test',test],log=evidence/(test+'.log'))
+    # Compare the same JavaFX workload against the exact released 1.1.5 JARs.
+    perfcp=os.pathsep.join(map(str,[linux/'app'/'*',deps/'*',build/'ui-tests']))
+    run([jdk/'bin/java','-Xmx768m','-Daegis.native.root='+str(linux),'-Dprism.order=sw','-Dglass.platform=Monocle','-Dmonocle.platform=Headless','-Dheadless.geometry=1600x1200-32','-cp',perfcp,'org.securemail.ui.AppearancePerformanceSmoke'],timeout=180,log=evidence/'baseline115-performance.log')
     shutil.copytree(ROOT/'build/ui115-screenshots',out/'screenshots',dirs_exist_ok=True)
     shutil.copytree(build/'junit',evidence/'junit',dirs_exist_ok=True)
     if (ROOT/'tools/compatibility-matrix.py').exists():
@@ -93,8 +96,9 @@ def main():
     run([sys.executable,ROOT/'packaging/package-clients.py','--linux-base',linux,'--windows-base',windows/'AEGIS','--mingw','/usr/bin','--makensis','/usr/bin/makensis','--mksquashfs','/usr/bin/mksquashfs','--appimage-runtime',runtime,'--out',out],timeout=360,log=evidence/'packaging.log')
     run([sys.executable,ROOT/'packaging/verify_client_release.py',out],timeout=180,log=out/'ARTIFACT-VERIFICATION.json')
     run([sys.executable,ROOT/'packaging/archive-clients.py',out],timeout=90)
+    run([sys.executable,ROOT/'tools/package-native120.py','--jdk',jdk,'--artifacts',out],timeout=180,log=evidence/'native-kit-build.log')
     shutil.copytree(build/'junit',evidence/'junit',dirs_exist_ok=True)
-    for name in ['README-WINDOWS.md','README-CACHYOS.md','CHANGELOG-1.2.0.md','TEST-REPORT-1.2.0.md','NATIVE-ACCEPTANCE-1.2.0.md','APPEARANCE-1.2.0.md','MIGRATION-1.1.5-TO-1.2.0.md','BUILD-1.2.0.md','SECURITY.md','RELEASE-GATES-1.2.0.json','PERFORMANCE-1.2.0.json','NATIVE-RESULTS-1.2.0.csv','AUTO-TEST-MATRIX-1.2.0.json']:
+    for name in ['README-WINDOWS.md','README-CACHYOS.md','CHANGELOG-1.2.0.md','TEST-REPORT-1.2.0.md','NATIVE-ACCEPTANCE-1.2.0.md','APPEARANCE-1.2.0.md','MIGRATION-1.1.5-TO-1.2.0.md','BUILD-1.2.0.md','SECURITY.md','RELEASE-GATES-1.2.0.json','PERFORMANCE-1.2.0.json','NATIVE-RESULTS-1.2.0.csv','AUTO-TEST-MATRIX-1.2.0.json','AUDIT-1.2.0-RU.md','RELAY-LIFECYCLE-PROPOSAL-1.2.0.md','OWNER-OFFLINE-SIGNING-1.2.0.md','PROTECTED-COMPONENTS-1.2.0.json']:
         shutil.copy2(ROOT/name,out/name)
     if (build/'compatibility-matrix.json').exists():shutil.copy2(build/'compatibility-matrix.json',evidence/'compatibility-matrix.json')
     provenance={'version':'1.2.0','productionReady':False,'sourceCommit':os.environ.get('GITHUB_SHA','local-uncommitted'),'nativeAcceptance':'NOT_RUN','JDK':subprocess.check_output([jdk/'bin/java','-version'],stderr=subprocess.STDOUT,text=True,timeout=15).strip(),'baseReleaseInputs':INPUTS,'testAndRelayDependencies':MAVEN,'runtimeConnectionsAdded':False,'ownerPrivateKeyUsed':False,'productionDeploymentOrPublication':False,'baseline':'1.1.5 Stable','newJavaDependencies':False,'licensedFontsAdded':True,'lifecycleFeatures':'BLOCKED_ARCHITECTURE_APPROVAL'}
@@ -102,8 +106,6 @@ def main():
     files=sorted(p for p in out.iterdir() if p.is_file() and p.name!='SHA256SUMS')
     (out/'SHA256SUMS').write_text(''.join(sha(p)+'  '+p.name+'\n' for p in files))
     run([sys.executable,ROOT/'tools/stability-release.py','--artifacts',out],timeout=30)
-    shutil.copy2(ROOT/'AUDIT-1.2.0-RU.md',out/'AUDIT-1.2.0-RU.md')
-    shutil.copy2(ROOT/'RELAY-LIFECYCLE-PROPOSAL-1.2.0.md',out/'RELAY-LIFECYCLE-PROPOSAL-1.2.0.md')
     print('Candidate artifacts rebuilt and structurally verified. Native acceptance NOT_RUN; no signature/publication.')
 
 if __name__=='__main__':main()

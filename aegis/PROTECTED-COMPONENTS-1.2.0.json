@@ -1,0 +1,197 @@
+{
+  "version": "1.2.0",
+  "baseline": "1.1.5",
+  "allByteIdentical": true,
+  "files": [
+    {
+      "file": "common-protocol/build.gradle",
+      "unchanged": true,
+      "sha256": "efd4a2247fc0175fd3cb801fafd06583383ac9007351d7e15f3519c770cee47f"
+    },
+    {
+      "file": "common-protocol/gradle.lockfile",
+      "unchanged": true,
+      "sha256": "bf9ee25c7cf20529fcf8d3b2ed07a35c462bc9d71f69933ccf2babcb20792440"
+    },
+    {
+      "file": "common-protocol/src/main/java/org/securemail/protocol/Algorithm.java",
+      "unchanged": true,
+      "sha256": "80fdfc48293e89243d7cd5a37ca99e6a370311dbe5417c4710580ad7700da87b"
+    },
+    {
+      "file": "common-protocol/src/main/java/org/securemail/protocol/Binary.java",
+      "unchanged": true,
+      "sha256": "f4d5759f11b5f762fe511f373a49cbe420adcfee8355ed451e51aa290ee46581"
+    },
+    {
+      "file": "common-protocol/src/main/java/org/securemail/protocol/ContactAssertion.java",
+      "unchanged": true,
+      "sha256": "721277022f23ca704e9900981779aa4c9f3f53780f7e902141c63bf66216e479"
+    },
+    {
+      "file": "common-protocol/src/main/java/org/securemail/protocol/EncryptedPacket.java",
+      "unchanged": true,
+      "sha256": "203bd5aa081ac5cfad01565339975d3fdb8cdf2dddffa6f6e8cefd497a31e58c"
+    },
+    {
+      "file": "common-protocol/src/main/java/org/securemail/protocol/Limits.java",
+      "unchanged": true,
+      "sha256": "e9b6929ad4a9229bfa826f73d29965b239b2e2c1764a7eef4ee3224102b46659"
+    },
+    {
+      "file": "common-protocol/src/main/java/org/securemail/protocol/Operation.java",
+      "unchanged": true,
+      "sha256": "191dded1411c575fadbf5e174916a56acd32df1d8b5745c5ec12ab798c1cd554"
+    },
+    {
+      "file": "common-protocol/src/main/java/org/securemail/protocol/PacketCodec.java",
+      "unchanged": true,
+      "sha256": "1152fc5541d7768dbb24b765cd08eb480b36e991363eda36f297db4a6e2f562f"
+    },
+    {
+      "file": "common-protocol/src/main/java/org/securemail/protocol/PublicProfile.java",
+      "unchanged": true,
+      "sha256": "b2acc31586158b144084728b04fc66ec17394750f6861ab1fc287d3badefa7a1"
+    },
+    {
+      "file": "common-protocol/src/main/java/org/securemail/protocol/Receipt.java",
+      "unchanged": true,
+      "sha256": "479c2bcd27710c18af443c8972e904d2f2eae83dbaf17a21f2dfe76d9a322486"
+    },
+    {
+      "file": "common-protocol/src/main/java/org/securemail/protocol/Route.java",
+      "unchanged": true,
+      "sha256": "db9b52f5edaa2573e7ea78045de366f1623520d2f7f3da664868dfae0373505a"
+    },
+    {
+      "file": "common-protocol/src/main/java/org/securemail/protocol/UserInfo.java",
+      "unchanged": true,
+      "sha256": "bfaaa186f20d5bc3507451444b222c4eb0db4b22c0abcade06e4737f495db3e7"
+    },
+    {
+      "file": "common-protocol/src/test/java/org/securemail/protocol/WireTest.java",
+      "unchanged": true,
+      "sha256": "662d073dc4c2ac1ed8fa30319e08f219d021cc6898a9a4c16935f8e1be818e72"
+    },
+    {
+      "file": "relay-server/build.gradle",
+      "unchanged": true,
+      "sha256": "066384a080291828cf67d286f6032d23b06b8e4d4cd8e3b354b34f8ae505edb4"
+    },
+    {
+      "file": "relay-server/gradle.lockfile",
+      "unchanged": true,
+      "sha256": "f29fafd9973ec8f2fe9009a609547d07ff4bd2deb0e704774fdd1682c2b73497"
+    },
+    {
+      "file": "relay-server/src/main/java/org/securemail/relay/Authentication.java",
+      "unchanged": true,
+      "sha256": "6e8eea42bb498fa998f32b4b3ae5a30f2db1f7e1c12866375a84c95f11bf8ec8"
+    },
+    {
+      "file": "relay-server/src/main/java/org/securemail/relay/Rejection.java",
+      "unchanged": true,
+      "sha256": "350d1d6e30491a74b59391ae204f616d70c083dc039a001346f18fd01e83f1ce"
+    },
+    {
+      "file": "relay-server/src/main/java/org/securemail/relay/RelayConfig.java",
+      "unchanged": true,
+      "sha256": "50526eaedc2821f89498272233411b933f28ea014a8c701fb1a1431b7b4bda67"
+    },
+    {
+      "file": "relay-server/src/main/java/org/securemail/relay/RelayMain.java",
+      "unchanged": true,
+      "sha256": "c12325d55c10d2dbf7d0530fd69203b2e259d575e1144c8b70cefb7ce50a45ba"
+    },
+    {
+      "file": "relay-server/src/main/java/org/securemail/relay/RelayServer.java",
+      "unchanged": true,
+      "sha256": "d8bec500185388d557d0407856f573f087bf3a53eeddba1b67d9ce634bc076c6"
+    },
+    {
+      "file": "relay-server/src/main/java/org/securemail/relay/RelayStore.java",
+      "unchanged": true,
+      "sha256": "3bd44312bf48864ac858d6fe88e9a01f81d0f2629a283bde5693b888ed7f3cf8"
+    },
+    {
+      "file": "relay-server/src/main/java/org/securemail/relay/Signatures.java",
+      "unchanged": true,
+      "sha256": "e0ed051ca9a000e073f31d8e553699bbfc5f5503a959a07fa4f1fdd922a736a2"
+    },
+    {
+      "file": "relay-server/src/test/java/org/securemail/relay/IsolationTest.java",
+      "unchanged": true,
+      "sha256": "65e387a51c370a1366d530e50d5060ecaacc363a65ad92adacf1eed0c7bfd7c8"
+    },
+    {
+      "file": "relay-server/src/test/java/org/securemail/relay/OpenRegistrationTest.java",
+      "unchanged": true,
+      "sha256": "9eb63e6bbe6fc64e2ee525b9fd3d2c7254eea00ec67b1f58de7ee9266f29afea"
+    },
+    {
+      "file": "client-core/src/main/java/org/securemail/client/crypto/AutomaticEncryption.java",
+      "unchanged": true,
+      "sha256": "8eedf9f725752da2c33e838f33c286e757fd1ce449d87b0432dc38de563be90f"
+    },
+    {
+      "file": "client-core/src/main/java/org/securemail/client/crypto/EncryptionService.java",
+      "unchanged": true,
+      "sha256": "7bc5cee947a7740680cd3327da41c492e0be6817521f0fe7e5b6f22f217fedb6"
+    },
+    {
+      "file": "client-core/src/main/java/org/securemail/client/crypto/Enigma.java",
+      "unchanged": true,
+      "sha256": "b75b08c313640962a10009642cf90cdb689796ea768d602dc805f343776ebdb7"
+    },
+    {
+      "file": "client-core/src/main/java/org/securemail/client/crypto/Identity.java",
+      "unchanged": true,
+      "sha256": "2f806ec98d0fd98dca71e57b0309de8c59f38e1532fb9cac6e56a278049fcf06"
+    },
+    {
+      "file": "client-core/src/main/java/org/securemail/client/crypto/LetterEnvelope.java",
+      "unchanged": true,
+      "sha256": "66bfff785116b8a1df89460f6cf0f9f3bc9641ffa6004622ad7c7722bd7c819c"
+    },
+    {
+      "file": "client-core/src/main/java/org/securemail/client/crypto/LetterKdf.java",
+      "unchanged": true,
+      "sha256": "68d5733eeb55a0c303c4ce89d9cdf553110825d05b5e732fa2608b15b3e93c61"
+    },
+    {
+      "file": "client-core/src/main/java/org/securemail/client/crypto/LiveCode.java",
+      "unchanged": true,
+      "sha256": "9090647ee0d030cd3c5a2092fd1525bb919fe2d850127a95b297bc8cfc233566"
+    },
+    {
+      "file": "client-core/src/main/java/org/securemail/client/crypto/MailContext.java",
+      "unchanged": true,
+      "sha256": "52cfe09b768b6f319d36a9eef647f0dc52218a3a219e4bbabefbf28986718830"
+    },
+    {
+      "file": "client-core/src/main/java/org/securemail/client/crypto/PlainMessage.java",
+      "unchanged": true,
+      "sha256": "ccafbfb30859468510f237762d371efe960e98990561afc5ad26251a5d7e0a8e"
+    },
+    {
+      "file": "client-core/src/main/java/org/securemail/client/crypto/Secrets.java",
+      "unchanged": true,
+      "sha256": "b80d45e871e902df8f318aae2666e8486377152e1a4e502cd9c52d3d6290a1f2"
+    },
+    {
+      "file": "client-core/src/main/java/org/securemail/client/crypto/SodiumBox.java",
+      "unchanged": true,
+      "sha256": "e9bbdf6fd02a0db9e201146cf8f92b152e7f40e49a9fed10a771114c85c17aea"
+    },
+    {
+      "file": "client-core/src/main/java/org/securemail/client/storage/LocalStore.java",
+      "unchanged": true,
+      "sha256": "6bbae569d84702a54bbf0ac14feabdef8558ea39efa5634771e7ce9b03127e9f"
+    },
+    {
+      "file": "client-core/src/main/java/org/securemail/client/update/TorHttpsClient.java",
+      "unchanged": true,
+      "sha256": "733cf9218316334e5d485458dbe095cdff177028ffa1fc803e6a8af2d0059df3"
+    }
+  ]
+}
