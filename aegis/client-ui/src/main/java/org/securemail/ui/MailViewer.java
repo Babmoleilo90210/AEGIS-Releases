@@ -22,6 +22,7 @@ final class MailViewer implements AutoCloseable {
     void original(MailContext reference);
     boolean unknown();
     default void displayed(){}
+    default long expiresAt(){return -1;}
   }
   private final Stage stage;private InWindowDialog<Void> page;
   private final PlainMessage plain;
@@ -36,7 +37,7 @@ final class MailViewer implements AutoCloseable {
   private LiveCode live;
   private volatile boolean closed;private boolean revealed,displayNotified;
   private char[] archivePassword;private boolean exporting;private Button download;
-  private VBox host;
+  private VBox host;private java.util.function.LongSupplier expiry;
   MailViewer(Stage owner,ThemeManager themes,PlainMessage plain,LocalStore.HistoryItem item,ExecutorService worker,LongSupplier now) {
     this(owner,themes,plain,item,worker,now,null);
   }
@@ -44,7 +45,7 @@ final class MailViewer implements AutoCloseable {
     this(owner,themes,plain,item,worker,now,host,null);
   }
   MailViewer(Stage owner,ThemeManager themes,PlainMessage plain,LocalStore.HistoryItem item,ExecutorService worker,LongSupplier now,VBox host,Actions actions) {
-    this.host=host;
+    this.host=host;expiry=()->actions!=null&&actions.expiresAt()>=0?actions.expiresAt():item.expiresAt();
     this.plain=plain;stage=owner;content.setPadding(new Insets(22));
     Label heading=new Label(plain.subject().isBlank()?"Без темы":plain.subject());heading.getStyleClass().add("brand");
     Label lifetime=new Label();lifetime.getStyleClass().add("muted");
@@ -54,13 +55,13 @@ final class MailViewer implements AutoCloseable {
       Label verification=new Label("Подпись проверена · "+(actions.unknown()?"Неизвестный отправитель":"Из контактов"));verification.getStyleClass().add("muted");content.getChildren().add(verification);
       if(plain.context()!=null){var reference=plain.context();Button original=new Button((reference.forwarded()?"Переслано: ":"Ответ на: ")+reference.author()+" · "+reference.subject());original.setTooltip(new Tooltip("Ссылка автора письма; исходное письмо проверяется на этом устройстве"));original.setOnAction(e->actions.original(reference));content.getChildren().add(original);}
       Button reply=new Button("Ответить"),forward=new Button("Переслать"),copy=new Button("Копировать");
-      reply.setOnAction(e->{if(!closed&&item.expiresAt()>now.getAsLong())actions.reply(item,plain);});
+      reply.setOnAction(e->{if(!closed&&expiry.getAsLong()>now.getAsLong())actions.reply(item,plain);});
       forward.setOnAction(e->{
-        if(closed||item.expiresAt()<=now.getAsLong())return;
+        if(closed||expiry.getAsLong()<=now.getAsLong())return;
         if(plain.protectedLetter()&&(opened==null||code.value().length==0||text.getText().isEmpty())){error.setText("Сначала откройте письмо");if(!content.getChildren().contains(error))content.getChildren().add(error);return;}
         InWindowAlert confirm=new InWindowAlert(Alert.AlertType.CONFIRMATION,"Переслать открытый текст новым письмом?",ButtonType.OK,ButtonType.CANCEL);confirm.initOwner(host==null?stage:owner);confirm.setHeaderText(null);themes.apply(confirm.getDialogPane());
         CheckBox files=new CheckBox("Включить вложения");if(!plain.files().isEmpty())confirm.getDialogPane().setContent(new VBox(10,new Label("Переслать это письмо выбранному получателю?"),files));
-        if(confirm.showAndWait().orElse(ButtonType.CANCEL)==ButtonType.OK&&!closed&&item.expiresAt()>now.getAsLong())actions.forward(item,plain,text.getText(),files.isSelected()?plain.copyFiles():null);
+        if(confirm.showAndWait().orElse(ButtonType.CANCEL)==ButtonType.OK&&!closed&&expiry.getAsLong()>now.getAsLong())actions.forward(item,plain,text.getText(),files.isSelected()?plain.copyFiles():null);
       });
       copy.setOnAction(e->{if(!closed&&!text.getText().isEmpty()){var value=new javafx.scene.input.ClipboardContent();value.putString(text.getText());javafx.scene.input.Clipboard.getSystemClipboard().setContent(value);}});
       actionButtons.put("reply",reply);actionButtons.put("forward",forward);actionButtons.put("copy",copy);actionBar=new HBox(8,reply,forward,copy);content.getChildren().add(actionBar);
@@ -88,24 +89,24 @@ final class MailViewer implements AutoCloseable {
       Selector<String> selectedFile=new Selector<>(themes,plain.files().stream().map(PlainMessage.FileInfo::name).toList(),plain.filename());if(!plain.protectedLetter()&&plain.files().size()>1)content.getChildren().add(selectedFile);
       content.getChildren().add(new Label("Вложения: "+plain.files().size()));download=new Button(plain.protectedLetter()?"Скачать вложения":"Сохранить "+plain.filename());download.setDisable(plain.protectedLetter());
       download.setOnAction(e->{
-        if(closed||item.expiresAt()<=now.getAsLong()||exporting)return;
+        if(closed||expiry.getAsLong()<=now.getAsLong()||exporting)return;
         if(actions!=null&&actions.unknown()){
           InWindowAlert confirm=new InWindowAlert(Alert.AlertType.CONFIRMATION,"Сохранить вложение неизвестного отправителя?",ButtonType.OK,ButtonType.CANCEL);confirm.initOwner(host==null?stage:owner);confirm.setHeaderText(null);themes.apply(confirm.getDialogPane());if(confirm.showAndWait().orElse(ButtonType.CANCEL)!=ButtonType.OK)return;
         }
         String chosen=selectedFile.getValue();InWindowFileChooser chooser=new InWindowFileChooser();chooser.setInitialFileName(plain.protectedLetter()?"AEGIS_Documents_"+java.time.LocalDate.now()+".zip":chosen);var file=chooser.showSaveDialog(host==null?stage:owner);
-        if(file==null||closed||item.expiresAt()<=now.getAsLong())return;
+        if(file==null||closed||expiry.getAsLong()<=now.getAsLong())return;
         if(java.nio.file.Files.exists(file.toPath())){error.setText("Файл уже существует. Выберите другое имя.");if(!content.getChildren().contains(error))content.getChildren().add(error);return;}
         char[] secret=archivePassword==null?new char[0]:archivePassword.clone();exporting=true;download.setDisable(true);download.setText("Сохранение…");
         worker.execute(()->{try{
-          if(plain.protectedLetter())plain.exportEncryptedZip(file.toPath(),secret,()->!closed&&item.expiresAt()>now.getAsLong());else plain.exportTo(file.toPath(),chosen);
+          if(plain.protectedLetter())plain.exportEncryptedZip(file.toPath(),secret,()->!closed&&expiry.getAsLong()>now.getAsLong());else plain.exportTo(file.toPath(),chosen);
           Platform.runLater(()->{if(!closed)download.setText("Сохранено");});
         }catch(Exception failure){Platform.runLater(()->{if(!closed){error.setText("Не удалось сохранить архив. Выберите новое имя и проверьте доступ к папке.");if(!content.getChildren().contains(error))content.getChildren().add(error);}});}
         finally{Arrays.fill(secret,'\0');Platform.runLater(()->{exporting=false;if(closed)plain.close();else{download.setDisable(false);download.setText(plain.protectedLetter()?"Скачать вложения":"Сохранить файл");}});}});
       });content.getChildren().add(download);
     }
     appearance(themes.settings());themes.apply(content);if(host==null){page=new InWindowDialog<>();page.initOwner(owner);page.setTitle(plain.subject().isBlank()?"Письмо":plain.subject());page.getDialogPane().setContent(content);themes.apply(page.getDialogPane());page.onClose(this::close);}else{host.getChildren().setAll(content);VBox.setVgrow(content,Priority.ALWAYS);}
-    timer=new Timeline(new KeyFrame(Duration.seconds(1),e->{long left=item.expiresAt()-now.getAsLong();if(left<=0){close();return;}lifetime.setText("Удаление через "+java.time.Duration.ofMillis(left).toMinutes()+" мин");}));
-    timer.setCycleCount(Animation.INDEFINITE);timer.play();if(item.expiresAt()>now.getAsLong()){if(host==null)page.show();}else close();
+    timer=new Timeline(new KeyFrame(Duration.seconds(1),e->{long left=expiry.getAsLong()-now.getAsLong();if(left<=0){close();return;}lifetime.setText(expiry.getAsLong()==Long.MAX_VALUE?"Отсчёт после показа":"Удаление через "+java.time.Duration.ofMillis(left).toMinutes()+" мин");}));
+    timer.setCycleCount(Animation.INDEFINITE);timer.play();if(expiry.getAsLong()>now.getAsLong()){if(host==null)page.show();}else close();
   }
   private void contentDisplayed(Actions actions){
     if(closed||displayNotified||text.getScene()==null)return;

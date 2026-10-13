@@ -1,3 +1,7 @@
+# Дополнение реализации client-only lifecycle
+
+E2EE workaround реализован в development/aegis-1.2.0 после разрешения владельца продолжать без production Relay изменений. Friends/receipts больше не заблокированы серверными операциями. Signed port-81 capabilities и device-bound expiry описаны в LIFECYCLE-1.2.0.md. Нативные проверки и conservative reboot policy явно отделены от unit/staging. Ниже сохранён исходный аудит, его предварительные архитектурные варианты не являются текущим implementation status.
+
 # АЕГИС 1.2.0 — технический аудит перед реализацией
 
 Дата: 12.10.2026. Проверена действительная база 1.1.5, проект не создаётся заново. Это внутренний технический анализ, независимый security audit не проводился.

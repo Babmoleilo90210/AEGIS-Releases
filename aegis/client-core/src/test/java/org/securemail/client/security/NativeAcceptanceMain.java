@@ -100,6 +100,14 @@ public final class NativeAcceptanceMain {
       require(!Files.exists(app.resolve("app/relay-server-0.2.0.jar")),"Relay in client");
     });
     report.put("applicationJarSha256",jars);
+    check("device_boot_clock_and_encrypted_expiry_guard",()->{
+      var boot=org.securemail.client.lifecycle.BootClock.system();var before=boot.stamp();Thread.sleep(20);var after=boot.stamp();require(before.boot().equals(after.boot())&&after.elapsed()>=before.elapsed(),"OS boot clock unavailable");
+      try(var local=new LocalStore(temporary.resolve("lifecycle-vault"),"Synthetic acceptance vault password".toCharArray(),Clock.systemUTC(),200000,8000000)){
+        try(var guard=new org.securemail.client.lifecycle.ExpiryGuard(local,Identity.create().userId(),true,temporary.resolve("expiry-guard"),boot)){
+          require(guard.available(),"Expiry guard unavailable");String id=UUID.randomUUID().toString();long now=local.now();guard.prepare(id,60000,now);require(guard.remaining(id,now)==Long.MAX_VALUE,"Timer started before display");guard.confirm(id,now,now);require(guard.remaining(id,now)<=60000,"Confirmed timer unavailable");
+        }
+      }
+    });
     check("embedded_owner_key_and_unsigned_manifest_rejection",()->{
       require(Base64.getEncoder().encodeToString(SignedManifest.embeddedPublicKey()).equals("MCowBQYDK2VwAyEAswWYCFStSEhQdrgqUJFF3x12ltmfUA0PvQtlh684B2g="),"Wrong root key");
       boolean rejected=false;try{SignedManifest.verify("{}".getBytes(StandardCharsets.UTF_8),new byte[64],"stable","1.0.0","1.0.0");}catch(GeneralSecurityException expected){rejected=true;}

@@ -1,6 +1,6 @@
 # АЕГИС 1.2.0 — приёмка, офлайн-подпись и публикация владельцем
 
-`productionReady=false`: это частичный клиентский кандидат, НЕ готовый Stable. Friends на Relay 0.2.0, read/delivery event forwarding и исчезновение после прочтения заблокированы отдельным архитектурным согласованием. Не подписывайте и не публикуйте этот кандидат как завершённое обновление 1.2.0. Private key остаётся у владельца. В Work, CI, GitHub, VPS или архив он не передаётся. Подпись ещё не создана; production update feed не менялся. Не переносите подпись прежней версии на этот manifest.
+`productionReady=false`: это release candidate для нативной приёмки, не завершённый Stable. Client-only Friends, signed receipts и device-bound disappearing реализованы; production Relay менять не требуется. Обязательны Windows 11/CachyOS и owner-signed updater/restart/rollback. Учтите conservative expiry after OS reboot (LIFECYCLE-1.2.0.md). Private key остаётся у владельца, не передаётся в Work/CI/GitHub/VPS. Подпись не создана, production feed не менялся. Не переносите прежнюю подпись на новый manifest.
 
 ## Порядок
 

@@ -49,7 +49,7 @@ public final class MessengerApp extends Application {
   private boolean refreshing,mailOutgoing,notifying;private NotificationCenter notifications;
   private long viewGeneration;
   private Timeline timer;private Path pendingLinuxUpdate;
-  private ComboBox<Ttl> ttl;
+  private ComboBox<Ttl> ttl,expiryTTL;private CheckBox disappearing;private TextField expiryMinutes;
   private UiPresetStore presets;private UiPreferences layout=UiPreferences.builtins().get("Компактный");
   private Appearance.Settings previousAppearance;private VBox mailListColumn,mailFolders;private SplitPane mailSplit;private Selector<String> mailboxFolderChoice;private boolean changingLayout,geometryBound,narrowNavigation;private ScrollPane composeContent;private Node composeBackdrop;private StackPane composeStack;
   private UpdateService updates;private UpdatePreferences updatePreferences;private UpdatesView updatesView;
@@ -61,7 +61,7 @@ public final class MessengerApp extends Application {
   private Draft draft;private MailContext replyContext;
   private PlainMessage.FileBundle forwardedFiles;private boolean replyNeedsProtection;
   private static final class Draft implements AutoCloseable{
-    String recipient="",subject="",body="";List<Path> files=List.of();char[] password=new char[0],code=new char[0];long ttl;boolean protectedLetter,forceProtection;MailContext context;PlainMessage.FileBundle bundle;
+    String recipient="",subject="",body="";List<Path> files=List.of();char[] password=new char[0],code=new char[0];long ttl,expirySeconds=86400;String expiryInput="60";boolean disappearing;boolean protectedLetter,forceProtection;MailContext context;PlainMessage.FileBundle bundle;
     public void close(){Arrays.fill(password,'\0');Arrays.fill(code,'\0');recipient="";subject="";body="";files=List.of();context=null;if(bundle!=null){bundle.close();bundle=null;}}
   }
   private TextField contactSearch;private ListView<LocalMailSearch.Result> threadResults;
@@ -298,6 +298,7 @@ public final class MessengerApp extends Application {
     if(composer==null)return;if(draft!=null)draft.close();draft=new Draft();
     draft.recipient=recipientField==null?"":recipientField.getText();draft.subject=subjectField==null?"":subjectField.getText();draft.body=composer.getText();draft.files=List.copyOf(attachments);
     if(letterPassword!=null)draft.password=letterPassword.value();if(secondCode!=null)draft.code=secondCode.value();
+    draft.disappearing=disappearing!=null&&disappearing.isSelected();draft.expirySeconds=expiryTTL==null||expiryTTL.getValue()==null?86400:expiryTTL.getValue().seconds();draft.expiryInput=expiryMinutes==null?"60":expiryMinutes.getText();
     draft.ttl=ttl==null||ttl.getValue()==null?config.defaultTTL():ttl.getValue().seconds();draft.protectedLetter=additionalProtection!=null&&additionalProtection.isSelected();draft.context=replyContext;
     draft.forceProtection=replyNeedsProtection;draft.bundle=forwardedFiles;forwardedFiles=null;
   }
@@ -307,7 +308,7 @@ public final class MessengerApp extends Application {
     previewTicket++;if(embeddedViewer!=null){embeddedViewer.close();embeddedViewer=null;}previewHost=null;
     if(composer!=null)composer.clear();if(letterPassword!=null)letterPassword.clear();if(secondCode!=null)secondCode.clear();
     if(composeBackdrop!=null)composeBackdrop.setDisable(false);if(composeStack!=null)composeStack.getChildren().clear();composeStack=null;composeContent=null;composeBackdrop=null;
-    composer=null;letterPassword=null;secondCode=null;additionalProtection=null;replyContext=null;sendButton=null;attachments.clear();attachmentsBox=null;attachmentLabel=null;
+    composer=null;letterPassword=null;secondCode=null;additionalProtection=null;disappearing=null;expiryTTL=null;expiryMinutes=null;replyContext=null;sendButton=null;attachments.clear();attachmentsBox=null;attachmentLabel=null;
     replyNeedsProtection=false;if(forwardedFiles!=null){forwardedFiles.close();forwardedFiles=null;}
   }
   void mailboxPage(boolean outgoing){
@@ -336,7 +337,7 @@ public final class MessengerApp extends Application {
       if(appearance.rows()==Appearance.Rows.CARDS||appearance.rows()==Appearance.Rows.PREVIEW)body.getStyleClass().add("mail-card");else body.getStyleClass().add("mail-row");
       if(appearance.rows()==Appearance.Rows.COMPACT)text.setSpacing(1);
       setGraphic(body);setOnMouseClicked(e->{if(e.getClickCount()==2){if(threads)threadPage(row);else openLetter(item);}});setOnKeyPressed(e->{if(e.getCode()==javafx.scene.input.KeyCode.ENTER){if(threads)threadPage(row);else openLetter(item);e.consume();}});
-      MenuItem delete=new MenuItem("Удалить у меня");delete.setOnAction(e->work(null,"",()->{session.local().deleteHistory(item.id(),item.outgoing());return true;},x->{rendered="";refresh();}));
+      MenuItem delete=new MenuItem("Удалить у меня");delete.setOnAction(e->work(null,"",()->{session.lifecycle().delete(item.id(),item.outgoing());return true;},x->{rendered="";refresh();}));
       MenuItem pin=new MenuItem(session.features().pinned("pinnedMail",item.id())?"Убрать из избранного":"В избранное");pin.setOnAction(e->work(null,"",()->{session.features().pin("pinnedMail",item.id(),!session.features().pinned("pinnedMail",item.id()));return true;},x->{rendered="";refresh();}));
       MenuItem block=new MenuItem(scope==LocalMailSearch.Scope.BLOCKED?"Разблокировать письмо":"Заблокировать письмо");block.setOnAction(e->work(null,"",()->{session.features().blockMail(item.id(),scope!=LocalMailSearch.Scope.BLOCKED);return true;},x->{rendered="";refresh();}));
       ContextMenu menu=new ContextMenu(pin,delete);if(!item.outgoing()){
@@ -393,13 +394,19 @@ public final class MessengerApp extends Application {
     }catch(Exception ignored){/* The durable inbox is independent of optional notifications. */}finally{Platform.runLater(()->notifying=false);}});
   }
   private void openLetter(LocalStore.MailItem item){
+    boolean mandatoryConsent=false;
+    if(session.lifecycle().expired(item.id())){info("Письмо исчезло");return;}
+    if(session.lifecycle().expiring(item.id())&&!item.outgoing()&&!session.lifecycle().readReceipts()){
+      InWindowAlert confirm=new InWindowAlert(Alert.AlertType.CONFIRMATION,"Для исчезающего письма подтверждение показа обязательно. Открыть письмо?",ButtonType.OK,ButtonType.CANCEL);confirm.initOwner(stage);confirm.setHeaderText(null);themes.apply(confirm.getDialogPane());if(confirm.showAndWait().orElse(ButtonType.CANCEL)!=ButtonType.OK)return;mandatoryConsent=true;
+    }
+    boolean revealConsent=mandatoryConsent;
     long ticket=++previewTicket;VBox host=section.equals("mail")&&themes.settings().layout().mail()!=Appearance.MailLayout.COMPACT&&root.getWidth()>=850?previewHost:null;
     if(embeddedViewer!=null){embeddedViewer.close();embeddedViewer=null;}
     if(viewers.size()>=4){info("Закройте одно из открытых писем");return;}
     work(null,"",()->{
-      var stored=session.local().loadHistory(item.id(),item.outgoing());
+      var stored=session.lifecycle().loadHistory(item.id(),item.outgoing());
       if(!AutomaticEncryption.supports(stored.packet()))return stored;
-      return new OpenedMail(stored,automatic.decrypt(stored.packet(),session.local().identity(),config.maxFileSize()),!stored.outgoing()&&!session.local().assessSender(stored.packet()).keyMatches());
+      return new OpenedMail(stored,session.lifecycle().open(stored,config.maxFileSize(),revealConsent),!stored.outgoing()&&!session.local().assessSender(stored.packet()).keyMatches());
     },value->{
       if(value instanceof LocalStore.HistoryItem legacy){openLegacy(legacy);return;}
       var entry=(OpenedMail)value;
@@ -409,6 +416,7 @@ public final class MessengerApp extends Application {
         public void forward(LocalStore.HistoryItem item,PlainMessage plain,String body,PlainMessage.FileBundle files){prepareResponse(item,plain,body,files,true);}
         public void original(MailContext reference){openReference(reference);}
         public boolean unknown(){return entry.unknown();}
+        public long expiresAt(){try{long left=session.lifecycle().remaining(entry.item().id());return left==Long.MAX_VALUE?entry.item().expiresAt():session.local().now()+left;}catch(Exception uncertain){return 0;}}
         public void displayed(){ClientSession active=session;worker.execute(()->{try{active.lifecycle().displayed(entry.item().id());}catch(Exception failure){Platform.runLater(()->{if(!stopping)info("Подтверждение прочтения пока не сохранено");});}});}
       };
       if(host!=null&&host==previewHost){embeddedViewer=new MailViewer(stage,themes,entry.plain(),entry.item(),worker,()->session.local().now(),host,actions);viewers.add(embeddedViewer);}else viewers.add(new MailViewer(stage,themes,entry.plain(),entry.item(),worker,()->session.local().now(),null,actions));
@@ -425,7 +433,7 @@ public final class MessengerApp extends Application {
     },prepared->{if(item.expiresAt()<=session.local().now()){prepared.close();return;}clearCompose(false);draft=new Draft();draft.recipient=forwarded?"":item.contact();draft.subject=(forwarded?"Fwd: ":"Re: ")+subject;draft.body=body;draft.context=prepared.context;draft.protectedLetter=protectedLetter;draft.forceProtection=protectedLetter;draft.bundle=prepared.take();draft.ttl=config.defaultTTL();composePage();});
   }
   private void openReference(MailContext reference){
-    work(null,"",()->{for(boolean outgoing:new boolean[]{false,true})try{var original=session.local().loadHistory(reference.parentId(),outgoing);
+    work(null,"",()->{for(boolean outgoing:new boolean[]{false,true})try{var original=session.lifecycle().loadHistory(reference.parentId(),outgoing);
       if(java.security.MessageDigest.isEqual(Identity.digest(original.packet()),reference.digest())&&Identity.verifyPacket(original.packet()))return new LocalStore.MailItem(original.id(),original.contact(),outgoing,original.status(),original.time(),original.expiresAt());
     }catch(java.nio.file.NoSuchFileException absent){}throw new IOException("Исходное письмо недоступно");},this::openLetter);
   }
@@ -447,9 +455,14 @@ public final class MessengerApp extends Application {
     ttl.setVisibleRowCount(7);ttl.setPrefWidth(185);themes.stylePopup(ttl);
     attachmentLabel=new Label();attachmentsBox=new VBox(5);Button send=new Button("Отправить");sendButton=send;send.setDisable(!session.online()||tor==null||!tor.ready());send.setOnAction(e->send(send));
     ScrollPane attachmentScroll=new ScrollPane(attachmentsBox);attachmentScroll.setFitToWidth(true);attachmentScroll.setMaxHeight(130);attachmentScroll.setPrefHeight(0);attachmentScroll.visibleProperty().bind(javafx.beans.binding.Bindings.isNotEmpty(attachmentsBox.getChildren()));attachmentScroll.managedProperty().bind(attachmentScroll.visibleProperty());attachmentsBox.getChildren().addListener((javafx.collections.ListChangeListener<javafx.scene.Node>)change->attachmentScroll.setPrefHeight(Math.min(130,attachmentsBox.getChildren().size()*40)));
-    HBox address=new HBox(14,recipientPicker,new VBox(5,new Label("Хранить:"),ttl));HBox.setHgrow(recipientPicker,Priority.ALWAYS);address.setAlignment(Pos.BOTTOM_LEFT);
-    VBox box=new VBox(12,new Label("Новое письмо"),new Label("Кому"),address,subjectField,composer,additionalProtection,letterPassword,secondCode,attachmentScroll,new HBox(10,button("+ Прикрепить",this::attach),attachmentLabel),send);
+    disappearing=new CheckBox("Исчезающее письмо");disappearing.setTooltip(new Tooltip("Отсчёт после показа на одном устройстве. Открытые письма закрываются после перезагрузки ОС или при недостоверном таймере."));
+    expiryTTL=new Selector<>(themes);expiryTTL.getItems().addAll(new Ttl("5 минут",300),new Ttl("1 час",3600),new Ttl("1 день",86400),new Ttl("7 дней",604800),new Ttl("30 дней",2592000),new Ttl("Свой срок",0));expiryTTL.getSelectionModel().select(2);expiryMinutes=field("Минуты, 1–43200");expiryMinutes.setText("60");expiryMinutes.setPrefWidth(150);expiryMinutes.visibleProperty().bind(expiryTTL.valueProperty().isNull().not().and(javafx.beans.binding.Bindings.createBooleanBinding(()->expiryTTL.getValue()!=null&&expiryTTL.getValue().seconds()==0,expiryTTL.valueProperty())));expiryMinutes.managedProperty().bind(expiryMinutes.visibleProperty());
+    HBox expiryRow=new HBox(8,new Label("После показа:"),expiryTTL,expiryMinutes);expiryRow.visibleProperty().bind(disappearing.selectedProperty());expiryRow.managedProperty().bind(expiryRow.visibleProperty());
+    VBox ordinaryTTL=new VBox(5,new Label("Хранить:"),ttl);ordinaryTTL.visibleProperty().bind(disappearing.selectedProperty().not());ordinaryTTL.managedProperty().bind(ordinaryTTL.visibleProperty());
+    HBox address=new HBox(14,recipientPicker,ordinaryTTL);HBox.setHgrow(recipientPicker,Priority.ALWAYS);address.setAlignment(Pos.BOTTOM_LEFT);
+    VBox box=new VBox(12,new Label("Новое письмо"),new Label("Кому"),address,subjectField,composer,disappearing,expiryRow,additionalProtection,letterPassword,secondCode,attachmentScroll,new HBox(10,button("+ Прикрепить",this::attach),attachmentLabel),send);
     if(draft!=null){recipientField.setText(draft.recipient);subjectField.setText(draft.subject);composer.setText(draft.body);attachments.addAll(draft.files);additionalProtection.setSelected(draft.protectedLetter);letterPassword.hidden.setText(new String(draft.password));secondCode.hidden.setText(new String(draft.code));replyContext=draft.context;replyNeedsProtection=draft.forceProtection;forwardedFiles=draft.bundle;draft.bundle=null;
+      disappearing.setSelected(draft.disappearing);expiryMinutes.setText(draft.expiryInput);expiryTTL.getItems().stream().filter(t->t.seconds()==draft.expirySeconds).findFirst().ifPresent(t->expiryTTL.setValue(t));
       ttl.getItems().stream().filter(t->t.seconds()==draft.ttl).findFirst().ifPresent(t->ttl.setValue(t));draft.close();draft=null;
     }
     additionalProtection.setDisable(replyNeedsProtection);if(replyContext!=null)box.getChildren().add(2,new Label((replyContext.forwarded()?"Пересылка: ":"Ответ: ")+replyContext.author()+" · "+replyContext.subject()));
@@ -470,6 +483,9 @@ public final class MessengerApp extends Application {
       if(!session.online()||tor==null||!tor.ready()){info("Войдите в сеть для отправки");return;}
       if(recipient==null){info("Сначала добавьте и проверьте контакт");return;}
       Ttl lifetime=ttl.getValue();if(lifetime==null||lifetime.seconds()<60||lifetime.seconds()>604800){info("Выберите срок хранения");return;}
+      boolean expiring=disappearing!=null&&disappearing.isSelected();long chosenExpiry=0;
+      if(expiring){try{Ttl option=expiryTTL.getValue();chosenExpiry=option.seconds()==0?Math.multiplyExact(Long.parseLong(expiryMinutes.getText().trim()),60):option.seconds();if(chosenExpiry<60||chosenExpiry>30L*86400)throw new IllegalArgumentException();}catch(Exception invalid){info("Срок исчезновения: от 1 минуты до 30 дней");return;}}
+      long expirationSeconds=chosenExpiry;
       char[] password=letterPassword.value(),code=secondCode.value();
       boolean protectedLetter=additionalProtection.isSelected();
       if(protectedLetter&&(password.length<8||code.length==0)){Arrays.fill(password,'\0');Arrays.fill(code,'\0');info("Введите новый пароль письма от 8 символов и код второго слоя");return;}
@@ -481,9 +497,10 @@ public final class MessengerApp extends Application {
         byte[] envelope=null;try{
           if(protectedLetter)envelope=LetterEnvelope.seal(body,password,code);
           // Ordinary single-file mail stays readable by 1.0, even after a peer downgraded.
-          boolean rich=session.local().cachedProfile(nick)!=null&&(context!=null||files.size()+(bundle==null?0:bundle.info().size())>1);
+          boolean rich=(expiring||session.local().cachedProfile(nick)!=null)&&(context!=null||files.size()+(bundle==null?0:bundle.info().size())>1);
           try(var plain=PlainMessage.compose(subject,body,envelope==null?new byte[0]:envelope,files,bundle,config.maxFileSize(),context,rich)){
-            var packet=automatic.encrypt(plain,lifetime.seconds(),config.deliveryTTL(),session.local().identity(),session.local().nickname(),recipient);
+            if(expiring)session.syncPublicData(recipient);
+            var packet=expiring?session.lifecycle().encryptExpiring(plain,recipient,expirationSeconds,config.deliveryTTL()):automatic.encrypt(plain,lifetime.seconds(),config.deliveryTTL(),session.local().identity(),session.local().nickname(),recipient);
             return session.lifecycle().send(packet,recipient);
           }
         }finally{Arrays.fill(password,'\0');Arrays.fill(code,'\0');if(envelope!=null)Arrays.fill(envelope,(byte)0);if(bundle!=null)bundle.close();}

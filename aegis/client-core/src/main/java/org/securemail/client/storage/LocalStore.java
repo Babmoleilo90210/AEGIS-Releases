@@ -111,7 +111,7 @@ public final class LocalStore implements AutoCloseable {
   }
 
   public synchronized long now() {
-    return Math.max(clock.millis(), anchorWall + (System.nanoTime() - anchorNanos) / 1_000_000);
+    lastWall=Math.max(lastWall,Math.max(clock.millis(),anchorWall+(System.nanoTime()-anchorNanos)/1_000_000));return lastWall;
   }
 
   public Identity identity() {
@@ -457,7 +457,7 @@ public final class LocalStore implements AutoCloseable {
       }
       byte[] features=readFeatures();if(features!=null)try{AtomicFiles.write(target.resolve("features-v1.vault"),sealWith(next,features,"features/v1".getBytes(java.nio.charset.StandardCharsets.US_ASCII)));}finally{Arrays.fill(features,(byte)0);}
       Path lifecycle=root.resolve("lifecycle");if(Files.isDirectory(lifecycle,LinkOption.NOFOLLOW_LINKS)){
-        AtomicFiles.directory(target.resolve("lifecycle"));try(var files=Files.newDirectoryStream(lifecycle,"*.enc")){for(Path file:files){String name=file.getFileName().toString().replaceFirst("\\.enc$","");extensionName(name);byte[] data=readExtension(name,maxCipher+8192);try{AtomicFiles.write(target.resolve("lifecycle").resolve(file.getFileName()),sealWith(next,data,extensionAad(name)));}finally{Arrays.fill(data,(byte)0);}}}
+        AtomicFiles.directory(target.resolve("lifecycle"));try(var files=Files.newDirectoryStream(lifecycle,"*.enc")){for(Path file:files){String name=file.getFileName().toString().replaceFirst("\\.enc$","");extensionName(name);byte[] data=readExtension(name,name.equals("state-v1")?8*1024*1024:maxCipher+8192);try{AtomicFiles.write(target.resolve("lifecycle").resolve(file.getFileName()),sealWith(next,data,extensionAad(name)));}finally{Arrays.fill(data,(byte)0);}}}
       }
       Path profiles=root.resolve("profiles");if(Files.isDirectory(profiles,LinkOption.NOFOLLOW_LINKS)){
         AtomicFiles.directory(target.resolve("profiles"));try(var files=Files.list(profiles)){

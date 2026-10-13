@@ -3,7 +3,7 @@
 No network, publication, signing, production profile edits, or production classpath changes.
 """
 import argparse,hashlib,json,pathlib,shutil,subprocess,tempfile,zipfile
-p=argparse.ArgumentParser(description=__doc__);p.add_argument('--jdk',required=True,type=pathlib.Path);p.add_argument('--artifacts',required=True,type=pathlib.Path);a=p.parse_args()
+p=argparse.ArgumentParser(description=__doc__);p.add_argument('--jdk',required=True,type=pathlib.Path);p.add_argument('--artifacts',required=True,type=pathlib.Path);p.add_argument('--staging-deps',type=pathlib.Path);a=p.parse_args()
 r=a.artifacts.resolve();jdk=a.jdk.resolve();version='1.2.0'
 def sha(file):
  with file.open('rb') as f:return hashlib.file_digest(f,'sha256').hexdigest()
@@ -48,6 +48,19 @@ public final class AppearanceNativeLauncher {
  hashes={f.name:sha(f) for f in (app/'app').glob('*.jar') if f.name.startswith(('client-core-','client-ui-','common-protocol-'))}
  metadata={'version':version,'productionReady':False,'applicationJarSha256':hashes,'sourceZipSha256':sha(r/f'AEGIS-{version}-client-source.zip'),'productionClientClasspathModified':False,'signatureFixture':'EPHEMERAL_TEST_KEY_ONLY'}
  (kit/'TESTED-ARTIFACTS.json').write_text(json.dumps(metadata,indent=2)+'\n')
+ if a.staging_deps:
+  staging=kit/'staging';staging.mkdir(exist_ok=True)
+  relay=Path(__file__).resolve().parents[1]/'build/local-java21/compatibility/relay02/lib/relay-server.jar';shutil.copy2(relay,staging/relay.name)
+  for dep in a.staging_deps.glob('*.jar'):
+   if dep.name.startswith(('password4j-','sqlite-jdbc-','slf4j-')):shutil.copy2(dep,staging/dep.name)
+  main=source/'integration-tests/src/test/java/org/securemail/integration/LifecycleTorProbe.java'
+  import os
+  cp=str(app/'app/*')+os.pathsep+str(staging/'*')
+  stageclasses=temp/'stageclasses';stageclasses.mkdir()
+  subprocess.run([str(javac)+suffix,'--release','21','-encoding','UTF-8','-cp',cp,'-d',str(stageclasses),str(main)],check=True,timeout=90)
+  subprocess.run([str(jar)+suffix,'--create','--file',str(staging/'lifecycle-tor-tests.jar'),'-C',str(stageclasses),'.'],check=True,timeout=30)
+  (staging/'README.md').write_text('Disposable staging Relay 0.2.0 (independently compiled SHA-verified published 1.0.0 source) and test-only dependencies. Never add these JARs to app/*.jar. The real-Tor lifecycle probe generates two throwaway identities/accounts and three ephemeral onion services, on this device only. Production relay/feed/keys are not touched. Cross-network Windows11/KDE acceptance remains separate.\n')
+
  (kit/'Run-Appearance-Windows.cmd').write_bytes('''@echo off
 setlocal DisableDelayedExpansion
 chcp 65001 >nul

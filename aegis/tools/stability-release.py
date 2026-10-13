@@ -15,7 +15,7 @@ def prepare(root):
         ('AEGIS-1.2.0-Windows-x64.zip','windows-x64','portable'),
         ('AEGIS-1.2.0-CachyOS-x86_64.AppImage','cachyos-x86_64','appimage'),
         ('AEGIS-1.2.0-client-source.zip','source','source')]]
-    document={'schemaVersion':1,'application':'AEGIS','channel':'stable','version':version,'tag':'v'+version,'repository':REPOSITORY,'protocolVersion':1,'relayCompatibility':['0.2.0'],'artifacts':artifacts,'checksums':asset('SHA256SUMS'),'changelog':asset('CHANGELOG-1.2.0.md'),'minimumSupported':'1.1.0','updatePolicy':'optional','announcement':{'title':'АЕГИС 1.2.0 Stability client candidate','summary':'Исправления клиента; lifecycle расширение ожидает отдельного согласования.','showAsLetter':True},'releaseNotes':{'publishedAt':'2026-10-12T00:00:00Z','type':'Feature','text':(root/'CHANGELOG-1.2.0.md').read_text('utf-8')}}
+    document={'schemaVersion':1,'application':'AEGIS','channel':'stable','version':version,'tag':'v'+version,'repository':REPOSITORY,'protocolVersion':1,'relayCompatibility':['0.2.0'],'artifacts':artifacts,'checksums':asset('SHA256SUMS'),'changelog':asset('CHANGELOG-1.2.0.md'),'minimumSupported':'1.1.0','updatePolicy':'optional','announcement':{'title':'АЕГИС 1.2.0 Stability & Lifecycle candidate','summary':'Стабильность, подписанные Friends/receipts и исчезающие письма; нативная приёмка обязательна.','showAsLetter':True},'releaseNotes':{'publishedAt':'2026-10-13T00:00:00Z','type':'Feature','text':(root/'CHANGELOG-1.2.0.md').read_text('utf-8')}}
     exact=(json.dumps(document,ensure_ascii=False,indent=2)+'\n').encode('utf-8')
     parse_manifest(exact,'1.1.0');verify_assets(document,root)
     updates=root/'updates';updates.mkdir(exist_ok=True)

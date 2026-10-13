@@ -96,6 +96,8 @@ public final class PlainMessage implements AutoCloseable {
   public String text(){return new String(text,StandardCharsets.UTF_8);}
   public List<FileInfo> files(){return attachments.stream().map(f->new FileInfo(f.name(),f.data().length)).toList();}
   public String filename(){return attachments.isEmpty()?"":attachments.getFirst().name();}
+  /** Memory-only defensive copy; same existing payload codec, no new cipher or secret format. */
+  public byte[] attachmentBytes(String name)throws IOException {var file=attachments.stream().filter(a->a.name().equals(name)).findFirst().orElseThrow(()->new IOException("Вложение отсутствует"));return file.data().clone();}
   public int fileSize(){return attachments.stream().mapToInt(f->f.data().length).sum();}
   public byte[] encode()throws IOException {return Binary.encode(out->{
     out.writeInt(version);if(version==1)Binary.bytes(out,text);else{Binary.text(out,subject);if(version==5)Binary.bytes(out,text);Binary.bytes(out,letter);}

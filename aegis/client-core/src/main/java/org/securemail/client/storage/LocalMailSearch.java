@@ -21,15 +21,21 @@ public final class LocalMailSearch {
     List<Result> result=new ArrayList<>();var automatic=new AutomaticEncryption(java.time.Clock.systemUTC());
     for(boolean outgoing:new boolean[]{false,true}){
       if(query.scope()==Scope.INBOX&&outgoing||query.scope()==Scope.SENT&&!outgoing)continue;
-      for(var original:local.mailboxIndex(outgoing)){
+      for(var original:(lifecycle==null?local.mailboxIndex(outgoing):lifecycle.mailboxIndex(outgoing))){
         var item=lifecycle==null?original:new LocalStore.MailItem(original.id(),original.contact(),original.outgoing(),lifecycle.status(original.id(),original.status()),original.time(),original.expiresAt());
         if(item.time()<query.from()||item.time()>query.to()||!item.contact().contains(query.nickname().toLowerCase(Locale.ROOT)))continue;
-        var stored=local.loadHistory(item.id(),outgoing);var p=stored.packet();var assessment=local.assessSender(p);
+        if(lifecycle!=null&&lifecycle.expired(item.id())){
+          String peer=lifecycle.peerId(item.id());boolean unknown=local.contact(item.contact())==null;
+          if(query.scope()==Scope.UNKNOWN&&!unknown||query.scope()==Scope.FRIENDS&&!features.friend(peer)||query.scope()==Scope.BLOCKED&&!features.blocked(item.id(),peer)||query.scope()!=Scope.BLOCKED&&features.blocked(item.id(),peer)||query.scope()==Scope.FAVORITES&&!features.pinned("pinnedMail",item.id()))continue;
+          if("Письмо исчезло".toLowerCase(Locale.ROOT).contains(query.subject().toLowerCase(Locale.ROOT)))result.add(new Result(item,"Письмо исчезло",true,unknown,true,item.id(),peer,0,""));continue;
+        }
+        var stored=lifecycle==null?local.loadHistory(item.id(),outgoing):lifecycle.loadHistory(item.id(),outgoing);var p=stored.packet();var assessment=local.assessSender(p);
         boolean unknown=!outgoing&&!assessment.keyMatches(),blocked=features.blocked(p);
         if(query.scope()==Scope.BLOCKED?!blocked:blocked)continue;
         if(query.scope()==Scope.UNKNOWN&&!unknown||query.scope()==Scope.FRIENDS&&!features.friend(outgoing?p.recipientId():p.senderId()))continue;
         String subject="Письмо 0.1.0",thread=item.id(),snippet="";boolean protectedLetter=true;int fileCount=0;
-        if(AutomaticEncryption.supports(p))try(var plain=automatic.decrypt(p,local.identity(),maxFile)){
+        if(lifecycle!=null&&lifecycle.expiring(item.id()))subject="Исчезающее письмо";
+        else if(AutomaticEncryption.supports(p))try(var plain=automatic.decrypt(p,local.identity(),maxFile)){
           subject=plain.subject();protectedLetter=plain.protectedLetter();fileCount=plain.files().size();if(plain.context()!=null&&!plain.context().forwarded()&&!plain.context().threadId().isEmpty())thread=plain.context().threadId();
           // Only an authenticated ordinary letter may provide a memory-only snippet.
           // Additional letter password/FF1 content is never unlocked by list rendering.

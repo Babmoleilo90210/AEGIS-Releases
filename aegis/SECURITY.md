@@ -75,3 +75,7 @@ Runtime update root of trust — встроенный X.509 Ed25519 public key M
 Auto-check/download включены в явных настройках; silent install выключен. Системные update letters выводятся только из успешно проверенного signed metadata и не пересылаются relay. Одна версия имеет один локальный history record и announcement marker. История перепроверяет pinned signature при чтении.
 
 Обновление работающей ОС, native DPAPI/KWallet, реальная установка/rollback/reboot и Tor100% требуют owner-side приёмки. В этом Linux container их нельзя объявлять PASS. Updater tests с эфемерным key доказывают локальную проверку и отказные пути, а не успех ещё не выпущенного production update по настоящему Tor.
+
+## Client-only lifecycle 1.2.0
+
+Friends/read/delivery события подписаны account Ed25519 и передаются только внутри существующей E2EE. Relay новых команд/ключей не получает. Capability probe ограничен подписанным onion route virtual port 81, не публичным IP. Disappearing inner body шифруется для одного локального device public key, account key не заменяется. AES-GCM encrypted device guard защищает от старого profile backup/clock rollback в одной загрузке ОС; reboot и отсутствие guard fail closed для открытого письма. Компрометация клиента/ОС и осознанное извлечение данных получателем остаются вне гарантий удаления. Полная семантика и фактические границы тестов: LIFECYCLE-1.2.0.md.

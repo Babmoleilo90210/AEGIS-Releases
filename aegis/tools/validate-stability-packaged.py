@@ -162,5 +162,11 @@ else:
 baselineClasses=root/'published-115-probes';baselineClasses.mkdir(exist_ok=True);baselineCp=str(baselineApp/'app')+os.sep+'*'
 run([jdk/('bin/javac.exe' if windows else 'bin/javac'),'--release','21','-encoding','UTF-8','-cp',baselineCp,'-d',baselineClasses,source/'client-core/src/test/java/org/securemail/client/update/VisualCompatibilityProbe.java'],'published-115-compile.log',60)
 check('published_115_verifier_stable_schema_exact_120_packages_fixture',lambda:run([baselineJava,'-cp',str(baselineClasses)+os.pathsep+baselineCp,'org.securemail.client.update.VisualCompatibilityProbe',inputs/'updates/stable.json',inputs/'AEGIS-1.2.0-Windows-x64.zip',inputs/'AEGIS-1.2.0-CachyOS-x86_64.AppImage'],'published-115-compatibility.log',120,env))
+# Dedicated test JARs are never on the installed client classpath.
+with zipfile.ZipFile(inputs/'AEGIS-1.2.0-native-acceptance.zip') as z:z.extractall(root/'lifecycle-stage-kit')
+stagekit=root/'lifecycle-stage-kit/native-acceptance/staging'
+if not stagekit.exists():stagekit=root/'lifecycle-stage-kit/staging'
+stagecp=str(stagekit/'*')+os.pathsep+cp
+check('candidate_120_actual_Tor_ephemeral_staging_Friends_receipts_expiry',lambda:run([java,'-Xmx768m','-Daegis.native.root='+str(app),'-cp',stagecp,'org.securemail.integration.LifecycleTorProbe',app,out/'lifecycle-real-onion'],'lifecycle-real-onion.log',660,env))
 (out/'RESULTS.json').write_text(json.dumps(report,indent=2)+'\n')
 if any(x['result']!='PASS' for x in report['checks']):sys.exit(1)

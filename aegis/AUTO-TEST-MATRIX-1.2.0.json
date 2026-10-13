@@ -1,12 +1,10 @@
 {
   "version": "1.2.0",
   "productionReady": false,
-  "buildRunId": "38228975781",
-  "buildSourceCommit": "b8cbeff6902c9f7db7a284f6ba7c590fc42203bc",
   "junit": {
     "client-core": {
-      "tests": 115,
-      "pass": 114,
+      "tests": 122,
+      "pass": 121,
       "skip": 1,
       "fail": 0,
       "errors": 0
@@ -19,8 +17,8 @@
       "errors": 0
     },
     "integration-tests": {
-      "tests": 7,
-      "pass": 7,
+      "tests": 11,
+      "pass": 11,
       "skip": 0,
       "fail": 0,
       "errors": 0
@@ -43,7 +41,7 @@
     "pass": 16
   },
   "headlessJavaFX": {
-    "passSuites": 8,
+    "passSuites": 9,
     "names": [
       "ClientUiRegressionSmoke",
       "Aegis11UiSmoke",
@@ -52,8 +50,10 @@
       "MessengerSmoke",
       "Appearance115Smoke",
       "AppearancePerformanceSmoke",
-      "Stability120Smoke"
-    ]
+      "Stability120Smoke",
+      "Lifecycle120Smoke"
+    ],
+    "currentRun": "Lifecycle120Smoke and MessengerSmoke PASS; full 9-suite CI pending"
   },
   "compatibility": {
     "oldReleasedClientJARs": {
@@ -206,5 +206,10 @@
   "nativeCachyOSWayland": "NOT_RUN",
   "nativeCachyOSX11": "NOT_RUN",
   "signedPreviousTo120InstallRestartRollback": "NOT_RUN",
-  "lifecycleFeatures": "BLOCKED_ARCHITECTURE_APPROVAL"
+  "lifecycleFeatures": "BLOCKED_ARCHITECTURE_APPROVAL",
+  "previousBuildRunId": "38228975781",
+  "previousBuildSourceCommit": "b8cbeff6902c9f7db7a284f6ba7c590fc42203bc",
+  "currentBuild": "LOCAL_CORE_PASS; NEW_CI_PACKAGING_PENDING",
+  "lifecycleUnitAndIntegration": "PASS: 7 security/storage/clock tests and 4 real TCP/SOCKS/SQLite integration tests; no native acceptance claim",
+  "actualTorStaging": "PENDING_CURRENT_CI"
 }

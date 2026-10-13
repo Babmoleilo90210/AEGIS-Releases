@@ -113,6 +113,7 @@ public final class ClientSession implements AutoCloseable {
         } catch (Exception ignored) {closeRouting();
         }
       }
+      lifecycle.retry();
       network.fetchAndAcknowledge();
       local.checkpoint();
       status = "Tor ●  Relay ●  P2P " + (p2p ? "●" : "недоступен");

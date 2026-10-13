@@ -1,7 +1,7 @@
 {
   "version": "1.2.0",
   "baseline": "1.1.5",
-  "allByteIdentical": true,
+  "allByteIdentical": false,
   "files": [
     {
       "file": "common-protocol/build.gradle",
@@ -169,11 +169,6 @@
       "sha256": "52cfe09b768b6f319d36a9eef647f0dc52218a3a219e4bbabefbf28986718830"
     },
     {
-      "file": "client-core/src/main/java/org/securemail/client/crypto/PlainMessage.java",
-      "unchanged": true,
-      "sha256": "ccafbfb30859468510f237762d371efe960e98990561afc5ad26251a5d7e0a8e"
-    },
-    {
       "file": "client-core/src/main/java/org/securemail/client/crypto/Secrets.java",
       "unchanged": true,
       "sha256": "b80d45e871e902df8f318aae2666e8486377152e1a4e502cd9c52d3d6290a1f2"
@@ -184,14 +179,25 @@
       "sha256": "e9bbdf6fd02a0db9e201146cf8f92b152e7f40e49a9fed10a771114c85c17aea"
     },
     {
-      "file": "client-core/src/main/java/org/securemail/client/storage/LocalStore.java",
-      "unchanged": true,
-      "sha256": "6bbae569d84702a54bbf0ac14feabdef8558ea39efa5634771e7ce9b03127e9f"
-    },
-    {
       "file": "client-core/src/main/java/org/securemail/client/update/TorHttpsClient.java",
       "unchanged": true,
       "sha256": "733cf9218316334e5d485458dbe095cdff177028ffa1fc803e6a8af2d0059df3"
     }
-  ]
+  ],
+  "unchangedCount": 36,
+  "reviewedClientChanges": [
+    {
+      "file": "client-core/src/main/java/org/securemail/client/crypto/PlainMessage.java",
+      "baselineSha256": "ccafbfb30859468510f237762d371efe960e98990561afc5ad26251a5d7e0a8e",
+      "candidateSha256": "a699eb4bd01dd0968772effa982bb2060dd009b7e1e0603d4f7dcab7c117a2b2",
+      "reason": "Defensive memory-only attachment accessor; encoding/ciphers unchanged"
+    },
+    {
+      "file": "client-core/src/main/java/org/securemail/client/storage/LocalStore.java",
+      "baselineSha256": "6bbae569d84702a54bbf0ac14feabdef8558ea39efa5634771e7ce9b03127e9f",
+      "candidateSha256": "639db253f7b55a406077ee27dce44ac01435b56a2d7137b5ae6b3fe785d2d127",
+      "reason": "Existing AES-GCM sidecars/rekey and monotonic wall-clock high-water"
+    }
+  ],
+  "protocolRelayAlgorithmsAndReleaseKeyChanged": false
 }

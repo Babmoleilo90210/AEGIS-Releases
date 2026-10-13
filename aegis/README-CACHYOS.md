@@ -1,5 +1,5 @@
 > АЕГИС 1.2.0: незавершённый клиентский кандидат. productionReady=false.
-> Friends на Relay0.2.0, receipts и timer-after-read ожидают архитектурного решения.
+> Клиентские Friends/receipts/disappearing реализованы без обновления Relay. Нативная приёмка обязательна; ограничения таймера — LIFECYCLE-1.2.0.md.
 > См. AUDIT-1.2.0-RU.md, RELAY-LIFECYCLE-PROPOSAL-1.2.0.md и TEST-REPORT-1.2.0.md.
 
 # АЕГИС 1.2.0 — кандидат для нативной приёмки

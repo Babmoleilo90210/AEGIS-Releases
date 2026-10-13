@@ -79,7 +79,7 @@ def main():
     run([jdk/'bin/java','-Xmx256m','-cp',os.pathsep.join(map(str,jars+[build/'tests'])),'org.securemail.client.TorProcessSmoke',linux],timeout=60,log=evidence/'TorProcessSmoke.log')
     run([sys.executable,'-m','unittest','-v','test_release_manifest'],cwd=ROOT/'tools',log=evidence/'release-security-tests.log')
     ui=[sys.executable,ROOT/'tools/run-ui-regression.py','--jdk',jdk,'--deps',linux/'app','--deps',deps,'--native-root',linux]
-    for test in ['ClientUiRegressionSmoke','Aegis11UiSmoke','SingleWindowSmoke','DarkGreenThemeSmoke','MessengerSmoke','Appearance115Smoke','AppearancePerformanceSmoke','Stability120Smoke']:
+    for test in ['ClientUiRegressionSmoke','Aegis11UiSmoke','SingleWindowSmoke','DarkGreenThemeSmoke','MessengerSmoke','Appearance115Smoke','AppearancePerformanceSmoke','Stability120Smoke','Lifecycle120Smoke']:
         run(ui+['--test',test],log=evidence/(test+'.log'))
     # Compare the same JavaFX workload against the exact released 1.1.5 JARs.
     perfcp=os.pathsep.join(map(str,[linux/'app'/'*',deps/'*',build/'ui-tests']))
@@ -100,12 +100,12 @@ def main():
     run([sys.executable,ROOT/'packaging/package-clients.py','--linux-base',linux,'--windows-base',windows/'AEGIS','--mingw','/usr/bin','--makensis','/usr/bin/makensis','--mksquashfs','/usr/bin/mksquashfs','--appimage-runtime',runtime,'--out',out],timeout=360,log=evidence/'packaging.log')
     run([sys.executable,ROOT/'packaging/verify_client_release.py',out],timeout=180,log=out/'ARTIFACT-VERIFICATION.json')
     run([sys.executable,ROOT/'packaging/archive-clients.py',out],timeout=90)
-    run([sys.executable,ROOT/'tools/package-native120.py','--jdk',jdk,'--artifacts',out],timeout=180,log=evidence/'native-kit-build.log')
+    run([sys.executable,ROOT/'tools/package-native120.py','--jdk',jdk,'--artifacts',out,'--staging-deps',deps],timeout=180,log=evidence/'native-kit-build.log')
     shutil.copytree(build/'junit',evidence/'junit',dirs_exist_ok=True)
-    for name in ['README-WINDOWS.md','README-CACHYOS.md','CHANGELOG-1.2.0.md','TEST-REPORT-1.2.0.md','NATIVE-ACCEPTANCE-1.2.0.md','APPEARANCE-1.2.0.md','MIGRATION-1.1.5-TO-1.2.0.md','BUILD-1.2.0.md','SECURITY.md','RELEASE-GATES-1.2.0.json','PERFORMANCE-1.2.0.json','NATIVE-RESULTS-1.2.0.csv','AUTO-TEST-MATRIX-1.2.0.json','AUDIT-1.2.0-RU.md','RELAY-LIFECYCLE-PROPOSAL-1.2.0.md','OWNER-OFFLINE-SIGNING-1.2.0.md','PROTECTED-COMPONENTS-1.2.0.json']:
+    for name in ['README-WINDOWS.md','README-CACHYOS.md','CHANGELOG-1.2.0.md','TEST-REPORT-1.2.0.md','NATIVE-ACCEPTANCE-1.2.0.md','APPEARANCE-1.2.0.md','MIGRATION-1.1.5-TO-1.2.0.md','BUILD-1.2.0.md','SECURITY.md','RELEASE-GATES-1.2.0.json','PERFORMANCE-1.2.0.json','NATIVE-RESULTS-1.2.0.csv','AUTO-TEST-MATRIX-1.2.0.json','AUDIT-1.2.0-RU.md','RELAY-LIFECYCLE-PROPOSAL-1.2.0.md','OWNER-OFFLINE-SIGNING-1.2.0.md','PROTECTED-COMPONENTS-1.2.0.json','LIFECYCLE-1.2.0.md']:
         shutil.copy2(ROOT/name,out/name)
     if (build/'compatibility-matrix.json').exists():shutil.copy2(build/'compatibility-matrix.json',evidence/'compatibility-matrix.json')
-    provenance={'version':'1.2.0','productionReady':False,'sourceCommit':os.environ.get('GITHUB_SHA','local-uncommitted'),'nativeAcceptance':'NOT_RUN','JDK':subprocess.check_output([jdk/'bin/java','-version'],stderr=subprocess.STDOUT,text=True,timeout=15).strip(),'baseReleaseInputs':INPUTS,'testAndRelayDependencies':MAVEN,'runtimeConnectionsAdded':False,'ownerPrivateKeyUsed':False,'productionDeploymentOrPublication':False,'baseline':'1.1.5 Stable','newJavaDependencies':False,'licensedFontsAdded':True,'lifecycleFeatures':'BLOCKED_ARCHITECTURE_APPROVAL','relay02SourceInputSha256':'3745572f1261392a88b4ea4cfad7763d54e3fb9efb9a9d5a674eaa74abc5e2ee'}
+    provenance={'version':'1.2.0','productionReady':False,'sourceCommit':os.environ.get('GITHUB_SHA','local-uncommitted'),'nativeAcceptance':'NOT_RUN','JDK':subprocess.check_output([jdk/'bin/java','-version'],stderr=subprocess.STDOUT,text=True,timeout=15).strip(),'baseReleaseInputs':INPUTS,'testAndRelayDependencies':MAVEN,'runtimeConnectionsAdded':['account-signed peer onion virtual port 81 through existing mail SOCKS; relay protocol unchanged'],'ownerPrivateKeyUsed':False,'productionDeploymentOrPublication':False,'baseline':'1.1.5 Stable','newJavaDependencies':False,'licensedFontsAdded':True,'lifecycleFeatures':'CLIENT_ONLY_SIGNED_E2EE; NATIVE_ACCEPTANCE_PENDING; CONSERVATIVE_EXPIRY_ON_OS_REBOOT','relay02SourceInputSha256':'3745572f1261392a88b4ea4cfad7763d54e3fb9efb9a9d5a674eaa74abc5e2ee'}
     (out/'BUILD-PROVENANCE.json').write_text(json.dumps(provenance,indent=2)+'\n')
     files=sorted(p for p in out.iterdir() if p.is_file() and p.name!='SHA256SUMS')
     (out/'SHA256SUMS').write_text(''.join(sha(p)+'  '+p.name+'\n' for p in files))

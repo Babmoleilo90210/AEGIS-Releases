@@ -1,3 +1,21 @@
+# АЕГИС 1.2.0 — новый lifecycle release candidate
+
+**productionReady=false.** Friends/receipts/disappearing теперь реализованы клиентским E2EE путём без production Relay изменений. Новые файлы и формат подробно описаны в LIFECYCLE-1.2.0.md. Для открытых disappearing писем действует conservative early expiry после reboot ОС/неопределённого guard; это не утверждение точного межзагрузочного времени.
+
+## Текущие результаты
+
+Локальный Java21 прогон: client-core 121 PASS + 1 Linux DPAPI SKIP, common 4 PASS, Relay 3 PASS, integration 11 PASS; всего **139 PASS, 1 SKIP, 0 FAIL**. Семь новых security/clock/storage тестов и четыре lifecycle TCP/SOCKS/SQLite интеграции проверяют настоящие шифрование, Ed25519, persistence, packet framing и database. Synthetic SOCKS не является Tor.
+
+Отдельные actual JavaFX MessengerSmoke и Lifecycle120Smoke PASS: password/FF1 сами не дают read receipt, explicit final reveal отображает body, один Stage. Полный 9-suite CI и проверки exact новых артефактов ниже будут дополнены после выполнения. Новый LifecycleTorProbe предназначен для настоящего встроенного Tor, трёх временных onion services и двух staging аккаунтов; его статус до запуска PENDING, не PASS.
+
+Protocol/common, Relay, основные cipher algorithms и pinned updater key сохранены. 36 из прежних 38 protected files byte-identical; LocalStore и PlainMessage изменены отдельно для encrypted sidecars/clock floor и memory-only attachment copy, прежние форматы/codecs/алгоритмы не заменялись. Новые device keys не заменяют account identity. Ни independent security audit, ни Windows11/CachyOS acceptance не объявляются.
+
+Windows11, CachyOS KDE Wayland/X11, различные физические сети и полный owner-signed 1.1.5→1.2.0 install/restart/rollback: **NOT_RUN**. Private key не использован; main/production feed/VPS/onion/релизы не менялись. Новый manifest надо подписывать заново для новых бинарников после приёмки.
+
+## История предыдущего частичного кандидата
+
+Следующий отчёт относится только к прежним бинарникам/CI b8cbeff (не к изменённым lifecycle binaries). Он сохраняется для воспроизводимости, его прежние BLOCKED решения заменены client-only реализацией и не являются текущим состоянием.
+
 # АЕГИС 1.2.0 — проверенный клиентский кандидат
 
 **productionReady=false.** Завершена независимая клиентская фаза; это не полный Stable 1.2.0. Friends на Relay 0.2.0, доставка подписанных delivery/read events отправителю и исчезновение после отображения требуют утверждения архитектуры. Production VPS, onion identity, ключи, main update feed и опубликованные Release не изменялись. Независимый security audit не проводился.

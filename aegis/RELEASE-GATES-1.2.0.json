@@ -4,14 +4,15 @@
   "productionRelayChanged": false,
   "productionFeedChanged": false,
   "productionPrivateKeyUsed": false,
-  "friendsOnRelay02": "BLOCKED_REQUIRES_APPROVED_RELAY_CAPABILITY",
-  "deliveryReadReceipts": "BLOCKED_REQUIRES_ARCHITECTURE_APPROVAL",
-  "expiringAfterRead": "BLOCKED_REQUIRES_ARCHITECTURE_APPROVAL",
+  "friendsOnRelay02": "IMPLEMENTED_CLIENT_ONLY_SIGNED_E2EE; REAL_NATIVE_ACCEPTANCE_PENDING",
+  "deliveryReadReceipts": "IMPLEMENTED_SIGNED_DURABLE_E2EE; REAL_NATIVE_ACCEPTANCE_PENDING",
+  "expiringAfterRead": "IMPLEMENTED_DEVICE_BOUND; FAIL_CLOSED_ON_OS_REBOOT; NATIVE_PENDING",
   "nativeWindows11": "NOT_RUN",
   "nativeCachyOSWayland": "NOT_RUN",
   "nativeCachyOSX11": "NOT_RUN",
   "signedPreviousTo120EndToEnd": "NOT_RUN",
   "nativeRollback": "NOT_RUN",
   "persistentDrafts": "NOT_IMPLEMENTED_IN_BASE115",
-  "publicationAuthorized": false
+  "publicationAuthorized": false,
+  "expiryRebootPolicy": "CONSERVATIVE_EARLY_EXPIRY_DOCUMENTED"
 }
