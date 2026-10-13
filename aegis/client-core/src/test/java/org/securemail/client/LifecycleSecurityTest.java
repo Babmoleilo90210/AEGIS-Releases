@@ -23,6 +23,11 @@ class LifecycleSecurityTest {
     assertThrows(GeneralSecurityException.class,()->caps.verify(owner,nonce,now+86400_000));
     assertNotEquals(root.userId(),Identity.id(caps.deviceKey()));assertEquals(root.userId(),caps.ownerId());
   }
+  @Test void durableEventRemainsVerifiableAfterItsOuterRetryWasRewrapped()throws Exception {
+    Identity sender=Identity.create(),recipient=Identity.create(),device=Identity.create();long issued=System.currentTimeMillis(),later=issued+40L*86400_000;var caps=DeviceCapabilities.create(sender,device,issued+30L*86400_000,3,Secrets.random(32));
+    var event=LifecycleEvent.create(sender,recipient.userId(),issued,LifecycleEvent.ACK,Binary.encode(o->Binary.text(o,UUID.randomUUID().toString())),caps);var encryption=new AutomaticEncryption(Clock.fixed(Instant.ofEpochMilli(later),ZoneOffset.UTC));
+    try(var text=new PlainMessage(event.text(),"",new byte[0])){var packet=encryption.encrypt(text,604800,86400000,sender,"raven",new UserInfo(recipient.userId(),"blackfox",recipient.publicKey(),null));event.verify(packet,later);assertThrows(GeneralSecurityException.class,()->caps.verify(new UserInfo(sender.userId(),"raven",sender.publicKey(),null),null,later));}
+  }
   static final class Boot implements BootClock {String id="test-boot-a";long uptime=100_000;public Stamp stamp(){return new Stamp(id,uptime);}}
   @Test void wallRollbackCannotExtendCountdownAndProfileRestoreDoesNotResetLedger()throws Exception {
     var boot=new Boot();String id=UUID.randomUUID().toString();long wall=1_800_000_000_000L;

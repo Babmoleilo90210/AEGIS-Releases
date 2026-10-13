@@ -65,8 +65,8 @@ class LifecycleDeliveryTest {
       a.bindNickname("raven");b.bindNickname("blackfox");var af=new LocalFeatures(a);var bf=new LocalFeatures(b);var au=new UserInfo(a.identity().userId(),"raven",a.identity().publicKey(),null);var bu=new UserInfo(b.identity().userId(),"blackfox",b.identity().publicKey(),null);
       try(var al=new LifecycleService(a,af,1_000_000);var bl=new LifecycleService(b,bf,1_000_000)){
         bl.learn(au,al.capabilities(Secrets.random(32)));bl.readReceipts(false);var encryption=new AutomaticEncryption(clock);EncryptedPacket p;try(var plain=PlainMessage.text("Unknown but signed")){p=encryption.encrypt(plain,86400,86400000,a.identity(),"raven",bu);}bl.accept(p);bl.displayed(p.messageId());assertEquals(1,b.inbox().size());assertTrue(b.contacts().isEmpty());
-        try(var plain=PlainMessage.text(LifecycleEvent.PREFIX+"%%%invalid")){var bad=encryption.encrypt(plain,86400,86400000,a.identity(),"raven",bu);assertNotNull(bl.accept(bad));assertEquals(1,b.inbox().size());}
-        try(var plain=PlainMessage.text("A following ordinary message")){var next=encryption.encrypt(plain,86400,86400000,a.identity(),"raven",bu);assertNotNull(bl.accept(next));assertEquals(2,b.inbox().size());}
+        try(var plain=PlainMessage.text(LifecycleEvent.PREFIX+"%%%invalid")){var bad=encryption.encrypt(plain,86400,86400000,a.identity(),"raven",bu);assertNotNull(bl.accept(bad));assertEquals(2,b.inbox().size(),"Literal reserved-prefix text remains ordinary mail, never a privileged event");}
+        try(var plain=PlainMessage.text("A following ordinary message")){var next=encryption.encrypt(plain,86400,86400000,a.identity(),"raven",bu);assertNotNull(bl.accept(next));assertEquals(3,b.inbox().size());}
       }
     }
   }

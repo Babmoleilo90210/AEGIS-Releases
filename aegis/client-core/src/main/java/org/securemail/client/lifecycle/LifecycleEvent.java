@@ -18,7 +18,7 @@ public record LifecycleEvent(String id,int kind,String owner,String target,long 
   public static LifecycleEvent create(Identity owner,String target,long now,int kind,byte[] payload,DeviceCapabilities caps)throws IOException,GeneralSecurityException {var e=new LifecycleEvent(UUID.randomUUID().toString(),kind,owner.userId(),target,now,payload,caps,new byte[0]);return new LifecycleEvent(e.id,kind,e.owner,target,now,payload,caps,owner.sign(e.signingBytes()));}
   public void verify(EncryptedPacket outer,long now)throws IOException,GeneralSecurityException {
     UserInfo ownerInfo=new UserInfo(outer.senderId(),outer.senderNickname(),outer.senderPublicKey(),null);
-    capabilities.verify(ownerInfo,null,Math.min(now,outer.createdAt()));
+    capabilities.verify(ownerInfo,null,createdAt);
     if(!owner.equals(outer.senderId())||!target.equals(outer.recipientId())||createdAt>now+300_000||!Identity.verify(outer.senderPublicKey(),signingBytes(),signature))throw new GeneralSecurityException("Lifecycle event origin rejected");
   }
   public byte[] encode()throws IOException{return Binary.encode(o->{o.writeInt(1);unsigned(o);Binary.bytes(o,signature);});}

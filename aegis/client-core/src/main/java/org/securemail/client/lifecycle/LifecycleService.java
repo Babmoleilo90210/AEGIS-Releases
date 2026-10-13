@@ -40,7 +40,7 @@ public final class LifecycleService implements AutoCloseable {
   }
   private void recoverCarriers()throws IOException,GeneralSecurityException {
     for(var item:local.inbox())if(!messages.containsKey(item.messageId())){var packet=local.load(item.messageId());if(!AutomaticEncryption.supports(packet))continue;
-      boolean internal=false;try(var plain=crypto.decrypt(packet,local.identity(),maxCipher)){internal=ExpiringEnvelope.isCarrier(plain)||plain.text().startsWith(LifecycleEvent.PREFIX);}catch(Exception bad){continue;}
+      boolean internal=false;try(var plain=crypto.decrypt(packet,local.identity(),maxCipher)){var expiry=ExpiringEnvelope.read(plain,maxCipher);if(expiry!=null){expiry.verify(packet);internal=true;}else{var event=LifecycleEvent.fromText(plain.text().getBytes(java.nio.charset.StandardCharsets.UTF_8));if(event!=null){event.verify(packet,local.now());validatePayload(event);internal=true;}}}catch(Exception bad){continue;}
       if(internal)try{accept(packet);}catch(IOException|GeneralSecurityException notDeliverable){/* Original durable ciphertext retained for repair. */}
     }
   }
@@ -61,7 +61,7 @@ public final class LifecycleService implements AutoCloseable {
   public synchronized Receipt accept(EncryptedPacket packet)throws IOException,GeneralSecurityException {
     ensureOpen();if(!AutomaticEncryption.supports(packet))return local.accept(packet);
     LifecycleEvent event=null;ExpiringEnvelope expiring=null;boolean malformed=false;
-    try(var plain=crypto.decrypt(packet,local.identity(),maxCipher)) {event=LifecycleEvent.fromText(plain.text().getBytes(java.nio.charset.StandardCharsets.UTF_8));if(event!=null)validatePayload(event);else {expiring=ExpiringEnvelope.read(plain,maxCipher);if(expiring!=null)expiring.verify(packet);}}
+    try(var plain=crypto.decrypt(packet,local.identity(),maxCipher)) {try{event=LifecycleEvent.fromText(plain.text().getBytes(java.nio.charset.StandardCharsets.UTF_8));}catch(IOException ordinaryReservedText){event=null;}if(event!=null)validatePayload(event);else {expiring=ExpiringEnvelope.read(plain,maxCipher);if(expiring!=null)expiring.verify(packet);}}
     catch(Exception invalid){malformed=true;}
     Receipt ack=local.accept(packet,event==null&&!malformed);
     if(expiring!=null){rememberTimed(packet,expiring,false,ack.deliveredAt());local.delete(packet.messageId());}
