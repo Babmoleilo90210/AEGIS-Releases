@@ -170,6 +170,9 @@ public final class LifecycleService implements AutoCloseable {
     if(previous!=null&&!MessageDigest.isEqual(previous,digest))throw new GeneralSecurityException("Event ID conflict");
     UserInfo sender=new UserInfo(packet.senderId(),packet.senderNickname(),packet.senderPublicKey(),null);
     if(event.kind()==LifecycleEvent.ACK){try(var in=new DataInputStream(new ByteArrayInputStream(event.payload()))){String id=Binary.text(in,36);Binary.end(in);Queued outstanding=queue.get(id);if(outstanding!=null&&outstanding.peer.userId().equals(sender.userId())){queue.remove(id);save();}}return;}
+    UserInfo contact=local.contact(sender.nickname());boolean pinned=contact!=null&&contact.userId().equals(sender.userId())&&MessageDigest.isEqual(contact.publicKey(),sender.publicKey());
+    boolean related=pinned||peers.containsKey(sender.userId())||messages.values().stream().anyMatch(t->t.outgoing&&t.peer.userId().equals(sender.userId()));
+    if(!related)return; // Unknown roots cannot exhaust the privileged control state or stall ordinary delivery.
     if(event.capabilities().expiresAt()>local.now())learn(sender,event.capabilities());
     if(previous==null){
       if(processed.size()>=MAX_EVENTS)throw new IOException("Lifecycle replay quota");
@@ -178,7 +181,8 @@ public final class LifecycleService implements AutoCloseable {
           if(!assertion.ownerId().equals(sender.userId())||!assertion.targetId().equals(local.identity().userId())||!MessageDigest.isEqual(assertion.publicKey(),sender.publicKey())||!Identity.verify(sender.publicKey(),assertion.signingBytes(),assertion.signature()))throw new GeneralSecurityException("Consent origin");
           Peer peer=peers.get(sender.userId());if(peer==null)throw new GeneralSecurityException("Missing capability");
           if(peer.theirs!=null&&(assertion.revision()<peer.theirs.revision()||assertion.revision()==peer.theirs.revision()&&!MessageDigest.isEqual(assertion.signingBytes(),peer.theirs.signingBytes())))throw new GeneralSecurityException("Consent rollback");
-          peer.theirs=assertion;applyFriendship(peer);
+          boolean newConsent=peer.theirs==null||peer.theirs.revision()!=assertion.revision();peer.theirs=assertion;
+          if(newConsent&&pinned){peer.lastConsent=0;syncConsent(peer,true);}applyFriendship(peer);
         }
       }else {
         try(var in=new DataInputStream(new ByteArrayInputStream(event.payload()))){String id=Binary.text(in,36);byte[] packetDigest=Binary.bytes(in,32);long when=in.readLong();Binary.end(in);Tracked t=messages.get(id);
