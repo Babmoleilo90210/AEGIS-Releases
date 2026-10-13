@@ -150,9 +150,10 @@ public final class LifecycleService implements AutoCloseable {
     }finally{carrier.close();}
   }
   public synchronized void prepareDisplay(String id)throws IOException,GeneralSecurityException {ensureOpen();Timed t=timed.get(id);if(t!=null&&!t.outgoing){if(t.expired||remaining(id)<=0)throw new IOException("Письмо исчезло");guard.prepare(id,t.seconds*1000,local.now());}}
+  public synchronized void abandonDisplay(String id)throws IOException,GeneralSecurityException {ensureOpen();Timed t=timed.get(id);Tracked message=messages.get(id);if(t!=null&&!t.outgoing&&message!=null&&message.displayed==0){guard.expire(id);cleanup();}}
   public synchronized void cancelUnshown(String id)throws IOException,GeneralSecurityException {ensureOpen();Timed t=timed.get(id);if(t!=null&&!t.outgoing&&t.displayed==0&&guard.available())guard.cancelPrepared(id);}
   public synchronized List<LocalStore.MailItem> mailboxIndex(boolean outgoing)throws IOException,GeneralSecurityException {
-    var result=new ArrayList<LocalStore.MailItem>();for(var item:local.mailboxIndex(outgoing))if(!timed.containsKey(item.id()))result.add(new LocalStore.MailItem(item.id(),item.contact(),item.outgoing(),status(item.id(),item.status()),item.time(),item.expiresAt()));
+    cleanup();var result=new ArrayList<LocalStore.MailItem>();for(var item:local.mailboxIndex(outgoing))if(!timed.containsKey(item.id()))result.add(new LocalStore.MailItem(item.id(),item.contact(),item.outgoing(),status(item.id(),item.status()),item.time(),item.expiresAt()));
     for(Timed t:timed.values())if(t.outgoing==outgoing){long left=t.expired?0:remaining(t.id);long expiry=left==0||left==Long.MAX_VALUE?Long.MAX_VALUE:local.now()+left;result.add(new LocalStore.MailItem(t.id,t.nickname,outgoing,left<=0?"Письмо исчезло":status(t.id,"Получено"),t.time,expiry));}return List.copyOf(result);
   }
   public synchronized boolean expired(String id){Timed t=timed.get(id);return t!=null&&t.expired;}

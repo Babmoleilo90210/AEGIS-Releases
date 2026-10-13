@@ -24,6 +24,7 @@ final class MailViewer implements AutoCloseable {
     default void displayed(){}
     default void prepareDisplay()throws Exception{}
     default void closed(boolean wasDisplayed){}
+    default void abandonedDisplay(){}
     default long expiresAt(){return -1;}
   }
   private final Stage stage;private InWindowDialog<Void> page;
@@ -37,7 +38,7 @@ final class MailViewer implements AutoCloseable {
   private final Timeline timer;
   private LetterEnvelope.Opened opened;
   private LiveCode live;
-  private volatile boolean closed;private boolean revealed,displayNotified;private long revealGeneration;private Actions lifecycleActions;private boolean displayScheduled;private PauseTransition displayPulse;
+  private volatile boolean closed;private boolean revealed,displayNotified;private long revealGeneration;private Actions lifecycleActions;private boolean displayScheduled,displayOffered;private PauseTransition displayPulse;
   private char[] archivePassword;private boolean exporting;private Button download;
   private VBox host;private java.util.function.LongSupplier expiry;
   MailViewer(Stage owner,ThemeManager themes,PlainMessage plain,LocalStore.HistoryItem item,ExecutorService worker,LongSupplier now) {
@@ -119,14 +120,14 @@ final class MailViewer implements AutoCloseable {
     var bounds=text.localToScene(text.getBoundsInLocal());return bounds.getMaxX()>0&&bounds.getMaxY()>0&&bounds.getMinX()<text.getScene().getWidth()&&bounds.getMinY()<text.getScene().getHeight();
   }
   private void contentDisplayed(Actions actions){
-    if(displayNotified||displayScheduled||!bodyVisible())return;displayScheduled=true;
+    if(displayNotified||displayScheduled||!bodyVisible())return;displayScheduled=true;displayOffered=true;
     // Give the scene a render pulse. A minimized window, detached view or password form is not a read.
     displayPulse=new PauseTransition(Duration.millis(150));displayPulse.setOnFinished(e->{displayScheduled=false;if(!displayNotified&&bodyVisible()){displayNotified=true;actions.displayed();}});displayPulse.play();
   }
   boolean showing(){return !closed&&(host!=null||page!=null&&page.isShowing());}
   void appearance(org.securemail.client.appearance.Appearance.Settings settings){if(closed)return;var layout=settings.layout();content.setPadding(new Insets(layout.viewPadding()));content.setMaxWidth(layout.textWidth());content.setMinWidth(0);text.setMinWidth(0);if(layout.viewCard()){if(!content.getStyleClass().contains("letter-card"))content.getStyleClass().add("letter-card");}else content.getStyleClass().remove("letter-card");content.getChildren().remove(metadata);if(layout.metadataTop())content.getChildren().add(Math.min(1,content.getChildren().size()),metadata);else content.getChildren().add(metadata);if(actionBar!=null){actionBar.getChildren().clear();for(String name:layout.actions()){Button button=actionButtons.get(name);if(button!=null)actionBar.getChildren().add(button);}actionBar.setSpacing(settings.components().spacing());}}
   @Override public void close(){
-    if(closed)return;closed=true;revealGeneration++;if(displayPulse!=null)displayPulse.stop();if(lifecycleActions!=null)try{lifecycleActions.closed(displayNotified);}catch(RuntimeException interrupted){/* Memory cleanup must complete even when the owner worker is stopping. */}timer.stop();if(live!=null)live.close();if(opened!=null)opened.close();
+    if(closed)return;closed=true;revealGeneration++;if(displayPulse!=null)displayPulse.stop();if(lifecycleActions!=null)try{if(displayOffered&&!displayNotified)lifecycleActions.abandonedDisplay();else lifecycleActions.closed(displayNotified);}catch(RuntimeException interrupted){/* Memory cleanup must complete even when the owner worker is stopping. */}timer.stop();if(live!=null)live.close();if(opened!=null)opened.close();
     password.clear();code.clear();text.clear();content.getChildren().clear();if(archivePassword!=null){Arrays.fill(archivePassword,'\0');archivePassword=null;}if(!exporting)plain.close();if(page!=null)page.close();
   }
 }

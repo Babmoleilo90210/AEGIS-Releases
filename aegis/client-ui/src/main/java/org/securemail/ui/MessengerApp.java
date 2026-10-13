@@ -416,6 +416,7 @@ public final class MessengerApp extends Application {
         public void forward(LocalStore.HistoryItem item,PlainMessage plain,String body,PlainMessage.FileBundle files){prepareResponse(item,plain,body,files,true);}
         public void original(MailContext reference){openReference(reference);}
         public boolean unknown(){return entry.unknown();}
+        public void abandonedDisplay(){ClientSession active=session;worker.execute(()->{try{active.lifecycle().abandonDisplay(entry.item().id());}catch(Exception ignored){/* Uncertain reveal is fail closed on restart. */}});}
         public void prepareDisplay()throws Exception{session.lifecycle().prepareDisplay(entry.item().id());}
         public void closed(boolean displayed){if(!displayed){ClientSession active=session;worker.execute(()->{try{active.lifecycle().cancelUnshown(entry.item().id());}catch(Exception ignored){/* Interrupted reveal remains fail closed on restart. */}});}}
         public long expiresAt(){try{long left=session.lifecycle().remaining(entry.item().id());return left==Long.MAX_VALUE?entry.item().expiresAt():session.local().now()+left;}catch(Exception uncertain){return 0;}}
