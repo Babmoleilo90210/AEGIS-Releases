@@ -16,11 +16,13 @@ public final class LocalMailSearch {
     public Result(LocalStore.MailItem item,String subject,boolean protectedLetter,boolean unknown,boolean signatureValid,String threadId,String peerId,int fileCount){this(item,subject,protectedLetter,unknown,signatureValid,threadId,peerId,fileCount,"");}
   }
   private LocalMailSearch(){}
-  public static List<Result> find(LocalStore local,LocalFeatures features,Query query,int maxFile)throws Exception{
+  public static List<Result> find(LocalStore local,LocalFeatures features,Query query,int maxFile)throws Exception{return find(local,features,null,query,maxFile);}
+  public static List<Result> find(LocalStore local,LocalFeatures features,org.securemail.client.lifecycle.LifecycleService lifecycle,Query query,int maxFile)throws Exception{
     List<Result> result=new ArrayList<>();var automatic=new AutomaticEncryption(java.time.Clock.systemUTC());
     for(boolean outgoing:new boolean[]{false,true}){
       if(query.scope()==Scope.INBOX&&outgoing||query.scope()==Scope.SENT&&!outgoing)continue;
-      for(var item:local.mailboxIndex(outgoing)){
+      for(var original:local.mailboxIndex(outgoing)){
+        var item=lifecycle==null?original:new LocalStore.MailItem(original.id(),original.contact(),original.outgoing(),lifecycle.status(original.id(),original.status()),original.time(),original.expiresAt());
         if(item.time()<query.from()||item.time()>query.to()||!item.contact().contains(query.nickname().toLowerCase(Locale.ROOT)))continue;
         var stored=local.loadHistory(item.id(),outgoing);var p=stored.packet();var assessment=local.assessSender(p);
         boolean unknown=!outgoing&&!assessment.keyMatches(),blocked=features.blocked(p);

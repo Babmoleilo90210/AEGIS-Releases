@@ -25,6 +25,7 @@ public final class NetworkService {
   private final String relayOnion;
   private final int relayPort, maxCiphertext;
   private final LocalStore local;
+  private PacketAcceptor acceptor;
   private volatile String token = "";
   private volatile boolean registrationAccepted;
   private volatile int capabilities=-1;
@@ -35,8 +36,10 @@ public final class NetworkService {
     relayOnion = Limits.onion(relay);
     relayPort = port;
     this.local = local;
+    acceptor=local::accept;
     maxCiphertext = max;
   }
+  public void packetAcceptor(PacketAcceptor value){acceptor=java.util.Objects.requireNonNull(value);}
 
   public void authenticate(String nickname, char[] password, boolean register)
       throws IOException, GeneralSecurityException {
@@ -127,6 +130,13 @@ public final class NetworkService {
             .filter(u -> u.userId().equals(p.recipientId()))
             .findFirst()
             .orElseThrow(() -> new IOException("Добавьте и проверьте контакт"));
+    return deliverControl(p,contact);
+  }
+
+  /** Internal replies are encrypted packets addressed to an independently verified root identity.
+   * This does not add a contact or change its trust status. */
+  public DeliveryResult deliverControl(EncryptedPacket p,UserInfo contact)throws IOException {
+    if(!p.senderId().equals(local.identity().userId())||!p.recipientId().equals(contact.userId())||!Identity.verifyPacket(p))throw new IOException("Invalid encrypted reply");
     UserInfo remote = find(contact.nickname());
     if (!remote.userId().equals(contact.userId())
         || !MessageDigest.isEqual(remote.publicKey(), contact.publicKey()))
@@ -170,11 +180,23 @@ public final class NetworkService {
               o -> {},
               in -> in.readBoolean() ? PacketCodec.read(in, maxCiphertext) : null);
       if (p == null) break;
-      Receipt ack = local.accept(p);
+      Receipt ack = acceptor.accept(p);
       request(Operation.ACK, ack::write, in -> null);
       count++;
     }
     return count;
+  }
+  /** A capability probe uses a signed protocol-1 onion route, never an IP or clearnet fallback. */
+  public org.securemail.client.lifecycle.DeviceCapabilities probe(UserInfo contact)throws IOException,GeneralSecurityException {
+    UserInfo remote=find(contact.nickname());if(!remote.userId().equals(contact.userId())||!MessageDigest.isEqual(remote.publicKey(),contact.publicKey()))throw new GeneralSecurityException("Identity changed");
+    Route route=remote.route();long now=local.now();
+    if(route==null||route.port()!=org.securemail.client.lifecycle.DeviceCapabilities.ONION_PORT||!route.userId().equals(contact.userId())||route.expiresAt()<=now||route.expiresAt()>now+300_000||!Identity.verify(contact.publicKey(),route.signingBytes(),route.signature()))return null;
+    byte[] challenge=Secrets.random(32);
+    try(var socket=tor.connect(route.onionAddress(),route.port());var in=new DataInputStream(new BufferedInputStream(socket.getInputStream()));var out=new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()))){
+      socket.setSoTimeout(20_000);Binary.header(out);out.writeByte(org.securemail.client.lifecycle.DeviceCapabilities.OPERATION);Binary.text(out,"");Binary.bytes(out,challenge);out.flush();
+      Binary.header(in);if(in.readInt()!=0)throw new IOException("Capability probe unavailable");
+      var caps=org.securemail.client.lifecycle.DeviceCapabilities.read(in);caps.verify(contact,challenge,now);return caps;
+    }
   }
 
   public void logout() {

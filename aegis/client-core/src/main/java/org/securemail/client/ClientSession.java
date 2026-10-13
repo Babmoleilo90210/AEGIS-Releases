@@ -12,6 +12,7 @@ public final class ClientSession implements AutoCloseable {
   private final LocalStore local;
   private final NetworkService network;
   private final LocalFeatures features;
+  private final org.securemail.client.lifecycle.LifecycleService lifecycle;
   private int contactCursor;
   private int revocationCursor;
   private volatile int relayCapabilities=-1;
@@ -35,7 +36,7 @@ public final class ClientSession implements AutoCloseable {
   }
   public ClientSession(ClientConfig config,LocalStore unlocked)throws IOException,java.security.GeneralSecurityException {
     this.config=config;local=unlocked;
-    try{features=new LocalFeatures(local);}catch(IOException|java.security.GeneralSecurityException failure){local.close();throw failure;}
+    try{features=new LocalFeatures(local);lifecycle=new org.securemail.client.lifecycle.LifecycleService(local,features,config.maxCiphertext());}catch(IOException|java.security.GeneralSecurityException failure){local.close();throw failure;}
     network =
         config.relayOnionAddress().isEmpty()
             ? null
@@ -45,10 +46,12 @@ public final class ClientSession implements AutoCloseable {
                 config.relayPort(),
                 local,
                 config.maxCiphertext());
+    if(network!=null){network.packetAcceptor(lifecycle::accept);lifecycle.network(network);}
     cleanup.scheduleAtFixedRate(
         () -> {
           try {
             local.cleanup();
+            lifecycle.cleanup();
             features.removeExpired(local.drainExpiredMetadata());
           } catch (Exception e) {
             status = "Ошибка локального удаления: проверьте диск";
@@ -77,7 +80,7 @@ public final class ClientSession implements AutoCloseable {
   private void rebuildPeerRoute(){synchronized(routingLock){
     closeRouting();if(closed||network==null||!network.loggedIn())return;
     try {
-      peer = new PeerServer(config.localServicePort(), local, config.maxCiphertext());
+      peer = new PeerServer(config.localServicePort(), local, config.maxCiphertext(),lifecycle::accept,lifecycle::capabilities);
       peer.start();
       control = new TorControl(config.torControlPort(), config.torCookiePath());
       onion = control.publish(peer.port());
@@ -104,7 +107,7 @@ public final class ClientSession implements AutoCloseable {
       if (control != null)
         try {
           if (control.bootstrapped()) {
-            network.publish(local.identity().route(onion, 80, local.now() + 90_000));
+            network.publish(local.identity().route(onion, org.securemail.client.lifecycle.DeviceCapabilities.ONION_PORT, local.now() + 90_000));
             p2p = true;
           }
         } catch (Exception ignored) {closeRouting();
@@ -120,7 +123,9 @@ public final class ClientSession implements AutoCloseable {
     }
   }
   public synchronized void syncPublicData(org.securemail.protocol.UserInfo selected)throws Exception{
-    if(!online()||deliverySuspended)return;relayCapabilities=network.capabilities();
+    if(!online()||deliverySuspended)return;
+    lifecycle.sync(selected);if(lifecycle.takeFriendshipChanged())friendshipChanged.set(true);
+    relayCapabilities=network.capabilities();
     if(relayCapabilities==0){publicStatus="Сервер поддерживает базовую почту";return;}
     boolean profileSynced=true;
     try{if((relayCapabilities&1)!=0&&features.profilePending()){
@@ -155,6 +160,7 @@ public final class ClientSession implements AutoCloseable {
     publicStatus=profileSynced?"Публичные данные синхронизированы":"Профиль пока не синхронизирован";
   }
   public LocalFeatures features(){return features;}
+  public org.securemail.client.lifecycle.LifecycleService lifecycle(){return lifecycle;}
   public int relayCapabilities(){return relayCapabilities;}
   public String publicStatus(){return publicStatus;}
 
@@ -190,6 +196,7 @@ public final class ClientSession implements AutoCloseable {
     cleanup.shutdownNow();
     if (network != null) network.forgetSession();
     synchronized(routingLock){closeRouting();}
+    lifecycle.close();
     local.close();
   }
 }

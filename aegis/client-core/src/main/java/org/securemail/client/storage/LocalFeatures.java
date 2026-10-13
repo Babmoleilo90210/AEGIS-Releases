@@ -54,6 +54,7 @@ public final class LocalFeatures {
   private static void change(Set<String> target,String id,boolean value){if(value)target.add(id);else target.remove(id);}
   public synchronized boolean friend(String id){return friends.contains(id)&&!revokedFriends.contains(id)&&!blockedSenders.contains(id)&&local.contacts().stream().anyMatch(p->p.userId().equals(id));}
   public synchronized boolean consent(String id){return !revokedFriends.contains(id)&&!blockedSenders.contains(id);}
+  public synchronized long friendRevision(String id,boolean ours){return friendRevisions.getOrDefault(id,new long[2])[ours?0:1];}
   /** Keep revocations after contact removal so reconnect can withdraw the signed relay consent. */
   public synchronized List<String> revokedConsentTargets(){return revokedFriends.stream().sorted().toList();}
   public synchronized void consent(String id,boolean active)throws IOException,GeneralSecurityException{Limits.userId(id);change(revokedFriends,id,!active);if(!active)friends.remove(id);save();}

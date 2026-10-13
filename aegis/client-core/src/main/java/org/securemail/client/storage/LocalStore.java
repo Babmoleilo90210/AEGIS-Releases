@@ -61,7 +61,6 @@ public final class LocalStore implements AutoCloseable {
     this.clock = clock;
     this.maxCipher = maxCipher;
     this.maxBytes = maxBytes;
-    anchorWall = clock.millis();
     AtomicFiles.directory(this.root);
     AtomicFiles.directory(mail);
     AtomicFiles.directory(sent);
@@ -100,10 +99,8 @@ public final class LocalStore implements AutoCloseable {
         identity = Identity.create();
         save();
       }
-      if (clock.millis() < lastWall)
-        for (Path folder : List.of(mail, sent)) try (var files = Files.newDirectoryStream(folder, "*.sm")) {
-          for (Path f : files) Files.deleteIfExists(f);
-        }
+      // A backwards wall clock must not destroy unrelated mail or extend its TTL.
+      anchorWall = Math.max(clock.millis(), lastWall);
       cleanup();
     } catch (IOException | GeneralSecurityException | RuntimeException e) {
       if (derived != null) Arrays.fill(derived, (byte) 0);
@@ -145,6 +142,22 @@ public final class LocalStore implements AutoCloseable {
     ensureOpen();if(data.length>2*1024*1024)throw new IOException("Local feature quota");
     AtomicFiles.write(root.resolve("features-v1.vault"),seal(data,"features/v1".getBytes(java.nio.charset.StandardCharsets.US_ASCII)));
   }
+  /** Versioned client-only sidecars. Existing vault and protocol formats are unchanged. */
+  public synchronized byte[] readExtension(String name,int maximum)throws IOException,GeneralSecurityException {
+    ensureOpen();extensionName(name);Path path=root.resolve("lifecycle").resolve(name+".enc");
+    return Files.exists(path)?open(AtomicFiles.read(path,maximum+128),extensionAad(name)):null;
+  }
+  public synchronized void writeExtension(String name,byte[] data,int maximum)throws IOException,GeneralSecurityException {
+    ensureOpen();extensionName(name);if(data.length>maximum)throw new IOException("Lifecycle quota");
+    Path folder=root.resolve("lifecycle");AtomicFiles.directory(folder);Path path=folder.resolve(name+".enc");
+    long previous=Files.exists(path)?Files.size(path):0;
+    if(usedBytes()-previous+data.length+128>maxBytes)throw new IOException("Локальное хранилище заполнено");
+    AtomicFiles.write(path,seal(data,extensionAad(name)));changeCounter++;
+  }
+  public synchronized void deleteExtension(String name)throws IOException {ensureOpen();extensionName(name);Path folder=root.resolve("lifecycle");if(Files.deleteIfExists(folder.resolve(name+".enc"))){AtomicFiles.syncDirectory(folder);changeCounter++;}}
+  private static void extensionName(String name){if(!name.matches("(?:state-v1|mail-[a-f0-9-]{36}|out-[a-f0-9-]{36})"))throw new IllegalArgumentException("Extension name");}
+  private static byte[] extensionAad(String name){return ("AEGIS-lifecycle/v1/"+name).getBytes(java.nio.charset.StandardCharsets.US_ASCII);}
+  public synchronized Path root(){return root;}
   public synchronized PublicProfile cachedProfile(String nick)throws IOException,GeneralSecurityException{
     UserInfo owner=nick.equals(nickname)?new UserInfo(identity.userId(),nickname,identity.publicKey(),null):contact(nick);if(owner==null)return null;
     Path path=root.resolve("profiles").resolve(owner.userId()+".enc");if(!Files.exists(path))return null;
@@ -209,6 +222,10 @@ public final class LocalStore implements AutoCloseable {
 
   public synchronized Receipt accept(EncryptedPacket p)
       throws IOException, GeneralSecurityException {
+    return accept(p,true);
+  }
+  public synchronized Receipt accept(EncryptedPacket p,boolean notify)
+      throws IOException, GeneralSecurityException {
     ensureOpen();
     long now = now();
     if (!p.recipientId().equals(identity.userId())
@@ -250,7 +267,7 @@ public final class LocalStore implements AutoCloseable {
     seen.put(p.messageId(), new Seen(digest, now, p.deliveryDeadline()));
     save();
     changeCounter++;
-    if(notices.size()<1024)notices.addLast(new DeliveryNotice(p.messageId(),p.senderId()));
+    if(notify&&notices.size()<1024)notices.addLast(new DeliveryNotice(p.messageId(),p.senderId()));
     return identity.receipt(p, now); // File, state and containing directories have been fsynced.
   }
 
@@ -340,6 +357,7 @@ public final class LocalStore implements AutoCloseable {
     for (Path dir : List.of(mail, sent)) try (var files = Files.newDirectoryStream(dir, "*.sm")) {
       for (Path f : files) n += Files.size(f);
     }
+    Path lifecycle=root.resolve("lifecycle");if(Files.isDirectory(lifecycle,LinkOption.NOFOLLOW_LINKS))try(var files=Files.newDirectoryStream(lifecycle,"*.enc")){for(Path f:files)n+=Files.size(f);}
     return n;
   }
 
@@ -438,6 +456,9 @@ public final class LocalStore implements AutoCloseable {
         for(String person:people){byte[] pixels=avatar(person);if(pixels!=null)try{Path old=avatarPath(person);AtomicFiles.write(target.resolve("avatars").resolve(old.getFileName()),sealWith(next,pixels,("avatar/v1/"+person).getBytes(java.nio.charset.StandardCharsets.US_ASCII)));}finally{Arrays.fill(pixels,(byte)0);}}
       }
       byte[] features=readFeatures();if(features!=null)try{AtomicFiles.write(target.resolve("features-v1.vault"),sealWith(next,features,"features/v1".getBytes(java.nio.charset.StandardCharsets.US_ASCII)));}finally{Arrays.fill(features,(byte)0);}
+      Path lifecycle=root.resolve("lifecycle");if(Files.isDirectory(lifecycle,LinkOption.NOFOLLOW_LINKS)){
+        AtomicFiles.directory(target.resolve("lifecycle"));try(var files=Files.newDirectoryStream(lifecycle,"*.enc")){for(Path file:files){String name=file.getFileName().toString().replaceFirst("\\.enc$","");extensionName(name);byte[] data=readExtension(name,maxCipher+8192);try{AtomicFiles.write(target.resolve("lifecycle").resolve(file.getFileName()),sealWith(next,data,extensionAad(name)));}finally{Arrays.fill(data,(byte)0);}}}
+      }
       Path profiles=root.resolve("profiles");if(Files.isDirectory(profiles,LinkOption.NOFOLLOW_LINKS)){
         AtomicFiles.directory(target.resolve("profiles"));try(var files=Files.list(profiles)){
           for(Path file:files.toList()){

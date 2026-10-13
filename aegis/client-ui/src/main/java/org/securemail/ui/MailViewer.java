@@ -21,6 +21,7 @@ final class MailViewer implements AutoCloseable {
     void forward(LocalStore.HistoryItem item,PlainMessage plain,String body,PlainMessage.FileBundle files);
     void original(MailContext reference);
     boolean unknown();
+    default void displayed(){}
   }
   private final Stage stage;private InWindowDialog<Void> page;
   private final PlainMessage plain;
@@ -33,7 +34,7 @@ final class MailViewer implements AutoCloseable {
   private final Timeline timer;
   private LetterEnvelope.Opened opened;
   private LiveCode live;
-  private volatile boolean closed;
+  private volatile boolean closed;private boolean revealed,displayNotified;
   private char[] archivePassword;private boolean exporting;private Button download;
   private VBox host;
   MailViewer(Stage owner,ThemeManager themes,PlainMessage plain,LocalStore.HistoryItem item,ExecutorService worker,LongSupplier now) {
@@ -74,14 +75,15 @@ final class MailViewer implements AutoCloseable {
           try{
             var value=LetterEnvelope.open(envelope,secret);char[] held=secret.clone();
             Platform.runLater(()->{if(closed){value.close();Arrays.fill(held,'\0');return;}opened=value;archivePassword=held;if(download!=null)download.setDisable(false);content.getChildren().removeAll(row,error);content.getChildren().addAll(text,code);
-              text.setText(value.ciphertext());live=new LiveCode(value::candidate,Platform::runLater,result->{if(!closed)text.setText(result);});
-              code.hidden.textProperty().addListener((o,a,b)->{if(closed)return;text.clear();live.change(code.value(),value.ciphertext());});
+              text.setText(value.ciphertext());live=new LiveCode(value::candidate,Platform::runLater,result->{if(!closed&&(actions==null||revealed)){text.setText(result);if(actions!=null)contentDisplayed(actions);}});
+              if(actions!=null){Button reveal=new Button("Показать результат");reveal.setOnAction(event->{if(closed||code.value().length==0)return;revealed=true;live.change(code.value(),value.ciphertext());});content.getChildren().add(reveal);}
+              code.hidden.textProperty().addListener((o,a,b)->{if(closed)return;if(actions==null){text.clear();live.change(code.value(),value.ciphertext());}else{revealed=false;text.setText(value.ciphertext());}});
             });
           }catch(Exception failure){Platform.runLater(()->{if(!closed)error.setText(failure instanceof AEADBadTagException?"Неверный пароль письма.":"Не удалось открыть письмо.");});}
           finally{Arrays.fill(secret,'\0');Arrays.fill(envelope,(byte)0);Platform.runLater(()->{unlock.setDisable(false);unlock.setText("Открыть");});}
         });
       });
-    }else{content.getChildren().add(text);text.setText(plain.text());}
+    }else{content.getChildren().add(text);text.setText(plain.text());if(actions!=null)Platform.runLater(()->contentDisplayed(actions));}
     if(!plain.files().isEmpty()){
       Selector<String> selectedFile=new Selector<>(themes,plain.files().stream().map(PlainMessage.FileInfo::name).toList(),plain.filename());if(!plain.protectedLetter()&&plain.files().size()>1)content.getChildren().add(selectedFile);
       content.getChildren().add(new Label("Вложения: "+plain.files().size()));download=new Button(plain.protectedLetter()?"Скачать вложения":"Сохранить "+plain.filename());download.setDisable(plain.protectedLetter());
@@ -104,6 +106,12 @@ final class MailViewer implements AutoCloseable {
     appearance(themes.settings());themes.apply(content);if(host==null){page=new InWindowDialog<>();page.initOwner(owner);page.setTitle(plain.subject().isBlank()?"Письмо":plain.subject());page.getDialogPane().setContent(content);themes.apply(page.getDialogPane());page.onClose(this::close);}else{host.getChildren().setAll(content);VBox.setVgrow(content,Priority.ALWAYS);}
     timer=new Timeline(new KeyFrame(Duration.seconds(1),e->{long left=item.expiresAt()-now.getAsLong();if(left<=0){close();return;}lifetime.setText("Удаление через "+java.time.Duration.ofMillis(left).toMinutes()+" мин");}));
     timer.setCycleCount(Animation.INDEFINITE);timer.play();if(item.expiresAt()>now.getAsLong()){if(host==null)page.show();}else close();
+  }
+  private void contentDisplayed(Actions actions){
+    if(closed||displayNotified||text.getScene()==null)return;
+    javafx.stage.Window window=text.getScene().getWindow();if(window==null||!window.isShowing()||!text.isVisible())return;
+    // A pulse/layout of the actual content, not a list selection, is the event being acknowledged.
+    text.applyCss();text.layout();displayNotified=true;actions.displayed();
   }
   boolean showing(){return !closed&&(host!=null||page!=null&&page.isShowing());}
   void appearance(org.securemail.client.appearance.Appearance.Settings settings){if(closed)return;var layout=settings.layout();content.setPadding(new Insets(layout.viewPadding()));content.setMaxWidth(layout.textWidth());content.setMinWidth(0);text.setMinWidth(0);if(layout.viewCard()){if(!content.getStyleClass().contains("letter-card"))content.getStyleClass().add("letter-card");}else content.getStyleClass().remove("letter-card");content.getChildren().remove(metadata);if(layout.metadataTop())content.getChildren().add(Math.min(1,content.getChildren().size()),metadata);else content.getChildren().add(metadata);if(actionBar!=null){actionBar.getChildren().clear();for(String name:layout.actions()){Button button=actionButtons.get(name);if(button!=null)actionBar.getChildren().add(button);}actionBar.setSpacing(settings.components().spacing());}}

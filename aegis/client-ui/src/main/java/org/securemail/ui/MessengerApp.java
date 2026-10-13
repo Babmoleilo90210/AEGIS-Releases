@@ -370,7 +370,7 @@ public final class MessengerApp extends Application {
     if(refreshing)return;refreshing=true;long generation=viewGeneration;boolean outgoing=mailOutgoing;ClientSession active=session;
     long change=active.local().changeCounter();if(!rendered.isEmpty()&&change==lastMailboxChange&&System.nanoTime()-lastMailboxScan<TimeUnit.SECONDS.toNanos(15)){refreshing=false;return;}
     worker.execute(()->{try{
-      var found=LocalMailSearch.find(active.local(),active.features(),new LocalMailSearch.Query("","",0,Long.MAX_VALUE,mailScope),config.maxFileSize());
+      var found=LocalMailSearch.find(active.local(),active.features(),active.lifecycle(),new LocalMailSearch.Query("","",0,Long.MAX_VALUE,mailScope),config.maxFileSize());
       String signature=found.stream().map(i->i.item().id()+i.item().status()+i.unknown()+i.threadId()+active.features().pinned("pinnedMail",i.item().id())).reduce("",String::concat)+threads;
       if(signature.equals(rendered)){Platform.runLater(()->{if(generation==viewGeneration){lastMailboxChange=change;lastMailboxScan=System.nanoTime();}});return;}
       var rows=new ArrayList<MailRow>();
@@ -409,6 +409,7 @@ public final class MessengerApp extends Application {
         public void forward(LocalStore.HistoryItem item,PlainMessage plain,String body,PlainMessage.FileBundle files){prepareResponse(item,plain,body,files,true);}
         public void original(MailContext reference){openReference(reference);}
         public boolean unknown(){return entry.unknown();}
+        public void displayed(){ClientSession active=session;worker.execute(()->{try{active.lifecycle().displayed(entry.item().id());}catch(Exception failure){Platform.runLater(()->{if(!stopping)info("Подтверждение прочтения пока не сохранено");});}});}
       };
       if(host!=null&&host==previewHost){embeddedViewer=new MailViewer(stage,themes,entry.plain(),entry.item(),worker,()->session.local().now(),host,actions);viewers.add(embeddedViewer);}else viewers.add(new MailViewer(stage,themes,entry.plain(),entry.item(),worker,()->session.local().now(),null,actions));
     });
@@ -432,7 +433,7 @@ public final class MessengerApp extends Application {
     clearCompose();section="thread";viewGeneration++;long generation=viewGeneration;ListView<LocalMailSearch.Result> chain=new ListView<>();threadResults=chain;chain.setCellFactory(list->new ListCell<>(){protected void updateItem(LocalMailSearch.Result r,boolean empty){super.updateItem(r,empty);setText(empty||r==null?null:(r.item().outgoing()?"Вы":r.item().contact())+" · "+r.subject());}});
     chain.setOnMouseClicked(e->{if(e.getClickCount()==2&&chain.getSelectionModel().getSelectedItem()!=null)openLetter(chain.getSelectionModel().getSelectedItem().item());});
     VBox body=new VBox(12,button("← Назад",()->mailboxPage(mailOutgoing,mailScope)),new Label("Цепочка"),chain);body.setPadding(new Insets(20));VBox.setVgrow(chain,Priority.ALWAYS);root.setCenter(body);
-    work(null,"",()->LocalMailSearch.find(session.local(),session.features(),new LocalMailSearch.Query("","",0,Long.MAX_VALUE,mailScope==LocalMailSearch.Scope.BLOCKED?LocalMailSearch.Scope.BLOCKED:LocalMailSearch.Scope.ALL),config.maxFileSize()),found->{if(section.equals("thread")&&generation==viewGeneration){var anchor=found.stream().filter(r->r.item().id().equals(selectedRow.item().id())).findFirst();if(anchor.isPresent())chain.getItems().setAll(found.stream().filter(r->r.threadId().equals(selectedRow.thread())&&r.peerId().equals(anchor.get().peerId())).sorted(Comparator.comparingLong(r->r.item().time())).toList());}});
+    work(null,"",()->LocalMailSearch.find(session.local(),session.features(),session.lifecycle(),new LocalMailSearch.Query("","",0,Long.MAX_VALUE,mailScope==LocalMailSearch.Scope.BLOCKED?LocalMailSearch.Scope.BLOCKED:LocalMailSearch.Scope.ALL),config.maxFileSize()),found->{if(section.equals("thread")&&generation==viewGeneration){var anchor=found.stream().filter(r->r.item().id().equals(selectedRow.item().id())).findFirst();if(anchor.isPresent())chain.getItems().setAll(found.stream().filter(r->r.threadId().equals(selectedRow.thread())&&r.peerId().equals(anchor.get().peerId())).sorted(Comparator.comparingLong(r->r.item().time())).toList());}});
   }
   void composePage(){
     Node before=section.equals("compose")?composeBackdrop:root.getCenter();clearCompose();composeBackdrop=before;section="compose";viewGeneration++;
@@ -483,7 +484,7 @@ public final class MessengerApp extends Application {
           boolean rich=session.local().cachedProfile(nick)!=null&&(context!=null||files.size()+(bundle==null?0:bundle.info().size())>1);
           try(var plain=PlainMessage.compose(subject,body,envelope==null?new byte[0]:envelope,files,bundle,config.maxFileSize(),context,rich)){
             var packet=automatic.encrypt(plain,lifetime.seconds(),config.deliveryTTL(),session.local().identity(),session.local().nickname(),recipient);
-            var result=session.network().deliverDetailed(packet);session.local().saveSent(packet,recipient.nickname(),result.confirmedAt());return result;
+            return session.lifecycle().send(packet,recipient);
           }
         }finally{Arrays.fill(password,'\0');Arrays.fill(code,'\0');if(envelope!=null)Arrays.fill(envelope,(byte)0);if(bundle!=null)bundle.close();}
       },result->{if(generation==viewGeneration){clearCompose(false);mailboxPage(true);}});
@@ -507,12 +508,12 @@ public final class MessengerApp extends Application {
     ListView<LocalMailSearch.Result> results=new ListView<>();results.setCellFactory(list->new ListCell<>(){protected void updateItem(LocalMailSearch.Result r,boolean empty){super.updateItem(r,empty);setText(empty||r==null?null:r.item().contact()+" · "+(r.subject().isBlank()?"Без темы":r.subject()));}});
     results.setOnMouseClicked(e->{if(e.getClickCount()==2){var chosen=results.getSelectionModel().getSelectedItem();if(chosen!=null)openLetter(chosen.item());}});
     Button search=new Button("Найти");search.setOnAction(e->{try{long a=from.getValue()==null?0:from.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli(),b=to.getValue()==null?Long.MAX_VALUE:to.getValue().plusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()-1;
-      var query=new LocalMailSearch.Query(nick.getText(),subject.getText(),a,b,scope.getValue());long generation=viewGeneration;work(search,"Поиск…",()->LocalMailSearch.find(session.local(),session.features(),query,config.maxFileSize()),found->{if(section.equals("search")&&generation==viewGeneration)results.getItems().setAll(found);});
+      var query=new LocalMailSearch.Query(nick.getText(),subject.getText(),a,b,scope.getValue());long generation=viewGeneration;work(search,"Поиск…",()->LocalMailSearch.find(session.local(),session.features(),session.lifecycle(),query,config.maxFileSize()),found->{if(section.equals("search")&&generation==viewGeneration)results.getItems().setAll(found);});
     }catch(Exception failure){error(failure);}});
     VBox body=new VBox(10,new Label("Поиск на устройстве"),nick,subject,new HBox(10,from,to),scope,search,results);body.setPadding(new Insets(20));VBox.setVgrow(results,Priority.ALWAYS);root.setCenter(body);
   }
   private void fillContacts(String term){
-    if(contacts==null)return;String old=selected;contacts.setPlaceholder(new Label(section.equals("friends")?(session.relayCapabilities()==0?"Этот сервер пока не поддерживает подтверждённую дружбу":"Ожидается взаимное добавление в контакты"):"Добавьте контакт"));
+    if(contacts==null)return;String old=selected;contacts.setPlaceholder(new Label(section.equals("friends")?"Ожидается взаимное добавление в контакты":"Добавьте контакт"));
     contacts.getItems().setAll(session.local().contacts().stream().filter(u->!section.equals("friends")||session.features().friend(u.userId())).sorted(Comparator.comparing((UserInfo u)->!session.features().pinned("pinnedContacts",u.userId())).thenComparing(UserInfo::nickname)).map(UserInfo::nickname).filter(s->s.contains(term.toLowerCase(Locale.ROOT))).toList());
     if(!old.isEmpty())contacts.getSelectionModel().select(old);
   }
@@ -549,10 +550,11 @@ public final class MessengerApp extends Application {
   }
   private void notificationSettings(){
     InWindowDialog<Void> dialog=new InWindowDialog<>();dialog.initOwner(stage);dialog.setTitle("Уведомления");dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+    CheckBox receipts=new CheckBox("Подтверждать прочтение обычных писем");receipts.setSelected(session.lifecycle().readReceipts());
     CheckBox mail=new CheckBox("Письма"),friends=new CheckBox("Приоритет писем друзей"),events=new CheckBox("События дружбы"),releases=new CheckBox("Обновления");
     var preferences=session.features();mail.setSelected(preferences.notifications());friends.setSelected(preferences.friendNotifications());events.setSelected(preferences.friendEvents());releases.setSelected(preferences.updateNotifications());
-    Button save=new Button("Сохранить");save.setOnAction(e->{boolean a=mail.isSelected(),b=friends.isSelected(),c=events.isSelected(),d=releases.isSelected();work(save,"Сохранение…",()->{preferences.notifications(a,b,c,d);return true;},done->dialog.close());});
-    dialog.getDialogPane().setContent(new VBox(12,mail,friends,events,releases,save));themes.apply(dialog.getDialogPane());dialog.showAndWait();
+    Button save=new Button("Сохранить");save.setOnAction(e->{boolean a=mail.isSelected(),b=friends.isSelected(),c=events.isSelected(),d=releases.isSelected();work(save,"Сохранение…",()->{preferences.notifications(a,b,c,d);session.lifecycle().readReceipts(receipts.isSelected());return true;},done->dialog.close());});
+    dialog.getDialogPane().setContent(new VBox(12,mail,friends,events,releases,receipts,save));themes.apply(dialog.getDialogPane());dialog.showAndWait();
   }
   private void appearance(){try{new AppearanceView(stage,themes,worker).show();}catch(IOException e){error(e);}}
   private void applyLayout(UiPreferences value)throws IOException {
@@ -562,7 +564,7 @@ public final class MessengerApp extends Application {
     if(letters!=null)letters.refresh();if(contacts!=null)contacts.refresh();if(section.equals("mail")&&previous.preview()!=value.preview())mailboxPage(mailOutgoing,mailScope);
   }
   private Node avatar(String nick){return AvatarView.create(nick,avatarImages,layout.avatars(),themes.settings().components(),(int)Math.round(ResponsiveGeometry.avatar(root.getWidth(),themes.settings().components().avatarSize())));}
-  private ListCell<String> contactCell(){return new ListCell<>(){protected void updateItem(String nick,boolean empty){super.updateItem(nick,empty);setText(null);setGraphic(null);if(empty||nick==null)return;UserInfo peer=session.local().contact(nick);String status=peer==null?"":session.features().blockedSender(peer.userId())?"Заблокирован":session.features().friend(peer.userId())?"Друг":session.relayCapabilities()==0?"Дружба недоступна на этом сервере":"Ожидается подтверждение";Label label=new Label(status);label.getStyleClass().add("muted");setGraphic(new HBox(8,avatar(nick),new VBox(3,new Label(nick),label)));}};}
+  private ListCell<String> contactCell(){return new ListCell<>(){protected void updateItem(String nick,boolean empty){super.updateItem(nick,empty);setText(null);setGraphic(null);if(empty||nick==null)return;UserInfo peer=session.local().contact(nick);String status=peer==null?"":session.features().blockedSender(peer.userId())?"Заблокирован":session.features().friend(peer.userId())?"Друг":session.lifecycle().friendshipStatus(peer.userId());Label label=new Label(status);label.getStyleClass().add("muted");setGraphic(new HBox(8,avatar(nick),new VBox(3,new Label(nick),label)));}};}
   private void loadAvatars(){ClientSession active=session;work(null,"",()->{Map<String,Image> images=new HashMap<>();List<String> names=new ArrayList<>(active.local().contacts().stream().map(UserInfo::nickname).toList());names.add(active.local().nickname());for(String nick:names){byte[] data=null;try{data=active.local().avatar(nick);if(data!=null){byte[] bounded=AvatarCodec.normalize(data);try{Image image=new Image(new ByteArrayInputStream(bounded));if(!image.isError())images.put(nick,image);}finally{Arrays.fill(bounded,(byte)0);}}}catch(IOException|java.security.GeneralSecurityException invalidImage){/* One invalid image never suppresses other verified profiles. */}finally{if(data!=null)Arrays.fill(data,(byte)0);}}return images;},images->{if(active!=session)return;avatarImages.clear();avatarImages.putAll(images);if(contacts!=null)contacts.refresh();if(letters!=null)letters.refresh();if(accountAvatar!=null)accountAvatar.getChildren().setAll(avatar(active.local().nickname()));if(section.equals("profile")&&profileAvatar!=null)profileAvatar.getChildren().setAll(profileAvatar(active.local().nickname(),true));});}
   private Node profileAvatar(String nick,boolean permitted){Image image=permitted?avatarImages.get(nick):null;return AvatarViewer.profile(nick,image,()->AvatarViewer.show(stage,themes,nick,image));}
   private void chooseAvatar(String nick){
