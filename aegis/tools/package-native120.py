@@ -59,7 +59,7 @@ public final class AppearanceNativeLauncher {
   stageclasses=temp/'stageclasses';stageclasses.mkdir()
   subprocess.run([str(javac)+suffix,'--release','21','-encoding','UTF-8','-cp',cp,'-d',str(stageclasses),str(main)],check=True,timeout=90)
   subprocess.run([str(jar)+suffix,'--create','--file',str(staging/'lifecycle-tor-tests.jar'),'-C',str(stageclasses),'.'],check=True,timeout=30)
-  (staging/'README.md').write_text('Disposable staging Relay 0.2.0 (independently compiled SHA-verified published 1.0.0 source) and test-only dependencies. Never add these JARs to app/*.jar. The real-Tor lifecycle probe generates two throwaway identities/accounts and three ephemeral onion services, on this device only. Production relay/feed/keys are not touched. Cross-network Windows11/KDE acceptance remains separate.\n')
+  (staging/'README.md').write_text('Disposable staging Relay 0.2.0 (independently compiled SHA-verified published 1.0.0 source) and test-only dependencies. Never add these JARs to app/*.jar. Linux-only: the existing Debian Relay uses POSIX filesystem permissions. The real-Tor lifecycle probe generates two throwaway identities/accounts and three ephemeral onion services, on this device only. Production relay/feed/keys are not touched. Cross-network Windows11/KDE acceptance remains separate.\n')
 
  (kit/'Run-Appearance-Windows.cmd').write_bytes('''@echo off
 setlocal DisableDelayedExpansion

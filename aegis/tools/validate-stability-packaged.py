@@ -174,6 +174,9 @@ with zipfile.ZipFile(inputs/'AEGIS-1.2.0-native-acceptance.zip') as z:z.extracta
 stagekit=root/'lifecycle-stage-kit/native-acceptance/staging'
 if not stagekit.exists():stagekit=root/'lifecycle-stage-kit/staging'
 stagecp=str(stagekit/'*')+os.pathsep+cp
-check('candidate_120_actual_Tor_ephemeral_staging_Friends_receipts_expiry',lambda:run([java,'-Xmx768m','-Daegis.native.root='+str(app),'-cp',stagecp,'org.securemail.integration.LifecycleTorProbe',app,out/'lifecycle-real-onion'],'lifecycle-real-onion.log',660,env))
+if not windows:
+ check('candidate_120_actual_Tor_ephemeral_staging_Friends_receipts_expiry',lambda:run([java,'-Xmx768m','-Daegis.native.root='+str(app),'-cp',stagecp,'org.securemail.integration.LifecycleTorProbe',app,out/'lifecycle-real-onion'],'lifecycle-real-onion.log',660,env))
+else:
+ report['crossPlatformLifecycle']={'result':'NOT_RUN','reason':'Existing Debian/POSIX Relay cannot be hosted in a Windows JVM; requires separate Linux staging host and two native clients. Relay unchanged.'} 
 (out/'RESULTS.json').write_text(json.dumps(report,indent=2)+'\n')
 if any(x['result']!='PASS' for x in report['checks']):sys.exit(1)
