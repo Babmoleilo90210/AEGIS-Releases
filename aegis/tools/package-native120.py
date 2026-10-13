@@ -104,15 +104,15 @@ printf '%s\\n' 'Синтетические снимки: build/ui115-screenshots
 
 На CachyOS выполните bash Run-CachyOS.sh <AppImage>, затем bash Run-Appearance-CachyOS.sh <AppImage>. Python/JDK/Gradle для запуска не нужны. Повторите в KDE Wayland и X11. Система DPI не меняется: запускайте отдельно при разных настройках дисплея. Не открывайте production key и не отключайте Defender/firewall.
 
-Тесты не меняют реальный профиль, создают искусственные данные. NativeAcceptanceMain сохраняет JSON результатов без паролей/ключей. Дополнительная проверка оформления пишет synthetic screenshots в build/ui115-screenshots. В NativeAcceptanceMain добавлена реальная проверка пяти JavaFX шрифтов с кириллицей, карточки подключения и встроенного просмотра аватара. Friends/receipts/исчезновение ожидают отдельного согласования; не объявляются PASS. Полная приёмка через обычный интерфейс, cross-platform Relay, миграция, reboot и подписанный updater выполняются дополнительно по NATIVE-ACCEPTANCE-1.2.0.md. FAIL_OR_UNAVAILABLE не равен PASS. productionReady остаётся false до всех обязательных проверок.
+Тесты не меняют реальный профиль, создают искусственные данные. NativeAcceptanceMain сохраняет JSON результатов без паролей/ключей. Дополнительная проверка оформления пишет synthetic screenshots в build/ui115-screenshots. В NativeAcceptanceMain добавлена реальная проверка пяти JavaFX шрифтов с кириллицей, карточки подключения и встроенного просмотра аватара. Friends/receipts/исчезновение реализованы client-only и требуют двух реальных клиентов для native PASS. В каталоге staging есть отдельный тест реальных onion services с disposable Relay 0.2.0; не добавляйте staging JARs в app/. Его PASS не заменяет Windows11/KDE/cross-network acceptance. Полная приёмка через обычный интерфейс, cross-platform Relay, миграция, reboot и подписанный updater выполняются дополнительно по NATIVE-ACCEPTANCE-1.2.0.md. FAIL_OR_UNAVAILABLE не равен PASS. productionReady остаётся false до всех обязательных проверок.
 
 Состав тестов пересобирается package-native120.py из exact source/client ZIP текущего кандидата и явно переданного JDK21. Все классы fixture/wrapper остаются только в этом комплекте. Приложение не загружает эти JAR.
 ''',encoding='utf-8')
 shutil.copy2(pathlib.Path(__file__),kit/'package-native120.py')
-(kit/'SHA256SUMS').write_text(''.join(sha(f)+'  '+f.name+'\n' for f in sorted(kit.iterdir()) if f.is_file() and f.name!='SHA256SUMS'))
+(kit/'SHA256SUMS').write_text(''.join(sha(f)+'  '+f.relative_to(kit).as_posix()+'\n' for f in sorted(kit.rglob('*')) if f.is_file() and f.name!='SHA256SUMS'))
 archive=r/f'AEGIS-{version}-native-acceptance.zip'
 with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED,compresslevel=6) as z:
- for f in sorted(kit.iterdir()):
-  if f.is_file():z.write(f,'native-acceptance/'+f.name)
+ for f in sorted(kit.rglob('*')):
+  if f.is_file():z.write(f,'native-acceptance/'+f.relative_to(kit).as_posix())
 with zipfile.ZipFile(archive) as z:assert z.testzip() is None
 print(json.dumps({'file':archive.name,'sha256':sha(archive),'nativeAcceptanceExecuted':False}))

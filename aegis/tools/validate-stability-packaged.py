@@ -63,7 +63,14 @@ if windows:
     if log.exists() and 'TOR_DIRECT_START' in log.read_text():break
     time.sleep(.2)
    assert client.poll() is None and log.exists() and 'TOR_DIRECT_START' in log.read_text()
-   bindings=subprocess.check_output(['netstat','-ano','-p','tcp'],text=True)
+   report['launcherPhase']='WAIT_OWN_LOOPBACK_LISTENERS'
+   deadline=time.monotonic()+20
+   while True:
+    bindings=subprocess.check_output(['netstat','-ano','-p','tcp'],text=True)
+    ready=all('127.0.0.1:'+str(port) in bindings for port in [19050,19051,19052])
+    if ready:break
+    assert client.poll() is None and time.monotonic()<deadline,'Owned Tor listeners not ready'
+    time.sleep(.1)
    for port in [19050,19051,19052]:
     assert '127.0.0.1:'+str(port) in bindings
     assert '0.0.0.0:'+str(port) not in bindings
@@ -86,8 +93,8 @@ if windows:
     pid=w.DWORD();user.GetWindowThreadProcessId(hwnd,ctypes.byref(pid))
     if pid.value in children and user.IsWindowVisible(hwnd):user.PostMessageW(hwnd,0x10,0,0);closed.append(pid.value)
     return True
-   user.EnumWindows(visit,0);assert closed
-   assert client.wait(timeout=25)==0
+   report['launcherPhase']='CLOSE_OWN_WINDOW';user.EnumWindows(visit,0);assert closed
+   assert client.wait(timeout=25)==0;report['launcherPhase']='VERIFY_OWN_SHUTDOWN'
    assert foreign.poll() is None
    for port in [19050,19051,19052]:
     with socket.socket() as sock:sock.bind(('127.0.0.1',port))
