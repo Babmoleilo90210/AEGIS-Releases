@@ -192,7 +192,7 @@ public final class NetworkService {
     Route route=remote.route();long now=local.now();
     if(route==null||route.port()!=org.securemail.client.lifecycle.DeviceCapabilities.ONION_PORT||!route.userId().equals(contact.userId())||route.expiresAt()<=now||route.expiresAt()>now+300_000||!Identity.verify(contact.publicKey(),route.signingBytes(),route.signature()))return null;
     byte[] challenge=Secrets.random(32);
-    try(var socket=tor.connect(route.onionAddress(),route.port());var in=new DataInputStream(new BufferedInputStream(socket.getInputStream()));var out=new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()))){
+    try(var socket=tor.connectPeer(route.onionAddress(),route.port());var in=new DataInputStream(new BufferedInputStream(socket.getInputStream()));var out=new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()))){
       socket.setSoTimeout(20_000);Binary.header(out);out.writeByte(org.securemail.client.lifecycle.DeviceCapabilities.OPERATION);Binary.text(out,"");Binary.bytes(out,challenge);out.flush();
       Binary.header(in);if(in.readInt()!=0)throw new IOException("Capability probe unavailable");
       var caps=org.securemail.client.lifecycle.DeviceCapabilities.read(in);caps.verify(contact,challenge,now);return caps;

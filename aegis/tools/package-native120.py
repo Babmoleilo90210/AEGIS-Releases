@@ -50,7 +50,7 @@ public final class AppearanceNativeLauncher {
  (kit/'TESTED-ARTIFACTS.json').write_text(json.dumps(metadata,indent=2)+'\n')
  if a.staging_deps:
   staging=kit/'staging';staging.mkdir(exist_ok=True)
-  relay=Path(__file__).resolve().parents[1]/'build/local-java21/compatibility/relay02/lib/relay-server.jar';shutil.copy2(relay,staging/relay.name)
+  relay=pathlib.Path(__file__).resolve().parents[1]/'build/local-java21/compatibility/relay02/lib/relay-server.jar';shutil.copy2(relay,staging/relay.name)
   for dep in a.staging_deps.glob('*.jar'):
    if dep.name.startswith(('password4j-','sqlite-jdbc-','slf4j-')):shutil.copy2(dep,staging/dep.name)
   main=source/'integration-tests/src/test/java/org/securemail/integration/LifecycleTorProbe.java'

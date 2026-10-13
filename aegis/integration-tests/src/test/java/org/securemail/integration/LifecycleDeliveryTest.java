@@ -41,6 +41,15 @@ class LifecycleDeliveryTest {
       }
     }
   }
+  @Test void unshownProtectedExpiringLetterSurvivesAppRestartWithoutStartingTimer()throws Exception {
+    var clock=Clock.systemUTC();try(var a=new LocalStore(temp.resolve("a"),vault,clock,1_000_000,16_000_000);var b=new LocalStore(temp.resolve("b"),vault,clock,1_000_000,16_000_000)){
+      a.bindNickname("raven");b.bindNickname("blackfox");var au=new UserInfo(a.identity().userId(),"raven",a.identity().publicKey(),null);var bu=new UserInfo(b.identity().userId(),"blackfox",b.identity().publicKey(),null);a.trust(bu);b.trust(au);var af=new LocalFeatures(a);var bf=new LocalFeatures(b);String id;
+      try(var al=new LifecycleService(a,af,1_000_000);var bl=new LifecycleService(b,bf,1_000_000)){
+        al.learn(bu,bl.capabilities(Secrets.random(32)));EncryptedPacket p;try(var plain=PlainMessage.letter("Protected timed",LetterEnvelope.seal("Secret fixture","letter passphrase".toCharArray(),"FF1-code".toCharArray()),null,200000)){p=al.encryptExpiring(plain,bu,60,86400000);}id=p.messageId();bl.accept(p);try(var opened=bl.open(bl.loadHistory(id,false),200000,true)){assertTrue(opened.protectedLetter());}assertEquals(Long.MAX_VALUE,bl.remaining(id));
+      }
+      try(var reopened=new LifecycleService(b,bf,1_000_000)){assertEquals(Long.MAX_VALUE,reopened.remaining(id));assertFalse(reopened.expired(id));try(var opened=reopened.open(reopened.loadHistory(id,false),200000,true)){reopened.prepareDisplay(id);reopened.cancelUnshown(id);}assertEquals(Long.MAX_VALUE,reopened.remaining(id));}
+    }
+  }
   @Test void forgedReadEventFromAnotherRootCannotAlterDeliveryStatus()throws Exception {
     var clock=Clock.systemUTC();try(var a=new LocalStore(temp.resolve("a"),vault,clock,1_000_000,16_000_000);var b=new LocalStore(temp.resolve("b"),vault,clock,1_000_000,16_000_000)){
       a.bindNickname("raven");b.bindNickname("blackfox");var au=new UserInfo(a.identity().userId(),"raven",a.identity().publicKey(),null);var bu=new UserInfo(b.identity().userId(),"blackfox",b.identity().publicKey(),null);a.trust(bu);var af=new LocalFeatures(a);

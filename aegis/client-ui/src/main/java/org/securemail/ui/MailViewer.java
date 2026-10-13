@@ -22,6 +22,8 @@ final class MailViewer implements AutoCloseable {
     void original(MailContext reference);
     boolean unknown();
     default void displayed(){}
+    default void prepareDisplay()throws Exception{}
+    default void closed(boolean wasDisplayed){}
     default long expiresAt(){return -1;}
   }
   private final Stage stage;private InWindowDialog<Void> page;
@@ -35,7 +37,7 @@ final class MailViewer implements AutoCloseable {
   private final Timeline timer;
   private LetterEnvelope.Opened opened;
   private LiveCode live;
-  private volatile boolean closed;private boolean revealed,displayNotified;
+  private volatile boolean closed;private boolean revealed,displayNotified;private long revealGeneration;private Actions lifecycleActions;
   private char[] archivePassword;private boolean exporting;private Button download;
   private VBox host;private java.util.function.LongSupplier expiry;
   MailViewer(Stage owner,ThemeManager themes,PlainMessage plain,LocalStore.HistoryItem item,ExecutorService worker,LongSupplier now) {
@@ -45,7 +47,7 @@ final class MailViewer implements AutoCloseable {
     this(owner,themes,plain,item,worker,now,host,null);
   }
   MailViewer(Stage owner,ThemeManager themes,PlainMessage plain,LocalStore.HistoryItem item,ExecutorService worker,LongSupplier now,VBox host,Actions actions) {
-    this.host=host;expiry=()->actions!=null&&actions.expiresAt()>=0?actions.expiresAt():item.expiresAt();
+    this.host=host;this.lifecycleActions=actions;expiry=()->actions!=null&&actions.expiresAt()>=0?actions.expiresAt():item.expiresAt();
     this.plain=plain;stage=owner;content.setPadding(new Insets(22));
     Label heading=new Label(plain.subject().isBlank()?"Без темы":plain.subject());heading.getStyleClass().add("brand");
     Label lifetime=new Label();lifetime.getStyleClass().add("muted");
@@ -58,7 +60,7 @@ final class MailViewer implements AutoCloseable {
       reply.setOnAction(e->{if(!closed&&expiry.getAsLong()>now.getAsLong())actions.reply(item,plain);});
       forward.setOnAction(e->{
         if(closed||expiry.getAsLong()<=now.getAsLong())return;
-        if(plain.protectedLetter()&&(opened==null||code.value().length==0||text.getText().isEmpty())){error.setText("Сначала откройте письмо");if(!content.getChildren().contains(error))content.getChildren().add(error);return;}
+        if(plain.protectedLetter()&&(opened==null||code.value().length==0||text.getText().isEmpty()||actions!=null&&!revealed)){error.setText("Сначала откройте письмо");if(!content.getChildren().contains(error))content.getChildren().add(error);return;}
         InWindowAlert confirm=new InWindowAlert(Alert.AlertType.CONFIRMATION,"Переслать открытый текст новым письмом?",ButtonType.OK,ButtonType.CANCEL);confirm.initOwner(host==null?stage:owner);confirm.setHeaderText(null);themes.apply(confirm.getDialogPane());
         CheckBox files=new CheckBox("Включить вложения");if(!plain.files().isEmpty())confirm.getDialogPane().setContent(new VBox(10,new Label("Переслать это письмо выбранному получателю?"),files));
         if(confirm.showAndWait().orElse(ButtonType.CANCEL)==ButtonType.OK&&!closed&&expiry.getAsLong()>now.getAsLong())actions.forward(item,plain,text.getText(),files.isSelected()?plain.copyFiles():null);
@@ -75,10 +77,13 @@ final class MailViewer implements AutoCloseable {
         worker.execute(()->{
           try{
             var value=LetterEnvelope.open(envelope,secret);char[] held=secret.clone();
-            Platform.runLater(()->{if(closed){value.close();Arrays.fill(held,'\0');return;}opened=value;archivePassword=held;if(download!=null)download.setDisable(false);content.getChildren().removeAll(row,error);content.getChildren().addAll(text,code);
-              text.setText(value.ciphertext());live=new LiveCode(value::candidate,Platform::runLater,result->{if(!closed&&(actions==null||revealed)){text.setText(result);if(actions!=null)contentDisplayed(actions);}});
-              if(actions!=null){Button reveal=new Button("Показать результат");reveal.setOnAction(event->{if(closed||code.value().length==0)return;revealed=true;live.change(code.value(),value.ciphertext());});content.getChildren().add(reveal);}
-              code.hidden.textProperty().addListener((o,a,b)->{if(closed)return;if(actions==null){text.clear();live.change(code.value(),value.ciphertext());}else{revealed=false;text.setText(value.ciphertext());}});
+            Platform.runLater(()->{if(closed){value.close();Arrays.fill(held,'\0');return;}opened=value;archivePassword=held;if(download!=null&&actions==null)download.setDisable(false);content.getChildren().removeAll(row,error);content.getChildren().addAll(text,code);
+              text.setText(value.ciphertext());if(actions==null)live=new LiveCode(value::candidate,Platform::runLater,result->{if(!closed)text.setText(result);});
+              if(actions!=null){Button reveal=new Button("Показать результат");reveal.setOnAction(event->{
+                char[] entered=code.value();if(closed||entered.length==0){Arrays.fill(entered,'\0');return;}long generation=++revealGeneration;reveal.setDisable(true);reveal.setText("Открытие…");
+                worker.execute(()->{try{actions.prepareDisplay();String result=value.candidate(entered);Platform.runLater(()->{if(!closed&&generation==revealGeneration){revealed=true;text.setText(result);if(download!=null)download.setDisable(false);contentDisplayed(actions);}});}catch(Exception failure){Platform.runLater(()->{if(!closed){error.setText("Не удалось показать письмо. Проверьте срок и состояние хранилища.");if(!content.getChildren().contains(error))content.getChildren().add(error);}});}finally{Arrays.fill(entered,'\0');Platform.runLater(()->{reveal.setDisable(false);reveal.setText("Показать результат");});}});
+              });content.getChildren().add(reveal);}
+              code.hidden.textProperty().addListener((o,a,b)->{if(closed)return;if(actions==null){text.clear();live.change(code.value(),value.ciphertext());}else{revealGeneration++;revealed=false;if(download!=null)download.setDisable(true);text.setText(value.ciphertext());}});
             });
           }catch(Exception failure){Platform.runLater(()->{if(!closed)error.setText(failure instanceof AEADBadTagException?"Неверный пароль письма.":"Не удалось открыть письмо.");});}
           finally{Arrays.fill(secret,'\0');Arrays.fill(envelope,(byte)0);Platform.runLater(()->{unlock.setDisable(false);unlock.setText("Открыть");});}
@@ -117,7 +122,7 @@ final class MailViewer implements AutoCloseable {
   boolean showing(){return !closed&&(host!=null||page!=null&&page.isShowing());}
   void appearance(org.securemail.client.appearance.Appearance.Settings settings){if(closed)return;var layout=settings.layout();content.setPadding(new Insets(layout.viewPadding()));content.setMaxWidth(layout.textWidth());content.setMinWidth(0);text.setMinWidth(0);if(layout.viewCard()){if(!content.getStyleClass().contains("letter-card"))content.getStyleClass().add("letter-card");}else content.getStyleClass().remove("letter-card");content.getChildren().remove(metadata);if(layout.metadataTop())content.getChildren().add(Math.min(1,content.getChildren().size()),metadata);else content.getChildren().add(metadata);if(actionBar!=null){actionBar.getChildren().clear();for(String name:layout.actions()){Button button=actionButtons.get(name);if(button!=null)actionBar.getChildren().add(button);}actionBar.setSpacing(settings.components().spacing());}}
   @Override public void close(){
-    if(closed)return;closed=true;timer.stop();if(live!=null)live.close();if(opened!=null)opened.close();
+    if(closed)return;closed=true;revealGeneration++;if(lifecycleActions!=null)try{lifecycleActions.closed(displayNotified);}catch(RuntimeException interrupted){/* Memory cleanup must complete even when the owner worker is stopping. */}timer.stop();if(live!=null)live.close();if(opened!=null)opened.close();
     password.clear();code.clear();text.clear();content.getChildren().clear();if(archivePassword!=null){Arrays.fill(archivePassword,'\0');archivePassword=null;}if(!exporting)plain.close();if(page!=null)page.close();
   }
 }

@@ -49,6 +49,7 @@ public final class ExpiryGuard implements AutoCloseable {
     long elapsed=Math.max(e.consumed,Math.max(e.baseline+stamp.elapsed()-e.start,Math.max(0,wall-e.wall)));e.consumed=elapsed;
     if(elapsed>=e.duration){e.expired=true;save();return 0;}return e.duration-elapsed;
   }
+  public synchronized void cancelPrepared(String id)throws IOException,GeneralSecurityException {require();Entry e=entries.get(id);if(e!=null&&!e.confirmed&&!e.expired){entries.remove(id);save();}}
   /** On startup a reveal prepared but never durably confirmed is treated as uncertain. */
   public synchronized void recover()throws IOException,GeneralSecurityException {if(!available())return;boolean changed=false;for(Entry e:entries.values())if(!e.confirmed&&!e.expired){e.expired=true;changed=true;}if(changed)save();}
   public synchronized void expire(String id)throws IOException,GeneralSecurityException {require();Limits.messageId(id);Entry e=entries.get(id);if(e==null){if(entries.size()>=8192)throw new IOException("Expiry ledger quota");var stamp=clock.stamp();e=new Entry();e.boot=stamp.boot();e.start=stamp.elapsed();e.wall=Math.max(1,System.currentTimeMillis());e.duration=60_000;entries.put(id,e);}if(!e.expired){e.expired=true;save();}}

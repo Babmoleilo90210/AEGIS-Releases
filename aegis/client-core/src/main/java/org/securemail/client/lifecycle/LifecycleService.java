@@ -144,10 +144,13 @@ public final class LifecycleService implements AutoCloseable {
     if(!item.outgoing()&&timed.containsKey(item.id())&&!readReceipts&&!mandatoryReceiptConsent)throw new IOException("Нужно согласие на обязательное подтверждение прочтения");
     PlainMessage carrier=crypto.decrypt(item.packet(),local.identity(),maxCipher);Timed t=timed.get(item.id());if(t==null)return carrier;
     try{if(t.expired||remaining(t.id)<=0)throw new IOException("Письмо исчезло");var envelope=ExpiringEnvelope.read(carrier,maxCipher);if(envelope==null)throw new IOException("Missing expiring envelope");envelope.verify(item.packet());
-      if(!t.outgoing){if(!envelope.deviceId().equals(device.userId()))throw new IOException("Это письмо адресовано другому устройству аккаунта");guard.prepare(t.id,t.seconds*1000,local.now());}
-      return crypto.decrypt(envelope.inner(),t.outgoing?local.identity():device,maximum);
+      if(!t.outgoing&&!envelope.deviceId().equals(device.userId()))throw new IOException("Это письмо адресовано другому устройству аккаунта");
+      PlainMessage opened=crypto.decrypt(envelope.inner(),t.outgoing?local.identity():device,maximum);
+      try{if(!t.outgoing&&!opened.protectedLetter())guard.prepare(t.id,t.seconds*1000,local.now());return opened;}catch(Exception failure){opened.close();throw failure;}
     }finally{carrier.close();}
   }
+  public synchronized void prepareDisplay(String id)throws IOException,GeneralSecurityException {ensureOpen();Timed t=timed.get(id);if(t!=null&&!t.outgoing){if(t.expired||remaining(id)<=0)throw new IOException("Письмо исчезло");guard.prepare(id,t.seconds*1000,local.now());}}
+  public synchronized void cancelUnshown(String id)throws IOException,GeneralSecurityException {ensureOpen();Timed t=timed.get(id);if(t!=null&&!t.outgoing&&t.displayed==0&&guard.available())guard.cancelPrepared(id);}
   public synchronized List<LocalStore.MailItem> mailboxIndex(boolean outgoing)throws IOException,GeneralSecurityException {
     var result=new ArrayList<LocalStore.MailItem>();for(var item:local.mailboxIndex(outgoing))if(!timed.containsKey(item.id()))result.add(new LocalStore.MailItem(item.id(),item.contact(),item.outgoing(),status(item.id(),item.status()),item.time(),item.expiresAt()));
     for(Timed t:timed.values())if(t.outgoing==outgoing){long left=t.expired?0:remaining(t.id);long expiry=left==0||left==Long.MAX_VALUE?Long.MAX_VALUE:local.now()+left;result.add(new LocalStore.MailItem(t.id,t.nickname,outgoing,left<=0?"Письмо исчезло":status(t.id,"Получено"),t.time,expiry));}return List.copyOf(result);
