@@ -14,6 +14,12 @@ import org.securemail.relay.*;
  * One OS and one Tor process: this is deliberately not Windows11/KDE cross-network acceptance.
  * No production relay, account, update feed or release key is touched. */
 public final class LifecycleTorProbe {
+  @FunctionalInterface private interface Refresh {void run()throws Exception;}
+  private static DeviceCapabilities warmProbe(NetworkService network,UserInfo peer,Refresh refresh)throws Exception {
+    java.io.IOException last=null;
+    for(int attempt=1;attempt<=3;attempt++){refresh.run();try{var value=network.probe(peer);if(value!=null)return value;last=new java.io.IOException("Signed peer route not yet available");}catch(java.io.IOException notReady){last=notReady;}System.out.println("Staging signed capability attempt "+attempt+" not ready");}
+    throw new java.io.IOException("Onion descriptor did not become available within three bounded probes",last);
+  }
   public static void main(String[] args)throws Exception {
     Path app=Path.of(args[0]).toAbsolutePath(),output=Path.of(args[1]).toAbsolutePath();Files.createDirectories(output);
     Path root=Files.createTempDirectory("AEGIS lifecycle onion staging ");System.setProperty("aegis.home",app.toString());System.setProperty("aegis.profile",root.toString());
@@ -26,7 +32,7 @@ public final class LifecycleTorProbe {
         na.authenticate("raven",password,true);nb.authenticate("blackfox",password,true);UserInfo au=nb.find("raven"),bu=na.find("blackfox");a.trust(bu);b.trust(au);var af=new LocalFeatures(a);var bf=new LocalFeatures(b);
         try(var al=new LifecycleService(a,af,2_000_000);var bl=new LifecycleService(b,bf,2_000_000);var pa=new PeerServer(0,a,2_000_000,al::accept,al::capabilities);var pb=new PeerServer(0,b,2_000_000,bl::accept,bl::capabilities)){
           na.packetAcceptor(al::accept);nb.packetAcceptor(bl::accept);al.network(na);bl.network(nb);pa.start();pb.start();String ao=ac.publish(pa.port()),bo=bc.publish(pb.port());na.publish(a.identity().route(ao,81,a.now()+90_000));nb.publish(b.identity().route(bo,81,b.now()+90_000));
-          var advertised=na.probe(bu);if(advertised==null)throw new AssertionError("Real signed onion capability unavailable");al.learn(bu,advertised);var reverse=nb.probe(au);if(reverse==null)throw new AssertionError("Reverse signed capability unavailable");bl.learn(au,reverse);
+          var advertised=warmProbe(na,bu,()->nb.publish(b.identity().route(bo,81,b.now()+90_000)));if(advertised==null)throw new AssertionError("Real signed onion capability unavailable");al.learn(bu,advertised);var reverse=warmProbe(nb,au,()->na.publish(a.identity().route(ao,81,a.now()+90_000)));if(reverse==null)throw new AssertionError("Reverse signed capability unavailable");bl.learn(au,reverse);
           al.sync(bu);bl.sync(au);na.fetchAndAcknowledge();nb.fetchAndAcknowledge();al.retry();bl.retry();if(!af.friend(bu.userId())||!bf.friend(au.userId()))throw new AssertionError("Real onion mutual friendship missing");
           na.publish(a.identity().route(ao,81,a.now()+90_000));nb.publish(b.identity().route(bo,81,b.now()+90_000));String text="Synthetic real Tor lifecycle fixture";EncryptedPacket p;try(var plain=PlainMessage.text(text)){p=new AutomaticEncryption(clock).encrypt(plain,86400,86400000,a.identity(),"raven",bu);}
           var result=al.send(p,bu);if(result.delivery()!=NetworkService.Delivery.P2P_CONFIRMED)throw new AssertionError("Real onion P2P was not used");
