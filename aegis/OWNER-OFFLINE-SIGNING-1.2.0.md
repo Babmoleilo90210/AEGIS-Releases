@@ -6,7 +6,7 @@
 
 1. Распакуйте комплект; проверьте `SHA256SUMS`, отдельно `SIGNING-INPUT-SHA256`. Сверьте хеши бинарников с отчётом.
 2. На копиях тестовых профилей проведите Windows 11, CachyOS KDE Wayland и X11 приёмку. Native kit и CSV находятся в комплекте. Проверьте миграцию, mail/file/offline/TTL, все UI/SYS сценарии, restart и rollback. Протокол/production Relay/onion не изменяются.
-3. Закройте ограничение постоянных encrypted drafts либо отдельно согласуйте его; незавершённый черновик пока блокирует установку. Сборка не закрывает этот gate.
+3. Завершите или отмените открытый черновик перед установкой: как в базе 1.1.5, он хранится только в памяти. Проверьте, что updater не завершает приложение с несохранённым черновиком. Identity backup не заменяет полный backup профиля.
 4. Для полного updater испытания предыдущего опубликованного клиента потребуется отдельно разрешённый подписанный Beta feed того же репозитория и доступные по HTTPS assets. Не заменяйте Stable для испытаний. Уже опубликованный 1.1.5 не принимает произвольный локальный test URL. Fixture-тесты этого ограничения не снимают.
 5. Подписывайте конкретные неизменённые байты manifest офлайн. После изменения бинарника, source ZIP или SHA256SUMS нужен пересозданный manifest и новая подпись.
 6. Проверьте подпись public key перед передачей только публичных release-файлов на онлайн-машину. Private key остаётся офлайн.
@@ -40,3 +40,24 @@ OpenSSL должен вывести `Signature Verified Successfully`. Detached 
 Windows: открыть Setup под обычной учётной записью либо распаковать весь ZIP и открыть AEGIS.exe. Не извлекать один EXE из пакета — нужны runtime/tor/app. Java и Tor Browser отдельно не нужны. Данные сохраняются в LocalAppData.
 
 CachyOS: скачать AppImage, `chmod +x AEGIS-1.2.0-CachyOS-x86_64.AppImage`, открыть его. Runtime и Tor внутри. Используйте README-CACHYOS.md для ограничений FUSE/Wayland. Не открывайте входящие порты и не запускайте клиент root.
+
+## Отдельный unsigned Beta input
+
+В итоговом комплекте подготовлен updates/beta-test.json: те же exact 1.2.0 assets и hashes, channel=beta. Этот файл и stable.json подписываются отдельно. Никакой feed автоматически не публикуется. Не копируйте одну подпись между каналами.
+
+Для изолированного owner-теста после отдельного разрешения/ручной публикации prerelease assets v1.2.0 и Beta feed:
+
+1. Используйте копию профиля и реальный установленный 1.1.5 (не заменяйте его verifier/test key). В настройках выберите Beta.
+2. На офлайн-машине проверьте signing input SHA-256 и подпишите Beta bytes своим существующим ключом:
+
+```bash
+openssl pkeyutl -sign -rawin -inkey /media/offline/aegis-ed25519-private.pem -in updates/beta-test.json -out updates/beta-test.json.sig
+openssl pkeyutl -verify -pubin -rawin -inkey updates/release-public.pem -in updates/beta-test.json -sigfile updates/beta-test.json.sig
+```
+
+3. На online-машину переносите только публичные файлы. Beta JSON и его подпись копируются exact bytes в main/updates/beta.json и beta.json.sig только вашим отдельным действием. Stable feed остаётся прежним. Подписанный manifest не поможет, если assets ещё недоступны по URL.
+4. Из 1.1.5 проверяйте Tor, announcement, download progress/resume, size/SHA-256, согласие, backup, установку и restart. Затем проверьте письма/ключи/настройки, системное письмо об успехе и отдельный rollback сценарий. NOT_RUN не меняйте на PASS без evidence.
+
+Stable offline подпись выполняется для updates/stable.json из этого же неизменённого комплекта после mandatory acceptance. Signature command ничего не загружает на GitHub. ProductionReady=false остаётся до завершения native и signed install/restart/rollback gates.
+
+SHA256SUMS проверяет release assets/documents. Offline-signing ZIP имеет отдельный .sha256, чтобы не создавать циклический hash manifest→checksums→signing ZIP→manifest. SIGNING-INPUT-SHA256 проверяет exact Stable/Beta input. После подписи не редактируйте JSON, hashes или assets.

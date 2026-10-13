@@ -14,5 +14,9 @@
   "nativeRollback": "NOT_RUN",
   "persistentDrafts": "NOT_IMPLEMENTED_IN_BASE115",
   "publicationAuthorized": false,
-  "expiryRebootPolicy": "CONSERVATIVE_EARLY_EXPIRY_DOCUMENTED"
+  "expiryRebootPolicy": "CONSERVATIVE_EARLY_EXPIRY_DOCUMENTED",
+  "actualTorStaging": "PASS_DISPOSABLE_RELAY02",
+  "packagedWindowsServer": "PASS",
+  "packagedUbuntu": "PASS",
+  "nativeCrossNetwork": "NOT_RUN"
 }

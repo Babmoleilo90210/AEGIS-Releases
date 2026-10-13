@@ -1,88 +1,88 @@
 platform,test,status,evidence,reason
-Windows 11 x64,FR-01,NOT_RUN,,Lifecycle approval needed
-Windows 11 x64,FR-02,NOT_RUN,,Lifecycle approval needed
-Windows 11 x64,FR-03,NOT_RUN,,Owner native acceptance pending
-Windows 11 x64,FR-04,NOT_RUN,,Owner native acceptance pending
-Windows 11 x64,TOR-01,NOT_RUN,,Owner native acceptance pending
-Windows 11 x64,TOR-02,NOT_RUN,,Owner native acceptance pending
-Windows 11 x64,TOR-03,NOT_RUN,,Owner native acceptance pending
-Windows 11 x64,TOR-04,NOT_RUN,,Owner native acceptance pending
-Windows 11 x64,TOR-05,NOT_RUN,,Owner native acceptance pending
-Windows 11 x64,MSG-01,NOT_RUN,,Owner native acceptance pending
-Windows 11 x64,MSG-02,NOT_RUN,,Owner native acceptance pending
-Windows 11 x64,MSG-03,NOT_RUN,,Lifecycle approval needed
-Windows 11 x64,MSG-04,NOT_RUN,,Lifecycle approval needed
-Windows 11 x64,MSG-05,NOT_RUN,,Lifecycle approval needed
-Windows 11 x64,MSG-06,NOT_RUN,,Lifecycle approval needed
-Windows 11 x64,EXP-01,NOT_RUN,,Lifecycle approval needed
-Windows 11 x64,EXP-02,NOT_RUN,,Lifecycle approval needed
-Windows 11 x64,EXP-03,NOT_RUN,,Lifecycle approval needed
-Windows 11 x64,EXP-04,NOT_RUN,,Lifecycle approval needed
-Windows 11 x64,EXP-05,NOT_RUN,,Lifecycle approval needed
-Windows 11 x64,EXP-06,NOT_RUN,,Lifecycle approval needed
-Windows 11 x64,EXP-07,NOT_RUN,,Lifecycle approval needed
-Windows 11 x64,UI-01,NOT_RUN,,Owner native acceptance pending
-Windows 11 x64,UI-02,NOT_RUN,,Owner native acceptance pending
-Windows 11 x64,UI-03,NOT_RUN,,Owner native acceptance pending
-Windows 11 x64,UI-04,NOT_RUN,,Owner native acceptance pending
-Windows 11 x64,UPD-01,NOT_RUN,,Owner native acceptance pending
-Windows 11 x64,UPD-02,NOT_RUN,,Owner native acceptance pending
-Windows 11 x64,MIG-01,NOT_RUN,,Owner native acceptance pending
-CachyOS KDE Wayland,FR-01,NOT_RUN,,Lifecycle approval needed
-CachyOS KDE Wayland,FR-02,NOT_RUN,,Lifecycle approval needed
-CachyOS KDE Wayland,FR-03,NOT_RUN,,Owner native acceptance pending
-CachyOS KDE Wayland,FR-04,NOT_RUN,,Owner native acceptance pending
-CachyOS KDE Wayland,TOR-01,NOT_RUN,,Owner native acceptance pending
-CachyOS KDE Wayland,TOR-02,NOT_RUN,,Owner native acceptance pending
-CachyOS KDE Wayland,TOR-03,NOT_RUN,,Owner native acceptance pending
-CachyOS KDE Wayland,TOR-04,NOT_RUN,,Owner native acceptance pending
-CachyOS KDE Wayland,TOR-05,NOT_RUN,,Owner native acceptance pending
-CachyOS KDE Wayland,MSG-01,NOT_RUN,,Owner native acceptance pending
-CachyOS KDE Wayland,MSG-02,NOT_RUN,,Owner native acceptance pending
-CachyOS KDE Wayland,MSG-03,NOT_RUN,,Lifecycle approval needed
-CachyOS KDE Wayland,MSG-04,NOT_RUN,,Lifecycle approval needed
-CachyOS KDE Wayland,MSG-05,NOT_RUN,,Lifecycle approval needed
-CachyOS KDE Wayland,MSG-06,NOT_RUN,,Lifecycle approval needed
-CachyOS KDE Wayland,EXP-01,NOT_RUN,,Lifecycle approval needed
-CachyOS KDE Wayland,EXP-02,NOT_RUN,,Lifecycle approval needed
-CachyOS KDE Wayland,EXP-03,NOT_RUN,,Lifecycle approval needed
-CachyOS KDE Wayland,EXP-04,NOT_RUN,,Lifecycle approval needed
-CachyOS KDE Wayland,EXP-05,NOT_RUN,,Lifecycle approval needed
-CachyOS KDE Wayland,EXP-06,NOT_RUN,,Lifecycle approval needed
-CachyOS KDE Wayland,EXP-07,NOT_RUN,,Lifecycle approval needed
-CachyOS KDE Wayland,UI-01,NOT_RUN,,Owner native acceptance pending
-CachyOS KDE Wayland,UI-02,NOT_RUN,,Owner native acceptance pending
-CachyOS KDE Wayland,UI-03,NOT_RUN,,Owner native acceptance pending
-CachyOS KDE Wayland,UI-04,NOT_RUN,,Owner native acceptance pending
-CachyOS KDE Wayland,UPD-01,NOT_RUN,,Owner native acceptance pending
-CachyOS KDE Wayland,UPD-02,NOT_RUN,,Owner native acceptance pending
-CachyOS KDE Wayland,MIG-01,NOT_RUN,,Owner native acceptance pending
-CachyOS KDE X11,FR-01,NOT_RUN,,Lifecycle approval needed
-CachyOS KDE X11,FR-02,NOT_RUN,,Lifecycle approval needed
-CachyOS KDE X11,FR-03,NOT_RUN,,Owner native acceptance pending
-CachyOS KDE X11,FR-04,NOT_RUN,,Owner native acceptance pending
-CachyOS KDE X11,TOR-01,NOT_RUN,,Owner native acceptance pending
-CachyOS KDE X11,TOR-02,NOT_RUN,,Owner native acceptance pending
-CachyOS KDE X11,TOR-03,NOT_RUN,,Owner native acceptance pending
-CachyOS KDE X11,TOR-04,NOT_RUN,,Owner native acceptance pending
-CachyOS KDE X11,TOR-05,NOT_RUN,,Owner native acceptance pending
-CachyOS KDE X11,MSG-01,NOT_RUN,,Owner native acceptance pending
-CachyOS KDE X11,MSG-02,NOT_RUN,,Owner native acceptance pending
-CachyOS KDE X11,MSG-03,NOT_RUN,,Lifecycle approval needed
-CachyOS KDE X11,MSG-04,NOT_RUN,,Lifecycle approval needed
-CachyOS KDE X11,MSG-05,NOT_RUN,,Lifecycle approval needed
-CachyOS KDE X11,MSG-06,NOT_RUN,,Lifecycle approval needed
-CachyOS KDE X11,EXP-01,NOT_RUN,,Lifecycle approval needed
-CachyOS KDE X11,EXP-02,NOT_RUN,,Lifecycle approval needed
-CachyOS KDE X11,EXP-03,NOT_RUN,,Lifecycle approval needed
-CachyOS KDE X11,EXP-04,NOT_RUN,,Lifecycle approval needed
-CachyOS KDE X11,EXP-05,NOT_RUN,,Lifecycle approval needed
-CachyOS KDE X11,EXP-06,NOT_RUN,,Lifecycle approval needed
-CachyOS KDE X11,EXP-07,NOT_RUN,,Lifecycle approval needed
-CachyOS KDE X11,UI-01,NOT_RUN,,Owner native acceptance pending
-CachyOS KDE X11,UI-02,NOT_RUN,,Owner native acceptance pending
-CachyOS KDE X11,UI-03,NOT_RUN,,Owner native acceptance pending
-CachyOS KDE X11,UI-04,NOT_RUN,,Owner native acceptance pending
-CachyOS KDE X11,UPD-01,NOT_RUN,,Owner native acceptance pending
-CachyOS KDE X11,UPD-02,NOT_RUN,,Owner native acceptance pending
-CachyOS KDE X11,MIG-01,NOT_RUN,,Owner native acceptance pending
+Windows 11 x64,FR-01,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+Windows 11 x64,FR-02,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+Windows 11 x64,FR-03,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+Windows 11 x64,FR-04,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+Windows 11 x64,TOR-01,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+Windows 11 x64,TOR-02,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+Windows 11 x64,TOR-03,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+Windows 11 x64,TOR-04,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+Windows 11 x64,TOR-05,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+Windows 11 x64,MSG-01,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+Windows 11 x64,MSG-02,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+Windows 11 x64,MSG-03,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+Windows 11 x64,MSG-04,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+Windows 11 x64,MSG-05,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+Windows 11 x64,MSG-06,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+Windows 11 x64,EXP-01,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+Windows 11 x64,EXP-02,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+Windows 11 x64,EXP-03,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+Windows 11 x64,EXP-04,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+Windows 11 x64,EXP-05,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+Windows 11 x64,EXP-06,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+Windows 11 x64,EXP-07,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+Windows 11 x64,UI-01,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+Windows 11 x64,UI-02,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+Windows 11 x64,UI-03,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+Windows 11 x64,UI-04,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+Windows 11 x64,UPD-01,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+Windows 11 x64,UPD-02,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+Windows 11 x64,MIG-01,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE Wayland,FR-01,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE Wayland,FR-02,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE Wayland,FR-03,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE Wayland,FR-04,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE Wayland,TOR-01,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE Wayland,TOR-02,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE Wayland,TOR-03,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE Wayland,TOR-04,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE Wayland,TOR-05,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE Wayland,MSG-01,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE Wayland,MSG-02,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE Wayland,MSG-03,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE Wayland,MSG-04,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE Wayland,MSG-05,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE Wayland,MSG-06,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE Wayland,EXP-01,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE Wayland,EXP-02,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE Wayland,EXP-03,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE Wayland,EXP-04,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE Wayland,EXP-05,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE Wayland,EXP-06,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE Wayland,EXP-07,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE Wayland,UI-01,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE Wayland,UI-02,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE Wayland,UI-03,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE Wayland,UI-04,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE Wayland,UPD-01,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE Wayland,UPD-02,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE Wayland,MIG-01,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE X11,FR-01,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE X11,FR-02,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE X11,FR-03,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE X11,FR-04,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE X11,TOR-01,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE X11,TOR-02,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE X11,TOR-03,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE X11,TOR-04,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE X11,TOR-05,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE X11,MSG-01,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE X11,MSG-02,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE X11,MSG-03,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE X11,MSG-04,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE X11,MSG-05,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE X11,MSG-06,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE X11,EXP-01,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE X11,EXP-02,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE X11,EXP-03,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE X11,EXP-04,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE X11,EXP-05,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE X11,EXP-06,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE X11,EXP-07,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE X11,UI-01,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE X11,UI-02,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE X11,UI-03,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE X11,UI-04,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE X11,UPD-01,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE X11,UPD-02,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"
+CachyOS KDE X11,MIG-01,NOT_RUN,,"Owner Windows11/CachyOS acceptance pending; client-only lifecycle implemented, no Relay upgrade required"

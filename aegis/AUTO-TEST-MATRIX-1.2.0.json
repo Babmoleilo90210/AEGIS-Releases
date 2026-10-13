@@ -2,13 +2,6 @@
   "version": "1.2.0",
   "productionReady": false,
   "junit": {
-    "client-core": {
-      "tests": 122,
-      "pass": 121,
-      "skip": 1,
-      "fail": 0,
-      "errors": 0
-    },
     "common-protocol": {
       "tests": 4,
       "pass": 4,
@@ -16,16 +9,23 @@
       "fail": 0,
       "errors": 0
     },
-    "integration-tests": {
-      "tests": 11,
-      "pass": 11,
-      "skip": 0,
+    "client-core": {
+      "tests": 123,
+      "pass": 122,
+      "skip": 1,
       "fail": 0,
       "errors": 0
     },
     "relay-server": {
       "tests": 3,
       "pass": 3,
+      "skip": 0,
+      "fail": 0,
+      "errors": 0
+    },
+    "integration-tests": {
+      "tests": 12,
+      "pass": 12,
       "skip": 0,
       "fail": 0,
       "errors": 0
@@ -53,7 +53,7 @@
       "Stability120Smoke",
       "Lifecycle120Smoke"
     ],
-    "currentRun": "Lifecycle120Smoke and MessengerSmoke PASS; full 9-suite CI pending"
+    "currentRun": "PASS_CI"
   },
   "compatibility": {
     "oldReleasedClientJARs": {
@@ -206,10 +206,130 @@
   "nativeCachyOSWayland": "NOT_RUN",
   "nativeCachyOSX11": "NOT_RUN",
   "signedPreviousTo120InstallRestartRollback": "NOT_RUN",
-  "lifecycleFeatures": "BLOCKED_ARCHITECTURE_APPROVAL",
+  "lifecycleFeatures": "IMPLEMENTED_CLIENT_ONLY; CONSERVATIVE_EXPIRY_ON_OS_REBOOT; NATIVE_ACCEPTANCE_PENDING",
   "previousBuildRunId": "38228975781",
   "previousBuildSourceCommit": "b8cbeff6902c9f7db7a284f6ba7c590fc42203bc",
-  "currentBuild": "LOCAL_CORE_PASS; NEW_CI_PACKAGING_PENDING",
-  "lifecycleUnitAndIntegration": "PASS: 7 security/storage/clock tests and 4 real TCP/SOCKS/SQLite integration tests; no native acceptance claim",
-  "actualTorStaging": "PENDING_CURRENT_CI"
+  "currentBuild": "PASS_CI_EXACT_PACKAGES",
+  "lifecycleUnitAndIntegration": "PASS: 8 lifecycle security/storage/clock tests, 5 actual TCP/SOCKS/SQLite lifecycle integration tests; no native acceptance claim",
+  "actualTorStaging": "PASS_REAL_ONION_DISPOSABLE_RELAY02; ONE_OS_NOT_NATIVE_CROSS_NETWORK",
+  "buildRunId": "38356575633",
+  "buildSourceCommit": "70f80c27c13321d3ad8f7c8d7fa630862c56c56d",
+  "packagedWindowsServer": {
+    "productionReady": false,
+    "nativeWindows11": "NOT_RUN",
+    "nativeCachyOSKDE": "NOT_RUN",
+    "artifactSourceCommit": "70f80c27c13321d3ad8f7c8d7fa630862c56c56d",
+    "actualOS": "nt",
+    "checks": [
+      {
+        "name": "packaged_runtime_native_cryptography_DPAPI_and_JavaFX",
+        "result": "PASS",
+        "elapsedSeconds": 52.62
+      },
+      {
+        "name": "real_NSIS_silent_install_with_isolated_profile",
+        "result": "PASS",
+        "elapsedSeconds": 8.48
+      },
+      {
+        "name": "real_AEGIS_EXE_no_global_Java_loopback_Tor_own_shutdown",
+        "result": "PASS",
+        "elapsedSeconds": 3.64
+      },
+      {
+        "name": "BUG11_real_embedded_Tor_TLS_production_Ed25519_old_feed",
+        "result": "PASS",
+        "elapsedSeconds": 16.47
+      },
+      {
+        "name": "published_110_verifier_stable_schema_exact_120_packages_fixture",
+        "result": "PASS",
+        "elapsedSeconds": 1.92
+      },
+      {
+        "name": "published_110_real_Tor_production_signature_download_resume_SHA256",
+        "result": "PASS",
+        "elapsedSeconds": 29.64
+      },
+      {
+        "name": "candidate_120_real_Tor_production_signature_download_resume_SHA256",
+        "result": "PASS",
+        "elapsedSeconds": 33.84
+      },
+      {
+        "name": "candidate_120_real_Snowflake_signature_download_resume_SHA256",
+        "result": "PASS",
+        "elapsedSeconds": 134.45
+      },
+      {
+        "name": "published_111_verifier_stable_schema_exact_120_packages_fixture",
+        "result": "PASS",
+        "elapsedSeconds": 1.98
+      },
+      {
+        "name": "published_115_verifier_stable_schema_exact_120_packages_fixture",
+        "result": "PASS",
+        "elapsedSeconds": 2.59
+      }
+    ],
+    "WindowsVersion": "sys.getwindowsversion(major=10, minor=0, build=26100, platform=2, service_pack='')",
+    "launcherPhase": "VERIFY_OWN_SHUTDOWN",
+    "crossPlatformLifecycle": {
+      "result": "NOT_RUN",
+      "reason": "Existing Debian/POSIX Relay cannot be hosted in a Windows JVM; requires separate Linux staging host and two native clients. Relay unchanged."
+    }
+  },
+  "packagedUbuntuTor": {
+    "productionReady": false,
+    "nativeWindows11": "NOT_RUN",
+    "nativeCachyOSKDE": "NOT_RUN",
+    "artifactSourceCommit": "70f80c27c13321d3ad8f7c8d7fa630862c56c56d",
+    "actualOS": "posix",
+    "checks": [
+      {
+        "name": "BUG11_real_embedded_Tor_TLS_production_Ed25519_old_feed",
+        "result": "PASS",
+        "elapsedSeconds": 41.92
+      },
+      {
+        "name": "published_110_verifier_stable_schema_exact_120_packages_fixture",
+        "result": "PASS",
+        "elapsedSeconds": 2.07
+      },
+      {
+        "name": "published_110_real_Tor_production_signature_download_resume_SHA256",
+        "result": "PASS",
+        "elapsedSeconds": 17.81
+      },
+      {
+        "name": "candidate_120_real_Tor_production_signature_download_resume_SHA256",
+        "result": "PASS",
+        "elapsedSeconds": 27.99
+      },
+      {
+        "name": "candidate_120_real_Snowflake_signature_download_resume_SHA256",
+        "result": "PASS",
+        "elapsedSeconds": 73.58
+      },
+      {
+        "name": "published_111_verifier_stable_schema_exact_120_packages_fixture",
+        "result": "PASS",
+        "elapsedSeconds": 2.12
+      },
+      {
+        "name": "published_115_verifier_stable_schema_exact_120_packages_fixture",
+        "result": "PASS",
+        "elapsedSeconds": 2.17
+      },
+      {
+        "name": "candidate_120_actual_Tor_ephemeral_staging_Friends_receipts_expiry",
+        "result": "PASS",
+        "elapsedSeconds": 264.54
+      }
+    ]
+  },
+  "finalLinuxAttempts": {
+    "first": "FAIL_OR_UNAVAILABLE: bounded cold-onion readiness timeout; evidence/packaged-linux-attempt1",
+    "singleRerun": "PASS: evidence/packaged-linux; exact same binaries"
+  }
 }

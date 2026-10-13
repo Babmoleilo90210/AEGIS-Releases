@@ -1,42 +1,36 @@
-# АЕГИС 1.2.0 — lifecycle candidate
+# АЕГИС 1.2.0 — release candidate
 
-Client-only Friends, signed receipts и device-bound disappearing добавлены без обновления Relay protocol 1. productionReady=false до native/E2E приёмки. LIFECYCLE-1.2.0.md описывает новые encrypted events, local device key/guard и conservative expiry после reboot. Все обычные сетевые операции остаются Tor-only; дополнительно используется только account-signed peer onion virtual port 81 через существующий mail SOCKS. Прямые IP/HTTP/fallback не добавлены.
+АЕГИС — Автономная Единая Гибридная Информационная Система. Обновление Stability, Reliability & Message Lifecycle продолжает кодовую базу 1.1.5.
 
-> АЕГИС 1.2.0: незавершённый клиентский кандидат. productionReady=false.
-> Friends на Relay0.2.0, receipts и timer-after-read ожидают архитектурного решения.
-> См. AUDIT-1.2.0-RU.md, RELAY-LIFECYCLE-PROPOSAL-1.2.0.md и TEST-REPORT-1.2.0.md.
+**productionReady=false.** Клиентские функции собраны и прошли автоматические и настоящее Tor staging проверки. Windows 11, CachyOS KDE Wayland/X11 и полный подписанный updater/install/restart/rollback должны пройти нативную приёмку владельцем. Этот комплект не является опубликованным Stable.
 
-# АЕГИС 1.2.0 — клиентский кандидат
+## Файлы
 
-Автономная Единая Гибридная Информационная Система. Локальные Java 21 клиенты Windows/CachyOS и заменяемый protocol-1 relay. Продолжает фактически опубликованную 1.1.5 Stable: исправления подключения, интерфейса и обновлений, с сохранением идентичности и protocol 1. Lifecycle часть ждёт архитектурного согласования.
+- AEGIS-Setup-1.2.0-x64.exe — установка Windows под обычной учётной записью.
+- AEGIS-1.2.0-Windows-x64.zip — portable Windows; распаковать полностью и открыть AEGIS.exe.
+- AEGIS-1.2.0-CachyOS-x86_64.AppImage — Java 21, Tor и Snowflake внутри.
+- AEGIS-1.2.0-source.zip и client-source.zip — исходники и build scripts; версия общего протокола/Relay сохранена намеренно.
+- AEGIS-1.2.0-native-acceptance.zip — набор тестов, сценариев и матрица для владельца.
+- AEGIS-1.2.0-offline-signing.zip — неподписанные Stable/Beta manifest inputs, существующий публичный ключ и инструкция. Private key отсутствует.
+- SHA256SUMS и SIGNING-INPUT-SHA256 — проверка release assets и точных байтов manifest.
+- TEST-REPORT-1.2.0.md и evidence/ — результаты и ограничения проверок.
 
-Текущая сборка — **unsigned candidate**, `productionReady=false`. Реализация, JavaFX регрессии и staging совместимость проверяются отдельно от настоящих Windows/KDE/Tor/VPS испытаний. Production Relay, onion identity, опубликованные релизы и pinned release public key не изменены.
+Начните с README-WINDOWS.md или README-CACHYOS.md, затем MIGRATION-1.1.5-TO-1.2.0.md и NATIVE-ACCEPTANCE-1.2.0.md. Изменения перечислены в CHANGELOG-1.2.0.md.
 
-Начало работы: [Windows](README-WINDOWS.md), [CachyOS](README-CACHYOS.md), [переход с 1.1.5](MIGRATION-1.1.5-TO-1.2.0.md). Для разработчика: [сборка](BUILD-1.2.0.md), [изменения](CHANGELOG-1.2.0.md), [отчёт тестирования](TEST-REPORT-1.2.0.md), [optional staging Relay](RELAY-0.3-STAGING.md), [угрозы](THREAT_MODEL.md).
+## Что изменилось
 
+Подписанные взаимные Friends и durable delivery/read receipts передаются через прежние encrypted письма, без обновления production Relay 0.2.0. Исчезающие письма используют одно проверенное устройство и timer после отображения. Обычные письма сохраняют прежний TTL после доставки; старым письмам не добавляются новые timers/read statuses. Обновлены Tor state card, повторное подключение, адаптивная компоновка, локальные кириллические шрифты, встроенный просмотр аватара и изоляция updater helper.
 
-## Приложения и данные
+**Ограничение исчезающих писем:** reboot ОС, недостоверный ledger или неоднозначный прерванный reveal могут закрыть уже открытое письмо раньше срока. Перезапуск приложения в рамках того же boot сохраняет countdown. Это явно консервативная модель, не гарантия точного времени через reboot. См. LIFECYCLE-1.2.0.md. Экспортированные файлы/скриншоты не уничтожаются.
 
-`common-protocol` — модели, wire codecs и protocol 1; `client-core` — E2EE, ciphertext vault, доставка, local features и updater; `client-ui` — JavaFX desktop; `relay-server` — адресация, временный ciphertext и минимальные подписанные публичные данные. Relay не подключает client-core или криптографию расшифровки сообщений.
+## Все сетевые направления
 
-Письма всегда имеют TTL. Неизвестные отправители доставляются без автоматического добавления/доверия; подпись и наличие проверенного контакта показываются раздельно. Вложение сохраняется только вручную. Публичный профиль скрыт по умолчанию. Об аватарах, mutual friends, replies/chains, pins/search/offline и обновлениях — в CHANGELOG.
+Код Java обращается к собственным Tor SOCKS и Control на localhost. Почта — только к настроенному relay onion и account-signed peer onion; virtual ports 80/81 ведут в локальный клиентский сервис, публичный IP-порт не открывается. Control управляет только собственным Tor/onion и не получает приватные account/device/message keys. HTTPS updater использует отдельный localhost SOCKS Tor для подписанных GitHub feeds/assets и их разрешённых HTTPS redirect hosts. TLS, pinned Ed25519, размер, SHA-256 и anti-rollback обязательны. Прямого clearnet fallback в Java нет.
 
-## Все сетевые соединения
+Сам официальный Tor создаёт исходящие соединения Tor Direct, а Snowflake — документированные transport/broker/rendezvous/WebRTC соединения. Выбор режима и диагностические детали доступны в приложении; внешнего SaaS для писем нет. Существующий Debian Relay слушает loopback и получает только encrypted payload; новый server deployment не требуется и не входит в этот клиентский комплект. Полный прежний privacy/protocol/deployment код и документация находятся в source ZIP.
 
-| Компонент | Куда и для чего | Какие данные |
-|---|---|---|
-| Java клиент, почта | localhost SOCKS 19050 собственного Tor, только onion Relay/peer | протокол регистрации/входа; nickname, публичная identity/route; ciphertext, ACK; согласованные публичные profile/consent |
-| Java клиент, P2P | localhost listener 19120, опубликованный только через onion Tor | подписанный ciphertext и ACK; IP пользователя не передаётся Relay |
-| Java клиент, управление Tor | localhost Control 19051, SAFECOOKIE | bootstrap/публикация ephemeral onion; cookie не логируется |
-| Java клиент, updater | localhost SOCKS 19052 → GitHub HTTPS | manifest, Ed25519 подпись, release assets; профиль/пароли/переписка туда не отправляются |
-| Встроенный Tor | Tor directory/relays; при Snowflake официальные broker/front/STUN/WebRTC transport endpoints | сетевой транспорт Tor; настройки bridge перечислены в поставляемых pt_config.json/snowflake-bridges.txt |
-| Java Relay | localhost listener 19110; исходящих пользовательских HTTP/SaaS запросов нет | зашифрованная очередь, ACK, публичные идентификаторы |
-| Серверный Tor | сеть Tor/Snowflake, onion service → localhost Relay | транспорт; secret onion keys остаются у системного Tor |
+Нет телеметрии, аналитики, рекламных SDK или автоматической публикации. Independent security audit не проводился. Production Relay/onion/feed и pinned release key не изменены.
 
-Updater HTTPS допускает только `raw.githubusercontent.com`, `github.com`, `objects.githubusercontent.com`, `release-assets.githubusercontent.com`, ограниченные redirect и обязательную TLS hostname проверку. Почтовый SOCKS сохраняет `OnionTrafficOnly`. Прямого подключения Java к публичному IP/HTTPS, DNS fallback, телеметрии, аналитики, скрытого updater или cloud crash reporting нет.
+## Подпись и публикация
 
-Сборка — отдельное явное действие разработчика: Gradle/Maven Central, GitHub release inputs и SHA-pinned официальные репозитории шрифтов, официальный JDK/Tor через перечисленные build scripts. Установщик Debian ставит только необходимые пакеты через настроенный apt; ОС/GRUB/DNS не перенастраивает. Эти developer/admin соединения не запускаются пользовательским клиентом.
-
-Кандидат 1.2.0 не опубликован; 1.1.5 Stable уже опубликована. Ветка разработки: https://github.com/Babmoleilo90210/AEGIS-Releases/tree/development/aegis-1.2.0 . Финальные проверки, offline подпись владельца и публикация требуют отдельного завершения приёмки.
-
-Пять новых лицензированных шрифтов находятся внутри client-ui JAR; установленное приложение не загружает их из сети. Предложение Friends/receipts/исчезновение: [отдельное архитектурное ТЗ](RELAY-LIFECYCLE-PROPOSAL-1.2.0.md). Не считать legacy TTL-after-delivery исчезновением-after-read.
+OWNER-OFFLINE-SIGNING-1.2.0.md описывает owner-only офлайн Ed25519 подпись и отдельный Beta E2E тест. Stable публикуется только после обязательной приёмки. Подписи самостоятельно не созданы; существующая подпись другого manifest не подходит. GitHub URL v1.2.0 в manifest — будущие адреса, файлы по ним станут доступны после публикации владельцем.
