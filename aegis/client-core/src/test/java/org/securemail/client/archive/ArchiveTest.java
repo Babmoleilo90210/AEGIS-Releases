@@ -37,6 +37,7 @@ final class ArchiveTest {
     try(var a=create()){
       var f=a.folder("","PrivateFolderName");var item=a.importBytes("PrivateFileName.txt","text","TOP SECRET: КИРИЛЛИЦА контрольная строка".getBytes(StandardCharsets.UTF_8),f.id(),false,EncryptedArchive.QUIET,()->false);a.metadata(item.id(),f.id(),item.name(),List.of("PrivateTagName"),true);
       assertEquals(1,a.search(new EncryptedArchive.Filter("кириллица",f.id(),"text",0,Long.MAX_VALUE,true,false,true),EncryptedArchive.QUIET,()->false).size());
+      a.close(); // File locks are mandatory on NTFS; inspect the actual locked archive on both OSes.
       try(var files=Files.walk(root())){for(Path p:files.filter(Files::isRegularFile).toList()){String bytes=new String(Files.readAllBytes(p),StandardCharsets.ISO_8859_1);for(String secret:List.of("PrivateFolderName","PrivateFileName","PrivateTagName","TOP SECRET")){assertFalse(p.toString().contains(secret));assertFalse(bytes.contains(secret));}}}
     }
   }

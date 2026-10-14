@@ -22,7 +22,7 @@ public final class ArchiveBackup {
     try(var walk=Files.walk(archive.root())){files=walk.filter(p->Files.isRegularFile(p,LinkOption.NOFOLLOW_LINKS)&&name(archive.root().relativize(p).toString().replace('\\','/'))).sorted().toList();}
     long total=archive.usedBytes(),done=0;boolean created=false,success=false;
     try(var channel=FileChannel.open(target,Set.of(StandardOpenOption.CREATE_NEW,StandardOpenOption.WRITE),AtomicFiles.exportAttributes(target.getParent()))){
-      created=true;OutputStream file=new FilterOutputStream(Channels.newOutputStream(channel)){@Override public void close()throws IOException{flush();}};var outer=new DataOutputStream(file);outer.writeInt(MAGIC);outer.writeInt(1);Binary.text(outer,backupId);Binary.bytes(outer,encoded);outer.flush();
+      created=true;OutputStream file=new FilterOutputStream(Channels.newOutputStream(channel)){@Override public void write(byte[] bytes,int offset,int length)throws IOException{out.write(bytes,offset,length);}@Override public void close()throws IOException{flush();}};var outer=new DataOutputStream(file);outer.writeInt(MAGIC);outer.writeInt(1);Binary.text(outer,backupId);Binary.bytes(outer,encoded);outer.flush();
       try(var encrypted=ArchiveCrypto.stream(key).newEncryptingStream(file,ArchiveCrypto.aad("backup/"+backupId+"/"+ArchiveCrypto.digest(encoded)));var out=new DataOutputStream(encrypted)){
         out.writeInt(files.size());byte[] buffer=new byte[65536];
         try{for(Path path:files){if(Files.isSymbolicLink(path))throw new IOException("Symlink в контейнере");String relative=archive.root().relativize(path).toString().replace('\\','/');Binary.text(out,relative);

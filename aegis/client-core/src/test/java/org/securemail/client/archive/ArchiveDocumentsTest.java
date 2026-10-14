@@ -16,7 +16,7 @@ final class ArchiveDocumentsTest {
   }
   @Test void actualIsolatedPdfRenderAndTextExtraction()throws Exception {
     byte[] bytes;
-    try(var doc=new PDDocument();var out=new ByteArrayOutputStream()){
+    try(var fallback=PdfWorkerMain.memoryFonts();var doc=new PDDocument();var out=new ByteArrayOutputStream()){
       PDPage page=new PDPage();doc.addPage(page);try(var text=new PDPageContentStream(doc,page)){text.beginText();text.setFont(new PDType1Font(Standard14Fonts.FontName.HELVETICA),14);text.newLineAtOffset(40,700);text.showText("Synthetic private PDF document");text.endText();}doc.save(out);bytes=out.toByteArray();
     }
     ArchiveDocuments.PdfPage page=ArchiveDocuments.pdf(bytes,0);assertEquals(1,page.pages());assertTrue(page.text().contains("Synthetic private PDF document"));assertTrue(ArchiveDocuments.image(page.png()));assertTrue(ArchiveDocuments.pdfText(bytes).contains("Synthetic private PDF document"));
