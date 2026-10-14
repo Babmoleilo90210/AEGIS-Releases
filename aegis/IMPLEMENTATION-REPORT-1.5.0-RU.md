@@ -1,29 +1,76 @@
-# Реализация АЕГИС 1.5.0 — отчёт владельцу
+# АЕГИС 1.5.0 — отчёт реализации
 
-База опубликованного1.2.0: binaries70f80c27c13321d3ad8f7c8d7fa630862c56c56d, sourceoverlay8dd290af025921c16c40798f71b7958878524faf. Аудит и изменения — development/aegis-1.5.0. Exact sourcecommit/hash финального кандидата указан вBUILD-PROVENANCE.json/SHA256SUMS. Нельзя объявлять независимый securityaudit: его не было.
+Базовая версия — опубликованная 1.2.0. Бинарный commit: 70f80c27c13321d3ad8f7c8d7fa630862c56c56d. Итоговый исходный overlay: 8dd290af025921c16c40798f71b7958878524faf. Изменения выполнялись в development/aegis-1.5.0. Точный commit бинарников и хеш исходного ZIP указаны в BUILD-PROVENANCE.json и SHA256SUMS.
 
-## Реализовано
+**productionReady=false.** Кандидат предназначен для нативной приёмки владельцем. Независимый аудит безопасности не проводился. Production Relay, onion identity, update feed и приватный ключ подписи не изменялись.
 
-Независимое archivecore (ArchiveCrypto/EncryptedArchive/ArchiveBackup/ArchiveDocuments/PdfWorkerMain/ArchiveEntry), отдельныйpassword/optionalrecovery/DEKwrap, file/index/catalogAEAD, privateACL/POSIX, lock/autolock, import/export/folders/tags/favorite/search/filters/sort/trash/quota/dedup, encryptedbackup/schedule/restore/merge/repaircopy, localtext/image/PDFpreview. ArchiveView выполняетheavyoperationsотдельноотFX, не пересоздаёт сеть/криптографию письма приthemechange. Опасныеоперации требуютinlineconfirm; noextraStage.
+## Что реализовано
 
-MessengerApp/MailViewer: new6sectionnavigation/compactheader/mailcompose/settingscategories/noFriendsUI/nopopuptoasts; one retention selector сохраняет разныеwireTTL/lifecycle semantics; archiveaction gated onreveal+disappearingwarning; autoTor и inline accountreauth/allowedoffline. ThemeManager/AppearanceEngine/16presets/legacygreen/fonts/layouts сохранены; Appearance navigation безопасносопоставлена.
+Личный архив получил независимый пароль, случайный ключ данных, необязательный ключ восстановления, смену пароля без перешифрования файлов и автоматическую блокировку. Зашифрованы документы, имена, структура папок, теги, избранное, индекс и настройки резервных копий. На диске — случайные UUID. Права ограничены владельцем через POSIX или NTFS ACL.
 
-NetworkService/ClientSession: boundedroot-signedroutecache, preservePeer/ControlonRelayPUBLISHfailure, nofalseP2Pack, existingRelayfallback/packetIDdedup; technicalrouteAEADsidecar. No productionRelay/protocol1/serveroperation/identity/cryptochanges. Plaintext never goesNetworkService.
+Работают импорт файлов, сохранение показанного письма и вложений, папки до 12 уровней, теги, сортировка, полнотекстовый поиск и фильтры. Есть список, таблица и карточки, перемещение, корзина, окончательное удаление, предупреждение о дубликатах и лимит размера. UTF-8 текст, изображения и PDF просматриваются внутри главного окна. PDF декодируется в ограниченном дочернем процессе без видимого окна и документных временных файлов.
 
-LocalStore/ProfileSnapshot/ClientUpgrade: encryptedUIprefs/routeevidence, rekeypreservation, managedarchives snapshotrestore включаяотсутствующийrestoredsibling, per-versionfullbackup beforemigration, updater waitsarchiveworker. Archiveсоздаётся пустым только пользователем. Исчезающихtimersbackfill нет.
+Добавлены зашифрованные ручные и запланированные копии, отдельный пароль копии, восстановление отдельно, объединение без перезаписи и ремонт диагностической копии. Архив работает офлайн и создаётся пустым только после действия пользователя. Архивирование исчезающего письма требует предупреждения; таймер оригинала продолжается.
+
+Главная навигация теперь: Поиск → Профиль → Контакты → Письма → Архив → Настройки. Сохранены расположение слева/сверху/снизу и пользовательский порядок. Верхняя панель содержит nickname и краткий статус сети. Создание письма перенесено в почтовый центр. Настройки разделены на категории. Friends скрыт из пользовательского интерфейса; контакты, переписка и внутренние совместимые структуры сохранены.
+
+Обычные сообщения об операциях показываются на странице. Подтверждения и пароль используют встроенные страницы единого окна. В редакторе один выбор срока с сохранением разной семантики хранения после доставки и исчезновения после показа. Tor запускается автоматически; разрешённый офлайн-доступ сохраняется. Все 16 пресетов и прежние темы, включая тёмно-зелёную, пользовательские палитры, шрифты и макеты остаются.
+
+## Исправленные проблемы
+
+- P2P больше не требует безусловного FIND при наличии действительного root-signed маршрута. Краткая недоступность Relay не закрывает работающий PeerServer/Control. Срок действия маршрута и проверка ключа обязательны.
+- В технических сведениях письма маршрут берётся из зашифрованной записи подтверждённого события; историческим письмам он не выдумывается.
+- Updater ждёт завершения архивных задач до полного снимка профиля. Закрытие программы сохраняет настройки и завершает только собственные процессы.
+- Снимок профиля включает управляемый архив и восстановленные/диагностические контейнеры. Restore умеет вернуть отсутствующий управляемый контейнер.
+- Запланированная копия с паролем архива использует новый пароль после его смены. Отдельный пароль копии сохраняет свою семантику.
+- Неудачный импорт удаляет незавершённые объекты. Подготовленная AEAD-запись допускает восстановление после прерывания. Известный откат каталога отвергается.
+- Устранена недостающая декларация JNA в Gradle UI-модуле. Просмотр папок выполняется асинхронно и ограниченно.
+- Backup использует bulk write: посимвольная запись замедляла копию 32 MiB до 39 секунд.
+- PDFBox использует memory-only fallback font вместо системного font scan/cache; ImageIO выводит PNG через MemoryCacheImageOutputStream, чтобы не оставлять plaintext временный cache.
+
+## Компоненты
+
+ArchiveCrypto, EncryptedArchive, ArchiveBackup, ArchiveDocuments, PdfWorkerMain и ArchiveEntry — новое независимое ядро. ArchiveView — UI и worker операций. MessengerApp/MailViewer/Appearance — интеграция навигации, настроек, просмотра и безопасного сопоставления макетов. LocalStore/ProfileSnapshot/ClientUpgrade — новые зашифрованные sidecars и сохранность состояния. NetworkService/ClientSession — клиентское исправление маршрутизации. Packaging, launcher resources, тесты и документация обновлены до 1.5.0. Итоговые бинарники зафиксированы в commit `f9ac41ab9a7aca659e23df88f020a84618af77a1`. Код приложения после этой сборки не менялся.
+
+Криптография переписки, protocol 1 и серверные операции не менялись. Архив использует проверенные JCA/BC/Tink; PDFBox 3.0.8 — новая локальная Apache 2.0 зависимость. Сетевого сервиса для архива нет.
 
 ## Проверки и доказательства
 
-TEST-REPORT-1.5.0.md иevidence содержатexactJUnit/JavaFX/releasechecks; screenshots — реальноеrendering syntheticdata. P2P-VERIFICATION-1.5.0.md разделяетsyntheticlocalSOCKS, actualTorstaging и NOT_RUNnative/crossnetwork. Cryptotests неsecuritycertification. WindowsServerCI неWindows11; Ubuntu неCachyOSKDE.
+Точные XML, журналы и результаты упаковки находятся в evidence. TEST-REPORT-1.5.0.md и AUTO-NATIVE-MATRIX-1.5.0.json разделяют автоматические и нативные проверки. Скриншоты получены реальным JavaFX rendering с синтетическими данными, не сгенерированы.
 
-## Необходимая приёмка
+Полный JUnit: 165 PASS, 1 SKIP, 0 FAIL. 16 release/security проверок и 6 JavaFX smoke прошли. 22 архивных теста отдельно прошли на точном пакете Windows Server 2025 и Ubuntu. Реальный onion staging прошёл, включая остановленный Relay; это два client-core экземпляра на одном Linux-хосте, а не два физических устройства.
 
-NativeWindows11/KDEWayland/X11/DPI/reboot/ExplorerDolphin/OSACL, tworealdeviceP2P и exactownerSignedupdater120→150/install/restart/rollback остаютсяотдельнымиgate. Privatekey остаётсявладельцу; manifestunsigned. ProductionReady=false покахотьmandatorycriterionнепроверен. Пакетcandidateготовитсядляэтихиспытаний, Stableнепубликуетсясамостоятельно.
+P2P-VERIFICATION-1.5.0.md различает локальный synthetic SOCKS, реальные onion services на одном staging host и непроверенную передачу между физическими устройствами. Проверка схемы updater с временным тестовым ключом не является owner-signed установкой.
+
+## Что требует владельца
+
+Windows 11, CachyOS KDE Wayland/X11, физические DPI, файловые менеджеры/NTFS ACL на целевых ОС, reboot, две физические сети и точный подписанный переход 1.2.0 → 1.5.0 с restart/rollback остаются отдельными обязательными проверками. Приватный ключ не передаётся Work; manifest подготовлен без production подписи.
 
 ## Ограничения
 
-ПеречисленывARCHIVE/THREAT_MODEL: strictpreviewlimits; autbackupтолькоприunlockedrunning; mergepartialdurableoncancel; nofreshnessproofnewdevice; JavaGCwipebest-effort; explicitplaintextfileexport; powerlossnativepending; noSSDphysicalerase; privateACLнеадминистраторзащита; PDFworkerresourceisolationнеOSsandbox. Сторонниекопии/backupнеуничтожаютсяpurge. Externalcontainers/backupfoldersmigrationнетронуты, ихкопииделаютсяархивнымbackup.
+Автоматические архивные копии создаются только при запущенном приложении и разблокированном архиве. Отмена объединения сохраняет уже импортированные отдельные объекты. На новом устройстве без прежнего anchor невозможно доказать свежесть контейнера. Java/JavaFX не гарантируют стирание всех GC/native копий памяти. PDF worker ограничивает ресурсы, но не является полноценным OS sandbox. Preview имеет документированные лимиты. Явный экспорт создаёт обычный файл; авария может оставить приватный partial. Физическое стирание SSD и удаление чужих копий не обещаются.
 
-## Передача
+Исторические письма 0.1 продолжают открываться прежним ручным способом; для переноса их файлов используется явный экспорт и импорт. Основная кнопка «В архив» интегрирована с обычным/защищённым форматом 1.2. Внешние выбранные контейнеры и папки backup не переписываются миграцией; для них нужны собственные зашифрованные копии.
 
-Итог: SetupEXE/portableZIP/AppImage/source/client-source/nativekit, reports/acceptance/SHA256/unsignedstable+beta+publickey/offlinesigningguide. Exactbinaries/hash/manifest должныбытьоднойсборкой. ПередofflineподписьювладелецпроверяеттестыиSHA, затемподписываетточныебайты. КомандаподписиGitHubuploadнеделает. Publicationтолькопослеотдельногоразрешения.
+## Передача и публикация
+
+Кандидат включает Setup EXE, portable ZIP, AppImage, исходники, native kit, отчёты, SHA256SUMS и пакет офлайн-подписи. Бинарники, исходники и manifest должны соответствовать одной итоговой сборке. После нативной приёмки владелец подписывает точные байты manifest и отдельно разрешает публикацию. Команда подписи ничего не загружает в GitHub. Пока обязательные проверки не завершены, Stable выпуск не готов.
+
+## Реальные скриншоты
+
+Снимки сняты с работающих JavaFX сцен на искусственных данных через Monocle. Они подтверждают построение интерфейса, но не нативный compositor Windows 11/KDE. PDF и документы пользователя на них не используются.
+
+| Категория | Скриншот |
+|---|---|
+| Минимализм | [Архив Minimal Dark](screenshots/archive/archive-minimal-dark.png) |
+| Объёмный | [Архив Deep Blue](screenshots/archive/archive-deep-blue.png) |
+| Прозрачный | [Архив Frost Blue](screenshots/archive/archive-frost-blue.png) |
+| Классический | [Архив Classic Light](screenshots/archive/archive-classic-light.png) |
+| Настройки | [Структурированные настройки](screenshots/archive/settings.png) |
+| Почта | [Почтовый центр](screenshots/appearance/mail-center.png) |
+| Системные письма | [Подписанный тестовый источник](screenshots/appearance/system-signed-fixture.png) |
+| Минимальное окно | [Архив, узкое окно](screenshots/archive/archive-narrow.png) |
+
+## Незавершённые проверки
+
+Нативная приёмка Windows 11, KDE Wayland и X11, обмен между двумя физическими устройствами/сетями и точный переход с подписью владельца, установкой, restart и rollback остаются NOT_RUN. Архивный таймер в UI, ручной захват показанного защищённого письма и drag-and-drop требуют проверки обычным пользователем по матрице; наличие кода само по себе не равно PASS. Необратимая очистка SSD, защита от администратора разблокированной ОС и абсолютное стирание памяти не обещаются.

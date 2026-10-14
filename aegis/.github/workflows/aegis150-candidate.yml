@@ -1,0 +1,104 @@
+name: AEGIS 1.5.0 unsigned release candidates
+on:
+  push:
+    branches: [development/aegis-1.5.0]
+    paths: [aegis/**, .github/workflows/aegis150-candidate.yml]
+permissions:
+  contents: read
+concurrency:
+  group: aegis150-candidates-${{ github.sha }}
+  cancel-in-progress: false
+jobs:
+  candidates:
+    if: ${{ !contains(github.event.head_commit.message, '[evidence-only]') }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore SHA-verified published1.2.0 source below the reviewed overlay
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib,pathlib,urllib.request,zipfile,shutil
+          target=pathlib.Path('aegis');target.mkdir(exist_ok=True);archive=pathlib.Path('/tmp/aegis120-source.zip')
+          with urllib.request.urlopen('https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.2.0/AEGIS-1.2.0-client-source.zip',timeout=60) as src,archive.open('wb') as dst:shutil.copyfileobj(src,dst)
+          assert hashlib.sha256(archive.read_bytes()).hexdigest()=='93c816760d3f688214a3a37e67483e9ec89233e5f671d28bb8f5b49f7f370324'
+          with zipfile.ZipFile(archive) as z:
+            assert z.testzip() is None
+            for entry in z.infolist():
+              p=pathlib.PurePosixPath(entry.filename);assert not p.is_absolute() and '..' not in p.parts and p.parts[0]=='aegis' and '\\' not in entry.filename and (entry.external_attr>>16)&0o170000!=0o120000
+              dest=pathlib.Path(*p.parts)
+              if entry.is_dir():dest.mkdir(parents=True,exist_ok=True)
+              elif not dest.exists():dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes(z.read(entry))
+          PY
+      - name: Install packaging tools only on disposable runner
+        run: |
+          sudo timeout 90s apt-get -o Acquire::http::Timeout=15 -o Acquire::https::Timeout=15 -o Acquire::Retries=1 update
+          sudo env DEBIAN_FRONTEND=noninteractive timeout 180s apt-get -o Acquire::http::Timeout=15 -o Acquire::https::Timeout=15 -o Acquire::Retries=1 install -y --no-install-recommends gcc-mingw-w64-x86-64 nsis squashfs-tools
+      - name: Compile, test, refresh approved dependency metadata, package unsigned files
+        run: python3 aegis/tools/build-archive.py --jdk "$JAVA_HOME_21_X64" --work "$RUNNER_TEMP/aegis150-inputs" --out "$GITHUB_WORKSPACE/candidates" --refresh-gradle-locks
+      - name: Upload candidate/evidence, never publish Release or update feed
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: AEGIS-1.5.0-unsigned-candidates
+          path: |
+            candidates/*.zip
+            candidates/*.exe
+            candidates/*.AppImage
+            candidates/*.md
+            candidates/*.json
+            candidates/SHA256SUMS
+            candidates/SIGNING-INPUT-SHA256
+            candidates/updates/
+            candidates/evidence/
+            candidates/screenshots/
+            aegis/gradle/verification-metadata.xml
+            aegis/**/gradle.lockfile
+          retention-days: 14
+          if-no-files-found: error
+  windows-packaged:
+    needs: candidates
+    runs-on: windows-2025
+    timeout-minutes: 35
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: AEGIS-1.5.0-unsigned-candidates
+          path: downloaded
+      - name: Extract matching source to run its package verification
+        shell: pwsh
+        run: |
+          Move-Item downloaded/candidates candidates
+          python -c "import zipfile; zipfile.ZipFile('candidates/AEGIS-1.5.0-client-source.zip').extractall('source')"
+      - name: Windows Server packaged EXE, Setup, DPAPI, JavaFX, Tor and old-verifier checks
+        run: python source/aegis/tools/validate-archive-packaged.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: AEGIS-1.5.0-Windows-Server-evidence
+          path: validation-evidence/
+          retention-days: 14
+          if-no-files-found: error
+  linux-tor:
+    needs: candidates
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: AEGIS-1.5.0-unsigned-candidates
+          path: downloaded
+      - name: Extract matching source
+        run: |
+          mv downloaded/candidates candidates
+          python3 -c "import zipfile; zipfile.ZipFile('candidates/AEGIS-1.5.0-client-source.zip').extractall('source')"
+      - name: Ubuntu actual bundled Tor/Snowflake, exact packages and ephemeral onion staging
+        run: python3 source/aegis/tools/validate-archive-packaged.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: AEGIS-1.5.0-Linux-Tor-evidence
+          path: validation-evidence/
+          retention-days: 14
+          if-no-files-found: error

@@ -1,0 +1,729 @@
+{
+  "version": "1.5.0",
+  "productionReady": false,
+  "rows": [
+    {
+      "id": "ARC-01",
+      "name": "Создание",
+      "automaticStatus": "PASS",
+      "evidence": "ArchiveTest / actual ciphertext",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-02",
+      "name": "Правильный пароль",
+      "automaticStatus": "PASS",
+      "evidence": "ArchiveTest",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-03",
+      "name": "Неверный пароль",
+      "automaticStatus": "PASS",
+      "evidence": "ArchiveTest",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-04",
+      "name": "Смена пароля",
+      "automaticStatus": "PASS",
+      "evidence": "ArchiveTest objects unchanged",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-05",
+      "name": "Recovery key",
+      "automaticStatus": "PASS",
+      "evidence": "ArchiveSecurityTest rotation/disable",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-06",
+      "name": "Без recovery",
+      "automaticStatus": "PASS",
+      "evidence": "ArchiveTest wrong/absent recovery",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-07",
+      "name": "Таймер",
+      "automaticStatus": "NOT_RUN",
+      "evidence": "Manual native scenario required; implementation alone is not PASS",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-08",
+      "name": "Закрытие",
+      "automaticStatus": "PASS",
+      "evidence": "Archive150Smoke closes own archive; native app exit additional",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-09",
+      "name": "Offline",
+      "automaticStatus": "PASS",
+      "evidence": "ArchiveTest no network + Archive150Smoke offline session",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-10",
+      "name": "Обычное письмо",
+      "automaticStatus": "NOT_RUN",
+      "evidence": "Manual native scenario required; implementation alone is not PASS",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-11",
+      "name": "Защищённое письмо",
+      "automaticStatus": "NOT_RUN",
+      "evidence": "Manual native scenario required; implementation alone is not PASS",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-12",
+      "name": "Вложение",
+      "automaticStatus": "NOT_RUN",
+      "evidence": "Manual native scenario required; implementation alone is not PASS",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-13",
+      "name": "Свой файл",
+      "automaticStatus": "PASS",
+      "evidence": "Archive150Smoke actual import",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-14",
+      "name": "Папки",
+      "automaticStatus": "PASS",
+      "evidence": "ArchiveSecurityTest depth/cycle",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-15",
+      "name": "Теги/избранное",
+      "automaticStatus": "PASS",
+      "evidence": "ArchiveTest metadata",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-16",
+      "name": "Поиск",
+      "automaticStatus": "PASS",
+      "evidence": "ArchiveTest + Archive150Smoke",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-17",
+      "name": "Фильтры",
+      "automaticStatus": "PASS",
+      "evidence": "ArchiveTest Filter / UI controls rendered",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-18",
+      "name": "Encrypted index",
+      "automaticStatus": "PASS",
+      "evidence": "ArchiveTest disk plaintext markers absent",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-19",
+      "name": "Index rebuild",
+      "automaticStatus": "PASS",
+      "evidence": "ArchiveTest tamper/rebuild",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-20",
+      "name": "Image preview",
+      "automaticStatus": "PASS",
+      "evidence": "ArchiveDocumentsTest actual decoder",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-21",
+      "name": "Text preview",
+      "automaticStatus": "PASS",
+      "evidence": "ArchiveDocumentsTest + JavaFX",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-22",
+      "name": "PDF preview",
+      "automaticStatus": "PASS",
+      "evidence": "ArchiveDocumentsTest actual isolated PDF",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-23",
+      "name": "Export",
+      "automaticStatus": "PASS",
+      "evidence": "ArchiveTest explicit export",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-24",
+      "name": "External open",
+      "automaticStatus": "NOT_RUN",
+      "evidence": "Manual native scenario required; implementation alone is not PASS",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-25",
+      "name": "Duplicate",
+      "automaticStatus": "PASS",
+      "evidence": "ArchiveTest Duplicate",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-26",
+      "name": "DnD",
+      "automaticStatus": "NOT_RUN",
+      "evidence": "Manual native scenario required; implementation alone is not PASS",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-27",
+      "name": "Menu move",
+      "automaticStatus": "PASS",
+      "evidence": "ArchiveTest move/cycle and UI handler rendered",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-28",
+      "name": "Trash",
+      "automaticStatus": "PASS",
+      "evidence": "ArchiveTest",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-29",
+      "name": "Purge",
+      "automaticStatus": "PASS",
+      "evidence": "ArchiveTest separate object deletion",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-30",
+      "name": "Quota",
+      "automaticStatus": "PASS",
+      "evidence": "ArchiveSecurityTest quota rejected",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-31",
+      "name": "Manual backup",
+      "automaticStatus": "PASS",
+      "evidence": "ArchiveTest actual AEAD backup",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-32",
+      "name": "Auto backup",
+      "automaticStatus": "PASS",
+      "evidence": "ArchiveTest due schedule; ArchiveSecurityTest password rotation",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-33",
+      "name": "Separate restore",
+      "automaticStatus": "PASS",
+      "evidence": "ArchiveTest new root/guard + auth verify",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-34",
+      "name": "Merge",
+      "automaticStatus": "PASS",
+      "evidence": "ArchiveTest merge no overwrite",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-35",
+      "name": "Corruption",
+      "automaticStatus": "PASS",
+      "evidence": "ArchiveTest AEAD corruption/repaircopy",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-36",
+      "name": "Interrupted commit",
+      "automaticStatus": "PASS",
+      "evidence": "ArchiveSecurityTest prepared guard simulates crash sides; actual power-loss NOT_RUN",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-37",
+      "name": "Windows Explorer",
+      "automaticStatus": "NOT_RUN",
+      "evidence": "Manual native scenario required; implementation alone is not PASS",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-38",
+      "name": "Dolphin",
+      "automaticStatus": "NOT_RUN",
+      "evidence": "Manual native scenario required; implementation alone is not PASS",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-39",
+      "name": "Transferred container",
+      "automaticStatus": "PASS",
+      "evidence": "ArchiveTest different folder/guards; physical devices NOT_RUN",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "ARC-40",
+      "name": "Expiring archive warning",
+      "automaticStatus": "NOT_RUN",
+      "evidence": "Manual native scenario required; implementation alone is not PASS",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "UI-01",
+      "name": "Nav order",
+      "automaticStatus": "PASS",
+      "evidence": "Archive150Smoke/Appearance115Smoke/SingleWindowSmoke actual JavaFX",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "UI-02",
+      "name": "Icon centers",
+      "automaticStatus": "NOT_RUN",
+      "evidence": "Native visual/OS/connectivity verification required",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "UI-03",
+      "name": "Spacing",
+      "automaticStatus": "NOT_RUN",
+      "evidence": "Native visual/OS/connectivity verification required",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "UI-04",
+      "name": "Left nav",
+      "automaticStatus": "PASS",
+      "evidence": "Archive150Smoke/Appearance115Smoke/SingleWindowSmoke actual JavaFX",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "UI-05",
+      "name": "Top nav",
+      "automaticStatus": "PASS",
+      "evidence": "Archive150Smoke/Appearance115Smoke/SingleWindowSmoke actual JavaFX",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "UI-06",
+      "name": "Bottom nav",
+      "automaticStatus": "PASS",
+      "evidence": "Archive150Smoke/Appearance115Smoke/SingleWindowSmoke actual JavaFX",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "UI-07",
+      "name": "Reorder",
+      "automaticStatus": "NOT_RUN",
+      "evidence": "Native visual/OS/connectivity verification required",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "UI-08",
+      "name": "Header",
+      "automaticStatus": "NOT_RUN",
+      "evidence": "Native visual/OS/connectivity verification required",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "UI-09",
+      "name": "Network status",
+      "automaticStatus": "NOT_RUN",
+      "evidence": "Native visual/OS/connectivity verification required",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "UI-10",
+      "name": "Auto Tor",
+      "automaticStatus": "NOT_RUN",
+      "evidence": "Native visual/OS/connectivity verification required",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "UI-11",
+      "name": "Inline password",
+      "automaticStatus": "PASS",
+      "evidence": "Archive150Smoke/Appearance115Smoke/SingleWindowSmoke actual JavaFX",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "UI-12",
+      "name": "Offline",
+      "automaticStatus": "PASS",
+      "evidence": "Archive150Smoke/Appearance115Smoke/SingleWindowSmoke actual JavaFX",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "UI-13",
+      "name": "No Friends UI",
+      "automaticStatus": "PASS",
+      "evidence": "Archive150Smoke/Appearance115Smoke/SingleWindowSmoke actual JavaFX",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "UI-14",
+      "name": "Contacts preserved",
+      "automaticStatus": "NOT_RUN",
+      "evidence": "Native visual/OS/connectivity verification required",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "UI-15",
+      "name": "Mail compose",
+      "automaticStatus": "PASS",
+      "evidence": "Archive150Smoke/Appearance115Smoke/SingleWindowSmoke actual JavaFX",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "UI-16",
+      "name": "Settings categories",
+      "automaticStatus": "PASS",
+      "evidence": "Archive150Smoke/Appearance115Smoke/SingleWindowSmoke actual JavaFX",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "UI-17",
+      "name": "No popup stages",
+      "automaticStatus": "PASS",
+      "evidence": "Archive150Smoke/Appearance115Smoke/SingleWindowSmoke actual JavaFX",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "UI-18",
+      "name": "Retention selector",
+      "automaticStatus": "NOT_RUN",
+      "evidence": "Native visual/OS/connectivity verification required",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "UI-19",
+      "name": "Presets16",
+      "automaticStatus": "PASS",
+      "evidence": "Archive150Smoke/Appearance115Smoke/SingleWindowSmoke actual JavaFX",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "UI-20",
+      "name": "Custom themes",
+      "automaticStatus": "NOT_RUN",
+      "evidence": "Native visual/OS/connectivity verification required",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "UI-21",
+      "name": "Cyrillic fonts",
+      "automaticStatus": "NOT_RUN",
+      "evidence": "Native visual/OS/connectivity verification required",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "UI-22",
+      "name": "Scale",
+      "automaticStatus": "PASS",
+      "evidence": "Archive150Smoke/Appearance115Smoke/SingleWindowSmoke actual JavaFX",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "UI-23",
+      "name": "Maximize",
+      "automaticStatus": "NOT_RUN",
+      "evidence": "Native visual/OS/connectivity verification required",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "UI-24",
+      "name": "Min window",
+      "automaticStatus": "PASS",
+      "evidence": "Archive150Smoke/Appearance115Smoke/SingleWindowSmoke actual JavaFX",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "UI-25",
+      "name": "Archive list",
+      "automaticStatus": "PASS",
+      "evidence": "Archive150Smoke/Appearance115Smoke/SingleWindowSmoke actual JavaFX",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "UI-26",
+      "name": "Archive table",
+      "automaticStatus": "PASS",
+      "evidence": "Archive150Smoke/Appearance115Smoke/SingleWindowSmoke actual JavaFX",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "UI-27",
+      "name": "Archive cards",
+      "automaticStatus": "PASS",
+      "evidence": "Archive150Smoke/Appearance115Smoke/SingleWindowSmoke actual JavaFX",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "UI-28",
+      "name": "No overlaps",
+      "automaticStatus": "NOT_RUN",
+      "evidence": "Native visual/OS/connectivity verification required",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "UI-29",
+      "name": "Settings restart",
+      "automaticStatus": "PASS",
+      "evidence": "Archive150Smoke/Appearance115Smoke/SingleWindowSmoke actual JavaFX",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "UI-30",
+      "name": "No blank Stage",
+      "automaticStatus": "PASS",
+      "evidence": "Archive150Smoke/Appearance115Smoke/SingleWindowSmoke actual JavaFX",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "P2P-01",
+      "name": "Native route scenario",
+      "automaticStatus": "PASS",
+      "evidence": "Actual bundled Tor staging run38534308413, frozen f9ac41a; two client-core instances, one Linux host, not two physical devices",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "P2P-02",
+      "name": "Native route scenario",
+      "automaticStatus": "PASS",
+      "evidence": "Actual bundled Tor staging run38534308413, frozen f9ac41a; two client-core instances, one Linux host, not two physical devices",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "P2P-03",
+      "name": "Native route scenario",
+      "automaticStatus": "PASS",
+      "evidence": "Actual bundled Tor staging run38534308413, frozen f9ac41a; two client-core instances, one Linux host, not two physical devices",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "P2P-04",
+      "name": "Native route scenario",
+      "automaticStatus": "PASS",
+      "evidence": "Actual bundled Tor staging run38534308413, frozen f9ac41a; two client-core instances, one Linux host, not two physical devices",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "P2P-05",
+      "name": "Native route scenario",
+      "automaticStatus": "NOT_RUN",
+      "evidence": "Different devices/OS/physical networks require native tests",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "P2P-06",
+      "name": "Native route scenario",
+      "automaticStatus": "NOT_RUN",
+      "evidence": "Different devices/OS/physical networks require native tests",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "P2P-07",
+      "name": "Native route scenario",
+      "automaticStatus": "PASS",
+      "evidence": "Actual bundled Tor staging run38534308413, frozen f9ac41a; two client-core instances, one Linux host, not two physical devices",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "P2P-08",
+      "name": "Native route scenario",
+      "automaticStatus": "PASS",
+      "evidence": "Actual bundled Tor staging run38534308413, frozen f9ac41a; two client-core instances, one Linux host, not two physical devices",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "P2P-09",
+      "name": "Native route scenario",
+      "automaticStatus": "PASS",
+      "evidence": "Actual bundled Tor staging run38534308413, frozen f9ac41a; two client-core instances, one Linux host, not two physical devices",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    },
+    {
+      "id": "P2P-10",
+      "name": "Native route scenario",
+      "automaticStatus": "PASS",
+      "evidence": "Actual bundled Tor staging run38534308413, frozen f9ac41a; two client-core instances, one Linux host, not two physical devices",
+      "Windows11": "NOT_RUN",
+      "CachyOSWayland": "NOT_RUN",
+      "CachyOSX11": "NOT_RUN"
+    }
+  ],
+  "binaryCommit": "f9ac41ab9a7aca659e23df88f020a84618af77a1",
+  "actualTorStagingRun": 38534308413,
+  "archivePlatformRun": 38534308414
+}

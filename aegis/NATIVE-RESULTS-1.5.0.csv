@@ -1,0 +1,81 @@
+id,name,automaticStatus,Windows11,CachyOSWayland,CachyOSX11,evidence
+ARC-01,Создание,PASS,NOT_RUN,NOT_RUN,NOT_RUN,ArchiveTest / actual ciphertext
+ARC-02,Правильный пароль,PASS,NOT_RUN,NOT_RUN,NOT_RUN,ArchiveTest
+ARC-03,Неверный пароль,PASS,NOT_RUN,NOT_RUN,NOT_RUN,ArchiveTest
+ARC-04,Смена пароля,PASS,NOT_RUN,NOT_RUN,NOT_RUN,ArchiveTest objects unchanged
+ARC-05,Recovery key,PASS,NOT_RUN,NOT_RUN,NOT_RUN,ArchiveSecurityTest rotation/disable
+ARC-06,Без recovery,PASS,NOT_RUN,NOT_RUN,NOT_RUN,ArchiveTest wrong/absent recovery
+ARC-07,Таймер,NOT_RUN,NOT_RUN,NOT_RUN,NOT_RUN,Manual native scenario required; implementation alone is not PASS
+ARC-08,Закрытие,PASS,NOT_RUN,NOT_RUN,NOT_RUN,Archive150Smoke closes own archive; native app exit additional
+ARC-09,Offline,PASS,NOT_RUN,NOT_RUN,NOT_RUN,ArchiveTest no network + Archive150Smoke offline session
+ARC-10,Обычное письмо,NOT_RUN,NOT_RUN,NOT_RUN,NOT_RUN,Manual native scenario required; implementation alone is not PASS
+ARC-11,Защищённое письмо,NOT_RUN,NOT_RUN,NOT_RUN,NOT_RUN,Manual native scenario required; implementation alone is not PASS
+ARC-12,Вложение,NOT_RUN,NOT_RUN,NOT_RUN,NOT_RUN,Manual native scenario required; implementation alone is not PASS
+ARC-13,Свой файл,PASS,NOT_RUN,NOT_RUN,NOT_RUN,Archive150Smoke actual import
+ARC-14,Папки,PASS,NOT_RUN,NOT_RUN,NOT_RUN,ArchiveSecurityTest depth/cycle
+ARC-15,Теги/избранное,PASS,NOT_RUN,NOT_RUN,NOT_RUN,ArchiveTest metadata
+ARC-16,Поиск,PASS,NOT_RUN,NOT_RUN,NOT_RUN,ArchiveTest + Archive150Smoke
+ARC-17,Фильтры,PASS,NOT_RUN,NOT_RUN,NOT_RUN,ArchiveTest Filter / UI controls rendered
+ARC-18,Encrypted index,PASS,NOT_RUN,NOT_RUN,NOT_RUN,ArchiveTest disk plaintext markers absent
+ARC-19,Index rebuild,PASS,NOT_RUN,NOT_RUN,NOT_RUN,ArchiveTest tamper/rebuild
+ARC-20,Image preview,PASS,NOT_RUN,NOT_RUN,NOT_RUN,ArchiveDocumentsTest actual decoder
+ARC-21,Text preview,PASS,NOT_RUN,NOT_RUN,NOT_RUN,ArchiveDocumentsTest + JavaFX
+ARC-22,PDF preview,PASS,NOT_RUN,NOT_RUN,NOT_RUN,ArchiveDocumentsTest actual isolated PDF
+ARC-23,Export,PASS,NOT_RUN,NOT_RUN,NOT_RUN,ArchiveTest explicit export
+ARC-24,External open,NOT_RUN,NOT_RUN,NOT_RUN,NOT_RUN,Manual native scenario required; implementation alone is not PASS
+ARC-25,Duplicate,PASS,NOT_RUN,NOT_RUN,NOT_RUN,ArchiveTest Duplicate
+ARC-26,DnD,NOT_RUN,NOT_RUN,NOT_RUN,NOT_RUN,Manual native scenario required; implementation alone is not PASS
+ARC-27,Menu move,PASS,NOT_RUN,NOT_RUN,NOT_RUN,ArchiveTest move/cycle and UI handler rendered
+ARC-28,Trash,PASS,NOT_RUN,NOT_RUN,NOT_RUN,ArchiveTest
+ARC-29,Purge,PASS,NOT_RUN,NOT_RUN,NOT_RUN,ArchiveTest separate object deletion
+ARC-30,Quota,PASS,NOT_RUN,NOT_RUN,NOT_RUN,ArchiveSecurityTest quota rejected
+ARC-31,Manual backup,PASS,NOT_RUN,NOT_RUN,NOT_RUN,ArchiveTest actual AEAD backup
+ARC-32,Auto backup,PASS,NOT_RUN,NOT_RUN,NOT_RUN,ArchiveTest due schedule; ArchiveSecurityTest password rotation
+ARC-33,Separate restore,PASS,NOT_RUN,NOT_RUN,NOT_RUN,ArchiveTest new root/guard + auth verify
+ARC-34,Merge,PASS,NOT_RUN,NOT_RUN,NOT_RUN,ArchiveTest merge no overwrite
+ARC-35,Corruption,PASS,NOT_RUN,NOT_RUN,NOT_RUN,ArchiveTest AEAD corruption/repaircopy
+ARC-36,Interrupted commit,PASS,NOT_RUN,NOT_RUN,NOT_RUN,ArchiveSecurityTest prepared guard simulates crash sides; actual power-loss NOT_RUN
+ARC-37,Windows Explorer,NOT_RUN,NOT_RUN,NOT_RUN,NOT_RUN,Manual native scenario required; implementation alone is not PASS
+ARC-38,Dolphin,NOT_RUN,NOT_RUN,NOT_RUN,NOT_RUN,Manual native scenario required; implementation alone is not PASS
+ARC-39,Transferred container,PASS,NOT_RUN,NOT_RUN,NOT_RUN,ArchiveTest different folder/guards; physical devices NOT_RUN
+ARC-40,Expiring archive warning,NOT_RUN,NOT_RUN,NOT_RUN,NOT_RUN,Manual native scenario required; implementation alone is not PASS
+UI-01,Nav order,PASS,NOT_RUN,NOT_RUN,NOT_RUN,Archive150Smoke/Appearance115Smoke/SingleWindowSmoke actual JavaFX
+UI-02,Icon centers,NOT_RUN,NOT_RUN,NOT_RUN,NOT_RUN,Native visual/OS/connectivity verification required
+UI-03,Spacing,NOT_RUN,NOT_RUN,NOT_RUN,NOT_RUN,Native visual/OS/connectivity verification required
+UI-04,Left nav,PASS,NOT_RUN,NOT_RUN,NOT_RUN,Archive150Smoke/Appearance115Smoke/SingleWindowSmoke actual JavaFX
+UI-05,Top nav,PASS,NOT_RUN,NOT_RUN,NOT_RUN,Archive150Smoke/Appearance115Smoke/SingleWindowSmoke actual JavaFX
+UI-06,Bottom nav,PASS,NOT_RUN,NOT_RUN,NOT_RUN,Archive150Smoke/Appearance115Smoke/SingleWindowSmoke actual JavaFX
+UI-07,Reorder,NOT_RUN,NOT_RUN,NOT_RUN,NOT_RUN,Native visual/OS/connectivity verification required
+UI-08,Header,NOT_RUN,NOT_RUN,NOT_RUN,NOT_RUN,Native visual/OS/connectivity verification required
+UI-09,Network status,NOT_RUN,NOT_RUN,NOT_RUN,NOT_RUN,Native visual/OS/connectivity verification required
+UI-10,Auto Tor,NOT_RUN,NOT_RUN,NOT_RUN,NOT_RUN,Native visual/OS/connectivity verification required
+UI-11,Inline password,PASS,NOT_RUN,NOT_RUN,NOT_RUN,Archive150Smoke/Appearance115Smoke/SingleWindowSmoke actual JavaFX
+UI-12,Offline,PASS,NOT_RUN,NOT_RUN,NOT_RUN,Archive150Smoke/Appearance115Smoke/SingleWindowSmoke actual JavaFX
+UI-13,No Friends UI,PASS,NOT_RUN,NOT_RUN,NOT_RUN,Archive150Smoke/Appearance115Smoke/SingleWindowSmoke actual JavaFX
+UI-14,Contacts preserved,NOT_RUN,NOT_RUN,NOT_RUN,NOT_RUN,Native visual/OS/connectivity verification required
+UI-15,Mail compose,PASS,NOT_RUN,NOT_RUN,NOT_RUN,Archive150Smoke/Appearance115Smoke/SingleWindowSmoke actual JavaFX
+UI-16,Settings categories,PASS,NOT_RUN,NOT_RUN,NOT_RUN,Archive150Smoke/Appearance115Smoke/SingleWindowSmoke actual JavaFX
+UI-17,No popup stages,PASS,NOT_RUN,NOT_RUN,NOT_RUN,Archive150Smoke/Appearance115Smoke/SingleWindowSmoke actual JavaFX
+UI-18,Retention selector,NOT_RUN,NOT_RUN,NOT_RUN,NOT_RUN,Native visual/OS/connectivity verification required
+UI-19,Presets16,PASS,NOT_RUN,NOT_RUN,NOT_RUN,Archive150Smoke/Appearance115Smoke/SingleWindowSmoke actual JavaFX
+UI-20,Custom themes,NOT_RUN,NOT_RUN,NOT_RUN,NOT_RUN,Native visual/OS/connectivity verification required
+UI-21,Cyrillic fonts,NOT_RUN,NOT_RUN,NOT_RUN,NOT_RUN,Native visual/OS/connectivity verification required
+UI-22,Scale,PASS,NOT_RUN,NOT_RUN,NOT_RUN,Archive150Smoke/Appearance115Smoke/SingleWindowSmoke actual JavaFX
+UI-23,Maximize,NOT_RUN,NOT_RUN,NOT_RUN,NOT_RUN,Native visual/OS/connectivity verification required
+UI-24,Min window,PASS,NOT_RUN,NOT_RUN,NOT_RUN,Archive150Smoke/Appearance115Smoke/SingleWindowSmoke actual JavaFX
+UI-25,Archive list,PASS,NOT_RUN,NOT_RUN,NOT_RUN,Archive150Smoke/Appearance115Smoke/SingleWindowSmoke actual JavaFX
+UI-26,Archive table,PASS,NOT_RUN,NOT_RUN,NOT_RUN,Archive150Smoke/Appearance115Smoke/SingleWindowSmoke actual JavaFX
+UI-27,Archive cards,PASS,NOT_RUN,NOT_RUN,NOT_RUN,Archive150Smoke/Appearance115Smoke/SingleWindowSmoke actual JavaFX
+UI-28,No overlaps,NOT_RUN,NOT_RUN,NOT_RUN,NOT_RUN,Native visual/OS/connectivity verification required
+UI-29,Settings restart,PASS,NOT_RUN,NOT_RUN,NOT_RUN,Archive150Smoke/Appearance115Smoke/SingleWindowSmoke actual JavaFX
+UI-30,No blank Stage,PASS,NOT_RUN,NOT_RUN,NOT_RUN,Archive150Smoke/Appearance115Smoke/SingleWindowSmoke actual JavaFX
+P2P-01,Native route scenario,PASS,NOT_RUN,NOT_RUN,NOT_RUN,"Actual bundled Tor staging run38534308413, frozen f9ac41a; two client-core instances, one Linux host, not two physical devices"
+P2P-02,Native route scenario,PASS,NOT_RUN,NOT_RUN,NOT_RUN,"Actual bundled Tor staging run38534308413, frozen f9ac41a; two client-core instances, one Linux host, not two physical devices"
+P2P-03,Native route scenario,PASS,NOT_RUN,NOT_RUN,NOT_RUN,"Actual bundled Tor staging run38534308413, frozen f9ac41a; two client-core instances, one Linux host, not two physical devices"
+P2P-04,Native route scenario,PASS,NOT_RUN,NOT_RUN,NOT_RUN,"Actual bundled Tor staging run38534308413, frozen f9ac41a; two client-core instances, one Linux host, not two physical devices"
+P2P-05,Native route scenario,NOT_RUN,NOT_RUN,NOT_RUN,NOT_RUN,Different devices/OS/physical networks require native tests
+P2P-06,Native route scenario,NOT_RUN,NOT_RUN,NOT_RUN,NOT_RUN,Different devices/OS/physical networks require native tests
+P2P-07,Native route scenario,PASS,NOT_RUN,NOT_RUN,NOT_RUN,"Actual bundled Tor staging run38534308413, frozen f9ac41a; two client-core instances, one Linux host, not two physical devices"
+P2P-08,Native route scenario,PASS,NOT_RUN,NOT_RUN,NOT_RUN,"Actual bundled Tor staging run38534308413, frozen f9ac41a; two client-core instances, one Linux host, not two physical devices"
+P2P-09,Native route scenario,PASS,NOT_RUN,NOT_RUN,NOT_RUN,"Actual bundled Tor staging run38534308413, frozen f9ac41a; two client-core instances, one Linux host, not two physical devices"
+P2P-10,Native route scenario,PASS,NOT_RUN,NOT_RUN,NOT_RUN,"Actual bundled Tor staging run38534308413, frozen f9ac41a; two client-core instances, one Linux host, not two physical devices"
