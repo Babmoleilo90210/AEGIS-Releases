@@ -18,7 +18,7 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          run-id: 38525785018
+          run-id: 38528818135
           name: AEGIS-1.5.0-unsigned-candidates
           path: exact
       - name: Exercise archive crypto, AEAD backup, PDF/image worker and migration on exact runtime
@@ -48,7 +48,7 @@ jobs:
           with (e/'JUNIT.log').open('w') as log:subprocess.run([str(app/('runtime/bin/java'+suffix)),'-Xmx512m','-jar',str(junit),'execute','--class-path',os.pathsep.join(map(str,[classes,*libraries])),'--select-package','org.securemail.client.archive','--reports-dir',str(e/'xml'),'--details=summary'],check=True,stdout=log,stderr=subprocess.STDOUT,timeout=240)
           with (e/'PERFORMANCE.json').open('w') as log:subprocess.run([str(app/('runtime/bin/java'+suffix)),'-Xmx256m','-cp',os.pathsep.join(map(str,[classes,app/'app/*'])),'org.securemail.client.archive.ArchivePerformanceMain'],check=True,stdout=log,stderr=subprocess.STDOUT,timeout=90)
           import json,platform
-          result={'artifactBinaryCommit':'7a4684166814856b83a07c310d47e0ee8e253847','version':'1.5.0','actualPlatform':platform.platform(),'Windows11':'NOT_RUN','CachyOSKDE':'NOT_RUN','productionReady':False,'checks':ET.parse(e/'xml/TEST-junit-jupiter.xml').getroot().attrib}
+          result={'artifactBinaryCommit':'bd1c3421f4a113aa5b1997b1413117e8852ac19a','version':'1.5.0','actualPlatform':platform.platform(),'Windows11':'NOT_RUN','CachyOSKDE':'NOT_RUN','productionReady':False,'checks':ET.parse(e/'xml/TEST-junit-jupiter.xml').getroot().attrib}
           (e/'RESULTS.json').write_text(json.dumps(result,indent=2)+'\n')
           junit.unlink()
           PY
