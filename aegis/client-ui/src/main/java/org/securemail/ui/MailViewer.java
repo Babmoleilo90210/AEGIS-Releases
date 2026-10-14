@@ -25,6 +25,7 @@ final class MailViewer implements AutoCloseable {
     default void prepareDisplay()throws Exception{}
     default void closed(boolean wasDisplayed){}
     default void abandonedDisplay(){}
+    default void archive(LocalStore.HistoryItem item,PlainMessage plain,String displayedBody,Runnable finished){finished.run();}
     default long expiresAt(){return -1;}
   }
   private final Stage stage;private InWindowDialog<Void> page;
@@ -67,7 +68,8 @@ final class MailViewer implements AutoCloseable {
         if(confirm.showAndWait().orElse(ButtonType.CANCEL)==ButtonType.OK&&!closed&&expiry.getAsLong()>now.getAsLong())actions.forward(item,plain,text.getText(),files.isSelected()?plain.copyFiles():null);
       });
       copy.setOnAction(e->{if(!closed&&!text.getText().isEmpty()){var value=new javafx.scene.input.ClipboardContent();value.putString(text.getText());javafx.scene.input.Clipboard.getSystemClipboard().setContent(value);}});
-      actionButtons.put("reply",reply);actionButtons.put("forward",forward);actionButtons.put("copy",copy);actionBar=new HBox(8,reply,forward,copy);content.getChildren().add(actionBar);
+      Button archive=new Button("В архив");archive.setOnAction(e->{if(closed||exporting||expiry.getAsLong()<=now.getAsLong())return;if(plain.protectedLetter()&&!revealed){error.setText("Сначала покажите расшифрованный текст");if(!content.getChildren().contains(error))content.getChildren().add(error);return;}exporting=true;archive.setDisable(true);String body=text.getText();actions.archive(item,plain,body,()->{exporting=false;if(closed)plain.close();else archive.setDisable(false);});});
+      actionButtons.put("reply",reply);actionButtons.put("forward",forward);actionButtons.put("copy",copy);actionButtons.put("archive",archive);actionBar=new HBox(8,reply,forward,copy,archive);content.getChildren().add(actionBar);
     }
     if(plain.protectedLetter()) {
       password.setPromptText("Пароль письма");Button unlock=new Button("Открыть");unlock.setDefaultButton(true);
@@ -125,7 +127,7 @@ final class MailViewer implements AutoCloseable {
     displayPulse=new PauseTransition(Duration.millis(150));displayPulse.setOnFinished(e->{displayScheduled=false;if(!displayNotified&&bodyVisible()){displayNotified=true;actions.displayed();}});displayPulse.play();
   }
   boolean showing(){return !closed&&(host!=null||page!=null&&page.isShowing());}
-  void appearance(org.securemail.client.appearance.Appearance.Settings settings){if(closed)return;var layout=settings.layout();content.setPadding(new Insets(layout.viewPadding()));content.setMaxWidth(layout.textWidth());content.setMinWidth(0);text.setMinWidth(0);if(layout.viewCard()){if(!content.getStyleClass().contains("letter-card"))content.getStyleClass().add("letter-card");}else content.getStyleClass().remove("letter-card");content.getChildren().remove(metadata);if(layout.metadataTop())content.getChildren().add(Math.min(1,content.getChildren().size()),metadata);else content.getChildren().add(metadata);if(actionBar!=null){actionBar.getChildren().clear();for(String name:layout.actions()){Button button=actionButtons.get(name);if(button!=null)actionBar.getChildren().add(button);}actionBar.setSpacing(settings.components().spacing());}}
+  void appearance(org.securemail.client.appearance.Appearance.Settings settings){if(closed)return;var layout=settings.layout();content.setPadding(new Insets(layout.viewPadding()));content.setMaxWidth(layout.textWidth());content.setMinWidth(0);text.setMinWidth(0);if(layout.viewCard()){if(!content.getStyleClass().contains("letter-card"))content.getStyleClass().add("letter-card");}else content.getStyleClass().remove("letter-card");content.getChildren().remove(metadata);if(layout.metadataTop())content.getChildren().add(Math.min(1,content.getChildren().size()),metadata);else content.getChildren().add(metadata);if(actionBar!=null){actionBar.getChildren().clear();for(String name:layout.actions()){Button button=actionButtons.get(name);if(button!=null)actionBar.getChildren().add(button);}if(actionButtons.containsKey("archive"))actionBar.getChildren().add(actionButtons.get("archive"));actionBar.setSpacing(settings.components().spacing());}}
   @Override public void close(){
     if(closed)return;closed=true;revealGeneration++;if(displayPulse!=null)displayPulse.stop();if(lifecycleActions!=null)try{if(displayOffered&&!displayNotified)lifecycleActions.abandonedDisplay();else lifecycleActions.closed(displayNotified);}catch(RuntimeException interrupted){/* Memory cleanup must complete even when the owner worker is stopping. */}timer.stop();if(live!=null)live.close();if(opened!=null)opened.close();
     password.clear();code.clear();text.clear();content.getChildren().clear();if(archivePassword!=null){Arrays.fill(archivePassword,'\0');archivePassword=null;}if(!exporting)plain.close();if(page!=null)page.close();

@@ -9,6 +9,7 @@ import javafx.scene.shape.SVGPath;
 final class NavigationGlyph {
   static Node create(String name,int size){SVGPath path=new SVGPath();path.setContent(switch(name){
     case "letters"->"M3 5 H21 V19 H3 Z M3 5 L12 12 L21 5";
+    case "archive"->"M3 4 H21 V8 H3 Z M5 8 V21 H19 V8 M9 12 H15";
     case "contacts"->"M4 3 H20 V21 H4 Z M9 8 A3 3 0 1 0 15 8 A3 3 0 1 0 9 8 M7 18 Q7 13 12 13 Q17 13 17 18";
     case "friends"->"M4 9 A3 3 0 1 0 10 9 A3 3 0 1 0 4 9 M14 9 A3 3 0 1 0 20 9 A3 3 0 1 0 14 9 M2 21 Q2 14 7 14 Q12 14 12 21 M12 21 Q12 14 17 14 Q22 14 22 21";
     case "search"->"M3 10 A7 7 0 1 0 17 10 A7 7 0 1 0 3 10 M15 15 L22 22";

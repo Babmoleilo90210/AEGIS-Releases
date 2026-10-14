@@ -34,3 +34,4 @@ PDFBox3.0.8 — новая Apache2 библиотека только локал�
 1.2.0 disappearing timer device-bound, консервативное раннее закрытие после OS reboot/потери guard; сохраняется, не выдаётся за исправление. FF1 deliberately no correctness oracle: показ candidate не доказывает правильность code. Persistent plaintext drafts отсутствуют, остаются RAM-only. Identity backup не равен profile backup.
 Local archive plaintext память Java/JavaFX нельзя гарантированно стереть из всех GC/native/render copies. Explicit export/external opening создаёт обычный файл по предупреждению; encryption at rest не защищает открытый процесс от администратора/keylogger.
 Previous Linux one Tor staging PASS не является P2P между физическими пользовательскими сетями. Windows11/KDE и full owner-signed updater E2E/rollback сейчас NOT_RUN. ProductionReady=false до mandatory gates.
+

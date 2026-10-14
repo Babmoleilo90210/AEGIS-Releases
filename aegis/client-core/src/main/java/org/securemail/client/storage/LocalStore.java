@@ -158,6 +158,13 @@ public final class LocalStore implements AutoCloseable {
   private static void extensionName(String name){if(!name.matches("(?:state-v1|mail-[a-f0-9-]{36}|out-[a-f0-9-]{36})"))throw new IllegalArgumentException("Extension name");}
   private static byte[] extensionAad(String name){return ("AEGIS-lifecycle/v1/"+name).getBytes(java.nio.charset.StandardCharsets.US_ASCII);}
   public synchronized Path root(){return root;}
+  /** UI-only archive location/mode; encrypted with the existing vault, never the archive DEK. */
+  public synchronized byte[] readArchivePreferences()throws IOException,GeneralSecurityException {
+    ensureOpen();Path p=root.resolve("archive-ui-v1.vault");return Files.exists(p)?open(AtomicFiles.read(p,8192+128),"archive-ui/v1".getBytes(java.nio.charset.StandardCharsets.US_ASCII)):null;
+  }
+  public synchronized void writeArchivePreferences(byte[] bytes)throws IOException,GeneralSecurityException {
+    ensureOpen();if(bytes.length>8192)throw new IOException("Archive UI quota");AtomicFiles.write(root.resolve("archive-ui-v1.vault"),seal(bytes,"archive-ui/v1".getBytes(java.nio.charset.StandardCharsets.US_ASCII)));
+  }
   public synchronized PublicProfile cachedProfile(String nick)throws IOException,GeneralSecurityException{
     UserInfo owner=nick.equals(nickname)?new UserInfo(identity.userId(),nickname,identity.publicKey(),null):contact(nick);if(owner==null)return null;
     Path path=root.resolve("profiles").resolve(owner.userId()+".enc");if(!Files.exists(path))return null;

@@ -14,6 +14,11 @@ public final class ProfileSnapshot {
   private static Map<String,Path> sources(ClientConfig config)throws IOException{
     var result=new LinkedHashMap<String,Path>();
     result.put("vault",config.storagePath());result.put("client-config",AppPaths.config());
+    Path profile=config.storagePath().toAbsolutePath().normalize();String prefix=profile.getFileName().toString();
+    result.put("personal-archives/main",profile.resolveSibling(prefix+".personal-archive"));
+    if(Files.isDirectory(profile.getParent()))try(var siblings=Files.list(profile.getParent())){
+      for(Path p:siblings.toList())if(p.getFileName().toString().matches(java.util.regex.Pattern.quote(prefix)+"\\.archive-(?:restored|diagnostic)-[a-f0-9-]{36}"))result.put("personal-archives/"+p.getFileName(),p);
+    }
     for(String name:List.of("ui-preferences.json","theme.txt","appearance","updates/events","mail-mode.txt","tor-mode.txt","update-preferences.json","session","tor/state","tor/transport-state"))
       result.put("app/"+name,AppPaths.root().resolve(name));
     Path updates=AppPaths.root().resolve("updates");

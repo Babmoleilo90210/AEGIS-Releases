@@ -109,7 +109,7 @@ final class AppearanceView {
     }
   }
   private Node reorder(ListView<String> list){list.setPrefHeight(150);list.setCellFactory(v->new ListCell<>(){protected void updateItem(String id,boolean empty){super.updateItem(id,empty);setText(empty||id==null?null:display(id));}});return new VBox(6,list,new HBox(8,button("↑",()->move(list,-1)),button("↓",()->move(list,1))));}
-  private static String display(String id){return switch(id){case "letters"->"Письма";case "contacts"->"Контакты";case "friends"->"Друзья";case "search"->"Поиск";case "profile"->"Профиль";case "settings"->"Настройки";case "reply"->"Ответить";case "forward"->"Переслать";case "copy"->"Копировать";default->id;};}
+  private static String display(String id){return switch(id){case "letters"->"Письма";case "contacts"->"Контакты";case "archive"->"Архив";case "search"->"Поиск";case "profile"->"Профиль";case "settings"->"Настройки";case "reply"->"Ответить";case "forward"->"Переслать";case "copy"->"Копировать";default->id;};}
   private static void move(ListView<String> list,int shift){int i=list.getSelectionModel().getSelectedIndex(),next=i+shift;if(i<0||next<0||next>=list.getItems().size())return;Collections.swap(list.getItems(),i,next);list.getSelectionModel().select(next);}
   private void saveLayout(){try{store.saveLayout(layoutName.getText(),gather().layout());refreshLayouts();message.setText("Макет сохранён.");}catch(Exception e){failure(e);}}
   private void renameLayout(){try{store.renameLayout(savedLayouts.getValue(),layoutName.getText());refreshLayouts();}catch(Exception e){failure(e);}}
@@ -120,9 +120,10 @@ final class AppearanceView {
   private void importTheme(){Path path=pick("Тема",false);if(path!=null)runIO(()->{store.importTheme(path);return true;},"Тема добавлена в библиотеку.");}
   private void exportLayout(){Path path=pick("AEGIS-layout",true);String name=savedLayouts.getValue();if(path!=null)runIO(()->{store.exportLayout(name,path);return true;},"Макет экспортирован.");}
   private void importLayout(){Path path=pick("Макет",false);if(path!=null)runIO(()->{store.importLayout(path);return true;},"Макет добавлен.");}
-  private void chooseBackground(){InWindowFileChooser picker=new InWindowFileChooser();picker.setTitle("Фон");picker.getExtensionFilters().add(new FileChooser.ExtensionFilter("JPG, PNG, WebP · до 5 МБ","*.jpg","*.jpeg","*.png","*.webp"));var file=picker.showOpenDialog(owner);if(file==null)return;message.setText("Подготовка фона…");worker.execute(()->{try{byte[] clean=BackgroundCodec.load(file.toPath());String id;try{id=store.image(clean);}finally{Arrays.fill(clean,(byte)0);}Platform.runLater(()->{if(!page.isShowing())return;image=id;background.setValue(Appearance.Background.IMAGE);preview();});}catch(Exception e){Platform.runLater(()->failure(e));}});}
+  private void chooseBackground(){InWindowFileChooser picker=new InWindowFileChooser();picker.setTitle("Фон");picker.getExtensionFilters().add(new FileChooser.ExtensionFilter("JPG, PNG, WebP · до 5 МБ","*.jpg","*.jpeg","*.png","*.webp"));var file=picker.showOpenDialog(owner);if(file==null)return;message.setText("Подготовка фона…");worker.execute(()->{try{byte[] clean=BackgroundCodec.load(file.toPath());String id;try{id=store.image(clean);}finally{Arrays.fill(clean,(byte)0);}Platform.runLater(()->{if(!page.isShowing()&&node().getScene()==null)return;image=id;background.setValue(Appearance.Background.IMAGE);preview();});}catch(Exception e){Platform.runLater(()->failure(e));}});}
   @FunctionalInterface private interface IO{boolean run()throws Exception;}
-  private void runIO(IO operation,String success){worker.execute(()->{try{operation.run();Platform.runLater(()->{if(page.isShowing()){fillGallery();refreshLayouts();message.setText(success);}});}catch(Exception e){Platform.runLater(()->failure(e));}});}
+  private void runIO(IO operation,String success){worker.execute(()->{try{operation.run();Platform.runLater(()->{if(page.isShowing()||node().getScene()!=null){fillGallery();refreshLayouts();message.setText(success);}});}catch(Exception e){Platform.runLater(()->failure(e));}});}
   private void failure(Exception error){String text=error.getMessage();message.setText(text!=null&&text.length()<160?text:"Не удалось изменить оформление. Проверьте выбранные значения.");}
   void show(){page.show();}
+  Node node(){return page.getDialogPane().getContent();}
 }

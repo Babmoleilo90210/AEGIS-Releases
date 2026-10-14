@@ -22,7 +22,13 @@ public final class Appearance {
   public enum Mode {MANUAL,SYSTEM,SCHEDULE;public String toString(){return switch(this){case MANUAL->"Вручную";case SYSTEM->"Как в системе";case SCHEDULE->"По расписанию";};}}
   public enum Background {SOLID,GRADIENT,IMAGE;public String toString(){return switch(this){case SOLID->"Цвет";case GRADIENT->"Градиент";case IMAGE->"Локальное изображение";};}}
   public enum Weight {NORMAL,MEDIUM,BOLD;public String toString(){return switch(this){case NORMAL->"Обычный";case MEDIUM->"Средний";case BOLD->"Жирный";};}}
-  public static final List<String> SECTIONS=List.of("letters","contacts","friends","search","profile","settings");
+  public static final List<String> SECTIONS=List.of("search","profile","contacts","letters","archive","settings");
+  private static final List<String> OLD_SECTIONS=List.of("letters","contacts","friends","search","profile","settings");
+  private static List<String> migrateNavigation(List<String> order){
+    if(order.equals(OLD_SECTIONS))return SECTIONS;
+    if(order.contains("friends")&&!order.contains("archive")){List<String> next=new ArrayList<>(order);next.remove("friends");int mail=next.indexOf("letters");next.add(mail<0?next.size():mail+1,"archive");return next;}
+    return order;
+  }
   public static final List<String> ACTIONS=List.of("reply","forward","copy");
 
   public record Palette(String background,String panel,String control,String text,String muted,String accent,String incoming,String outgoing){
@@ -61,7 +67,7 @@ public final class Appearance {
   }
   public record Layout(Zone zone,Labels labels,List<String> order,boolean collapsed,int navigationWidth,MailLayout mail,Rows rows,int foldersPercent,int listPercent,Composer composer,int textWidth,int viewPadding,boolean viewCard,boolean metadataTop,List<String> actions,Fields fields,boolean previewBelow){
     public Layout(Zone zone,Labels labels,List<String> order,boolean collapsed,int navigationWidth,MailLayout mail,Rows rows,int foldersPercent,int listPercent,Composer composer,int textWidth,int viewPadding,boolean viewCard,boolean metadataTop,List<String> actions,Fields fields){this(zone,labels,order,collapsed,navigationWidth,mail,rows,foldersPercent,listPercent,composer,textWidth,viewPadding,viewCard,metadataTop,actions,fields,false);}
-    public Layout {Objects.requireNonNull(zone);Objects.requireNonNull(labels);Objects.requireNonNull(mail);Objects.requireNonNull(rows);Objects.requireNonNull(composer);Objects.requireNonNull(fields);order=permutation(order,SECTIONS);actions=permutation(actions,ACTIONS);range(navigationWidth,120,240);range(foldersPercent,12,30);range(listPercent,25,55);if(foldersPercent+listPercent>75)throw new IllegalArgumentException("Слишком узкая область просмотра");range(textWidth,360,1200);range(viewPadding,8,40);}
+    public Layout {Objects.requireNonNull(zone);Objects.requireNonNull(labels);Objects.requireNonNull(mail);Objects.requireNonNull(rows);Objects.requireNonNull(composer);Objects.requireNonNull(fields);order=permutation(migrateNavigation(order),SECTIONS);actions=permutation(actions,ACTIONS);range(navigationWidth,120,240);range(foldersPercent,12,30);range(listPercent,25,55);if(foldersPercent+listPercent>75)throw new IllegalArgumentException("Слишком узкая область просмотра");range(textWidth,360,1200);range(viewPadding,8,40);}
     public Layout panels(int folders,int list){return new Layout(zone,labels,order,collapsed,navigationWidth,mail,rows,folders,list,composer,textWidth,viewPadding,viewCard,metadataTop,actions,fields,previewBelow);}
     public Layout below(boolean value){return new Layout(zone,labels,order,collapsed,navigationWidth,mail,rows,foldersPercent,listPercent,composer,textWidth,viewPadding,viewCard,metadataTop,actions,fields,value);}
     public JsonObject json(){JsonObject o=new JsonObject();o.addProperty("zone",zone.name());o.addProperty("labels",labels.name());o.add("order",strings(order));o.addProperty("collapsed",collapsed);o.addProperty("navigationWidth",navigationWidth);o.addProperty("mail",mail.name());o.addProperty("rows",rows.name());o.addProperty("foldersPercent",foldersPercent);o.addProperty("listPercent",listPercent);o.addProperty("composer",composer.name());o.addProperty("textWidth",textWidth);o.addProperty("viewPadding",viewPadding);o.addProperty("viewCard",viewCard);o.addProperty("metadataTop",metadataTop);o.add("actions",strings(actions));o.add("fields",fields.json());o.addProperty("previewBelow",previewBelow);return o;}
