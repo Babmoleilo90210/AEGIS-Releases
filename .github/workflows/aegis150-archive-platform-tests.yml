@@ -1,0 +1,61 @@
+name: AEGIS 1.5.0 exact-package archive platform tests
+on:
+  push:
+    branches: [development/aegis-1.5.0]
+    paths: [.github/workflows/aegis150-archive-platform-tests.yml]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  archive-platform:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-2025, ubuntu-24.04]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 12
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: 38525785018
+          name: AEGIS-1.5.0-unsigned-candidates
+          path: exact
+      - name: Exercise archive crypto, AEAD backup, PDF/image worker and migration on exact runtime
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import os,pathlib,hashlib,subprocess,zipfile,urllib.request,xml.etree.ElementTree as ET
+          root=pathlib.Path.cwd();c=root/'exact/candidates';e=root/'archive-platform-evidence';e.mkdir()
+          def digest(p):
+            with p.open('rb') as f:return hashlib.file_digest(f,'sha256').hexdigest()
+          hashes=dict(line.split('  ',1)[::-1] for line in (c/'SHA256SUMS').read_text().splitlines())
+          for name in ['AEGIS-1.5.0-client-source.zip','AEGIS-1.5.0-Windows-x64.zip','AEGIS-1.5.0-CachyOS-x86_64.AppImage']:assert digest(c/name)==hashes[name]
+          with zipfile.ZipFile(c/'AEGIS-1.5.0-client-source.zip') as z:z.extractall(root/'source')
+          windows=os.name=='nt'
+          if windows:
+            with zipfile.ZipFile(c/'AEGIS-1.5.0-Windows-x64.zip') as z:z.extractall(root/'client')
+            app=root/'client/AEGIS'
+          else:
+            image=c/'AEGIS-1.5.0-CachyOS-x86_64.AppImage';image.chmod(0o755);subprocess.run([str(image),'--appimage-extract'],cwd=root,check=True,stdout=subprocess.DEVNULL,timeout=60);app=root/'squashfs-root'
+          junit=e/'junit.jar'
+          with urllib.request.urlopen('https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-console-standalone/1.13.4/junit-platform-console-standalone-1.13.4.jar',timeout=30) as s:junit.write_bytes(s.read())
+          assert digest(junit)=='3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892'
+          suffix='.exe' if windows else '';jdk=pathlib.Path(os.environ['JAVA_HOME_21_X64']);classes=e/'classes';classes.mkdir()
+          sources=list((root/'source/aegis/client-core/src/test/java/org/securemail/client/archive').glob('*.java'))
+          cp=os.pathsep.join(map(str,[junit,app/'app/*']))
+          with (e/'COMPILE.log').open('w') as log:subprocess.run([str(jdk/('bin/javac'+suffix)),'--release','21','-encoding','UTF-8','-cp',cp,'-d',str(classes),*map(str,sources)],check=True,stdout=log,stderr=subprocess.STDOUT,timeout=60)
+          with (e/'JUNIT.log').open('w') as log:subprocess.run([str(app/('runtime/bin/java'+suffix)),'-Xmx512m','-jar',str(junit),'execute','--class-path',os.pathsep.join(map(str,[classes,app/'app/*'])),'--select-package','org.securemail.client.archive','--reports-dir',str(e/'xml'),'--details=summary'],check=True,stdout=log,stderr=subprocess.STDOUT,timeout=240)
+          with (e/'PERFORMANCE.json').open('w') as log:subprocess.run([str(app/('runtime/bin/java'+suffix)),'-Xmx256m','-cp',os.pathsep.join(map(str,[classes,app/'app/*'])),'org.securemail.client.archive.ArchivePerformanceMain'],check=True,stdout=log,stderr=subprocess.STDOUT,timeout=90)
+          import json,platform
+          result={'artifactBinaryCommit':'7a4684166814856b83a07c310d47e0ee8e253847','version':'1.5.0','actualPlatform':platform.platform(),'Windows11':'NOT_RUN','CachyOSKDE':'NOT_RUN','productionReady':False,'checks':ET.parse(e/'xml/TEST-junit-jupiter.xml').getroot().attrib}
+          (e/'RESULTS.json').write_text(json.dumps(result,indent=2)+'\n')
+          junit.unlink()
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: AEGIS-1.5.0-archive-${{ matrix.os }}-evidence
+          path: archive-platform-evidence/
+          retention-days: 14
+          if-no-files-found: error
