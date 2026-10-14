@@ -43,9 +43,9 @@ jobs:
           assert digest(junit)=='3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892'
           suffix='.exe' if windows else '';jdk=pathlib.Path(os.environ['JAVA_HOME_21_X64']);classes=e/'classes';classes.mkdir()
           sources=list((root/'source/aegis/client-core/src/test/java/org/securemail/client/archive').glob('*.java'))
-          cp=os.pathsep.join(map(str,[junit,app/'app/*']))
+          libraries=sorted((app/'app').glob('*.jar'));cp=os.pathsep.join(map(str,[junit,*libraries]))
           with (e/'COMPILE.log').open('w') as log:subprocess.run([str(jdk/('bin/javac'+suffix)),'--release','21','-encoding','UTF-8','-cp',cp,'-d',str(classes),*map(str,sources)],check=True,stdout=log,stderr=subprocess.STDOUT,timeout=60)
-          with (e/'JUNIT.log').open('w') as log:subprocess.run([str(app/('runtime/bin/java'+suffix)),'-Xmx512m','-jar',str(junit),'execute','--class-path',os.pathsep.join(map(str,[classes,app/'app/*'])),'--select-package','org.securemail.client.archive','--reports-dir',str(e/'xml'),'--details=summary'],check=True,stdout=log,stderr=subprocess.STDOUT,timeout=240)
+          with (e/'JUNIT.log').open('w') as log:subprocess.run([str(app/('runtime/bin/java'+suffix)),'-Xmx512m','-jar',str(junit),'execute','--class-path',os.pathsep.join(map(str,[classes,*libraries])),'--select-package','org.securemail.client.archive','--reports-dir',str(e/'xml'),'--details=summary'],check=True,stdout=log,stderr=subprocess.STDOUT,timeout=240)
           with (e/'PERFORMANCE.json').open('w') as log:subprocess.run([str(app/('runtime/bin/java'+suffix)),'-Xmx256m','-cp',os.pathsep.join(map(str,[classes,app/'app/*'])),'org.securemail.client.archive.ArchivePerformanceMain'],check=True,stdout=log,stderr=subprocess.STDOUT,timeout=90)
           import json,platform
           result={'artifactBinaryCommit':'7a4684166814856b83a07c310d47e0ee8e253847','version':'1.5.0','actualPlatform':platform.platform(),'Windows11':'NOT_RUN','CachyOSKDE':'NOT_RUN','productionReady':False,'checks':ET.parse(e/'xml/TEST-junit-jupiter.xml').getroot().attrib}
