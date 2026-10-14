@@ -1,0 +1,43 @@
+name: AEGIS 1.5.0 exact-package real onion staging
+on:
+  push:
+    branches: [development/aegis-1.5.0]
+    paths: [.github/workflows/aegis150-onion-staging.yml]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  staging:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: 38525785018
+          name: AEGIS-1.5.0-unsigned-candidates
+          path: exact
+      - name: Actual signed peer onions with stopped/restarted disposable Relay
+        run: |
+          python3 - <<'PY'
+          import pathlib,zipfile,hashlib,subprocess,os
+          root=pathlib.Path.cwd();c=root/'exact/candidates';e=root/'onion-staging-evidence';e.mkdir()
+          hashes=dict(line.split('  ',1)[::-1] for line in (c/'SHA256SUMS').read_text().splitlines())
+          for name in ['AEGIS-1.5.0-native-acceptance.zip','AEGIS-1.5.0-CachyOS-x86_64.AppImage']:
+            with (c/name).open('rb') as f:assert hashlib.file_digest(f,'sha256').hexdigest()==hashes[name]
+          image=c/'AEGIS-1.5.0-CachyOS-x86_64.AppImage';image.chmod(0o755)
+          subprocess.run([str(image),'--appimage-extract'],check=True,stdout=subprocess.DEVNULL,timeout=60)
+          with zipfile.ZipFile(c/'AEGIS-1.5.0-native-acceptance.zip') as z:z.extractall(root/'kit')
+          app=root/'squashfs-root';stage=next((root/'kit').rglob('staging'));classes=e/'classes';classes.mkdir()
+          cp=os.pathsep.join(map(str,[app/'app/*',stage/'*']));jdk=pathlib.Path(os.environ['JAVA_HOME_21_X64'])
+          with (e/'COMPILE.log').open('w') as log:subprocess.run([str(jdk/'bin/javac'),'--release','21','-encoding','UTF-8','-cp',cp,'-d',str(classes),'aegis/integration-tests/src/test/java/org/securemail/integration/LifecycleTorProbe.java'],check=True,stdout=log,stderr=subprocess.STDOUT,timeout=60)
+          with (e/'REAL-TOR.log').open('w') as log:subprocess.run([str(app/'runtime/bin/java'),'-Xmx768m','-Daegis.native.root='+str(app),'-cp',str(classes)+os.pathsep+cp,'org.securemail.integration.LifecycleTorProbe',str(app),str(e/'results')],check=True,stdout=log,stderr=subprocess.STDOUT,timeout=720)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: AEGIS-1.5.0-real-onion-staging-evidence
+          path: onion-staging-evidence/
+          retention-days: 14
+          if-no-files-found: error
