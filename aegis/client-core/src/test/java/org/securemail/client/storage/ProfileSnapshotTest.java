@@ -53,4 +53,19 @@ class ProfileSnapshotTest {
       ProfileSnapshot.verify(first,config);assertThrows(java.io.IOException.class,()->ClientUpgrade.beforeVersionOpen("../oops",config,root.resolve("backups")));
     }finally{if(previous==null)System.clearProperty("aegis.profile");else System.setProperty("aegis.profile",previous);}
   }
+  @Test void version150PreservesManagedArchiveAndRestoresMissingSeparateContainer()throws Exception{
+    String previous=System.getProperty("aegis.profile");System.setProperty("aegis.profile",root.toString());
+    try{
+      ClientConfig config=ClientConfig.load(AppPaths.config());config.save(AppPaths.config());
+      try(var vault=new LocalStore(config.storagePath(),"snapshot-vault-password-150".toCharArray(),Clock.systemUTC(),100000,1000000)){vault.bindNickname("raven");vault.writeArchivePreferences(new byte[]{1,2,3});}
+      Path archive=config.storagePath().resolveSibling(config.storagePath().getFileName()+".personal-archive"),guards=root.resolveSibling(root.getFileName()+"-guards");
+      char[] secret="independent archive snapshot password".toCharArray();String item;
+      try(var a=org.securemail.client.archive.EncryptedArchive.create(archive,guards,secret,false,Clock.systemUTC()).archive()){item=a.importBytes("not-visible.txt","text","snapshot content".getBytes(),"",false,org.securemail.client.archive.EncryptedArchive.QUIET,()->false).id();}
+      Path restored=archive.resolveSibling(config.storagePath().getFileName()+".archive-restored-"+java.util.UUID.randomUUID());Files.createDirectories(restored);Files.write(restored.resolve("key.bin"),new byte[]{9,8,7});
+      byte[] state=Files.readAllBytes(config.storagePath().resolve("state.vault"));Path backup=ClientUpgrade.beforeVersionOpen("1.5.0",config,root.resolve("backups"));assertEquals(backup,ClientUpgrade.beforeVersionOpen("1.5.0",config,root.resolve("backups")));assertArrayEquals(state,Files.readAllBytes(config.storagePath().resolve("state.vault")));
+      Files.delete(restored.resolve("key.bin"));Files.delete(restored);Files.write(archive.resolve("catalog.enc"),new byte[]{0});ProfileSnapshot.restore(backup,config);assertArrayEquals(new byte[]{9,8,7},Files.readAllBytes(restored.resolve("key.bin")));
+      try(var a=org.securemail.client.archive.EncryptedArchive.open(archive,guards,secret,false,Clock.systemUTC())){assertEquals("snapshot content",new String(a.previewBytes(item,100)));}
+    }finally{if(previous==null)System.clearProperty("aegis.profile");else System.setProperty("aegis.profile",previous);}
+  }
+
 }

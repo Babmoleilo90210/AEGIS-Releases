@@ -1,36 +1,33 @@
-# АЕГИС 1.2.0 — release candidate
+# АЕГИС 1.5.0
 
-АЕГИС — Автономная Единая Гибридная Информационная Система. Обновление Stability, Reliability & Message Lifecycle продолжает кодовую базу 1.1.5.
+АЕГИС — Автономная Единая Гибридная Информационная Система. Локальный Java21/JavaFX почтовый клиент с E2EE, Tor и независимым Relay. Это продолжение опубликованного 1.2.0, не новый проект.
 
-**productionReady=false.** Клиентские функции собраны и прошли автоматические и настоящее Tor staging проверки. Windows 11, CachyOS KDE Wayland/X11 и полный подписанный updater/install/restart/rollback должны пройти нативную приёмку владельцем. Этот комплект не является опубликованным Stable.
+**Статус: release candidate, productionReady=false.** Сборка не заменяет обязательную нативную приёмку. Stable/feed/production Relay и signing keys этой работой не изменяются.
 
-## Файлы
+Windows: распакуйте полный portable ZIP и запустите AEGIS.exe либо установите Setup. CachyOS: сделайте AppImage исполняемым и откройте его. Java21 и Tor включены. Tor подключается автоматически; адрес Relay вводится только как v3 .onion. Офлайн-доступ требует пароль локального хранилища.
 
-- AEGIS-Setup-1.2.0-x64.exe — установка Windows под обычной учётной записью.
-- AEGIS-1.2.0-Windows-x64.zip — portable Windows; распаковать полностью и открыть AEGIS.exe.
-- AEGIS-1.2.0-CachyOS-x86_64.AppImage — Java 21, Tor и Snowflake внутри.
-- AEGIS-1.2.0-source.zip и client-source.zip — исходники и build scripts; версия общего протокола/Relay сохранена намеренно.
-- AEGIS-1.2.0-native-acceptance.zip — набор тестов, сценариев и матрица для владельца.
-- AEGIS-1.2.0-offline-signing.zip — неподписанные Stable/Beta manifest inputs, существующий публичный ключ и инструкция. Private key отсутствует.
-- SHA256SUMS и SIGNING-INPUT-SHA256 — проверка release assets и точных байтов manifest.
-- TEST-REPORT-1.2.0.md и evidence/ — результаты и ограничения проверок.
+Раздел «Архив» создаётся только по действию пользователя, пустым, с отдельным паролем. Он работает без сети. Имена и документы не хранятся в открытом виде. Необязательный recovery key сохраните отдельно; скрытого восстановления/мастер-ключа нет. Подробности: ARCHIVE-1.5.0.md и ARCHIVE-THREAT-MODEL-1.5.0.md.
 
-Начните с README-WINDOWS.md или README-CACHYOS.md, затем MIGRATION-1.1.5-TO-1.2.0.md и NATIVE-ACCEPTANCE-1.2.0.md. Изменения перечислены в CHANGELOG-1.2.0.md.
+## Код и сборка
 
-## Что изменилось
+common-protocol — protocol 1; client-core — E2EE, vault, Tor, lifecycle, updater, архив; client-ui — JavaFX; relay-server — неизменённая staging-реализация. Клиент совместим с production Relay0.2.0. Сервер не имеет библиотек расшифровки пользовательских сообщений.
 
-Подписанные взаимные Friends и durable delivery/read receipts передаются через прежние encrypted письма, без обновления production Relay 0.2.0. Исчезающие письма используют одно проверенное устройство и timer после отображения. Обычные письма сохраняют прежний TTL после доставки; старым письмам не добавляются новые timers/read statuses. Обновлены Tor state card, повторное подключение, адаптивная компоновка, локальные кириллические шрифты, встроенный просмотр аватара и изоляция updater helper.
+Обычная сборка: `./gradlew build`. Явная упаковка с проверенными входами: `python3 tools/build-archive.py --jdk /path/to/jdk21 --work /path/to/build-inputs --out /path/to/candidates`. BUILD-1.5.0.md перечисляет зависимости и проверки. Подпись/публикация отделены от сборки.
 
-**Ограничение исчезающих писем:** reboot ОС, недостоверный ledger или неоднозначный прерванный reveal могут закрыть уже открытое письмо раньше срока. Перезапуск приложения в рамках того же boot сохраняет countdown. Это явно консервативная модель, не гарантия точного времени через reboot. См. LIFECYCLE-1.2.0.md. Экспортированные файлы/скриншоты не уничтожаются.
+## Все возможные сетевые соединения
 
-## Все сетевые направления
+| Источник | Назначение | Передаваемые данные |
+|---|---|---|
+| Клиент Java | 127.0.0.1 SOCKS19050 | Только v3 onion Relay/проверенного peer; protocol1 authentication, публичные identity/routing данные, E2EE ciphertext, ACK |
+| Клиент Java | 127.0.0.1 Control19051 | SAFECOOKIE authentication и управление собственным ephemeral onion service; не пароли аккаунта/письма |
+| Updater Java | 127.0.0.1 SOCKS19052 | HTTPS github.com, raw.githubusercontent.com, release-assets.githubusercontent.com, objects.githubusercontent.com; публичные manifest/signature/artifacts, range-resume |
+| Встроенный Tor | Tor relays/authorities/directories | Транспорт Tor; внешние IP видит Tor-инфраструктура, HTTP user profile не отправляется |
+| Snowflake/lyrebird, только при fallback/выборе | Официальные broker/front/rendezvous/STUN, указанные в комплектном pt_config/bridge-конфиге | Обход блокировки Tor; транспортные метаданные, не archive keys |
+| Peer service Java | Только loopback, через свой Tor onion | Подписанный capability challenge и encrypted DELIVER/receipt; публичный TCP listener не создаётся |
+| Relay | Локальный SQLite/loopback Tor service | Ciphertext и необходимые routing/account/delivery метаданные; Relay не расшифровывает письма |
+| PDF worker/архив/поиск/темы | Сеть не используется | Локальные memory pipes/шифрованные файлы |
+| Явная сборка разработчика | GitHub releases, Maven Central, Apache/официальные build inputs | Скачивание исходников/библиотек/инструментов; установленный клиент эти build scripts не запускает |
 
-Код Java обращается к собственным Tor SOCKS и Control на localhost. Почта — только к настроенному relay onion и account-signed peer onion; virtual ports 80/81 ведут в локальный клиентский сервис, публичный IP-порт не открывается. Control управляет только собственным Tor/onion и не получает приватные account/device/message keys. HTTPS updater использует отдельный localhost SOCKS Tor для подписанных GitHub feeds/assets и их разрешённых HTTPS redirect hosts. TLS, pinned Ed25519, размер, SHA-256 и anti-rollback обязательны. Прямого clearnet fallback в Java нет.
+Прямого clearnet fallback для операций АЕГИС нет. Нет телеметрии, аналитики, рекламных SDK, облачного crash reporting и скрытого updater. Проверка/загрузка обновлений следуют сохранённым пользовательским настройкам; установка подтверждается пользователем. PDFBox — единственная новая группа runtime-библиотек: локальный просмотр PDF, Apache2, без внешнего сервиса.
 
-Сам официальный Tor создаёт исходящие соединения Tor Direct, а Snowflake — документированные transport/broker/rendezvous/WebRTC соединения. Выбор режима и диагностические детали доступны в приложении; внешнего SaaS для писем нет. Существующий Debian Relay слушает loopback и получает только encrypted payload; новый server deployment не требуется и не входит в этот клиентский комплект. Полный прежний privacy/protocol/deployment код и документация находятся в source ZIP.
-
-Нет телеметрии, аналитики, рекламных SDK или автоматической публикации. Independent security audit не проводился. Production Relay/onion/feed и pinned release key не изменены.
-
-## Подпись и публикация
-
-OWNER-OFFLINE-SIGNING-1.2.0.md описывает owner-only офлайн Ed25519 подпись и отдельный Beta E2E тест. Stable публикуется только после обязательной приёмки. Подписи самостоятельно не созданы; существующая подпись другого manifest не подходит. GitHub URL v1.2.0 в manifest — будущие адреса, файлы по ним станут доступны после публикации владельцем.
+Документы: README-WINDOWS.md, README-CACHYOS.md, MIGRATION-1.2.0-TO-1.5.0.md, TEST-REPORT-1.5.0.md, P2P-VERIFICATION-1.5.0.md, OWNER-OFFLINE-SIGNING-1.5.0.md. Безопасность и ограничения перечислены явно; независимый security audit не проводился.

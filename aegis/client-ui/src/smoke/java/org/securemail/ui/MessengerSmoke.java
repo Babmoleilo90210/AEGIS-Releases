@@ -45,8 +45,9 @@ public final class MessengerSmoke {
      packet=crypto.encrypt(p,1800,86400000,sender,"raven",new UserInfo(session.local().identity().userId(),"blackfox",session.local().identity().publicKey(),null));
    }
    session.local().accept(packet);var item=session.local().loadHistory(packet.messageId(),false);
-   ExecutorService worker=Executors.newSingleThreadExecutor();MessengerApp app=new MessengerApp();
+   ExecutorService worker=Executors.newSingleThreadExecutor();
    CompletableFuture<Void> startup=new CompletableFuture<>();Platform.startup(()->{Platform.setImplicitExit(false);startup.complete(null);});startup.get();
+   MessengerApp app=fx(MessengerApp::new);
    Stage owner=fx(()->{
      Stage stage=new Stage();BorderPane root=new BorderPane();var scene=new Scene(root,1020,730);scene.getStylesheets().add(MessengerApp.class.getResource("messenger.css").toExternalForm());stage.setScene(scene);stage.show();
      set(app,"stage",stage);set(app,"root",root);set(app,"config",config);
@@ -57,7 +58,7 @@ public final class MessengerSmoke {
    });
    try{
      until(()->((ListView<?>)get(app,"letters")).getItems().size()==1);
-     fx(()->{var change=MessengerApp.class.getDeclaredMethod("updateChanged",UpdateService.Snapshot.class);change.setAccessible(true);SignedManifest release=new SignedManifest("1.3.0","stable","1.0.0","optional",new SignedManifest.Announcement("Update","UI-only fixture",true),new SignedManifest.Notes("2026-10-08T00:00:00Z","Fix","UI-only fixture"),java.util.List.of(),null,null);change.invoke(app,new UpdateService.Snapshot(UpdateService.State.AVAILABLE,0,72,release,false,"Доступно обновление"));check(((Button)get(app,"updateBadge")).isVisible(),"Update badge absent");change.invoke(app,new UpdateService.Snapshot(UpdateService.State.FAILED,0,0,null,false,"Подпись отклонена"));check(!((Button)get(app,"updateBadge")).isVisible(),"Invalid update displayed trusted badge");return null;});
+     fx(()->{check(owner.getScene().getRoot().lookupAll(".app-header").stream().noneMatch(n->n.lookupAll(".button").stream().anyMatch(b->b instanceof Button x&&"Новое письмо".equals(x.getText()))),"Compose leaked into global header");return null;});
      fx(()->{snapshot(owner,out.resolve("inbox.png"));app.composePage();snapshot(owner,out.resolve("compose.png"));return null;});
      var themes=(ThemeManager)fx(()->get(app,"themes"));
      for(var theme:ThemeManager.Theme.values())fx(()->{themes.select(theme);snapshot(owner,out.resolve("theme-"+theme.name()+".png"));return null;});

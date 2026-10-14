@@ -165,6 +165,18 @@ public final class LocalStore implements AutoCloseable {
   public synchronized void writeArchivePreferences(byte[] bytes)throws IOException,GeneralSecurityException {
     ensureOpen();if(bytes.length>8192)throw new IOException("Archive UI quota");AtomicFiles.write(root.resolve("archive-ui-v1.vault"),seal(bytes,"archive-ui/v1".getBytes(java.nio.charset.StandardCharsets.US_ASCII)));
   }
+  public synchronized String deliveryRoute(String id)throws IOException {
+    ensureOpen();Limits.messageId(id);return routes().getOrDefault(id,"");
+  }
+  public synchronized void deliveryRoute(String id,String route)throws IOException {
+    ensureOpen();Limits.messageId(id);if(!Set.of("P2P","RELAY").contains(route))throw new IOException("Некорректный маршрут");var routes=routes();if(routes.containsKey(id))return;if(routes.size()>=8192){Set<String> retained=new HashSet<>();try(var files=Files.newDirectoryStream(mail,"*.sm")){for(Path f:files)retained.add(f.getFileName().toString().replaceFirst("\\.sm$",""));}try(var files=Files.newDirectoryStream(sent,"*.sm")){for(Path f:files)retained.add(f.getFileName().toString().replaceFirst("\\.sm$",""));}routes.keySet().retainAll(retained);while(routes.size()>=8192)routes.remove(routes.keySet().iterator().next());}routes.put(id,route);
+    byte[] data=Binary.encode(out->{out.writeInt(1);out.writeInt(routes.size());for(var e:routes.entrySet()){Binary.text(out,e.getKey());Binary.text(out,e.getValue());}});
+    try{AtomicFiles.write(root.resolve("delivery-routes-v1.vault"),seal(data,"delivery-routes/v1".getBytes(java.nio.charset.StandardCharsets.US_ASCII)));}catch(GeneralSecurityException invalid){throw new IOException("Не удалось сохранить подтверждённый маршрут",invalid);}finally{Arrays.fill(data,(byte)0);}
+  }
+  private Map<String,String> routes()throws IOException {
+    Path p=root.resolve("delivery-routes-v1.vault");Map<String,String> values=new LinkedHashMap<>();if(!Files.isRegularFile(p,LinkOption.NOFOLLOW_LINKS))return values;byte[] clear=null;
+    try{clear=open(AtomicFiles.read(p,512*1024),"delivery-routes/v1".getBytes(java.nio.charset.StandardCharsets.US_ASCII));try(var in=new DataInputStream(new ByteArrayInputStream(clear))){if(in.readInt()!=1)throw new IOException("Route schema");int n=in.readInt();if(n<0||n>8192)throw new IOException("Route quota");for(int k=0;k<n;k++){String id=Binary.text(in,36),route=Binary.text(in,5);Limits.messageId(id);if(!Set.of("P2P","RELAY").contains(route)||values.putIfAbsent(id,route)!=null)throw new IOException("Route evidence damaged");}Binary.end(in);}return values;}catch(GeneralSecurityException|IllegalArgumentException invalid){throw new IOException("Повреждены технические сведения маршрута",invalid);}finally{if(clear!=null)Arrays.fill(clear,(byte)0);}
+  }
   public synchronized PublicProfile cachedProfile(String nick)throws IOException,GeneralSecurityException{
     UserInfo owner=nick.equals(nickname)?new UserInfo(identity.userId(),nickname,identity.publicKey(),null):contact(nick);if(owner==null)return null;
     Path path=root.resolve("profiles").resolve(owner.userId()+".enc");if(!Files.exists(path))return null;
@@ -463,6 +475,7 @@ public final class LocalStore implements AutoCloseable {
         for(String person:people){byte[] pixels=avatar(person);if(pixels!=null)try{Path old=avatarPath(person);AtomicFiles.write(target.resolve("avatars").resolve(old.getFileName()),sealWith(next,pixels,("avatar/v1/"+person).getBytes(java.nio.charset.StandardCharsets.US_ASCII)));}finally{Arrays.fill(pixels,(byte)0);}}
       }
       byte[] features=readFeatures();if(features!=null)try{AtomicFiles.write(target.resolve("features-v1.vault"),sealWith(next,features,"features/v1".getBytes(java.nio.charset.StandardCharsets.US_ASCII)));}finally{Arrays.fill(features,(byte)0);}
+      for(String name:List.of("archive-ui-v1","delivery-routes-v1")){Path old=root.resolve(name+".vault");if(Files.isRegularFile(old,LinkOption.NOFOLLOW_LINKS)){byte[] aad=(name.equals("archive-ui-v1")?"archive-ui/v1":"delivery-routes/v1").getBytes(java.nio.charset.StandardCharsets.US_ASCII),clear=open(AtomicFiles.read(old,512*1024),aad);try{AtomicFiles.write(target.resolve(old.getFileName()),sealWith(next,clear,aad));}finally{Arrays.fill(clear,(byte)0);}}}
       Path lifecycle=root.resolve("lifecycle");if(Files.isDirectory(lifecycle,LinkOption.NOFOLLOW_LINKS)){
         AtomicFiles.directory(target.resolve("lifecycle"));try(var files=Files.newDirectoryStream(lifecycle,"*.enc")){for(Path file:files){String name=file.getFileName().toString().replaceFirst("\\.enc$","");extensionName(name);byte[] data=readExtension(name,name.equals("state-v1")?8*1024*1024:maxCipher+8192);try{AtomicFiles.write(target.resolve("lifecycle").resolve(file.getFileName()),sealWith(next,data,extensionAad(name)));}finally{Arrays.fill(data,(byte)0);}}}
       }

@@ -12,11 +12,11 @@ import org.securemail.client.net.*;
 
 /** Real published 1.1.0 HTTPS transport and bundled Tor, with its production
  * Ed25519 key. Fetches an SHA-pinned published 1.1.5 source artifact read-only.
- * Does not install, write feeds or claim that unsigned 1.2.0 passed E2E.
+ * Does not install, write feeds or claim that unsigned 1.5.0 passed E2E.
  */
 public final class DemoTorNetworkProbe {
   public static void main(String[] args)throws Exception {
-    String current=(String)SignedManifest.class.getField("CURRENT").get(null);if(!Set.of("1.1.0","1.2.0").contains(current))throw new AssertionError("Use the exact published 1.1.0 or candidate 1.2.0 classpath");
+    String current=(String)SignedManifest.class.getField("CURRENT").get(null);if(!Set.of("1.1.0","1.2.0","1.5.0").contains(current))throw new AssertionError("Use the exact published 1.1.0 or candidate 1.5.0 classpath");
     Path app=Path.of(args[0]).toAbsolutePath(),evidence=Path.of(args[1]).toAbsolutePath();Files.createDirectories(evidence);
     Path profile=Files.createTempDirectory("AEGIS demo Tor fixture ");System.setProperty("aegis.home",app.toString());System.setProperty("aegis.profile",profile.toString());
     boolean snowflake=args.length==3&&args[2].equals("--snowflake");
@@ -29,9 +29,9 @@ public final class DemoTorNetworkProbe {
       String rc=Files.readString(profile.resolve("tor/torrc"));if(!rc.contains("127.0.0.1:19050 OnionTrafficOnly")||!rc.contains("127.0.0.1:19052\n")||rc.contains("0.0.0.0"))throw new AssertionError("Listener isolation failed");
       var https=new TorHttpsClient(config.torUpdateSocksPort());URI uri=URI.create("https://raw.githubusercontent.com/"+SignedManifest.REPOSITORY+"/main/updates/stable.json");
       byte[] exact=https.bytes(uri,SignedManifest.MAX_BYTES),sig=https.bytes(URI.create(uri+".sig"),64);SignedManifest signed=SignedManifest.verifyForCheck(exact,sig,"stable",current,current);
-      if(!signed.version().equals("1.1.5"))throw new AssertionError("Feed changed; expected SHA-pinned published 1.1.5 source only");
+      if(!signed.version().equals("1.2.0"))throw new AssertionError("Feed changed; expected SHA-pinned published 1.2.0 source only");
       var asset=signed.artifacts().stream().filter(a->a.kind().equals("source")).findFirst().orElseThrow();
-      if(!asset.sha256().equals("9a564f5bb0638a55d1378d2601e5f8949012a725409a19792c6dd7630c74efd9"))throw new AssertionError("Different published source artifact");
+      if(!asset.sha256().equals("93c816760d3f688214a3a37e67483e9ec89233e5f671d28bb8f5b49f7f370324"))throw new AssertionError("Different published source artifact");
       Path target=profile.resolve("source.part");AtomicBoolean cancel=new AtomicBoolean();AtomicInteger progress=new AtomicInteger();
       try{https.file(asset,target,cancel::get,(n,total)->{progress.incrementAndGet();if(n>=262144)cancel.set(true);});throw new AssertionError("Cancellation did not interrupt transfer");}catch(InterruptedIOException expected){}
       long partial=Files.size(target);if(partial<=0||partial>=asset.size())throw new AssertionError("No resumable partial file");
@@ -39,8 +39,8 @@ public final class DemoTorNetworkProbe {
       https.file(asset,target,()->false,(n,total)->{first.compareAndSet(-1,n);last.set(n);progress.incrementAndGet();});UpdateService.verifyFile(target,asset);
       if(last.get()!=asset.size()||progress.get()<3)throw new AssertionError("No real progress");
       Files.write(evidence.resolve("production-stable.json"),exact);Files.write(evidence.resolve("production-stable.json.sig"),sig);
-      Files.writeString(evidence.resolve("RESULTS.json"),"{\n  \"result\": \"PASS\",\n  \"clientVersion\": \""+current+"\",\n  \"torMode\": \""+tor.mode()+"\",\n  \"torBootstrap\": 100,\n  \"productionEd25519\": true,\n  \"TLSDefaultTruststore\": true,\n  \"artifactVersion\": \""+signed.version()+"\",\n  \"artifactKind\": \"source\",\n  \"downloadedBytes\": "+asset.size()+",\n  \"partialBytes\": "+partial+",\n  \"firstResumedProgress\": "+first.get()+",\n  \"progressEvents\": "+progress.get()+",\n  \"sha256\": \""+asset.sha256()+"\",\n  \"directFallback\": false,\n  \"productionModified\": false,\n  \"candidate120SignedInstall\": \"NOT_RUN\"\n}\n");
-      System.out.println("Exact client "+current+" real Tor PASS: production Ed25519, TLS, GitHub artifact download, interruption/resume and SHA-256. New 1.2.0 owner-signed installation pending.");
+      Files.writeString(evidence.resolve("RESULTS.json"),"{\n  \"result\": \"PASS\",\n  \"clientVersion\": \""+current+"\",\n  \"torMode\": \""+tor.mode()+"\",\n  \"torBootstrap\": 100,\n  \"productionEd25519\": true,\n  \"TLSDefaultTruststore\": true,\n  \"artifactVersion\": \""+signed.version()+"\",\n  \"artifactKind\": \"source\",\n  \"downloadedBytes\": "+asset.size()+",\n  \"partialBytes\": "+partial+",\n  \"firstResumedProgress\": "+first.get()+",\n  \"progressEvents\": "+progress.get()+",\n  \"sha256\": \""+asset.sha256()+"\",\n  \"directFallback\": false,\n  \"productionModified\": false,\n  \"candidate150SignedInstall\": \"NOT_RUN\"\n}\n");
+      System.out.println("Exact client "+current+" real Tor PASS: production Ed25519, TLS, GitHub artifact download, interruption/resume and SHA-256. New 1.5.0 owner-signed installation pending.");
     }
   }
 }

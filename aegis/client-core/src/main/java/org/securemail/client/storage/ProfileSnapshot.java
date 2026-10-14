@@ -58,6 +58,13 @@ public final class ProfileSnapshot {
     for(String key:p.stringPropertyNames())if(key.startsWith("present/app/updates/")){
       String name=key.substring("present/app/updates/".length());if(name.equals("events"))continue;if(!updateMetadata(name))throw new IOException("Invalid update metadata backup");targets.put("app/updates/"+name,AppPaths.root().resolve("updates").resolve(name));
     }
+    String archivePrefix=config.storagePath().getFileName().toString();
+    for(String key:p.stringPropertyNames())if(key.startsWith("present/personal-archives/")){
+      String name=key.substring("present/personal-archives/".length());
+      if(name.equals("main"))targets.put("personal-archives/main",config.storagePath().resolveSibling(archivePrefix+".personal-archive"));
+      else if(name.matches(java.util.regex.Pattern.quote(archivePrefix)+"\\.archive-(?:restored|diagnostic)-[a-f0-9-]{36}"))targets.put("personal-archives/"+name,config.storagePath().resolveSibling(name));
+      else throw new IOException("Invalid managed archive backup");
+    }
     for(var target:targets.values()){Path parent=target.toAbsolutePath().normalize();while(parent!=null){if(Files.isSymbolicLink(parent))throw new IOException("Profile restore symlink rejected");parent=parent.getParent();}}
     for(var entry:targets.entrySet()){
       Path target=entry.getValue().toAbsolutePath().normalize();AtomicFiles.directory(target.getParent());

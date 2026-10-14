@@ -1,0 +1,18 @@
+{
+  "version": "1.5.0",
+  "baseline": "1.2.0",
+  "productionReady": false,
+  "nativeAcceptance": {
+    "Windows11-x64": "NOT_RUN",
+    "CachyOS-KDE-Wayland": "NOT_RUN",
+    "CachyOS-KDE-X11": "NOT_RUN",
+    "twoPhysicalNetworksP2P": "NOT_RUN",
+    "ownerSignedUpdater120to150": "NOT_RUN",
+    "ownerSignedRollback": "NOT_RUN"
+  },
+  "ownerSignature": "NOT_CREATED",
+  "published": false,
+  "productionRelayModified": false,
+  "pinnedPublicKeyChanged": false,
+  "archiveIndependentSecurityAudit": false
+}

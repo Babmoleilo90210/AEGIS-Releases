@@ -26,3 +26,16 @@
 
 .connection-card{-fx-background-color:-aegis-panel;-fx-background-radius:12;-fx-padding:14;}
 .connection-card .progress-bar{-fx-accent:-aegis-action;}
+
+/* Personal archive shares the design tokens; never use a theme-specific UI copy. */
+.archive-root .tree-view,.archive-root .table-view{-fx-background-color:-aegis-panel;-fx-background-radius:8;-fx-border-width:0;-fx-padding:4}
+.archive-root .tree-cell,.archive-root .table-row-cell{-fx-background-color:transparent;-fx-text-fill:-aegis-text;-fx-padding:8}
+.archive-root .tree-cell:filled:selected,.archive-root .table-row-cell:filled:selected{-fx-background-color:-aegis-control;-fx-background-radius:6}
+.archive-root .tree-cell .arrow{-fx-background-color:-aegis-muted}
+.archive-root .table-cell{-fx-text-fill:-aegis-text;-fx-border-color:transparent;-fx-padding:8}
+.archive-root .table-view .column-header,.archive-root .table-view .column-header-background,.archive-root .table-view .filler{-fx-background-color:-aegis-control}
+.archive-root .table-view .column-header .label{-fx-text-fill:-aegis-text}
+.archive-root .split-pane{-fx-background-color:transparent;-fx-padding:0}
+.archive-root .split-pane-divider{-fx-background-color:-aegis-control;-fx-padding:0 2}
+.archive-root .date-picker,.archive-root .date-picker .arrow-button{-fx-background-color:-aegis-control;-fx-background-radius:6}
+.archive-root .date-picker .arrow{-fx-background-color:-aegis-muted}

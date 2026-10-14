@@ -34,9 +34,13 @@ public final class EncryptedArchive implements AutoCloseable {
   private final FileChannel lockChannel;private final FileLock fileLock;
   private final Map<String,ArchiveEntry> entries=new LinkedHashMap<>();
   private byte[] key;private ArchiveCrypto.Header header;private volatile boolean closed;
-  private long revision,limit=DEFAULT_LIMIT,lastActivity=System.nanoTime(),lastBackup,backupInterval;
-  private int lockMinutes=10;private String backupDirectory="";private byte[] backupHeader=new byte[0];
+  private long revision,limit=DEFAULT_LIMIT,lastBackup,backupInterval;
+  private volatile long lastActivity=System.nanoTime();private volatile int incompleteIndexes;
+  private volatile int lockMinutes=10;private String backupDirectory="";private byte[] backupHeader=new byte[0];
   private String committedHeader,committedState;
+  private boolean backupPathAvailable=true;
+  public int incompleteIndexes(){return incompleteIndexes;}
+  public boolean backupPathAvailable(){return backupPathAvailable;}
 
   private EncryptedArchive(Path path,Path anchors,Clock clock)throws IOException {
     root=path.toAbsolutePath().normalize();objects=root.resolve("objects");this.clock=clock;
@@ -61,6 +65,7 @@ public final class EncryptedArchive implements AutoCloseable {
   public static EncryptedArchive open(Path root,Path guards,char[] password,boolean firstDevice,Clock clock)throws IOException,GeneralSecurityException {return openInternal(root,guards,password,false,firstDevice,clock);}
   public static EncryptedArchive recover(Path root,Path guards,char[] recovery,boolean firstDevice,Clock clock)throws IOException,GeneralSecurityException {return openInternal(root,guards,recovery,true,firstDevice,clock);}
   private static EncryptedArchive openInternal(Path root,Path guards,char[] secret,boolean recovery,boolean firstDevice,Clock clock)throws IOException,GeneralSecurityException {
+    rejectLinks(root);if(!Files.isRegularFile(root.resolve("key.bin"),LinkOption.NOFOLLOW_LINKS)||!Files.isRegularFile(root.resolve("catalog.enc"),LinkOption.NOFOLLOW_LINKS))throw new IOException("Контейнер архива не найден");
     var a=new EncryptedArchive(root,guards,clock);
     try{
       byte[] h=AtomicFiles.read(a.root.resolve("key.bin"),4096);a.header=ArchiveCrypto.parse(h);a.key=recovery?ArchiveCrypto.recover(a.header,secret):ArchiveCrypto.unlock(a.header,secret);
@@ -92,13 +97,15 @@ public final class EncryptedArchive implements AutoCloseable {
       if(revision<1||limit<1024*1024||limit>MAX_ARCHIVE||lockMinutes<1||lockMinutes>240||backupInterval<0||backupInterval>10080L*60_000)throw new IOException("Повреждены настройки архива");
       int n=i.readInt();if(n<0||n>MAX_ENTRIES)throw new IOException("Повреждён каталог архива");entries.clear();for(int k=0;k<n;k++){ArchiveEntry e=ArchiveEntry.read(i);if(entries.putIfAbsent(e.id(),e)!=null)throw new IOException("Повтор объекта архива");}Binary.end(i);
       for(var e:entries.values())validateFolder(e.folder(),e.directory()?e.id():"");
+      if(backupInterval>0)try{backupPathAvailable=Path.of(backupDirectory).isAbsolute()&&!Path.of(backupDirectory).normalize().startsWith(root);}catch(java.nio.file.InvalidPathException invalid){backupPathAvailable=false;}
     }finally{Arrays.fill(clear,(byte)0);}
   }
   private void commit(boolean keepPrevious)throws IOException,GeneralSecurityException {
-    requireOpen();revision=Math.addExact(revision,1);byte[] data=sealedCatalog();String next=ArchiveCrypto.digest(data);
-    if(usedBytes()+data.length>limit)throw new IOException("Архив достиг лимита размера");
-    anchor(committedHeader,committedState,committedHeader,next);
+    requireOpen();
     try{
+      revision=Math.addExact(revision,1);byte[] data=sealedCatalog();String next=ArchiveCrypto.digest(data);
+      if(usedBytes()+data.length>limit)throw new IOException("Архив достиг лимита размера");
+      anchor(committedHeader,committedState,committedHeader,next);
       AtomicFiles.write(root.resolve("previous.enc"),keepPrevious?AtomicFiles.read(root.resolve("catalog.enc"),MAX_META+28):data);
       AtomicFiles.write(root.resolve("catalog.enc"),data);anchor(committedHeader,next,"","");committedState=next;
     }catch(IOException|GeneralSecurityException failure){closed=true;throw failure;}
@@ -125,15 +132,16 @@ public final class EncryptedArchive implements AutoCloseable {
   public synchronized List<ArchiveEntry> entries()throws IOException {requireOpen();return List.copyOf(entries.values());}
   public synchronized ArchiveEntry entry(String id)throws IOException {requireOpen();ArchiveEntry e=entries.get(id);if(e==null)throw new IOException("Объект недоступен");return e;}
   public synchronized ArchiveEntry folder(String parent,String name)throws IOException,GeneralSecurityException {
-    requireOpen();capacity();validateFolder(parent,"");var e=new ArchiveEntry(UUID.randomUUID().toString(),parent,name,"folder",0,clock.millis(),"",List.of(),false,false);entries.put(e.id(),e);commit(true);return e;
+    requireOpen();capacity();String id=UUID.randomUUID().toString();validateFolder(parent,id);var e=new ArchiveEntry(id,parent,name,"folder",0,clock.millis(),"",List.of(),false,false);entries.put(e.id(),e);commit(true);return e;
   }
   private void capacity()throws IOException {if(entries.size()>=MAX_ENTRIES)throw new IOException("Достигнут лимит объектов архива");}
   private void validateFolder(String folder,String child)throws IOException {
     Set<String> seen=new HashSet<>();String f=folder;
-    for(int depth=0;!f.isEmpty();depth++){if(depth>=12||f.equals(child)||!seen.add(f))throw new IOException("Папки: не более 12 уровней, без циклов");ArchiveEntry e=entries.get(f);if(e==null||!e.directory())throw new IOException("Папка недоступна");f=e.folder();}
+    for(int depth=0;!f.isEmpty();depth++){if(depth>=(child.isEmpty()?12:11)||f.equals(child)||!seen.add(f))throw new IOException("Папки: не более 12 уровней, без циклов");ArchiveEntry e=entries.get(f);if(e==null||!e.directory())throw new IOException("Папка недоступна");f=e.folder();}
   }
   public synchronized void metadata(String id,String folder,String name,List<String> tags,boolean favorite)throws IOException,GeneralSecurityException {
     requireOpen();ArchiveEntry old=entry(id);validateFolder(folder,old.directory()?id:"");ArchiveEntry next=old.metadata(folder,name,tags,favorite,old.trash());entries.put(id,next);
+    try{for(var e:entries.values())validateFolder(e.folder(),e.directory()?e.id():"");}catch(IOException invalid){entries.put(id,old);throw invalid;}
     if(!next.directory())descriptor(next);commit(true);activity();
   }
   public synchronized void trash(String id,boolean value)throws IOException,GeneralSecurityException {
@@ -153,14 +161,14 @@ public final class EncryptedArchive implements AutoCloseable {
   public synchronized ArchiveEntry importBytes(String name,String type,byte[] data,String folder,boolean allowDuplicate,Progress progress,BooleanSupplier cancel)throws IOException,GeneralSecurityException {try(var in=new ByteArrayInputStream(data)){return importStream(name,type,data.length,in,folder,List.of(),false,allowDuplicate,progress,cancel);}}
   synchronized ArchiveEntry importStream(String name,String type,long size,InputStream source,String folder,List<String> tags,boolean favorite,boolean allowDuplicate,Progress progress,BooleanSupplier cancel)throws IOException,GeneralSecurityException {
     requireOpen();capacity();validateFolder(folder,"");if(size<0||size>MAX_FILE||usedBytes()+2*size+MAX_META*2L>limit)throw new IOException("Недостаточно места в лимите архива");
-    String id=UUID.randomUUID().toString();Path temporary=Files.createTempFile(objects,".atomic-",".tmp",AtomicFiles.attributes(objects));MessageDigest digest=MessageDigest.getInstance("SHA-256");
+    String id=UUID.randomUUID().toString();Path temporary=Files.createTempFile(objects,".atomic-",".tmp",AtomicFiles.attributes(objects));MessageDigest digest=MessageDigest.getInstance("SHA-256");boolean committing=false;
     try{
       try(OutputStream file=Files.newOutputStream(temporary);OutputStream sealed=ArchiveCrypto.stream(key).newEncryptingStream(file,ArchiveCrypto.aad(header.id()+"/object/"+id))){copy(source,sealed,digest,size,progress,cancel);}
       String hash=HexFormat.of().formatHex(digest.digest());if(!allowDuplicate)for(var e:entries.values())if(!e.directory()&&e.digest().equals(hash))throw new Duplicate(e.id());
       try(var f=FileChannel.open(temporary,StandardOpenOption.WRITE)){f.force(true);}Files.move(temporary,object(id,".bin"),StandardCopyOption.ATOMIC_MOVE);AtomicFiles.syncDirectory(objects);
       ArchiveEntry e=new ArchiveEntry(id,folder,name,type,size,clock.millis(),hash,tags,favorite,false);descriptor(e);
-      writeIndex(e,cancel);entries.put(id,e);commit(true);activity();return e;
-    }finally{Files.deleteIfExists(temporary);}
+      writeIndex(e,cancel);entries.put(id,e);committing=true;commit(true);activity();return e;
+    }finally{Files.deleteIfExists(temporary);if(!committing)for(String suffix:List.of(".bin",".meta",".idx"))Files.deleteIfExists(object(id,suffix));}
   }
   private void descriptor(ArchiveEntry e)throws IOException,GeneralSecurityException {byte[] b=Binary.encode(e::write);try{AtomicFiles.write(object(e.id(),".meta"),ArchiveCrypto.seal(key,b,header.id()+"/descriptor/"+e.id()));}finally{Arrays.fill(b,(byte)0);}}
   private void writeIndex(ArchiveEntry e,BooleanSupplier cancel)throws IOException,GeneralSecurityException {
@@ -168,24 +176,27 @@ public final class EncryptedArchive implements AutoCloseable {
     try{
       try(OutputStream file=Files.newOutputStream(temp);OutputStream sealed=ArchiveCrypto.stream(key).newEncryptingStream(file,ArchiveCrypto.aad(header.id()+"/index/"+e.id()))){
         if(Set.of("letter","text").contains(e.type()))try(var clear=readStream(e)){
+          sealed.write(1);sealed.write(0);
           var reader=new InputStreamReader(clear,StandardCharsets.UTF_8.newDecoder().onMalformedInput(java.nio.charset.CodingErrorAction.REPORT));var writer=new OutputStreamWriter(sealed,StandardCharsets.UTF_8);char[] buffer=new char[8192];try{int n;while((n=reader.read(buffer))!=-1){check(cancel);writer.write(buffer,0,n);}writer.flush();}finally{Arrays.fill(buffer,'\0');}
-        }else if(e.type().equals("pdf")&&e.size()<=ArchiveDocuments.MAX_PREVIEW){byte[] b=readBytesInternal(e,ArchiveDocuments.MAX_PREVIEW);try{String text=ArchiveDocuments.pdfText(b);sealed.write(text.getBytes(StandardCharsets.UTF_8));}catch(IOException invalidPdf){/* File remains encrypted and exportable; PDF preview reports decoder failure. */}finally{Arrays.fill(b,(byte)0);}}
+        }else if(e.type().equals("pdf")&&e.size()<=ArchiveDocuments.MAX_PREVIEW){byte[] b=readBytesInternal(e,ArchiveDocuments.MAX_PREVIEW);try{byte[] text=ArchiveDocuments.pdfText(b).getBytes(StandardCharsets.UTF_8);try{sealed.write(1);sealed.write(0);sealed.write(text);}finally{Arrays.fill(text,(byte)0);}}catch(IOException invalidPdf){sealed.write(1);sealed.write(1);}finally{Arrays.fill(b,(byte)0);}}
+        else{sealed.write(1);sealed.write(e.type().equals("pdf")?1:0);}
       }
       try(var f=FileChannel.open(temp,StandardOpenOption.WRITE)){f.force(true);}Files.move(temp,object(e.id(),".idx"),StandardCopyOption.ATOMIC_MOVE,StandardCopyOption.REPLACE_EXISTING);AtomicFiles.syncDirectory(objects);
     }finally{Files.deleteIfExists(temp);}
   }
   public synchronized void rebuildIndex(Progress progress,BooleanSupplier cancel)throws IOException,GeneralSecurityException {requireOpen();var files=entries.values().stream().filter(e->!e.directory()).toList();int n=0;for(var e:files){check(cancel);writeIndex(e,cancel);progress.update(++n,files.size());}activity();}
   public synchronized List<ArchiveEntry> search(Filter filter,Progress progress,BooleanSupplier cancel)throws IOException,GeneralSecurityException {
-    requireOpen();String needle=filter.query().strip().toLowerCase(Locale.ROOT);List<ArchiveEntry> result=new ArrayList<>();int n=0;
+    requireOpen();String needle=filter.query().strip().toLowerCase(Locale.ROOT);List<ArchiveEntry> result=new ArrayList<>();incompleteIndexes=0;int n=0;Set<String> descendantIds=filter.recursive()&&!filter.folder().isEmpty()?descendants(filter.folder()):Set.of();
     for(var e:entries.values()){
       check(cancel);progress.update(++n,entries.size());if(e.trash()!=filter.trash()||filter.favorites()&&!e.favorite()||e.addedAt()<filter.since()||e.addedAt()>filter.until()||!filter.type().isEmpty()&&!e.type().equals(filter.type()))continue;
-      if(!filter.folder().isEmpty()&&!e.folder().equals(filter.folder())&&(!filter.recursive()||!descendants(filter.folder()).contains(e.id())))continue;
+      if(!filter.folder().isEmpty()&&!e.folder().equals(filter.folder())&&!descendantIds.contains(e.id()))continue;
       if(needle.isEmpty()||(e.name()+" "+String.join(" ",e.tags())).toLowerCase(Locale.ROOT).contains(needle)||!e.directory()&&indexContains(e,needle,cancel))result.add(e);
     }activity();return List.copyOf(result);
   }
   private boolean indexContains(ArchiveEntry e,String needle,BooleanSupplier cancel)throws IOException,GeneralSecurityException {
     if(e.directory())return false;Path p=object(e.id(),".idx");if(!Files.isRegularFile(p,LinkOption.NOFOLLOW_LINKS))throw new IndexDamaged();boolean found=false;
     try(InputStream source=Files.newInputStream(p);InputStream clear=ArchiveCrypto.stream(key).newDecryptingStream(source,ArchiveCrypto.aad(header.id()+"/index/"+e.id()));Reader reader=new InputStreamReader(clear,StandardCharsets.UTF_8)){
+      int schema=reader.read(),state=reader.read();if(schema!=1||state<0||state>1)throw new IndexDamaged();if(state==1)incompleteIndexes++;
       char[] chars=new char[8192];String carry="";try{int n;while((n=reader.read(chars))!=-1){check(cancel);String part=carry+new String(chars,0,n).toLowerCase(Locale.ROOT);found|=part.contains(needle);carry=part.substring(Math.max(0,part.length()-Math.max(1,needle.length())));}return found;}finally{Arrays.fill(chars,'\0');}
     }catch(InterruptedIOException cancelled){throw cancelled;}catch(IOException damaged){throw new IndexDamaged();}
   }
@@ -222,9 +233,9 @@ public final class EncryptedArchive implements AutoCloseable {
   public synchronized void backup(Path path,char[] password,Progress progress,BooleanSupplier cancel)throws IOException,GeneralSecurityException {requireOpen();ArchiveBackup.write(this,path,password,progress,cancel);lastBackup=clock.millis();commit(true);}
   public synchronized void backupSchedule(Path folder,long intervalMinutes,char[] separatePassword)throws IOException,GeneralSecurityException {
     requireOpen();if(intervalMinutes<0||intervalMinutes>10080)throw new IOException("Расписание: не более 7 дней");Path dir=folder.toAbsolutePath().normalize();rejectLinks(dir);if(dir.startsWith(root))throw new IOException("Папка копий должна быть вне архива");AtomicFiles.directory(dir);
-    backupDirectory=dir.toString();backupInterval=intervalMinutes*60_000;backupHeader=backupHeader(separatePassword);commit(true);
+    backupPathAvailable=true;backupDirectory=dir.toString();backupInterval=intervalMinutes*60_000;backupHeader=backupHeader(separatePassword);commit(true);
   }
-  public synchronized boolean backupDue(){return !closed&&backupInterval>0&&clock.millis()-lastBackup>=backupInterval;}
+  public synchronized boolean backupDue(){return !closed&&backupPathAvailable&&backupInterval>0&&clock.millis()-lastBackup>=backupInterval;}
   public synchronized Path automaticBackup(Progress progress,BooleanSupplier cancel)throws IOException,GeneralSecurityException {
     requireOpen();if(!backupDue())return null;Path target=Path.of(backupDirectory).resolve("AEGIS-archive-"+clock.millis()+"-"+UUID.randomUUID()+".aegis-archive");ArchiveBackup.writePrepared(this,target,backupHeader,progress,cancel);lastBackup=clock.millis();commit(true);return target;
   }
@@ -241,13 +252,15 @@ public final class EncryptedArchive implements AutoCloseable {
   }
   public static EncryptedArchive repairCopy(Path source,Path destination,Path guards,char[] password,Clock clock,Progress progress)throws IOException,GeneralSecurityException {
     if(Files.exists(destination))throw new IOException("Выберите новое имя для диагностической копии");rejectLinks(source);rejectLinks(destination);if(destination.toAbsolutePath().normalize().startsWith(source.toAbsolutePath().normalize()))throw new IOException("Копия должна быть вне оригинала");
-    AtomicFiles.directory(destination);try(var paths=Files.walk(source)){for(Path f:paths.toList()){if(Files.isSymbolicLink(f))throw new IOException("Symlink в контейнере");Path to=destination.resolve(source.relativize(f));if(Files.isDirectory(f))AtomicFiles.directory(to);else if(!f.getFileName().toString().endsWith(".lock")&&!f.getFileName().toString().startsWith(".atomic-"))Files.copy(f,to);}}
+    ArchiveCrypto.Header valid=ArchiveCrypto.parse(AtomicFiles.read(source.resolve("key.bin"),4096));byte[] verifiedKey=ArchiveCrypto.unlock(valid,password);Arrays.fill(verifiedKey,(byte)0);
+    AtomicFiles.directory(destination);try(var paths=Files.walk(source)){for(Path f:paths.toList()){if(Files.isSymbolicLink(f))throw new IOException("Symlink в контейнере");Path to=destination.resolve(source.relativize(f));if(Files.isDirectory(f)){if(!f.equals(source)&&!source.relativize(f).toString().equals("objects"))throw new IOException("Неожиданная структура контейнера");AtomicFiles.directory(to);}else if(!f.getFileName().toString().endsWith(".lock")&&!f.getFileName().toString().startsWith(".atomic-")){if(!ArchiveBackup.name(source.relativize(f).toString().replace('\\','/')))throw new IOException("Неожиданный файл в контейнере");Files.copy(f,to);}}}
     try{return open(destination,guards,password,true,clock);}catch(IOException|GeneralSecurityException invalid){
-      try{Files.deleteIfExists(destination.resolve("archive.lock"));var a=new EncryptedArchive(destination,guards,clock);a.header=ArchiveCrypto.parse(AtomicFiles.read(destination.resolve("key.bin"),4096));a.key=ArchiveCrypto.unlock(a.header,password);
+      EncryptedArchive a=null;boolean success=false;
+      try{Files.deleteIfExists(destination.resolve("archive.lock"));a=new EncryptedArchive(destination,guards,clock);a.header=ArchiveCrypto.parse(AtomicFiles.read(destination.resolve("key.bin"),4096));a.key=ArchiveCrypto.unlock(a.header,password);
         try{a.readCatalog(AtomicFiles.read(destination.resolve("previous.enc"),MAX_META+28));}catch(IOException|GeneralSecurityException metadataLost){a.entries.clear();}
         try(var files=Files.newDirectoryStream(a.objects,"*.meta")){for(Path f:files){String id=f.getFileName().toString().replace(".meta","");byte[] b=null;try{b=ArchiveCrypto.open(a.key,AtomicFiles.read(f,32768),a.header.id()+"/descriptor/"+id);try(var in=new DataInputStream(new ByteArrayInputStream(b))){ArchiveEntry e=ArchiveEntry.read(in);Binary.end(in);if(!e.id().equals(id))throw new IOException("Descriptor mismatch");a.entries.putIfAbsent(e.id(),e);}}catch(IOException|GeneralSecurityException unreadable){/* Repair copy keeps damaged ciphertext for diagnosis. */}finally{if(b!=null)Arrays.fill(b,(byte)0);}}}
-        a.entries.replaceAll((id,e)->e.metadata(a.entries.containsKey(e.folder())?e.folder():"",e.name(),e.tags(),e.favorite(),e.trash()));a.revision=Math.max(1,a.revision);a.verifyAll(progress,()->false);a.committedHeader=ArchiveCrypto.digest(a.header.encode());byte[] repaired=a.sealedCatalog();AtomicFiles.write(destination.resolve("catalog.enc"),repaired);a.committedState=ArchiveCrypto.digest(repaired);a.anchor(a.committedHeader,a.committedState,"","");a.rebuildIndex(progress,()->false);return a;
-      }catch(IOException|GeneralSecurityException failed){failed.addSuppressed(invalid);throw failed;}
+        final EncryptedArchive repairing=a;a.entries.replaceAll((id,e)->e.metadata(repairing.entries.containsKey(e.folder())?e.folder():"",e.name(),e.tags(),e.favorite(),e.trash()));a.revision=Math.max(1,a.revision);a.verifyAll(progress,()->false);a.committedHeader=ArchiveCrypto.digest(a.header.encode());byte[] repaired=a.sealedCatalog();AtomicFiles.write(destination.resolve("catalog.enc"),repaired);a.committedState=ArchiveCrypto.digest(repaired);a.anchor(a.committedHeader,a.committedState,"","");a.rebuildIndex(progress,()->false);success=true;return a;
+      }catch(IOException|GeneralSecurityException failed){failed.addSuppressed(invalid);throw failed;}finally{if(!success&&a!=null)a.close();}
     }
   }
   @Override public synchronized void close(){closed=true;if(key!=null){Arrays.fill(key,(byte)0);key=null;}Arrays.fill(backupHeader,(byte)0);entries.clear();header=null;try{if(fileLock.isValid())fileLock.release();}catch(IOException ignored){}try{lockChannel.close();}catch(IOException ignored){}}

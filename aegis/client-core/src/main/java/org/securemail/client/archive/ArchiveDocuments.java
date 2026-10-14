@@ -37,7 +37,7 @@ public final class ArchiveDocuments {
   public static PdfPage pdf(byte[] bytes,int page)throws IOException {
     if(bytes.length>MAX_PREVIEW||!pdf(bytes)||page< -1||page>511)throw new IOException("PDF не подходит для безопасного просмотра");
     Set<String> paths=new LinkedHashSet<>();for(Class<?> c:List.of(PdfWorkerMain.class,Binary.class,PDDocument.class,RandomAccessReadBuffer.class,FontBoxFont.class,LogFactory.class))try{paths.add(Path.of(c.getProtectionDomain().getCodeSource().getLocation().toURI()).toString());}catch(Exception invalid){throw new IOException("PDF-библиотека недоступна",invalid);}
-    String executable=Path.of(System.getProperty("java.home"),"bin",System.getProperty("os.name").startsWith("Windows")?"java.exe":"java").toString();
+    String executable=Path.of(System.getProperty("java.home"),"bin",System.getProperty("os.name").startsWith("Windows")?"javaw.exe":"java").toString();
     Process child=new ProcessBuilder(executable,"-Xmx192m","-Djava.awt.headless=true","-XX:+DisableAttachMechanism","-XX:-HeapDumpOnOutOfMemoryError","-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.NoOpLog","-cp",String.join(File.pathSeparator,paths),PdfWorkerMain.class.getName()).redirectError(ProcessBuilder.Redirect.DISCARD).start();
     var watchdog=Executors.newSingleThreadScheduledExecutor(r->{Thread t=new Thread(r,"aegis-pdf-deadline");t.setDaemon(true);return t;});var stop=watchdog.schedule(child::destroyForcibly,12,TimeUnit.SECONDS);
     try{

@@ -80,7 +80,7 @@ public final class ClientSession implements AutoCloseable {
   private void rebuildPeerRoute(){synchronized(routingLock){
     closeRouting();if(closed||network==null||!network.loggedIn())return;
     try {
-      peer = new PeerServer(config.localServicePort(), local, config.maxCiphertext(),lifecycle::accept,lifecycle::capabilities);
+      peer = new PeerServer(config.localServicePort(), local, config.maxCiphertext(),p->{var receipt=lifecycle.accept(p);local.deliveryRoute(p.messageId(),"P2P");return receipt;},lifecycle::capabilities);
       peer.start();
       control = new TorControl(config.torControlPort(), config.torCookiePath());
       onion = control.publish(peer.port());
@@ -107,8 +107,8 @@ public final class ClientSession implements AutoCloseable {
       if (control != null)
         try {
           if (control.bootstrapped()) {
-            network.publish(local.identity().route(onion, org.securemail.client.lifecycle.DeviceCapabilities.ONION_PORT, local.now() + 90_000));
             p2p = true;
+            try{network.publish(local.identity().route(onion, org.securemail.client.lifecycle.DeviceCapabilities.ONION_PORT, local.now() + 90_000));}catch(IOException relayUnavailable){status="Tor ●  Relay недоступен  P2P ●";/* A directory outage must not close our live peer onion/Control channel. */}
           }
         } catch (Exception ignored) {closeRouting();
         }
@@ -120,7 +120,7 @@ public final class ClientSession implements AutoCloseable {
       try{syncPublicData(null);}catch(Exception rejected){publicStatus="Публичные данные пока не синхронизированы";}
     } catch (Exception e) {
       if(e instanceof org.securemail.client.net.RequestRejected rejected&&rejected.code()==1)network.forgetSession();
-      status = "Синхронизация не завершена · проверьте Tor, вход и доверенные контакты";
+      status = peer!=null?"Tor ●  Relay недоступен  P2P ●":"Синхронизация не завершена · проверьте Tor, вход и доверенные контакты";
     }
   }
   public synchronized void syncPublicData(org.securemail.protocol.UserInfo selected)throws Exception{

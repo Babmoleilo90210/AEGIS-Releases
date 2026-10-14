@@ -26,6 +26,7 @@ final class MailViewer implements AutoCloseable {
     default void closed(boolean wasDisplayed){}
     default void abandonedDisplay(){}
     default void archive(LocalStore.HistoryItem item,PlainMessage plain,String displayedBody,Runnable finished){finished.run();}
+    default String route(){return "";}
     default long expiresAt(){return -1;}
   }
   private final Stage stage;private InWindowDialog<Void> page;
@@ -57,6 +58,7 @@ final class MailViewer implements AutoCloseable {
     Label author=new Label((item.outgoing()?"Кому: ":"От: ")+item.contact());author.setWrapText(true);metadata.getChildren().addAll(author,lifetime);content.getChildren().addAll(heading,metadata);
     if(actions!=null){
       Label verification=new Label("Подпись проверена · "+(actions.unknown()?"Неизвестный отправитель":"Из контактов"));verification.getStyleClass().add("muted");content.getChildren().add(verification);
+      String route=actions.route();if(!route.isEmpty()){TitledPane details=new TitledPane("Технические сведения",new Label(route));details.setExpanded(false);details.setAnimated(false);content.getChildren().add(details);}
       if(plain.context()!=null){var reference=plain.context();Button original=new Button((reference.forwarded()?"Переслано: ":"Ответ на: ")+reference.author()+" · "+reference.subject());original.setTooltip(new Tooltip("Ссылка автора письма; исходное письмо проверяется на этом устройстве"));original.setOnAction(e->actions.original(reference));content.getChildren().add(original);}
       Button reply=new Button("Ответить"),forward=new Button("Переслать"),copy=new Button("Копировать");
       reply.setOnAction(e->{if(!closed&&expiry.getAsLong()>now.getAsLong())actions.reply(item,plain);});

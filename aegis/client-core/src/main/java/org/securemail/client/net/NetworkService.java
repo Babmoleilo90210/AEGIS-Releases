@@ -26,6 +26,7 @@ public final class NetworkService {
   private final int relayPort, maxCiphertext;
   private final LocalStore local;
   private PacketAcceptor acceptor;
+  private final java.util.concurrent.ConcurrentHashMap<String,Route> signedRoutes=new java.util.concurrent.ConcurrentHashMap<>();
   private volatile String token = "";
   private volatile boolean registrationAccepted;
   private volatile int capabilities=-1;
@@ -105,7 +106,14 @@ public final class NetworkService {
     UserInfo u = request(Operation.FIND, o -> Binary.text(o, normalized), UserInfo::read);
     if (!u.nickname().equals(normalized) || !u.userId().equals(Identity.id(u.publicKey())))
       throw new IOException("Bad directory response");
+    if(validRoute(u.route(),u,local.now())){if(signedRoutes.size()>=512)signedRoutes.entrySet().removeIf(e->e.getValue().expiresAt()<=local.now());if(signedRoutes.size()<512||signedRoutes.containsKey(u.userId()))signedRoutes.put(u.userId(),u.route());}
     return u;
+  }
+
+  /** Reuses only a current, root-signed route of an already verified contact. */
+  public UserInfo resolveTrusted(UserInfo contact)throws IOException {
+    if(validRoute(signedRoutes.get(contact.userId()),contact,local.now()))return new UserInfo(contact.userId(),contact.nickname(),contact.publicKey(),signedRoutes.get(contact.userId()));
+    UserInfo remote=find(contact.nickname());if(!remote.userId().equals(contact.userId())||!MessageDigest.isEqual(remote.publicKey(),contact.publicKey()))throw new IOException("Ключ контакта изменился");return remote;
   }
 
   public void publish(Route route) throws IOException {
@@ -137,17 +145,21 @@ public final class NetworkService {
    * This does not add a contact or change its trust status. */
   public DeliveryResult deliverControl(EncryptedPacket p,UserInfo contact)throws IOException {
     if(!p.senderId().equals(local.identity().userId())||!p.recipientId().equals(contact.userId())||!Identity.verifyPacket(p))throw new IOException("Invalid encrypted reply");
+    Route cached=signedRoutes.get(contact.userId());
+    DeliveryResult direct=peer(p,contact,cached);
+    if(direct!=null){local.deliveryRoute(p.messageId(),"P2P");return direct;}
     UserInfo remote = find(contact.nickname());
     if (!remote.userId().equals(contact.userId())
         || !MessageDigest.isEqual(remote.publicKey(), contact.publicKey()))
       throw new IOException("Ключ контакта изменился. Отправка остановлена.");
-    Route r = remote.route();
-    long now = local.now();
-    if (r != null
-        && r.userId().equals(contact.userId())
-        && r.expiresAt() > now
-        && r.expiresAt() <= now + 300_000
-        && Identity.verify(contact.publicKey(), r.signingBytes(), r.signature()))
+    direct=cached!=null&&remote.route()!=null&&cached.onionAddress().equals(remote.route().onionAddress())&&cached.port()==remote.route().port()?null:peer(p,contact,remote.route());
+    if(direct!=null){local.deliveryRoute(p.messageId(),"P2P");return direct;}
+    request(Operation.STORE, o -> PacketCodec.write(o, p), i -> null);
+    local.deliveryRoute(p.messageId(),"RELAY");return new DeliveryResult(Delivery.RELAY_QUEUED, 0);
+  }
+  private static boolean validRoute(Route r,UserInfo contact,long now)throws IOException{return r!=null&&r.userId().equals(contact.userId())&&r.expiresAt()>now&&r.expiresAt()<=now+300_000&&Identity.verify(contact.publicKey(),r.signingBytes(),r.signature());}
+  private DeliveryResult peer(EncryptedPacket p,UserInfo contact,Route r)throws IOException {
+    if(validRoute(r,contact,local.now()))
       try {
         Receipt ack =
             exchange(
@@ -167,8 +179,7 @@ public final class NetworkService {
       } catch (IOException ignored) {
         /* Same packet and ID used for fallback; lost ACK cannot reset recipient TTL. */
       }
-    request(Operation.STORE, o -> PacketCodec.write(o, p), i -> null);
-    return new DeliveryResult(Delivery.RELAY_QUEUED, 0);
+    return null;
   }
 
   public int fetchAndAcknowledge() throws IOException, GeneralSecurityException {
@@ -181,6 +192,7 @@ public final class NetworkService {
               in -> in.readBoolean() ? PacketCodec.read(in, maxCiphertext) : null);
       if (p == null) break;
       Receipt ack = acceptor.accept(p);
+      local.deliveryRoute(p.messageId(),"RELAY");
       request(Operation.ACK, ack::write, in -> null);
       count++;
     }

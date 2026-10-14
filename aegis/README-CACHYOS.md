@@ -1,28 +1,19 @@
-# АЕГИС 1.2.0 — CachyOS KDE x86_64
+# АЕГИС 1.5.0 — CachyOS KDE x86_64
 
-Кандидат для нативной приёмки: **productionReady=false**. Java 21, Tor и Snowflake включены. Проверка настоящего KDE Wayland/X11 остаётся владельцу.
+Это release candidate. Ubuntu headless/Monocle/CI не заменяют KDE Wayland/X11 acceptance.
 
-Сохраните AEGIS-1.2.0-CachyOS-x86_64.AppImage в пользовательский каталог. В Dolphin разрешите выполнение через свойства и откройте. Эквивалент:
-
-```bash
-chmod +x AEGIS-1.2.0-CachyOS-x86_64.AppImage
-./AEGIS-1.2.0-CachyOS-x86_64.AppImage
-```
-
-Если FUSE недоступен:
+Сохраните полный AppImage в пользовательский каталог и проверьте SHA256SUMS:
 
 ```bash
-./AEGIS-1.2.0-CachyOS-x86_64.AppImage --appimage-extract-and-run
+sha256sum AEGIS-1.5.0-CachyOS-x86_64.AppImage
+chmod +x AEGIS-1.5.0-CachyOS-x86_64.AppImage
+./AEGIS-1.5.0-CachyOS-x86_64.AppImage
 ```
 
-Дождитесь Tor, введите onion сервера, войдите и разблокируйте хранилище. Для нового аккаунта используйте регистрацию. Не заменяйте существующую identity. Перед переходом с 1.1.5 сохраните полный профиль и следуйте MIGRATION-1.1.5-TO-1.2.0.md. XDG пути, письма, ключи, контакты, темы, макеты, сессии и Tor state сохраняются; identity-only backup не заменяет полный backup.
+Java21/Tor/libsodium включены; приложение не требует root, системного Tor или Tor Browser. Если FUSE отсутствует, официальный AppImage режим `APPIMAGE_EXTRACT_AND_RUN=1 ./AEGIS-1.5.0-CachyOS-x86_64.AppImage` извлекает только программный payload. Пользовательские plaintext документы не входят в AppImage.
 
-«Открыть без сети» открывает локальную непосроченную почту. Настройки и просмотр аватара находятся внутри главного окна. Черновик переживает изменения UI в памяти, но не закрытие приложения; он блокирует установку updater, пока не завершён/отменён. Новые Noto Sans, Inter, Roboto, PT Sans и DejaVu Sans с кириллицей поставляются локально с лицензиями.
+Tor подключается автоматически, затем вставьте .onion и войдите. Собственный torrc явно передаётся через defaults-torrc/-f, системный /etc/tor/torrc не используется. Сетевые listeners только localhost; никаких портов роутера открывать не требуется.
 
-Два клиента 1.2.0 подтверждают Friends через signed E2EE pair assertions на прежнем Relay 0.2.0; пока подтверждение не пришло — ожидание. Публичный профиль зависит от возможностей Relay. Delivery/read receipts подтверждаются signed событиями, не исчезновением записи из Relay. Обычные receipts можно отключить. Защищённое письмо требует ручных letter password/FF1 и явного показа результата.
+Профиль: XDG_DATA_HOME/aegis либо ~/.local/share/aegis. Сохранение семидневного входа зависит от доступного Secret Service, иначе работает ручной пароль/offline. Архив имеет отдельный пароль; работает без Tor. Linux каталог700 и файлы600; Explorer/Dolphin не показывают содержимое без расшифрования. Экспорт — явное создание обычного файла.
 
-Обычный TTL остаётся после доставки. Исчезающие письма на одном проверенном устройстве: 1 минута–30 дней после показа. При OS reboot, недостоверном ledger или неоднозначном прерванном reveal уже открытое письмо может исчезнуть раньше срока. App restart того же boot сохраняет countdown. Экспортированные файлы и скриншоты не удаляются. Подробности — LIFECYCLE-1.2.0.md.
-
-Встроенный Tor запускается с собственными --defaults-torrc и -f, не читает системный /etc/tor/torrc. Только loopback: SOCKS почты 19050, Control 19051, SOCKS HTTPS updater 19052 и P2P 19120. sudo, публичные входящие порты и системная служба для клиента не нужны. Tor unavailable означает offline, clearnet fallback отсутствует. Семидневное локальное разблокирование зависит от доступного Secret Service KDE; иначе используется пароль.
-
-Нативно проверьте Wayland и X11, дробный scale, Tor Direct/Snowflake, два аккаунта, файл, offline, restart и updater/rollback по NATIVE-ACCEPTANCE-1.2.0.md. Реальные Ubuntu/Tor staging результаты не заменяют CachyOS. Production подпись/feed/публикация этого candidate не выполнены. BUILD-1.2.0.md содержит сборку, OWNER-OFFLINE-SIGNING-1.2.0.md — подпись владельцем. Не запускайте клиент root.
+Проверьте native kit отдельно в KDE Wayland и X11, включая дробный масштаб, темы/шрифты, минимальное окно, restore, Tor/Snowflake и updater. Не запускайте старый binary поверх изменённого профиля для отката — используйте согласованный backup/rollback.
