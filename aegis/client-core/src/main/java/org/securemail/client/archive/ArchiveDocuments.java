@@ -8,6 +8,7 @@ import java.util.*;
 import java.util.concurrent.*;
 import javax.imageio.*;
 import javax.imageio.stream.MemoryCacheImageInputStream;
+import javax.imageio.stream.MemoryCacheImageOutputStream;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.io.RandomAccessReadBuffer;
 import org.apache.fontbox.FontBoxFont;
@@ -30,7 +31,7 @@ public final class ArchiveDocuments {
   public static byte[] imagePreview(byte[] encoded)throws IOException {
     if(encoded.length>MAX_PREVIEW||!image(encoded))throw new IOException("Неподдерживаемое изображение");
     try(var input=new MemoryCacheImageInputStream(new ByteArrayInputStream(encoded))){var readers=ImageIO.getImageReaders(input);if(!readers.hasNext())throw new IOException("Изображение повреждено");var reader=readers.next();
-      try{reader.setInput(input,true,true);int width=reader.getWidth(0),height=reader.getHeight(0);if(width<=0||height<=0||width>32000||height>32000||(long)width*height>64_000_000)throw new IOException("Изображение превышает безопасные размеры");int sample=Math.max(1,(int)Math.ceil(Math.sqrt((double)width*height/4_000_000)));var params=reader.getDefaultReadParam();params.setSourceSubsampling(sample,sample,0,0);BufferedImage image=reader.read(0,params);try(var output=new ByteArrayOutputStream()){ImageIO.write(image,"PNG",output);if(output.size()>16*1024*1024)throw new IOException("Предпросмотр слишком большой");return output.toByteArray();}finally{image.flush();}}finally{reader.dispose();}
+      try{reader.setInput(input,true,true);int width=reader.getWidth(0),height=reader.getHeight(0);if(width<=0||height<=0||width>32000||height>32000||(long)width*height>64_000_000)throw new IOException("Изображение превышает безопасные размеры");int sample=Math.max(1,(int)Math.ceil(Math.sqrt((double)width*height/4_000_000)));var params=reader.getDefaultReadParam();params.setSourceSubsampling(sample,sample,0,0);BufferedImage image=reader.read(0,params);try(var output=new ByteArrayOutputStream();var memory=new MemoryCacheImageOutputStream(output)){ImageIO.write(image,"PNG",memory);memory.flush();if(output.size()>16*1024*1024)throw new IOException("Предпросмотр слишком большой");return output.toByteArray();}finally{image.flush();}}finally{reader.dispose();}
     }
   }
   public static String pdfText(byte[] bytes)throws IOException {return pdf(bytes,-1).text();}

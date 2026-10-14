@@ -22,4 +22,14 @@ final class ArchiveDocumentsTest {
     ArchiveDocuments.PdfPage page=ArchiveDocuments.pdf(bytes,0);assertEquals(1,page.pages());assertTrue(page.text().contains("Synthetic private PDF document"));assertTrue(ArchiveDocuments.image(page.png()));assertTrue(ArchiveDocuments.pdfText(bytes).contains("Synthetic private PDF document"));
   }
   @Test void damagedPdfFailsWithoutExternalOpening()throws Exception {assertThrows(IOException.class,()->ArchiveDocuments.pdf("%PDF-malformed\nnot a document".getBytes(StandardCharsets.US_ASCII),0));}
+  @Test void previewDoesNotCreatePlaintextImageIoCacheEvenWhenGlobalCacheIsEnabled()throws Exception {
+    var bitmap=new BufferedImage(400,200,BufferedImage.TYPE_INT_RGB);byte[] encoded;
+    try(var out=new ByteArrayOutputStream();var memory=new javax.imageio.stream.MemoryCacheImageOutputStream(out)){ImageIO.write(bitmap,"PNG",memory);memory.flush();encoded=out.toByteArray();}finally{bitmap.flush();}
+    java.nio.file.Path cache=java.nio.file.Files.createTempDirectory("AEGIS-image-cache-monitor-");boolean old=ImageIO.getUseCache();File oldDirectory=ImageIO.getCacheDirectory();
+    try(var watch=cache.getFileSystem().newWatchService()){
+      cache.register(watch,java.nio.file.StandardWatchEventKinds.ENTRY_CREATE);ImageIO.setUseCache(true);ImageIO.setCacheDirectory(cache.toFile());ArchiveDocuments.imagePreview(encoded);
+      assertNull(watch.poll(200,java.util.concurrent.TimeUnit.MILLISECONDS),"Image preview created a plaintext disk cache");
+    }finally{ImageIO.setUseCache(old);ImageIO.setCacheDirectory(oldDirectory);}
+  }
+
 }
