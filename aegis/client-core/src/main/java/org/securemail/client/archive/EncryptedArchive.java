@@ -233,11 +233,11 @@ public final class EncryptedArchive implements AutoCloseable {
   public synchronized void backup(Path path,char[] password,Progress progress,BooleanSupplier cancel)throws IOException,GeneralSecurityException {requireOpen();ArchiveBackup.write(this,path,password,progress,cancel);lastBackup=clock.millis();commit(true);}
   public synchronized void backupSchedule(Path folder,long intervalMinutes,char[] separatePassword)throws IOException,GeneralSecurityException {
     requireOpen();if(intervalMinutes<0||intervalMinutes>10080)throw new IOException("Расписание: не более 7 дней");Path dir=folder.toAbsolutePath().normalize();rejectLinks(dir);if(dir.startsWith(root))throw new IOException("Папка копий должна быть вне архива");AtomicFiles.directory(dir);
-    backupPathAvailable=true;backupDirectory=dir.toString();backupInterval=intervalMinutes*60_000;backupHeader=backupHeader(separatePassword);commit(true);
+    backupPathAvailable=true;backupDirectory=dir.toString();backupInterval=intervalMinutes*60_000;backupHeader=separatePassword==null?new byte[0]:backupHeader(separatePassword);commit(true);
   }
   public synchronized boolean backupDue(){return !closed&&backupPathAvailable&&backupInterval>0&&clock.millis()-lastBackup>=backupInterval;}
   public synchronized Path automaticBackup(Progress progress,BooleanSupplier cancel)throws IOException,GeneralSecurityException {
-    requireOpen();if(!backupDue())return null;Path target=Path.of(backupDirectory).resolve("AEGIS-archive-"+clock.millis()+"-"+UUID.randomUUID()+".aegis-archive");ArchiveBackup.writePrepared(this,target,backupHeader,progress,cancel);lastBackup=clock.millis();commit(true);return target;
+    requireOpen();if(!backupDue())return null;Path target=Path.of(backupDirectory).resolve("AEGIS-archive-"+clock.millis()+"-"+UUID.randomUUID()+".aegis-archive");ArchiveBackup.writePrepared(this,target,backupHeader.length==0?header.encode():backupHeader,progress,cancel);lastBackup=clock.millis();commit(true);return target;
   }
   public synchronized int merge(EncryptedArchive source,boolean includeDuplicates,Progress progress,BooleanSupplier cancel)throws IOException,GeneralSecurityException {
     requireOpen();if(source==this||root.equals(source.root))throw new IOException("Выберите другой архив");source.verifyAll(QUIET,cancel);var sourceEntries=source.entries();Map<String,String> folders=new HashMap<>();folders.put("","");int added=0;

@@ -1,0 +1,60 @@
+plugins { id 'application' }
+def fxPlatform=providers.gradleProperty('targetPlatform').getOrElse(System.getProperty('os.name').startsWith('Windows') ? 'win' : 'linux')
+dependencies {
+    // UI reads the Windows system theme; implementation dependencies of core are not exported.
+    implementation 'net.java.dev.jna:jna-platform:5.19.1'
+    implementation 'net.java.dev.jna:jna:5.19.1'
+    implementation project(':client-core')
+    ['base','graphics','controls'].each { implementation("org.openjfx:javafx-${it}:21.0.12:${fxPlatform}") { transitive=false } }
+}
+application {
+    mainClass='org.securemail.ui.Launcher'
+    applicationDefaultJvmArgs=['-Xmx1024m','-XX:+DisableAttachMechanism','-XX:-HeapDumpOnOutOfMemoryError']
+}
+
+// Optional headless graphical test; this dependency never enters client distributions.
+sourceSets {
+    smoke {
+        compileClasspath += sourceSets.main.output + configurations.runtimeClasspath
+        runtimeClasspath += output + compileClasspath
+    }
+}
+dependencies { smokeRuntimeOnly 'org.testfx:openjfx-monocle:21.0.2' }
+tasks.register('uiSmoke', JavaExec) {
+    dependsOn smokeClasses
+    classpath = sourceSets.smoke.runtimeClasspath
+    mainClass = 'org.securemail.ui.UiSmoke'
+    jvmArgs '-Dprism.order=sw'
+    if (project.hasProperty('headlessSmoke')) {
+        jvmArgs '-Dglass.platform=Monocle', '-Dmonocle.platform=Headless', '-Dheadless.geometry=1280x900-32'
+    }
+}
+
+tasks.register("stageApp", Sync) { dependsOn jar; into layout.buildDirectory.dir("stage/"+fxPlatform); from configurations.runtimeClasspath; from tasks.jar }
+tasks.register('messengerSmoke', JavaExec) {
+    dependsOn smokeClasses
+    classpath = sourceSets.smoke.runtimeClasspath
+    mainClass = 'org.securemail.ui.MessengerSmoke'
+    systemProperty 'aegis.native.root', rootProject.file('.native-test').absolutePath
+    jvmArgs '-Dprism.order=sw', '-Dglass.platform=Monocle', '-Dmonocle.platform=Headless', '-Dheadless.geometry=1280x900-32'
+}
+
+tasks.register('pickerSmoke', JavaExec) {
+ dependsOn smokeClasses
+ classpath=sourceSets.smoke.runtimeClasspath
+ mainClass='org.securemail.ui.PickerSmoke'
+ jvmArgs '-Dprism.order=sw','-Dglass.platform=Monocle','-Dmonocle.platform=Headless','-Dheadless.geometry=1280x900-32'
+}
+tasks.register('clientUiRegressionSmoke', JavaExec) {
+ dependsOn smokeClasses
+ classpath=sourceSets.smoke.runtimeClasspath
+ mainClass='org.securemail.ui.ClientUiRegressionSmoke'
+ jvmArgs '-Dprism.order=sw','-Dglass.platform=Monocle','-Dmonocle.platform=Headless','-Dheadless.geometry=1280x900-32'
+}
+
+tasks.register('nativeAcceptanceGuiJar', Jar) {
+ dependsOn smokeClasses
+ archiveFileName='aegis-ui-tests.jar'
+ from sourceSets.smoke.output
+ include 'org/securemail/ui/*.class'
+}

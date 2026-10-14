@@ -64,4 +64,11 @@ class ArchiveSecurityTest {
       assertThrows(IOException.class,()->a.settings(1024,10));assertEquals(0,a.entries().size());try(var files=Files.list(archive().resolve("objects"))){assertEquals(0,files.count());}
     }
   }
+  @Test void scheduledArchivePasswordBackupUsesCurrentPasswordAfterRotation()throws Exception {
+    char[] fresh="new independent archive password 150".toCharArray();Path copy;
+    try(var a=EncryptedArchive.create(archive(),guards(),pass,false,Clock.systemUTC()).archive()){a.backupSchedule(root.resolve("copies"),1,null);a.changePassword(fresh);copy=a.automaticBackup(EncryptedArchive.QUIET,()->false);assertNotNull(copy);}
+    assertThrows(GeneralSecurityException.class,()->ArchiveBackup.restore(copy,root.resolve("old-rejected"),root.resolve("old-guards"),pass,Clock.systemUTC(),EncryptedArchive.QUIET,()->false));
+    try(var restored=ArchiveBackup.restore(copy,root.resolve("restored"),root.resolve("restored-guards"),fresh,Clock.systemUTC(),EncryptedArchive.QUIET,()->false)){assertTrue(restored.entries().isEmpty());}
+  }
+
 }
