@@ -129,12 +129,16 @@ public final class ClientSession implements AutoCloseable {
     relayCapabilities=network.capabilities();
     if(relayCapabilities==0){publicStatus="Сервер поддерживает базовую почту";return;}
     boolean profileSynced=true;
-    try{if((relayCapabilities&1)!=0&&features.profilePending()){
+    var localProfile=features.profileState();
+    try{if((relayCapabilities&1)!=0&&localProfile.pending()){
       var previous=network.profile(local.nickname());long revision=Math.max(local.now(),previous==null?1:previous.revision()+1);
-      byte[] avatar=local.avatar(local.nickname());try{
-        var profile=local.identity().profile(local.nickname(),revision,features.visible(),features.about(),avatar==null?new byte[0]:avatar);
-        network.publishProfile(profile);local.cacheProfile(profile);features.profilePublished();
-      }finally{if(avatar!=null)java.util.Arrays.fill(avatar,(byte)0);}
+      byte[] avatar=localProfile.visible()?local.avatar(local.nickname()):null,pixels=null;try{
+        // Also sanitize older stored avatars created before the storage boundary
+        // enforced PNG normalization. The identity and profile wire format stay unchanged.
+        pixels=avatar==null?new byte[0]:org.securemail.client.storage.AvatarCodec.normalize(avatar);
+        var profile=local.identity().profile(local.nickname(),revision,localProfile.visible(),localProfile.about(),pixels);
+        network.publishProfile(profile);local.cacheProfile(profile);features.profilePublished(localProfile.generation());
+      }finally{if(avatar!=null)java.util.Arrays.fill(avatar,(byte)0);if(pixels!=null)java.util.Arrays.fill(pixels,(byte)0);}
     }
     }catch(IOException|java.security.GeneralSecurityException profileFailure){profileSynced=false;}
     if((relayCapabilities&2)!=0){

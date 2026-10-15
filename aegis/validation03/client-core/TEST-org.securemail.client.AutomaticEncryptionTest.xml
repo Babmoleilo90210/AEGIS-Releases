@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.securemail.client.AutomaticEncryptionTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-10-05T09:22:53.052Z" hostname="082a6d56e07d" time="1.319">
+  <properties/>
+  <testcase name="torUnavailableFailClosedBeforeSocket()" classname="org.securemail.client.AutomaticEncryptionTest" time="0.022"/>
+  <testcase name="rejectsAmbiguousSnowflakeFront()" classname="org.securemail.client.AutomaticEncryptionTest" time="0.008"/>
+  <testcase name="encryptedHistoryBackupRestoresOriginalIdentityAndPassword()" classname="org.securemail.client.AutomaticEncryptionTest" time="1.247"/>
+  <testcase name="recipientSenderWrongIdentityTamperAndNonce()" classname="org.securemail.client.AutomaticEncryptionTest" time="0.021"/>
+  <testcase name="rejectsWindowsTraversalAndDevices()" classname="org.securemail.client.AutomaticEncryptionTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

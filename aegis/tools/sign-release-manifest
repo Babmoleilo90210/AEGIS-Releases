@@ -1,0 +1,20 @@
+#!/usr/bin/env python3
+"""Run ONLY on the owner's offline signing computer."""
+import argparse
+from pathlib import Path
+import sys
+from release_manifest import sign
+
+parser = argparse.ArgumentParser(description='Offline Ed25519 release signing (OpenSSL 3+)')
+parser.add_argument('manifest', type=Path)
+parser.add_argument('private_key', type=Path)
+parser.add_argument('--output', type=Path)
+args = parser.parse_args()
+try:
+    output = args.output or args.manifest.with_name(args.manifest.name + '.sig')
+    digest = sign(args.manifest, args.private_key, output)
+    print('Ed25519 signature verified; manifest SHA256=' + digest)
+    print('Created ' + str(output))
+except Exception:
+    print('Signing failed: check OpenSSL 3+, the offline key, manifest and output path.', file=sys.stderr)
+    sys.exit(1)

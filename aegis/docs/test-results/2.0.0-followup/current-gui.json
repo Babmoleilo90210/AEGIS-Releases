@@ -1,0 +1,112 @@
+{
+  "version": "2.0.0",
+  "productionReady": false,
+  "scope": "Actual JavaFX Monocle UI over intermediate compiled core/UI JARs; no native browser installation or network claims",
+  "status": "PASS_HEADLESS",
+  "tests": [
+    {
+      "name": "SafeWeb200Smoke",
+      "status": "PASS_HEADLESS",
+      "log": "docs/test-results/2.0.0-followup/logs/SafeWeb200Smoke-current.log"
+    },
+    {
+      "name": "Interface200Smoke",
+      "status": "PASS_HEADLESS",
+      "log": "docs/test-results/2.0.0-followup/logs/Interface200Smoke-current.log"
+    },
+    {
+      "name": "SettingsResponsive200Smoke",
+      "status": "PASS_HEADLESS",
+      "log": "docs/test-results/2.0.0-followup/logs/SettingsResponsive200Smoke-current.log"
+    }
+  ],
+  "realScenePixels": [
+    800,
+    600
+  ],
+  "javaFxLayoutScales": [
+    100,
+    125,
+    150,
+    200
+  ],
+  "themes": [
+    "minimal-dark",
+    "classic-light"
+  ],
+  "safeWebSessionModes": [
+    "PERSISTENT",
+    "TEMPORARY"
+  ],
+  "safeWebOperationsExecuted": [
+    "actual mode selector and controls/rendered layout",
+    "cancel actual in-window package file picker",
+    "reject file URL before browser launch",
+    "refresh downloads for uninstalled manager",
+    "ignore archive import with empty selection",
+    "close idle manager",
+    "read cached snapshot and render page while real manager monitor is held by synchronization probe"
+  ],
+  "safeWebOperationsNotRun": [
+    "official Tor Browser installation",
+    "actual browser process launch and closure",
+    "HTTPS/onion/Tor/DNS/WebRTC network acceptance",
+    "native OS browser or firewall isolation"
+  ],
+  "nativeAcceptance": {
+    "Windows11x64": "NOT_RUN",
+    "CachyOSKDEWayland": "NOT_RUN",
+    "CachyOSKDEX11": "NOT_RUN"
+  },
+  "screenshots": [
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/safeweb-800x600-classic-light-100-persistent-downloads.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/safeweb-800x600-classic-light-100-persistent-top.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/safeweb-800x600-classic-light-100-temporary-downloads.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/safeweb-800x600-classic-light-100-temporary-top.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/safeweb-800x600-classic-light-125-persistent-downloads.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/safeweb-800x600-classic-light-125-persistent-top.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/safeweb-800x600-classic-light-125-temporary-downloads.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/safeweb-800x600-classic-light-125-temporary-top.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/safeweb-800x600-classic-light-150-persistent-downloads.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/safeweb-800x600-classic-light-150-persistent-top.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/safeweb-800x600-classic-light-150-temporary-downloads.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/safeweb-800x600-classic-light-150-temporary-top.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/safeweb-800x600-classic-light-200-persistent-downloads.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/safeweb-800x600-classic-light-200-persistent-top.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/safeweb-800x600-classic-light-200-temporary-downloads.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/safeweb-800x600-classic-light-200-temporary-top.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/safeweb-800x600-minimal-dark-100-persistent-downloads.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/safeweb-800x600-minimal-dark-100-persistent-top.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/safeweb-800x600-minimal-dark-100-temporary-downloads.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/safeweb-800x600-minimal-dark-100-temporary-top.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/safeweb-800x600-minimal-dark-125-persistent-downloads.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/safeweb-800x600-minimal-dark-125-persistent-top.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/safeweb-800x600-minimal-dark-125-temporary-downloads.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/safeweb-800x600-minimal-dark-125-temporary-top.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/safeweb-800x600-minimal-dark-150-persistent-downloads.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/safeweb-800x600-minimal-dark-150-persistent-top.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/safeweb-800x600-minimal-dark-150-temporary-downloads.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/safeweb-800x600-minimal-dark-150-temporary-top.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/safeweb-800x600-minimal-dark-200-persistent-downloads.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/safeweb-800x600-minimal-dark-200-persistent-top.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/safeweb-800x600-minimal-dark-200-temporary-downloads.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/safeweb-800x600-minimal-dark-200-temporary-top.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/settings-800x600-classic-light-100.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/settings-800x600-classic-light-125.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/settings-800x600-classic-light-150.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/settings-800x600-classic-light-200.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/settings-800x600-minimal-dark-100.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/settings-800x600-minimal-dark-125.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/settings-800x600-minimal-dark-150.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/settings-800x600-minimal-dark-200.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/settings-content-800x600-classic-light-100.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/settings-content-800x600-classic-light-125.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/settings-content-800x600-classic-light-150.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/settings-content-800x600-classic-light-200.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/settings-content-800x600-minimal-dark-100.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/settings-content-800x600-minimal-dark-125.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/settings-content-800x600-minimal-dark-150.png",
+    "docs/test-results/2.0.0-followup/current-gui/screenshots/settings-content-800x600-minimal-dark-200.png"
+  ],
+  "sourceAndReleaseNote": "Intermediate compile, not final release source freeze. Existing native/security/release gates remain open."
+}

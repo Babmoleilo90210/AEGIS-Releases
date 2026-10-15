@@ -1,0 +1,22 @@
+{
+  "result": "BLOCKED",
+  "transport": "actual bundled Tor onion service, no SOCKS harness",
+  "startedAt": "2026-10-15T05:33:15.948499653Z",
+  "productionModified": false,
+  "physicalHosts": 1,
+  "nativeWindows11CachyOS": "NOT_RUN",
+  "torBootstrap": "BLOCKED",
+  "checks": {
+    "publish": "NOT_RUN",
+    "crossAccountReceive": "NOT_RUN",
+    "changedAvatar": "NOT_RUN",
+    "privacyRestriction": "NOT_RUN",
+    "avatarRemoval": "NOT_RUN",
+    "offlineCacheAfterRestart": "NOT_RUN",
+    "relayRestartPersistence": "NOT_RUN"
+  },
+  "torMaximumBootstrapPercent": 10,
+  "blockedAt": "actual-tor-bootstrap",
+  "reason": "BootstrapFailure: Tor не смог подключиться",
+  "finishedAt": "2026-10-15T05:34:46.773926959Z"
+}

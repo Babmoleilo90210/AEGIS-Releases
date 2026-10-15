@@ -14,5 +14,36 @@
   "published": false,
   "productionRelayModified": false,
   "pinnedPublicKeyChanged": false,
-  "archiveIndependentSecurityAudit": false
+  "archiveIndependentSecurityAudit": false,
+  "automatic": {
+    "JUnit": "165 PASS, 1 SKIP, 0 FAIL; 166 tests found",
+    "releaseSecurity": "16 PASS",
+    "JavaFX": "6 PASS; actual Monocle scenes, not native acceptance",
+    "WindowsServer2025Package": "8 PASS; not Windows11",
+    "archiveWindowsServer": "22 PASS, 0 FAIL; exact frozen binaries, run38534308414",
+    "archiveUbuntu": "22 PASS, 0 FAIL; exact frozen binaries, run38534308414",
+    "TorDirectSnowflakeTLSResumeSHA": "PASS WindowsServer and Ubuntu",
+    "P2PActualOnions": "PASS run38534308413; two client-core instances, one Tor process, one Linux host",
+    "updater120VerifierFixture": "PASS exact binaries / ephemeral test key; not owner-signed E2E"
+  },
+  "requiredRemaining": [
+    "Windows11 x64 native acceptance",
+    "CachyOS KDE Wayland native acceptance",
+    "CachyOS KDE X11 native acceptance",
+    "two physical devices and networks P2P",
+    "owner-signed 1.2.0 to 1.5.0 updater install/restart/rollback"
+  ],
+  "binaryCommit": "f9ac41ab9a7aca659e23df88f020a84618af77a1",
+  "binaryBuildRun": 38532085562,
+  "retainedFailures": [
+    "First final Linux staging descriptor attempt FAIL_OR_UNAVAILABLE; targeted exact-binary retry PASS, original log retained",
+    "Monocle resize buffer warning; native compositor verification pending"
+  ],
+  "packageState": "RELEASE_CANDIDATE_NOT_STABLE",
+  "checksNotToInfer": [
+    "WindowsServer2025 is not Windows11",
+    "Ubuntu/Monocle is not CachyOS KDE",
+    "One-host actual onions is not cross-physical P2P",
+    "Verifier fixture is not owner-signed install/restart/rollback"
+  ]
 }

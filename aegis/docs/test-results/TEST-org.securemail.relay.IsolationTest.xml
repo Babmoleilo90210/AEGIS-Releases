@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.securemail.relay.IsolationTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-09-29T05:11:26.723Z" hostname="c1f5fd157598" time="0.024">
+  <properties/>
+  <testcase name="relayRuntimeHasNoClientOrMessageCrypto()" classname="org.securemail.relay.IsolationTest" time="0.013"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

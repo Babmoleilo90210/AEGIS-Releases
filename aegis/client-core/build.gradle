@@ -6,6 +6,11 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.14.0'
     implementation 'com.twelvemonkeys.imageio:imageio-webp:3.14.0'
     implementation 'org.bouncycastle:bcprov-jdk18on:1.86'
+    implementation 'org.apache.commons:commons-compress:1.28.0'
+    implementation 'org.tukaani:xz:1.12'
+    // Official Tor Browser detached OpenPGP distribution signatures only.
+    implementation 'org.bouncycastle:bcpg-jdk18on:1.86'
+    implementation 'org.bouncycastle:bcutil-jdk18on:1.86'
     implementation 'com.google.crypto.tink:tink:1.23.0'
     // Local bounded PDF renderer; no network or cloud document service.
     implementation 'org.apache.pdfbox:pdfbox:3.0.8'

@@ -1,0 +1,218 @@
+{
+  "version": "2.0.0",
+  "status": "INCOMPLETE_DEVELOPMENT_CANDIDATE",
+  "productionReady": false,
+  "baseTagCommit": "f9ac41ab9a7aca659e23df88f020a84618af77a1",
+  "publishedSourceSha256": "7907e1a5970f5a167cec60f8d171c56d69bf013fc4d593b1236eef3265c3e9a8",
+  "nativeAcceptance": {
+    "Windows11x64": "NOT_RUN",
+    "CachyOSKDEWayland": "NOT_RUN",
+    "CachyOSKDEX11": "NOT_RUN"
+  },
+  "safeWebProductionLaunch": "IMPLEMENTED_NATIVE_ACCEPTANCE_NOT_RUN",
+  "blockers": [
+    "Official current Tor Browser package/signature download blocked; actual install/version/HTTPS/onion/DNS/WebRTC/capture NOT_RUN",
+    "Windows11/CachyOS KDE Wayland/X11 native acceptance NOT_RUN; container denies Linux NETLINK_ROUTE",
+    "Windows Safe Web requires 24H2+ Pro/Enterprise/Education and current Microsoft WSB CLI; other editions/builds not covered",
+    "Official Tor Browser MAR update/re-attestation compatibility NOT_RUN",
+    "Actual Tor profile probe BLOCKED (Direct0%, Snowflake10%/broker error); live Tor avatar cases NOT_RUN",
+    "Production Relay public-profile capability not checked or changed",
+    "Nickname rename requires approved Relay/protocol operation: RELAY-PROFILE-NICKNAME-PROPOSAL-2.0.0.md",
+    "Exact 1.5.0 to 2.0.0 owner-signed updater install/restart/rollback E2E NOT_RUN"
+  ],
+  "productionRelayChanged": false,
+  "stableFeedChanged": false,
+  "pinnedPublicKeyChanged": false,
+  "ownerPrivateSigningKeyUsed": false,
+  "stablePublished": false,
+  "uiProfileMigrationFollowup": {
+    "status": "PASS_LOCAL_ONLY",
+    "scope": "Targeted follow-up only; prior complete-build counts are retained separately and have not been reclassified as a current full build.",
+    "junit": {
+      "tests": 13,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "durationSeconds": 7.667,
+      "classes": {
+        "org.securemail.client.storage.PublicProfileCacheTest": 8,
+        "org.securemail.client.storage.NavigationMigration200Test": 2,
+        "org.securemail.client.storage.LocalMailSearch200Test": 3
+      },
+      "evidence": [
+        "docs/test-results/2.0.0-followup/junit/TEST-junit-jupiter.xml",
+        "docs/test-results/2.0.0-followup/junit/TEST-junit-platform-suite.xml",
+        "docs/test-results/2.0.0-followup/junit/TEST-junit-vintage.xml"
+      ]
+    },
+    "javaFx": {
+      "Interface200Smoke": {
+        "status": "PASS_HEADLESS",
+        "evidence": "docs/test-results/2.0.0-followup/logs/interface200-retry.log",
+        "scope": "Real JavaFX application with synthetic local fixtures; archive import/preview/search/lock, presets, display modes, navigation zones, draft and encrypted preferences, single Stage."
+      },
+      "SettingsResponsive200Smoke": {
+        "status": "PASS_HEADLESS",
+        "evidence": "docs/test-results/2.0.0-followup/logs/settings-responsive.log",
+        "windowPixels": [
+          800,
+          600
+        ],
+        "scalesPercent": [
+          100,
+          125,
+          150,
+          200
+        ],
+        "themes": [
+          "minimal-dark",
+          "classic-light"
+        ],
+        "checks": [
+          "category wrapping",
+          "equal category heights",
+          "selected content below category panel",
+          "shared scrolling",
+          "offline signed avatar refresh and removal"
+        ],
+        "screenshots": [
+          "docs/test-results/2.0.0-followup/screenshots/settings-800x600-classic-light-100.png",
+          "docs/test-results/2.0.0-followup/screenshots/settings-800x600-classic-light-125.png",
+          "docs/test-results/2.0.0-followup/screenshots/settings-800x600-classic-light-150.png",
+          "docs/test-results/2.0.0-followup/screenshots/settings-800x600-classic-light-200.png",
+          "docs/test-results/2.0.0-followup/screenshots/settings-800x600-minimal-dark-100.png",
+          "docs/test-results/2.0.0-followup/screenshots/settings-800x600-minimal-dark-125.png",
+          "docs/test-results/2.0.0-followup/screenshots/settings-800x600-minimal-dark-150.png",
+          "docs/test-results/2.0.0-followup/screenshots/settings-800x600-minimal-dark-200.png",
+          "docs/test-results/2.0.0-followup/screenshots/settings-content-800x600-classic-light-100.png",
+          "docs/test-results/2.0.0-followup/screenshots/settings-content-800x600-classic-light-125.png",
+          "docs/test-results/2.0.0-followup/screenshots/settings-content-800x600-classic-light-150.png",
+          "docs/test-results/2.0.0-followup/screenshots/settings-content-800x600-classic-light-200.png",
+          "docs/test-results/2.0.0-followup/screenshots/settings-content-800x600-minimal-dark-100.png",
+          "docs/test-results/2.0.0-followup/screenshots/settings-content-800x600-minimal-dark-125.png",
+          "docs/test-results/2.0.0-followup/screenshots/settings-content-800x600-minimal-dark-150.png",
+          "docs/test-results/2.0.0-followup/screenshots/settings-content-800x600-minimal-dark-200.png"
+        ]
+      }
+    },
+    "profileAvatar": {
+      "status": "PASS_LOCAL_ONLY",
+      "checks": [
+        "two pinned identities and signed profile cache",
+        "avatar update and offline restart",
+        "visibility and avatar removal",
+        "revision replay and conflict",
+        "forged identity and signature",
+        "malformed and oversized images rejected",
+        "metadata normalization before signing",
+        "encrypted local cache"
+      ],
+      "liveProductionRelayTwoAccountTorTest": "NOT_RUN"
+    },
+    "migration150to200": {
+      "status": "PASS_LOCAL_ONLY",
+      "checks": [
+        "six-section custom order retained with Safe Web inserted after Archive",
+        "parse/save/export/repeated import idempotent",
+        "beforeVersionOpen(2.0.0) verified snapshot reused without rewriting source",
+        "real identity public/private keys and mail retained",
+        "encrypted personal archive, theme, saved layout and update-event fixture retained"
+      ],
+      "nativeInstallerUpgrade": "NOT_RUN"
+    },
+    "nativeAcceptance": {
+      "Windows11x64": "NOT_RUN",
+      "CachyOSKDEWayland": "NOT_RUN",
+      "CachyOSKDEX11": "NOT_RUN"
+    },
+    "nicknameRename": {
+      "status": "BLOCKED_SERVER_APPROVAL",
+      "proposal": "RELAY-PROFILE-NICKNAME-PROPOSAL-2.0.0.md"
+    },
+    "productionReady": false
+  },
+  "packagingRuntimeFollowup": {
+    "runtimeInputs": "PASS_PINNED_SHA256_CRC",
+    "runtimeInputCount": 8,
+    "runtimeEvidence": "docs/test-results/2.0.0-followup/packaging-runtime/runtime-dependencies.json",
+    "stagingRegression": {
+      "status": "PASS_SYNTHETIC_JAR_FIXTURES",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "evidence": "docs/test-results/2.0.0-followup/packaging-runtime/staging-tests.log"
+    },
+    "nativeAcceptance": "NOT_RUN",
+    "productionReady": false
+  },
+  "safeWebImplemented": [
+    "Java pinned OpenPGP before extraction/execution",
+    "Atomic trusted templates and persistent/temporary sessions",
+    "Linux bwrap network namespace/slirp/nested display",
+    "Windows Microsoft WSB CLI owned-ID lifecycle/recovery",
+    "Protected download snapshots before archive import",
+    "Nonblocking JavaFX and dedicated worker",
+    "Ownership retained on unconfirmed shutdown"
+  ],
+  "currentGuiEvidence": "docs/test-results/2.0.0-followup/current-gui.json",
+  "previousAutomaticTests": {
+    "relay-server": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "client-core": {
+      "tests": 150,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1
+    },
+    "common-protocol": {
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "integration-tests": {
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "automaticTests": {
+    "client-core": {
+      "tests": 237,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1
+    },
+    "common-protocol": {
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "integration-tests": {
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "relay-server": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "currentFullBuildEvidence": "docs/test-results/2.0.0-followup/full-current/RESULTS.json",
+  "currentFullBuildSourceCommit": "0a8efa98c1307ae2dc88c00d6b3208cdb260282b",
+  "finalJarSafeWebGui": "PASS_HEADLESS",
+  "pythonTests": {
+    "tests": 40,
+    "status": "PASS"
+  }
+}

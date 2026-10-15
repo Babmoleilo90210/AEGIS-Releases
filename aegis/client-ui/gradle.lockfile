@@ -1,0 +1,45 @@
+# This is a Gradle generated file for dependency locking.
+# Manual edits can break the build and are not advised.
+# This file is expected to be part of source control.
+# To regenerate this file, run: ./gradlew :client-ui:dependencies --write-locks
+com.google.code.findbugs:jsr305:3.0.2=runtimeClasspath,testRuntimeClasspath
+com.google.code.gson:gson:2.14.0=runtimeClasspath,testRuntimeClasspath
+com.google.crypto.tink:tink:1.23.0=runtimeClasspath,testRuntimeClasspath
+com.google.errorprone:error_prone_annotations:2.48.0=runtimeClasspath,testRuntimeClasspath
+com.google.protobuf:protobuf-java:4.33.6=runtimeClasspath,testRuntimeClasspath
+com.twelvemonkeys.common:common-image:3.14.0=runtimeClasspath,testRuntimeClasspath
+com.twelvemonkeys.common:common-io:3.14.0=runtimeClasspath,testRuntimeClasspath
+com.twelvemonkeys.common:common-lang:3.14.0=runtimeClasspath,testRuntimeClasspath
+com.twelvemonkeys.imageio:imageio-core:3.14.0=runtimeClasspath,testRuntimeClasspath
+com.twelvemonkeys.imageio:imageio-metadata:3.14.0=runtimeClasspath,testRuntimeClasspath
+com.twelvemonkeys.imageio:imageio-webp:3.14.0=runtimeClasspath,testRuntimeClasspath
+commons-codec:commons-codec:1.19.0=runtimeClasspath,testRuntimeClasspath
+commons-io:commons-io:2.20.0=runtimeClasspath,testRuntimeClasspath
+commons-logging:commons-logging:1.4.0=runtimeClasspath,testRuntimeClasspath
+net.java.dev.jna:jna-platform:5.19.1=compileClasspath,runtimeClasspath,testCompileClasspath,testRuntimeClasspath
+net.java.dev.jna:jna:5.19.1=compileClasspath,runtimeClasspath,testCompileClasspath,testRuntimeClasspath
+net.lingala.zip4j:zip4j:2.11.6=runtimeClasspath,testRuntimeClasspath
+org.apache.commons:commons-compress:1.28.0=runtimeClasspath,testRuntimeClasspath
+org.apache.commons:commons-lang3:3.18.0=runtimeClasspath,testRuntimeClasspath
+org.apache.pdfbox:fontbox:3.0.8=runtimeClasspath,testRuntimeClasspath
+org.apache.pdfbox:pdfbox-io:3.0.8=runtimeClasspath,testRuntimeClasspath
+org.apache.pdfbox:pdfbox:3.0.8=runtimeClasspath,testRuntimeClasspath
+org.apiguardian:apiguardian-api:1.1.2=testCompileClasspath
+org.bouncycastle:bcpg-jdk18on:1.86=runtimeClasspath,testRuntimeClasspath
+org.bouncycastle:bcprov-jdk18on:1.86=runtimeClasspath,testRuntimeClasspath
+org.bouncycastle:bcutil-jdk18on:1.86=runtimeClasspath,testRuntimeClasspath
+org.junit.jupiter:junit-jupiter-api:5.13.4=testCompileClasspath,testRuntimeClasspath
+org.junit.jupiter:junit-jupiter-engine:5.13.4=testRuntimeClasspath
+org.junit.jupiter:junit-jupiter-params:5.13.4=testCompileClasspath,testRuntimeClasspath
+org.junit.jupiter:junit-jupiter:5.13.4=testCompileClasspath,testRuntimeClasspath
+org.junit.platform:junit-platform-commons:1.13.4=testCompileClasspath,testRuntimeClasspath
+org.junit.platform:junit-platform-engine:1.13.4=testRuntimeClasspath
+org.junit.platform:junit-platform-launcher:1.13.4=testRuntimeClasspath
+org.junit:junit-bom:5.13.4=testCompileClasspath,testRuntimeClasspath
+org.openjfx:javafx-base:21.0.12=compileClasspath,runtimeClasspath,testCompileClasspath,testRuntimeClasspath
+org.openjfx:javafx-controls:21.0.12=compileClasspath,runtimeClasspath,testCompileClasspath,testRuntimeClasspath
+org.openjfx:javafx-graphics:21.0.12=compileClasspath,runtimeClasspath,testCompileClasspath,testRuntimeClasspath
+org.opentest4j:opentest4j:1.3.0=testCompileClasspath,testRuntimeClasspath
+org.testfx:openjfx-monocle:21.0.2=smokeRuntimeClasspath
+org.tukaani:xz:1.12=runtimeClasspath,testRuntimeClasspath
+empty=annotationProcessor,smokeAnnotationProcessor,smokeCompileClasspath,testAnnotationProcessor

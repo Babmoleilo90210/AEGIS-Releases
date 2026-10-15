@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.securemail.client.StorageTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-10-05T09:23:09.195Z" hostname="082a6d56e07d" time="2.027">
+  <properties/>
+  <testcase name="incorrectVaultPasswordAndExclusiveLock()" classname="org.securemail.client.StorageTest" time="0.412"/>
+  <testcase name="durableAckDedupTtlAcrossRestartAndNoPlaintextFiles()" classname="org.securemail.client.StorageTest" time="0.613"/>
+  <testcase name="maintenanceDeletesWithoutVaultPassword()" classname="org.securemail.client.StorageTest" time="0.409"/>
+  <testcase name="clockRollbackExpiresLivePackets()" classname="org.securemail.client.StorageTest" time="0.59"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

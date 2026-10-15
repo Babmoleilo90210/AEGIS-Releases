@@ -26,3 +26,5 @@
 | SEC-20 | Ciphertext staging, file force + atomic rename + prepared guard. Linux fsync directory; Java Windows directory fsync отсутствует. Физическое отключение питания на native пока NOT_RUN. |
 
 Архив не добавляет сетевых destinations, keys не попадают Relay/Tor. При наличии malware с полным доступом plaintext/password capture возможны. Точные обязательные native/OS/перенос/питание испытания перечислены в acceptance kit. PASS unit/synthetic filesystem tests не независимая сертификация.
+
+Смена пароля/recovery перезащищает тот же DEK и не отзывает уже извлечённый DEK. Знающий старый секрет и имеющий старую wrapper/backup может извлечь DEK; при его компрометации требуется новый пустой архив с новым случайным ключом и явный перенос.

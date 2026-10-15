@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.securemail.client.CryptoTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2026-10-05T09:22:54.373Z" hostname="082a6d56e07d" time="5.878">
+  <properties/>
+  <testcase name="[1] a=AES-256-GCM · рекомендуется" classname="org.securemail.client.CryptoTest" time="0.444"/>
+  <testcase name="[2] a=XChaCha20-Poly1305 · рекомендуется" classname="org.securemail.client.CryptoTest" time="0.434"/>
+  <testcase name="[3] a=ChaCha20-Poly1305" classname="org.securemail.client.CryptoTest" time="0.428"/>
+  <testcase name="[4] a=Camellia-256-GCM" classname="org.securemail.client.CryptoTest" time="0.366"/>
+  <testcase name="defensiveCopies()" classname="org.securemail.client.CryptoTest" time="0.162"/>
+  <testcase name="filenameAllowlistAndTraversal()" classname="org.securemail.client.CryptoTest" time="0.002"/>
+  <testcase name="historicalKnownVector()" classname="org.securemail.client.CryptoTest" time="0.001"/>
+  <testcase name="[1] a=AES-256-GCM · рекомендуется" classname="org.securemail.client.CryptoTest" time="0.973"/>
+  <testcase name="[2] a=XChaCha20-Poly1305 · рекомендуется" classname="org.securemail.client.CryptoTest" time="1.005"/>
+  <testcase name="[3] a=ChaCha20-Poly1305" classname="org.securemail.client.CryptoTest" time="1.012"/>
+  <testcase name="[4] a=Camellia-256-GCM" classname="org.securemail.client.CryptoTest" time="0.987"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

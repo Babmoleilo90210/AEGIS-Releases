@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.securemail.client.LetterTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-10-05T09:23:00.253Z" hostname="082a6d56e07d" time="8.426">
+  <properties/>
+  <testcase name="outerAuthenticationBeforeInnerAndFreshParameters()" classname="org.securemail.client.LetterTest" time="1.166"/>
+  <testcase name="existingVaultNoMigrationAndBackupBeforeOpen()" classname="org.securemail.client.LetterTest" time="0.589"/>
+  <testcase name="everyCodeComputesCandidateWithoutInnerVerifier()" classname="org.securemail.client.LetterTest" time="2.121"/>
+  <testcase name="protectedContentInsideUnchangedE2eeAndAttachmentAndOldContent()" classname="org.securemail.client.LetterTest" time="1.204"/>
+  <testcase name="unicodeShortAndEmptyRoundTrip()" classname="org.securemail.client.LetterTest" time="3.339"/>
+  <testcase name="nistFf1KnownVector()" classname="org.securemail.client.LetterTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

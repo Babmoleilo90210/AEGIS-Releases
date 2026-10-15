@@ -1,0 +1,9 @@
+{
+  "source": "https://keys.openpgp.org/vks/v1/by-fingerprint/EF6E286DDA85EA2A4BA7DE684E2C6E8793298290",
+  "authority": "https://support.torproject.org/tor-browser/getting-started/verifying-tor-browser/",
+  "retrieved": "2026-10-15",
+  "primaryFingerprint": "EF6E286DDA85EA2A4BA7DE684E2C6E8793298290",
+  "sha256": "7cec103d0be11b608f61850143101e56f0ba45383b61f44835300ff54ef93032",
+  "bytes": 39452,
+  "trust": "Only mathematical signatures and the pinned primary fingerprint are trusted. Third-party certifications are ignored. Offline snapshot has no online revocation freshness guarantee."
+}

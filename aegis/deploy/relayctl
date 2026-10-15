@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+case "${1:-status}" in
+  start|stop|restart|status) exec systemctl "$1" aegis-relay.service ;;
+  cleanup|stats|health|version) exec runuser -u aegis-relay -- /opt/aegis/relay/bin/relay-server "$1" /etc/aegis/relay.properties ;;
+  *) printf '%s\n' 'Usage: relayctl {start|stop|restart|status|cleanup|stats|health|version}' >&2; exit 2 ;;
+esac

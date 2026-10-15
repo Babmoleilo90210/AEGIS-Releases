@@ -1,0 +1,52 @@
+{
+  "retrievalDate": "2026-10-15",
+  "versionObservedInOfficialSources": "15.0.25",
+  "upstreamReleaseDate": "2026-10-12",
+  "officialReleaseNotes": "https://blog.torproject.org/new-release-tor-browser-15025/",
+  "officialDistributionIndex": "https://dist.torproject.org/torbrowser/15.0.25/",
+  "packages": [
+    {
+      "platform": "linux-x86_64",
+      "archive": "https://dist.torproject.org/torbrowser/15.0.25/tor-browser-linux-x86_64-15.0.25.tar.xz",
+      "signature": "https://dist.torproject.org/torbrowser/15.0.25/tor-browser-linux-x86_64-15.0.25.tar.xz.asc",
+      "indexSize": "132M",
+      "downloadStatus": "BLOCKED_HTML_RESPONSE",
+      "officialSignatureVerification": "NOT_RUN",
+      "nativeInstallation": "NOT_RUN"
+    },
+    {
+      "platform": "windows-x86_64",
+      "archive": "https://dist.torproject.org/torbrowser/15.0.25/tor-browser-windows-x86_64-portable-15.0.25.exe",
+      "signature": "https://dist.torproject.org/torbrowser/15.0.25/tor-browser-windows-x86_64-portable-15.0.25.exe.asc",
+      "indexSize": "108M",
+      "downloadStatus": "NOT_DOWNLOADED",
+      "officialSignatureVerification": "NOT_RUN",
+      "nativeInstallation": "NOT_RUN"
+    }
+  ],
+  "publicKey": {
+    "primaryFingerprint": "EF6E286DDA85EA2A4BA7DE684E2C6E8793298290",
+    "sourceInstructions": "https://support.torproject.org/tor-browser/getting-started/verifying-tor-browser/"
+  },
+  "updater": {
+    "documentation": "https://support.torproject.org/tor-browser/getting-started/updating/",
+    "portableDocumentation": "https://support.torproject.org/tor-browser/getting-started/making-tor-browser-portable/",
+    "design": "Official browser-managed updater unchanged. Writable session copies may update; changed executable trees are never silently trusted on subsequent start. Reauthenticate a new official package and compare exact immutable inventory before resealing. Preserve separate profile data.",
+    "liveUpdateCompatibility": "NOT_RUN"
+  },
+  "testEvidence": {
+    "pythonBoundaryAndRealGpgvTests": {
+      "status": "PASS",
+      "count": 19,
+      "fixtures": "Disposable locally generated test-only OpenPGP keys and tiny TAR fixtures; not official Tor Browser binaries",
+      "log": "installer-tests.txt"
+    },
+    "javaBoundedTarExtractionTests": {
+      "status": "PASS",
+      "count": 10,
+      "fixtures": "Generated bounded TAR/XZ fixtures including PAX names and hostile links; not official Tor Browser binaries",
+      "log": "installer-java-tests.txt",
+      "junit": "installer-junit/TEST-junit-jupiter.xml"
+    }
+  }
+}

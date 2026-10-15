@@ -1,0 +1,1485 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="JUnit Jupiter" tests="237" skipped="1" failures="0" errors="0" time="82.639" hostname="9baed28aafd3" timestamp="2026-10-15T07:56:34">
+<properties>
+<property name="aegis.native.root" value="/workspace/scratch/aa629f360927/inputs/squashfs-root"/>
+<property name="file.encoding" value="UTF-8"/>
+<property name="file.separator" value="/"/>
+<property name="java.class.path" value="/workspace/scratch/aa629f360927/inputs/deps/junit-platform-console-standalone-1.13.4.jar"/>
+<property name="java.class.version" value="65.0"/>
+<property name="java.home" value="/workspace/scratch/aa629f360927/inputs/jdk-21.0.12.1+1"/>
+<property name="java.io.tmpdir" value="/tmp"/>
+<property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/>
+<property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+<property name="java.runtime.version" value="21.0.12.1+1-LTS"/>
+<property name="java.specification.name" value="Java Platform API Specification"/>
+<property name="java.specification.vendor" value="Oracle Corporation"/>
+<property name="java.specification.version" value="21"/>
+<property name="java.vendor" value="Eclipse Adoptium"/>
+<property name="java.vendor.url" value="https://adoptium.net/"/>
+<property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
+<property name="java.vendor.version" value="Temurin-21.0.12.1+1"/>
+<property name="java.version" value="21.0.12.1"/>
+<property name="java.version.date" value="2026-08-18"/>
+<property name="java.vm.compressedOopsMode" value="32-bit"/>
+<property name="java.vm.info" value="mixed mode, sharing"/>
+<property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+<property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+<property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+<property name="java.vm.specification.version" value="21"/>
+<property name="java.vm.vendor" value="Eclipse Adoptium"/>
+<property name="java.vm.version" value="21.0.12.1+1-LTS"/>
+<property name="jdk.debug" value="release"/>
+<property name="jna.loaded" value="true"/>
+<property name="jna.platform.library.path" value="/usr/lib/x86_64-linux-gnu:/lib/x86_64-linux-gnu:/usr/lib64:/lib64:/usr/lib:/lib"/>
+<property name="jnidispatch.path" value="/root/.cache/JNA/temp/jna2016429897919540842.tmp"/>
+<property name="junit.docs.version" value="1.13.4"/>
+<property name="line.separator" value="&#10;"/>
+<property name="native.encoding" value="UTF-8"/>
+<property name="os.arch" value="amd64"/>
+<property name="os.name" value="Linux"/>
+<property name="os.version" value="6.18.44"/>
+<property name="path.separator" value=":"/>
+<property name="stderr.encoding" value="UTF-8"/>
+<property name="stdout.encoding" value="UTF-8"/>
+<property name="sun.arch.data.model" value="64"/>
+<property name="sun.boot.library.path" value="/workspace/scratch/aa629f360927/inputs/jdk-21.0.12.1+1/lib"/>
+<property name="sun.cpu.endian" value="little"/>
+<property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+<property name="sun.java.command" value="/workspace/scratch/aa629f360927/inputs/deps/junit-platform-console-standalone-1.13.4.jar execute --class-path /workspace/scratch/aa629f360927/inputs/squashfs-root/app/fontbox-3.0.8.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/commons-logging-1.3.5.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/jna-platform-5.19.1.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/common-lang-3.14.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/tink-1.23.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/imageio-metadata-3.14.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/pdfbox-io-3.0.8.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/bcprov-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/imageio-webp-3.14.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/common-io-3.14.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/pdfbox-3.0.8.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/javafx-controls-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/javafx-base-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/jna-5.19.1.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/protobuf-java-4.33.6.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/zip4j-2.11.6.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/gson-2.14.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/jsr305-3.0.2.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/imageio-core-3.14.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/error_prone_annotations-2.48.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/common-image-3.14.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/javafx-graphics-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs/deps/fontbox-3.0.8.jar:/workspace/scratch/aa629f360927/inputs/deps/commons-logging-1.3.5.jar:/workspace/scratch/aa629f360927/inputs/deps/slf4j-api-2.0.17.jar:/workspace/scratch/aa629f360927/inputs/deps/junit-platform-console-standalone-1.13.4.jar:/workspace/scratch/aa629f360927/inputs/deps/pdfbox-io-3.0.8.jar:/workspace/scratch/aa629f360927/inputs/deps/pdfbox-3.0.8.jar:/workspace/scratch/aa629f360927/inputs/deps/sqlite-jdbc-3.53.4.0.jar:/workspace/scratch/aa629f360927/inputs/deps/openjfx-monocle-21.0.2.jar:/workspace/scratch/aa629f360927/inputs/deps/password4j-1.8.4.jar:/workspace/scratch/aa629f360927/inputs/deps/slf4j-nop-2.0.17.jar:/workspace/scratch/aa629f360927/inputs/safeweb-deps/commons-codec-1.19.0.jar:/workspace/scratch/aa629f360927/inputs/safeweb-deps/commons-lang3-3.18.0.jar:/workspace/scratch/aa629f360927/inputs/safeweb-deps/commons-io-2.20.0.jar:/workspace/scratch/aa629f360927/inputs/safeweb-deps/bcutil-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs/safeweb-deps/xz-1.12.jar:/workspace/scratch/aa629f360927/inputs/safeweb-deps/bcpg-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs/safeweb-deps/commons-compress-1.28.0.jar:/workspace/scratch/aa629f360927/aegis/aegis/build/local-java21/common-protocol.jar:/workspace/scratch/aa629f360927/aegis/aegis/build/local-java21/client-core.jar:/workspace/scratch/aa629f360927/aegis/aegis/build/local-java21/tests --select-package org.securemail.client --fail-if-no-tests --reports-dir /workspace/scratch/aa629f360927/aegis/aegis/build/local-java21/junit/client-core --details=summary"/>
+<property name="sun.java.launcher" value="SUN_STANDARD"/>
+<property name="sun.jnu.encoding" value="UTF-8"/>
+<property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+<property name="user.dir" value="/workspace/scratch/aa629f360927/aegis/aegis"/>
+<property name="user.home" value="/root"/>
+<property name="user.language" value="en"/>
+<property name="user.name" value="root"/>
+<property name="user.timezone" value="Europe/Paris"/>
+</properties>
+<testcase name="identicalRevisionIsIdempotentWhileReplayAndConflictsPreserveTheCurrentProfile()" classname="org.securemail.client.storage.PublicProfileCacheTest" time="0.361">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.PublicProfileCacheTest]/[method:identicalRevisionIsIdempotentWhileReplayAndConflictsPreserveTheCurrentProfile()]
+display-name: identicalRevisionIsIdempotentWhileReplayAndConflictsPreserveTheCurrentProfile()
+]]></system-out>
+</testcase>
+<testcase name="refusesSpecialFilesDuplicateMembersAndMultipleRoots()" classname="org.securemail.client.safeweb.TorBrowserInstallerTest" time="0.162">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserInstallerTest]/[method:refusesSpecialFilesDuplicateMembersAndMultipleRoots()]
+display-name: refusesSpecialFilesDuplicateMembersAndMultipleRoots()
+]]></system-out>
+</testcase>
+<testcase name="scheduledArchivePasswordBackupUsesCurrentPasswordAfterRotation()" classname="org.securemail.client.archive.ArchiveSecurityTest" time="1.567">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.archive.ArchiveSecurityTest]/[method:scheduledArchivePasswordBackupUsesCurrentPasswordAfterRotation()]
+display-name: scheduledArchivePasswordBackupUsesCurrentPasswordAfterRotation()
+]]></system-out>
+</testcase>
+<testcase name="explicitExportAndLockGate()" classname="org.securemail.client.archive.ArchiveTest" time="0.285">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.archive.ArchiveTest]/[method:explicitExportAndLockGate()]
+display-name: explicitExportAndLockGate()
+]]></system-out>
+</testcase>
+<testcase name="sixSectionCustomOrderSurvivesLoadSaveExportAndRepeatedImport()" classname="org.securemail.client.storage.NavigationMigration200Test" time="0.026">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.NavigationMigration200Test]/[method:sixSectionCustomOrderSurvivesLoadSaveExportAndRepeatedImport()]
+display-name: sixSectionCustomOrderSurvivesLoadSaveExportAndRepeatedImport()
+]]></system-out>
+</testcase>
+<testcase name="closeRefusesReplacedDirectoryInsteadOfDeletingAnotherTree()" classname="org.securemail.client.safeweb.SafeWebDownloadTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebDownloadTest]/[method:closeRefusesReplacedDirectoryInsteadOfDeletingAnotherTree()]
+display-name: closeRefusesReplacedDirectoryInsteadOfDeletingAnotherTree()
+]]></system-out>
+</testcase>
+<testcase name="mutualConsentRequiresBothPinnedSignaturesAndRevocationDoesNotRemoveContact()" classname="org.securemail.client.storage.LocalFeaturesTest" time="0.314">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.LocalFeaturesTest]/[method:mutualConsentRequiresBothPinnedSignaturesAndRevocationDoesNotRemoveContact()]
+display-name: mutualConsentRequiresBothPinnedSignaturesAndRevocationDoesNotRemoveContact()
+]]></system-out>
+</testcase>
+<testcase name="stableAndBetaIdsDoNotCollide()" classname="org.securemail.client.update.UpdateEventsTest" time="0.022">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.update.UpdateEventsTest]/[method:stableAndBetaIdsDoNotCollide()]
+display-name: stableAndBetaIdsDoNotCollide()
+]]></system-out>
+</testcase>
+<testcase name="torFailurePreventsUpdateRequestAndClearnetFallback()" classname="org.securemail.client.update.UpdateTransportTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.update.UpdateTransportTest]/[method:torFailurePreventsUpdateRequestAndClearnetFallback()]
+display-name: torFailurePreventsUpdateRequestAndClearnetFallback()
+]]></system-out>
+</testcase>
+<testcase name="clockRollbackPreservesMailWithoutExtendingItsDeadline()" classname="org.securemail.client.StorageTest" time="0.963">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.StorageTest]/[method:clockRollbackPreservesMailWithoutExtendingItsDeadline()]
+display-name: clockRollbackPreservesMailWithoutExtendingItsDeadline()
+]]></system-out>
+</testcase>
+<testcase name="foldersMoveTrashPurgeAndCycles()" classname="org.securemail.client.archive.ArchiveTest" time="0.28">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.archive.ArchiveTest]/[method:foldersMoveTrashPurgeAndCycles()]
+display-name: foldersMoveTrashPurgeAndCycles()
+]]></system-out>
+</testcase>
+<testcase name="boundedImageAndStrictUtf8()" classname="org.securemail.client.archive.ArchiveDocumentsTest" time="0.015">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.archive.ArchiveDocumentsTest]/[method:boundedImageAndStrictUtf8()]
+display-name: boundedImageAndStrictUtf8()
+]]></system-out>
+</testcase>
+<testcase name="failedStartRetainsTheExactOwnerUntilVmCleanupIsProved()" classname="org.securemail.client.safeweb.WindowsSafeWebSandboxTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.WindowsSafeWebSandboxTest]/[method:failedStartRetainsTheExactOwnerUntilVmCleanupIsProved()]
+display-name: failedStartRetainsTheExactOwnerUntilVmCleanupIsProved()
+]]></system-out>
+</testcase>
+<testcase name="refusesMembersUnderSymlinkEvenWhenTargetIsInternal()" classname="org.securemail.client.safeweb.TorBrowserInstallerTest" time="0.019">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserInstallerTest]/[method:refusesMembersUnderSymlinkEvenWhenTargetIsInternal()]
+display-name: refusesMembersUnderSymlinkEvenWhenTargetIsInternal()
+]]></system-out>
+</testcase>
+<testcase name="localUnlockSevenDaysButRelayTokenOnlyTwelveHoursAndNoPassword()" classname="org.securemail.client.security.RememberedLoginTest" time="0.012">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.security.RememberedLoginTest]/[method:localUnlockSevenDaysButRelayTokenOnlyTwelveHoursAndNoPassword()]
+display-name: localUnlockSevenDaysButRelayTokenOnlyTwelveHoursAndNoPassword()
+]]></system-out>
+</testcase>
+<testcase name="explicitDistributionAndRedirectHostsOnly()" classname="org.securemail.client.update.UpdateTransportTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.update.UpdateTransportTest]/[method:explicitDistributionAndRedirectHostsOnly()]
+display-name: explicitDistributionAndRedirectHostsOnly()
+]]></system-out>
+</testcase>
+<testcase name="successfulInstallRequiresStartupAckAndRollsBackOnNoAck()" classname="org.securemail.client.update.UpdateSecurityTest" time="0.109">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.update.UpdateSecurityTest]/[method:successfulInstallRequiresStartupAckAndRollsBackOnNoAck()]
+display-name: successfulInstallRequiresStartupAckAndRollsBackOnNoAck()
+]]></system-out>
+</testcase>
+<testcase name="builtinImmutableAndCustomRoundTripHasNoSecrets()" classname="org.securemail.client.appearance.AppearanceTest" time="0.023">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.appearance.AppearanceTest]/[method:builtinImmutableAndCustomRoundTripHasNoSecrets()]
+display-name: builtinImmutableAndCustomRoundTripHasNoSecrets()
+]]></system-out>
+</testcase>
+<testcase name="filenamesFoldersTagsIndexAndContentAreEncryptedAtRest()" classname="org.securemail.client.archive.ArchiveTest" time="0.206">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.archive.ArchiveTest]/[method:filenamesFoldersTagsIndexAndContentAreEncryptedAtRest()]
+display-name: filenamesFoldersTagsIndexAndContentAreEncryptedAtRest()
+]]></system-out>
+</testcase>
+<testcase name="supportsAsciiArmoredDetachedSignatureAndPublicKey()" classname="org.securemail.client.safeweb.TorBrowserSignatureTest" time="0.03">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserSignatureTest]/[method:supportsAsciiArmoredDetachedSignatureAndPublicKey()]
+display-name: supportsAsciiArmoredDetachedSignatureAndPublicKey()
+]]></system-out>
+</testcase>
+<testcase name="supportsInternalDirectorySymlink()" classname="org.securemail.client.safeweb.TorBrowserInstallerTest" time="0.023">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserInstallerTest]/[method:supportsInternalDirectorySymlink()]
+display-name: supportsInternalDirectorySymlink()
+]]></system-out>
+</testcase>
+<testcase name="rejectsUnsupportedEditionsAndInjectedSessionCommands()" classname="org.securemail.client.safeweb.WindowsSafeWebSandboxTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.WindowsSafeWebSandboxTest]/[method:rejectsUnsupportedEditionsAndInjectedSessionCommands()]
+display-name: rejectsUnsupportedEditionsAndInjectedSessionCommands()
+]]></system-out>
+</testcase>
+<testcase name="dimensionsAndSymlinksRejectedBeforePixelDecode()" classname="org.securemail.client.storage.AvatarPresetTest" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.AvatarPresetTest]/[method:dimensionsAndSymlinksRejectedBeforePixelDecode()]
+display-name: dimensionsAndSymlinksRejectedBeforePixelDecode()
+]]></system-out>
+</testcase>
+<testcase name="historicalKnownVector()" classname="org.securemail.client.CryptoTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.CryptoTest]/[method:historicalKnownVector()]
+display-name: historicalKnownVector()
+]]></system-out>
+</testcase>
+<testcase name="changedOrInvalidSignatureCannotCreateTrustedLetter()" classname="org.securemail.client.update.UpdateEventsTest" time="0.015">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.update.UpdateEventsTest]/[method:changedOrInvalidSignatureCannotCreateTrustedLetter()]
+display-name: changedOrInvalidSignatureCannotCreateTrustedLetter()
+]]></system-out>
+</testcase>
+<testcase name="rapidTypingOnlyPublishesLatest()" classname="org.securemail.client.LiveCodeTest" time="0.315">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.LiveCodeTest]/[method:rapidTypingOnlyPublishesLatest()]
+display-name: rapidTypingOnlyPublishesLatest()
+]]></system-out>
+</testcase>
+<testcase name="helperCannotLoadJavaFxOrClientUi()" classname="org.securemail.client.update.HelperIsolationTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.update.HelperIsolationTest]/[method:helperCannotLoadJavaFxOrClientUi()]
+display-name: helperCannotLoadJavaFxOrClientUi()
+]]></system-out>
+</testcase>
+<testcase name="relaySuccessRequiresTorAndSeparateProbe()" classname="org.securemail.client.ConnectionStatusTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ConnectionStatusTest]/[method:relaySuccessRequiresTorAndSeparateProbe()]
+display-name: relaySuccessRequiresTorAndSeparateProbe()
+]]></system-out>
+</testcase>
+<testcase name="naturalExitCleansTemporaryProfileButKeepsPersistentDownloads()" classname="org.securemail.client.safeweb.SafeWebProcessTest" time="1.073">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebProcessTest]/[method:naturalExitCleansTemporaryProfileButKeepsPersistentDownloads()]
+display-name: naturalExitCleansTemporaryProfileButKeepsPersistentDownloads()
+]]></system-out>
+</testcase>
+<testcase name="rejectsMalformedOversizedAndCompressedMetadataBeforeParsing()" classname="org.securemail.client.safeweb.TorBrowserSignatureTest" time="0.019">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserSignatureTest]/[method:rejectsMalformedOversizedAndCompressedMetadataBeforeParsing()]
+display-name: rejectsMalformedOversizedAndCompressedMetadataBeforeParsing()
+]]></system-out>
+</testcase>
+<testcase name="rejectsKeyWithoutSigningPermission()" classname="org.securemail.client.safeweb.TorBrowserSignatureTest" time="0.026">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserSignatureTest]/[method:rejectsKeyWithoutSigningPermission()]
+display-name: rejectsKeyWithoutSigningPermission()
+]]></system-out>
+</testcase>
+<testcase name="migrateGreenAndBottomWithoutChangingOldFiles()" classname="org.securemail.client.appearance.AppearanceTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.appearance.AppearanceTest]/[method:migrateGreenAndBottomWithoutChangingOldFiles()]
+display-name: migrateGreenAndBottomWithoutChangingOldFiles()
+]]></system-out>
+</testcase>
+<testcase name="executionAliasMustBindOfficialPackageAndProtectedTarget()" classname="org.securemail.client.safeweb.WindowsSafeWebSandboxTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.WindowsSafeWebSandboxTest]/[method:executionAliasMustBindOfficialPackageAndProtectedTarget()]
+display-name: executionAliasMustBindOfficialPackageAndProtectedTarget()
+]]></system-out>
+</testcase>
+<testcase name="rejectsSourceDirectoriesAndHardLinks()" classname="org.securemail.client.safeweb.SafeWebDownloadTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebDownloadTest]/[method:rejectsSourceDirectoriesAndHardLinks()]
+display-name: rejectsSourceDirectoriesAndHardLinks()
+]]></system-out>
+</testcase>
+<testcase name="interruptedDownloadLeavesOldBinaryAndRemovesPartial()" classname="org.securemail.client.update.UpdateSecurityTest" time="0.019">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.update.UpdateSecurityTest]/[method:interruptedDownloadLeavesOldBinaryAndRemovesPartial()]
+display-name: interruptedDownloadLeavesOldBinaryAndRemovesPartial()
+]]></system-out>
+</testcase>
+<testcase name="avatarIsEncryptedAndRekeyPreservesIt()" classname="org.securemail.client.storage.AvatarPresetTest" time="1.273">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.AvatarPresetTest]/[method:avatarIsEncryptedAndRekeyPreservesIt()]
+display-name: avatarIsEncryptedAndRekeyPreservesIt()
+]]></system-out>
+</testcase>
+<testcase name="publicationCompletingAfterAnEditCannotLoseThePendingEdit()" classname="org.securemail.client.storage.LocalMailSearch200Test" time="0.344">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.LocalMailSearch200Test]/[method:publicationCompletingAfterAnEditCannotLoseThePendingEdit()]
+display-name: publicationCompletingAfterAnEditCannotLoseThePendingEdit()
+]]></system-out>
+</testcase>
+<testcase name="migrationPreservesCustomNavigationAndIsIdempotent()" classname="org.securemail.client.safeweb.SafeWebTest" time="0.008">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebTest]/[method:migrationPreservesCustomNavigationAndIsIdempotent()]
+display-name: migrationPreservesCustomNavigationAndIsIdempotent()
+]]></system-out>
+</testcase>
+<testcase name="extractsBoundedXzTarWithoutChangingFileBytesOrKeepingSetuidBits()" classname="org.securemail.client.safeweb.TorBrowserInstallerTest" time="0.059">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserInstallerTest]/[method:extractsBoundedXzTarWithoutChangingFileBytesOrKeepingSetuidBits()]
+display-name: extractsBoundedXzTarWithoutChangingFileBytesOrKeepingSetuidBits()
+]]></system-out>
+</testcase>
+<testcase name="failedCloseRetainsProcessSessionAndManagerLockForRetry()" classname="org.securemail.client.safeweb.SafeWebProcessTest" time="0.031">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebProcessTest]/[method:failedCloseRetainsProcessSessionAndManagerLockForRetry()]
+display-name: failedCloseRetainsProcessSessionAndManagerLockForRetry()
+]]></system-out>
+</testcase>
+<testcase name="rejectsOversizedFileBeforeCopyingAndCleansNothingUnrelated()" classname="org.securemail.client.safeweb.SafeWebDownloadTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebDownloadTest]/[method:rejectsOversizedFileBeforeCopyingAndCleansNothingUnrelated()]
+display-name: rejectsOversizedFileBeforeCopyingAndCleansNothingUnrelated()
+]]></system-out>
+</testcase>
+<testcase name="rejectsWindowsTraversalAndDevices()" classname="org.securemail.client.AutomaticEncryptionTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.AutomaticEncryptionTest]/[method:rejectsWindowsTraversalAndDevices()]
+display-name: rejectsWindowsTraversalAndDevices()
+]]></system-out>
+</testcase>
+<testcase name="rememberedSnowflakeFirstAndReverseFallback()" classname="org.securemail.client.FastTorTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.FastTorTest]/[method:rememberedSnowflakeFirstAndReverseFallback()]
+display-name: rememberedSnowflakeFirstAndReverseFallback()
+]]></system-out>
+</testcase>
+<testcase name="errorsContainOnlyCodesAndNoPrivilegedSender()" classname="org.securemail.client.update.UpdateEventsTest" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.update.UpdateEventsTest]/[method:errorsContainOnlyCodesAndNoPrivilegedSender()]
+display-name: errorsContainOnlyCodesAndNoPrivilegedSender()
+]]></system-out>
+</testcase>
+<testcase name="twelveFolderLevelsAndInvalidSubtreeMoveAreNonDestructive()" classname="org.securemail.client.archive.ArchiveSecurityTest" time="0.66">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.archive.ArchiveSecurityTest]/[method:twelveFolderLevelsAndInvalidSubtreeMoveAreNonDestructive()]
+display-name: twelveFolderLevelsAndInvalidSubtreeMoveAreNonDestructive()
+]]></system-out>
+</testcase>
+<testcase name="nistFf1KnownVector()" classname="org.securemail.client.LetterTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.LetterTest]/[method:nistFf1KnownVector()]
+display-name: nistFf1KnownVector()
+]]></system-out>
+</testcase>
+<testcase name="capturesPrivateIndependentCopyAndPreservesOriginalBasename()" classname="org.securemail.client.safeweb.SafeWebDownloadTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebDownloadTest]/[method:capturesPrivateIndependentCopyAndPreservesOriginalBasename()]
+display-name: capturesPrivateIndependentCopyAndPreservesOriginalBasename()
+]]></system-out>
+</testcase>
+<testcase name="defensiveCopies()" classname="org.securemail.client.CryptoTest" time="0.333">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.CryptoTest]/[method:defensiveCopies()]
+display-name: defensiveCopies()
+]]></system-out>
+</testcase>
+<testcase name="refusesEscapingLinkAndDoesNotWriteOutsideExtraction()" classname="org.securemail.client.safeweb.TorBrowserInstallerTest" time="0.016">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserInstallerTest]/[method:refusesEscapingLinkAndDoesNotWriteOutsideExtraction()]
+display-name: refusesEscapingLinkAndDoesNotWriteOutsideExtraction()
+]]></system-out>
+</testcase>
+<testcase name="blockingOverridesMutualConsentAndRemovingContactCannotLeaveFriend()" classname="org.securemail.client.storage.LocalFeaturesTest" time="0.247">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.LocalFeaturesTest]/[method:blockingOverridesMutualConsentAndRemovingContactCannotLeaveFriend()]
+display-name: blockingOverridesMutualConsentAndRemovingContactCannotLeaveFriend()
+]]></system-out>
+</testcase>
+<testcase name="malformedJournalCannotMoveOutsideProfile()" classname="org.securemail.client.MigrationTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.MigrationTest]/[method:malformedJournalCannotMoveOutsideProfile()]
+display-name: malformedJournalCannotMoveOutsideProfile()
+]]></system-out>
+</testcase>
+<testcase name="refusesImpersonatedTorController()" classname="org.securemail.client.TorControlTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.TorControlTest]/[method:refusesImpersonatedTorController()]
+display-name: refusesImpersonatedTorController()
+]]></system-out>
+</testcase>
+<testcase name="incorrectVaultPasswordAndExclusiveLock()" classname="org.securemail.client.StorageTest" time="0.589">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.StorageTest]/[method:incorrectVaultPasswordAndExclusiveLock()]
+display-name: incorrectVaultPasswordAndExclusiveLock()
+]]></system-out>
+</testcase>
+<testcase name="capabilitiesAreRootSignedChallengeBoundAndNeverReplaceAccountIdentity()" classname="org.securemail.client.LifecycleSecurityTest" time="0.009">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.LifecycleSecurityTest]/[method:capabilitiesAreRootSignedChallengeBoundAndNeverReplaceAccountIdentity()]
+display-name: capabilitiesAreRootSignedChallengeBoundAndNeverReplaceAccountIdentity()
+]]></system-out>
+</testcase>
+<testcase name="arbitraryTypesMultipleFilesEndToEndAndAesZip()" classname="org.securemail.client.AttachmentsTest" time="1.017">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.AttachmentsTest]/[method:arbitraryTypesMultipleFilesEndToEndAndAesZip()]
+display-name: arbitraryTypesMultipleFilesEndToEndAndAesZip()
+]]></system-out>
+</testcase>
+<testcase name="version150PreservesManagedArchiveAndRestoresMissingSeparateContainer()" classname="org.securemail.client.storage.ProfileSnapshotTest" time="0.607">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.ProfileSnapshotTest]/[method:version150PreservesManagedArchiveAndRestoresMissingSeparateContainer()]
+display-name: version150PreservesManagedArchiveAndRestoresMissingSeparateContainer()
+]]></system-out>
+</testcase>
+<testcase name="hostListIsStrictAndUnknownVmStateRemainsActive()" classname="org.securemail.client.safeweb.WindowsSafeWebSandboxTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.WindowsSafeWebSandboxTest]/[method:hostListIsStrictAndUnknownVmStateRemainsActive()]
+display-name: hostListIsStrictAndUnknownVmStateRemainsActive()
+]]></system-out>
+</testcase>
+<testcase name="crashBetweenRenamesRestoresOldProfile()" classname="org.securemail.client.MigrationTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.MigrationTest]/[method:crashBetweenRenamesRestoresOldProfile()]
+display-name: crashBetweenRenamesRestoresOldProfile()
+]]></system-out>
+</testcase>
+<testcase name="webpDecodesLocallyIntoSanitizedPng()" classname="org.securemail.client.storage.AvatarPresetTest" time="0.023">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.AvatarPresetTest]/[method:webpDecodesLocallyIntoSanitizedPng()]
+display-name: webpDecodesLocallyIntoSanitizedPng()
+]]></system-out>
+</testcase>
+<testcase name="downloadsSurviveNormalCloseAndAuthenticatedUpgrade()" classname="org.securemail.client.safeweb.SafeWebSessionsTest" time="0.022">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebSessionsTest]/[method:downloadsSurviveNormalCloseAndAuthenticatedUpgrade()]
+display-name: downloadsSurviveNormalCloseAndAuthenticatedUpgrade()
+]]></system-out>
+</testcase>
+<testcase name="rejectsExpiredSigningKey()" classname="org.securemail.client.safeweb.TorBrowserSignatureTest" time="0.018">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserSignatureTest]/[method:rejectsExpiredSigningKey()]
+display-name: rejectsExpiredSigningKey()
+]]></system-out>
+</testcase>
+<testcase name="unsafeExecutableDuplicateAndOversizePresetDataRejected()" classname="org.securemail.client.storage.AvatarPresetTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.AvatarPresetTest]/[method:unsafeExecutableDuplicateAndOversizePresetDataRejected()]
+display-name: unsafeExecutableDuplicateAndOversizePresetDataRejected()
+]]></system-out>
+</testcase>
+<testcase name="exactRangeRequired()" classname="org.securemail.client.update.ResumeRangeTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.update.ResumeRangeTest]/[method:exactRangeRequired()]
+display-name: exactRangeRequired()
+]]></system-out>
+</testcase>
+<testcase name="arbitraryForeignSessionCannotBeDeleted()" classname="org.securemail.client.safeweb.SafeWebSessionsTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebSessionsTest]/[method:arbitraryForeignSessionCannotBeDeleted()]
+display-name: arbitraryForeignSessionCannotBeDeleted()
+]]></system-out>
+</testcase>
+<testcase name="malformedTextCancelAndRejectedLimitLeaveNoPlaintextOrOrphanObject()" classname="org.securemail.client.archive.ArchiveSecurityTest" time="0.223">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.archive.ArchiveSecurityTest]/[method:malformedTextCancelAndRejectedLimitLeaveNoPlaintextOrOrphanObject()]
+display-name: malformedTextCancelAndRejectedLimitLeaveNoPlaintextOrOrphanObject()
+]]></system-out>
+</testcase>
+<testcase name="recoveryRotationAndDisableDoNotChangeDataObjects()" classname="org.securemail.client.archive.ArchiveSecurityTest" time="0.233">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.archive.ArchiveSecurityTest]/[method:recoveryRotationAndDisableDoNotChangeDataObjects()]
+display-name: recoveryRotationAndDisableDoNotChangeDataObjects()
+]]></system-out>
+</testcase>
+<testcase name="unknownValidSenderIsDurableAndNeverAutomaticallyTrusted()" classname="org.securemail.client.UnknownSenderTest" time="0.557">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.UnknownSenderTest]/[method:unknownValidSenderIsDurableAndNeverAutomaticallyTrusted()]
+display-name: unknownValidSenderIsDurableAndNeverAutomaticallyTrusted()
+]]></system-out>
+</testcase>
+<testcase name="closeDeletesOnlyOwnSnapshotAndIsIdempotent()" classname="org.securemail.client.safeweb.SafeWebDownloadTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebDownloadTest]/[method:closeDeletesOnlyOwnSnapshotAndIsIdempotent()]
+display-name: closeDeletesOnlyOwnSnapshotAndIsIdempotent()
+]]></system-out>
+</testcase>
+<testcase name="stallMeasuredFromLastRealProgress()" classname="org.securemail.client.FastTorTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.FastTorTest]/[method:stallMeasuredFromLastRealProgress()]
+display-name: stallMeasuredFromLastRealProgress()
+]]></system-out>
+</testcase>
+<testcase name="rejectsAmbiguousSnowflakeFront()" classname="org.securemail.client.AutomaticEncryptionTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.AutomaticEncryptionTest]/[method:rejectsAmbiguousSnowflakeFront()]
+display-name: rejectsAmbiguousSnowflakeFront()
+]]></system-out>
+</testcase>
+<testcase name="cookieIsPrivateWellFormedAndDifferentEverySession()" classname="org.securemail.client.safeweb.LinuxSafeWebSandboxTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.LinuxSafeWebSandboxTest]/[method:cookieIsPrivateWellFormedAndDifferentEverySession()]
+display-name: cookieIsPrivateWellFormedAndDifferentEverySession()
+]]></system-out>
+</testcase>
+<testcase name="rollbackClockAndWrongRelayInvalidateSavedSession()" classname="org.securemail.client.security.RememberedLoginTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.security.RememberedLoginTest]/[method:rollbackClockAndWrongRelayInvalidateSavedSession()]
+display-name: rollbackClockAndWrongRelayInvalidateSavedSession()
+]]></system-out>
+</testcase>
+<testcase name="contactsRemainPinnedAndForeignAvatarWriteIsRejected()" classname="org.securemail.client.UnknownSenderTest" time="0.365">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.UnknownSenderTest]/[method:contactsRemainPinnedAndForeignAvatarWriteIsRejected()]
+display-name: contactsRemainPinnedAndForeignAvatarWriteIsRejected()
+]]></system-out>
+</testcase>
+<testcase name="rejectsOutsideAndNestedSelections()" classname="org.securemail.client.safeweb.SafeWebDownloadTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebDownloadTest]/[method:rejectsOutsideAndNestedSelections()]
+display-name: rejectsOutsideAndNestedSelections()
+]]></system-out>
+</testcase>
+<testcase name="failedProfileUpgradePreservesPreviousAndCanBeRetried()" classname="org.securemail.client.safeweb.SafeWebSessionsTest" time="0.037">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebSessionsTest]/[method:failedProfileUpgradePreservesPreviousAndCanBeRetried()]
+display-name: failedProfileUpgradePreservesPreviousAndCanBeRetried()
+]]></system-out>
+</testcase>
+<testcase name="announcementDeduplicatesAndTamperingNeverEntersTrustedHistory()" classname="org.securemail.client.update.UpdateSecurityTest" time="0.02">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.update.UpdateSecurityTest]/[method:announcementDeduplicatesAndTamperingNeverEntersTrustedHistory()]
+display-name: announcementDeduplicatesAndTamperingNeverEntersTrustedHistory()
+]]></system-out>
+</testcase>
+<testcase name="imageTypeSizeAndStoredPathAreBounded()" classname="org.securemail.client.appearance.AppearanceTest" time="0.045">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.appearance.AppearanceTest]/[method:imageTypeSizeAndStoredPathAreBounded()]
+display-name: imageTypeSizeAndStoredPathAreBounded()
+]]></system-out>
+</testcase>
+<testcase name="twoIdentitiesReceiveChangedAvatarAndRetainItAfterOfflineRestart()" classname="org.securemail.client.storage.PublicProfileCacheTest" time="1.152">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.PublicProfileCacheTest]/[method:twoIdentitiesReceiveChangedAvatarAndRetainItAfterOfflineRestart()]
+display-name: twoIdentitiesReceiveChangedAvatarAndRetainItAfterOfflineRestart()
+]]></system-out>
+</testcase>
+<testcase name="sixteenCategoriesAndAllLegacyPalettesRemainReadable()" classname="org.securemail.client.appearance.AppearanceTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.appearance.AppearanceTest]/[method:sixteenCategoriesAndAllLegacyPalettesRemainReadable()]
+display-name: sixteenCategoriesAndAllLegacyPalettesRemainReadable()
+]]></system-out>
+</testcase>
+<testcase name="detectsReplacedFilenameDuringStreamingAndRemovesPartialSnapshot()" classname="org.securemail.client.safeweb.SafeWebDownloadTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebDownloadTest]/[method:detectsReplacedFilenameDuringStreamingAndRemovesPartialSnapshot()]
+display-name: detectsReplacedFilenameDuringStreamingAndRemovesPartialSnapshot()
+]]></system-out>
+</testcase>
+<testcase name="supportsForwardHardlinkChains()" classname="org.securemail.client.safeweb.TorBrowserInstallerTest" time="0.251">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserInstallerTest]/[method:supportsForwardHardlinkChains()]
+display-name: supportsForwardHardlinkChains()
+]]></system-out>
+</testcase>
+<testcase name="emptyCompletedDownloadIsHandledWithoutExecution()" classname="org.securemail.client.safeweb.SafeWebDownloadTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebDownloadTest]/[method:emptyCompletedDownloadIsHandledWithoutExecution()]
+display-name: emptyCompletedDownloadIsHandledWithoutExecution()
+]]></system-out>
+</testcase>
+<testcase name="encryptedBackupSeparatePasswordRestoresOnDifferentDevice()" classname="org.securemail.client.archive.ArchiveTest" time="1.844">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.archive.ArchiveTest]/[method:encryptedBackupSeparatePasswordRestoresOnDifferentDevice()]
+display-name: encryptedBackupSeparatePasswordRestoresOnDifferentDevice()
+]]></system-out>
+</testcase>
+<testcase name="cookieDoesNotFollowSymbolicLinks()" classname="org.securemail.client.safeweb.LinuxSafeWebSandboxTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.LinuxSafeWebSandboxTest]/[method:cookieDoesNotFollowSymbolicLinks()]
+display-name: cookieDoesNotFollowSymbolicLinks()
+]]></system-out>
+</testcase>
+<testcase name="cleanupWaitsForEveryCapturedOwnedHandleAndPreservesForeignProcess()" classname="org.securemail.client.safeweb.LinuxSafeWebSandboxTest" time="0.03">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.LinuxSafeWebSandboxTest]/[method:cleanupWaitsForEveryCapturedOwnedHandleAndPreservesForeignProcess()]
+display-name: cleanupWaitsForEveryCapturedOwnedHandleAndPreservesForeignProcess()
+]]></system-out>
+</testcase>
+<testcase name="urlIsAlwaysOnePositionalArgumentNeverShellSource()" classname="org.securemail.client.safeweb.LinuxSafeWebSandboxTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.LinuxSafeWebSandboxTest]/[method:urlIsAlwaysOnePositionalArgumentNeverShellSource()]
+display-name: urlIsAlwaysOnePositionalArgumentNeverShellSource()
+]]></system-out>
+</testcase>
+<testcase name="fallbackIsStillConnectingAndNeverFailed()" classname="org.securemail.client.ConnectionStatusTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ConnectionStatusTest]/[method:fallbackIsStillConnectingAndNeverFailed()]
+display-name: fallbackIsStillConnectingAndNeverFailed()
+]]></system-out>
+</testcase>
+<testcase name="actualIsolatedPdfRenderAndTextExtraction()" classname="org.securemail.client.archive.ArchiveDocumentsTest" time="1.622">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.archive.ArchiveDocumentsTest]/[method:actualIsolatedPdfRenderAndTextExtraction()]
+display-name: actualIsolatedPdfRenderAndTextExtraction()
+]]></system-out>
+</testcase>
+<testcase name="signedButDamagedUnknownCiphertextDoesNotSuppressOtherInboxResults()" classname="org.securemail.client.UnknownSenderTest" time="0.34">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.UnknownSenderTest]/[method:signedButDamagedUnknownCiphertextDoesNotSuppressOtherInboxResults()]
+display-name: signedButDamagedUnknownCiphertextDoesNotSuppressOtherInboxResults()
+]]></system-out>
+</testcase>
+<testcase name="wrappersUseIndependentRandomSaltAndNonceAndAuthenticateHeader()" classname="org.securemail.client.archive.ArchiveSecurityTest" time="16.856">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.archive.ArchiveSecurityTest]/[method:wrappersUseIndependentRandomSaltAndNonceAndAuthenticateHeader()]
+display-name: wrappersUseIndependentRandomSaltAndNonceAndAuthenticateHeader()
+]]></system-out>
+</testcase>
+<testcase name="everyCodeComputesCandidateWithoutInnerVerifier()" classname="org.securemail.client.LetterTest" time="2.395">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.LetterTest]/[method:everyCodeComputesCandidateWithoutInnerVerifier()]
+display-name: everyCodeComputesCandidateWithoutInnerVerifier()
+]]></system-out>
+</testcase>
+<testcase name="closeQuiescesDiagnosticsAndNeverRecreatesRemovedProfile()" classname="org.securemail.client.update.UpdateSecurityTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.update.UpdateSecurityTest]/[method:closeQuiescesDiagnosticsAndNeverRecreatesRemovedProfile()]
+display-name: closeQuiescesDiagnosticsAndNeverRecreatesRemovedProfile()
+]]></system-out>
+</testcase>
+<testcase name="signedAvailableCreatesOfflineDeduplicatedLetter()" classname="org.securemail.client.update.UpdateEventsTest" time="0.01">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.update.UpdateEventsTest]/[method:signedAvailableCreatesOfflineDeduplicatedLetter()]
+display-name: signedAvailableCreatesOfflineDeduplicatedLetter()
+]]></system-out>
+</testcase>
+<testcase name="rejectsUnboundSigningSubkey()" classname="org.securemail.client.safeweb.TorBrowserSignatureTest" time="0.023">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserSignatureTest]/[method:rejectsUnboundSigningSubkey()]
+display-name: rejectsUnboundSigningSubkey()
+]]></system-out>
+</testcase>
+<testcase name="encryptedLifecycleStateAndDeviceIdentitySurviveReopen()" classname="org.securemail.client.LifecycleSecurityTest" time="0.243">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.LifecycleSecurityTest]/[method:encryptedLifecycleStateAndDeviceIdentitySurviveReopen()]
+display-name: encryptedLifecycleStateAndDeviceIdentitySurviveReopen()
+]]></system-out>
+</testcase>
+<testcase name="preparedCommitAnchorAcceptsEitherCrashSideThenRejectsHistoricalRollback()" classname="org.securemail.client.archive.ArchiveSecurityTest" time="0.786">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.archive.ArchiveSecurityTest]/[method:preparedCommitAnchorAcceptsEitherCrashSideThenRejectsHistoricalRollback()]
+display-name: preparedCommitAnchorAcceptsEitherCrashSideThenRejectsHistoricalRollback()
+]]></system-out>
+</testcase>
+<testcase name="settingsAreAtomicAndRestorePreviousAppearance()" classname="org.securemail.client.appearance.AppearanceTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.appearance.AppearanceTest]/[method:settingsAreAtomicAndRestorePreviousAppearance()]
+display-name: settingsAreAtomicAndRestorePreviousAppearance()
+]]></system-out>
+</testcase>
+<testcase name="unverifiedAndForgedProfilesCannotOverwriteAPinnedContact()" classname="org.securemail.client.storage.PublicProfileCacheTest" time="0.382">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.PublicProfileCacheTest]/[method:unverifiedAndForgedProfilesCannotOverwriteAPinnedContact()]
+display-name: unverifiedAndForgedProfilesCannotOverwriteAPinnedContact()
+]]></system-out>
+</testcase>
+<testcase name="createWrongPasswordAndNoRecovery()" classname="org.securemail.client.archive.ArchiveTest" time="0.878">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.archive.ArchiveTest]/[method:createWrongPasswordAndNoRecovery()]
+display-name: createWrongPasswordAndNoRecovery()
+]]></system-out>
+</testcase>
+<testcase name="uiSnapshotAndListenerDoNotWaitForSlowLaunchOrBlockingCallback()" classname="org.securemail.client.safeweb.SafeWebProcessTest" time="0.026">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebProcessTest]/[method:uiSnapshotAndListenerDoNotWaitForSlowLaunchOrBlockingCallback()]
+display-name: uiSnapshotAndListenerDoNotWaitForSlowLaunchOrBlockingCallback()
+]]></system-out>
+</testcase>
+<testcase name="mapsOnlyDedicatedBundleAndDisablesHostChannels()" classname="org.securemail.client.safeweb.WindowsSafeWebSandboxTest" time="0.023">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.WindowsSafeWebSandboxTest]/[method:mapsOnlyDedicatedBundleAndDisablesHostChannels()]
+display-name: mapsOnlyDedicatedBundleAndDisablesHostChannels()
+]]></system-out>
+</testcase>
+<testcase name="failedTemplateCopyNeverPublishesPartialTemplate()" classname="org.securemail.client.safeweb.SafeWebSessionsTest" time="0.014">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebSessionsTest]/[method:failedTemplateCopyNeverPublishesPartialTemplate()]
+display-name: failedTemplateCopyNeverPublishesPartialTemplate()
+]]></system-out>
+</testcase>
+<testcase name="featureSidecarIsEncryptedSurvivesRekeyAndCannotAssignRemoteAvatar()" classname="org.securemail.client.storage.LocalFeaturesTest" time="1.267">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.LocalFeaturesTest]/[method:featureSidecarIsEncryptedSurvivesRekeyAndCannotAssignRemoteAvatar()]
+display-name: featureSidecarIsEncryptedSurvivesRekeyAndCannotAssignRemoteAvatar()
+]]></system-out>
+</testcase>
+<testcase name="absentProfileAndExplicitAvatarRemovalDoNotReturnAnOldImage()" classname="org.securemail.client.storage.PublicProfileCacheTest" time="0.332">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.PublicProfileCacheTest]/[method:absentProfileAndExplicitAvatarRemovalDoNotReturnAnOldImage()]
+display-name: absentProfileAndExplicitAvatarRemovalDoNotReturnAnOldImage()
+]]></system-out>
+</testcase>
+<testcase name="browserCannotResealItsModifiedExecutables()" classname="org.securemail.client.safeweb.SafeWebSessionsTest" time="0.015">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebSessionsTest]/[method:browserCannotResealItsModifiedExecutables()]
+display-name: browserCannotResealItsModifiedExecutables()
+]]></system-out>
+</testcase>
+<testcase name="migratedHistoryRequiresSignatureAndFormerAcceptanceFloor()" classname="org.securemail.client.update.UpdateEventsTest" time="0.013">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.update.UpdateEventsTest]/[method:migratedHistoryRequiresSignatureAndFormerAcceptanceFloor()]
+display-name: migratedHistoryRequiresSignatureAndFormerAcceptanceFloor()
+]]></system-out>
+</testcase>
+<testcase name="manualCheckDownloadStatesRealProgressAndInstallFailure()" classname="org.securemail.client.update.UpdateSecurityTest" time="0.043">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.update.UpdateSecurityTest]/[method:manualCheckDownloadStatesRealProgressAndInstallFailure()]
+display-name: manualCheckDownloadStatesRealProgressAndInstallFailure()
+]]></system-out>
+</testcase>
+<testcase name="signedMalformedAndExcessiveDimensionAvatarsAreRejectedBeforeCacheReplacement()" classname="org.securemail.client.storage.PublicProfileCacheTest" time="0.367">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.PublicProfileCacheTest]/[method:signedMalformedAndExcessiveDimensionAvatarsAreRejectedBeforeCacheReplacement()]
+display-name: signedMalformedAndExcessiveDimensionAvatarsAreRejectedBeforeCacheReplacement()
+]]></system-out>
+</testcase>
+<testcase name="stagingMustBeDisjointAndCannotUseParentSymlinks()" classname="org.securemail.client.safeweb.SafeWebDownloadTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebDownloadTest]/[method:stagingMustBeDisjointAndCannotUseParentSymlinks()]
+display-name: stagingMustBeDisjointAndCannotUseParentSymlinks()
+]]></system-out>
+</testcase>
+<testcase name="validExactSignatureAcceptsAndPinsProductionKey()" classname="org.securemail.client.update.UpdateSecurityTest" time="0.007">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.update.UpdateSecurityTest]/[method:validExactSignatureAcceptsAndPinsProductionKey()]
+display-name: validExactSignatureAcceptsAndPinsProductionKey()
+]]></system-out>
+</testcase>
+<testcase name="roundTripWrongKeyTamperAndAuthenticatedMetadata(Algorithm)[2]" classname="org.securemail.client.CryptoTest" time="1.51">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.CryptoTest]/[test-template:roundTripWrongKeyTamperAndAuthenticatedMetadata(org.securemail.protocol.Algorithm)]/[test-template-invocation:#2]
+display-name: [2] XChaCha20-Poly1305 · рекомендуется
+]]></system-out>
+</testcase>
+<testcase name="unavailableSystemVaultNeverCreatesPlaintextFallback()" classname="org.securemail.client.security.RememberedLoginTest" time="0.016">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.security.RememberedLoginTest]/[method:unavailableSystemVaultNeverCreatesPlaintextFallback()]
+display-name: unavailableSystemVaultNeverCreatesPlaintextFallback()
+]]></system-out>
+</testcase>
+<testcase name="roundTripWrongKeyTamperAndAuthenticatedMetadata(Algorithm)[3]" classname="org.securemail.client.CryptoTest" time="1.464">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.CryptoTest]/[test-template:roundTripWrongKeyTamperAndAuthenticatedMetadata(org.securemail.protocol.Algorithm)]/[test-template-invocation:#3]
+display-name: [3] ChaCha20-Poly1305
+]]></system-out>
+</testcase>
+<testcase name="roundTripWrongKeyTamperAndAuthenticatedMetadata(Algorithm)[4]" classname="org.securemail.client.CryptoTest" time="1.363">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.CryptoTest]/[test-template:roundTripWrongKeyTamperAndAuthenticatedMetadata(org.securemail.protocol.Algorithm)]/[test-template-invocation:#4]
+display-name: [4] Camellia-256-GCM
+]]></system-out>
+</testcase>
+<testcase name="anyFileTypeAndTraversal()" classname="org.securemail.client.CryptoTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.CryptoTest]/[method:anyFileTypeAndTraversal()]
+display-name: anyFileTypeAndTraversal()
+]]></system-out>
+</testcase>
+<testcase name="unicodeShortAndEmptyRoundTrip()" classname="org.securemail.client.LetterTest" time="4.079">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.LetterTest]/[method:unicodeShortAndEmptyRoundTrip()]
+display-name: unicodeShortAndEmptyRoundTrip()
+]]></system-out>
+</testcase>
+<testcase name="messengerRootAliasCannotOverlapBrowserStorage()" classname="org.securemail.client.safeweb.SafeWebSessionsTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebSessionsTest]/[method:messengerRootAliasCannotOverlapBrowserStorage()]
+display-name: messengerRootAliasCannotOverlapBrowserStorage()
+]]></system-out>
+</testcase>
+<testcase name="favoritesPersistWithoutMutatingBuiltins()" classname="org.securemail.client.appearance.AppearanceTest" time="0.018">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.appearance.AppearanceTest]/[method:favoritesPersistWithoutMutatingBuiltins()]
+display-name: favoritesPersistWithoutMutatingBuiltins()
+]]></system-out>
+</testcase>
+<testcase name="backupCannotRecursivelyCopyItself()" classname="org.securemail.client.UpdateSupportTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.UpdateSupportTest]/[method:backupCannotRecursivelyCopyItself()]
+display-name: backupCannotRecursivelyCopyItself()
+]]></system-out>
+</testcase>
+<testcase name="damagedAndIncompatibleFilesArePreservedInSafeMode()" classname="org.securemail.client.appearance.AppearanceTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.appearance.AppearanceTest]/[method:damagedAndIncompatibleFilesArePreservedInSafeMode()]
+display-name: damagedAndIncompatibleFilesArePreservedInSafeMode()
+]]></system-out>
+</testcase>
+<testcase name="channelProtocolUrlAndDateAreStrict()" classname="org.securemail.client.update.UpdateSecurityTest" time="0.014">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.update.UpdateSecurityTest]/[method:channelProtocolUrlAndDateAreStrict()]
+display-name: channelProtocolUrlAndDateAreStrict()
+]]></system-out>
+</testcase>
+<testcase name="supportsPaxLongNamesAndInternalSymlinks()" classname="org.securemail.client.safeweb.TorBrowserInstallerTest" time="0.035">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserInstallerTest]/[method:supportsPaxLongNamesAndInternalSymlinks()]
+display-name: supportsPaxLongNamesAndInternalSymlinks()
+]]></system-out>
+</testcase>
+<testcase name="recipientSenderWrongIdentityTamperAndNonce()" classname="org.securemail.client.AutomaticEncryptionTest" time="0.029">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.AutomaticEncryptionTest]/[method:recipientSenderWrongIdentityTamperAndNonce()]
+display-name: recipientSenderWrongIdentityTamperAndNonce()
+]]></system-out>
+</testcase>
+<testcase name="unreadablePaletteAndBackdropCannotBeSaved()" classname="org.securemail.client.appearance.AppearanceTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.appearance.AppearanceTest]/[method:unreadablePaletteAndBackdropCannotBeSaved()]
+display-name: unreadablePaletteAndBackdropCannotBeSaved()
+]]></system-out>
+</testcase>
+<testcase name="rejectsCommandsLocalDestinationsCredentialsAndAmbiguousInputs()" classname="org.securemail.client.safeweb.SafeWebTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebTest]/[method:rejectsCommandsLocalDestinationsCredentialsAndAmbiguousInputs()]
+display-name: rejectsCommandsLocalDestinationsCredentialsAndAmbiguousInputs()
+]]></system-out>
+</testcase>
+<testcase name="damagedPdfFailsWithoutExternalOpening()" classname="org.securemail.client.archive.ArchiveDocumentsTest" time="0.352">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.archive.ArchiveDocumentsTest]/[method:damagedPdfFailsWithoutExternalOpening()]
+display-name: damagedPdfFailsWithoutExternalOpening()
+]]></system-out>
+</testcase>
+<testcase name="version120SnapshotIsRepeatableAndDoesNotRewriteVault()" classname="org.securemail.client.storage.ProfileSnapshotTest" time="0.243">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.ProfileSnapshotTest]/[method:version120SnapshotIsRepeatableAndDoesNotRewriteVault()]
+display-name: version120SnapshotIsRepeatableAndDoesNotRewriteVault()
+]]></system-out>
+</testcase>
+<testcase name="verifiesCertifiedSigningSubkeyAndBackSignature()" classname="org.securemail.client.safeweb.TorBrowserSignatureTest" time="0.022">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserSignatureTest]/[method:verifiesCertifiedSigningSubkeyAndBackSignature()]
+display-name: verifiesCertifiedSigningSubkeyAndBackSignature()
+]]></system-out>
+</testcase>
+<testcase name="ackAndStartAloneNeverConfirmInstallation()" classname="org.securemail.client.update.UpdateEventsTest" time="0.026">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.update.UpdateEventsTest]/[method:ackAndStartAloneNeverConfirmInstallation()]
+display-name: ackAndStartAloneNeverConfirmInstallation()
+]]></system-out>
+</testcase>
+<testcase name="transportTlsSignatureAndSchemaDiagnosticsStaySeparateAndNeverLogRawMessages()" classname="org.securemail.client.update.UpdateSecurityTest" time="0.062">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.update.UpdateSecurityTest]/[method:transportTlsSignatureAndSchemaDiagnosticsStaySeparateAndNeverLogRawMessages()]
+display-name: transportTlsSignatureAndSchemaDiagnosticsStaySeparateAndNeverLogRawMessages()
+]]></system-out>
+</testcase>
+<testcase name="wrongSignatureAndKeyRejected()" classname="org.securemail.client.update.UpdateSecurityTest" time="0.014">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.update.UpdateSecurityTest]/[method:wrongSignatureAndKeyRejected()]
+display-name: wrongSignatureAndKeyRejected()
+]]></system-out>
+</testcase>
+<testcase name="roundTripWrongKeyTamperAndAuthenticatedMetadata(Algorithm)[1]" classname="org.securemail.client.CryptoTest" time="1.429">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.CryptoTest]/[test-template:roundTripWrongKeyTamperAndAuthenticatedMetadata(org.securemail.protocol.Algorithm)]/[test-template-invocation:#1]
+display-name: [1] AES-256-GCM · рекомендуется
+]]></system-out>
+</testcase>
+<testcase name="safeCookieAuthenticatedBeforeAddOnion()" classname="org.securemail.client.TorControlTest" time="0.027">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.TorControlTest]/[method:safeCookieAuthenticatedBeforeAddOnion()]
+display-name: safeCookieAuthenticatedBeforeAddOnion()
+]]></system-out>
+</testcase>
+<testcase name="resumeKeyOpensExistingModernVaultWithoutChangingIdentity()" classname="org.securemail.client.security.RememberedLoginTest" time="0.257">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.security.RememberedLoginTest]/[method:resumeKeyOpensExistingModernVaultWithoutChangingIdentity()]
+display-name: resumeKeyOpensExistingModernVaultWithoutChangingIdentity()
+]]></system-out>
+</testcase>
+<testcase name="atomicAppImageReplacementAndShortcutThenRollbackOnFailure()" classname="org.securemail.client.UpdateSupportTest" time="0.011">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.UpdateSupportTest]/[method:atomicAppImageReplacementAndShortcutThenRollbackOnFailure()]
+display-name: atomicAppImageReplacementAndShortcutThenRollbackOnFailure()
+]]></system-out>
+</testcase>
+<testcase name="hidingProfileRemovesPreviouslyVisibleContentAndPersistsTheRestriction()" classname="org.securemail.client.storage.PublicProfileCacheTest" time="0.848">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.PublicProfileCacheTest]/[method:hidingProfileRemovesPreviouslyVisibleContentAndPersistsTheRestriction()]
+display-name: hidingProfileRemovesPreviouslyVisibleContentAndPersistsTheRestriction()
+]]></system-out>
+</testcase>
+<testcase name="signedRemoteAvatarStillRejectsOversizeDimensionsBeforeCaching()" classname="org.securemail.client.storage.AvatarPresetTest" time="0.404">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.AvatarPresetTest]/[method:signedRemoteAvatarStillRejectsOversizeDimensionsBeforeCaching()]
+display-name: signedRemoteAvatarStillRejectsOversizeDimensionsBeforeCaching()
+]]></system-out>
+</testcase>
+<testcase name="freshNonceSaltAndNoFilenameInPacket(Algorithm)[3]" classname="org.securemail.client.CryptoTest" time="0.509">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.CryptoTest]/[test-template:freshNonceSaltAndNoFilenameInPacket(org.securemail.protocol.Algorithm)]/[test-template-invocation:#3]
+display-name: [3] ChaCha20-Poly1305
+]]></system-out>
+</testcase>
+<testcase name="duplicateAndUnknownJsonFieldsRejectedEvenIfSigned()" classname="org.securemail.client.update.UpdateSecurityTest" time="0.033">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.update.UpdateSecurityTest]/[method:duplicateAndUnknownJsonFieldsRejectedEvenIfSigned()]
+display-name: duplicateAndUnknownJsonFieldsRejectedEvenIfSigned()
+]]></system-out>
+</testcase>
+<testcase name="requiredOnlySecurityOrIncompatibleAndOptionalDoesNotGate()" classname="org.securemail.client.update.UpdateSecurityTest" time="0.024">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.update.UpdateSecurityTest]/[method:requiredOnlySecurityOrIncompatibleAndOptionalDoesNotGate()]
+display-name: requiredOnlySecurityOrIncompatibleAndOptionalDoesNotGate()
+]]></system-out>
+</testcase>
+<testcase name="freshNonceSaltAndNoFilenameInPacket(Algorithm)[2]" classname="org.securemail.client.CryptoTest" time="0.474">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.CryptoTest]/[test-template:freshNonceSaltAndNoFilenameInPacket(org.securemail.protocol.Algorithm)]/[test-template-invocation:#2]
+display-name: [2] XChaCha20-Poly1305 · рекомендуется
+]]></system-out>
+</testcase>
+<testcase name="refusesSymlinksAndOversizedDistribution()" classname="org.securemail.client.safeweb.TorBrowserSignatureTest" time="0.025">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserSignatureTest]/[method:refusesSymlinksAndOversizedDistribution()]
+display-name: refusesSymlinksAndOversizedDistribution()
+]]></system-out>
+</testcase>
+<testcase name="noTraversalNoOverwriteAndCancelledZipRemoved()" classname="org.securemail.client.AttachmentsTest" time="0.505">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.AttachmentsTest]/[method:noTraversalNoOverwriteAndCancelledZipRemoved()]
+display-name: noTraversalNoOverwriteAndCancelledZipRemoved()
+]]></system-out>
+</testcase>
+<testcase name="freshNonceSaltAndNoFilenameInPacket(Algorithm)[4]" classname="org.securemail.client.CryptoTest" time="0.65">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.CryptoTest]/[test-template:freshNonceSaltAndNoFilenameInPacket(org.securemail.protocol.Algorithm)]/[test-template-invocation:#4]
+display-name: [4] Camellia-256-GCM
+]]></system-out>
+</testcase>
+<testcase name="freshNonceSaltAndNoFilenameInPacket(Algorithm)[1]" classname="org.securemail.client.CryptoTest" time="0.513">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.CryptoTest]/[test-template:freshNonceSaltAndNoFilenameInPacket(org.securemail.protocol.Algorithm)]/[test-template-invocation:#1]
+display-name: [1] AES-256-GCM · рекомендуется
+]]></system-out>
+</testcase>
+<testcase name="staleQueuedUiResultAndCloseAreSuppressed()" classname="org.securemail.client.LiveCodeTest" time="0.203">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.LiveCodeTest]/[method:staleQueuedUiResultAndCloseAreSuppressed()]
+display-name: staleQueuedUiResultAndCloseAreSuppressed()
+]]></system-out>
+</testcase>
+<testcase name="rejectsMissingBackSignature()" classname="org.securemail.client.safeweb.TorBrowserSignatureTest" time="0.019">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserSignatureTest]/[method:rejectsMissingBackSignature()]
+display-name: rejectsMissingBackSignature()
+]]></system-out>
+</testcase>
+<testcase name="semanticPrereleaseOrderingAndLimits()" classname="org.securemail.client.update.UpdateSecurityTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.update.UpdateSecurityTest]/[method:semanticPrereleaseOrderingAndLimits()]
+display-name: semanticPrereleaseOrderingAndLimits()
+]]></system-out>
+</testcase>
+<testcase name="detectsActualMutationDuringStreamingAndRemovesPartialSnapshot()" classname="org.securemail.client.safeweb.SafeWebDownloadTest" time="0.007">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebDownloadTest]/[method:detectsActualMutationDuringStreamingAndRemovesPartialSnapshot()]
+display-name: detectsActualMutationDuringStreamingAndRemovesPartialSnapshot()
+]]></system-out>
+</testcase>
+<testcase name="queryRejectsNullFieldsAndInvalidDateRange()" classname="org.securemail.client.storage.LocalMailSearch200Test" time="0.01">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.LocalMailSearch200Test]/[method:queryRejectsNullFieldsAndInvalidDateRange()]
+display-name: queryRejectsNullFieldsAndInvalidDateRange()
+]]></system-out>
+</testcase>
+<testcase name="rebootAndInterruptedRevealFailClosedWithoutInventingARead()" classname="org.securemail.client.LifecycleSecurityTest" time="0.177">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.LifecycleSecurityTest]/[method:rebootAndInterruptedRevealFailClosedWithoutInventingARead()]
+display-name: rebootAndInterruptedRevealFailClosedWithoutInventingARead()
+]]></system-out>
+</testcase>
+<testcase name="remoteProfileAndAvatarAreEncryptedOnDisk()" classname="org.securemail.client.storage.PublicProfileCacheTest" time="0.299">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.PublicProfileCacheTest]/[method:remoteProfileAndAvatarAreEncryptedOnDisk()]
+display-name: remoteProfileAndAvatarAreEncryptedOnDisk()
+]]></system-out>
+</testcase>
+<testcase name="stalledDirectAutomaticallyStartsFreshSnowflake()" classname="org.securemail.client.TorConnectionTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.TorConnectionTest]/[method:stalledDirectAutomaticallyStartsFreshSnowflake()]
+display-name: stalledDirectAutomaticallyStartsFreshSnowflake()
+]]></system-out>
+</testcase>
+<testcase name="first11OpenBacksUpAnAlreadyModern10VaultOnceWithoutChangingIdentity()" classname="org.securemail.client.storage.ProfileSnapshotTest" time="0.355">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.ProfileSnapshotTest]/[method:first11OpenBacksUpAnAlreadyModern10VaultOnceWithoutChangingIdentity()]
+display-name: first11OpenBacksUpAnAlreadyModern10VaultOnceWithoutChangingIdentity()
+]]></system-out>
+</testcase>
+<testcase name="rejectsMultipleDetachedSignatures()" classname="org.securemail.client.safeweb.TorBrowserSignatureTest" time="0.013">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserSignatureTest]/[method:rejectsMultipleDetachedSignatures()]
+display-name: rejectsMultipleDetachedSignatures()
+]]></system-out>
+</testcase>
+<testcase name="rejectsWrongPrimaryFingerprint()" classname="org.securemail.client.safeweb.TorBrowserSignatureTest" time="0.01">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserSignatureTest]/[method:rejectsWrongPrimaryFingerprint()]
+display-name: rejectsWrongPrimaryFingerprint()
+]]></system-out>
+</testcase>
+<testcase name="malformedSignatureRefusedBeforeExtractionAndExistingDataPreserved()" classname="org.securemail.client.safeweb.TorBrowserInstallerTest" time="0.079">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserInstallerTest]/[method:malformedSignatureRefusedBeforeExtractionAndExistingDataPreserved()]
+display-name: malformedSignatureRefusedBeforeExtractionAndExistingDataPreserved()
+]]></system-out>
+</testcase>
+<testcase name="torUnavailableFailClosedBeforeSocket()" classname="org.securemail.client.AutomaticEncryptionTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.AutomaticEncryptionTest]/[method:torUnavailableFailClosedBeforeSocket()]
+display-name: torUnavailableFailClosedBeforeSocket()
+]]></system-out>
+</testcase>
+<testcase name="closeUnlinksSubstitutedSymlinkAndPreservesItsTarget()" classname="org.securemail.client.safeweb.SafeWebDownloadTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebDownloadTest]/[method:closeUnlinksSubstitutedSymlinkAndPreservesItsTarget()]
+display-name: closeUnlinksSubstitutedSymlinkAndPreservesItsTarget()
+]]></system-out>
+</testcase>
+<testcase name="importsRejectCodeUrlsUnknownKeysAndOversize()" classname="org.securemail.client.appearance.AppearanceTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.appearance.AppearanceTest]/[method:importsRejectCodeUrlsUnknownKeysAndOversize()]
+display-name: importsRejectCodeUrlsUnknownKeysAndOversize()
+]]></system-out>
+</testcase>
+<testcase name="nativeDpapiCurrentUserRoundTrip()" classname="org.securemail.client.security.RememberedLoginTest" time="0">
+<skipped><![CDATA[Disabled on operating system: Linux]]></skipped>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.security.RememberedLoginTest]/[method:nativeDpapiCurrentUserRoundTrip()]
+display-name: nativeDpapiCurrentUserRoundTrip()
+]]></system-out>
+</testcase>
+<testcase name="heldDirectoryPreventsParentSymlinkSwapFromReadingOutsideDownload()" classname="org.securemail.client.safeweb.SafeWebDownloadTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebDownloadTest]/[method:heldDirectoryPreventsParentSymlinkSwapFromReadingOutsideDownload()]
+display-name: heldDirectoryPreventsParentSymlinkSwapFromReadingOutsideDownload()
+]]></system-out>
+</testcase>
+<testcase name="objectSubstitutionAndMissingAnchorFailClosed()" classname="org.securemail.client.archive.ArchiveSecurityTest" time="0.939">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.archive.ArchiveSecurityTest]/[method:objectSubstitutionAndMissingAnchorFailClosed()]
+display-name: objectSubstitutionAndMissingAnchorFailClosed()
+]]></system-out>
+</testcase>
+<testcase name="outerAuthenticationBeforeInnerAndFreshParameters()" classname="org.securemail.client.LetterTest" time="1.549">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.LetterTest]/[method:outerAuthenticationBeforeInnerAndFreshParameters()]
+display-name: outerAuthenticationBeforeInnerAndFreshParameters()
+]]></system-out>
+</testcase>
+<testcase name="rejectsSymlinkInDownloadAncestors()" classname="org.securemail.client.safeweb.SafeWebDownloadTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebDownloadTest]/[method:rejectsSymlinkInDownloadAncestors()]
+display-name: rejectsSymlinkInDownloadAncestors()
+]]></system-out>
+</testcase>
+<testcase name="missingVerificationFailsClosed()" classname="org.securemail.client.safeweb.SafeWebTest" time="0.009">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebTest]/[method:missingVerificationFailsClosed()]
+display-name: missingVerificationFailsClosed()
+]]></system-out>
+</testcase>
+<testcase name="repeatedOpenCannotCreateAnotherProcess()" classname="org.securemail.client.safeweb.SafeWebProcessTest" time="0.032">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebProcessTest]/[method:repeatedOpenCannotCreateAnotherProcess()]
+display-name: repeatedOpenCannotCreateAnotherProcess()
+]]></system-out>
+</testcase>
+<testcase name="startupFailureRollsBackAndPreviousRecoveryCopyIsNeverOverwritten()" classname="org.securemail.client.update.UpdateSecurityTest" time="0.013">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.update.UpdateSecurityTest]/[method:startupFailureRollsBackAndPreviousRecoveryCopyIsNeverOverwritten()]
+display-name: startupFailureRollsBackAndPreviousRecoveryCopyIsNeverOverwritten()
+]]></system-out>
+</testcase>
+<testcase name="richContentRetainsReplyAndMultipleAttachmentsWhileLegacyContentStaysReadable()" classname="org.securemail.client.ReplyContentTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ReplyContentTest]/[method:richContentRetainsReplyAndMultipleAttachmentsWhileLegacyContentStaysReadable()]
+display-name: richContentRetainsReplyAndMultipleAttachmentsWhileLegacyContentStaysReadable()
+]]></system-out>
+</testcase>
+<testcase name="duplicatesAndCancelledImportDoNotOverwrite()" classname="org.securemail.client.archive.ArchiveTest" time="0.368">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.archive.ArchiveTest]/[method:duplicatesAndCancelledImportDoNotOverwrite()]
+display-name: duplicatesAndCancelledImportDoNotOverwrite()
+]]></system-out>
+</testcase>
+<testcase name="separatePasswordChangeKeepsCiphertextAndRecovery()" classname="org.securemail.client.archive.ArchiveTest" time="0.737">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.archive.ArchiveTest]/[method:separatePasswordChangeKeepsCiphertextAndRecovery()]
+display-name: separatePasswordChangeKeepsCiphertextAndRecovery()
+]]></system-out>
+</testcase>
+<testcase name="successfulStartupFailureCleanupThrowsOriginalFailureAfterOwnedChildStopped()" classname="org.securemail.client.safeweb.LinuxSafeWebSandboxTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.LinuxSafeWebSandboxTest]/[method:successfulStartupFailureCleanupThrowsOriginalFailureAfterOwnedChildStopped()]
+display-name: successfulStartupFailureCleanupThrowsOriginalFailureAfterOwnedChildStopped()
+]]></system-out>
+</testcase>
+<testcase name="mutableRootsCannotEscapeAndOnlyRootDesktopLauncherMayChange()" classname="org.securemail.client.safeweb.SafeWebSessionsTest" time="0.029">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebSessionsTest]/[method:mutableRootsCannotEscapeAndOnlyRootDesktopLauncherMayChange()]
+display-name: mutableRootsCannotEscapeAndOnlyRootDesktopLauncherMayChange()
+]]></system-out>
+</testcase>
+<testcase name="maintenanceDeletesWithoutVaultPassword()" classname="org.securemail.client.StorageTest" time="0.632">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.StorageTest]/[method:maintenanceDeletesWithoutVaultPassword()]
+display-name: maintenanceDeletesWithoutVaultPassword()
+]]></system-out>
+</testcase>
+<testcase name="failedLaunchCleansOnlyPreparedTemporarySessionAndAllowsRetry()" classname="org.securemail.client.safeweb.SafeWebProcessTest" time="0.023">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebProcessTest]/[method:failedLaunchCleansOnlyPreparedTemporarySessionAndAllowsRetry()]
+display-name: failedLaunchCleansOnlyPreparedTemporarySessionAndAllowsRetry()
+]]></system-out>
+</testcase>
+<testcase name="refusesCyclicAndDanglingLinks()" classname="org.securemail.client.safeweb.TorBrowserInstallerTest" time="0.036">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserInstallerTest]/[method:refusesCyclicAndDanglingLinks()]
+display-name: refusesCyclicAndDanglingLinks()
+]]></system-out>
+</testcase>
+<testcase name="modernIdentityBackupPreservesKdf()" classname="org.securemail.client.LetterTest" time="0.706">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.LetterTest]/[method:modernIdentityBackupPreservesKdf()]
+display-name: modernIdentityBackupPreservesKdf()
+]]></system-out>
+</testcase>
+<testcase name="updateHostnameUsesLoopbackSocksRemoteDnsOnly()" classname="org.securemail.client.update.UpdateTransportTest" time="0.046">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.update.UpdateTransportTest]/[method:updateHostnameUsesLoopbackSocksRemoteDnsOnly()]
+display-name: updateHostnameUsesLoopbackSocksRemoteDnsOnly()
+]]></system-out>
+</testcase>
+<testcase name="sanitizingPixelsBeforeSigningRemovesEmbeddedImageMetadata()" classname="org.securemail.client.storage.PublicProfileCacheTest" time="0.326">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.PublicProfileCacheTest]/[method:sanitizingPixelsBeforeSigningRemovesEmbeddedImageMetadata()]
+display-name: sanitizingPixelsBeforeSigningRemovesEmbeddedImageMetadata()
+]]></system-out>
+</testcase>
+<testcase name="rejectsWeakSha1DetachedSignature()" classname="org.securemail.client.safeweb.TorBrowserSignatureTest" time="0.026">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserSignatureTest]/[method:rejectsWeakSha1DetachedSignature()]
+display-name: rejectsWeakSha1DetachedSignature()
+]]></system-out>
+</testcase>
+<testcase name="wrongAckTokenAndRollbackPreventInstalledLetter()" classname="org.securemail.client.update.UpdateEventsTest" time="0.017">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.update.UpdateEventsTest]/[method:wrongAckTokenAndRollbackPreventInstalledLetter()]
+display-name: wrongAckTokenAndRollbackPreventInstalledLetter()
+]]></system-out>
+</testcase>
+<testcase name="aggregateLimitAndDuplicates()" classname="org.securemail.client.AttachmentsTest" time="0.538">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.AttachmentsTest]/[method:aggregateLimitAndDuplicates()]
+display-name: aggregateLimitAndDuplicates()
+]]></system-out>
+</testcase>
+<testcase name="productionPinCannotBeReplacedByCallerProvidedKey()" classname="org.securemail.client.safeweb.TorBrowserSignatureTest" time="0.052">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserSignatureTest]/[method:productionPinCannotBeReplacedByCallerProvidedKey()]
+display-name: productionPinCannotBeReplacedByCallerProvidedKey()
+]]></system-out>
+</testcase>
+<testcase name="backendCannotReleaseOwnershipWhileItsProcessRemainsAlive()" classname="org.securemail.client.safeweb.SafeWebProcessTest" time="0.043">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebProcessTest]/[method:backendCannotReleaseOwnershipWhileItsProcessRemainsAlive()]
+display-name: backendCannotReleaseOwnershipWhileItsProcessRemainsAlive()
+]]></system-out>
+</testcase>
+<testcase name="rejectsRevokedSigningSubkey()" classname="org.securemail.client.safeweb.TorBrowserSignatureTest" time="0.022">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserSignatureTest]/[method:rejectsRevokedSigningSubkey()]
+display-name: rejectsRevokedSigningSubkey()
+]]></system-out>
+</testcase>
+<testcase name="actualOsClockSupportsProcessRestartAndUsesNoWallClockAsItsOnlySource()" classname="org.securemail.client.LifecycleSecurityTest" time="0.027">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.LifecycleSecurityTest]/[method:actualOsClockSupportsProcessRestartAndUsesNoWallClockAsItsOnlySource()]
+display-name: actualOsClockSupportsProcessRestartAndUsesNoWallClockAsItsOnlySource()
+]]></system-out>
+</testcase>
+<testcase name="authenticatesBinaryBytesAndReturnsExactHash()" classname="org.securemail.client.safeweb.TorBrowserSignatureTest" time="0.122">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserSignatureTest]/[method:authenticatesBinaryBytesAndReturnsExactHash()]
+display-name: authenticatesBinaryBytesAndReturnsExactHash()
+]]></system-out>
+</testcase>
+<testcase name="expiredEnvelopeNeverExposesBodyToLegacyAccountKey()" classname="org.securemail.client.LifecycleSecurityTest" time="0.014">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.LifecycleSecurityTest]/[method:expiredEnvelopeNeverExposesBodyToLegacyAccountKey()]
+display-name: expiredEnvelopeNeverExposesBodyToLegacyAccountKey()
+]]></system-out>
+</testcase>
+<testcase name="rejectsFutureSignature()" classname="org.securemail.client.safeweb.TorBrowserSignatureTest" time="0.022">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserSignatureTest]/[method:rejectsFutureSignature()]
+display-name: rejectsFutureSignature()
+]]></system-out>
+</testcase>
+<testcase name="newlyAvailableFeedBelowRememberedFloorIsPolicyFailure()" classname="org.securemail.client.update.UpdateSecurityTest" time="0.016">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.update.UpdateSecurityTest]/[method:newlyAvailableFeedBelowRememberedFloorIsPolicyFailure()]
+display-name: newlyAvailableFeedBelowRememberedFloorIsPolicyFailure()
+]]></system-out>
+</testcase>
+<testcase name="pngJpegNormalizeToBoundedPngAndRejectOtherFormats()" classname="org.securemail.client.storage.AvatarPresetTest" time="0.082">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.AvatarPresetTest]/[method:pngJpegNormalizeToBoundedPngAndRejectOtherFormats()]
+display-name: pngJpegNormalizeToBoundedPngAndRejectOtherFormats()
+]]></system-out>
+</testcase>
+<testcase name="changedJsonAndUnparseableUnsignedDataFailSignatureFirst()" classname="org.securemail.client.update.UpdateSecurityTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.update.UpdateSecurityTest]/[method:changedJsonAndUnparseableUnsignedDataFailSignatureFirst()]
+display-name: changedJsonAndUnparseableUnsignedDataFailSignatureFirst()
+]]></system-out>
+</testcase>
+<testcase name="failedStartupRetainsControllerAndFilesWhenCleanupCannotStopOwnedChild()" classname="org.securemail.client.safeweb.LinuxSafeWebSandboxTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.LinuxSafeWebSandboxTest]/[method:failedStartupRetainsControllerAndFilesWhenCleanupCannotStopOwnedChild()]
+display-name: failedStartupRetainsControllerAndFilesWhenCleanupCannotStopOwnedChild()
+]]></system-out>
+</testcase>
+<testcase name="signedOldFeedIsNotATransportErrorAndCannotDownloadOrLowerFloor()" classname="org.securemail.client.update.UpdateSecurityTest" time="0.019">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.update.UpdateSecurityTest]/[method:signedOldFeedIsNotATransportErrorAndCannotDownloadOrLowerFloor()]
+display-name: signedOldFeedIsNotATransportErrorAndCannotDownloadOrLowerFloor()
+]]></system-out>
+</testcase>
+<testcase name="bodySubjectSenderDirectionAndProtectionFiltersUseRealPackets()" classname="org.securemail.client.storage.LocalMailSearch200Test" time="1.049">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.LocalMailSearch200Test]/[method:bodySubjectSenderDirectionAndProtectionFiltersUseRealPackets()]
+display-name: bodySubjectSenderDirectionAndProtectionFiltersUseRealPackets()
+]]></system-out>
+</testcase>
+<testcase name="tamperingClearsSessionAndExplicitEndDeletesSecret()" classname="org.securemail.client.security.RememberedLoginTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.security.RememberedLoginTest]/[method:tamperingClearsSessionAndExplicitEndDeletesSecret()]
+display-name: tamperingClearsSessionAndExplicitEndDeletesSecret()
+]]></system-out>
+</testcase>
+<testcase name="binaryChangedWrongSizeAndTraversalRejected()" classname="org.securemail.client.update.UpdateSecurityTest" time="0.047">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.update.UpdateSecurityTest]/[method:binaryChangedWrongSizeAndTraversalRejected()]
+display-name: binaryChangedWrongSizeAndTraversalRejected()
+]]></system-out>
+</testcase>
+<testcase name="invalidRuntimeSignatureCreatesNoAnnouncementOrFloor()" classname="org.securemail.client.update.UpdateSecurityTest" time="0.02">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.update.UpdateSecurityTest]/[method:invalidRuntimeSignatureCreatesNoAnnouncementOrFloor()]
+display-name: invalidRuntimeSignatureCreatesNoAnnouncementOrFloor()
+]]></system-out>
+</testcase>
+<testcase name="knownContainerRollbackIsRejected()" classname="org.securemail.client.archive.ArchiveTest" time="0.6">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.archive.ArchiveTest]/[method:knownContainerRollbackIsRejected()]
+display-name: knownContainerRollbackIsRejected()
+]]></system-out>
+</testcase>
+<testcase name="missingOrDamagedLedgerBlocksOnlyExpiringMail()" classname="org.securemail.client.LifecycleSecurityTest" time="0.28">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.LifecycleSecurityTest]/[method:missingOrDamagedLedgerBlocksOnlyExpiringMail()]
+display-name: missingOrDamagedLedgerBlocksOnlyExpiringMail()
+]]></system-out>
+</testcase>
+<testcase name="repairOperatesOnCopyAndPreservesOriginal()" classname="org.securemail.client.archive.ArchiveTest" time="1.217">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.archive.ArchiveTest]/[method:repairOperatesOnCopyAndPreservesOriginal()]
+display-name: repairOperatesOnCopyAndPreservesOriginal()
+]]></system-out>
+</testcase>
+<testcase name="beforeVersionOpen200SnapshotsRealKeysMailArchiveAndAppearanceWithoutRewritingSources()" classname="org.securemail.client.storage.NavigationMigration200Test" time="1.623">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.NavigationMigration200Test]/[method:beforeVersionOpen200SnapshotsRealKeysMailArchiveAndAppearanceWithoutRewritingSources()]
+display-name: beforeVersionOpen200SnapshotsRealKeysMailArchiveAndAppearanceWithoutRewritingSources()
+]]></system-out>
+</testcase>
+<testcase name="staleCleanupRequiresExclusiveLockAndPreservesNormalSession()" classname="org.securemail.client.safeweb.SafeWebSessionsTest" time="0.078">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebSessionsTest]/[method:staleCleanupRequiresExclusiveLockAndPreservesNormalSession()]
+display-name: staleCleanupRequiresExclusiveLockAndPreservesNormalSession()
+]]></system-out>
+</testcase>
+<testcase name="rejectsModifiedDistribution()" classname="org.securemail.client.safeweb.TorBrowserSignatureTest" time="0.032">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserSignatureTest]/[method:rejectsModifiedDistribution()]
+display-name: rejectsModifiedDistribution()
+]]></system-out>
+</testcase>
+<testcase name="displayLeaseStopsItsChildWhenControllerPipeCloses()" classname="org.securemail.client.safeweb.LinuxSafeWebSandboxTest" time="0.108">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.LinuxSafeWebSandboxTest]/[method:displayLeaseStopsItsChildWhenControllerPipeCloses()]
+display-name: displayLeaseStopsItsChildWhenControllerPipeCloses()
+]]></system-out>
+</testcase>
+<testcase name="protectedContentInsideUnchangedE2eeAndAttachmentAndOldContent()" classname="org.securemail.client.LetterTest" time="1.584">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.LetterTest]/[method:protectedContentInsideUnchangedE2eeAndAttachmentAndOldContent()]
+display-name: protectedContentInsideUnchangedE2eeAndAttachmentAndOldContent()
+]]></system-out>
+</testcase>
+<testcase name="layoutsReorderRequiredActionsAndRetainSettingsAccess()" classname="org.securemail.client.appearance.AppearanceTest" time="0.013">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.appearance.AppearanceTest]/[method:layoutsReorderRequiredActionsAndRetainSettingsAccess()]
+display-name: layoutsReorderRequiredActionsAndRetainSettingsAccess()
+]]></system-out>
+</testcase>
+<testcase name="automaticEncryptedBackupAndMerge()" classname="org.securemail.client.archive.ArchiveTest" time="0.913">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.archive.ArchiveTest]/[method:automaticEncryptedBackupAndMerge()]
+display-name: automaticEncryptedBackupAndMerge()
+]]></system-out>
+</testcase>
+<testcase name="distinctVaultKeyAndVerifiedFullRekey()" classname="org.securemail.client.MigrationTest" time="2.692">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.MigrationTest]/[method:distinctVaultKeyAndVerifiedFullRekey()]
+display-name: distinctVaultKeyAndVerifiedFullRekey()
+]]></system-out>
+</testcase>
+<testcase name="arbitraryHostsIpsCredentialsHttpAndPortsAreRejected()" classname="org.securemail.client.update.UpdateTransportTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.update.UpdateTransportTest]/[method:arbitraryHostsIpsCredentialsHttpAndPortsAreRejected()]
+display-name: arbitraryHostsIpsCredentialsHttpAndPortsAreRejected()
+]]></system-out>
+</testcase>
+<testcase name="downgradeAndSignedSameVersionReplacementRejected()" classname="org.securemail.client.update.UpdateSecurityTest" time="0.04">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.update.UpdateSecurityTest]/[method:downgradeAndSignedSameVersionReplacementRejected()]
+display-name: downgradeAndSignedSameVersionReplacementRejected()
+]]></system-out>
+</testcase>
+<testcase name="isolatesNetworkAndOnlyExposesDedicatedFiles()" classname="org.securemail.client.safeweb.LinuxSafeWebSandboxTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.LinuxSafeWebSandboxTest]/[method:isolatesNetworkAndOnlyExposesDedicatedFiles()]
+display-name: isolatesNetworkAndOnlyExposesDedicatedFiles()
+]]></system-out>
+</testcase>
+<testcase name="durableAckDedupTtlAcrossRestartAndNoPlaintextFiles()" classname="org.securemail.client.StorageTest" time="0.82">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.StorageTest]/[method:durableAckDedupTtlAcrossRestartAndNoPlaintextFiles()]
+display-name: durableAckDedupTtlAcrossRestartAndNoPlaintextFiles()
+]]></system-out>
+</testcase>
+<testcase name="protectedReplyUsesNewIndependentManualSecretsAndFreshSaltNonce()" classname="org.securemail.client.ReplyContentTest" time="2.41">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ReplyContentTest]/[method:protectedReplyUsesNewIndependentManualSecretsAndFreshSaltNonce()]
+display-name: protectedReplyUsesNewIndependentManualSecretsAndFreshSaltNonce()
+]]></system-out>
+</testcase>
+<testcase name="durableEventRemainsVerifiableAfterItsOuterRetryWasRewrapped()" classname="org.securemail.client.LifecycleSecurityTest" time="0.009">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.LifecycleSecurityTest]/[method:durableEventRemainsVerifiableAfterItsOuterRetryWasRewrapped()]
+display-name: durableEventRemainsVerifiableAfterItsOuterRetryWasRewrapped()
+]]></system-out>
+</testcase>
+<testcase name="customSecretDirectoriesInSystemMountsAreRejectedEvenThroughSymlinks()" classname="org.securemail.client.safeweb.LinuxSafeWebSandboxTest" time="0.009">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.LinuxSafeWebSandboxTest]/[method:customSecretDirectoriesInSystemMountsAreRejectedEvenThroughSymlinks()]
+display-name: customSecretDirectoriesInSystemMountsAreRejectedEvenThroughSymlinks()
+]]></system-out>
+</testcase>
+<testcase name="rejectsSourceSymlinkWithoutFollowingSecret()" classname="org.securemail.client.safeweb.SafeWebDownloadTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebDownloadTest]/[method:rejectsSourceSymlinkWithoutFollowingSecret()]
+display-name: rejectsSourceSymlinkWithoutFollowingSecret()
+]]></system-out>
+</testcase>
+<testcase name="customPresetsPersistApplyRenameImportExportAndDelete()" classname="org.securemail.client.storage.AvatarPresetTest" time="0.007">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.AvatarPresetTest]/[method:customPresetsPersistApplyRenameImportExportAndDelete()]
+display-name: customPresetsPersistApplyRenameImportExportAndDelete()
+]]></system-out>
+</testcase>
+<testcase name="scheduleHandlesMidnightAndOsMode()" classname="org.securemail.client.appearance.AppearanceTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.appearance.AppearanceTest]/[method:scheduleHandlesMidnightAndOsMode()]
+display-name: scheduleHandlesMidnightAndOsMode()
+]]></system-out>
+</testcase>
+<testcase name="authenticatedTemplateUpgradeKeepsOnlyBrowserData()" classname="org.securemail.client.safeweb.SafeWebSessionsTest" time="0.033">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebSessionsTest]/[method:authenticatedTemplateUpgradeKeepsOnlyBrowserData()]
+display-name: authenticatedTemplateUpgradeKeepsOnlyBrowserData()
+]]></system-out>
+</testcase>
+<testcase name="cancellationCannotReachReadyOrModifyInstallation()" classname="org.securemail.client.update.UpdateSecurityTest" time="0.044">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.update.UpdateSecurityTest]/[method:cancellationCannotReachReadyOrModifyInstallation()]
+display-name: cancellationCannotReachReadyOrModifyInstallation()
+]]></system-out>
+</testcase>
+<testcase name="mismatchedOrAmbiguousRangeRejected()" classname="org.securemail.client.update.ResumeRangeTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.update.ResumeRangeTest]/[method:mismatchedOrAmbiguousRangeRejected()]
+display-name: mismatchedOrAmbiguousRangeRejected()
+]]></system-out>
+</testcase>
+<testcase name="refusesAbsolutePathAndTraversalBeforeOpeningFile()" classname="org.securemail.client.safeweb.TorBrowserInstallerTest" time="0.327">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserInstallerTest]/[method:refusesAbsolutePathAndTraversalBeforeOpeningFile()]
+display-name: refusesAbsolutePathAndTraversalBeforeOpeningFile()
+]]></system-out>
+</testcase>
+<testcase name="acceptsWebUrlsWithoutExecutingOrResolvingThem()" classname="org.securemail.client.safeweb.SafeWebTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebTest]/[method:acceptsWebUrlsWithoutExecutingOrResolvingThem()]
+display-name: acceptsWebUrlsWithoutExecutingOrResolvingThem()
+]]></system-out>
+</testcase>
+<testcase name="allControlledStateSurvivesRestoreAndTamperingStopsIt()" classname="org.securemail.client.storage.ProfileSnapshotTest" time="0.441">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.ProfileSnapshotTest]/[method:allControlledStateSurvivesRestoreAndTamperingStopsIt()]
+display-name: allControlledStateSurvivesRestoreAndTamperingStopsIt()
+]]></system-out>
+</testcase>
+<testcase name="wallRollbackCannotExtendCountdownAndProfileRestoreDoesNotResetLedger()" classname="org.securemail.client.LifecycleSecurityTest" time="0.225">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.LifecycleSecurityTest]/[method:wallRollbackCannotExtendCountdownAndProfileRestoreDoesNotResetLedger()]
+display-name: wallRollbackCannotExtendCountdownAndProfileRestoreDoesNotResetLedger()
+]]></system-out>
+</testcase>
+<testcase name="encryptedHistoryBackupRestoresOriginalIdentityAndPassword()" classname="org.securemail.client.AutomaticEncryptionTest" time="0.941">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.AutomaticEncryptionTest]/[method:encryptedHistoryBackupRestoresOriginalIdentityAndPassword()]
+display-name: encryptedHistoryBackupRestoresOriginalIdentityAndPassword()
+]]></system-out>
+</testcase>
+<testcase name="previewDoesNotCreatePlaintextImageIoCacheEvenWhenGlobalCacheIsEnabled()" classname="org.securemail.client.archive.ArchiveDocumentsTest" time="0.212">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.archive.ArchiveDocumentsTest]/[method:previewDoesNotCreatePlaintextImageIoCacheEvenWhenGlobalCacheIsEnabled()]
+display-name: previewDoesNotCreatePlaintextImageIoCacheEvenWhenGlobalCacheIsEnabled()
+]]></system-out>
+</testcase>
+<testcase name="cleanupNeverFollowsAnExternalSymlink()" classname="org.securemail.client.safeweb.SafeWebSessionsTest" time="0.016">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebSessionsTest]/[method:cleanupNeverFollowsAnExternalSymlink()]
+display-name: cleanupNeverFollowsAnExternalSymlink()
+]]></system-out>
+</testcase>
+<testcase name="privatePathChecksResolveMissingChildrenOfSymlinkAliases()" classname="org.securemail.client.safeweb.SafeWebProcessTest" time="0.026">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebProcessTest]/[method:privatePathChecksResolveMissingChildrenOfSymlinkAliases()]
+display-name: privatePathChecksResolveMissingChildrenOfSymlinkAliases()
+]]></system-out>
+</testcase>
+<testcase name="duplicateStartsCannotCreateSecondAttempt()" classname="org.securemail.client.ConnectionStatusTest" time="0.013">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ConnectionStatusTest]/[method:duplicateStartsCannotCreateSecondAttempt()]
+display-name: duplicateStartsCannotCreateSecondAttempt()
+]]></system-out>
+</testcase>
+<testcase name="guestBootstrapIsPackagedAndUsesDataRatherThanCommandInterpolation()" classname="org.securemail.client.safeweb.WindowsSafeWebSandboxTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.WindowsSafeWebSandboxTest]/[method:guestBootstrapIsPackagedAndUsesDataRatherThanCommandInterpolation()]
+display-name: guestBootstrapIsPackagedAndUsesDataRatherThanCommandInterpolation()
+]]></system-out>
+</testcase>
+<testcase name="rawTransportMessagesNeverEnterLogs()" classname="org.securemail.client.FastTorTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.FastTorTest]/[method:rawTransportMessagesNeverEnterLogs()]
+display-name: rawTransportMessagesNeverEnterLogs()
+]]></system-out>
+</testcase>
+<testcase name="bothAttemptsFailClosed()" classname="org.securemail.client.TorConnectionTest" time="0.008">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.TorConnectionTest]/[method:bothAttemptsFailClosed()]
+display-name: bothAttemptsFailClosed()
+]]></system-out>
+</testcase>
+<testcase name="persistentProfileAndTemporaryCleanupAreSeparate()" classname="org.securemail.client.safeweb.SafeWebSessionsTest" time="0.027">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebSessionsTest]/[method:persistentProfileAndTemporaryCleanupAreSeparate()]
+display-name: persistentProfileAndTemporaryCleanupAreSeparate()
+]]></system-out>
+</testcase>
+<testcase name="rejectsRevokedPrimaryKey()" classname="org.securemail.client.safeweb.TorBrowserSignatureTest" time="0.017">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserSignatureTest]/[method:rejectsRevokedPrimaryKey()]
+display-name: rejectsRevokedPrimaryKey()
+]]></system-out>
+</testcase>
+<testcase name="ciphertextTamperingAndIndexRepair()" classname="org.securemail.client.archive.ArchiveTest" time="0.23">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.archive.ArchiveTest]/[method:ciphertextTamperingAndIndexRepair()]
+display-name: ciphertextTamperingAndIndexRepair()
+]]></system-out>
+</testcase>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]
+display-name: JUnit Jupiter
+]]></system-out>
+</testsuite>

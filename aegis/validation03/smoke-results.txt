@@ -1,0 +1,9 @@
+43 JUnit tests passed (see XML).
+Mail GUI passed: inbox, compose, five themes, wrong password, FF1 live typing, close/reopen, TTL.
+Unchanged packaged relay 0.2.0: bidirectional protected letters, 2 MiB file, offline, ACK, dedup, TTL, no plaintext/private key. Loopback SOCKS harness; not Tor.
+Actual released 0.2.0 vault passed: identity, nickname, contact, old letter, pre-open encrypted backup.
+Actual Linux Tor/PT: direct timeout automatically transitioned; Lyrebird PT-v1 CMETHOD was registered on loopback; Snowflake reached 10% within short timeout; foreign Tor remained running; owned ports released. Public bootstrap 100% not verified.
+64 KiB body: seal 5.235 seconds; candidate 4.277 seconds.
+Relay process restart: queued packet delivered after restart, accounts preserved. Both client vaults reopened: contacts and protected reply preserved, expired inbox remained empty.
+Extracted 0.3.0 AppImage runtime: Tor/PT lifecycle test passed.
+Windows PE: seven ICON resources, GROUP_ICON, VERSIONINFO, MANIFEST, AMD64 and ASLR/NX; native Windows execution not tested.

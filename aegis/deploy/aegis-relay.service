@@ -1,0 +1,35 @@
+[Unit]
+Description=AEGIS private ciphertext relay
+After=network.target tor.service
+
+[Service]
+Type=simple
+User=aegis-relay
+Group=aegis-relay
+WorkingDirectory=/opt/aegis/relay
+ExecStart=/opt/aegis/relay/bin/relay-server serve /etc/aegis/relay.properties
+Restart=on-failure
+RestartSec=5
+UMask=0077
+StateDirectory=aegis-relay
+StateDirectoryMode=0700
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+RestrictAddressFamilies=AF_UNIX AF_INET
+IPAddressDeny=any
+IPAddressAllow=localhost
+CapabilityBoundingSet=
+LimitCORE=0
+TasksMax=64
+MemoryMax=384M
+LogRateLimitIntervalSec=30s
+LogRateLimitBurst=20
+
+[Install]
+WantedBy=multi-user.target

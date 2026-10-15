@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.securemail.client.TorControlTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-10-03T14:11:50.611Z" hostname="48d28442c77f" time="0.024">
+  <properties/>
+  <testcase name="safeCookieAuthenticatedBeforeAddOnion()" classname="org.securemail.client.TorControlTest" time="0.018"/>
+  <testcase name="refusesImpersonatedTorController()" classname="org.securemail.client.TorControlTest" time="0.005"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

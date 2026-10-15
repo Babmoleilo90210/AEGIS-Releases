@@ -19,6 +19,19 @@ class PublicDataTest {
   static final char[] PASSWORD="integration account passphrase".toCharArray();
   RelayConfig config(){return new RelayConfig(root.resolve("server/relay.db"),"127.0.0.1",0,604800000,1000000,8000000,256,8,true,Set.of());}
   NetworkService network(SocksHarness socks,LocalStore local){return new NetworkService(new TorTransport("127.0.0.1",socks.port()),SocksHarness.RELAY,80,local,1000000);}
+  @Test void avatarCrossAccountRefreshRemovalPrivacyAndOfflineRestart()throws Exception{
+    Clock clock=Clock.systemUTC();var cfg=config();byte[] latest;
+    try(var relay=new RelayStore(cfg,clock);var server=new RelayServer(cfg,relay,clock);var socks=new SocksHarness();var a=new LocalStore(root.resolve("a"),PASSWORD,clock,1000000,8000000);var b=new LocalStore(root.resolve("b"),PASSWORD,clock,1000000,8000000)){
+      server.start();socks.destinations.put(SocksHarness.RELAY,server.port());var na=network(socks,a);var nb=network(socks,b);na.authenticate("raven",PASSWORD,true);nb.authenticate("blackfox",PASSWORD,true);b.trust(nb.find("raven"));
+      var image=new java.awt.image.BufferedImage(24,24,java.awt.image.BufferedImage.TYPE_INT_RGB);var out=new java.io.ByteArrayOutputStream();javax.imageio.ImageIO.write(image,"png",out);byte[] first=AvatarCodec.normalize(out.toByteArray());long revision=clock.millis();
+      na.publishProfile(a.identity().profile("raven",revision,true,"avatar",first));b.cacheProfile(nb.profile("raven"));assertArrayEquals(first,b.avatar("raven"));
+      image.setRGB(0,0,0xffffff);out.reset();javax.imageio.ImageIO.write(image,"png",out);latest=AvatarCodec.normalize(out.toByteArray());na.publishProfile(a.identity().profile("raven",revision+1,true,"changed",latest));b.cacheProfile(nb.profile("raven"));assertArrayEquals(latest,b.avatar("raven"));assertFalse(Arrays.equals(first,latest));
+      na.publishProfile(a.identity().profile("raven",revision+2,false,"private",latest));b.cacheProfile(nb.profile("raven"));assertNull(b.avatar("raven"));
+      na.publishProfile(a.identity().profile("raven",revision+3,true,"removed",new byte[0]));b.cacheProfile(nb.profile("raven"));assertNull(b.avatar("raven"));
+      na.publishProfile(a.identity().profile("raven",revision+4,true,"restored",latest));b.cacheProfile(nb.profile("raven"));
+    }
+    try(var offline=new LocalStore(root.resolve("b"),PASSWORD,clock,1000000,8000000)){assertArrayEquals(latest,offline.avatar("raven"));}
+  }
   @Test void signedProfileIsOwnedHiddenReplayProtectedAndMutualFriendshipRevokesWithoutRemovingMail()throws Exception{
     var config=config();Clock clock=Clock.systemUTC();
     try(var relay=new RelayStore(config,clock);var server=new RelayServer(config,relay,clock);var socks=new SocksHarness();var a=new LocalStore(root.resolve("a"),PASSWORD,clock,1000000,8000000);var b=new LocalStore(root.resolve("b"),PASSWORD,clock,1000000,8000000)){

@@ -1,0 +1,11 @@
+.gradle/
+**/build/
+*.db
+*.db-*
+*.vault
+*.sm
+data/
+local-config/
+
+__pycache__/
+*.pyc

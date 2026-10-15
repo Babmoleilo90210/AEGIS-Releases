@@ -1,0 +1,29 @@
+.root { -fx-font-family: "DejaVu Sans"; -fx-font-size: 13px; -fx-base: #14181e; -fx-background: #111419; -fx-control-inner-background: #171d24; -fx-accent: #819eae; -fx-focus-color: #819eae; -fx-faint-focus-color: transparent; -fx-text-fill: #e5e8ec; }
+.shell, .scroll-pane, .scroll-pane > .viewport { -fx-background-color: #111419; }
+.topbar { -fx-padding: 21px 28px; -fx-border-color: transparent transparent #2b3139 transparent; -fx-background-color: #14181e; }
+.brand { -fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #e8ecf1; }
+.section-title { -fx-font-size: 14px; -fx-text-fill: #9ea9b8; }
+.hero-title { -fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #e9edf2; -fx-padding: 10px 0 2px 0; }
+.navigation { -fx-padding: 23px 12px; -fx-border-color: transparent #2b3139 transparent transparent; -fx-background-color: #14181e; }
+.nav-button { -fx-alignment: center-left; -fx-background-color: transparent; -fx-padding: 12px; }
+.nav-button:hover { -fx-background-color: #232a33; }
+.footer { -fx-padding: 12px 28px; -fx-border-color: #2b3139 transparent transparent transparent; }
+.footer .label { -fx-text-fill: #8f9eac; -fx-font-size: 11px; }
+.label { -fx-text-fill: #e2e6eb; }
+.muted, .field-label { -fx-text-fill: #94a1af; -fx-font-size: 12px; }
+.field-label { -fx-padding: 3px 0 0 0; }
+.warning { -fx-text-fill: #dfb36e; }
+.sender { -fx-font-size: 16px; -fx-font-weight: bold; }
+.mail-row { -fx-padding: 20px 0; -fx-border-color: transparent transparent #2a3038 transparent; }
+.button { -fx-background-color: #222a34; -fx-text-fill: #dce4ec; -fx-background-radius: 4; -fx-padding: 10px 15px; -fx-cursor: hand; }
+.button:hover { -fx-background-color: #313c49; }
+.button.primary { -fx-background-color: #abc1cc; -fx-text-fill: #132029; -fx-font-weight: bold; }
+.button.primary:hover { -fx-background-color: #bfd4df; }
+.text-field, .text-area, .combo-box { -fx-background-color: #181f27; -fx-border-color: #333e4b; -fx-border-radius: 4; -fx-background-radius: 4; -fx-prompt-text-fill: #758292; -fx-text-fill: #e4eaf0; }
+.text-field { -fx-padding: 10px; }
+.text-area .content { -fx-background-color: #181f27; }
+.combo-box .list-cell, .list-view .list-cell { -fx-text-fill: #dce4ec; -fx-background-color: #181f27; -fx-padding: 10px; }
+.list-view .list-cell:hover { -fx-background-color: #303e4b; }
+.dialog-pane, .dialog-pane .header-panel { -fx-background-color: #171d24; }
+.scroll-bar { -fx-background-color: #171d24; }
+.scroll-bar .thumb { -fx-background-color: #3b4652; }

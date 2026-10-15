@@ -7,4 +7,4 @@ deps=[f.resolve() for d in a.deps for f in d.glob('*.jar') if not f.name.startsw
 cp=os.pathsep.join(map(str,deps+list(out.glob('*.jar'))+[classes]))
 sources=sorted((root/'client-ui/src/smoke/java').rglob('*.java'));lst=out/'ui-tests.sources';lst.write_text('\n'.join('"'+str(v)+'"' for v in sources)+'\n')
 subprocess.run([str(a.jdk.resolve()/'bin/javac'),'--release','21','-encoding','UTF-8','-cp',cp,'-d',str(classes),'@'+str(lst)],check=True,timeout=120)
-subprocess.run([str(a.jdk.resolve()/'bin/java'),'-Xmx768m','-Daegis.native.root='+str(a.native_root.resolve()),'-Dprism.order=sw','-Dglass.platform=Monocle','-Dmonocle.platform=Headless','-Dheadless.geometry=1600x1200-32','-cp',cp,'org.securemail.ui.'+a.test],check=True,cwd=root,timeout=180)
+subprocess.run([str(a.jdk.resolve()/'bin/java'),'-Xmx768m','-Daegis.native.root='+str(a.native_root.resolve()),'-Dprism.order=sw','-Dquantum.multithreaded=false','-Dglass.platform=Monocle','-Dmonocle.platform=Headless','-Dheadless.geometry=1600x1200-32','-cp',cp,'org.securemail.ui.'+a.test],check=True,cwd=root,timeout=180)

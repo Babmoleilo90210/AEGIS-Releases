@@ -1,0 +1,14 @@
+{
+  "common-protocol/build.gradle": "efd4a2247fc0175fd3cb801fafd06583383ac9007351d7e15f3519c770cee47f",
+  "common-protocol/gradle.lockfile": "bf9ee25c7cf20529fcf8d3b2ed07a35c462bc9d71f69933ccf2babcb20792440",
+  "common-protocol/src/main/java/org/securemail/protocol/Binary.java": "f4d5759f11b5f762fe511f373a49cbe420adcfee8355ed451e51aa290ee46581",
+  "common-protocol/src/main/java/org/securemail/protocol/PacketCodec.java": "1152fc5541d7768dbb24b765cd08eb480b36e991363eda36f297db4a6e2f562f",
+  "common-protocol/src/main/java/org/securemail/protocol/Algorithm.java": "80fdfc48293e89243d7cd5a37ca99e6a370311dbe5417c4710580ad7700da87b",
+  "common-protocol/src/main/java/org/securemail/protocol/Receipt.java": "479c2bcd27710c18af443c8972e904d2f2eae83dbaf17a21f2dfe76d9a322486",
+  "common-protocol/src/main/java/org/securemail/protocol/EncryptedPacket.java": "203bd5aa081ac5cfad01565339975d3fdb8cdf2dddffa6f6e8cefd497a31e58c",
+  "common-protocol/src/main/java/org/securemail/protocol/Operation.java": "29a2dc2076a4665f33e14960c2a5f8fd0ee0d3f06b0c38ebe4b81014dbf58ce7",
+  "common-protocol/src/main/java/org/securemail/protocol/UserInfo.java": "bfaaa186f20d5bc3507451444b222c4eb0db4b22c0abcade06e4737f495db3e7",
+  "common-protocol/src/main/java/org/securemail/protocol/Route.java": "db9b52f5edaa2573e7ea78045de366f1623520d2f7f3da664868dfae0373505a",
+  "common-protocol/src/main/java/org/securemail/protocol/Limits.java": "e9b6929ad4a9229bfa826f73d29965b239b2e2c1764a7eef4ee3224102b46659",
+  "common-protocol/src/test/java/org/securemail/protocol/WireTest.java": "662d073dc4c2ac1ed8fa30319e08f219d021cc6898a9a4c16935f8e1be818e72"
+}

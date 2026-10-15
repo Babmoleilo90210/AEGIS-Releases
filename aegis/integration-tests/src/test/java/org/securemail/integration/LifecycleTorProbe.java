@@ -20,6 +20,11 @@ public final class LifecycleTorProbe {
     for(int attempt=1;attempt<=3;attempt++){refresh.run();try{var value=network.probe(peer);if(value!=null)return value;last=new java.io.IOException("Signed peer route not yet available");}catch(java.io.IOException notReady){last=notReady;}System.out.println("Staging signed capability attempt "+attempt+" not ready");}
     throw new java.io.IOException("Onion descriptor did not become available within three bounded probes",last);
   }
+  private static void warmRelay(ClientConfig config)throws Exception {
+    java.io.IOException last=null;
+    for(int attempt=1;attempt<=3;attempt++)try{RelayProbe.check(config);System.out.println("Staging Relay descriptor reachable");return;}catch(java.io.IOException unavailable){last=unavailable;System.out.println("Staging Relay descriptor attempt "+attempt+" not yet available");}
+    throw new java.io.IOException("Fresh Relay onion descriptor unavailable after three bounded probes",last);
+  }
   public static void main(String[] args)throws Exception {
     Path app=Path.of(args[0]).toAbsolutePath(),output=Path.of(args[1]).toAbsolutePath();Files.createDirectories(output);
     Path root=Files.createTempDirectory("AEGIS lifecycle onion staging ");System.setProperty("aegis.home",app.toString());System.setProperty("aegis.profile",root.toString());
@@ -28,7 +33,7 @@ public final class LifecycleTorProbe {
     try(var tor=new TorConnection(config);var rs=new RelayStore(relayConfig,clock);var server=new RelayServer(relayConfig,rs,clock);var a=new LocalStore(root.resolve("a"),password,clock,2_000_000,32_000_000);var b=new LocalStore(root.resolve("b"),password,clock,2_000_000,32_000_000)){
       TorTransport.requireAvailability(tor::ready);tor.start(Duration.ofSeconds(150),Duration.ofSeconds(300),(mode,n)->System.out.println("Staging Tor "+mode+" "+n+"%"));if(!tor.ready())throw new AssertionError("Tor unavailable");server.start();
       try(var relayControl=new TorControl(config.torControlPort(),config.torCookiePath());var ac=new TorControl(config.torControlPort(),config.torCookiePath());var bc=new TorControl(config.torControlPort(),config.torCookiePath())){
-        String relayOnion=relayControl.publish(server.port());var na=new NetworkService(new TorTransport("127.0.0.1",config.torSocksPort()),relayOnion,80,a,2_000_000);var nb=new NetworkService(new TorTransport("127.0.0.1",config.torSocksPort()),relayOnion,80,b,2_000_000);
+        String relayOnion=relayControl.publish(server.port());warmRelay(config.withRelay(relayOnion));var na=new NetworkService(new TorTransport("127.0.0.1",config.torSocksPort()),relayOnion,80,a,2_000_000);var nb=new NetworkService(new TorTransport("127.0.0.1",config.torSocksPort()),relayOnion,80,b,2_000_000);
         na.authenticate("raven",password,true);nb.authenticate("blackfox",password,true);UserInfo au=nb.find("raven"),bu=na.find("blackfox");a.trust(bu);b.trust(au);var af=new LocalFeatures(a);var bf=new LocalFeatures(b);
         try(var al=new LifecycleService(a,af,2_000_000);var bl=new LifecycleService(b,bf,2_000_000);var pa=new PeerServer(0,a,2_000_000,al::accept,al::capabilities);var pb=new PeerServer(0,b,2_000_000,bl::accept,bl::capabilities)){
           na.packetAcceptor(al::accept);nb.packetAcceptor(bl::accept);al.network(na);bl.network(nb);pa.start();pb.start();String ao=ac.publish(pa.port()),bo=bc.publish(pb.port());na.publish(a.identity().route(ao,81,a.now()+90_000));nb.publish(b.identity().route(bo,81,b.now()+90_000));

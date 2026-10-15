@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.securemail.relay.OpenRegistrationTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-10-03T14:12:02.041Z" hostname="48d28442c77f" time="0.812">
+  <properties/>
+  <testcase name="openAcceptsUnlistedNicknameAndEnforcesUniqueAndLimit()" classname="org.securemail.relay.OpenRegistrationTest" time="0.807"/>
+  <testcase name="closedRejectsWithoutCreatingUser()" classname="org.securemail.relay.OpenRegistrationTest" time="0.005"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

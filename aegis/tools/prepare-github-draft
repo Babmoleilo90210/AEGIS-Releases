@@ -1,0 +1,38 @@
+#!/usr/bin/env python3
+"""Print a reviewable draft command; execute ONLY with --create-draft. Never publish."""
+import argparse
+from pathlib import Path
+import shlex
+import shutil
+import subprocess
+import sys
+from release_manifest import REPOSITORY, entries, exact_bytes, parse_manifest, verify_assets
+
+parser = argparse.ArgumentParser(description='Prepare a GitHub Release draft; no signing or publish operation')
+parser.add_argument('--assets', type=Path, default=Path.cwd())
+parser.add_argument('--target', required=True, help='Verified release-repository commit SHA (not application source provenance)')
+parser.add_argument('--create-draft', action='store_true')
+args = parser.parse_args()
+try:
+    import re
+    if not re.fullmatch('[a-f0-9]{40}', args.target):
+        raise ValueError('A verified full target commit SHA is required')
+    root = args.assets.resolve()
+    document = parse_manifest(exact_bytes(root / 'updates/stable.json'), '1.0.0')
+    verify_assets(document, root)
+    notes = root / 'RELEASE-NOTES.md'
+    if not notes.is_file() or notes.is_symlink():
+        raise ValueError('Release notes missing')
+    command = ['gh', 'release', 'create', document['tag'], '--repo', REPOSITORY,
+               '--target', args.target, '--draft', '--title', 'АЕГИС ' + document['version'] + ' — кандидат',
+               '--notes-file', str(notes), *[str(root / item['fileName']) for item in entries(document)]]
+    print(shlex.join(command))
+    if args.create_draft:
+        if shutil.which('gh') is None:
+            raise ValueError('GitHub CLI not installed on the release operator computer')
+        subprocess.run(command, check=True)
+    else:
+        print('Preview only. No GitHub mutation, signing, or publication performed.')
+except Exception as error:
+    print('Draft preparation failed: ' + str(error), file=sys.stderr)
+    sys.exit(1)

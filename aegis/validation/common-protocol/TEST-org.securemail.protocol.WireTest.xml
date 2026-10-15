@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.securemail.protocol.WireTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-10-03T14:11:54.026Z" hostname="48d28442c77f" time="0.032">
+  <properties/>
+  <testcase name="strictUtf8()" classname="org.securemail.protocol.WireTest" time="0.014"/>
+  <testcase name="unsupportedVersionRejected()" classname="org.securemail.protocol.WireTest" time="0.001"/>
+  <testcase name="oversizedLengthRejectedBeforeAllocation()" classname="org.securemail.protocol.WireTest" time="0.001"/>
+  <testcase name="onlyOnionV3()" classname="org.securemail.protocol.WireTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

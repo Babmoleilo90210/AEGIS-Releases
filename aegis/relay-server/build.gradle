@@ -1,0 +1,18 @@
+plugins { id 'application' }
+dependencies {
+    implementation project(':common-protocol')
+    implementation 'com.password4j:password4j:1.8.4'
+    implementation 'org.xerial:sqlite-jdbc:3.53.4.0'
+    runtimeOnly 'org.slf4j:slf4j-nop:2.0.17'
+}
+application {
+    mainClass='org.securemail.relay.RelayMain'
+    applicationDefaultJvmArgs=['-Xms32m','-Xmx256m','-XX:+DisableAttachMechanism','-XX:-HeapDumpOnOutOfMemoryError']
+}
+tasks.register('verifyIsolation') {
+    doLast {
+        def names=configurations.runtimeClasspath.files.collect { it.name }
+        assert !names.any { it.contains('client-') || it.contains('bcprov') || it.contains('tink-') || it.contains('javafx') }
+    }
+}
+check.dependsOn verifyIsolation

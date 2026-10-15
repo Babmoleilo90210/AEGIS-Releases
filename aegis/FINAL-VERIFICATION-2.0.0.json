@@ -1,0 +1,377 @@
+{
+  "version": "2.0.0",
+  "productionReady": false,
+  "SW": {
+    "SW-01": {
+      "status": "NOT_RUN",
+      "evidence": "Actual official Tor Browser HTTPS/network capture not performed"
+    },
+    "SW-02": {
+      "status": "NOT_RUN",
+      "evidence": "Actual browser DNS capture unavailable; Tor/PT bootstrap DNS must be distinguished"
+    },
+    "SW-03": {
+      "status": "NOT_RUN",
+      "evidence": "Actual WebRTC/IP-leak test unavailable"
+    },
+    "SW-04": {
+      "status": "NOT_RUN",
+      "evidence": "Actual Tor Browser onion navigation unavailable"
+    },
+    "SW-05": {
+      "status": "AUTOMATED_PARTIAL",
+      "evidence": "Linux mounts/private path guards and Windows mapping policy tested; native key sentinel test NOT_RUN"
+    },
+    "SW-06": {
+      "status": "AUTOMATED_PARTIAL",
+      "evidence": "Archive path guards and separate snapshots tested; native archive sentinel test NOT_RUN"
+    },
+    "SW-07": {
+      "status": "AUTOMATED_PARTIAL",
+      "evidence": "Persistent/temporary separation, atomic copies, external receipts and tamper rejection tested; official browser profiles NOT_RUN"
+    },
+    "SW-08": {
+      "status": "CODE_REVIEW_ONLY",
+      "evidence": "Launcher takes paths/URL; no identity/password/archive/messenger-Tor objects; native inspection NOT_RUN"
+    },
+    "SW-09": {
+      "status": "AUTOMATED_PARTIAL",
+      "evidence": "URL allowlist rejects commands/local hosts/credentials/control characters; native handoff NOT_RUN"
+    },
+    "SW-10": {
+      "status": "AUTOMATED_PARTIAL",
+      "evidence": "Single URL argv or fixed guest Base64 data; static bootstrap tests; native command-injection test NOT_RUN"
+    },
+    "SW-11": {
+      "status": "AUTOMATED_PARTIAL",
+      "evidence": "Guarded handles, mutation/link/hardlink/limit and snapshot cleanup tested; actual browser download/import NOT_RUN"
+    },
+    "SW-12": {
+      "status": "CODE_REVIEW_ONLY",
+      "evidence": "No download auto-execution; explicit snapshot import via EncryptedArchive; browser E2E NOT_RUN"
+    },
+    "SW-13": {
+      "status": "CRYPTO_TESTS_PARTIAL",
+      "evidence": "Real disposable RSA signatures and real pinned Tor public key tested; actual official archive installation NOT_RUN"
+    },
+    "SW-14": {
+      "status": "NOT_RUN",
+      "evidence": "Official MAR update/re-attestation cycle not executed"
+    },
+    "SW-15": {
+      "status": "NOT_RUN",
+      "evidence": "Separate browser Tor routing reviewed; concurrent live messenger/browser network test unavailable"
+    },
+    "SW-16": {
+      "status": "LIFECYCLE_TESTS_PARTIAL",
+      "evidence": "Owned harmless subprocess unit tests and retained ownership checks; actual Tor Browser/VM stop NOT_RUN"
+    },
+    "SW-17": {
+      "status": "CODE_REVIEW_ONLY",
+      "evidence": "Browser output discarded; fixed statuses; actual browser diagnostic inspection NOT_RUN"
+    },
+    "SW-18": {
+      "status": "POLICY_TESTS_PARTIAL",
+      "evidence": "Private display, bounded nonce-bound guest data and host VM-ID stop checks; native IPC tests NOT_RUN"
+    },
+    "SW-19": {
+      "status": "POLICY_TESTS_PARTIAL",
+      "evidence": "Private Linux display and disabled Windows clipboard mapping; native clipboard sentinel NOT_RUN"
+    },
+    "SW-20": {
+      "status": "SESSION_TESTS_PARTIAL",
+      "evidence": "Temporary cleanup, retained ownership and abandoned-VM recovery implemented/tested in parts; native crash cleanup NOT_RUN"
+    }
+  },
+  "UI": {
+    "UI-01": {
+      "status": "HEADLESS_PARTIAL",
+      "evidence": "Interface200Smoke and synthetic JavaFX screenshots; native target acceptance NOT_RUN"
+    },
+    "UI-02": {
+      "status": "HEADLESS_PARTIAL",
+      "evidence": "Interface200Smoke and synthetic JavaFX screenshots; native target acceptance NOT_RUN"
+    },
+    "UI-03": {
+      "status": "HEADLESS_PARTIAL",
+      "evidence": "Interface200Smoke and synthetic JavaFX screenshots; native target acceptance NOT_RUN"
+    },
+    "UI-04": {
+      "status": "HEADLESS_PARTIAL",
+      "evidence": "Interface200Smoke and synthetic JavaFX screenshots; native target acceptance NOT_RUN"
+    },
+    "UI-05": {
+      "status": "HEADLESS_PARTIAL",
+      "evidence": "Interface200Smoke and synthetic JavaFX screenshots; native target acceptance NOT_RUN"
+    },
+    "UI-06": {
+      "status": "HEADLESS_PARTIAL",
+      "evidence": "Interface200Smoke and synthetic JavaFX screenshots; native target acceptance NOT_RUN"
+    },
+    "UI-07": {
+      "status": "HEADLESS_PARTIAL",
+      "evidence": "Interface200Smoke and synthetic JavaFX screenshots; native target acceptance NOT_RUN"
+    },
+    "UI-08": {
+      "status": "HEADLESS_PARTIAL",
+      "evidence": "Interface200Smoke and synthetic JavaFX screenshots; native target acceptance NOT_RUN"
+    },
+    "UI-09": {
+      "status": "HEADLESS_PARTIAL",
+      "evidence": "Interface200Smoke and synthetic JavaFX screenshots; native target acceptance NOT_RUN"
+    },
+    "UI-10": {
+      "status": "INTEGRATION_PARTIAL",
+      "evidence": "PublicDataTest avatarCrossAccountRefreshRemovalPrivacyAndOfflineRestart; controlled SOCKS harness, not Tor"
+    },
+    "UI-11": {
+      "status": "HEADLESS_PARTIAL",
+      "evidence": "Interface200Smoke and synthetic JavaFX screenshots; native target acceptance NOT_RUN"
+    },
+    "UI-12": {
+      "status": "HEADLESS_PARTIAL",
+      "evidence": "Interface200Smoke and synthetic JavaFX screenshots; native target acceptance NOT_RUN"
+    },
+    "UI-13": {
+      "status": "HEADLESS_PARTIAL",
+      "evidence": "Interface200Smoke and synthetic JavaFX screenshots; native target acceptance NOT_RUN"
+    },
+    "UI-14": {
+      "status": "HEADLESS_PARTIAL",
+      "evidence": "Interface200Smoke and synthetic JavaFX screenshots; native target acceptance NOT_RUN"
+    },
+    "UI-15": {
+      "status": "HEADLESS_PARTIAL",
+      "evidence": "Interface200Smoke and synthetic JavaFX screenshots; native target acceptance NOT_RUN"
+    },
+    "UI-16": {
+      "status": "HEADLESS_PARTIAL",
+      "evidence": "Interface200Smoke and synthetic JavaFX screenshots; native target acceptance NOT_RUN"
+    },
+    "UI-17": {
+      "status": "HEADLESS_PARTIAL",
+      "evidence": "Interface200Smoke and synthetic JavaFX screenshots; native target acceptance NOT_RUN"
+    },
+    "UI-18": {
+      "status": "HEADLESS_PARTIAL",
+      "evidence": "Interface200Smoke and synthetic JavaFX screenshots; native target acceptance NOT_RUN"
+    },
+    "UI-19": {
+      "status": "HEADLESS_PARTIAL",
+      "evidence": "Interface200Smoke and synthetic JavaFX screenshots; native target acceptance NOT_RUN"
+    },
+    "UI-20": {
+      "status": "HEADLESS_PARTIAL",
+      "evidence": "Interface200Smoke and synthetic JavaFX screenshots; native target acceptance NOT_RUN"
+    },
+    "UI-21": {
+      "status": "HEADLESS_PARTIAL",
+      "evidence": "Interface200Smoke and synthetic JavaFX screenshots; native target acceptance NOT_RUN"
+    },
+    "UI-22": {
+      "status": "HEADLESS_PARTIAL",
+      "evidence": "Interface200Smoke and synthetic JavaFX screenshots; native target acceptance NOT_RUN"
+    },
+    "UI-23": {
+      "status": "HEADLESS_PARTIAL",
+      "evidence": "Interface200Smoke and synthetic JavaFX screenshots; native target acceptance NOT_RUN"
+    },
+    "UI-24": {
+      "status": "HEADLESS_PARTIAL",
+      "evidence": "Interface200Smoke and synthetic JavaFX screenshots; native target acceptance NOT_RUN"
+    },
+    "UI-25": {
+      "status": "AUTOMATED_PASS",
+      "evidence": "SafeWebTest migrationPreservesCustomNavigationAndIsIdempotent + AppearanceTest"
+    },
+    "UI-26": {
+      "status": "HEADLESS_PARTIAL",
+      "evidence": "Interface200Smoke and synthetic JavaFX screenshots; native target acceptance NOT_RUN"
+    }
+  },
+  "updaterE2E": "NOT_RUN",
+  "rollbackNative": "NOT_RUN",
+  "uiHeadless": "PASS after Monocle single-threaded rendering retry",
+  "screenshots": "Actual JavaFX synthetic fixtures, not generated images, not native KDE/Windows screenshots",
+  "uiProfileMigrationFollowup": {
+    "status": "PASS_LOCAL_ONLY",
+    "scope": "Targeted follow-up only; prior complete-build counts are retained separately and have not been reclassified as a current full build.",
+    "junit": {
+      "tests": 13,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "durationSeconds": 7.667,
+      "classes": {
+        "org.securemail.client.storage.PublicProfileCacheTest": 8,
+        "org.securemail.client.storage.NavigationMigration200Test": 2,
+        "org.securemail.client.storage.LocalMailSearch200Test": 3
+      },
+      "evidence": [
+        "docs/test-results/2.0.0-followup/junit/TEST-junit-jupiter.xml",
+        "docs/test-results/2.0.0-followup/junit/TEST-junit-platform-suite.xml",
+        "docs/test-results/2.0.0-followup/junit/TEST-junit-vintage.xml"
+      ]
+    },
+    "javaFx": {
+      "Interface200Smoke": {
+        "status": "PASS_HEADLESS",
+        "evidence": "docs/test-results/2.0.0-followup/logs/interface200-retry.log",
+        "scope": "Real JavaFX application with synthetic local fixtures; archive import/preview/search/lock, presets, display modes, navigation zones, draft and encrypted preferences, single Stage."
+      },
+      "SettingsResponsive200Smoke": {
+        "status": "PASS_HEADLESS",
+        "evidence": "docs/test-results/2.0.0-followup/logs/settings-responsive.log",
+        "windowPixels": [
+          800,
+          600
+        ],
+        "scalesPercent": [
+          100,
+          125,
+          150,
+          200
+        ],
+        "themes": [
+          "minimal-dark",
+          "classic-light"
+        ],
+        "checks": [
+          "category wrapping",
+          "equal category heights",
+          "selected content below category panel",
+          "shared scrolling",
+          "offline signed avatar refresh and removal"
+        ],
+        "screenshots": [
+          "docs/test-results/2.0.0-followup/screenshots/settings-800x600-classic-light-100.png",
+          "docs/test-results/2.0.0-followup/screenshots/settings-800x600-classic-light-125.png",
+          "docs/test-results/2.0.0-followup/screenshots/settings-800x600-classic-light-150.png",
+          "docs/test-results/2.0.0-followup/screenshots/settings-800x600-classic-light-200.png",
+          "docs/test-results/2.0.0-followup/screenshots/settings-800x600-minimal-dark-100.png",
+          "docs/test-results/2.0.0-followup/screenshots/settings-800x600-minimal-dark-125.png",
+          "docs/test-results/2.0.0-followup/screenshots/settings-800x600-minimal-dark-150.png",
+          "docs/test-results/2.0.0-followup/screenshots/settings-800x600-minimal-dark-200.png",
+          "docs/test-results/2.0.0-followup/screenshots/settings-content-800x600-classic-light-100.png",
+          "docs/test-results/2.0.0-followup/screenshots/settings-content-800x600-classic-light-125.png",
+          "docs/test-results/2.0.0-followup/screenshots/settings-content-800x600-classic-light-150.png",
+          "docs/test-results/2.0.0-followup/screenshots/settings-content-800x600-classic-light-200.png",
+          "docs/test-results/2.0.0-followup/screenshots/settings-content-800x600-minimal-dark-100.png",
+          "docs/test-results/2.0.0-followup/screenshots/settings-content-800x600-minimal-dark-125.png",
+          "docs/test-results/2.0.0-followup/screenshots/settings-content-800x600-minimal-dark-150.png",
+          "docs/test-results/2.0.0-followup/screenshots/settings-content-800x600-minimal-dark-200.png"
+        ]
+      }
+    },
+    "profileAvatar": {
+      "status": "PASS_LOCAL_ONLY",
+      "checks": [
+        "two pinned identities and signed profile cache",
+        "avatar update and offline restart",
+        "visibility and avatar removal",
+        "revision replay and conflict",
+        "forged identity and signature",
+        "malformed and oversized images rejected",
+        "metadata normalization before signing",
+        "encrypted local cache"
+      ],
+      "liveProductionRelayTwoAccountTorTest": "NOT_RUN"
+    },
+    "migration150to200": {
+      "status": "PASS_LOCAL_ONLY",
+      "checks": [
+        "six-section custom order retained with Safe Web inserted after Archive",
+        "parse/save/export/repeated import idempotent",
+        "beforeVersionOpen(2.0.0) verified snapshot reused without rewriting source",
+        "real identity public/private keys and mail retained",
+        "encrypted personal archive, theme, saved layout and update-event fixture retained"
+      ],
+      "nativeInstallerUpgrade": "NOT_RUN"
+    },
+    "nativeAcceptance": {
+      "Windows11x64": "NOT_RUN",
+      "CachyOSKDEWayland": "NOT_RUN",
+      "CachyOSKDEX11": "NOT_RUN"
+    },
+    "nicknameRename": {
+      "status": "BLOCKED_SERVER_APPROVAL",
+      "proposal": "RELAY-PROFILE-NICKNAME-PROPOSAL-2.0.0.md"
+    },
+    "productionReady": false
+  },
+  "packagingRuntimeFollowup": {
+    "runtimeInputs": "PASS_PINNED_SHA256_CRC",
+    "runtimeInputCount": 8,
+    "runtimeEvidence": "docs/test-results/2.0.0-followup/packaging-runtime/runtime-dependencies.json",
+    "stagingRegression": {
+      "status": "PASS_SYNTHETIC_JAR_FIXTURES",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "evidence": "docs/test-results/2.0.0-followup/packaging-runtime/staging-tests.log"
+    },
+    "nativeAcceptance": "NOT_RUN",
+    "productionReady": false
+  },
+  "currentGuiEvidence": "docs/test-results/2.0.0-followup/current-gui.json",
+  "previousAutomaticTests": {
+    "relay-server": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "client-core": {
+      "tests": 150,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1
+    },
+    "common-protocol": {
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "integration-tests": {
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "automaticTests": {
+    "client-core": {
+      "tests": 237,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1
+    },
+    "common-protocol": {
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "integration-tests": {
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "relay-server": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "currentFullBuildEvidence": "docs/test-results/2.0.0-followup/full-current/RESULTS.json",
+  "currentFullBuildSourceCommit": "0a8efa98c1307ae2dc88c00d6b3208cdb260282b",
+  "finalJarSafeWebGui": "PASS_HEADLESS",
+  "pythonTests": {
+    "tests": 40,
+    "status": "PASS"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "sourceCommit": "0a8efa98c1307ae2dc88c00d6b3208cdb260282b",
+  "Java21Compile": "PASS",
+  "modules": {
+    "client-core": {
+      "tests": 237,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1
+    },
+    "common-protocol": {
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "integration-tests": {
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "relay-server": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "totalFound": 258,
+  "successful": 257,
+  "skipped": 1,
+  "skipReason": "Windows DPAPI CurrentUser unavailable on Linux",
+  "firstFullAttempt": "INCOMPLETE_NO_JUNIT_RESULT; not accepted as PASS",
+  "nativeAcceptance": "NOT_RUN",
+  "productionReady": false,
+  "pythonTests": {
+    "tests": 40,
+    "status": "PASS",
+    "evidence": "python-tests.log"
+  },
+  "SafeWebFinalJarGui": {
+    "status": "PASS_HEADLESS",
+    "evidence": "SafeWeb200Smoke.log",
+    "nativeBrowser": "NOT_RUN"
+  }
+}

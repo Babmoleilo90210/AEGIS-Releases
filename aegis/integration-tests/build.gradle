@@ -1,0 +1,47 @@
+dependencies {
+    testImplementation project(':client-core')
+    testImplementation project(':relay-server')
+    testImplementation 'net.lingala.zip4j:zip4j:2.11.6'
+}
+
+tasks.withType(Test).configureEach { systemProperty "aegis.native.root", rootProject.file(".native-test").absolutePath }
+tasks.withType(Test).configureEach { dependsOn ':client-core:prepareNative' }
+
+tasks.register('client03Relay02Smoke', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'org.securemail.integration.Client03Relay02Smoke'
+    systemProperty 'aegis.native.root', rootProject.file('.native-test').absolutePath
+    args providers.gradleProperty('relayJava').getOrElse('java'), providers.gradleProperty('relayLib').getOrElse('.')
+}
+
+tasks.register('legacyVaultSmoke', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'org.securemail.integration.LegacyVaultCompatibilitySmoke'
+    systemProperty 'aegis.native.root', rootProject.file('.native-test').absolutePath
+    args providers.gradleProperty('legacyClient').getOrElse('.'), sourceSets.test.output.classesDirs.singleFile.absolutePath
+}
+
+tasks.register('migration03Smoke', JavaExec) {
+ dependsOn testClasses
+ classpath=sourceSets.test.runtimeClasspath
+ mainClass='org.securemail.integration.Migration03Smoke'
+ systemProperty 'aegis.native.root',rootProject.file('.native-test').absolutePath
+ args providers.gradleProperty('relayJava').getOrElse('java'),providers.gradleProperty('relayLib').getOrElse('.'),providers.gradleProperty('legacyClient').getOrElse('.'),sourceSets.test.output.classesDirs.singleFile.absolutePath
+}
+
+tasks.register('client10Relay02Smoke', JavaExec) {
+ dependsOn testClasses
+ classpath=sourceSets.test.runtimeClasspath
+ mainClass='org.securemail.integration.Client10Relay02Smoke'
+ systemProperty 'aegis.native.root',rootProject.file('.native-test').absolutePath
+ args providers.gradleProperty('relayJava').getOrElse('java'),providers.gradleProperty('relayLib').getOrElse('.')
+}
+
+tasks.register('linuxUpdateProcessSmoke', JavaExec) {
+ dependsOn testClasses
+ classpath=sourceSets.test.runtimeClasspath
+ mainClass='org.securemail.integration.LinuxUpdateProcessSmoke'
+ args providers.gradleProperty('legacyClient').getOrElse('.'),providers.gradleProperty('monocleJar').getOrElse('.')
+}

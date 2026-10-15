@@ -1,0 +1,10 @@
+{
+  "version": "1.5.0",
+  "binaryCommit": "f9ac41ab9a7aca659e23df88f020a84618af77a1",
+  "sourceCheckpointCommit": "11640e88e239e584916d9ec3532ea1a2b6c3b1cf",
+  "baselinePublishedSourceSha256": "93c816760d3f688214a3a37e67483e9ec89233e5f671d28bb8f5b49f7f370324",
+  "fullSource": true,
+  "srcMainByteMatchFrozenBuild": true,
+  "productionReady": false,
+  "generatedMetadata": "This inventory metadata is generated after the source checkpoint; app sources unchanged."
+}

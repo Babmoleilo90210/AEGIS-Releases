@@ -5,6 +5,7 @@ Fresh --inputs: verified prepare-inputs output, jlink from Linux/Windows jmods.
 """
 import argparse,pathlib,shutil,subprocess,os,zipfile,json,tempfile
 from verify_appimage import verify
+from client_runtime import sha256, verify_safe_web_runtime
 root=pathlib.Path(__file__).resolve().parents[1]
 p=argparse.ArgumentParser()
 p.add_argument('--inputs',type=pathlib.Path);p.add_argument('--linux-base',type=pathlib.Path);p.add_argument('--windows-base',type=pathlib.Path)
@@ -33,8 +34,10 @@ def fresh(target,platform):
  (target/'licenses').mkdir(exist_ok=True);shutil.copy2(assets/'sodium-src/libsodium-stable/LICENSE',target/'licenses/libsodium-LICENSE')
  shutil.copy2(a.inputs/'manifest.json',target/'BUILD-INPUTS.json')
 def docs(target):
- for name in ['README-WINDOWS.md','README-CACHYOS.md','README.md','BUILD-CLIENTS.md','CRYPTO-1.0.0.md','MIGRATION-1.0-TO-1.1.md','BUILD-1.5.0.md','ARCHIVE-1.5.0.md','MIGRATION-1.2.0-TO-1.5.0.md','NATIVE-ACCEPTANCE-1.5.0.md','SECURITY.md','THREAT_MODEL.md','PRIVACY.md','PROTOCOL.md','ARCHIVE-THREAT-MODEL-1.5.0.md','P2P-VERIFICATION-1.5.0.md','OWNER-OFFLINE-SIGNING-1.5.0.md','CHANGELOG-1.5.0.md','TEST-REPORT-1.5.0.md','RELEASE-GATES-1.5.0.json']:
+ for name in ['README-WINDOWS.md','README-CACHYOS.md','README.md','BUILD-CLIENTS.md','CRYPTO-1.0.0.md','MIGRATION-1.0-TO-1.1.md','BUILD-2.0.0.md','ARCHIVE-1.5.0.md','MIGRATION-1.5.0-TO-2.0.0.md','NATIVE-ACCEPTANCE-2.0.0.md','SECURITY.md','THREAT_MODEL.md','PRIVACY.md','PROTOCOL.md','ARCHIVE-THREAT-MODEL-2.0.0.md','P2P-VERIFICATION-2.0.0.md','OWNER-OFFLINE-SIGNING-2.0.0.md','CHANGELOG-2.0.0.md','TEST-REPORT-2.0.0.md','RELEASE-GATES-2.0.0.json']:
   if (root/name).is_file():shutil.copy2(root/name,target/name)
+ for extra in ['SAFE-WEB-DISTRIBUTION-AUTH-2.0.0.md','SOURCE-PROVENANCE-2.0.0.json','SAFE-WEB-2.0.0.md','SAFE-WEB-THREAT-MODEL-2.0.0.md','INTERFACE-REFINEMENT-2.0.0.md','PROFILE-SYNC-2.0.0.md','RELAY-PROFILE-NICKNAME-PROPOSAL-2.0.0.md','IMPLEMENTATION-REPORT-2.0.0-RU.md','FINAL-VERIFICATION-2.0.0.json']:
+  if (root/extra).exists():shutil.copy2(root/extra,target/extra)
  if (root/'docs').is_dir():copy(root/'docs',target/'docs')
  copy(root/'resources',target/'resources')
 def prepare(name,platform,base):
@@ -50,14 +53,17 @@ def prepare(name,platform,base):
  if base and manifest.exists():
   original=json.loads(manifest.read_text())
   if isinstance(original,dict):original=original.get('reused_0_2_0_manifest',original)
-  manifest.write_text(json.dumps({'client_version':'1.5.0','runtime_tor_sodium':'verified released AEGIS 1.0.0 assets; unchanged Java 21/Tor/libsodium; Linux PT mode is 0755','reused_0_2_0_manifest':original,'client_build_tools':{'Java':'21; exact JDK recorded separately','packaging':'native launchers rebuilt; NSIS; Type 2 SquashFS runtime','nativeAcceptance':'NOT_RUN'}},indent=2))
- copy(root/'client-ui/build/stage'/platform,target/'app');docs(target)
+  manifest.write_text(json.dumps({'client_version':'2.0.0','runtime_tor_sodium':'SHA-256 verified published AEGIS 1.5.0 runtime/Tor/libsodium; Linux PT mode is 0755','reused_0_2_0_manifest':original,'client_build_tools':{'Java':'21; exact JDK recorded separately','packaging':'native launchers rebuilt; NSIS; Type 2 SquashFS runtime','nativeAcceptance':'NOT_RUN'}},indent=2))
+ copy(root/'client-ui/build/stage'/platform,target/'app');runtime_pins=verify_safe_web_runtime(target/'app');docs(target)
+ (target/'RUNTIME-DEPENDENCIES-2.0.0.json').write_text(json.dumps({'version':'2.0.0','platform':platform,'scope':'offline copied dependency hashes; no native acceptance claim','safeWebRuntimePins':runtime_pins,'runtimeJars':{jar.name:sha256(jar) for jar in sorted((target/'app').glob('*.jar'))}},indent=2)+'\n')
  import zipfile
  for jar in (target/'app').glob('*.jar'):
-  if jar.name.startswith(('pdfbox-','fontbox-','commons-logging-')):
-   with zipfile.ZipFile(jar) as archive:
-    for name in ['META-INF/LICENSE','META-INF/LICENSE.txt','META-INF/NOTICE','META-INF/NOTICE.txt']:
-     if name in archive.namelist():(target/'licenses'/(jar.stem+'-'+name.split('/')[-1])).write_bytes(archive.read(name))
+  with zipfile.ZipFile(jar) as archive:
+   for name in archive.namelist():
+    leaf=pathlib.PurePosixPath(name).name
+    if not name.endswith('/') and name.startswith('META-INF/') and leaf.upper().startswith(('LICENSE','NOTICE','COPYING')):
+     if archive.getinfo(name).file_size>262144:raise ValueError('Unexpectedly large dependency license: '+jar.name)
+     (target/'licenses'/(jar.stem+'-'+leaf)).write_bytes(archive.read(name))
  return target
 win=prepare('AEGIS','win',a.windows_base);mingw=a.mingw.resolve();res=stage/'launcher.res'
 compiler=mingw/'x86_64-w64-mingw32-clang'
@@ -67,10 +73,10 @@ run([compiler,'-Os','-municode','-mwindows',root/'packaging/windows/launcher.c',
 run([compiler,'-Os','-municode','-mwindows',root/'packaging/windows/maintenance.c',res,'-Wl,--dynamicbase,--nxcompat,--high-entropy-va','-luser32','-lshell32','-ladvapi32','-o',win/'AEGIS-Maintenance.exe'])
 run([compiler,'-Os','-municode','-mwindows',root/'packaging/windows/updater.c',res,'-Wl,--dynamicbase,--nxcompat,--high-entropy-va','-luser32','-lshell32','-o',win/'AEGIS-Updater.exe'])
 res.unlink();shutil.copy2(root/'packaging/windows/CreateShortcuts.ps1',win/'CreateShortcuts.ps1')
-with zipfile.ZipFile(out/'AEGIS-1.5.0-Windows-x64.zip','w',zipfile.ZIP_DEFLATED,compresslevel=6) as z:
+with zipfile.ZipFile(out/'AEGIS-2.0.0-Windows-x64.zip','w',zipfile.ZIP_DEFLATED,compresslevel=6) as z:
  for file in sorted(win.rglob('*')):
   if file.is_file():z.write(file,pathlib.Path('AEGIS')/file.relative_to(win))
-run([a.makensis.resolve(),'-V2','-DPAYLOAD='+str(win),'-DOUTFILE='+str(out/'AEGIS-Setup-1.5.0-x64.exe'),'installer.nsi'],cwd=root/'packaging/windows')
+run([a.makensis.resolve(),'-V2','-DPAYLOAD='+str(win),'-DOUTFILE='+str(out/'AEGIS-Setup-2.0.0-x64.exe'),'installer.nsi'],cwd=root/'packaging/windows')
 linux=prepare('AEGIS.AppDir','linux',a.linux_base)
 (linux/'tor/pluggable_transports/lyrebird').chmod(0o755)
 (linux/'tor/tor').chmod(0o755)
@@ -78,7 +84,7 @@ for name in ['AppRun','aegis.desktop']:shutil.copy2(root/'packaging/linux'/name,
 (linux/'AppRun').chmod(0o755)
 for name in ['aegis.png','.DirIcon']:shutil.copy2(root/'resources/aegis.png',linux/name)
 env=os.environ.copy();env['ARCH']='x86_64';env['SOURCE_DATE_EPOCH']='1791201600';env['APPIMAGE_EXTRACT_AND_RUN']='1'
-image=out/'AEGIS-1.5.0-CachyOS-x86_64.AppImage'
+image=out/'AEGIS-2.0.0-CachyOS-x86_64.AppImage'
 # Always build into a fresh file. Repeated in-place packaging produced a truncated
 # image in the build environment despite a successful appimagetool exit status.
 # Keep the previous release until the new runtime and complete payload pass checks.

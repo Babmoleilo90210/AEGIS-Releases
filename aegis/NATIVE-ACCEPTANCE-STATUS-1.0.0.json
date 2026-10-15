@@ -1,0 +1,114 @@
+{
+  "version": "1.0.0",
+  "checkedAtUtc": "2026-10-08T10:17:18.168748+00:00",
+  "productionReady": false,
+  "ownerDevicesAvailable": [
+    "CachyOS",
+    "Windows"
+  ],
+  "ownerDevicesAccessedOrTested": false,
+  "nativeKit": {
+    "fileName": "AEGIS-1.0.0-native-acceptance.zip",
+    "size": 51656,
+    "sha256": "a36446982bc272a22a721bc3112a748783f7af3eaadf0909a0df6a8555664bd7",
+    "archiveVerified": true,
+    "usesBundledRuntime": true,
+    "additionalJavaInstallRequired": false,
+    "additionalBuildToolsRequired": false,
+    "automaticUpload": false,
+    "productionClientClasspathModified": false
+  },
+  "buildhostRuntimeChecks": {
+    "os": "Ubuntu24.04 x86_64",
+    "java": "21.0.12.1 bundled",
+    "tests": 7,
+    "passed": 6,
+    "failedOrUnavailable": 1,
+    "exitCode": 1,
+    "nativeCredentialStore": "BLOCKED_OR_UNAVAILABLE_NOT_PASS"
+  },
+  "isolatedSecretServiceAttempt": {
+    "result": "BLOCKED_BY_HOST_UNIX_SOCKET_POLICY",
+    "dbusStarted": false,
+    "nativeRoundTripPerformed": false,
+    "reason": "dbus-daemon: Failed to open socket: Operation not permitted",
+    "systemPackagesOrSettingsModified": false
+  },
+  "kitGUIValidation": {
+    "result": "PASS_HEADLESS_ONLY",
+    "scenes": [
+      "screen probe lifecycle",
+      "contact and TTL picker",
+      "unified selectors/themes/presets/progress",
+      "messenger/password/FF1/TTL"
+    ],
+    "nativeDPICovered": false,
+    "CachyOSWaylandX11Covered": false
+  },
+  "productionClientArtifactsModifiedInThisCompletion": true,
+  "sourceAndReleaseMetadataUpdated": true,
+  "serverChanged": false,
+  "protocolVersion": 1,
+  "relayVersion": "0.2.0",
+  "pending": [
+    "Native Windows11/DPAPI/DPI/installer/updater/reboot acceptance",
+    "Native CachyOS/KDE/SecretService/Wayland/X11/reboot acceptance",
+    "Tor bootstrap100% and cross-network exchange/offline/ACK/TTL/files through owner relay",
+    "Frozen relay12h network auth and existing-password KDF compatibility decision",
+    "Owner-only offline Ed25519 signature"
+  ],
+  "signatureCreated": false,
+  "githubReleasePublished": false,
+  "secretsOrPasswordsIncluded": false,
+  "evidence": [
+    {
+      "file": "validation-final/native-acceptance/buildhost-runtime-report.json",
+      "sha256": "0519960fa1d128b535a35f3c25504fcef8dde2147c6baac5ab378e3f250eafa7"
+    },
+    {
+      "file": "validation-final/native-acceptance/frozen-files-rechecked.json",
+      "sha256": "da3fd56d21dba2c2643ad6036797c069dcf513dbf4d13e4ff9f7bf16877c658b"
+    },
+    {
+      "file": "validation-final/native-acceptance/kit-final-build.log",
+      "sha256": "04b66d948db16fd915d48bb7a0e93eabda5850576e40fefe52a16fd65ba5ba31"
+    },
+    {
+      "file": "validation-final/native-acceptance/kit-host-runtime.log",
+      "sha256": "90a7d46e8979fcbbb99c0984e2348ec624186e8a4516511aa3e831bf822e449c"
+    },
+    {
+      "file": "validation-final/native-acceptance/kit-messenger-headless.log",
+      "sha256": "5144a295796bf11df180675a47f0e1eaf5735bf9225e9bddedb6a15c735e668f"
+    },
+    {
+      "file": "validation-final/native-acceptance/kit-packaging-checks.json",
+      "sha256": "bc5a3daea5006d621449038175e81339d3dc8d83b918e9663d4756f927b3dcf3"
+    },
+    {
+      "file": "validation-final/native-acceptance/kit-picker-headless.log",
+      "sha256": "5801a5fde39a409ffe5b7c0a3e6ff6e57250e31a7e30763ccadbf74776f5d116"
+    },
+    {
+      "file": "validation-final/native-acceptance/kit-screen-probe-headless.log",
+      "sha256": "0724570975d36fcd5d04bdb80d1ed24e71fdeda881231fb94d9164686de57c91"
+    },
+    {
+      "file": "validation-final/native-acceptance/kit-selectors-headless.log",
+      "sha256": "21f092dcadb697033bb1affcd3ec2261148af0b8d76af8d17e20b79bc30f1ed3"
+    },
+    {
+      "file": "validation-final/native-acceptance/secret-service.log",
+      "sha256": "66531c7079a74c8911599d5019e257295c319630b350f5dd966043d7a53a3c73"
+    }
+  ],
+  "nativeAcceptancePerformed": false,
+  "currentApplicationJarSha256": {
+    "client-core-1.0.0.jar": "e0057f34a35b8e0bafbee673095b1b429337c5dfad72756b026ec28a1a4c28d6",
+    "client-ui-1.0.0.jar": "db0f4ade85afc34326ec7b0e81aaf70b511d4caeac552f66b86e18faec4f225a",
+    "common-protocol-0.2.0.jar": "8abdf10b5f224974426ba57fb8d25096814ef424d092dd43d719c06d6ea21d77"
+  },
+  "latestKitPackagingVerifiedAgainstCurrentArtifacts": true,
+  "previousBuildhostChecksAreHistorical": true,
+  "latestNativeOwnerReports": []
+}

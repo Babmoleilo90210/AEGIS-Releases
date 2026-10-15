@@ -127,7 +127,9 @@ public final class LocalStore implements AutoCloseable {
     ensureOpen();nickname=Limits.nickname(nickname);
     if(!nickname.equals(this.nickname))throw new IOException("Можно изменять только собственный аватар");
     Path path=avatarPath(nickname);AtomicFiles.directory(path.getParent());if(png==null){Files.deleteIfExists(path);avatarRevision++;return;}if(png.length>1024*1024)throw new IOException("Avatar too large");
-    AtomicFiles.write(path,seal(png,("avatar/v1/"+nickname).getBytes(java.nio.charset.StandardCharsets.US_ASCII)));
+    // Enforce metadata stripping at the storage boundary as well as in the UI.
+    // Callers cannot accidentally publish EXIF/location from an original file.
+    byte[] pixels=AvatarCodec.normalize(png);try{AtomicFiles.write(path,seal(pixels,("avatar/v1/"+nickname).getBytes(java.nio.charset.StandardCharsets.US_ASCII)));}finally{Arrays.fill(pixels,(byte)0);}
     avatarRevision++;
   }
   public synchronized byte[] avatar(String nickname)throws IOException,GeneralSecurityException {

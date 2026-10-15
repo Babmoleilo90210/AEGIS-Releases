@@ -63,8 +63,14 @@ final class AppearanceEngine implements AutoCloseable {
       ".navigation .button{"+font(s.typography().navigation())+"-fx-padding:"+padding+" "+gap+";-fx-alignment:center-left;}\n"+
       ".heading,.brand,.mail-subject{"+font(s.typography().heading())+"}\n"+
       ".letter-body,.letter-body .content,.composer,.composer .content{"+font(s.typography().mail())+"}\n"+
-      ".button{-fx-background-radius:"+buttonRadius+";-fx-border-radius:"+buttonRadius+";-fx-padding:"+(padding+2)+" "+(gap+4)+";}\n"+
+      ".button,.toggle-button,.menu-button{-fx-min-height:2.6em;-fx-pref-height:2.6em;-fx-background-radius:"+buttonRadius+";-fx-border-radius:"+buttonRadius+";-fx-padding:"+(padding+2)+" "+(gap+4)+";}\n"+
+      ".button:hover,.toggle-button:hover,.menu-button:hover{-fx-background-color:derive(-aegis-control,8%);}\n"+
+      ".button:pressed,.toggle-button:pressed,.menu-button:pressed{-fx-background-color:derive(-aegis-control,-8%);}\n"+
+      ".button.auxiliary{-fx-min-height:2.3em;-fx-pref-height:2.3em;-fx-background-color:transparent;}\n"+
+      ".button.avatar-preview{-fx-min-height:144px;-fx-pref-height:144px;-fx-padding:8px;}\n"+
+      ".button.wrapped-action{-fx-pref-height:-1;-fx-min-height:2.6em;}\n"+
       ".primary{-fx-background-color:-aegis-accent;-fx-text-fill:-aegis-action-text;-fx-font-weight:bold;}\n"+
+      ".button.primary:hover{-fx-background-color:derive(-aegis-accent,8%);}.button.primary:pressed{-fx-background-color:derive(-aegis-accent,-8%);}\n"+
       ".mail-card,.preset-tile,.settings-card,.system-letter,.letter-card{-fx-background-color:"+panel+";-fx-background-radius:"+radius+";-fx-border-radius:"+radius+";-fx-padding:"+(padding+gap)+";-fx-effect:"+shadow+";}\n"+
       ".mail-card:selected,.preset-tile:selected,.navigation .active{-fx-background-color:-aegis-control;}\n"+
       ".list-cell{-fx-padding:"+padding+" "+gap+";-fx-background-color:transparent;}\n"+

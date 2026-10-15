@@ -1,0 +1,15 @@
+[Unit]
+Description=AEGIS Tor bootstrap and Snowflake fallback
+After=network-online.target tor@default.service
+Wants=network-online.target
+Requires=tor@default.service
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/aegis-server bootstrap
+TimeoutStartSec=540
+UMask=0077
+NoNewPrivileges=true
+ProtectHome=true
+PrivateTmp=true
+[Install]
+WantedBy=multi-user.target

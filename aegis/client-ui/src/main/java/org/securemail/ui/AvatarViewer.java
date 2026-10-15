@@ -15,7 +15,7 @@ final class AvatarViewer {
     StackPane square=new StackPane();square.setMinSize(128,128);square.setMaxSize(128,128);square.getStyleClass().add("avatar");
     if(image==null){Label initial=new Label(nick.isBlank()?"?":nick.substring(0,1).toUpperCase(java.util.Locale.ROOT));initial.setStyle("-fx-font-size:38px;");square.getChildren().add(initial);return square;}
     ImageView view=new ImageView(image);view.setFitWidth(128);view.setFitHeight(128);view.setPreserveRatio(true);square.getChildren().add(view);
-    Button button=new Button();button.setGraphic(square);button.setAccessibleText("Посмотреть аватар "+nick);button.setTooltip(new Tooltip("Посмотреть аватар"));button.setOnAction(e->open.run());return button;
+    Button button=new Button();button.getStyleClass().add("avatar-preview");button.setGraphic(square);button.setAccessibleText("Посмотреть аватар "+nick);button.setTooltip(new Tooltip("Посмотреть аватар"));button.setOnAction(e->open.run());return button;
   }
   static void show(Stage owner,ThemeManager themes,String nick,Image image){
     if(image==null||image.isError())return;

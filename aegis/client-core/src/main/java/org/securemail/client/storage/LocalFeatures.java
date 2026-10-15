@@ -13,7 +13,7 @@ public final class LocalFeatures {
   private final LocalStore local;
   private final Set<String> blockedMail=new HashSet<>(),blockedSenders=new HashSet<>(),pinnedContacts=new HashSet<>(),pinnedMail=new HashSet<>(),pinnedThreads=new HashSet<>(),revokedFriends=new HashSet<>(),friends=new HashSet<>();
   private final Map<String,long[]> friendRevisions=new HashMap<>();
-  private String about="";private boolean visible,profilePending=true;
+  private String about="";private boolean visible=true,profilePending=true;private long profileGeneration;
   private boolean notifications=true,friendNotifications=true,friendEvents=true,updateNotifications=true;
   public LocalFeatures(LocalStore local)throws IOException,GeneralSecurityException{
     this.local=local;byte[] data=local.readFeatures();if(data==null)return;
@@ -40,9 +40,13 @@ public final class LocalFeatures {
   }
   public synchronized String about(){return about;}public synchronized boolean visible(){return visible;}
   public synchronized boolean profilePending(){return profilePending;}
-  public synchronized void profile(String text,boolean show)throws IOException,GeneralSecurityException{if(text.length()>500||text.codePoints().anyMatch(c->Character.isISOControl(c)&&c!='\n'))throw new IOException("О себе: до 500 символов");about=text;visible=show;profilePending=true;save();}
-  public synchronized void profileChanged()throws IOException,GeneralSecurityException{profilePending=true;save();}
+  public record ProfileState(String about,boolean visible,boolean pending,long generation){}
+  public synchronized ProfileState profileState(){return new ProfileState(about,visible,profilePending,profileGeneration);}
+  public synchronized void profile(String text,boolean show)throws IOException,GeneralSecurityException{if(text.length()>500||text.codePoints().anyMatch(c->Character.isISOControl(c)&&c!='\n'))throw new IOException("О себе: до 500 символов");about=text;visible=show;profilePending=true;profileGeneration++;save();}
+  public synchronized void profileChanged()throws IOException,GeneralSecurityException{profilePending=true;profileGeneration++;save();}
   public synchronized void profilePublished()throws IOException,GeneralSecurityException{profilePending=false;save();}
+  /** A publication that began before an edit may not consume that newer edit. */
+  public synchronized void profilePublished(long generation)throws IOException,GeneralSecurityException{if(profileGeneration==generation){profilePending=false;save();}}
   public synchronized boolean blocked(EncryptedPacket p){return blockedMail.contains(p.messageId())||blockedSenders.contains(p.senderId());}
   public synchronized boolean blocked(String messageId,String senderId){return blockedMail.contains(messageId)||blockedSenders.contains(senderId);}
   public synchronized boolean blockedSender(String id){return blockedSenders.contains(id);}

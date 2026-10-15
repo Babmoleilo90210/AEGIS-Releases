@@ -1,0 +1,10 @@
+test_both_platforms_include_transitive_runtime_and_same_application_hashes (test_stage_candidate.CandidateRuntimeStagingTest.test_both_platforms_include_transitive_runtime_and_same_application_hashes) ... ok
+test_changed_dependency_and_symlink_are_rejected (test_stage_candidate.CandidateRuntimeStagingTest.test_changed_dependency_and_symlink_are_rejected) ... ok
+test_missing_dependency_preserves_previous_stage (test_stage_candidate.CandidateRuntimeStagingTest.test_missing_dependency_preserves_previous_stage) ... ok
+test_older_runtime_versions_cannot_shadow_pinned_installer_dependencies (test_stage_candidate.CandidateRuntimeStagingTest.test_older_runtime_versions_cannot_shadow_pinned_installer_dependencies) ... ok
+test_wrong_javafx_platform_and_missing_official_public_key_fail_closed (test_stage_candidate.CandidateRuntimeStagingTest.test_wrong_javafx_platform_and_missing_official_public_key_fail_closed) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.050s
+
+OK

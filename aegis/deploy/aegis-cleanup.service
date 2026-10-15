@@ -1,0 +1,9 @@
+[Unit]
+Description=Delete expired AEGIS ciphertext without unlocking the vault
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/opt/aegis/client/bin/client-ui --cleanup %h/.config/aegis/client.properties
+NoNewPrivileges=true
+UMask=0077
+LimitCORE=0

@@ -1,0 +1,28 @@
+/workspace/scratch/aa629f360927/aegis/aegis/client-core/src/main/java/org/securemail/client/MaintenanceMain.java:10: warning: [try] auto-closeable resource lock is never referenced in body of corresponding try statement
+      try(var lock=AppPaths.lock()){UpdateSupport.backup(config);}
+              ^
+/workspace/scratch/aa629f360927/aegis/aegis/client-core/src/main/java/org/securemail/client/archive/PdfWorkerMain.java:31: warning: [try] auto-closeable resource fallback is never referenced in body of corresponding try statement
+    try(var fallback=memoryFonts();var doc=Loader.loadPDF(data)){
+            ^
+/workspace/scratch/aa629f360927/aegis/aegis/client-core/src/main/java/org/securemail/client/net/RequestRejected.java:2: warning: [serial] serializable class RequestRejected has no definition of serialVersionUID
+public final class RequestRejected extends java.io.IOException {
+             ^
+/workspace/scratch/aa629f360927/aegis/aegis/client-core/src/main/java/org/securemail/client/safeweb/TorBrowserSignature.java:265: warning: [deprecation] RSA_SIGN in PublicKeyAlgorithmTags has been deprecated
+                && key.getAlgorithm() != PublicKeyAlgorithmTags.RSA_SIGN) || key.getBitStrength() < 3072)
+                                                               ^
+/workspace/scratch/aa629f360927/aegis/aegis/client-core/src/main/java/org/securemail/client/safeweb/WindowsSafeWebSandbox.java:159: warning: [try] auto-closeable resource sessionGuard is never referenced in body of corresponding try statement
+          try(Closeable sessionGuard=SafeWebDownload.guardDirectory(receipt.getParent())) {
+                        ^
+/workspace/scratch/aa629f360927/aegis/aegis/client-core/src/main/java/org/securemail/client/safeweb/WindowsSafeWebSandbox.java:156: warning: [try] auto-closeable resource guard is never referenced in body of corresponding try statement
+      try(lock;Closeable guard=SafeWebDownload.guardDirectory(control)) {
+                         ^
+/workspace/scratch/aa629f360927/aegis/aegis/client-core/src/main/java/org/securemail/client/update/UpdaterMain.java:31: warning: [try] auto-closeable resource appLock is never referenced in body of corresponding try statement
+    try(var appLock=AppPaths.lock()){
+            ^
+/workspace/scratch/aa629f360927/aegis/aegis/client-core/src/main/java/org/securemail/client/update/UpdaterMain.java:44: warning: [try] auto-closeable resource appLock is never referenced in body of corresponding try statement
+      try(var appLock=AppPaths.lock()){org.securemail.client.storage.ProfileSnapshot.restore(backup,previousConfig);}
+              ^
+8 warnings
+/workspace/scratch/aa629f360927/aegis/aegis/relay-server/src/main/java/org/securemail/relay/Rejection.java:2: warning: [serial] serializable class Rejection has no definition of serialVersionUID
+final class Rejection extends java.io.IOException { final int code; Rejection(int code){super("Request rejected");this.code=code;} }
+      ^
