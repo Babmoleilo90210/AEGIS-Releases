@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "application": "AEGIS",
   "channel": "stable",
-  "version": "1.2.0",
-  "tag": "v1.2.0",
+  "version": "1.5.0",
+  "tag": "v1.5.0",
   "repository": "Babmoleilo90210/AEGIS-Releases",
   "protocolVersion": 1,
   "relayCompatibility": [
@@ -11,60 +11,60 @@
   ],
   "artifacts": [
     {
-      "fileName": "AEGIS-Setup-1.2.0-x64.exe",
-      "size": 68944962,
-      "sha256": "169a21496acac021ba91db6fe28989342b35b4659ba443283ef51fdbce0c7423",
-      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.2.0/AEGIS-Setup-1.2.0-x64.exe",
+      "fileName": "AEGIS-Setup-1.5.0-x64.exe",
+      "size": 72687607,
+      "sha256": "9fda325eb90a9d025fb1a9f059c1c0893c61b4f376fdc8bf10f63b7ae387c2a5",
+      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.5.0/AEGIS-Setup-1.5.0-x64.exe",
       "platform": "windows-x64",
       "kind": "installer"
     },
     {
-      "fileName": "AEGIS-1.2.0-Windows-x64.zip",
-      "size": 77703625,
-      "sha256": "00addcba5b79828342e81f2a64eb9f21237b6b1297796fdf37c11edd95e6d4a9",
-      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.2.0/AEGIS-1.2.0-Windows-x64.zip",
+      "fileName": "AEGIS-1.5.0-Windows-x64.zip",
+      "size": 81470829,
+      "sha256": "df5dadec6ac42bc5a666c46a308f5b57e656f71dcbf8e3aaa8c8df9ddd0fd21c",
+      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.5.0/AEGIS-1.5.0-Windows-x64.zip",
       "platform": "windows-x64",
       "kind": "portable"
     },
     {
-      "fileName": "AEGIS-1.2.0-CachyOS-x86_64.AppImage",
-      "size": 76769784,
-      "sha256": "118487525eb2bcd7692535fd629b5068489ff6ba50dff1ab0302c70f5ac768e9",
-      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.2.0/AEGIS-1.2.0-CachyOS-x86_64.AppImage",
+      "fileName": "AEGIS-1.5.0-CachyOS-x86_64.AppImage",
+      "size": 80509432,
+      "sha256": "8f2e66429e22f2a57578e4d3d105b16bd99cbc9ccd0fb177dca4383d3ad13d8d",
+      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.5.0/AEGIS-1.5.0-CachyOS-x86_64.AppImage",
       "platform": "cachyos-x86_64",
       "kind": "appimage"
     },
     {
-      "fileName": "AEGIS-1.2.0-client-source.zip",
-      "size": 4309606,
-      "sha256": "93c816760d3f688214a3a37e67483e9ec89233e5f671d28bb8f5b49f7f370324",
-      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.2.0/AEGIS-1.2.0-client-source.zip",
+      "fileName": "AEGIS-1.5.0-client-source.zip",
+      "size": 4428962,
+      "sha256": "7907e1a5970f5a167cec60f8d171c56d69bf013fc4d593b1236eef3265c3e9a8",
+      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.5.0/AEGIS-1.5.0-client-source.zip",
       "platform": "source",
       "kind": "source"
     }
   ],
   "checksums": {
     "fileName": "SHA256SUMS",
-    "size": 2431,
-    "sha256": "01a6c32bc3126d959a9fa53f48ad2572bb44646f382b7c0a2508a93ac40b5e3e",
-    "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.2.0/SHA256SUMS"
+    "size": 2528,
+    "sha256": "571b86b9aed5ab3992258de0950111fa4904c9df22f00e293cd9cc928017fb6c",
+    "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.5.0/SHA256SUMS"
   },
   "changelog": {
-    "fileName": "CHANGELOG-1.2.0.md",
-    "size": 4046,
-    "sha256": "e42ab94cdf682f4da42032d3d917484065d8d0de1be1f8265140005cd44a6ca3",
-    "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.2.0/CHANGELOG-1.2.0.md"
+    "fileName": "CHANGELOG-1.5.0.md",
+    "size": 3774,
+    "sha256": "0b3e95728363d7360f17c71a9f8b26ff2fa882f39d02e8b52c6615f691f6763d",
+    "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v1.5.0/CHANGELOG-1.5.0.md"
   },
   "minimumSupported": "1.1.0",
   "updatePolicy": "optional",
   "announcement": {
-    "title": "АЕГИС 1.2.0 Stability & Lifecycle candidate",
-    "summary": "Стабильность, подписанные Friends/receipts и исчезающие письма; нативная приёмка обязательна.",
+    "title": "АЕГИС 1.5.0 Personal Encrypted Archive candidate",
+    "summary": "Личный зашифрованный архив, резервные копии и единое окно; нативная приёмка обязательна.",
     "showAsLetter": true
   },
   "releaseNotes": {
-    "publishedAt": "2026-10-13T00:00:00Z",
+    "publishedAt": "2026-10-14T00:00:00Z",
     "type": "Feature",
-    "text": "# АЕГИС 1.2.0 — Stability, Reliability & Message Lifecycle candidate\n\nproductionReady=false до Windows 11/CachyOS приёмки и полного owner-signed updater/restart/rollback. Stable не публиковался.\n\n- Friends для двух новых клиентов через подписанные E2EE assertions без обновления Relay 0.2.0. Ожидание при отсутствии подтверждения, устойчивый отзыв, приоритет блокировки; переписка сохраняется.\n- Четыре достоверных статуса: отправлено, принято Relay, доставлено на устройство, отображено получателем («Прочитано»). Encrypted retry queues, packet digest/root-signature binding, deduplication и application ACK.\n- Read receipts обычных писем можно выключить. Дополнительная защита требует ручных letter password/FF1 и явного показа результата; disappearing требует согласия на receipt.\n- Исчезающие письма на одно проверенное устройство: 1 минута–30 дней, timer после отображения, отсутствующий plaintext preview, удаление ciphertext/вложений и tombstone. Перезапуск приложения сохраняет timer; reboot ОС/неопределённый guard закрывает уже открытое письмо раньше срока (documented fail-closed restriction).\n- Встроенная Tor bootstrap/Direct/Snowflake карточка, самостоятельная Relay-проверка, защита повторного запуска и close/reconnect race.\n- Адаптивные отступы/максимизация с сохранённым пользовательским scale, всеми прежними темами и макетами.\n- Пять распространяемых локальных семейств с кириллицей: Noto Sans, Inter, Roboto, PT Sans, DejaVu Sans; проверяемые TTF/glyph coverage, preview/apply/cancel.\n- Крупный профильный аватар и встроенный zoom/Escape; чужой аватар не изменяется.\n- Updater helper без JavaFX/видимого пустого Stage; проверка Ed25519/SHA-256, полное резервирование и безопасный shutdown сохранены. Нативная KDE ошибка пока отдельно подтверждается владельцем.\n- Исправлено массовое удаление обычной почты при переводе часов назад: сохранена верхняя отметка, сроки не продлеваются.\n- Полный backup до первого запуска новой версии; encrypted lifecycle sidecars и device key сохраняются, profile rollback не откатывает expiry guard.\n\nProtocol 1, account identity keys, основные криптоалгоритмы, FF1, legacy TTL, production Relay/onion и pinned release public key сохранены. Новых SaaS/telemetry/clearnet fallback нет. Новые peer connections ограничены подписанным onion port 81 через прежний Tor transport. LIFECYCLE-1.2.0.md описывает формат и ограничения.\n\nАвтоматические, actual Tor staging и нативные результаты разделены в отчёте. Windows Server/Ubuntu/headless не заменяют Windows 11/CachyOS. Постоянные encrypted drafts отсутствовали в базе 1.1.5; текущий draft сохраняется в памяти при изменениях UI и блокирует установку обновления, пока не завершён.\n"
+    "text": "# АЕГИС 1.5.0 — Personal Encrypted Archive & Interface Refinement\n\nКандидат для приёмки. Stable не опубликован; productionReady=false до нативных испытаний и подписанного updater E2E.\n\n- Личный локальный архив с независимым паролем, случайным ключом данных, Argon2id, AES-GCM и стандартным Tink Streaming AEAD.\n- Необязательный ключ восстановления; смена пароля и замена/отключение recovery key без перешифрования файлов.\n- Зашифрованы содержимое, имена, папки, теги, избранное и поисковый индекс. На диске — случайные UUID, приватные POSIX-права/NTFS ACL.\n- Папки до 12 уровней, теги, полнотекстовый поиск, фильтры, сортировка, список/таблица/карточки, перемещение, корзина и окончательное удаление.\n- Встроенный просмотр UTF-8 текста, JPG/PNG/WebP и PDF. PDFBox 3.0.8 работает в отдельном ограниченном процессе без окна, активного содержимого и документных временных файлов.\n- Зашифрованные ручные и запланированные копии, отдельный пароль копии, восстановление отдельно, объединение и ремонт диагностической копии.\n- Архивирование показанного обычного/разблокированного письма и вложений. Исчезающие письма требуют предупреждения; таймер оригинала продолжается.\n- Навигация: Поиск → Профиль → Контакты → Письма → Архив → Настройки. Friends скрыт из интерфейса; внутренние данные и контакты сохранены.\n- Компактная верхняя панель, «Новое письмо» в почтовом центре, категории настроек и сообщения об операциях внутри главного окна.\n- Один выбор срока в редакторе с сохранением различия «после доставки» и «после показа».\n- P2P использует действительный подписанный кэш маршрута при краткой недоступности Relay; сбой публикации маршрута больше не закрывает работающий peer/Control.\n- В технических сведениях письма маршрут отображается только после подтверждённого события транспорта.\n- Снимок перед обновлением включает управляемые контейнеры архива; updater ждёт остановки архивного worker.\n- Сохранены protocol 1, Relay compatibility, identity keys, E2EE, letter password/FF1, 16 пресетов и прежние темы, шрифты, макеты, Ed25519/SHA-256/anti-rollback/Tor-only.\n\nНативная Windows 11/KDE Wayland/KDE X11 приёмка, разные физические сети и точный owner-signed 1.2.0 → 1.5.0 updater E2E оформляются отдельными доказательствами, а не результатом компиляции.\n"
   }
 }
