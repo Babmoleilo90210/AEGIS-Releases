@@ -3,7 +3,7 @@
   "application": "AEGIS",
   "channel": "beta",
   "version": "2.0.0",
-  "tag": "v2.0.0-beta.1",
+  "tag": "v2.0.0",
   "repository": "Babmoleilo90210/AEGIS-Releases",
   "protocolVersion": 1,
   "relayCompatibility": [
@@ -47,13 +47,13 @@
     "fileName": "SHA256SUMS",
     "size": 17096,
     "sha256": "eb27c46cca18b1510e11d1b80960d530c8a187768e7a85865647bc9901bbc5a6",
-    "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v2.0.0/SHA256SUMS"
+    "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v2.0.0-beta.1/SHA256SUMS"
   },
   "changelog": {
     "fileName": "CHANGELOG-2.0.0.md",
     "size": 3695,
     "sha256": "38b74063862dca601c8101f71e59c980e89fbfca491d231b44f9f64ff456d7f1",
-    "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v2.0.0/CHANGELOG-2.0.0.md"
+    "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v2.0.0-beta.1/CHANGELOG-2.0.0.md"
   },
   "minimumSupported": "1.5.0",
   "updatePolicy": "optional",
