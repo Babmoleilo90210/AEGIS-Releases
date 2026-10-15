@@ -52,7 +52,7 @@ public final class AppearanceNativeLauncher {
  (kit/'TESTED-ARTIFACTS.json').write_text(json.dumps(metadata,indent=2)+'\n')
  if a.staging_deps:
   staging=kit/'staging';staging.mkdir(exist_ok=True)
-  relay=pathlib.Path(__file__).resolve().parents[1]/'build/local-java21/compatibility/relay02/lib/relay-server.jar';shutil.copy2(relay,staging/relay.name)
+  relay=pathlib.Path(__file__).resolve().parents[1]/'build/local-java21/relay-server.jar';shutil.copy2(relay,staging/relay.name)
   for dep in a.staging_deps.glob('*.jar'):
    if dep.name.startswith(('password4j-','sqlite-jdbc-','slf4j-')):shutil.copy2(dep,staging/dep.name)
   main=source/'integration-tests/src/test/java/org/securemail/integration/LifecycleTorProbe.java'
@@ -61,10 +61,10 @@ public final class AppearanceNativeLauncher {
   stageclasses=temp/'stageclasses';stageclasses.mkdir()
   subprocess.run([str(javac)+suffix,'--release','21','-encoding','UTF-8','-cp',cp,'-d',str(stageclasses),str(main)],check=True,timeout=90)
   subprocess.run([str(jar)+suffix,'--create','--file',str(staging/'lifecycle-tor-tests.jar'),'-C',str(stageclasses),'.'],check=True,timeout=30)
-  (staging/'README.md').write_text('Disposable staging Relay 0.2.0 (independently compiled SHA-verified published 1.0.0 source) and test-only dependencies. Never add these JARs to app/*.jar. Linux-only: the existing Debian Relay uses POSIX filesystem permissions. The real-Tor lifecycle probe generates two throwaway identities/accounts and three ephemeral onion services, on this device only. Production relay/feed/keys are not touched. Cross-network Windows11/KDE acceptance remains separate.\n')
+  (staging/'README.md').write_text('Disposable staging Relay compiled from the same frozen current source as the candidate and test-only dependencies. Never add these JARs to app/*.jar. Linux-only: the existing Debian Relay uses POSIX filesystem permissions. The real-Tor lifecycle probe generates two throwaway identities/accounts and three ephemeral onion services, on this device only. Production relay/feed/keys are not touched. Cross-network Windows11/KDE acceptance remains separate.\n')
 
- # Separate current-Relay profile probe; legacy lifecycle compatibility probe above
- # is retained independently and cannot exercise public-profile capability.
+ # Separate current-Relay profile probe; lifecycle coverage above remains
+ # independent of the public-profile scenarios below.
  if a.staging_deps:
   profile_stage=kit/'staging-profile';profile_stage.mkdir(exist_ok=True)
   current_relay=pathlib.Path(__file__).resolve().parents[1]/'build/local-java21/relay-server.jar'
@@ -142,7 +142,7 @@ printf '%s\\n' 'Синтетические снимки: build/ui200-screenshots
 
 На CachyOS выполните bash Run-CachyOS.sh <AppImage>, затем bash Run-Appearance-CachyOS.sh <AppImage>. Python/JDK/Gradle для запуска не нужны. Повторите в KDE Wayland и X11. Система DPI не меняется: запускайте отдельно при разных настройках дисплея. Не открывайте production key и не отключайте Defender/firewall.
 
-Тесты не меняют реальный профиль, создают искусственные данные. NativeAcceptanceMain сохраняет JSON результатов без паролей/ключей. Дополнительная проверка оформления пишет synthetic screenshots в build/ui200-screenshots. В NativeAcceptanceMain добавлена реальная проверка пяти JavaFX шрифтов с кириллицей, карточки подключения и встроенного просмотра аватара. Friends/receipts/исчезновение реализованы client-only и требуют двух реальных клиентов для native PASS. В каталоге staging есть отдельный тест реальных onion services с disposable Relay 0.2.0; не добавляйте staging JARs в app/. Его PASS не заменяет Windows11/KDE/cross-network acceptance. Полная приёмка через обычный интерфейс, cross-platform Relay, миграция, reboot и подписанный updater выполняются дополнительно по NATIVE-ACCEPTANCE-2.0.0.md. FAIL_OR_UNAVAILABLE не равен PASS. productionReady остаётся false до всех обязательных проверок.
+Тесты не меняют реальный профиль, создают искусственные данные. NativeAcceptanceMain сохраняет JSON результатов без паролей/ключей. Дополнительная проверка оформления пишет synthetic screenshots в build/ui200-screenshots. В NativeAcceptanceMain добавлена реальная проверка пяти JavaFX шрифтов с кириллицей, карточки подключения и встроенного просмотра аватара. Friends/receipts/исчезновение реализованы client-only и требуют двух реальных клиентов для native PASS. В каталоге staging есть отдельный тест реальных onion services с disposable Relay из текущей зафиксированной версии исходников; не добавляйте staging JARs в app/. Его PASS не заменяет Windows11/KDE/cross-network acceptance. Полная приёмка через обычный интерфейс, cross-platform Relay, миграция, reboot и подписанный updater выполняются дополнительно по NATIVE-ACCEPTANCE-2.0.0.md. FAIL_OR_UNAVAILABLE не равен PASS. productionReady остаётся false до всех обязательных проверок.
 
 Состав тестов пересобирается package-native200.py из exact source/client ZIP текущего кандидата и явно переданного JDK21. Все классы fixture/wrapper остаются только в этом комплекте. Приложение не загружает эти JAR.
 ''',encoding='utf-8')

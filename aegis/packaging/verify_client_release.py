@@ -197,13 +197,13 @@ def verify_release(output):
         raise ValueError('AppImage desktop metadata has the wrong version')
     appimage = verify(image, linux)
     names = [setup.name, payload.name, image.name]
-    return {'verification_type': 'offline_structural_and_payload', 'native_OS_acceptance': 'PENDING',
+    return {'verification_type': 'offline_structural_and_payload', 'native_OS_acceptance': 'NOT_RUN',
             'artifacts': [{'name': name, 'bytes': (output / name).stat().st_size, 'sha256': sha256(output / name)} for name in names],
             'windows': {'launcher_PE': pe, 'setup_PE': setup_check, 'zip_CRC': 'OK',
                         'all_payload_files_SHA256_match': True, 'file_count': zip_file_count,
                         'java_21_included': True, 'tor_PT_sodium_included': True},
             'appimage': appimage, 'application_JAR_SHA256': win_jars,
-            'Windows_Linux_application_JARs_identical': True, 'final_Gradle_stage_matches_packages': True,
+            'Windows_Linux_application_JARs_identical': True, 'final_client_stage_matches_packages': True,
             'safeWebInstallerRuntimeDependencies': verify_safe_web_runtime(windows / 'app'),
             'safeWebOfficialPublicVerificationKeyResource': True,
             'pinned_public_key_embedded_in_both_core_JARs': ROOT_KEY.decode('ascii'),
