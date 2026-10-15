@@ -1,0 +1,6 @@
+{
+  "client-core.jar": "e6fa891e383ce141d0184756ff068dd12f7ff0e68ef6fd11bfcb05a1b1362b43",
+  "client-ui.jar": "cde48c519838d3d6deef5bc145315dca01e5a9a47c02863c53b0237c3655f9c6",
+  "common-protocol.jar": "f5b314c44d41a165ad735c170584dfa7318bee6ae1f8018dde10e837fdfc03cb",
+  "relay-server.jar": "adcea8e7a976cd44913d9b6c84dddb63389de023cc3923b57f31b60567776223"
+}

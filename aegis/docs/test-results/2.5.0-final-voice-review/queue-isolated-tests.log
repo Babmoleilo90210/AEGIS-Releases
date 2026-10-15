@@ -1,0 +1,37 @@
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+╷
+├─ JUnit Platform Suite ✔
+├─ JUnit Jupiter ✔
+│  ├─ VoiceAudioQueueTest ✔
+│  │  ├─ blockedOutputDoesNotBlockOffersOrReplayExpiredQueuedSpeech() ✔
+│  │  ├─ controlFramesCannotEnterOrDisplaceTheAudioQueue() ✔
+│  │  ├─ nanoTimeWraparoundStillExpiresAtExactElapsedLimit() ✔
+│  │  ├─ failedWriteWipesTheDequeuedOwnedPayload() ✔
+│  │  ├─ ttlBoundaryUsesLocalEnqueueTimeAndPreservesWireTimestamp() ✔
+│  │  ├─ clearWipesAllRetainedFramesAndAllowsASeparateFreshBatch() ✔
+│  │  ├─ enqueuePurgesExpiredHeadAndReportsLossOnceWhileKeepingFreshTail() ✔
+│  │  ├─ inputBytesAreWipedForSuccessReplacementAndRejectedEncoding() ✔
+│  │  ├─ fullQueueRetainsNewestButReportsPressureAndWipesEvicted() ✔
+│  │  └─ staleHeldFrameIsWipedBeforeWritingAndPressureReachesNextOffer() ✔
+│  └─ VoiceFramesTest ✔
+│     ├─ oversizedLengthAndUnknownTypeAreRejectedBeforeAllocation() ✔
+│     ├─ validFrameStaysBoundedAndBufferCanBeWiped() ✔
+│     └─ controlCannotCarryAudioAndUnsupportedCodecIsRejected() ✔
+└─ JUnit Vintage ✔
+
+Test run finished after 183 ms
+[         5 containers found      ]
+[         0 containers skipped    ]
+[         5 containers started    ]
+[         0 containers aborted    ]
+[         5 containers successful ]
+[         0 containers failed     ]
+[        13 tests found           ]
+[         0 tests skipped         ]
+[        13 tests started         ]
+[         0 tests aborted         ]
+[        13 tests successful      ]
+[         0 tests failed          ]
+

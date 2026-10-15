@@ -1,0 +1,3 @@
+# Финальная проверка после voice queue review
+
+Общий Java-прогон:378found,377PASS,1WindowsDPAPI SKIP,0FAIL/errors. Добавлены10 детерминированных тестов реальной очереди/serializer. Production queue12frames/TTL250ms передаёт сигнал давления и очищает старые кадры; TLS уже начатый write отозвать нельзя. Протокол/identity не изменены. Основные исходники не менялись во время компиляции/тестов. Пять UI probes повторены на этих конечных JAR; их148 реальных PNG и логи находятся в final-package-verification/postreview-ui/ итогового пакета. Исходные прошлые прогоны сохранены как история, не подменены. Native/SOCKS/Tor/physical audio здесь не заявляются.

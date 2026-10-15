@@ -23,78 +23,42 @@
   },
   "automatedJava": {
     "status": "PASS",
-    "scope": "Local Ubuntu 24.04 Java 21 JUnit only",
+    "scope": "Final full automated Java suite after voice queue review; target native acceptance separate.",
     "totals": {
-      "found": 368,
-      "passed": 367,
+      "found": 378,
+      "passed": 377,
       "skipped": 1,
       "failed": 0,
       "errors": 0
     },
     "modules": {
       "common-protocol": {
-        "found": 4,
-        "passed": 4,
+        "tests": 4,
         "skipped": 0,
-        "failed": 0,
+        "failures": 0,
         "errors": 0,
-        "scope": "JUnit on Ubuntu 24.04 / Java 21; platform-specific tests may be skipped",
-        "evidence": [
-          {
-            "path": "docs/test-results/2.5.0/full-java/common-protocol/TEST-junit-jupiter.xml",
-            "kind": "executed_report",
-            "sha256": "4f9fdcfe641255f7dfc4823934c69864b5d24ff05a49048cad6a926e2cf128dc"
-          }
-        ],
-        "junitReportedTimestamp": "2026-10-15T12:02:25"
+        "junitReportedTimestamp": "2026-10-15T12:58:00"
       },
       "client-core": {
-        "found": 347,
-        "passed": 346,
+        "tests": 357,
         "skipped": 1,
-        "failed": 0,
+        "failures": 0,
         "errors": 0,
-        "scope": "JUnit on Ubuntu 24.04 / Java 21; platform-specific tests may be skipped",
-        "evidence": [
-          {
-            "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
-            "kind": "executed_report",
-            "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
-          }
-        ],
-        "junitReportedTimestamp": "2026-10-15T12:04:02"
+        "junitReportedTimestamp": "2026-10-15T12:59:47"
       },
       "relay-server": {
-        "found": 3,
-        "passed": 3,
+        "tests": 3,
         "skipped": 0,
-        "failed": 0,
+        "failures": 0,
         "errors": 0,
-        "scope": "JUnit on Ubuntu 24.04 / Java 21; platform-specific tests may be skipped",
-        "evidence": [
-          {
-            "path": "docs/test-results/2.5.0/full-java/relay-server/TEST-junit-jupiter.xml",
-            "kind": "executed_report",
-            "sha256": "0e4d0240fdadaa422ed267b8c8466a0a196295ef31e255b287c9a1e929111790"
-          }
-        ],
-        "junitReportedTimestamp": "2026-10-15T12:04:04"
+        "junitReportedTimestamp": "2026-10-15T12:59:49"
       },
       "integration-tests": {
-        "found": 14,
-        "passed": 14,
+        "tests": 14,
         "skipped": 0,
-        "failed": 0,
+        "failures": 0,
         "errors": 0,
-        "scope": "JUnit on Ubuntu 24.04 / Java 21; platform-specific tests may be skipped",
-        "evidence": [
-          {
-            "path": "docs/test-results/2.5.0/full-java/integration-tests/TEST-junit-jupiter.xml",
-            "kind": "executed_report",
-            "sha256": "b6aa9bf53aa55a5fa1271fbc843fa64ce663bd960ef09acb79de2c621eabaff6"
-          }
-        ],
-        "junitReportedTimestamp": "2026-10-15T12:04:30"
+        "junitReportedTimestamp": "2026-10-15T13:00:16"
       }
     },
     "skippedNativeChecks": [
@@ -102,9 +66,9 @@
     ],
     "subsetReportsMustNotBeAddedAgainToFullTotals": true,
     "sourceBinding": {
-      "path": "SOURCE-PROVENANCE-2.5.0.json",
+      "path": "docs/test-results/2.5.0-final-voice-review/runtime-source-inputs.json",
       "kind": "executed_report",
-      "sha256": "480b4dc516493a186c99ee03d8e5c67b123e4c0e5950c721aff152e633f0511a"
+      "sha256": "921532363037354a53403f8d5ee60695042d9a4a020aa76c6bbba2119b4aab20"
     }
   },
   "packagingChecks": {

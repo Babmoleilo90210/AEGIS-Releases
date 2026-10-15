@@ -1,0 +1,55 @@
+{
+  "scope": "Final post-review audio-queue fix: Java21 automated and real loopback TLS tests, not physical Tor/audio acceptance",
+  "startedAtUtc": "2026-10-15T10:57:45.051390+00:00",
+  "finishedAtUtc": "2026-10-15T11:00:16.714940+00:00",
+  "compilerExitCode": 0,
+  "runtimeSourceUnchangedDuringBuild": true,
+  "modules": {
+    "common-protocol": {
+      "tests": 4,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "junitReportedTimestamp": "2026-10-15T12:58:00"
+    },
+    "client-core": {
+      "tests": 357,
+      "skipped": 1,
+      "failures": 0,
+      "errors": 0,
+      "junitReportedTimestamp": "2026-10-15T12:59:47"
+    },
+    "relay-server": {
+      "tests": 3,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "junitReportedTimestamp": "2026-10-15T12:59:49"
+    },
+    "integration-tests": {
+      "tests": 14,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "junitReportedTimestamp": "2026-10-15T13:00:16"
+    }
+  },
+  "status": "PASS",
+  "found": 378,
+  "passed": 377,
+  "skipped": 1,
+  "productionReady": false,
+  "command": [
+    "python3",
+    "tools/build-local.py",
+    "--jdk",
+    "/workspace/scratch/aa629f360927/inputs/jdk-21.0.12.1+1",
+    "--deps",
+    "/workspace/scratch/aa629f360927/inputs/squashfs-root/app",
+    "--deps",
+    "/workspace/scratch/aa629f360927/inputs/deps",
+    "--native-root",
+    "/workspace/scratch/aa629f360927/inputs/voice-linux"
+  ],
+  "reason": "Actual review found hidden outbound congestion and missing local queue TTL; fixed and checked before final packaging"
+}

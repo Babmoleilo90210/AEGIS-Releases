@@ -68,3 +68,8 @@ Unsigned manifest generator отвергает несовпадающие versio
 Установка: README-WINDOWS.md и README-CACHYOS.md. Миграция: MIGRATION-1.5.0-TO-2.5.0.md и MIGRATION-2.0.0-TO-2.5.0.md. Подпись: OWNER-OFFLINE-SIGNING-2.5.0.md. Публикация Stable и изменение updates/stable.json(.sig) в этой работе не выполняются.
 
 Дополнительная проверка комплектной Java воспроизвела отсутствие русских locale data в унаследованном JRE: октябрь отображался как Oct. Включены проверенные Java21runtimes с jdk.localedata: Linux jlink en,ru из vendorSHA-проверенного Temurin JDK, Windows официальный Temurin JREZIP с проверкой двух vendorSHAисточников. Фактическое Linux форматирование русского месяца/дня/даты и десятичной запятой прошло; Windows проверены vendorfiles/modules/PE, нативное форматирование NOT_RUN. Закреплены все441runtimefileSHA и лицензии; неизвестные/изменённые файлы и внешние ссылки packager отвергает. Источники и before/after: docs/test-results/2.5.0-java-locale/. Приватные ключи/криптоалгоритмы не менялись.
+
+
+## Финальный review исходящей очереди голоса
+
+Исправлены два подтверждённых дефекта: потеря сигнала congestion при drop-oldest и отсутствие local TTL для накопленных frames. Очередь12frames/250ms, fresh-check перед write после KeyUpdate, очистка payload.10 новых детерминированных тестов; итоговый полный Java-прогон378found/377PASS/1WindowsDPAPI SKIP/0FAIL/errors: docs/test-results/2.5.0-final-voice-review/. Все5headlessUIпроб повторены на конечных sharedJAR,148реальныхPNG в final-package-verification/postreview-ui/ итогового пакета. Старые performance числа остаются измерениями прежнего JAR; byte comparison подтвердил неизменность storage/search workload classes. Протокол и TLS не менялись.

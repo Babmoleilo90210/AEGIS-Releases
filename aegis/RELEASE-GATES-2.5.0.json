@@ -32,32 +32,32 @@
       "id": "JAVA_AUTOMATED",
       "mandatory": true,
       "status": "PASS",
-      "scope": "Полный локальный JUnit: 367 PASS, 1 Windows DPAPI skip, 0 failures/errors. Это не целевая нативная приёмка.",
+      "scope": "Final post-review Java suite:377PASS/1WindowsDPAPI SKIP/0FAIL/errors. Native target acceptance is separate.",
       "evidence": [
         {
-          "path": "docs/test-results/2.5.0/full-java/common-protocol/TEST-junit-jupiter.xml",
+          "path": "docs/test-results/2.5.0-final-voice-review/common-protocol/TEST-junit-jupiter.xml",
           "kind": "executed_report",
-          "sha256": "4f9fdcfe641255f7dfc4823934c69864b5d24ff05a49048cad6a926e2cf128dc"
+          "sha256": "035c45c3fdfb6ae8d0efbb697971e753dc4e785e35f0037131c045f99a12bcda"
         },
         {
-          "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+          "path": "docs/test-results/2.5.0-final-voice-review/client-core/TEST-junit-jupiter.xml",
           "kind": "executed_report",
-          "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+          "sha256": "4dc929e9756045a509b4cdbe7b5ee76a5acaf974ecede779e93d28125a260e09"
         },
         {
-          "path": "docs/test-results/2.5.0/full-java/relay-server/TEST-junit-jupiter.xml",
+          "path": "docs/test-results/2.5.0-final-voice-review/relay-server/TEST-junit-jupiter.xml",
           "kind": "executed_report",
-          "sha256": "0e4d0240fdadaa422ed267b8c8466a0a196295ef31e255b287c9a1e929111790"
+          "sha256": "24c3cb897cba4338524a72fd652cc0f9a522f1fe8b0c64235b772aa5fbe49f44"
         },
         {
-          "path": "docs/test-results/2.5.0/full-java/integration-tests/TEST-junit-jupiter.xml",
+          "path": "docs/test-results/2.5.0-final-voice-review/integration-tests/TEST-junit-jupiter.xml",
           "kind": "executed_report",
-          "sha256": "b6aa9bf53aa55a5fa1271fbc843fa64ce663bd960ef09acb79de2c621eabaff6"
+          "sha256": "6694babfc0f4e5e4cddf906b53b8a92a7928e2d68539b34e994b3e300c55ddfc"
         }
       ],
       "counts": {
-        "found": 368,
-        "passed": 367,
+        "found": 378,
+        "passed": 377,
         "skipped": 1,
         "failed": 0,
         "errors": 0

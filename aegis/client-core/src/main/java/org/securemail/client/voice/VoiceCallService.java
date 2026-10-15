@@ -231,14 +231,14 @@ public final class VoiceCallService implements AutoCloseable {
   }
   private boolean offerAudio(Call call,Link link,long sequence,long timestamp,byte[] opus){
     try{synchronized(lock){if(closed||current!=call||call.link!=link||call.state!=State.SECURE||!call.microphone||link.closed)return false;
-      try{VoiceFrames.Frame frame=VoiceFrames.audio(sequence,timestamp,opus);if(link.audio.offer(frame))return true;VoiceFrames.Frame dropped=link.audio.poll();if(dropped!=null)dropped.wipe();if(link.audio.offer(frame))return true;frame.wipe();return false;}catch(IOException invalid){return false;}}}finally{Arrays.fill(opus,(byte)0);}
+      return link.audio.offer(sequence,timestamp,opus);}}finally{Arrays.fill(opus,(byte)0);}
   }
   private void startWriter(Call call,Link link)throws IOException {
     if(!submit(()->{try{
-      while(!closed&&!link.closed){VoiceFrames.Frame frame=link.controls.poll();if(frame==null)frame=link.audio.poll(50,TimeUnit.MILLISECONDS);if(frame==null)continue;
+      while(!closed&&!link.closed){QueuedAudio audio=null;VoiceFrames.Frame frame=link.controls.poll();if(frame==null){audio=link.audio.poll(50,TimeUnit.MILLISECONDS);if(audio==null)continue;frame=audio.frame;}
         try{boolean allowed;synchronized(lock){allowed=frame.type()!=VoiceFrames.AUDIO||current==call&&call.link==link&&call.microphone&&call.state==State.SECURE&&!call.ending;}if(allowed){
           long now=System.nanoTime();if(now-link.lastKeyUpdate>600_000_000_000L||link.bytesSinceKeyUpdate>=64L*1024*1024){VoiceTls.requestKeyUpdate(link.tls);link.lastKeyUpdate=now;link.bytesSinceKeyUpdate=0;}
-          VoiceFrames.write(link.out,frame);link.bytesSinceKeyUpdate+=frame.payload().length;
+          if(audio==null)VoiceFrames.write(link.out,frame);else if(!link.audio.writeIfFresh(link.out,audio))continue;link.bytesSinceKeyUpdate+=frame.payload().length;
         }if(frame.type()==VoiceFrames.END||frame.type()==VoiceFrames.DECLINE)break;}finally{frame.wipe();}}
     }catch(IOException failure){lost(call,link);}catch(InterruptedException interrupted){Thread.currentThread().interrupt();}finally{closeLink(link);lost(call,link);}}))throw new IOException("Voice worker busy");
   }
@@ -298,7 +298,7 @@ public final class VoiceCallService implements AutoCloseable {
   private void notifyListeners(){if(closed||!notificationPending.compareAndSet(false,true))return;try{notifications.execute(()->{notificationPending.set(false);for(Runnable listener:listeners)try{listener.run();}catch(RuntimeException ignored){}});}catch(RejectedExecutionException ignored){notificationPending.set(false);}}
   private boolean submit(Runnable work){if(closed)return false;try{workers.execute(work);return true;}catch(RejectedExecutionException full){return false;}}
   private boolean submitAudio(Runnable work){if(closed)return false;try{audioActions.execute(work);return true;}catch(RejectedExecutionException full){idleStatus("Аудиоустройства заняты");return false;}}
-  private static void clearAudio(Link link){if(link!=null){VoiceFrames.Frame frame;while((frame=link.audio.poll())!=null)frame.wipe();}}
+  private static void clearAudio(Link link){if(link!=null)link.audio.clear();}
   private static void closeSocket(Socket socket){if(socket!=null)try{socket.close();}catch(IOException ignored){}}
   private static void closeLink(Link link){if(link==null)return;link.closed=true;closeSocket(link.raw);closeSocket(link.tls);clearAudio(link);VoiceFrames.Frame frame;while((frame=link.controls.poll())!=null)frame.wipe();}
   @Override public void close(){
@@ -310,9 +310,49 @@ public final class VoiceCallService implements AutoCloseable {
     State state;String status="",safetyCode="";Link link;Media media;boolean accepted,microphone,desiredMicrophone,microphoneTaskPending,connecting,ending,recordHistory;long microphoneGeneration,startedAt,startedNanos,deadline,reconnectDeadline,nextReconnect;int reconnectAttempts;
     Call(UUID id,UserInfo contact,Direction direction,long createdAt){this.id=id;this.contact=contact;this.direction=direction;this.createdAt=createdAt;}
   }
+  static final long AUDIO_TTL_NANOS=250_000_000L;
+  static final class QueuedAudio {
+    final VoiceFrames.Frame frame;final long enqueuedNanos;
+    private QueuedAudio(VoiceFrames.Frame frame,long enqueuedNanos){this.frame=frame;this.enqueuedNanos=enqueuedNanos;}
+  }
+  /** Owns only audio payloads. A stalled writer must not replay its queued speech later.
+   * The clock seam is local monotonic time, unrelated to peer/wire timestamps.
+   */
+  static final class AudioQueue {
+    private final ArrayDeque<QueuedAudio> frames=new ArrayDeque<>();
+    private final int capacity;private final long ttlNanos;private final java.util.function.LongSupplier nanoTime;
+    private boolean pressurePending;
+    AudioQueue(int capacity,long ttlNanos,java.util.function.LongSupplier nanoTime){if(capacity<1||ttlNanos<1)throw new IllegalArgumentException("Audio queue bounds");this.capacity=capacity;this.ttlNanos=ttlNanos;this.nanoTime=Objects.requireNonNull(nanoTime);}
+    boolean offer(long sequence,long timestamp,byte[] opus){
+      try{return offerOwned(VoiceFrames.audio(sequence,timestamp,opus));}catch(IOException invalid){return false;}finally{Arrays.fill(opus,(byte)0);}
+    }
+    synchronized boolean offerOwned(VoiceFrames.Frame frame){
+      if(frame.type()!=VoiceFrames.AUDIO){frame.wipe();throw new IllegalArgumentException("Audio frame required");}
+      long now=nanoTime.getAsLong();discardExpired(now);boolean pressure=pressurePending;pressurePending=false;
+      if(frames.size()==capacity){frames.removeFirst().frame.wipe();pressure=true;}
+      frames.addLast(new QueuedAudio(frame,now));notifyAll();return !pressure;
+    }
+    synchronized QueuedAudio poll(long timeout,TimeUnit unit)throws InterruptedException{
+      long budget=unit.toNanos(timeout),began=System.nanoTime();
+      while(true){discardExpired(nanoTime.getAsLong());if(!frames.isEmpty())return frames.removeFirst();long remaining=budget-(System.nanoTime()-began);if(remaining<=0)return null;TimeUnit.NANOSECONDS.timedWait(this,remaining);}
+    }
+    private boolean expired(QueuedAudio audio,long now){long age=now-audio.enqueuedNanos;return age<0||age>=ttlNanos;}
+    private void discardExpired(long now){while(!frames.isEmpty()&&expired(frames.getFirst(),now)){frames.removeFirst().frame.wipe();pressurePending=true;}}
+    boolean writeIfFresh(DataOutputStream out,QueuedAudio audio)throws IOException{
+      try{
+        synchronized(this){if(expired(audio,nanoTime.getAsLong())){pressurePending=true;return false;}}
+        // Never hold the queue monitor while TLS blocks. A write already in
+        // progress cannot be retracted; all later queued frames are rechecked.
+        VoiceFrames.write(out,audio.frame);return true;
+      }finally{audio.frame.wipe();}
+    }
+    synchronized void clear(){while(!frames.isEmpty())frames.removeFirst().frame.wipe();notifyAll();}
+    synchronized int size(){return frames.size();}
+  }
   private static final class Link {
     final Socket raw;final SSLSocket tls;final DataInputStream in;final DataOutputStream out;final String safetyCode;
-    final ArrayBlockingQueue<VoiceFrames.Frame> controls=new ArrayBlockingQueue<>(8),audio=new ArrayBlockingQueue<>(20);
+    final ArrayBlockingQueue<VoiceFrames.Frame> controls=new ArrayBlockingQueue<>(8);
+    final AudioQueue audio=new AudioQueue(12,AUDIO_TTL_NANOS,System::nanoTime);
     volatile boolean closed;final long createdNanos=System.nanoTime();volatile long lastReceived=System.nanoTime(),lastPing=System.nanoTime();long lastAudioSequence=-1,lastKeyUpdate=System.nanoTime(),bytesSinceKeyUpdate,rateWindow=System.nanoTime();int framesInWindow;
     Link(Socket raw,SSLSocket tls,String code)throws IOException{this.raw=raw;this.tls=tls;in=new DataInputStream(tls.getInputStream());out=new DataOutputStream(tls.getOutputStream());safetyCode=code;}
   }

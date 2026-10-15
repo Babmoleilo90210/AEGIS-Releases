@@ -1,0 +1,35 @@
+{
+  "scope": "Actual final JAR entries compared to pre-review packaged snapshot; existing storage/search/performance workload classes remain byte-identical, voice queue changed. Old performance figures remain measurements of old JAR snapshot, not a new benchmark.",
+  "modules": {
+    "client-core": {
+      "previousJarSha256": "b13151904e9a2461158466a9da313e5439e816f96c32a226d51de00df830abdf",
+      "finalJarSha256": "e6fa891e383ce141d0184756ff068dd12f7ff0e68ef6fd11bfcb05a1b1362b43",
+      "changedEntries": [
+        "org/securemail/client/voice/VoiceCallService$Link.class",
+        "org/securemail/client/voice/VoiceCallService.class"
+      ],
+      "addedEntries": [
+        "org/securemail/client/voice/VoiceCallService$AudioQueue.class",
+        "org/securemail/client/voice/VoiceCallService$QueuedAudio.class"
+      ],
+      "removedEntries": [],
+      "otherEntriesByteIdentical": true
+    },
+    "client-ui": {
+      "previousJarSha256": "686eb69a381f0fabbc46aab8df53a195904293724ee2b72c6119ed317ba0f7fe",
+      "finalJarSha256": "cde48c519838d3d6deef5bc145315dca01e5a9a47c02863c53b0237c3655f9c6",
+      "changedEntries": [],
+      "addedEntries": [],
+      "removedEntries": [],
+      "otherEntriesByteIdentical": true
+    },
+    "common-protocol": {
+      "previousJarSha256": "55027fee83e95b85c943893d6f07b62de06fa80dbb06da8be63aecd165b89788",
+      "finalJarSha256": "f5b314c44d41a165ad735c170584dfa7318bee6ae1f8018dde10e837fdfc03cb",
+      "changedEntries": [],
+      "addedEntries": [],
+      "removedEntries": [],
+      "otherEntriesByteIdentical": true
+    }
+  }
+}

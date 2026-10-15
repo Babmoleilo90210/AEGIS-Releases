@@ -1,0 +1,112 @@
+/workspace/scratch/aa629f360927/aegis/aegis/client-core/src/main/java/org/securemail/client/MaintenanceMain.java:10: warning: [try] auto-closeable resource lock is never referenced in body of corresponding try statement
+      try(var lock=AppPaths.lock()){UpdateSupport.backup(config);}
+              ^
+/workspace/scratch/aa629f360927/aegis/aegis/client-core/src/main/java/org/securemail/client/archive/PdfWorkerMain.java:31: warning: [try] auto-closeable resource fallback is never referenced in body of corresponding try statement
+    try(var fallback=memoryFonts();var doc=Loader.loadPDF(data)){
+            ^
+/workspace/scratch/aa629f360927/aegis/aegis/client-core/src/main/java/org/securemail/client/net/RequestRejected.java:2: warning: [serial] serializable class RequestRejected has no definition of serialVersionUID
+public final class RequestRejected extends java.io.IOException {
+             ^
+/workspace/scratch/aa629f360927/aegis/aegis/client-core/src/main/java/org/securemail/client/safeweb/TorBrowserSignature.java:265: warning: [deprecation] RSA_SIGN in PublicKeyAlgorithmTags has been deprecated
+                && key.getAlgorithm() != PublicKeyAlgorithmTags.RSA_SIGN) || key.getBitStrength() < 3072)
+                                                               ^
+/workspace/scratch/aa629f360927/aegis/aegis/client-core/src/main/java/org/securemail/client/safeweb/WindowsSafeWebSandbox.java:166: warning: [try] auto-closeable resource sessionGuard is never referenced in body of corresponding try statement
+          try(Closeable sessionGuard=SafeWebDownload.guardDirectory(receipt.getParent())) {
+                        ^
+/workspace/scratch/aa629f360927/aegis/aegis/client-core/src/main/java/org/securemail/client/safeweb/WindowsSafeWebSandbox.java:163: warning: [try] auto-closeable resource guard is never referenced in body of corresponding try statement
+      try(lock;Closeable guard=SafeWebDownload.guardDirectory(control)) {
+                         ^
+/workspace/scratch/aa629f360927/aegis/aegis/client-core/src/main/java/org/securemail/client/update/UpdaterMain.java:31: warning: [try] auto-closeable resource appLock is never referenced in body of corresponding try statement
+    try(var appLock=AppPaths.lock()){
+            ^
+/workspace/scratch/aa629f360927/aegis/aegis/client-core/src/main/java/org/securemail/client/update/UpdaterMain.java:44: warning: [try] auto-closeable resource appLock is never referenced in body of corresponding try statement
+      try(var appLock=AppPaths.lock()){org.securemail.client.storage.ProfileSnapshot.restore(backup,previousConfig);}
+              ^
+8 warnings
+/workspace/scratch/aa629f360927/aegis/aegis/relay-server/src/main/java/org/securemail/relay/Rejection.java:2: warning: [serial] serializable class Rejection has no definition of serialVersionUID
+final class Rejection extends java.io.IOException { final int code; Rejection(int code){super("Request rejected");this.code=code;} }
+      ^
+1 warning
+/workspace/scratch/aa629f360927/aegis/aegis/client-ui/src/main/java/org/securemail/ui/ArchiveView.java:113: warning: [unchecked] unchecked generic array creation for varargs parameter of type TableColumn<ArchiveEntry,?>[]
+    list.getSelectionModel().selectedItemProperty().addListener((o,a,b)->{if(b!=null)selected(b);});table.getColumns().clear();TableColumn<ArchiveEntry,String> name=new TableColumn<>("Название"),bytes=new TableColumn<>("Размер"),added=new TableColumn<>("Добавлено"),tags=new TableColumn<>("Теги"),kind=new TableColumn<>("Тип");kind.setCellValueFactory(c->new javafx.beans.property.SimpleStringProperty(ArchiveDisplayTypes.label(c.getValue().type())));name.setCellValueFactory(c->new javafx.beans.property.SimpleStringProperty(c.getValue().name()));bytes.setCellValueFactory(c->new javafx.beans.property.SimpleStringProperty(size(c.getValue().size())));added.setCellValueFactory(c->new javafx.beans.property.SimpleStringProperty(date(c.getValue().addedAt())));tags.setCellValueFactory(c->new javafx.beans.property.SimpleStringProperty(String.join(", ",c.getValue().tags())));table.getColumns().addAll(name,kind,bytes,added,tags);table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);table.getSelectionModel().selectedItemProperty().addListener((o,a,b)->{if(b!=null)selected(b);});table.setRowFactory(v->new TableRow<>(){protected void updateItem(ArchiveEntry e,boolean empty){super.updateItem(e,empty);setContextMenu(empty||e==null?null:menu(e));} {setOnDragDetected(e->{if(getItem()!=null){var content=new ClipboardContent();content.putString(getItem().id());startDragAndDrop(TransferMode.MOVE).setContent(content);e.consume();}});}});
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ^
+1 warning
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+
+Test run finished after 131 ms
+[         4 containers found      ]
+[         0 containers skipped    ]
+[         4 containers started    ]
+[         0 containers aborted    ]
+[         4 containers successful ]
+[         0 containers failed     ]
+[         4 tests found           ]
+[         0 tests skipped         ]
+[         4 tests started         ]
+[         0 tests aborted         ]
+[         4 tests successful      ]
+[         0 tests failed          ]
+
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+Oct 15, 2026 12:58:49 PM org.junit.jupiter.engine.extension.TempDirectory$CloseablePath$1 warnAboutLinkWithTargetOutsideTempDir
+WARNING: Deleting symbolic link from location inside of temp dir (/tmp/junit-16780913146786244662/linked.so) to location outside of temp dir (/workspace/scratch/aa629f360927/inputs/voice-linux/native/libopus.so) but not the target file/directory
+warning: Had to discard a playback frame (your application is buggy and/or got xruns)
+warning: Had to discard a playback frame (your application is buggy and/or got xruns)
+Oct 15, 2026 12:58:57 PM org.junit.jupiter.engine.extension.TempDirectory$CloseablePath$1 warnAboutLinkWithTargetOutsideTempDir
+WARNING: Deleting symbolic link from location inside of temp dir (/tmp/junit-376219005652184231/alias) to location outside of temp dir (/usr) but not the target file/directory
+
+Test run finished after 105904 ms
+[        61 containers found      ]
+[         0 containers skipped    ]
+[        61 containers started    ]
+[         0 containers aborted    ]
+[        61 containers successful ]
+[         0 containers failed     ]
+[       357 tests found           ]
+[         1 tests skipped         ]
+[       356 tests started         ]
+[         0 tests aborted         ]
+[       356 tests successful      ]
+[         0 tests failed          ]
+
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+
+Test run finished after 1125 ms
+[         5 containers found      ]
+[         0 containers skipped    ]
+[         5 containers started    ]
+[         0 containers aborted    ]
+[         5 containers successful ]
+[         0 containers failed     ]
+[         3 tests found           ]
+[         0 tests skipped         ]
+[         3 tests started         ]
+[         0 tests aborted         ]
+[         3 tests successful      ]
+[         0 tests failed          ]
+
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+
+Test run finished after 26157 ms
+[         6 containers found      ]
+[         0 containers skipped    ]
+[         6 containers started    ]
+[         0 containers aborted    ]
+[         6 containers successful ]
+[         0 containers failed     ]
+[        14 tests found           ]
+[         0 tests skipped         ]
+[        14 tests started         ]
+[         0 tests aborted         ]
+[        14 tests successful      ]
+[         0 tests failed          ]
+
+Java 21 build complete; native acceptance is separate.

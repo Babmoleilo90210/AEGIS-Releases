@@ -8,29 +8,26 @@
   },
   "finalSourceCommit": "See generated BUILD-PROVENANCE-2.5.0.json alongside release artifacts (avoids a self-referential Git commit)",
   "finalRuntimeSourceInputs": {
-    "path": "docs/test-results/2.5.0/full-java/final-runtime-source-inputs.json",
+    "path": "docs/test-results/2.5.0-final-voice-review/runtime-source-inputs.json",
     "kind": "executed_report",
-    "sha256": "fcf56c207bdf9db42155d39912387daed16a3322cf5aa2e1fc98659b00a9f17a"
+    "sha256": "921532363037354a53403f8d5ee60695042d9a4a020aa76c6bbba2119b4aab20"
   },
   "fullJavaBuild": {
-    "path": "docs/test-results/2.5.0/full-java/RESULTS.json",
+    "path": "docs/test-results/2.5.0-final-voice-review/RESULTS.json",
     "kind": "executed_report",
-    "sha256": "591c74703dd7521a369ec070f36319e8c3c28bf4629d52d84d27d85059480364"
+    "sha256": "a369f8e2ffca40936be4b942b8edd19380bf91f8f9d00459287f089419d5064f"
   },
   "uiOnlyRecompile": {
-    "path": "docs/test-results/2.5.0/full-java/UI-RECOMPILE-FOLLOWUP.json",
-    "kind": "executed_report",
-    "sha256": "01b9440a769c69c756ac8884a29d306f1ad05d23d027a989e34d374ca3603898"
+    "historicalPreReviewOnly": true,
+    "currentUiFollowup": "final-package-verification/postreview-ui/RESULTS.json in final artifact package"
   },
-  "productionInputChangesAfterFullJUnit": [
-    "client-ui/src/main/java/org/securemail/ui/InWindowDialog.java"
-  ],
-  "reason": "Only common JavaFX dialog measurement changed; fresh UI module recompiled and all five current/related headless probes run against the final shared JAR. Core/common/Relay source and JARs unchanged.",
+  "productionInputChangesAfterFullJUnit": [],
+  "reason": "Final review fixed outbound voice pressure/TTL. All production modules recompiled, full Java suite passed and all five headless UI probes rerun on final shared JARs; generated BUILD-PROVENANCE binds the eventual remote commit and package hashes.",
   "applicationJarSha256": {
-    "client-ui.jar": "686eb69a381f0fabbc46aab8df53a195904293724ee2b72c6119ed317ba0f7fe",
-    "relay-server.jar": "5a454cdc3c10845dd8463dfb53b52d0b485999577dc26af9aa696e91d0e31adf",
-    "common-protocol.jar": "55027fee83e95b85c943893d6f07b62de06fa80dbb06da8be63aecd165b89788",
-    "client-core.jar": "b13151904e9a2461158466a9da313e5439e816f96c32a226d51de00df830abdf"
+    "client-core.jar": "e6fa891e383ce141d0184756ff068dd12f7ff0e68ef6fd11bfcb05a1b1362b43",
+    "client-ui.jar": "cde48c519838d3d6deef5bc145315dca01e5a9a47c02863c53b0237c3655f9c6",
+    "common-protocol.jar": "f5b314c44d41a165ad735c170584dfa7318bee6ae1f8018dde10e837fdfc03cb",
+    "relay-server.jar": "adcea8e7a976cd44913d9b6c84dddb63389de023cc3923b57f31b60567776223"
   },
   "nativeAudioProvenance": {
     "path": "packaging/native-kit/voice-runtime-provenance.json",
@@ -45,5 +42,28 @@
     "path": "packaging/native-kit/java-runtime-provenance-2.5.0.json",
     "sha256": "7fa3dfb5bfbb86cf1c4da4d6b2f073f087b503ef1729e71ab68fec8b88c2ae27",
     "reason": "Actual packaged old JRE had only English locale data; Russian native formatting must be available without user JDK installation"
+  },
+  "historicalPreReviewProvenance": {
+    "finalRuntimeSourceInputs": {
+      "path": "docs/test-results/2.5.0/full-java/final-runtime-source-inputs.json",
+      "kind": "executed_report",
+      "sha256": "fcf56c207bdf9db42155d39912387daed16a3322cf5aa2e1fc98659b00a9f17a"
+    },
+    "fullJavaBuild": {
+      "path": "docs/test-results/2.5.0/full-java/RESULTS.json",
+      "kind": "executed_report",
+      "sha256": "591c74703dd7521a369ec070f36319e8c3c28bf4629d52d84d27d85059480364"
+    },
+    "uiOnlyRecompile": {
+      "path": "docs/test-results/2.5.0/full-java/UI-RECOMPILE-FOLLOWUP.json",
+      "kind": "executed_report",
+      "sha256": "01b9440a769c69c756ac8884a29d306f1ad05d23d027a989e34d374ca3603898"
+    },
+    "applicationJarSha256": {
+      "client-ui.jar": "686eb69a381f0fabbc46aab8df53a195904293724ee2b72c6119ed317ba0f7fe",
+      "relay-server.jar": "5a454cdc3c10845dd8463dfb53b52d0b485999577dc26af9aa696e91d0e31adf",
+      "common-protocol.jar": "55027fee83e95b85c943893d6f07b62de06fa80dbb06da8be63aecd165b89788",
+      "client-core.jar": "b13151904e9a2461158466a9da313e5439e816f96c32a226d51de00df830abdf"
+    }
   }
 }
