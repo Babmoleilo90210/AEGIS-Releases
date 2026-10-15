@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "application": "AEGIS",
   "channel": "beta",
-  "version": "2.0.0",
-  "tag": "v2.0.0",
+  "version": "2.5.0",
+  "tag": "v2.5.0",
   "repository": "Babmoleilo90210/AEGIS-Releases",
   "protocolVersion": 1,
   "relayCompatibility": [
@@ -11,60 +11,60 @@
   ],
   "artifacts": [
     {
-      "fileName": "AEGIS-Setup-2.0.0-x64.exe",
+      "fileName": "AEGIS-Setup-2.5.0-x64.exe",
+      "size": 83957703,
+      "sha256": "23f58c149bfd8e62d14fe585a05bcb67aaf23e17c283b925e1521d930ebb6b1a",
+      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v2.5.0/AEGIS-Setup-2.5.0-x64.exe",
       "platform": "windows-x64",
-      "kind": "installer",
-      "size": 79096513,
-      "sha256": "d38ffebec669ddeb94ef26917e8f484c8c7a4dfd90009858443cc62d3c1750de",
-      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v2.0.0/AEGIS-Setup-2.0.0-x64.exe"
+      "kind": "installer"
     },
     {
-      "fileName": "AEGIS-2.0.0-Windows-x64.zip",
+      "fileName": "AEGIS-2.5.0-Windows-x64.zip",
+      "size": 114802498,
+      "sha256": "a888d5a5546225edfba0846d4a53215b4227391e62923b70dd98798af3d17b4f",
+      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v2.5.0/AEGIS-2.5.0-Windows-x64.zip",
       "platform": "windows-x64",
-      "kind": "portable",
-      "size": 88736585,
-      "sha256": "dec306f1759912010befa37b5efd907e80fb3134a64cdce7be8d25716bfc5be2",
-      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v2.0.0/AEGIS-2.0.0-Windows-x64.zip"
+      "kind": "portable"
     },
     {
-      "fileName": "AEGIS-2.0.0-CachyOS-x86_64.AppImage",
+      "fileName": "AEGIS-2.5.0-CachyOS-x86_64.AppImage",
+      "size": 95586808,
+      "sha256": "2b1c241dd37443c55ff592750bd14ab945adba642c07037b10fe67cde7f5474f",
+      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v2.5.0/AEGIS-2.5.0-CachyOS-x86_64.AppImage",
       "platform": "cachyos-x86_64",
-      "kind": "appimage",
-      "size": 87075320,
-      "sha256": "4e75b00b93b3ed6321f40b5e6052cb954d5ceafaad1ed7ad802c3eb57fb6e687",
-      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v2.0.0/AEGIS-2.0.0-CachyOS-x86_64.AppImage"
+      "kind": "appimage"
     },
     {
-      "fileName": "AEGIS-2.0.0-client-source.zip",
+      "fileName": "AEGIS-2.5.0-client-source.zip",
+      "size": 19057095,
+      "sha256": "c2664af51e5e074a3d447c75faa8a5ba20c53627139b1fea17a373141aed5645",
+      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v2.5.0/AEGIS-2.5.0-client-source.zip",
       "platform": "source",
-      "kind": "source",
-      "size": 7799392,
-      "sha256": "ade6108509ac837d9781ff3f03ebfe0bd9c917b332bbf221de0ed9ca28c90633",
-      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v2.0.0/AEGIS-2.0.0-client-source.zip"
+      "kind": "source"
     }
   ],
   "checksums": {
     "fileName": "SHA256SUMS",
-    "size": 17096,
-    "sha256": "eb27c46cca18b1510e11d1b80960d530c8a187768e7a85865647bc9901bbc5a6",
-    "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v2.0.0/SHA256SUMS"
+    "size": 3407,
+    "sha256": "187fa70d9f3bc57ffcb20a8d8ae4e8f8116309d71446b80aaf0154336b0d7a25",
+    "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v2.5.0/SHA256SUMS"
   },
   "changelog": {
-    "fileName": "CHANGELOG-2.0.0.md",
-    "size": 3695,
-    "sha256": "38b74063862dca601c8101f71e59c980e89fbfca491d231b44f9f64ff456d7f1",
-    "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v2.0.0/CHANGELOG-2.0.0.md"
+    "fileName": "CHANGELOG-2.5.0.md",
+    "size": 3202,
+    "sha256": "5e844eee7b40ee737cce96d5fdfc6f24797426211622ef706071ca679b4fc6e7",
+    "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v2.5.0/CHANGELOG-2.5.0.md"
   },
   "minimumSupported": "1.5.0",
   "updatePolicy": "optional",
   "announcement": {
-    "title": "АЕГИС 2.0.0 — тестовый кандидат",
-    "summary": "Пакет для приёмки. productionReady=false; нативные и сетевые испытания, updater E2E и согласование nickname остаются открыты. Не Stable.",
-    "showAsLetter": false
+    "title": "АЕГИС 2.5.0 — «Взор и Глас»",
+    "summary": "АЕГИС 2.5.0: подробности в журнале изменений.",
+    "showAsLetter": true
   },
   "releaseNotes": {
-    "publishedAt": "2026-10-15T06:20:46Z",
+    "publishedAt": "2026-10-15T11:07:19Z",
     "type": "Feature",
-    "text": "# 2.0.0 — Safe Web & Complete Interface Refinement\n\nТекущий статус — кандидат для проверки, `productionReady=false`; Stable не опубликован.\n\n- Safe Web встроен в навигацию. Встроенный Java OpenPGP verifier проверяет официальный пакет до распаковки/запуска; используется отдельный полный Tor Browser со своим Tor.\n- Реализованы обычные и временные сессии, отдельные trusted templates/receipts, атомарная подготовка, блокировка управляющего экземпляра и сохранение владения при ошибке остановки.\n- Linux: bubblewrap, private network namespace/slirp и вложенный Xephyr. Windows: официальный Windows Sandbox CLI, собственный VM ID и восстановление после сбоя. Требуются Windows11 24H2+ Pro/Enterprise/Education; Home этим backend не покрыт.\n- Реализованы явное открытие выбранной ссылки письма, строгая проверка URL, загрузки и защищённый snapshot перед импортом существующим EncryptedArchive. Автоматического запуска файлов нет.\n- Настройки объединены в пять категорий на общей подложке; содержимое ниже, единая прокрутка, длинные русские подписи и масштабирование. Возвращены все категории уведомлений и доступ к прежним функциям.\n- Архив: основные действия и меню дополнительных; сохранены список/таблица/карточки. Поиск: одна строка и шесть скрытых фильтров; исправлен отправитель исходящих писем.\n- Профиль: компактная карточка; исправлены устаревшее изображение контакта, удаление/скрытие аватара и гонка публикации. Метаданные изображения удаляются при сохранении и публикации старых данных.\n- Сохранены 16 пресетов, пользовательские темы/макеты, навигационный порядок и одобренная верхняя панель. Добавлены проверки миграции, cache/replay/privacy, UI 800×600 при100–200%, runtime packaging и lifecycle.\n\nОткрытые обязательные пункты: фактическая установка/версия официального Tor Browser; HTTPS/onion/DNS/WebRTC/packet capture и границы ОС; совместимость официального MAR updater; нативная приёмка Windows11/CachyOS Wayland/X11; полный owner-signed updater 1.5→2.0 и rollback; реальный двухаккаунтный обмен аватарами через Tor; согласованное серверное переименование nickname; определение требований к другим редакциям Windows. Попытки настоящего Tor в доступной сети заблокированы до готовности — это не PASS профилей. Production Relay, Stable feed и release keys не менялись.\n"
+    "text": "# АЕГИС 2.5.0 — «Взор и Глас»\n\nКандидат для приёмки, `productionReady=false`. Stable и подписной feed не опубликованы.\n\n- «Взор»: автоматическое получение официального Tor Browser и OpenPGP-подписи через Tor, проверка закреплённого ключа, версии и архитектуры, отмена, атомарная установка, восстановление и повторное удостоверение изменённой установки. Ручной импорт сохранён как резервный путь.\n- «Глас»: настоящая реализация личных звонков с onion P2P, взаимно аутентифицированным TLS 1.3, существующими Ed25519 identity, Opus, SpeexDSP AEC/NS, ограниченными очередями, восстановлением и добровольной зашифрованной историей. Микрофон включается явно после принятия и аутентификации.\n- Единые контурные значки, русские названия, восемь переставляемых разделов. Safe Web переименован во «Взор» с сохранением внутреннего ID и параметров.\n- Исправлена комплектная Java: добавлены русские данные локали для дат, календаря и чисел, проверены vendorSHA и все файлы runtime.\n- Исправлены пересечения избранного в галерее всех 16 пресетов, русские типы архива, компактное управление архивом с вложенными панелями и отображение меню при масштабе.\n- Сохранены компактный поиск, пять категорий настроек с содержимым ниже, контакты, письма и утверждённая верхняя панель.\n- Исправлены crash-safe публикация аватара, dirty-generation acknowledgement и очистка кэша контактов.\n- Добавлены миграция навигации 6/7→8 без сброса порядка, предварительный полный снимок профиля, проверки idempotency и прерванного снимка.\n- Генератор manifest обеспечивает `tag == \"v\" + version` и совпадающие release URL; старые парсеры проверяются автоматически. Ed25519, SHA-256, anti-rollback и pinned public key сохранены.\n\nОбязательная нативная приёмка Windows 11/CachyOS KDE, официальный браузер, DNS/IP/WebRTC-измерения, разговор двух физических устройств и updater E2E остаются незавершёнными. Подробности в TEST-REPORT-2.5.0.md и RELEASE-GATES-2.5.0.json.\n"
   }
 }
