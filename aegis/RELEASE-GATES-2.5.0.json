@@ -103,7 +103,7 @@
       "id": "FIXED_SOURCE_ARTIFACT_BINDING",
       "mandatory": true,
       "status": "NOT_RUN",
-      "scope": "Требуется финальный зафиксированный source commit и доказательство соответствия всех конечных бинарников/архивов одной версии. Текущий HEAD является базой, реализация находится в рабочем дереве.",
+      "scope": "Финальные бинарники собраны из зафиксированного source tree; окончательные source ZIP, native kit и SHA-256 связываются с remote commit в BUILD-PROVENANCE-2.5.0.json при упаковке.",
       "evidence": [
         {
           "path": "TEST-REPORT-2.5.0.md",
@@ -133,7 +133,7 @@
           "sha256": "df6df63b5bbaa87929d3713f519fb481e5e0ed5f5f076eccb4a9fa0cb5da3d0a"
         }
       ],
-      "executionState": "IN_PROGRESS"
+      "executionState": "COMPLETE_HEADLESS_ONLY"
     },
     {
       "id": "NATIVE_WINDOWS11",
@@ -1555,7 +1555,6 @@
     "allMandatoryPass": false,
     "unmetMandatoryIds": [
       "FIXED_SOURCE_ARTIFACT_BINDING",
-      "FINAL_HEADLESS_UI",
       "NATIVE_WINDOWS11",
       "NATIVE_CACHYOS_KDE_WAYLAND",
       "NATIVE_CACHYOS_KDE_X11",

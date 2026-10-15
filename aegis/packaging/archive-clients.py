@@ -18,7 +18,7 @@ commit=git('rev-parse','HEAD').decode().strip()
 if git('status','--porcelain','--untracked-files=all','--','.').strip():
     raise SystemExit('Refusing source archive: commit all intended source/evidence changes first')
 entries=[]
-for raw in git('ls-tree','-r','-z',commit,'--',prefix).split(b'\0'):
+for raw in git('ls-tree','-r','-z','--full-tree',commit,'--',prefix).split(b'\0'):
     if not raw:continue
     meta,name=raw.split(b'\t',1);mode,kind,blob=meta.decode().split();path=name.decode('utf-8')
     if kind!='blob' or mode not in ('100644','100755') or not path.startswith(prefix):

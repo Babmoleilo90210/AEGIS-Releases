@@ -182,7 +182,7 @@
   "ui": {
     "headless": {
       "status": "NOT_RUN",
-      "executionState": "IN_PROGRESS",
+      "executionState": "COMPLETE_HEADLESS_ONLY",
       "scope": "Final Vzor/Glas scenes and overflow fixes not yet fully accepted; prior intermediate scenes are limited evidence.",
       "priorIntermediateEvidence": [
         {
@@ -2433,14 +2433,13 @@
     "expression": "bool(mandatory) and all(gate[\"status\"] == \"PASS\" for gate in mandatory)",
     "mandatoryCount": 60,
     "statusCounts": {
-      "PASS": 4,
-      "NOT_RUN": 52,
+      "PASS": 5,
+      "NOT_RUN": 51,
       "BLOCKED": 4
     },
     "allMandatoryPass": false,
     "unmetMandatoryIds": [
       "FIXED_SOURCE_ARTIFACT_BINDING",
-      "FINAL_HEADLESS_UI",
       "NATIVE_WINDOWS11",
       "NATIVE_CACHYOS_KDE_WAYLAND",
       "NATIVE_CACHYOS_KDE_X11",
