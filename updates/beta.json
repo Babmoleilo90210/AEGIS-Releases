@@ -16,7 +16,7 @@
       "kind": "installer",
       "size": 79096513,
       "sha256": "d38ffebec669ddeb94ef26917e8f484c8c7a4dfd90009858443cc62d3c1750de",
-      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v2.0.0-beta.1/AEGIS-Setup-2.0.0-x64.exe"
+      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v2.0.0/AEGIS-Setup-2.0.0-x64.exe"
     },
     {
       "fileName": "AEGIS-2.0.0-Windows-x64.zip",
@@ -24,7 +24,7 @@
       "kind": "portable",
       "size": 88736585,
       "sha256": "dec306f1759912010befa37b5efd907e80fb3134a64cdce7be8d25716bfc5be2",
-      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v2.0.0-beta.1/AEGIS-2.0.0-Windows-x64.zip"
+      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v2.0.0/AEGIS-2.0.0-Windows-x64.zip"
     },
     {
       "fileName": "AEGIS-2.0.0-CachyOS-x86_64.AppImage",
@@ -32,7 +32,7 @@
       "kind": "appimage",
       "size": 87075320,
       "sha256": "4e75b00b93b3ed6321f40b5e6052cb954d5ceafaad1ed7ad802c3eb57fb6e687",
-      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v2.0.0-beta.1/AEGIS-2.0.0-CachyOS-x86_64.AppImage"
+      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v2.0.0/AEGIS-2.0.0-CachyOS-x86_64.AppImage"
     },
     {
       "fileName": "AEGIS-2.0.0-client-source.zip",
@@ -40,20 +40,20 @@
       "kind": "source",
       "size": 7799392,
       "sha256": "ade6108509ac837d9781ff3f03ebfe0bd9c917b332bbf221de0ed9ca28c90633",
-      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v2.0.0-beta.1/AEGIS-2.0.0-client-source.zip"
+      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v2.0.0/AEGIS-2.0.0-client-source.zip"
     }
   ],
   "checksums": {
     "fileName": "SHA256SUMS",
     "size": 17096,
     "sha256": "eb27c46cca18b1510e11d1b80960d530c8a187768e7a85865647bc9901bbc5a6",
-    "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v2.0.0-beta.1/SHA256SUMS"
+    "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v2.0.0/SHA256SUMS"
   },
   "changelog": {
     "fileName": "CHANGELOG-2.0.0.md",
     "size": 3695,
     "sha256": "38b74063862dca601c8101f71e59c980e89fbfca491d231b44f9f64ff456d7f1",
-    "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v2.0.0-beta.1/CHANGELOG-2.0.0.md"
+    "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v2.0.0/CHANGELOG-2.0.0.md"
   },
   "minimumSupported": "1.5.0",
   "updatePolicy": "optional",
