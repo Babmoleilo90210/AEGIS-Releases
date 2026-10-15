@@ -32,5 +32,5 @@ public record UpdateDiagnostic(Category category, String code, String exceptionT
     case STORAGE->"Не удалось сохранить данные обновления на этом устройстве";
     case CANCELLED->"Скачивание отменено";
     case INTERNAL->"Не удалось завершить проверку обновления";};}
-  public String technical(){return "Категория: "+category+" · Код: "+code+(exceptionType.isEmpty()?"":" · Тип: "+exceptionType);}
+  public String technical(){String label=switch(category){case TRANSPORT->"Транспорт";case TLS->"TLS";case HTTP->"HTTP";case SIGNATURE->"Подпись";case SCHEMA->"Формат данных";case POLICY->"Политика обновлений";case STORAGE->"Хранилище";case CANCELLED->"Отмена";case INTERNAL->"Внутренняя ошибка";};return "Категория: "+label+" · Код: "+code+(exceptionType.isEmpty()?"":" · Тип: "+exceptionType);}
 }

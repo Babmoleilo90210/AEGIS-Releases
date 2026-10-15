@@ -39,14 +39,18 @@ public final class LocalFeatures {
     byte[] data=JsonData.encode(o);try{local.writeFeatures(data);}finally{Arrays.fill(data,(byte)0);}
   }
   public synchronized String about(){return about;}public synchronized boolean visible(){return visible;}
-  public synchronized boolean profilePending(){return profilePending;}
-  public record ProfileState(String about,boolean visible,boolean pending,long generation){}
-  public synchronized ProfileState profileState(){return new ProfileState(about,visible,profilePending,profileGeneration);}
+  public synchronized boolean profilePending(){return profilePending||!local.avatarPublicationToken().isEmpty();}
+  public record ProfileState(String about,boolean visible,boolean pending,long generation,String avatarToken){}
+  public synchronized ProfileState profileState(){return new ProfileState(about,visible,profilePending(),profileGeneration,local.avatarPublicationToken());}
   public synchronized void profile(String text,boolean show)throws IOException,GeneralSecurityException{if(text.length()>500||text.codePoints().anyMatch(c->Character.isISOControl(c)&&c!='\n'))throw new IOException("О себе: до 500 символов");about=text;visible=show;profilePending=true;profileGeneration++;save();}
   public synchronized void profileChanged()throws IOException,GeneralSecurityException{profilePending=true;profileGeneration++;save();}
-  public synchronized void profilePublished()throws IOException,GeneralSecurityException{profilePending=false;save();}
+  public synchronized void profilePublished()throws IOException,GeneralSecurityException{profilePublished(profileState());}
   /** A publication that began before an edit may not consume that newer edit. */
   public synchronized void profilePublished(long generation)throws IOException,GeneralSecurityException{if(profileGeneration==generation){profilePending=false;save();}}
+  /** Keeps a concurrent or crash-recovered avatar edit pending until its own publication succeeds. */
+  public synchronized void profilePublished(ProfileState state)throws IOException,GeneralSecurityException{
+    if(profileGeneration==state.generation()){profilePending=false;save();local.avatarPublished(state.avatarToken());}
+  }
   public synchronized boolean blocked(EncryptedPacket p){return blockedMail.contains(p.messageId())||blockedSenders.contains(p.senderId());}
   public synchronized boolean blocked(String messageId,String senderId){return blockedMail.contains(messageId)||blockedSenders.contains(senderId);}
   public synchronized boolean blockedSender(String id){return blockedSenders.contains(id);}

@@ -31,6 +31,9 @@ public final class LocalStore implements AutoCloseable {
   private boolean closed;
   private volatile long changeCounter;
   private volatile long avatarRevision;
+  private String avatarPublicationToken="";
+  private static final String AVATAR_PUBLICATION_FILE="own-avatar-publication-v1.vault";
+  private static final byte[] AVATAR_PUBLICATION_AAD="own-avatar-publication/v1".getBytes(java.nio.charset.StandardCharsets.US_ASCII);
   public long avatarRevision(){return avatarRevision;}
   private final ArrayDeque<DeliveryNotice> notices=new ArrayDeque<>();
   private final Set<String> expiredMetadata=new HashSet<>();
@@ -99,6 +102,13 @@ public final class LocalStore implements AutoCloseable {
         identity = Identity.create();
         save();
       }
+      pruneOrphanedProfiles();
+      Path publication=this.root.resolve(AVATAR_PUBLICATION_FILE);
+      if(Files.exists(publication,LinkOption.NOFOLLOW_LINKS)){
+        byte[] pending=null;try{pending=open(AtomicFiles.read(publication,256),AVATAR_PUBLICATION_AAD);String token=new String(pending,java.nio.charset.StandardCharsets.US_ASCII);if(!token.matches("[a-f0-9-]{36}"))throw new IOException("Avatar publication marker damaged");avatarPublicationToken=token;}
+        catch(IOException|GeneralSecurityException damaged){avatarPublicationToken=UUID.randomUUID().toString();/* An unreadable dirty marker means republish, never silently drop the edit. */}
+        finally{if(pending!=null)Arrays.fill(pending,(byte)0);}
+      }
       // A backwards wall clock must not destroy unrelated mail or extend its TTL.
       anchorWall = Math.max(clock.millis(), lastWall);
       cleanup();
@@ -126,11 +136,32 @@ public final class LocalStore implements AutoCloseable {
   public synchronized void avatar(String nickname,byte[] png)throws IOException,GeneralSecurityException {
     ensureOpen();nickname=Limits.nickname(nickname);
     if(!nickname.equals(this.nickname))throw new IOException("Можно изменять только собственный аватар");
-    Path path=avatarPath(nickname);AtomicFiles.directory(path.getParent());if(png==null){Files.deleteIfExists(path);avatarRevision++;return;}if(png.length>1024*1024)throw new IOException("Avatar too large");
+    Path path=avatarPath(nickname);AtomicFiles.directory(path.getParent());if(png==null){markAvatarPublication();Files.deleteIfExists(path);AtomicFiles.syncDirectory(path.getParent());avatarRevision++;return;}if(png.length>1024*1024)throw new IOException("Avatar too large");
     // Enforce metadata stripping at the storage boundary as well as in the UI.
     // Callers cannot accidentally publish EXIF/location from an original file.
-    byte[] pixels=AvatarCodec.normalize(png);try{AtomicFiles.write(path,seal(pixels,("avatar/v1/"+nickname).getBytes(java.nio.charset.StandardCharsets.US_ASCII)));}finally{Arrays.fill(pixels,(byte)0);}
+    byte[] pixels=AvatarCodec.normalize(png);try{byte[] encrypted=seal(pixels,("avatar/v1/"+nickname).getBytes(java.nio.charset.StandardCharsets.US_ASCII));profileQuota(path,encrypted.length);markAvatarPublication();AtomicFiles.write(path,encrypted);}finally{Arrays.fill(pixels,(byte)0);}
     avatarRevision++;
+  }
+  /** Journal first: a crash after changing pixels must still request publication on restart. */
+  private void markAvatarPublication()throws IOException,GeneralSecurityException{
+    String token=UUID.randomUUID().toString();AtomicFiles.write(root.resolve(AVATAR_PUBLICATION_FILE),seal(token.getBytes(java.nio.charset.StandardCharsets.US_ASCII),AVATAR_PUBLICATION_AAD));avatarPublicationToken=token;
+  }
+  public synchronized String avatarPublicationToken(){return avatarPublicationToken;}
+  /** Only the precise avatar snapshot that was sent may acknowledge its durable dirty marker. */
+  public synchronized void avatarPublished(String token)throws IOException{
+    ensureOpen();if(token.isEmpty()||!token.equals(avatarPublicationToken))return;
+    Files.deleteIfExists(root.resolve(AVATAR_PUBLICATION_FILE));AtomicFiles.syncDirectory(root);avatarPublicationToken="";
+  }
+  private void profileQuota(Path replaced,long nextBytes)throws IOException{
+    long previous=Files.exists(replaced,LinkOption.NOFOLLOW_LINKS)?Files.size(replaced):0;
+    if(usedBytes()-previous+nextBytes>maxBytes)throw new IOException("Локальное хранилище заполнено: профиль или аватар не сохранён");
+  }
+  /** Profiles are caches of the own identity and currently pinned contacts, never mail history. */
+  private void pruneOrphanedProfiles()throws IOException{
+    Path directory=root.resolve("profiles");if(!Files.isDirectory(directory,LinkOption.NOFOLLOW_LINKS))return;
+    Set<String> retained=new HashSet<>();retained.add(identity.userId());for(UserInfo peer:contacts.values())retained.add(peer.userId());boolean changed=false;
+    try(var files=Files.newDirectoryStream(directory,"*.enc")){for(Path file:files){String id=file.getFileName().toString().replaceFirst("\\.enc$","");if(id.matches("[a-f0-9]{64}")&&!retained.contains(id))changed|=Files.deleteIfExists(file);}}
+    if(changed)AtomicFiles.syncDirectory(directory);
   }
   public synchronized byte[] avatar(String nickname)throws IOException,GeneralSecurityException {
     ensureOpen();nickname=Limits.nickname(nickname);
@@ -143,6 +174,15 @@ public final class LocalStore implements AutoCloseable {
   public synchronized void writeFeatures(byte[] data)throws IOException,GeneralSecurityException{
     ensureOpen();if(data.length>2*1024*1024)throw new IOException("Local feature quota");
     AtomicFiles.write(root.resolve("features-v1.vault"),seal(data,"features/v1".getBytes(java.nio.charset.StandardCharsets.US_ASCII)));
+  }
+  /** Optional call metadata/settings only. No audio, route, TLS or identity secrets. */
+  public synchronized byte[] readVoiceState()throws IOException,GeneralSecurityException{
+    ensureOpen();Path path=root.resolve("voice-v1.vault");return Files.exists(path)?open(AtomicFiles.read(path,128*1024+128),"voice/v1".getBytes(java.nio.charset.StandardCharsets.US_ASCII)):null;
+  }
+  public synchronized void writeVoiceState(byte[] data)throws IOException,GeneralSecurityException{
+    ensureOpen();if(data.length>128*1024)throw new IOException("Call history quota");Path path=root.resolve("voice-v1.vault");long old=Files.exists(path)?Files.size(path):0;
+    if(usedBytes()-old+data.length+128>maxBytes)throw new IOException("Локальное хранилище заполнено");
+    AtomicFiles.write(path,seal(data,"voice/v1".getBytes(java.nio.charset.StandardCharsets.US_ASCII)));changeCounter++;
   }
   /** Versioned client-only sidecars. Existing vault and protocol formats are unchanged. */
   public synchronized byte[] readExtension(String name,int maximum)throws IOException,GeneralSecurityException {
@@ -199,7 +239,7 @@ public final class LocalStore implements AutoCloseable {
       if(!Arrays.equals(Binary.encode(previous::write),Binary.encode(profile::write)))throw new GeneralSecurityException("Profile revision conflict");return;
     }
     Path path=root.resolve("profiles").resolve(profile.userId()+".enc");AtomicFiles.directory(path.getParent());
-    byte[] data=Binary.encode(profile::write);try{AtomicFiles.write(path,seal(data,("profile/v1/"+profile.userId()).getBytes(java.nio.charset.StandardCharsets.US_ASCII)));}finally{Arrays.fill(data,(byte)0);}
+    byte[] data=Binary.encode(profile::write);try{byte[] encrypted=seal(data,("profile/v1/"+profile.userId()).getBytes(java.nio.charset.StandardCharsets.US_ASCII));profileQuota(path,encrypted.length);AtomicFiles.write(path,encrypted);}finally{Arrays.fill(data,(byte)0);}
     avatarRevision++;
   }
 
@@ -236,9 +276,10 @@ public final class LocalStore implements AutoCloseable {
   }
 
   public synchronized void removeContact(String nick) throws IOException, GeneralSecurityException {
-    contacts.remove(Limits.nickname(nick));
+    UserInfo removed=contacts.remove(Limits.nickname(nick));
     Files.deleteIfExists(avatarPath(nick));
     save();
+    if(removed!=null){Path profiles=root.resolve("profiles");if(Files.deleteIfExists(profiles.resolve(removed.userId()+".enc"))){AtomicFiles.syncDirectory(profiles);avatarRevision++;}}
   }
 
   public synchronized Receipt accept(EncryptedPacket p)
@@ -379,6 +420,8 @@ public final class LocalStore implements AutoCloseable {
       for (Path f : files) n += Files.size(f);
     }
     Path lifecycle=root.resolve("lifecycle");if(Files.isDirectory(lifecycle,LinkOption.NOFOLLOW_LINKS))try(var files=Files.newDirectoryStream(lifecycle,"*.enc")){for(Path f:files)n+=Files.size(f);}
+    for(String name:List.of("profiles","avatars")){Path directory=root.resolve(name);if(Files.isDirectory(directory,LinkOption.NOFOLLOW_LINKS))try(var files=Files.newDirectoryStream(directory,"*.enc")){for(Path f:files)n+=Files.size(f);}}
+    Path voice=root.resolve("voice-v1.vault");if(Files.isRegularFile(voice,LinkOption.NOFOLLOW_LINKS))n+=Files.size(voice);
     return n;
   }
 
@@ -476,7 +519,9 @@ public final class LocalStore implements AutoCloseable {
         AtomicFiles.directory(target.resolve("avatars"));Set<String> people=new HashSet<>(contacts.keySet());if(!nickname.isBlank())people.add(nickname);
         for(String person:people){byte[] pixels=avatar(person);if(pixels!=null)try{Path old=avatarPath(person);AtomicFiles.write(target.resolve("avatars").resolve(old.getFileName()),sealWith(next,pixels,("avatar/v1/"+person).getBytes(java.nio.charset.StandardCharsets.US_ASCII)));}finally{Arrays.fill(pixels,(byte)0);}}
       }
+      if(!avatarPublicationToken.isEmpty())AtomicFiles.write(target.resolve(AVATAR_PUBLICATION_FILE),sealWith(next,avatarPublicationToken.getBytes(java.nio.charset.StandardCharsets.US_ASCII),AVATAR_PUBLICATION_AAD));
       byte[] features=readFeatures();if(features!=null)try{AtomicFiles.write(target.resolve("features-v1.vault"),sealWith(next,features,"features/v1".getBytes(java.nio.charset.StandardCharsets.US_ASCII)));}finally{Arrays.fill(features,(byte)0);}
+      byte[] voice=readVoiceState();if(voice!=null)try{AtomicFiles.write(target.resolve("voice-v1.vault"),sealWith(next,voice,"voice/v1".getBytes(java.nio.charset.StandardCharsets.US_ASCII)));}finally{Arrays.fill(voice,(byte)0);}
       for(String name:List.of("archive-ui-v1","delivery-routes-v1")){Path old=root.resolve(name+".vault");if(Files.isRegularFile(old,LinkOption.NOFOLLOW_LINKS)){byte[] aad=(name.equals("archive-ui-v1")?"archive-ui/v1":"delivery-routes/v1").getBytes(java.nio.charset.StandardCharsets.US_ASCII),clear=open(AtomicFiles.read(old,512*1024),aad);try{AtomicFiles.write(target.resolve(old.getFileName()),sealWith(next,clear,aad));}finally{Arrays.fill(clear,(byte)0);}}}
       Path lifecycle=root.resolve("lifecycle");if(Files.isDirectory(lifecycle,LinkOption.NOFOLLOW_LINKS)){
         AtomicFiles.directory(target.resolve("lifecycle"));try(var files=Files.newDirectoryStream(lifecycle,"*.enc")){for(Path file:files){String name=file.getFileName().toString().replaceFirst("\\.enc$","");extensionName(name);byte[] data=readExtension(name,name.equals("state-v1")?8*1024*1024:maxCipher+8192);try{AtomicFiles.write(target.resolve("lifecycle").resolve(file.getFileName()),sealWith(next,data,extensionAad(name)));}finally{Arrays.fill(data,(byte)0);}}}

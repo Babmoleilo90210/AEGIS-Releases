@@ -1,0 +1,13 @@
+{
+  "org.securemail.ui.ThemeManager": "file:/workspace/scratch/aa629f360927/aegis/aegis/build/local-java21/client-ui.jar",
+  "org.securemail.ui.MessengerApp": "file:/workspace/scratch/aa629f360927/aegis/aegis/build/local-java21/client-ui.jar",
+  "org.securemail.ui.InWindowDialog": "file:/workspace/scratch/aa629f360927/aegis/aegis/build/local-java21/client-ui.jar",
+  "org.securemail.ui.InWindowFileChooser": "file:/workspace/scratch/aa629f360927/aegis/aegis/build/local-java21/client-ui.jar",
+  "org.securemail.ui.AppearanceGallery": "file:/workspace/scratch/aa629f360927/aegis/aegis/build/local-java21/client-ui.jar",
+  "org.securemail.ui.AppearanceView": "file:/workspace/scratch/aa629f360927/aegis/aegis/build/local-java21/client-ui.jar",
+  "org.securemail.ui.InterfaceFailureMessages": "file:/workspace/scratch/aa629f360927/aegis/aegis/build/local-java21/client-ui.jar",
+  "org.securemail.ui.ArchiveView": "file:/workspace/scratch/aa629f360927/aegis/aegis/build/local-java21/client-ui.jar",
+  "org.securemail.client.storage.LocalStore": "file:/workspace/scratch/aa629f360927/aegis/aegis/build/local-java21/client-core.jar",
+  "org.securemail.client.archive.EncryptedArchive": "file:/workspace/scratch/aa629f360927/aegis/aegis/build/local-java21/client-core.jar",
+  "org.securemail.protocol.Algorithm": "file:/workspace/scratch/aa629f360927/aegis/aegis/build/local-java21/common-protocol.jar"
+}

@@ -1,43 +1,29 @@
-# АЕГИС 2.0.0 — development candidate, НЕ Stable
+# АЕГИС 2.5.0 — «Взор и Глас»
 
-`productionReady=false`. Реализованы проверка официального Tor Browser, отдельные сессии и backend изоляции Linux/Windows; фактический браузер и целевые ОС ещё не прошли нативную приёмку. Windows Safe Web требует 24H2+ Pro/Enterprise/Education с Windows Sandbox CLI; поддержка всех редакций Windows11 не заявляется. Nickname rename требует отдельного изменения Relay/протокола. Updater E2E/rollback остаются NOT_RUN. Используйте отдельный тестовый профиль.
+Кандидат для испытаний и офлайн-подписи владельцем. **productionReady=false**: обязательные испытания Windows 11, CachyOS KDE Wayland/X11, двух физических устройств в разных сетях, официального Tor Browser и полного updater E2E ещё не завершены. Это продолжение опубликованного 2.0.0 Beta на Java 21/JavaFX. Stable не опубликован, production Relay и Stable feed не изменены.
 
-Текущие изменения и ограничения: CHANGELOG-2.0.0.md, SAFE-WEB-2.0.0.md, RELEASE-GATES-2.0.0.json. Установка не означает готовности к production. Ключи подписи, production Relay и Stable feed не изменялись.
+АЕГИС сохраняет защищённые письма, FF1/letter password, вложения, receipts, исчезающие письма, Tor Direct/Snowflake, P2P, контакты, публичные профили, зашифрованный архив, восстановление и Appearance Engine. Встроенная история звонков отключена по умолчанию.
 
-Далее сохранена документация базовой 1.5.0 для унаследованных функций; её исторические результаты не являются результатами 2.0.0.
+## Установка и начало работы
 
----
+Windows: используйте AEGIS-Setup-2.5.0-x64.exe либо распакуйте весь AEGIS-2.5.0-Windows-x64.zip и запустите AEGIS.exe. CachyOS: дайте AppImage право выполнения и запустите его. Java и Tor входят в комплект. Отдельная системная Java не нужна. До приёмки используйте копию тестового профиля; не удаляйте исходную установку и резервные копии.
 
-# АЕГИС 1.5.0
+Откройте «Взор» → «Открыть Взор». При отсутствии собственной удостоверенной копии браузер загружается вместе с официальной подписью, проверяется и устанавливается в фоне. Для загрузки нужен работающий Tor АЕГИС, для запуска — поддерживаемая песочница. Ошибка не включает обычный небезопасный запуск. Windows Home для Взора не поддерживается. Окно официального Tor Browser остаётся отдельным.
 
-АЕГИС — Автономная Единая Гибридная Информационная Система. Локальный Java21/JavaFX почтовый клиент с E2EE, Tor и независимым Relay. Это продолжение опубликованного 1.2.0, не новый проект.
+Откройте «Глас», выберите существующий контакт и нажмите «Позвонить». После принятия и аутентификации микрофон выключен; включите его явно. Звук передаётся через onion P2P в TLS 1.3, кодек — Opus. Это рабочая реализация транспорта и аудиосистемы, однако качество реального Tor-разговора ещё не измерено.
 
-**Статус: release candidate, productionReady=false.** Сборка не заменяет обязательную нативную приёмку. Stable/feed/production Relay и signing keys этой работой не изменяются.
+## Документация
 
-Windows: распакуйте полный portable ZIP и запустите AEGIS.exe либо установите Setup. CachyOS: сделайте AppImage исполняемым и откройте его. Java21 и Tor включены. Tor подключается автоматически; адрес Relay вводится только как v3 .onion. Офлайн-доступ требует пароль локального хранилища.
+- [Windows](README-WINDOWS.md), [CachyOS](README-CACHYOS.md), [сборка](BUILD-2.5.0.md).
+- [Взор](VZOR-2.5.0.md), [его модель угроз](VZOR-THREAT-MODEL-2.5.0.md).
+- [Глас](GLAS-2.5.0.md), [криптография](GLAS-CRYPTOGRAPHY-2.5.0.md), [модель угроз](GLAS-THREAT-MODEL-2.5.0.md), [аудио](GLAS-AUDIO-2.5.0-RU.md).
+- [Интерфейс](INTERFACE-2.5.0.md), [профили](PROFILE-SYNC-AUDIT-2.5.0.md), [миграция 1.5.0](MIGRATION-1.5.0-TO-2.5.0.md), [миграция 2.0.0](MIGRATION-2.0.0-TO-2.5.0.md).
+- [Тесты](TEST-REPORT-2.5.0.md), [нативная приёмка](NATIVE-ACCEPTANCE-2.5.0.md), [отчёт](IMPLEMENTATION-REPORT-2.5.0-RU.md), [офлайн-подпись](OWNER-OFFLINE-SIGNING-2.5.0.md).
 
-Раздел «Архив» создаётся только по действию пользователя, пустым, с отдельным паролем. Он работает без сети. Имена и документы не хранятся в открытом виде. Необязательный recovery key сохраните отдельно; скрытого восстановления/мастер-ключа нет. Подробности: ARCHIVE-1.5.0.md и ARCHIVE-THREAT-MODEL-1.5.0.md.
+## Сетевые границы
 
-## Код и сборка
+Java-клиент соединяется с собственными loopback SOCKS/Control Tor. Письма и звонки используют только проверенные v3 onion-маршруты; updater и получение Tor Browser — ограниченные HTTPS-источники через отдельный SOCKS-контекст. Прямой fallback не добавлен. Встроенный Tor и Snowflake устанавливают необходимые внешние транспортные соединения; это не означает прямое P2P между пользователями.
 
-common-protocol — protocol 1; client-core — E2EE, vault, Tor, lifecycle, updater, архив; client-ui — JavaFX; relay-server — неизменённая staging-реализация. Клиент совместим с production Relay0.2.0. Сервер не имеет библиотек расшифровки пользовательских сообщений.
+Взор имеет собственный Tor. Browser VM/namespace изолирует файловую систему, но не является kernel firewall против полностью захваченного browser broker. Отсутствие DNS/IP/WebRTC-утечек требует нативной записи трафика. Компрометация ОС, микрофона или памяти находится за границами гарантий. Скрытая запись, аналитика и облачное распознавание речи не используются.
 
-Обычная сборка: `./gradlew build`. Явная упаковка с проверенными входами: `python3 tools/build-archive.py --jdk /path/to/jdk21 --work /path/to/build-inputs --out /path/to/candidates`. BUILD-1.5.0.md перечисляет зависимости и проверки. Подпись/публикация отделены от сборки.
-
-## Все возможные сетевые соединения
-
-| Источник | Назначение | Передаваемые данные |
-|---|---|---|
-| Клиент Java | 127.0.0.1 SOCKS19050 | Только v3 onion Relay/проверенного peer; protocol1 authentication, публичные identity/routing данные, E2EE ciphertext, ACK |
-| Клиент Java | 127.0.0.1 Control19051 | SAFECOOKIE authentication и управление собственным ephemeral onion service; не пароли аккаунта/письма |
-| Updater Java | 127.0.0.1 SOCKS19052 | HTTPS github.com, raw.githubusercontent.com, release-assets.githubusercontent.com, objects.githubusercontent.com; публичные manifest/signature/artifacts, range-resume |
-| Встроенный Tor | Tor relays/authorities/directories | Транспорт Tor; внешние IP видит Tor-инфраструктура, HTTP user profile не отправляется |
-| Snowflake/lyrebird, только при fallback/выборе | Официальные broker/front/rendezvous/STUN, указанные в комплектном pt_config/bridge-конфиге | Обход блокировки Tor; транспортные метаданные, не archive keys |
-| Peer service Java | Только loopback, через свой Tor onion | Подписанный capability challenge и encrypted DELIVER/receipt; публичный TCP listener не создаётся |
-| Relay | Локальный SQLite/loopback Tor service | Ciphertext и необходимые routing/account/delivery метаданные; Relay не расшифровывает письма |
-| PDF worker/архив/поиск/темы | Сеть не используется | Локальные memory pipes/шифрованные файлы |
-| Явная сборка разработчика | GitHub releases, Maven Central, Apache/официальные build inputs | Скачивание исходников/библиотек/инструментов; установленный клиент эти build scripts не запускает |
-
-Прямого clearnet fallback для операций АЕГИС нет. Нет телеметрии, аналитики, рекламных SDK, облачного crash reporting и скрытого updater. Проверка/загрузка обновлений следуют сохранённым пользовательским настройкам; установка подтверждается пользователем. PDFBox — единственная новая группа runtime-библиотек: локальный просмотр PDF, Apache2, без внешнего сервиса.
-
-Документы: README-WINDOWS.md, README-CACHYOS.md, MIGRATION-1.2.0-TO-1.5.0.md, TEST-REPORT-1.5.0.md, P2P-VERIFICATION-1.5.0.md, OWNER-OFFLINE-SIGNING-1.5.0.md. Безопасность и ограничения перечислены явно; независимый security audit не проводился.
+Приватный release-signing key остаётся у владельца. Полученные пакеты не подписаны владельцем и не должны попадать в Stable feed до всех обязательных проверок.

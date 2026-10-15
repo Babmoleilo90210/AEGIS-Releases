@@ -1,0 +1,26 @@
+{
+  "status": "PASS_LOCAL_ONLY",
+  "tests": 7,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "durationSeconds": 4.107,
+  "classes": {
+    "NavigationMigration200Test": 3,
+    "NavigationMigration250Test": 4
+  },
+  "sourceAppearanceSha256": "d9e6e9622442e632a54d424322c9973daf042a6d21f5923d9968ff25c5e942be",
+  "scope": "Isolated javac override of current Appearance plus selected tests against existing local core JAR. Appearance source unchanged during run. Not a complete 2.5.0 build.",
+  "checks": [
+    "six to eight sections",
+    "seven to eight sections",
+    "preserved existing customized section order",
+    "Vzor retains safeweb persisted ID",
+    "new glas inserted after existing safeweb",
+    "already customized eight sections remain unchanged",
+    "idempotent save and repeated import",
+    "pre-migration snapshot retains identity private/public keys, mail and independent encrypted archive"
+  ],
+  "nativeInstallerUpgrade": "NOT_RUN",
+  "productionReady": false
+}

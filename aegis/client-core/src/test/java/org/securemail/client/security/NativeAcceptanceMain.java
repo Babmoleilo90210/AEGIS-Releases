@@ -90,6 +90,14 @@ public final class NativeAcceptanceMain {
       report.put("linuxDistribution",distribution);
     }
     Map<String,String> jars = new LinkedHashMap<>();
+    check("packaged_russian_locale_data",()->{
+      Locale russian=Locale.forLanguageTag("ru-RU");
+      String month=LocalDate.of(2026,10,15).format(java.time.format.DateTimeFormatter.ofPattern("LLLL",russian));
+      String number=java.text.NumberFormat.getNumberInstance(russian).format(12.5);
+      require(Arrays.asList(Locale.getAvailableLocales()).contains(russian),"Russian locale unavailable");
+      require(month.equals("октябрь")&&number.equals("12,5"),"Russian locale data missing");
+      report.put("russianLocale",Map.of("month",month,"number",number,"actualFormatting",true));
+    });
     check("packaged_java21_and_common_client_JARs",()->{
       require(Runtime.version().feature()==21,"Java21 required");
       for(String name:List.of("client-core-"+SignedManifest.CURRENT+".jar","client-ui-"+SignedManifest.CURRENT+".jar","common-protocol-0.2.0.jar")) jars.put(name,sha256(app.resolve("app").resolve(name)));

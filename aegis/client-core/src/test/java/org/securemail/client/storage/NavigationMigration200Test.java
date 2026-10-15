@@ -31,7 +31,7 @@ class NavigationMigration200Test {
 
   @Test void sixSectionCustomOrderSurvivesLoadSaveExportAndRepeatedImport() throws Exception {
     List<String> oldOrder = List.of("settings", "letters", "archive", "contacts", "search", "profile");
-    List<String> expected = List.of("settings", "letters", "archive", "safeweb", "contacts", "search", "profile");
+    List<String> expected = List.of("settings", "letters", "archive", "safeweb", "glas", "contacts", "search", "profile");
     Path profile = root.resolve("profile");
     AppearanceStore initial = new AppearanceStore(profile);
     initial.saveLayout("Рабочий макет", initial.current().layout().panels(18, 35).below(true));
@@ -63,10 +63,12 @@ class NavigationMigration200Test {
     assertEquals(1, receiver.layouts().size());
     assertEquals(reopened.layouts().get("Рабочий макет"), receiver.layouts().get("Рабочий макет"));
     assertEquals(expected, Layout.parse(receiver.layouts().get("Рабочий макет").json()).order());
-    assertEquals(oldOrder, expected.stream().filter(section -> !section.equals("safeweb")).toList());
+    assertEquals(oldOrder, expected.stream().filter(section -> !section.equals("safeweb")&&!section.equals("glas")).toList());
   }
 
-  @Test void beforeVersionOpen200SnapshotsRealKeysMailArchiveAndAppearanceWithoutRewritingSources() throws Exception {
+  @org.junit.jupiter.params.ParameterizedTest
+  @org.junit.jupiter.params.provider.ValueSource(strings={"2.0.0","2.5.0"})
+  void beforeVersionOpenSnapshotsRealKeysMailArchiveAndAppearanceWithoutRewritingSources(String nextVersion) throws Exception {
     String previous = System.getProperty("aegis.profile");
     System.setProperty("aegis.profile", root.toString());
     char[] password = "migration-200-account-passphrase".toCharArray();
@@ -110,10 +112,10 @@ class NavigationMigration200Test {
       }
       Map<String, byte[]> vaultBefore = files(config.storagePath()), archiveBefore = files(archive), appearanceBefore = files(root.resolve("appearance"));
       byte[] historyBefore = Files.readAllBytes(history), configBefore = Files.readAllBytes(AppPaths.config());
-      Path backup = ClientUpgrade.beforeVersionOpen("2.0.0", config, root.resolve("backups"));
+      Path backup = ClientUpgrade.beforeVersionOpen(nextVersion, config, root.resolve("backups"));
       assertNotNull(backup);
       ProfileSnapshot.verify(backup, config);
-      assertEquals(backup, ClientUpgrade.beforeVersionOpen("2.0.0", config, root.resolve("backups")));
+      assertEquals(backup, ClientUpgrade.beforeVersionOpen(nextVersion, config, root.resolve("backups")));
       assertFilesEqual(vaultBefore, files(config.storagePath()));
       assertFilesEqual(archiveBefore, files(archive));
       assertFilesEqual(appearanceBefore, files(root.resolve("appearance")));

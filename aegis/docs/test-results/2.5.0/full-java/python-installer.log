@@ -1,0 +1,24 @@
+test_existing_destination_not_touched (test_safeweb_install.GpgVerificationIntegrationTest.test_existing_destination_not_touched) ... ok
+test_real_gpgv_changed_archive_and_signature_rejected (test_safeweb_install.GpgVerificationIntegrationTest.test_real_gpgv_changed_archive_and_signature_rejected) ... ok
+test_real_gpgv_install_compare_reseal_and_tamper_rejection (test_safeweb_install.GpgVerificationIntegrationTest.test_real_gpgv_install_compare_reseal_and_tamper_rejection) ... ok
+test_real_gpgv_rejects_unpinned_test_signer (test_safeweb_install.GpgVerificationIntegrationTest.test_real_gpgv_rejects_unpinned_test_signer) ... ok
+test_verify_only_authenticates_without_extract_or_execute (test_safeweb_install.GpgVerificationIntegrationTest.test_verify_only_authenticates_without_extract_or_execute) ... ok
+test_version_and_hash_mismatch_leave_no_installation (test_safeweb_install.GpgVerificationIntegrationTest.test_version_and_hash_mismatch_leave_no_installation) ... ok
+test_escaping_and_absolute_symlinks_rejected (test_safeweb_install.InstallerBoundaryTest.test_escaping_and_absolute_symlinks_rejected) ... ok
+test_extract_and_inventory_preserves_only_user_executable_bit (test_safeweb_install.InstallerBoundaryTest.test_extract_and_inventory_preserves_only_user_executable_bit) ... ok
+test_file_under_symlink_rejected_even_if_target_internal (test_safeweb_install.InstallerBoundaryTest.test_file_under_symlink_rejected_even_if_target_internal) ... ok
+test_input_symlink_empty_and_oversize_rejected (test_safeweb_install.InstallerBoundaryTest.test_input_symlink_empty_and_oversize_rejected) ... ok
+test_installed_extra_injection_and_changed_symlink_detected (test_safeweb_install.InstallerBoundaryTest.test_installed_extra_injection_and_changed_symlink_detected) ... ok
+test_internal_directory_symlink_preserved (test_safeweb_install.InstallerBoundaryTest.test_internal_directory_symlink_preserved) ... ok
+test_internal_hardlink_and_forward_chain (test_safeweb_install.InstallerBoundaryTest.test_internal_hardlink_and_forward_chain) ... ok
+test_internal_symlink_preserved_and_authenticated_separately (test_safeweb_install.InstallerBoundaryTest.test_internal_symlink_preserved_and_authenticated_separately) ... ok
+test_link_cycles_and_dangling_rejected (test_safeweb_install.InstallerBoundaryTest.test_link_cycles_and_dangling_rejected) ... ok
+test_non_windows_never_executes_windows_installer (test_safeweb_install.InstallerBoundaryTest.test_non_windows_never_executes_windows_installer) ... ok
+test_package_filename_and_version_are_restricted (test_safeweb_install.InstallerBoundaryTest.test_package_filename_and_version_are_restricted) ... ok
+test_special_file_duplicate_root_and_limits_rejected (test_safeweb_install.InstallerBoundaryTest.test_special_file_duplicate_root_and_limits_rejected) ... ok
+test_traversal_absolute_and_cross_platform_paths_rejected (test_safeweb_install.InstallerBoundaryTest.test_traversal_absolute_and_cross_platform_paths_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 0.203s
+
+OK

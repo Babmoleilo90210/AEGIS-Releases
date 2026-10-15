@@ -22,18 +22,18 @@ final class InWindowFileChooser {
   private List<File> choose(Window owner,boolean save,boolean multiple){
     InWindowDialog<List<File>> page=new InWindowDialog<>();page.initOwner(owner);page.setTitle(title);
     Path[] directory={Path.of(System.getProperty("user.home")).toAbsolutePath()};
-    TextField path=new TextField(directory[0].toString()),name=new TextField(initialName);name.setPromptText("Имя файла");
-    ListView<Path> list=new ListView<>();list.getSelectionModel().setSelectionMode(multiple?SelectionMode.MULTIPLE:SelectionMode.SINGLE);
-    list.setCellFactory(v->new ListCell<>(){protected void updateItem(Path p,boolean empty){super.updateItem(p,empty);setText(empty||p==null?null:(Files.isDirectory(p,LinkOption.NOFOLLOW_LINKS)?"▸ ":"")+p.getFileName());}});
+    TextField path=new TextField(directory[0].toString()),name=new TextField(initialName);name.setPromptText("Имя файла");path.setMinWidth(0);name.setMinWidth(0);
+    ListView<Path> list=new ListView<>();list.setMinWidth(0);list.getSelectionModel().setSelectionMode(multiple?SelectionMode.MULTIPLE:SelectionMode.SINGLE);
+    list.setCellFactory(v->new ListCell<>(){{setStyle("-fx-text-fill:-aegis-text;");}protected void updateItem(Path p,boolean empty){super.updateItem(p,empty);setText(empty||p==null?null:(Files.isDirectory(p,LinkOption.NOFOLLOW_LINKS)?"▸ ":"")+p.getFileName());}});
     Label status=new Label();status.getStyleClass().add("muted");
     Runnable load=()->{try{
       Path selected=Path.of(path.getText()).toAbsolutePath().normalize();if(!Files.isDirectory(selected,LinkOption.NOFOLLOW_LINKS))throw new java.io.IOException();
       var entries=new ArrayList<Path>();try(var stream=Files.newDirectoryStream(selected)){for(Path p:stream){if(entries.size()>=2000)break;if(Files.isSymbolicLink(p))continue;if(Files.isDirectory(p,LinkOption.NOFOLLOW_LINKS)||filters.isEmpty()||filters.stream().flatMap(f->f.getExtensions().stream()).anyMatch(g->p.getFileName().toString().toLowerCase(Locale.ROOT).endsWith(g.substring(1).toLowerCase(Locale.ROOT))))entries.add(p);}}
       entries.sort(Comparator.comparing((Path p)->!Files.isDirectory(p,LinkOption.NOFOLLOW_LINKS)).thenComparing(p->p.getFileName().toString(),String.CASE_INSENSITIVE_ORDER));directory[0]=selected;path.setText(selected.toString());list.getItems().setAll(entries);status.setText(entries.size()==2000?"Показаны первые 2000 элементов":"");
     }catch(Exception invalid){status.setText("Не удалось открыть папку");}};
-    Button go=new Button("Открыть папку"),up=new Button("↑");go.setOnAction(e->load.run());path.setOnAction(e->load.run());up.setOnAction(e->{Path parent=directory[0].getParent();if(parent!=null){path.setText(parent.toString());load.run();}});
+    Button go=new Button("Открыть папку"),up=new Button("↑");up.setAccessibleText("Родительская папка");go.setOnAction(e->load.run());path.setOnAction(e->load.run());up.setOnAction(e->{Path parent=directory[0].getParent();if(parent!=null){path.setText(parent.toString());load.run();}});
     list.setOnMouseClicked(e->{Path chosen=list.getSelectionModel().getSelectedItem();if(chosen==null)return;if(Files.isDirectory(chosen,LinkOption.NOFOLLOW_LINKS)&&e.getClickCount()==2){path.setText(chosen.toString());load.run();}else if(save&&!Files.isDirectory(chosen,LinkOption.NOFOLLOW_LINKS))name.setText(chosen.getFileName().toString());});
-    HBox location=new HBox(8,up,path,go);HBox.setHgrow(path,Priority.ALWAYS);VBox body=new VBox(10,location,list,status);if(save)body.getChildren().add(name);VBox.setVgrow(list,Priority.ALWAYS);body.setPrefHeight(450);page.getDialogPane().setContent(body);
+    FlowPane folderActions=new FlowPane(8,8,up,go);VBox location=new VBox(8,path,folderActions);location.setMinWidth(0);VBox body=new VBox(10,location,list,status);body.setMinWidth(0);if(save)body.getChildren().add(name);VBox.setVgrow(list,Priority.ALWAYS);body.setPrefHeight(450);page.getDialogPane().setContent(body);
     ButtonType select=new ButtonType(save?"Сохранить":"Выбрать",ButtonBar.ButtonData.OK_DONE);page.getDialogPane().getButtonTypes().addAll(select,ButtonType.CANCEL);
     var result=new java.util.concurrent.atomic.AtomicReference<List<File>>();
     page.getDialogPane().lookupButton(select).addEventFilter(ActionEvent.ACTION,e->{try{

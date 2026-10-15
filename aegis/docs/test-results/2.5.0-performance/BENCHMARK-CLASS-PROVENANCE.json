@@ -1,0 +1,8 @@
+{
+  "scope": "Exact standalone benchmark class files compiled by archived runner for final six measurements; production classes not overridden",
+  "classesSha256": {
+    "org/securemail/client/archive/CoreBaselineBenchmark$1.class": "80d91f096ae6ea2e81c010b3a3cbdb993e015b4d455f7c9b935742ff36cbdfd0",
+    "org/securemail/client/archive/CoreBaselineBenchmark.class": "6af43849d7f071293c829420cb6f9b13da4c7b07d3670c0207266b0fc50b37b0"
+  },
+  "sourceSha256": "812731c50216453c8be270ece9e3f800ba6f8a5d3337b29b48c7306698323cb1"
+}

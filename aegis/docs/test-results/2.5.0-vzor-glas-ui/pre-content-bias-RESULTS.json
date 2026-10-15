@@ -1,0 +1,120 @@
+{
+  "status": "PASS_HEADLESS",
+  "environment": {
+    "glassPlatform": "Monocle",
+    "os": "Linux"
+  },
+  "actualScenePixels": [
+    800,
+    600
+  ],
+  "themeScaleCombinations": 8,
+  "themes": [
+    "minimal-dark",
+    "classic-light"
+  ],
+  "scalesPercent": [
+    100,
+    125,
+    150,
+    200
+  ],
+  "navigationSections": 8,
+  "actualSandboxPrerequisiteFailure": "LINUX_SLIRP_MISSING",
+  "manualPickerRussianCancellation": "PASS",
+  "invalidUrlRejection": "PASS",
+  "glasIdleAndEncryptedSettings": "PASS",
+  "noAutomaticMicrophone": true,
+  "showingStageCount": 1,
+  "screenshots": [
+    "navigation-eight-sections-1280x850.png",
+    "vzor-800x600-minimal-dark-100-compact.png",
+    "vzor-800x600-minimal-dark-100-advanced.png",
+    "glas-800x600-minimal-dark-100-idle.png",
+    "glas-800x600-minimal-dark-100-settings.png",
+    "vzor-800x600-minimal-dark-125-compact.png",
+    "vzor-800x600-minimal-dark-125-advanced.png",
+    "glas-800x600-minimal-dark-125-idle.png",
+    "glas-800x600-minimal-dark-125-settings.png",
+    "vzor-800x600-minimal-dark-150-compact.png",
+    "vzor-800x600-minimal-dark-150-advanced.png",
+    "glas-800x600-minimal-dark-150-idle.png",
+    "glas-800x600-minimal-dark-150-settings.png",
+    "vzor-800x600-minimal-dark-200-compact.png",
+    "vzor-800x600-minimal-dark-200-advanced.png",
+    "glas-800x600-minimal-dark-200-idle.png",
+    "glas-800x600-minimal-dark-200-settings.png",
+    "glas-800x600-minimal-dark-200-audio-devices.png",
+    "vzor-800x600-classic-light-100-compact.png",
+    "vzor-800x600-classic-light-100-advanced.png",
+    "glas-800x600-classic-light-100-idle.png",
+    "glas-800x600-classic-light-100-settings.png",
+    "vzor-800x600-classic-light-125-compact.png",
+    "vzor-800x600-classic-light-125-advanced.png",
+    "glas-800x600-classic-light-125-idle.png",
+    "glas-800x600-classic-light-125-settings.png",
+    "vzor-800x600-classic-light-150-compact.png",
+    "vzor-800x600-classic-light-150-advanced.png",
+    "glas-800x600-classic-light-150-idle.png",
+    "glas-800x600-classic-light-150-settings.png",
+    "vzor-800x600-classic-light-200-compact.png",
+    "vzor-800x600-classic-light-200-advanced.png",
+    "glas-800x600-classic-light-200-idle.png",
+    "glas-800x600-classic-light-200-settings.png",
+    "glas-800x600-classic-light-200-audio-devices.png",
+    "vzor-manual-picker-russian-800x600-200.png",
+    "vzor-manual-picker-actions-800x600-200.png",
+    "vzor-invalid-url-rejected.png",
+    "vzor-real-prerequisite-rejection.png",
+    "glas-applied-settings-no-microphone.png",
+    "section-search-1280x850-minimal-dark-100.png",
+    "section-profile-1280x850-minimal-dark-100.png",
+    "section-contacts-1280x850-minimal-dark-100.png",
+    "section-letters-1280x850-minimal-dark-100.png",
+    "section-archive-1280x850-minimal-dark-100.png",
+    "section-vzor-1280x850-minimal-dark-100.png",
+    "section-glas-1280x850-minimal-dark-100.png",
+    "section-settings-1280x850-minimal-dark-100.png"
+  ],
+  "realTorBrowserOrCallTransport": "NOT_RUN",
+  "nativeWindows11CachyOS": "NOT_RUN",
+  "productionReady": false,
+  "eightSectionScreenshots": [
+    "search",
+    "profile",
+    "contacts",
+    "letters",
+    "archive",
+    "vzor",
+    "glas",
+    "settings"
+  ],
+  "navigationHandlerAndSynchronousLayoutMillis": {
+    "search": 50.068135,
+    "profile": 26.905031,
+    "contacts": 17.090643,
+    "letters": 12.621407,
+    "archive": 8.446783,
+    "vzor": 4.981626,
+    "glas": 8.319957,
+    "settings": 39.596163
+  },
+  "navigationTimingScope": "Actual button handler plus synchronous JavaFX layout; excludes asynchronous data fetch, pulse settling and screenshot encoding; headless fixture measurement, not native performance acceptance.",
+  "runtimeEvidence": {
+    "sourceSha256": {
+      "client-ui/src/smoke/java/org/securemail/ui/VzorGlas250Smoke.java": "6775c5bc5b0501dcc7b2b40c742442583430d6ecb8dc616740f660a1e963060b",
+      "client-ui/src/main/java/org/securemail/ui/VzorView.java": "f93969f859e663252ce6ed5330891576f53e48926a79a126eb4112b78c57fc31",
+      "client-ui/src/main/java/org/securemail/ui/GlasView.java": "89680404ef1ef4c039d2fff6916b2bf285914057d8f65d18704b9ebe1463c187",
+      "client-ui/src/main/java/org/securemail/ui/InWindowDialog.java": "d3441e71ceff76f33aca1d2e2b0a9ff69347006d9d3b8692489c17d49bb637b8",
+      "client-ui/src/main/java/org/securemail/ui/InWindowFileChooser.java": "776093bd2ecc2187e22cc141a0acc5e3c2a86db4b743b69754b8b00dc78d7237"
+    },
+    "sourceShaStatus": "ACTUAL_LOCAL_SOURCE",
+    "runtimeClassSha256": {
+      "org.securemail.ui.VzorGlas250Smoke": "6a78850283e27d94b0af7a7c8ed09fc0900b5988c5fa2c010b2235aa6e62c3f0",
+      "org.securemail.ui.VzorView": "38f768abe9345bec6dccb62446c10e6aa0f54a1b137a6c350dd37274e319f040",
+      "org.securemail.ui.GlasView": "009855aa6d04f0a48bbcf0046e794f13b6ffd23cbe664bd7397bacc54bf33168",
+      "org.securemail.ui.InWindowDialog": "cb920cfa6df7d867a810ea8371b0056d9162cbc2aed9b280b9a8204ec6aca53f",
+      "org.securemail.ui.InWindowFileChooser": "1864d355ffa589648bc4d25cfe3abf6a267f9c433bded08cce34d930ba011023"
+    }
+  }
+}

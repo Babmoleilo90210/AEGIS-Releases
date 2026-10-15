@@ -1,0 +1,24 @@
+{
+  "scope": "isolated current UI sources over copied intermediate root 2.5 application JARs; no claim for final later JARs",
+  "sourceSha256": {
+    "client-ui/src/main/java/org/securemail/ui/AppearanceGallery.java": "63e7bafc47cf4c5212ae86297eccbc88f8b79880a169e27e9ca4a714fc0d5afa",
+    "client-ui/src/main/java/org/securemail/ui/AppearanceView.java": "99647f79aedb1bcf145947d66951d6609d50a3c74e472886b7780eed42d5884c",
+    "client-ui/src/main/java/org/securemail/ui/ArchiveDisplayTypes.java": "2c3b093274a85eee31e515f012db0bc70628fd2a65bd887c8de1dc32bf387622",
+    "client-ui/src/main/java/org/securemail/ui/ArchiveView.java": "ee01e42e5314904cfed0ed1fa88df98648e2d0e658166db2ffe49996310ba640",
+    "client-ui/src/main/java/org/securemail/ui/ThemeManager.java": "03ef35710b44ff3b78a288bc45b8c814265a767d16fb933826625e8a7b81f7ee",
+    "client-ui/src/main/java/org/securemail/ui/Selector.java": "1ac9e966582927e573d573cad8020a02ecd6fb186062870abc5ef4fd64afe795",
+    "client-ui/src/smoke/java/org/securemail/ui/Interface250RefinementSmoke.java": "39c29f152a25fb87f21daa943bc8f6f2674f39a24d0bc2e54436bfa18476498f",
+    "client-ui/src/smoke/java/org/securemail/ui/MessengerSmoke.java": "84cdf78d6624d2ddc46b088eecef19810f263c4b91eef0ed625bd7ed7c548ec2",
+    "client-ui/src/smoke/java/org/securemail/ui/Aegis11UiSmoke.java": "115964f3534ee03fe57803f4e8cf45fd9f2eb74626cf11d530ab0d89a5f77bf0",
+    "client-ui/src/smoke/java/org/securemail/ui/Interface200Smoke.java": "5f0ff3a02c11eb743fc9996d749ef74127a8dc61ce7763eeb71abdb17667e7fe",
+    "client-ui/src/smoke/java/org/securemail/ui/SettingsResponsive200Smoke.java": "50073a476aacdfa4ddcd55aa07831e03767d4bb9db35ea63ef1740967018de24",
+    "client-ui/src/main/java/org/securemail/ui/InterfaceFailureMessages.java": "14edb270076be1db5cc9c7f2977f7df73713b499e7b9462a8b57f79df304e457"
+  },
+  "applicationJarSha256": {
+    "client-ui.jar": "03a3cf68f20fe0b562fb5b8c5f6dea46d251b717965d04ea4f06a1e6b705219c",
+    "relay-server.jar": "3f113024becaf3519f9a649b3843c8f6075661cd7eda5ba7f1b0cc3c4cc32841",
+    "common-protocol.jar": "c086bb60fd2ae056a7be8c9e01ddd75acb230404446228ff6994ae258a264286",
+    "client-core.jar": "68f865dcda531fb9e6a0b87c1cd4b4f40529bb8790d5eb2446589e94295c4b76"
+  },
+  "runtimeCopyAtUTC": "2026-10-15T09:44:20.011444+00:00"
+}

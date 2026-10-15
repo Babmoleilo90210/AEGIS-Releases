@@ -1,0 +1,22 @@
+{
+  "scope": "isolated current UI sources over root intermediate 2.5 application JARs",
+  "sourceSha256": {
+    "client-ui/src/main/java/org/securemail/ui/AppearanceGallery.java": "63e7bafc47cf4c5212ae86297eccbc88f8b79880a169e27e9ca4a714fc0d5afa",
+    "client-ui/src/main/java/org/securemail/ui/AppearanceView.java": "eb310efc31d758341488d0b6ce2b1e7a848773b79e1e92a46664e57ea62c1093",
+    "client-ui/src/main/java/org/securemail/ui/ArchiveDisplayTypes.java": "2c3b093274a85eee31e515f012db0bc70628fd2a65bd887c8de1dc32bf387622",
+    "client-ui/src/main/java/org/securemail/ui/ArchiveView.java": "f6fde4818b8868a027e712d3e5f901c8658a416446e2e8c9086e29430637dcb5",
+    "client-ui/src/main/java/org/securemail/ui/ThemeManager.java": "03ef35710b44ff3b78a288bc45b8c814265a767d16fb933826625e8a7b81f7ee",
+    "client-ui/src/main/java/org/securemail/ui/Selector.java": "1ac9e966582927e573d573cad8020a02ecd6fb186062870abc5ef4fd64afe795",
+    "client-ui/src/smoke/java/org/securemail/ui/Interface250RefinementSmoke.java": "39e269016df15e4f1a082b4b0cef7a0b6624eb3077d7d73a765a37efffee1620",
+    "client-ui/src/smoke/java/org/securemail/ui/MessengerSmoke.java": "84cdf78d6624d2ddc46b088eecef19810f263c4b91eef0ed625bd7ed7c548ec2",
+    "client-ui/src/smoke/java/org/securemail/ui/Aegis11UiSmoke.java": "115964f3534ee03fe57803f4e8cf45fd9f2eb74626cf11d530ab0d89a5f77bf0",
+    "client-ui/src/smoke/java/org/securemail/ui/Interface200Smoke.java": "5f0ff3a02c11eb743fc9996d749ef74127a8dc61ce7763eeb71abdb17667e7fe",
+    "client-ui/src/smoke/java/org/securemail/ui/SettingsResponsive200Smoke.java": "50073a476aacdfa4ddcd55aa07831e03767d4bb9db35ea63ef1740967018de24"
+  },
+  "applicationJarSha256": {
+    "client-ui.jar": "172c3c2cec642cde3583e57cc33ca49540781ea12ee01cf0d90c7576b86a32df",
+    "relay-server.jar": "e3fed084de164429ab822a170666029922ecba55a385fb0c6efce990c1b3ba73",
+    "common-protocol.jar": "bfdc00db128094a3b585d624c58d5549d22ec76472a3e6f41257e6599f323bcf",
+    "client-core.jar": "f765fbdf6d156b5e3768a294e5e6af783528a5992fd26f258242a7d44bb9f51d"
+  }
+}

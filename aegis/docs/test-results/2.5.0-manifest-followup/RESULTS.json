@@ -1,0 +1,33 @@
+{
+  "scope": "Targeted unsigned manifest generation and strict release security tests",
+  "PythonReleaseTests": {
+    "tests": 27,
+    "status": "PASS",
+    "evidence": "python-tests.log"
+  },
+  "JavaCompatibilityTest": {
+    "status": "PASS",
+    "tests": 5,
+    "source": "Actual root first global-run JUnit XML; these five tests passed while that overall run failed other tests; not a full-suite PASS",
+    "evidence": "root-first-run-client-core.xml"
+  },
+  "frozenSources": "Byte-identical Git sources with explicit per-file provenance in test resources",
+  "productionSigningKeyUsed": false,
+  "productionSignatureCreated": false,
+  "feedsChanged": false,
+  "published": false,
+  "productionReady": false,
+  "UpdateSecurityFutureFixtures": {
+    "status": "PASS",
+    "tests": 20,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "durationSeconds": 0.678,
+    "candidateVersion": "2.6.0",
+    "higherRollbackFloor": "2.7.0",
+    "installedCore": "actual existing root Java 21 client-core JAR 2.5.0",
+    "evidence": "update-security/TEST-junit-jupiter.xml",
+    "scope": "Only test fixture versions changed; production policy unchanged"
+  }
+}

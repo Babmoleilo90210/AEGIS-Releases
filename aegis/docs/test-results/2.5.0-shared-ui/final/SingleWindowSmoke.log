@@ -1,0 +1,6 @@
+startedUTC=2026-10-15T10:14:28.010719+00:00
+command=['/workspace/scratch/aa629f360927/inputs/jdk-21.0.12.1+1/bin/java', '--limit-modules', 'java.se,jdk.unsupported,jdk.charsets,jdk.crypto.ec', '-Xmx768m', '-Daegis.native.root=/workspace/scratch/aa629f360927/inputs/squashfs-root', '-Dprism.order=sw', '-Dquantum.multithreaded=false', '-Dglass.platform=Monocle', '-Dmonocle.platform=Headless', '-Dheadless.geometry=1600x1200-32', '-cp', '/tmp/aegis-final-shared-ui250-fixed-x5yk1eyi:/workspace/scratch/aa629f360927/aegis/aegis/build/local-java21/*:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/*:/workspace/scratch/aa629f360927/inputs/deps/*', 'org.securemail.ui.SingleWindowSmoke']
+Oct 15, 2026 12:14:28 PM com.sun.javafx.application.PlatformImpl startup
+WARNING: Unsupported JavaFX configuration: classes were loaded from 'unnamed module @67784306'
+Single-window PASS: settings, appearance, password, file picker, nested navigation, scaling, parent cancellation, preserved draft, one Stage and one title bar.
+exitCode=0

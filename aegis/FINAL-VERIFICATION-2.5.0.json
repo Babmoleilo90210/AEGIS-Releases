@@ -1,0 +1,2511 @@
+{
+  "schemaVersion": 1,
+  "application": "АЕГИС",
+  "version": "2.5.0",
+  "generatedAtUtc": "2026-10-15T10:20:54.702988+00:00",
+  "source": {
+    "baseCommit": "f173b4a1bb5f1e3ed121870aa04a6583833f93e9",
+    "branch": "development/aegis-2.5.0",
+    "implementationCommit": null,
+    "sourceState": "Final frozen production files; exact source commit/tree is bound in generated BUILD-PROVENANCE-2.5.0.json after Git freeze",
+    "implementationCommitCompanion": "BUILD-PROVENANCE-2.5.0.json in final artifact directory; generated after source freeze to avoid self-referential Git hash",
+    "observedGitHeadAtInitialAudit": "f173b4a1bb5f1e3ed121870aa04a6583833f93e9"
+  },
+  "scopeNotice": "Readiness aggregation of actual local evidence. Not a declaration of completed native, official-browser, physical-voice or updater E2E acceptance.",
+  "requirementNumbering": {
+    "BROWSER": "BROWSER01–BROWSER25, provided requirement summaries; not fabricated verbatim quotations",
+    "VOICE": "VOICE32–VOICE50, provided requirement summaries",
+    "VOICE01to31": {
+      "numberedTextPresentInProvidedContinuation": false,
+      "fabricatedOwnerRequirements": false,
+      "note": "Ранние номера не созданы искусственно; общая архитектура/контроллер/история описаны в GLAS-2.5.0.md."
+    }
+  },
+  "automatedJava": {
+    "status": "PASS",
+    "scope": "Local Ubuntu 24.04 Java 21 JUnit only",
+    "totals": {
+      "found": 368,
+      "passed": 367,
+      "skipped": 1,
+      "failed": 0,
+      "errors": 0
+    },
+    "modules": {
+      "common-protocol": {
+        "found": 4,
+        "passed": 4,
+        "skipped": 0,
+        "failed": 0,
+        "errors": 0,
+        "scope": "JUnit on Ubuntu 24.04 / Java 21; platform-specific tests may be skipped",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/common-protocol/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "4f9fdcfe641255f7dfc4823934c69864b5d24ff05a49048cad6a926e2cf128dc"
+          }
+        ],
+        "junitReportedTimestamp": "2026-10-15T12:02:25"
+      },
+      "client-core": {
+        "found": 347,
+        "passed": 346,
+        "skipped": 1,
+        "failed": 0,
+        "errors": 0,
+        "scope": "JUnit on Ubuntu 24.04 / Java 21; platform-specific tests may be skipped",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+          }
+        ],
+        "junitReportedTimestamp": "2026-10-15T12:04:02"
+      },
+      "relay-server": {
+        "found": 3,
+        "passed": 3,
+        "skipped": 0,
+        "failed": 0,
+        "errors": 0,
+        "scope": "JUnit on Ubuntu 24.04 / Java 21; platform-specific tests may be skipped",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/relay-server/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "0e4d0240fdadaa422ed267b8c8466a0a196295ef31e255b287c9a1e929111790"
+          }
+        ],
+        "junitReportedTimestamp": "2026-10-15T12:04:04"
+      },
+      "integration-tests": {
+        "found": 14,
+        "passed": 14,
+        "skipped": 0,
+        "failed": 0,
+        "errors": 0,
+        "scope": "JUnit on Ubuntu 24.04 / Java 21; platform-specific tests may be skipped",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/integration-tests/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "b6aa9bf53aa55a5fa1271fbc843fa64ce663bd960ef09acb79de2c621eabaff6"
+          }
+        ],
+        "junitReportedTimestamp": "2026-10-15T12:04:30"
+      }
+    },
+    "skippedNativeChecks": [
+      "nativeDpapiCurrentUserRoundTrip()"
+    ],
+    "subsetReportsMustNotBeAddedAgainToFullTotals": true,
+    "sourceBinding": {
+      "path": "SOURCE-PROVENANCE-2.5.0.json",
+      "kind": "executed_report",
+      "sha256": "480b4dc516493a186c99ee03d8e5c67b123e4c0e5950c721aff152e633f0511a"
+    }
+  },
+  "packagingChecks": {
+    "status": "PASS",
+    "allToolsTests": 59,
+    "windowsHelperPolicyTests": 1,
+    "scope": "Unit/static/offline package-policy checks, not Windows execution or complete release-artifact install verification",
+    "evidence": [
+      {
+        "path": "docs/test-results/2.5.0-packaging-audit/result.json",
+        "kind": "executed_report",
+        "sha256": "955fd5344f2baf4ba70f6fd7de3f895e8ac9f8862bf31ae2e773292b563160fc"
+      },
+      {
+        "path": "docs/test-results/2.5.0-packaging-audit/tools-tests.txt",
+        "kind": "executed_report",
+        "sha256": "597832da5f67bc4b581900670fb5e9069ee37412c0962620d13c83b97ddeef49"
+      },
+      {
+        "path": "docs/test-results/2.5.0-packaging-audit/windows-helper-policy.txt",
+        "kind": "executed_report",
+        "sha256": "0276289a917b36926f4a82fd7b7e1660cb3eb443b96c998d41c5d3cf04007a39"
+      }
+    ],
+    "finalTools": {
+      "status": "PASS",
+      "tests": 67,
+      "evidence": {
+        "path": "docs/test-results/2.5.0/full-java/python-final-tools.log",
+        "kind": "executed_report",
+        "sha256": "b22cd48a6fcc15325129f9aa48296b30e5e1edb553871c33b3e635244a1d6262"
+      }
+    }
+  },
+  "actualTorAttempt": {
+    "status": "BLOCKED",
+    "physicalHosts": 1,
+    "transport": "actual bundled Tor, not SOCKS fixture",
+    "directMaximumPercent": 0,
+    "snowflakeMaximumPercent": 10,
+    "sevenProfileAvatarChecks": "NOT_RUN",
+    "evidence": [
+      {
+        "path": "docs/test-results/2.5.0/tor-profiles/RESULTS.json",
+        "kind": "executed_report",
+        "sha256": "d3cce1caca43297c679e691630adb14f0786d0ff34f47d9093d250aabbe53858"
+      },
+      {
+        "path": "docs/test-results/2.5.0/tor-profiles/probe.log",
+        "kind": "executed_report",
+        "sha256": "31ff604ede0d0e6827fc5ce4f87b5d1460afa47b20eb27f2d453044019effa38"
+      }
+    ]
+  },
+  "officialBrowserAcquisition": {
+    "status": "BLOCKED",
+    "metadataRequests": "BLOCKED_HTML",
+    "observedResponseBytes": 195,
+    "officialPackageDownload": "NOT_RUN",
+    "officialPackageSignatureVerification": "NOT_RUN",
+    "officialBrowserExecution": "NOT_RUN",
+    "evidence": [
+      {
+        "path": "docs/test-results/2.5.0-tor-browser/metadata-fetch-results.json",
+        "kind": "executed_report",
+        "sha256": "d5c4cf7e40283428024cf18beca54119b3472e348e8fc0028b2eac9ea24ec71b"
+      },
+      {
+        "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+        "kind": "executed_report",
+        "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+      }
+    ]
+  },
+  "ui": {
+    "headless": {
+      "status": "NOT_RUN",
+      "executionState": "IN_PROGRESS",
+      "scope": "Final Vzor/Glas scenes and overflow fixes not yet fully accepted; prior intermediate scenes are limited evidence.",
+      "priorIntermediateEvidence": [
+        {
+          "path": "docs/test-results/2.5.0-ui-followup/RESULTS.json",
+          "kind": "executed_report",
+          "sha256": "5e29c78baa2611d0a4336075192f79090e8748c67bae36d8e4287c3281bbfc87"
+        }
+      ]
+    },
+    "nativeWindows11": "NOT_RUN",
+    "nativeCachyOSKDEWayland": "NOT_RUN",
+    "nativeCachyOSKDEX11": "NOT_RUN",
+    "executionState": "PASS_HEADLESS",
+    "currentProbes": [
+      "docs/test-results/2.5.0-shared-ui/final/RESULTS.json",
+      "docs/test-results/2.5.0-final-vzor-ui/RESULTS.json"
+    ],
+    "nativeAcceptance": "NOT_RUN"
+  },
+  "browserRequirements": [
+    {
+      "id": "BROWSER01",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Определение поддерживаемой ОС и архитектуры",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "PASS",
+        "scope": "Локальные проверки platform/architecture/prerequisite policy; запуск официального браузера на целевых ОС не выполнялся.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+          }
+        ],
+        "testClasses": [
+          "SandboxPrerequisitesTest",
+          "TorBrowserDownloadServiceTest",
+          "TorBrowserDiscoveryTest"
+        ],
+        "testsInLatestCoreRun": 30
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "OFFICIAL_BROWSER_ACQUISITION"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "BROWSER02",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Получение официального пакета Tor Browser",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "BLOCKED",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "PASS",
+        "scope": "Автоматическая загрузка на bounded HTTP/SOCKS fixtures; официальный пакет не получен.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+          },
+          {
+            "path": "docs/test-results/2.5.0-tor-browser/metadata-fetch-results.json",
+            "kind": "executed_report",
+            "sha256": "d5c4cf7e40283428024cf18beca54119b3472e348e8fc0028b2eac9ea24ec71b"
+          }
+        ],
+        "testClasses": [
+          "TorBrowserDownloadServiceTest",
+          "TorBrowserHttpsTest"
+        ],
+        "testsInLatestCoreRun": 15
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "OFFICIAL_BROWSER_ACQUISITION"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": [
+        "Official metadata requests returned 195-byte HTML, not JSON.",
+        "Actual application Tor bootstrap did not reach readiness; official application acquisition E2E NOT_RUN."
+      ]
+    },
+    {
+      "id": "BROWSER03",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Получение соответствующей OpenPGP-подписи пакета",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "BLOCKED",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "PASS",
+        "scope": "Связывание metadata, имени пакета, URL и detached signature в fixtures. Реальная .asc того же официального пакета не получена.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+          }
+        ],
+        "testClasses": [
+          "TorBrowserDownloadServiceTest",
+          "TorBrowserSignatureTest"
+        ],
+        "testsInLatestCoreRun": 26
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "OFFICIAL_BROWSER_ACQUISITION"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "BROWSER04",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Проверка подлинности официального пакета",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "PASS",
+        "scope": "Настоящая OpenPGP-криптография с одноразовыми тестовыми ключами и compiled vendor pin policy; реальный vendor package в среде не проверен.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+          }
+        ],
+        "testClasses": [
+          "TorBrowserSignatureTest"
+        ],
+        "testsInLatestCoreRun": 17
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "OFFICIAL_BROWSER_ACQUISITION"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "BROWSER05",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Отклонение неверной подписи",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "PASS",
+        "scope": "Неверные ключи, подписи и изменённые данные отвергаются в локальных негативных тестах.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+          }
+        ],
+        "testClasses": [
+          "TorBrowserSignatureTest"
+        ],
+        "testsInLatestCoreRun": 17
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "OFFICIAL_BROWSER_ACQUISITION"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "BROWSER06",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Отклонение неподдерживаемой версии",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "PASS",
+        "scope": "Локальные проверки версий, metadata/package binding и floor без silent downgrade.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+          }
+        ],
+        "testClasses": [
+          "TorBrowserDownloadServiceTest",
+          "TorBrowserDiscoveryTest",
+          "SafeWebSessionsTest"
+        ],
+        "testsInLatestCoreRun": 36
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "OFFICIAL_BROWSER_ACQUISITION"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "BROWSER07",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Безопасная распаковка пакета",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "PASS",
+        "scope": "Реальный extractor на ограниченных архивных fixtures; официальный установочный цикл не выполнялся.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+          }
+        ],
+        "testClasses": [
+          "TorBrowserInstallerTest"
+        ],
+        "testsInLatestCoreRun": 10
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "OFFICIAL_BROWSER_ACQUISITION"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "BROWSER08",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Защита от path traversal",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "PASS",
+        "scope": "Негативные fixture-архивы, небезопасные пути и ссылки отвергаются; нативная FS-проверка Windows/КDE не выполнялась.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+          }
+        ],
+        "testClasses": [
+          "TorBrowserInstallerTest",
+          "SafeWebSessionsTest",
+          "SafeWebDownloadTest"
+        ],
+        "testsInLatestCoreRun": 35
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "OFFICIAL_BROWSER_ACQUISITION"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "BROWSER09",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Атомарность установки",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "PASS",
+        "scope": "Staging/publish и сохранение предыдущей установки проверены на локальной временной FS.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+          }
+        ],
+        "testClasses": [
+          "SafeWebSessionsTest",
+          "TorBrowserDiscoveryTest",
+          "SafeWebProcessTest"
+        ],
+        "testsInLatestCoreRun": 34
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "OFFICIAL_BROWSER_ACQUISITION"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "BROWSER10",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Восстановление после ошибки установки",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "PASS",
+        "scope": "Отказ, повтор, восстановление собственного staging/backup и отсутствие автоматического доверия изменённым файлам проверены локально.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+          }
+        ],
+        "testClasses": [
+          "SafeWebSessionsTest",
+          "TorBrowserDiscoveryTest",
+          "SafeWebProcessTest"
+        ],
+        "testsInLatestCoreRun": 34
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "OFFICIAL_BROWSER_ACQUISITION"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "BROWSER11",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Повторное открытие без повторного скачивания",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "PASS",
+        "scope": "Authenticated preflight и повторное использование доверенной fixture-установки.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+          }
+        ],
+        "testClasses": [
+          "TorBrowserDiscoveryTest",
+          "SafeWebProcessTest"
+        ],
+        "testsInLatestCoreRun": 23
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "OFFICIAL_BROWSER_ACQUISITION"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "BROWSER12",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Обнаружение установленного Tor Browser",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "PASS",
+        "scope": "Поиск кандидатов в временных каталогах. Обнаружение pathname не означает аттестацию или перенос существующего профиля.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+          }
+        ],
+        "testClasses": [
+          "TorBrowserDiscoveryTest"
+        ],
+        "testsInLatestCoreRun": 16
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "OFFICIAL_BROWSER_ACQUISITION"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "BROWSER13",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Отсутствие переноса чужого браузерного профиля",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "PASS",
+        "scope": "Раздельные bundle/session roots, bounded profile copy только собственной доверенной сессии; обычный Firefox-профиль не импортируется.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+          }
+        ],
+        "testClasses": [
+          "SafeWebSessionsTest",
+          "TorBrowserDiscoveryTest"
+        ],
+        "testsInLatestCoreRun": 27
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "OFFICIAL_BROWSER_ACQUISITION"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "BROWSER14",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Изоляция браузера",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "PASS",
+        "scope": "Тесты Linux mount/network/display command policy и Windows Sandbox config/lifecycle seams. Реальная граница ОС не испытана.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+          }
+        ],
+        "testClasses": [
+          "LinuxSafeWebSandboxTest",
+          "WindowsSafeWebSandboxTest",
+          "SandboxPrerequisitesTest"
+        ],
+        "testsInLatestCoreRun": 20
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "OFFICIAL_BROWSER_ACQUISITION"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": [
+        "Linux environment denies the required namespace/network setup.",
+        "Windows Sandbox backend requires Windows 11 24H2+ Pro/Enterprise/Education and a supported current CLI; Home is not supported.",
+        "A separate process alone is not treated as a sandbox."
+      ]
+    },
+    {
+      "id": "BROWSER15",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Отсутствие clearnet fallback",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "PASS",
+        "scope": "Локальные transport/launch policy checks; packet capture реального официального браузера отсутствует.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+          }
+        ],
+        "testClasses": [
+          "SafeWebTest",
+          "LinuxSafeWebSandboxTest"
+        ],
+        "testsInLatestCoreRun": 13
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "OFFICIAL_BROWSER_ACQUISITION"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": [
+        "Tor-only relies on the supported stock Tor Browser model. A fully compromised browser broker is not claimed to be constrained by a per-process kernel Tor-only firewall."
+      ]
+    },
+    {
+      "id": "BROWSER16",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Отсутствие DNS-утечек",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "NOT_RUN",
+        "scope": "Не выполнялась DNS-проверка официального запущенного браузера.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": []
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "OFFICIAL_BROWSER_ACQUISITION"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "BROWSER17",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Отсутствие WebRTC/IP-утечек",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер и реальные WebRTC/IP leak checks не запускались.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": []
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "OFFICIAL_BROWSER_ACQUISITION"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "BROWSER18",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Открытие обычного HTTPS-сайта",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "NOT_RUN",
+        "scope": "Нет выполненного открытия сайта в официальном Tor Browser.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": []
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "OFFICIAL_BROWSER_ACQUISITION"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "BROWSER19",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Открытие onion-ресурса",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "NOT_RUN",
+        "scope": "Нет выполненного открытия onion-сайта в официальном Tor Browser.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": []
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "OFFICIAL_BROWSER_ACQUISITION"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "BROWSER20",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Корректное завершение принадлежащего приложению браузерного процесса",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "PASS",
+        "scope": "Owned harmless child/controller tests и simulated Windows lifecycle; не реальный Tor Browser/VM.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+          }
+        ],
+        "testClasses": [
+          "SafeWebProcessTest",
+          "LinuxSafeWebSandboxTest",
+          "WindowsSafeWebSandboxTest"
+        ],
+        "testsInLatestCoreRun": 22
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "OFFICIAL_BROWSER_ACQUISITION"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "BROWSER21",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Недоступность identity keys и данных архива браузеру",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "PASS",
+        "scope": "Политика непересекающихся roots, protected-path aliases и sandbox mounts; реальные sentinel-проверки на трёх ОС не выполнялись.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+          }
+        ],
+        "testClasses": [
+          "SafeWebSessionsTest",
+          "LinuxSafeWebSandboxTest",
+          "WindowsSafeWebSandboxTest"
+        ],
+        "testsInLatestCoreRun": 26
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "OFFICIAL_BROWSER_ACQUISITION"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "BROWSER22",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Безопасные загрузки и явный импорт",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "PASS",
+        "scope": "Реальные bounded file snapshots/anti-symlink tests на Linux; Windows policy seams. Browser download и нативный импорт не выполнялись.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+          }
+        ],
+        "testClasses": [
+          "SafeWebDownloadTest",
+          "SafeWebSessionsTest"
+        ],
+        "testsInLatestCoreRun": 25
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "OFFICIAL_BROWSER_ACQUISITION"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "BROWSER23",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Открытие ссылок из писем",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "PASS",
+        "scope": "Парсер URL, запрет команд/локальных адресов и передачи URL одним аргументом проверены локально; click-to-official-browser E2E не выполнялся.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+          }
+        ],
+        "testClasses": [
+          "SafeWebTest",
+          "LinuxSafeWebSandboxTest"
+        ],
+        "testsInLatestCoreRun": 13
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "OFFICIAL_BROWSER_ACQUISITION"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "BROWSER24",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Совместимость со штатным updater Tor Browser",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "PASS",
+        "scope": "Только повторная аттестация свежим подписанным fixture-пакетом с сохранением собственных данных. Реальный официальный MAR/update cycle не выполнялся.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+          }
+        ],
+        "testClasses": [
+          "TorBrowserDiscoveryTest",
+          "SafeWebSessionsTest"
+        ],
+        "testsInLatestCoreRun": 27
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "OFFICIAL_BROWSER_ACQUISITION"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": [
+        "Fixture repair is not an official Tor Browser update result."
+      ]
+    },
+    {
+      "id": "BROWSER25",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Нативная приёмка браузера на всех целевых платформах",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "NOT_RUN",
+        "scope": "Windows 11 x64, CachyOS KDE Wayland и CachyOS KDE X11 недоступны для соответствующей приёмки.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": []
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "OFFICIAL_BROWSER_ACQUISITION"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    }
+  ],
+  "voiceRequirements": [
+    {
+      "id": "VOICE32",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Проверка CPU/RAM нагрузки",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "NOT_RUN",
+        "scope": "Не измерялась нагрузка физического разговора через Tor.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": []
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "TWO_PHYSICAL_DEVICES_DIFFERENT_NETWORKS",
+          "NATIVE_PLATFORM_ACCEPTANCE"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "VOICE33",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Разговор продолжительностью не менее 60 минут",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "PASS",
+        "scope": "Есть короткие JSSE KeyUpdate/fresh reconnect tests; часовой физический разговор не выполнялся.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+          }
+        ],
+        "testClasses": [
+          "VoiceTlsTest",
+          "VoiceCallServiceTest"
+        ],
+        "testsInLatestCoreRun": 31
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "TWO_PHYSICAL_DEVICES_DIFFERENT_NETWORKS",
+          "NATIVE_PLATFORM_ACCEPTANCE"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "VOICE34",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Работа при высокой задержке Tor",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "PASS",
+        "scope": "Jitter/bounded buffering и отказ транспорта проверены синтетическими arrivals/loopback; реальная высокая задержка Tor не измерялась.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+          }
+        ],
+        "testClasses": [
+          "GlasAudioTest",
+          "VoiceCallServiceTest"
+        ],
+        "testsInLatestCoreRun": 25
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "TWO_PHYSICAL_DEVICES_DIFFERENT_NETWORKS",
+          "NATIVE_PLATFORM_ACCEPTANCE"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "VOICE35",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Адаптивные буфер и bitrate",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "PASS",
+        "scope": "Настоящие native Opus/Speex с синтетическим сигналом и искусственной device/sink нагрузкой; не real-network audio.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+          }
+        ],
+        "testClasses": [
+          "GlasAudioTest"
+        ],
+        "testsInLatestCoreRun": 11
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "TWO_PHYSICAL_DEVICES_DIFFERENT_NETWORKS",
+          "NATIVE_PLATFORM_ACCEPTANCE"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "VOICE36",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Одновременная работа Взора и Гласа",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "NOT_RUN",
+        "scope": "Одновременный официальный браузер и физический голосовой разговор не запускались.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": []
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "TWO_PHYSICAL_DEVICES_DIFFERENT_NETWORKS",
+          "NATIVE_PLATFORM_ACCEPTANCE"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "VOICE37",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Письма во время звонка",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "PASS",
+        "scope": "Зашифрованное подписанное письмо реально проходит тот же PeerServer listener во время real TLS с loopback connector и искусственными audio devices.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+          }
+        ],
+        "testClasses": [
+          "VoiceCallServiceTest"
+        ],
+        "testsInLatestCoreRun": 14
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "TWO_PHYSICAL_DEVICES_DIFFERENT_NETWORKS",
+          "NATIVE_PLATFORM_ACCEPTANCE"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "VOICE38",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Архив во время звонка",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "NOT_RUN",
+        "scope": "Нативный одновременный архив и реальный звонок не проверялись; отдельные тесты архива не засчитываются как этот сценарий.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": []
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "TWO_PHYSICAL_DEVICES_DIFFERENT_NETWORKS",
+          "NATIVE_PLATFORM_ACCEPTANCE"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "VOICE39",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Освобождение аудиоресурсов",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "PASS",
+        "scope": "Device seams проверяют close/mute/generation и удержание ownership при медленной очистке; физические линии ОС не проверены.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+          }
+        ],
+        "testClasses": [
+          "GlasAudioTest",
+          "GlasTestOwnershipTest",
+          "VoiceCallServiceTest"
+        ],
+        "testsInLatestCoreRun": 30
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "TWO_PHYSICAL_DEVICES_DIFFERENT_NETWORKS",
+          "NATIVE_PLATFORM_ACCEPTANCE"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "VOICE40",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Отсутствие утечек потоков и памяти",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "PASS",
+        "scope": "Ограничение workers/queues и teardown ownership проверены локально; длительное memory/thread profiling не выполнялось.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+          }
+        ],
+        "testClasses": [
+          "VoiceCallServiceTest",
+          "GlasTestOwnershipTest"
+        ],
+        "testsInLatestCoreRun": 19
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "TWO_PHYSICAL_DEVICES_DIFFERENT_NETWORKS",
+          "NATIVE_PLATFORM_ACCEPTANCE"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "VOICE41",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Отклонение повреждённых, слишком больших и malformed пакетов",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "PASS",
+        "scope": "Реальные TLS hostile peer/record corruption и bounded frame/native codec validation, без публичного Tor/физических устройств.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+          }
+        ],
+        "testClasses": [
+          "VoiceFramesTest",
+          "VoiceSecurityReviewTest",
+          "VoiceTlsTest",
+          "GlasAudioTest"
+        ],
+        "testsInLatestCoreRun": 35
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "TWO_PHYSICAL_DEVICES_DIFFERENT_NETWORKS",
+          "NATIVE_PLATFORM_ACCEPTANCE"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "VOICE42",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Отсутствие nonce/key reuse",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "PASS",
+        "scope": "Используется стандартный JSSE TLS 1.3 без собственного media AEAD; свежие ephemeral certificates и KeyUpdate проверены локально. Traffic secrets не выводятся для доказательства.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+          }
+        ],
+        "testClasses": [
+          "VoiceTlsTest",
+          "VoiceCallServiceTest"
+        ],
+        "testsInLatestCoreRun": 31
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "TWO_PHYSICAL_DEVICES_DIFFERENT_NETWORKS",
+          "NATIVE_PLATFORM_ACCEPTANCE"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "VOICE43",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Защита от подмены identity-ключа",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "PASS",
+        "scope": "Реальные JSSE mismatch/substitution tests, ordered identity/call/role binding, прекращение разговора при смене закреплённого контакта.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+          }
+        ],
+        "testClasses": [
+          "VoiceTlsTest",
+          "VoiceSecurityReviewTest",
+          "VoiceCallServiceTest"
+        ],
+        "testsInLatestCoreRun": 35
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "TWO_PHYSICAL_DEVICES_DIFFERENT_NETWORKS",
+          "NATIVE_PLATFORM_ACCEPTANCE"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "VOICE44",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Отсутствие аудио до аутентификации и принятия",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "PASS",
+        "scope": "Real TLS/PeerServer с искусственными devices доказывает отсутствие их создания до ACCEPT/READY и mic gate; физические permissions не проверены.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+          }
+        ],
+        "testClasses": [
+          "VoiceCallServiceTest",
+          "VoiceSecurityReviewTest",
+          "GlasAudioTest"
+        ],
+        "testsInLatestCoreRun": 29
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "TWO_PHYSICAL_DEVICES_DIFFERENT_NETWORKS",
+          "NATIVE_PLATFORM_ACCEPTANCE"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "VOICE45",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Отсутствие секретов в crash dumps/диагностике в границах возможностей ОС",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "NOT_RUN",
+        "scope": "Полный crash-dump/OS-memory анализ на целевых ОС не выполнялся. Ограниченная диагностика не является гарантией отсутствия копий в RAM/OS dumps.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": []
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "TWO_PHYSICAL_DEVICES_DIFFERENT_NETWORKS",
+          "NATIVE_PLATFORM_ACCEPTANCE"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": [
+        "Application does not claim absolute erasure of Java heap, driver buffers or operating-system crash dumps."
+      ]
+    },
+    {
+      "id": "VOICE46",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Блокировка экрана и sleep/resume",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "NOT_RUN",
+        "scope": "Не выполнялись физические screen lock/sleep/resume сценарии.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": []
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "TWO_PHYSICAL_DEVICES_DIFFERENT_NETWORKS",
+          "NATIVE_PLATFORM_ACCEPTANCE"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "VOICE47",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Аварийное завершение одного клиента",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "PASS",
+        "scope": "Прерывание реального loopback TCP/TLS и ограниченный reconnect проверены; crash отдельного нативного процесса клиента не выполнялся.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+          }
+        ],
+        "testClasses": [
+          "VoiceCallServiceTest"
+        ],
+        "testsInLatestCoreRun": 14
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "TWO_PHYSICAL_DEVICES_DIFFERENT_NETWORKS",
+          "NATIVE_PLATFORM_ACCEPTANCE"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "VOICE48",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Совместимость со старыми клиентами",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "PASS",
+        "scope": "Legacy peer-operation fixture отвергает op101 и затем принимает зашифрованное письмо. Полный старый бинарник на физических ОС не запускался.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+          }
+        ],
+        "testClasses": [
+          "VoiceCallServiceTest"
+        ],
+        "testsInLatestCoreRun": 14
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "TWO_PHYSICAL_DEVICES_DIFFERENT_NETWORKS",
+          "NATIVE_PLATFORM_ACCEPTANCE"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    },
+    {
+      "id": "VOICE49",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Отсутствие несанкционированной записи",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "PASS",
+        "scope": "Capture consent/mute tested with device seams; кодек fixture не открывает устройств. OS-wide monitoring фактического capture и файловой активности не выполнялся.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+          }
+        ],
+        "testClasses": [
+          "GlasAudioTest",
+          "GlasTestOwnershipTest",
+          "VoiceCallServiceTest"
+        ],
+        "testsInLatestCoreRun": 30
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "TWO_PHYSICAL_DEVICES_DIFFERENT_NETWORKS",
+          "NATIVE_PLATFORM_ACCEPTANCE"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": [
+        "Call metadata history is distinct from recording audio; history is opt-in and encrypted."
+      ]
+    },
+    {
+      "id": "VOICE50",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "descriptionKind": "summary_not_verbatim",
+      "requirementRu": "Недоступный или заблокированный контакт",
+      "mandatory": true,
+      "implementationStatus": "IMPLEMENTED_WITH_DOCUMENTED_LIMITATIONS",
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "localVerification": {
+        "status": "PASS",
+        "scope": "Real TLS/contact fixtures проверяют unknown/blocked/key-changed, timeout, unavailable device и отсутствие автоматического доверия.",
+        "doesNotEstablish": "official Tor Browser execution, Tor routing or native platform/physical-device acceptance",
+        "evidence": [
+          {
+            "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+            "kind": "executed_report",
+            "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+          }
+        ],
+        "testClasses": [
+          "VoiceCallServiceTest",
+          "VoiceSecurityReviewTest"
+        ],
+        "testsInLatestCoreRun": 18
+      },
+      "officialOrNativeEndToEnd": {
+        "status": "NOT_RUN",
+        "scope": "Официальный браузер на Windows 11/CachyOS либо реальные физические участники через Tor, в зависимости от требования.",
+        "blockingDependencies": [
+          "ACTUAL_TOR_BOOTSTRAP",
+          "TWO_PHYSICAL_DEVICES_DIFFERENT_NETWORKS",
+          "NATIVE_PLATFORM_ACCEPTANCE"
+        ]
+      },
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ],
+      "limitations": []
+    }
+  ],
+  "nativePlatformMatrix": [
+    {
+      "platform": "Windows 11 x64",
+      "browser": "NOT_RUN",
+      "voice": "NOT_RUN",
+      "ui": "NOT_RUN",
+      "migration": "NOT_RUN",
+      "updaterEndToEnd": "NOT_RUN",
+      "rollback": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ]
+    },
+    {
+      "platform": "CachyOS KDE Wayland",
+      "browser": "NOT_RUN",
+      "voice": "NOT_RUN",
+      "ui": "NOT_RUN",
+      "migration": "NOT_RUN",
+      "updaterEndToEnd": "NOT_RUN",
+      "rollback": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ]
+    },
+    {
+      "platform": "CachyOS KDE X11",
+      "browser": "NOT_RUN",
+      "voice": "NOT_RUN",
+      "ui": "NOT_RUN",
+      "migration": "NOT_RUN",
+      "updaterEndToEnd": "NOT_RUN",
+      "rollback": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ]
+    }
+  ],
+  "physicalVoice": {
+    "status": "NOT_RUN",
+    "twoPhysicalDevicesDifferentNetworks": "NOT_RUN",
+    "atLeastSixtyMinutes": "NOT_RUN",
+    "speechLatencyMeasurements": "NOT_RUN",
+    "cpuRamMeasurements": "NOT_RUN",
+    "realMicrophoneAndPlayback": "NOT_RUN",
+    "localCodecOnlyEvidence": [
+      {
+        "path": "docs/test-results/2.5.0-voice-native-local/UBUNTU-LOCAL-FINAL.json",
+        "kind": "executed_report",
+        "sha256": "02bd0f6530a3f83348a3e981cc917c279672acb13dbee5276b7e69cd483e46d7"
+      }
+    ],
+    "localCodecEvidenceDoesNotPromotePhysicalVoice": true
+  },
+  "updater": {
+    "signedTestChannelFullInstallRestart": "NOT_RUN",
+    "rollback": "NOT_RUN",
+    "productionStableFeedModified": false,
+    "manifestUnitTestPassDoesNotCloseEndToEnd": true
+  },
+  "knownLimitations": [
+    "Official Tor Browser metadata requests returned HTML; no official browser package/runtime was executed.",
+    "Actual bundled Tor did not finish bootstrap (Direct0%, Snowflake10%); real avatar checks remain NOT_RUN.",
+    "Windows 11/CachyOS KDE Wayland/X11, physical audio, 60-minute conversations and concurrent Vzor/voice acceptance remain NOT_RUN.",
+    "Windows Vzor backend has edition/build/CLI requirements; Windows Home is not covered.",
+    "Browser Tor-only relies on the supported stock Tor Browser model; full broker compromise is not claimed to be constrained by a per-process kernel Tor-only firewall.",
+    "No guarantee of erasing every audio/secret copy from Java heap, drivers, operating-system dumps, SSD or backups.",
+    "A successful automated suite or synthetic native codec fixture is not an overall production-readiness result."
+  ],
+  "gateEvaluation": {
+    "expression": "bool(mandatory) and all(gate[\"status\"] == \"PASS\" for gate in mandatory)",
+    "mandatoryCount": 60,
+    "statusCounts": {
+      "PASS": 4,
+      "NOT_RUN": 52,
+      "BLOCKED": 4
+    },
+    "allMandatoryPass": false,
+    "unmetMandatoryIds": [
+      "FIXED_SOURCE_ARTIFACT_BINDING",
+      "FINAL_HEADLESS_UI",
+      "NATIVE_WINDOWS11",
+      "NATIVE_CACHYOS_KDE_WAYLAND",
+      "NATIVE_CACHYOS_KDE_X11",
+      "ACTUAL_TOR_BOOTSTRAP",
+      "REAL_PUBLIC_PROFILE_AVATAR_AB",
+      "MIGRATION_NATIVE_REGRESSION",
+      "SIGNED_UPDATER_END_TO_END",
+      "UPDATER_ROLLBACK_NATIVE",
+      "FINAL_ARTIFACTS_HASHES_AND_INSTALL",
+      "OWNER_OFFLINE_SIGNATURE",
+      "BROWSER01",
+      "BROWSER02",
+      "BROWSER03",
+      "BROWSER04",
+      "BROWSER05",
+      "BROWSER06",
+      "BROWSER07",
+      "BROWSER08",
+      "BROWSER09",
+      "BROWSER10",
+      "BROWSER11",
+      "BROWSER12",
+      "BROWSER13",
+      "BROWSER14",
+      "BROWSER15",
+      "BROWSER16",
+      "BROWSER17",
+      "BROWSER18",
+      "BROWSER19",
+      "BROWSER20",
+      "BROWSER21",
+      "BROWSER22",
+      "BROWSER23",
+      "BROWSER24",
+      "BROWSER25",
+      "VOICE32",
+      "VOICE33",
+      "VOICE34",
+      "VOICE35",
+      "VOICE36",
+      "VOICE37",
+      "VOICE38",
+      "VOICE39",
+      "VOICE40",
+      "VOICE41",
+      "VOICE42",
+      "VOICE43",
+      "VOICE44",
+      "VOICE45",
+      "VOICE46",
+      "VOICE47",
+      "VOICE48",
+      "VOICE49",
+      "VOICE50"
+    ],
+    "automaticPromotionAllowed": false,
+    "signingOrPublicationPerformedByEvaluation": false
+  },
+  "releaseGates": "RELEASE-GATES-2.5.0.json",
+  "productionReady": false,
+  "stablePublicationAuthorized": false,
+  "stablePublished": false,
+  "performanceOfflineBaseline": {
+    "path": "docs/test-results/2.5.0-performance/SUMMARY.json",
+    "kind": "executed_report",
+    "sha256": "aef3a0b546a0cbfac140f7e871190d9971050d5e151bb6e3e412e3d7457e34e2"
+  }
+}

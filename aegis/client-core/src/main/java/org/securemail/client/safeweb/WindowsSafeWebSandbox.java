@@ -36,32 +36,17 @@ public final class WindowsSafeWebSandbox {
    * sessionRoot is the controller directory outside the mapped bundle.
    */
   public static Launch start(Path bundle,Path sessionRoot,URI url)throws IOException {
-    if(!System.getProperty("os.name","").startsWith("Windows"))
-      throw new IOException("Safe Web Windows: неподдерживаемая ОС");
+    Environment environment=requireEnvironment();
     URI checked=SafeWebUrl.parse(Objects.requireNonNull(url).toASCIIString());
-    String edition;
-    try {
-      edition=Advapi32Util.registryGetStringValue(WinReg.HKEY_LOCAL_MACHINE,
-        "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion","EditionID");
-      String build=Advapi32Util.registryGetStringValue(WinReg.HKEY_LOCAL_MACHINE,
-        "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion","CurrentBuildNumber");
-      if(Integer.parseInt(build)<26100)throw new IOException("Управляемый Safe Web требует Windows 11 24H2+ x64 с CLI Windows Sandbox");
-    }catch(RuntimeException error){throw new IOException("Не удалось определить редакцию Windows",error);}
-    requireSupportedEdition(edition);
-    if(!System.getProperty("os.arch","").equalsIgnoreCase("amd64")&&
-       !System.getProperty("os.arch","").equalsIgnoreCase("x86_64"))
-      throw new IOException("Safe Web требует Windows 11 x64");
-    Path windows=windowsDirectory(),executable=windows.resolve("System32/WindowsSandbox.exe");
-    if(!Files.isRegularFile(executable,LinkOption.NOFOLLOW_LINKS)||Files.isSymbolicLink(executable))
-      throw new IOException("Windows Sandbox недоступен. Нужны Windows 11 Pro/Enterprise/Education, виртуализация и установленный компонент Windows Sandbox; АЕГИС не меняет компоненты ОС автоматически");
+    Path windows=environment.windows();
     Path base=directory(bundle),control=directory(sessionRoot);
-    if(base.equals(control)||control.startsWith(base))throw new IOException("Каталог управления Safe Web должен находиться вне браузерного пакета");
-    Path nativeLocal=Path.of(Shell32Util.getKnownFolderPath(KnownFolders.FOLDERID_LocalAppData)).toRealPath();
+    if(base.equals(control)||control.startsWith(base))throw new IOException("Каталог управления Взор должен находиться вне браузерного пакета");
+    Path nativeLocal=environment.local();
     Path allowed=nativeLocal.resolve("AEGIS-SafeWeb/bundles").normalize();
     if(!base.getParent().equals(allowed)||!base.getFileName().toString().matches("[A-Za-z0-9_-]{1,100}"))
-      throw new IOException("Windows Sandbox принимает только отдельный браузерный пакет Safe Web");
+      throw new IOException("Windows Sandbox принимает только отдельный браузерный пакет Взор");
     if(!control.equals(allowed.getParent().resolve("control").resolve(base.getFileName())))
-      throw new IOException("Каталог управления должен соответствовать собственной сессии Safe Web");
+      throw new IOException("Каталог управления должен соответствовать собственной сессии Взор");
     if(!Files.isRegularFile(base.resolve("Browser/firefox.exe"),LinkOption.NOFOLLOW_LINKS)||
        !Files.isDirectory(base.resolve("Browser/TorBrowser/Data/Browser/profile.default"),LinkOption.NOFOLLOW_LINKS))
       throw new IOException("Не найден официальный Windows Tor Browser");
@@ -69,14 +54,14 @@ public final class WindowsSafeWebSandbox {
     Path lockPath=allowed.getParent().resolve("control/windows-sandbox.lock");
     FileChannel channel=FileChannel.open(lockPath,StandardOpenOption.CREATE,StandardOpenOption.WRITE,LinkOption.NOFOLLOW_LINKS);
     FileLock lock;
-    try{lock=channel.tryLock();}catch(OverlappingFileLockException busy){channel.close();throw new IOException("Safe Web уже запускает Windows Sandbox",busy);}
-    if(lock==null){channel.close();throw new IOException("Safe Web уже запускает Windows Sandbox");}
+    try{lock=channel.tryLock();}catch(OverlappingFileLockException busy){channel.close();throw new IOException("Взор уже запускает Windows Sandbox",busy);}
+    if(lock==null){channel.close();throw new IOException("Взор уже запускает Windows Sandbox");}
     Launch launch=null;
     try {
       WindowsSandboxCli cli=new WindowsSandboxCli(windows,nativeLocal,control);
       // A trusted host CLI, not a writable guest status file or launcher PID,
       // identifies and owns the VM. No process-name killing or VM adoption.
-      if(cli.list().values().stream().anyMatch(Boolean::booleanValue))throw new IOException("Уже открыт Windows Sandbox. Закройте его перед запуском Safe Web; АЕГИС не управляет посторонними экземплярами");
+      if(cli.list().values().stream().anyMatch(Boolean::booleanValue))throw new IOException("Уже открыт Windows Sandbox. Закройте его перед запуском Взор; АЕГИС не управляет посторонними экземплярами");
       String nonce=UUID.randomUUID().toString();
       Path runtime=base.resolve(RUNTIME).resolve(nonce);AtomicFiles.directory(runtime);
       Path downloads=base.resolve("aegis-downloads");AtomicFiles.directory(downloads);
@@ -96,7 +81,7 @@ public final class WindowsSafeWebSandbox {
       Map<String,Boolean> after=cli.list();
       launch.ambiguousOwnership=after.entrySet().stream().anyMatch(e->e.getValue()&&!e.getKey().equals(nonce));
       if(start.exit()!=0||!Boolean.TRUE.equals(after.get(nonce))||launch.ambiguousOwnership)
-        throw new IOException("Microsoft Windows Sandbox не подтвердил создание собственной виртуальной машины Safe Web");
+        throw new IOException("Microsoft Windows Sandbox не подтвердил создание собственной виртуальной машины Взор");
       launch.vmOwned=true;
       ProcessBuilder builder=cli.builder(List.of("connect","--id",nonce,"--raw"));
       builder.redirectError(ProcessBuilder.Redirect.DISCARD).redirectOutput(ProcessBuilder.Redirect.DISCARD);
@@ -107,7 +92,7 @@ public final class WindowsSafeWebSandbox {
     }catch(IOException|RuntimeException failure){
       if(launch!=null){Launch retained=launch;
         IOException problem=failure instanceof IOException io?io:new IOException("Запуск Windows Sandbox прерван",failure);
-        return retainOnUnverifiedStop(retained,problem,retained::close,()->retained.message="Запуск Safe Web прерван; остановка VM не подтверждена. Повторите закрытие Safe Web");
+        return retainOnUnverifiedStop(retained,problem,retained::close,()->retained.message="Запуск Взор прерван; остановка VM не подтверждена. Повторите закрытие Взор");
       }
       lock.release();channel.close();throw failure;
     }
@@ -121,9 +106,31 @@ public final class WindowsSafeWebSandbox {
     throw startFailure;
   }
 
+  record Environment(Path windows,Path local){}
+  /** Read-only preflight; actual VM creation/readiness is never inferred here. */
+  static Environment requireEnvironment()throws IOException {
+    String os=System.getProperty("os.name","");
+    SandboxPrerequisites.requirePlatform(os,System.getProperty("os.arch",""));
+    if(!os.startsWith("Windows"))throw new SandboxPrerequisites.Failure(SandboxPrerequisites.Code.UNSUPPORTED_OS);
+    try {
+      String edition=Advapi32Util.registryGetStringValue(WinReg.HKEY_LOCAL_MACHINE,
+        "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion","EditionID");
+      String build=Advapi32Util.registryGetStringValue(WinReg.HKEY_LOCAL_MACHINE,
+        "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion","CurrentBuildNumber");
+      requireSupportedEdition(edition);SandboxPrerequisites.requireWindowsVersion(build);
+      Path windows=windowsDirectory();
+      Path executable=windows.resolve("System32/WindowsSandbox.exe");
+      if(!Files.isRegularFile(executable,LinkOption.NOFOLLOW_LINKS)||Files.isSymbolicLink(executable))
+        throw new SandboxPrerequisites.Failure(SandboxPrerequisites.Code.WINDOWS_COMPONENT_MISSING);
+      Path local=Path.of(Shell32Util.getKnownFolderPath(KnownFolders.FOLDERID_LocalAppData)).toRealPath();
+      try{WindowsSandboxCli.requireInstalledAlias(local);}
+      catch(IOException|RuntimeException failure){throw new SandboxPrerequisites.Failure(SandboxPrerequisites.Code.WINDOWS_CLI_UNAVAILABLE,failure);}
+      return new Environment(windows,local);
+    }catch(SandboxPrerequisites.Failure failure){throw failure;}
+     catch(IOException|RuntimeException|LinkageError failure){throw new SandboxPrerequisites.Failure(SandboxPrerequisites.Code.WINDOWS_CHECK_FAILED,failure);}
+  }
   static void requireSupportedEdition(String edition)throws IOException {
-    if(edition==null||!edition.matches("Professional(?:N|EducationN?|WorkstationN?)?|Enterprise(?:N|S|SN)?|EducationN?"))
-      throw new IOException("Windows Sandbox поддерживается Microsoft только в редакциях Pro, Enterprise и Education. Windows Home: изолированный Safe Web недоступен; обычный запуск браузера отключён");
+    SandboxPrerequisites.requireWindowsEdition(edition);
   }
   /** Reconcile only host-private IDs before stale temporary bundles are deleted.
    * Called after the outer session-manager lock is acquired. A failed or absent
@@ -138,7 +145,7 @@ public final class WindowsSafeWebSandbox {
     try(var children=Files.list(control)) {
       Iterator<Path> iterator=children.iterator();int count=0;
       while(iterator.hasNext()) {
-        if(++count>1000)throw new IOException("Слишком много записей управления Safe Web");
+        if(++count>1000)throw new IOException("Слишком много записей управления Взор");
         Path session=iterator.next();String name=session.getFileName().toString();
         if(!name.matches("normal-[a-f0-9]{16}|temporary-[a-f0-9-]{36}")||!Files.isDirectory(session,LinkOption.NOFOLLOW_LINKS))continue;
         Path receipt=session.resolve("owned-vm-id");
@@ -151,15 +158,15 @@ public final class WindowsSafeWebSandbox {
       throw new IOException("Нельзя восстановить сессии Windows Sandbox из постороннего каталога");
     try(FileChannel channel=FileChannel.open(control.resolve("windows-sandbox.lock"),StandardOpenOption.CREATE,StandardOpenOption.WRITE,LinkOption.NOFOLLOW_LINKS)) {
       FileLock lock;
-      try{lock=channel.tryLock();}catch(OverlappingFileLockException busy){throw new IOException("Safe Web уже управляет Windows Sandbox",busy);}
-      if(lock==null)throw new IOException("Safe Web уже управляет Windows Sandbox");
+      try{lock=channel.tryLock();}catch(OverlappingFileLockException busy){throw new IOException("Взор уже управляет Windows Sandbox",busy);}
+      if(lock==null)throw new IOException("Взор уже управляет Windows Sandbox");
       try(lock;Closeable guard=SafeWebDownload.guardDirectory(control)) {
         WindowsSandboxCli cli=new WindowsSandboxCli(windowsDirectory(),local,control);
         for(Path receipt:receipts) {
           try(Closeable sessionGuard=SafeWebDownload.guardDirectory(receipt.getParent())) {
             String id=readOwnedId(receipt);
             if(Boolean.TRUE.equals(cli.list().get(id)))cli.stop(id);
-            if(Boolean.TRUE.equals(cli.list().get(id)))throw new IOException("Предыдущая виртуальная машина Safe Web ещё работает; файлы сохранены");
+            if(Boolean.TRUE.equals(cli.list().get(id)))throw new IOException("Предыдущая виртуальная машина Взор ещё работает; файлы сохранены");
             Path runtime=safeWebRoot.resolve("bundles").resolve(receipt.getParent().getFileName()).resolve(RUNTIME).resolve(id);
             SafeWebSessions.rejectLinksInParents(runtime);SafeWebSessions.removeTree(runtime);
             Files.delete(receipt);
@@ -215,7 +222,7 @@ public final class WindowsSafeWebSandbox {
   }
   private static Path directory(Path path)throws IOException {
     SafeWebSessions.rejectLinksInParents(path);
-    if(!Files.isDirectory(path,LinkOption.NOFOLLOW_LINKS))throw new IOException("Не найден каталог Safe Web");
+    if(!Files.isDirectory(path,LinkOption.NOFOLLOW_LINKS))throw new IOException("Не найден каталог Взор");
     return path.toRealPath();
   }
   private static void rejectReparseTree(Path root)throws IOException {
@@ -224,7 +231,7 @@ public final class WindowsSafeWebSandbox {
     try(var paths=Files.walk(root)) {
       Iterator<Path> iterator=paths.iterator();int count=0;
       while(iterator.hasNext()) {
-        Path path=iterator.next();if(++count>80000)throw new IOException("Слишком много файлов в сессии Safe Web");
+        Path path=iterator.next();if(++count>80000)throw new IOException("Слишком много файлов в сессии Взор");
         int attributes=Kernel32.INSTANCE.GetFileAttributes(path.toString());
         if(attributes==WinBase.INVALID_FILE_ATTRIBUTES||(attributes&WinNT.FILE_ATTRIBUTE_REPARSE_POINT)!=0)
           throw new IOException("Ссылки и точки повторной обработки в Windows-пакете браузера запрещены");
@@ -294,12 +301,12 @@ public final class WindowsSafeWebSandbox {
           if(!guestActive&&now-started>START_TIMEOUT.toNanos()){
             message="Windows Sandbox не подтвердил запуск за две минуты; проверьте компонент и виртуализацию";break;}
           if(guestActive&&now-lastGuest>LEASE_TIMEOUT.toNanos()){
-            message="Связь с гостевым процессом Safe Web прервалась";break;}
+            message="Связь с гостевым процессом Взор прервалась";break;}
           Thread.sleep(1000);
         }
       }catch(IOException error){message="Не удалось обновить контрольную сессию Windows Sandbox";}
        catch(InterruptedException interrupted){Thread.currentThread().interrupt();message="Управление Windows Sandbox прервано";}
-      finally {try{close();}catch(IOException error){message="Windows Sandbox ещё завершается; закройте принадлежащее Safe Web окно";}}
+      finally {try{close();}catch(IOException error){message="Windows Sandbox ещё завершается; закройте принадлежащее Взор окно";}}
     }
     @Override public synchronized void close()throws IOException {
       if(stopped){releaseController();return;}
@@ -321,7 +328,7 @@ public final class WindowsSafeWebSandbox {
       releaseController();
       // Keep runtime/URL/status until the owner session manager removes the
       // completed temporary bundle. Never delete a mapped folder while live.
-      Files.deleteIfExists(config);if(!message.contains("не ")&&!message.contains("прервал"))message="Safe Web остановлен";
+      Files.deleteIfExists(config);if(!message.contains("не ")&&!message.contains("прервал"))message="Взор остановлен";
     }
     private void releaseController()throws IOException {
       if(runtimeGuard!=null){runtimeGuard.close();runtimeGuard=null;}

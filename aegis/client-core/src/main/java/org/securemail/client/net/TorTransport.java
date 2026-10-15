@@ -31,14 +31,31 @@ public final class TorTransport {
     return connectHost(host,443,20_000);
   }
 
+  /** Official browser distribution only, using the HTTPS-capable SOCKS context.
+   * The hostname is sent in the SOCKS5 request, never resolved by the local JVM. */
+  public Socket connectTorBrowserDownload(String host) throws IOException {
+    return connectTorBrowserDownload(host, socket -> { });
+  }
+
+  @FunctionalInterface public interface SocketObserver { void opened(Socket socket) throws IOException; }
+  public Socket connectTorBrowserDownload(String host, SocketObserver observer) throws IOException {
+    if (!java.util.Set.of("aus1.torproject.org", "dist.torproject.org").contains(host))
+      throw new IOException("Tor Browser download destination rejected");
+    return connectHost(host, 443, 20_000, java.util.Objects.requireNonNull(observer));
+  }
+
   private Socket connectHost(String onion,int port) throws IOException {
     return connectHost(onion,port,120_000);
   }
   private Socket connectHost(String onion,int port,int timeout) throws IOException {
+    return connectHost(onion,port,timeout,socket -> { });
+  }
+  private Socket connectHost(String onion,int port,int timeout,SocketObserver observer) throws IOException {
     if(!available.getAsBoolean())throw new IOException("Tor ещё подключается. Прямое подключение отключено.");
     if (port < 1 || port > 65535) throw new IOException("Bad port");
     Socket socket = new Socket(Proxy.NO_PROXY);
     try {
+      observer.opened(socket);
       socket.connect(
           new InetSocketAddress(InetAddress.getByAddress(new byte[] {127, 0, 0, 1}), socksPort),
           5000);

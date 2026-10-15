@@ -1,0 +1,25 @@
+{
+  "exitCode": 0,
+  "productionClassesOverridden": false,
+  "compiledOnly": "client-ui/src/smoke/java/org/securemail/ui/VzorGlas250Smoke.java",
+  "applicationJarSha256": {
+    "client-ui.jar": "686eb69a381f0fabbc46aab8df53a195904293724ee2b72c6119ed317ba0f7fe",
+    "client-core.jar": "b13151904e9a2461158466a9da313e5439e816f96c32a226d51de00df830abdf",
+    "common-protocol.jar": "55027fee83e95b85c943893d6f07b62de06fa80dbb06da8be63aecd165b89788"
+  },
+  "command": [
+    "/workspace/scratch/aa629f360927/inputs/jdk-21.0.12.1+1/bin/java",
+    "-Xmx768m",
+    "-Djava.awt.headless=true",
+    "-Dglass.platform=Monocle",
+    "-Dmonocle.platform=Headless",
+    "-Dprism.order=sw",
+    "-Daegis.native.root=/workspace/scratch/aa629f360927/inputs/voice-linux",
+    "-cp",
+    "/workspace/scratch/aa629f360927/final-vzor-ui250-classes:/workspace/scratch/aa629f360927/aegis/aegis/build/local-java21/client-ui.jar:/workspace/scratch/aa629f360927/aegis/aegis/build/local-java21/client-core.jar:/workspace/scratch/aa629f360927/aegis/aegis/build/local-java21/common-protocol.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/fontbox-3.0.8.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/commons-logging-1.3.5.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/jna-platform-5.19.1.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/common-lang-3.14.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/tink-1.23.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/imageio-metadata-3.14.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/commons-codec-1.19.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/pdfbox-io-3.0.8.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/bcprov-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/commons-lang3-3.18.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/imageio-webp-3.14.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/common-io-3.14.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/pdfbox-3.0.8.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/commons-io-2.20.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/bcutil-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/javafx-controls-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/javafx-base-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/xz-1.12.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/jna-5.19.1.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/bcpg-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/commons-compress-1.28.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/protobuf-java-4.33.6.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/zip4j-2.11.6.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/gson-2.14.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/jsr305-3.0.2.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/imageio-core-3.14.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/error_prone_annotations-2.48.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/common-image-3.14.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/javafx-graphics-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs/deps/openjfx-monocle-21.0.2.jar",
+    "org.securemail.ui.VzorGlas250Smoke",
+    "/workspace/scratch/aa629f360927/aegis/aegis/docs/test-results/2.5.0-final-vzor-ui"
+  ],
+  "nativeAcceptance": "NOT_RUN",
+  "productionReady": false
+}

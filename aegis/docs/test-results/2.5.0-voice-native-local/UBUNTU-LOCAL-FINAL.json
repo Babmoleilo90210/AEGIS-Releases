@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "applicationVersion": "2.5.0",
+  "recordedAtUtc": "2026-10-15T09:37:08.515659618Z",
+  "osName": "Linux",
+  "osVersion": "6.18.44",
+  "architecture": "amd64",
+  "javaVersion": "21.0.12.1",
+  "sessionType": "unknown",
+  "linuxDistribution": {
+    "NAME": "Ubuntu",
+    "VERSION_ID": "24.04",
+    "ID": "ubuntu"
+  },
+  "physicalMicrophoneCapture": "NOT_RUN",
+  "checks": [
+    {
+      "name": "compiled_audio_pins",
+      "evidence": {
+        "sha256": {
+          "libopus.so": "86de12c992211fff80ae100b56c0e4699ae54fb16e0a9877a3228c3f14a329c8",
+          "libspeexdsp.so": "89a05213790b0549b9fd6ee774a5602db7e9b0b20e990305eec7b88677253262"
+        },
+        "platform": "linux-x86_64",
+        "compiledRegistryVerified": true
+      },
+      "result": "PASS",
+      "elapsedMillis": 119
+    },
+    {
+      "name": "audio_device_enumeration",
+      "evidence": {
+        "devices": [],
+        "playbackOpened": false,
+        "inputs": 0,
+        "outputs": 0,
+        "note": "Enumeration success does not prove a physical device works",
+        "captureOpened": false
+      },
+      "result": "PASS",
+      "elapsedMillis": 9
+    },
+    {
+      "name": "synthetic_native_Opus_Speex_fixture",
+      "evidence": {
+        "frameMillis": 20,
+        "sampleRate": 48000,
+        "physicalAudioOpened": false,
+        "encodedBytes": 1003,
+        "channels": 1,
+        "syntheticFrames": 16,
+        "acousticEchoQuality": "NOT_RUN"
+      },
+      "result": "PASS",
+      "elapsedMillis": 107
+    }
+  ],
+  "allRequestedLocalChecksPassed": true,
+  "nativeVoiceAcceptance": "NOT_RUN",
+  "twoPhysicalMachinesOnDifferentNetworks": "NOT_RUN",
+  "sixtyMinuteOnionCall": "NOT_RUN",
+  "physicalPlaybackAndSpeechQuality": "NOT_RUN",
+  "productionReady": false,
+  "networkConnectionsInitiated": false,
+  "productionProfilesRead": false,
+  "audioFilesWritten": false,
+  "secretsOrConversationContentIncluded": false,
+  "hardwareDeviceNamesIncluded": true
+}

@@ -1,0 +1,15 @@
+java.base@21.0.12.1
+java.datatransfer@21.0.12.1
+java.desktop@21.0.12.1
+java.logging@21.0.12.1
+java.management@21.0.12.1
+java.naming@21.0.12.1
+java.prefs@21.0.12.1
+java.security.sasl@21.0.12.1
+java.sql@21.0.12.1
+java.transaction.xa@21.0.12.1
+java.xml@21.0.12.1
+jdk.charsets@21.0.12.1
+jdk.crypto.ec@21.0.12.1
+jdk.localedata@21.0.12.1
+jdk.unsupported@21.0.12.1

@@ -18,7 +18,13 @@ final class WindowsSandboxCli {
   private static final int MAX_OUTPUT=65536;
   WindowsSandboxCli(Path windows,Path local,Path control)throws IOException {
     this.windows=windows;this.local=local;this.control=control;
-    executable=local.resolve("Microsoft/WindowsApps/wsb.exe").toAbsolutePath().normalize();
+    executable=requireInstalledAlias(local);
+    Result version=run(List.of("--version"),Duration.ofSeconds(20));
+    if(version.exit()!=0||version.output().isBlank())throw new IOException("Компонент Windows Sandbox ещё не готов; завершите его установку из меню Пуск");
+  }
+  /** Read-only validation for download preflight: no process, VM or temporary directory. */
+  static Path requireInstalledAlias(Path local)throws IOException {
+    Path executable=local.resolve("Microsoft/WindowsApps/wsb.exe").toAbsolutePath().normalize();
     int attributes=Kernel32.INSTANCE.GetFileAttributes(executable.toString());
     if(attributes==WinBase.INVALID_FILE_ATTRIBUTES||(attributes&WinNT.FILE_ATTRIBUTE_REPARSE_POINT)==0)
       throw new IOException("Нужен актуальный Microsoft Windows Sandbox с CLI wsb.exe (Windows 11 24H2+); откройте компонент через меню Пуск для завершения установки");
@@ -36,9 +42,12 @@ final class WindowsSandboxCli {
       byte[] raw=data.getByteArray(0,received.getValue());
       Path programFiles=Path.of(Shell32Util.getKnownFolderPath(KnownFolders.FOLDERID_ProgramFiles)).toRealPath();
       validateAlias(raw,programFiles.toString());
+      String payload=new String(raw,12,raw.length-12,StandardCharsets.UTF_16LE);
+      Path target=Path.of(payload.split("\\u0000",-1)[2]);
+      if(!Files.isRegularFile(target,LinkOption.NOFOLLOW_LINKS)||Files.isSymbolicLink(target))
+        throw new IOException("Официальный CLI Windows Sandbox не установлен полностью");
     } finally {Kernel32.INSTANCE.CloseHandle(handle);}
-    Result version=run(List.of("--version"),Duration.ofSeconds(20));
-    if(version.exit()!=0||version.output().isBlank())throw new IOException("Компонент Windows Sandbox ещё не готов; завершите его установку из меню Пуск");
+    return executable;
   }
   static void validateAlias(byte[] raw,String programFiles)throws IOException {
     if(raw.length<16||raw.length>16384||(raw.length&1)!=0)throw new IOException("Некорректный системный псевдоним");
@@ -111,6 +120,6 @@ final class WindowsSandboxCli {
     if(result.exit()!=0&&Boolean.TRUE.equals(list().get(ownedId)))throw new IOException("Microsoft Windows Sandbox не завершил собственную сессию");
     long end=System.nanoTime()+TimeUnit.SECONDS.toNanos(20);
     do{if(!Boolean.TRUE.equals(list().get(ownedId)))return;try{Thread.sleep(250);}catch(InterruptedException error){Thread.currentThread().interrupt();throw new IOException("Остановка прервана",error);}}while(System.nanoTime()<end);
-    throw new IOException("Завершение собственной виртуальной машины Safe Web не подтверждено");
+    throw new IOException("Завершение собственной виртуальной машины Взор не подтверждено");
   }
 }

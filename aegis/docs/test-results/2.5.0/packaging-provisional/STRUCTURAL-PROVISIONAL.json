@@ -1,0 +1,155 @@
+{
+  "verification_type": "offline_structural_and_payload",
+  "native_OS_acceptance": "NOT_RUN",
+  "artifacts": [
+    {
+      "name": "AEGIS-Setup-2.5.0-x64.exe",
+      "bytes": 84200517,
+      "sha256": "22cac36b000cb4fd24159fb518c462aad8f79f536f79123e21506452063d91bf"
+    },
+    {
+      "name": "AEGIS-2.5.0-Windows-x64.zip",
+      "bytes": 94656671,
+      "sha256": "2717c32addac8067745eb75d0895b34a2f47abfd3ed76e58937213a71c835885"
+    },
+    {
+      "name": "AEGIS-2.5.0-CachyOS-x86_64.AppImage",
+      "bytes": 92330488,
+      "sha256": "15bcebb4f2b1e46f8bd8d2ee16f59c1c206483ebad0c7853903d9fd097b89f50"
+    }
+  ],
+  "windows": {
+    "launcher_PE": {
+      "AEGIS.exe": {
+        "machine": "AMD64",
+        "PE32_plus": true,
+        "GUI": true,
+        "ASLR": true,
+        "NX": true,
+        "asInvoker": true,
+        "icon_sizes": [
+          16,
+          24,
+          32,
+          48,
+          64,
+          128,
+          256
+        ],
+        "icon_payload_matches_ICO": true,
+        "file_product_version": "2.5.0.0"
+      },
+      "AEGIS-Maintenance.exe": {
+        "machine": "AMD64",
+        "PE32_plus": true,
+        "GUI": true,
+        "ASLR": true,
+        "NX": true,
+        "asInvoker": true,
+        "icon_sizes": [
+          16,
+          24,
+          32,
+          48,
+          64,
+          128,
+          256
+        ],
+        "icon_payload_matches_ICO": true,
+        "file_product_version": "2.5.0.0"
+      },
+      "AEGIS-Updater.exe": {
+        "machine": "AMD64",
+        "PE32_plus": true,
+        "GUI": true,
+        "ASLR": true,
+        "NX": true,
+        "asInvoker": true,
+        "icon_sizes": [
+          16,
+          24,
+          32,
+          48,
+          64,
+          128,
+          256
+        ],
+        "icon_payload_matches_ICO": true,
+        "file_product_version": "2.5.0.0"
+      }
+    },
+    "setup_PE": {
+      "machine": "I386",
+      "PE32_plus": false,
+      "GUI": true,
+      "ASLR": true,
+      "NX": true,
+      "asInvoker": true,
+      "icon_sizes": [
+        16,
+        24,
+        32,
+        48,
+        64,
+        128,
+        256
+      ],
+      "icon_payload_matches_ICO": true,
+      "file_product_version": "2.5.0.0"
+    },
+    "zip_CRC": "OK",
+    "all_payload_files_SHA256_match": true,
+    "file_count": 634,
+    "java_21_included": true,
+    "tor_PT_sodium_included": true
+  },
+  "appimage": {
+    "ELF_Type_2": true,
+    "SquashFS_offset": 944632,
+    "extraction": "OK",
+    "all_payload_files_SHA256_match": true,
+    "file_count": 590,
+    "executable_modes_preserved": true,
+    "java_version": "openjdk version \"21.0.12.1\" 2026-08-18 LTS\nOpenJDK Runtime Environment Zulu21.52+203-CA (build 21.0.12.1+1-LTS)\nOpenJDK 64-Bit Server VM Zulu21.52+203-CA (build 21.0.12.1+1-LTS, mixed mode)"
+  },
+  "application_JAR_SHA256": {
+    "client-core-2.5.0.jar": "b13151904e9a2461158466a9da313e5439e816f96c32a226d51de00df830abdf",
+    "client-ui-2.5.0.jar": "8b5f6208aa530088282ede835d2e179d3ca5a96b31a1d754fe3d60a7ce02dd28",
+    "common-protocol-0.2.0.jar": "55027fee83e95b85c943893d6f07b62de06fa80dbb06da8be63aecd165b89788"
+  },
+  "Windows_Linux_application_JARs_identical": true,
+  "final_client_stage_matches_packages": true,
+  "safeWebInstallerRuntimeDependencies": {
+    "bcpg-jdk18on-1.86.jar": "8a52ea45b2063f6d41b8ca94409f255a1f4604922f7451c18a7cfd3a3c5b85ab",
+    "bcutil-jdk18on-1.86.jar": "1c268e15f785aafb1e4670d8d6e5f856f69475e96c162dadcd1ff9b350e9139f",
+    "bcprov-jdk18on-1.86.jar": "2af190b300cbb0b35e248ccf5f4a06b6072030aeb3da7a98ec73abe5b4cb371f",
+    "commons-compress-1.28.0.jar": "e1522945218456f3649a39bc4afd70ce4bd466221519dba7d378f2141a4642ca",
+    "xz-1.12.jar": "3e158a87bd73d8afb4b6e8239c013b7d049c48563f45860ce99cd2e448cf4a6b",
+    "commons-io-2.20.0.jar": "df90bba0fe3cb586b7f164e78fe8f8f4da3f2dd5c27fa645f888100ccc25dd72",
+    "commons-lang3-3.18.0.jar": "4eeeae8d20c078abb64b015ec158add383ac581571cddc45c68f0c9ae0230720",
+    "commons-codec-1.19.0.jar": "5c3881e4f556855e9c532927ee0c9dfde94cc66760d5805c031a59887070af5f"
+  },
+  "safeWebOfficialPublicVerificationKeyResource": true,
+  "voiceNativeSHA256": {
+    "win": {
+      "opus.dll": "95e018320376a89a37182763675b01d6ba684717444921c01e20644dfa238d3d",
+      "speexdsp.dll": "7b4194da26b08e4d6be25d25f93393a38cdbc6f6cc8f76175b3102407cd6589b"
+    },
+    "linux": {
+      "libopus.so": "86de12c992211fff80ae100b56c0e4699ae54fb16e0a9877a3228c3f14a329c8",
+      "libspeexdsp.so": "89a05213790b0549b9fd6ee774a5602db7e9b0b20e990305eec7b88677253262"
+    }
+  },
+  "voiceNativeArchitecture": {
+    "win": "PE64_AMD64_DLL",
+    "linux": "ELF64_AMD64_DYN"
+  },
+  "voiceCompiledRegistryMatchesNativeProvenance": true,
+  "voiceBSDLicenseHashesVerified": true,
+  "productionTestClassesExcluded": true,
+  "pinned_public_key_embedded_in_both_core_JARs": "MCowBQYDK2VwAyEAswWYCFStSEhQdrgqUJFF3x12ltmfUA0PvQtlh684B2g=",
+  "relay_JAR_in_client": false,
+  "production_signature_created": false,
+  "ICO_SHA256": "409c93dabb27e2456e3ae2c8d9dff58efb0addb03a2bb74347e6f1cd1fdb9a7c",
+  "source_icon_SHA256": "cbfcb8dc9adf1003a14d0801aad0b08e4d95e9d3190dbefb51532ba3d6608aec"
+}

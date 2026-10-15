@@ -1,0 +1,82 @@
+{
+  "sourceArchives": {
+    "opus-1.6.1.tar.gz": "6ffcb593207be92584df15b32466ed64bbec99109f007c82205f0194572411a1",
+    "speexdsp-1.2.1.tar.gz": "8c777343e4a6399569c72abc38a95b24db56882c83dbdb6c6424a5f4aeb54d3d"
+  },
+  "binaries": [
+    {
+      "name": "opus",
+      "version": "1.6.1",
+      "platform": "linux-x86_64",
+      "filename": "libopus.so",
+      "binarySHA256": "86de12c992211fff80ae100b56c0e4699ae54fb16e0a9877a3228c3f14a329c8",
+      "nativeExecution": "PASS_CODEC_FIXTURES",
+      "dependencies": [
+        "libc.so.6",
+        "libm.so.6"
+      ],
+      "configure": [
+        "--disable-static",
+        "--enable-shared",
+        "--disable-extra-programs",
+        "--disable-doc",
+        "--disable-deep-plc",
+        "--disable-dred",
+        "--disable-osce"
+      ]
+    },
+    {
+      "name": "speexdsp",
+      "version": "1.2.1",
+      "platform": "linux-x86_64",
+      "filename": "libspeexdsp.so",
+      "binarySHA256": "89a05213790b0549b9fd6ee774a5602db7e9b0b20e990305eec7b88677253262",
+      "nativeExecution": "PASS_CODEC_FIXTURES",
+      "dependencies": [
+        "libc.so.6",
+        "libm.so.6"
+      ],
+      "configure": [
+        "--disable-static",
+        "--enable-shared",
+        "--disable-examples"
+      ]
+    },
+    {
+      "name": "opus",
+      "version": "1.6.1",
+      "platform": "windows-x86_64",
+      "filename": "opus.dll",
+      "binarySHA256": "95e018320376a89a37182763675b01d6ba684717444921c01e20644dfa238d3d",
+      "nativeExecution": "NOT_RUN",
+      "dependencies": [
+        "KERNEL32.dll",
+        "msvcrt.dll"
+      ]
+    },
+    {
+      "name": "speexdsp",
+      "version": "1.2.1",
+      "platform": "windows-x86_64",
+      "filename": "speexdsp.dll",
+      "binarySHA256": "7b4194da26b08e4d6be25d25f93393a38cdbc6f6cc8f76175b3102407cd6589b",
+      "nativeExecution": "NOT_RUN",
+      "dependencies": [
+        "KERNEL32.dll",
+        "msvcrt.dll"
+      ]
+    }
+  ],
+  "sources": {
+    "opus": "https://downloads.xiph.org/releases/opus/opus-1.6.1.tar.gz",
+    "speexdsp": "https://downloads.xiph.org/releases/speex/speexdsp-1.2.1.tar.gz"
+  },
+  "build": {
+    "linuxCompiler": "gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+    "windowsCompiler": "x86_64-w64-mingw32-gcc-win32 (GCC) 13-win32",
+    "windowsNativeAcceptance": "NOT_RUN",
+    "audioHardwareAcceptance": "NOT_RUN",
+    "codecFixtureTests": 11,
+    "codecFixtureFailures": 0
+  }
+}

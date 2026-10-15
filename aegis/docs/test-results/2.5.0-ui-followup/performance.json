@@ -1,0 +1,113 @@
+{
+  "environment": "Synthetic JavaFX fixtures, 800x600 scene; runtime properties recorded separately",
+  "runtimeProperties": {
+    "javaVersion": "21.0.12.1",
+    "xdgSessionType": "UNAVAILABLE",
+    "osVersion": "6.18.44",
+    "osName": "Linux",
+    "prismOrder": "sw",
+    "glassPlatform": "Monocle"
+  },
+  "nativeAcceptance": "NOT_RUN",
+  "baselineComparison": "NOT_RUN",
+  "navigationSectionSwitch": "NOT_RUN_THIS_COMPONENT_PROBE",
+  "TorAndLogin": "NOT_RUN",
+  "localizedFailureAndStoredFontChecks": "PASS",
+  "archiveCreateRemainingWaitNanos": 242531897,
+  "archiveImportUiThroughCompletionNanos": 387188659,
+  "archiveSearchIncluding250msDebounceNanos": 306456531,
+  "heapBytes": {
+    "committed": 253755392,
+    "maximum": 805306368,
+    "used": 183566280
+  },
+  "boundedIdle": {
+    "wallNanos": 1500272166,
+    "logicalProcessors": 8,
+    "cpuMetricStatus": "UNAVAILABLE_OPTIONAL_JDK_MANAGEMENT"
+  },
+  "gallery": [
+    {
+      "constructShowCssLayoutNanos": 675738784,
+      "theme": "minimal-dark",
+      "scalePercent": 100
+    },
+    {
+      "constructShowCssLayoutNanos": 249178922,
+      "theme": "minimal-dark",
+      "scalePercent": 125
+    },
+    {
+      "constructShowCssLayoutNanos": 201162344,
+      "theme": "minimal-dark",
+      "scalePercent": 150
+    },
+    {
+      "constructShowCssLayoutNanos": 170417045,
+      "theme": "minimal-dark",
+      "scalePercent": 200
+    },
+    {
+      "constructShowCssLayoutNanos": 171265877,
+      "theme": "classic-light",
+      "scalePercent": 100
+    },
+    {
+      "constructShowCssLayoutNanos": 163104951,
+      "theme": "classic-light",
+      "scalePercent": 125
+    },
+    {
+      "constructShowCssLayoutNanos": 100740337,
+      "theme": "classic-light",
+      "scalePercent": 150
+    },
+    {
+      "constructShowCssLayoutNanos": 119539430,
+      "theme": "classic-light",
+      "scalePercent": 200
+    }
+  ],
+  "archive": [
+    {
+      "theme": "minimal-dark",
+      "cssLayoutNanos": 6400522,
+      "scalePercent": 100
+    },
+    {
+      "theme": "minimal-dark",
+      "cssLayoutNanos": 8635176,
+      "scalePercent": 125
+    },
+    {
+      "theme": "minimal-dark",
+      "cssLayoutNanos": 3627920,
+      "scalePercent": 150
+    },
+    {
+      "theme": "minimal-dark",
+      "cssLayoutNanos": 2802868,
+      "scalePercent": 200
+    },
+    {
+      "theme": "classic-light",
+      "cssLayoutNanos": 8411900,
+      "scalePercent": 100
+    },
+    {
+      "theme": "classic-light",
+      "cssLayoutNanos": 3502692,
+      "scalePercent": 125
+    },
+    {
+      "theme": "classic-light",
+      "cssLayoutNanos": 2580604,
+      "scalePercent": 150
+    },
+    {
+      "theme": "classic-light",
+      "cssLayoutNanos": 3682666,
+      "scalePercent": 200
+    }
+  ]
+}

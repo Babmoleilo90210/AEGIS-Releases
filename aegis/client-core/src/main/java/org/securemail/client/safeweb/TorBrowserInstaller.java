@@ -5,6 +5,7 @@ import java.nio.file.*;
 import java.nio.file.attribute.PosixFilePermissions;
 import java.util.*;
 import java.util.regex.Pattern;
+import java.util.function.BooleanSupplier;
 import org.apache.commons.compress.archivers.tar.TarArchiveEntry;
 import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
 import org.apache.commons.compress.archivers.tar.TarConstants;
@@ -16,7 +17,9 @@ import org.tukaani.xz.XZInputStream;
  */
 public final class TorBrowserInstaller {
     private TorBrowserInstaller() { }
-    public record Installed(Path bundle, String archiveSha256, String fingerprint, String label) { }
+    public record Installed(Path bundle, String archiveSha256, String fingerprint, String label, String version, String architecture) {
+        public Installed(Path bundle,String archiveSha256,String fingerprint,String label){this(bundle,archiveSha256,fingerprint,label,"","");}
+    }
     private record Member(String name, boolean directory, boolean symbolic, boolean hard, String target) { }
     private static final long MAX_PACKAGE = 1_000_000_000L;
     private static final long MAX_EXPANDED = 3_000_000_000L;
@@ -24,12 +27,21 @@ public final class TorBrowserInstaller {
     private static final Pattern PACKAGE = Pattern.compile("tor-browser-(linux-x86_64|windows-x86_64-portable)-([0-9]+(?:\\.[0-9]+){1,3})\\.(tar\\.xz|exe)");
 
     public static Installed install(Path archive, Path signature, Path destination) throws IOException {
-        return install(archive, signature, destination, null);
+        return install(archive, signature, destination, null, () -> false);
     }
 
     /** Optional public key input is still checked against the fixed Tor Developers pin. */
     public static Installed install(Path archive, Path signature, Path destination, InputStream publicKey) throws IOException {
-        Objects.requireNonNull(archive); Objects.requireNonNull(signature); Objects.requireNonNull(destination);
+        return install(archive,signature,destination,publicKey,() -> false);
+    }
+
+    public static Installed install(Path archive,Path signature,Path destination,BooleanSupplier cancelled)throws IOException {
+        return install(archive,signature,destination,null,cancelled);
+    }
+
+    public static Installed install(Path archive,Path signature,Path destination,InputStream publicKey,BooleanSupplier cancelled)throws IOException {
+        Objects.requireNonNull(archive); Objects.requireNonNull(signature); Objects.requireNonNull(destination);Objects.requireNonNull(cancelled);
+        TorBrowserPackageMetadata.check(cancelled);
         Path target = destination.toAbsolutePath().normalize();
         if (Files.exists(target, LinkOption.NOFOLLOW_LINKS)) throw new IOException("Каталог Tor Browser уже существует; его данные не будут перезаписаны");
         Path parent = target.getParent();
@@ -40,10 +52,11 @@ public final class TorBrowserInstaller {
         boolean destinationCreated = false;
         try {
             Path packageCopy = scratch.resolve("official-package.bin"), signatureCopy = scratch.resolve("official-package.asc");
-            snapshot(archive, packageCopy, MAX_PACKAGE); snapshot(signature, signatureCopy, 100_000);
+            snapshot(archive, packageCopy, MAX_PACKAGE,cancelled); snapshot(signature, signatureCopy, 100_000,cancelled);
             // Authentication happens before archive parsing, decompression or executing an EXE.
             var verified = publicKey == null ? TorBrowserSignature.verify(packageCopy, signatureCopy)
                     : TorBrowserSignature.verify(packageCopy, signatureCopy, publicKey);
+            TorBrowserPackageMetadata.check(cancelled);
             var match = PACKAGE.matcher(archive.getFileName().toString());
             if (!match.matches()) throw new IOException("Нужен официальный стабильный Tor Browser Linux x86_64 или Windows portable x86_64");
             boolean windows = match.group(1).startsWith("windows");
@@ -56,20 +69,25 @@ public final class TorBrowserInstaller {
                 Path executable = scratch.resolve("tor-browser-portable.exe");
                 Files.move(packageCopy, executable);
                 bundle = scratch.resolve("windows-bundle");
-                installWindows(executable, bundle);
+                installWindows(executable, bundle,cancelled);
             } else {
                 if (!System.getProperty("os.name", "").equals("Linux"))
                     throw new IOException("Установка Linux Tor Browser требует Linux");
-                bundle = extractLinux(packageCopy, scratch.resolve("unpack"));
+                bundle = extractLinux(packageCopy, scratch.resolve("unpack"),cancelled);
             }
             validateLayout(bundle, windows);
+            var metadata=TorBrowserPackageMetadata.bundle(bundle);
+            TorBrowserPackageMetadata.require(metadata,match.group(2),windows);
+            if(!TorBrowserDiscovery.architecture(bundle.resolve(windows?"Browser/firefox.exe":"Browser/firefox")).equals("x86_64")||!TorBrowserDiscovery.architecture(bundle.resolve(windows?"Browser/TorBrowser/Tor/tor.exe":"Browser/TorBrowser/Tor/tor")).equals("x86_64"))throw new IOException("Архитектура исполняемых файлов Tor Browser не соответствует x86_64");
+            TorBrowserPackageMetadata.check(cancelled);
             // Exclusive creation prevents overwriting an existing browser/profile, even after a race.
             Files.createDirectory(target); destinationCreated = true; privateDirectory(target);
-            copyBundle(bundle, target);
+            copyBundle(bundle, target,cancelled);
             validateLayout(target, windows);
             // Detached signatures authenticate bytes, not the caller-supplied filename.
             // Never promote a renamed package label into an authenticated browser version.
-            return new Installed(target, verified.sha256(), verified.primaryFingerprint(), "Пакет " + archive.getFileName());
+            TorBrowserPackageMetadata.check(cancelled);
+            return new Installed(target, verified.sha256(), verified.primaryFingerprint(), "Tor Browser " + metadata.version(),metadata.version(),metadata.architecture());
         } catch (IOException | RuntimeException failure) {
             if (destinationCreated) deleteTree(target);
             throw failure;
@@ -78,7 +96,7 @@ public final class TorBrowserInstaller {
         }
     }
 
-    private static void snapshot(Path source, Path copy, long maximum) throws IOException {
+    private static void snapshot(Path source, Path copy, long maximum,BooleanSupplier cancelled) throws IOException {
         if (!Files.isRegularFile(source, LinkOption.NOFOLLOW_LINKS) || Files.isSymbolicLink(source))
             throw new IOException("Нужен обычный файл пакета/подписи");
         long size = Files.size(source);
@@ -87,7 +105,7 @@ public final class TorBrowserInstaller {
              OutputStream out = Files.newOutputStream(copy, StandardOpenOption.CREATE_NEW)) {
             byte[] buffer = new byte[65536]; long count = 0;
             for (int read; (read = in.read(buffer)) != -1;) {
-                count += read; if (count > maximum) throw new IOException("Превышен размер пакета/подписи");
+                TorBrowserPackageMetadata.check(cancelled);count += read; if (count > maximum) throw new IOException("Превышен размер пакета/подписи");
                 out.write(buffer, 0, read);
             }
         }
@@ -95,16 +113,19 @@ public final class TorBrowserInstaller {
     }
 
     /** Commons Compress handles USTAR, PAX and GNU long names; no shell/tar parser. */
-    static Path extractLinux(Path archive, Path output) throws IOException {
+    static Path extractLinux(Path archive, Path output) throws IOException {return extractLinux(archive,output,() -> false);}
+    static Path extractLinux(Path archive,Path output,BooleanSupplier cancelled)throws IOException {
+        TorBrowserPackageMetadata.check(cancelled);
         Files.createDirectory(output); privateDirectory(output);
         Map<String, Member> members = new LinkedHashMap<>(); Set<String> roots = new HashSet<>();
         long expanded = 0;
         // Bound XZ dictionary memory to 128 MiB and total uncompressed stream to 3 GiB.
         try (InputStream file = Files.newInputStream(archive);
              InputStream xz = new XZInputStream(file, 131072);
-             InputStream bounded = new LimitedInput(xz, MAX_EXPANDED);
+             InputStream bounded = new LimitedInput(xz, MAX_EXPANDED,cancelled);
              TarArchiveInputStream tar = new TarArchiveInputStream(bounded)) {
             for (TarArchiveEntry entry; (entry = tar.getNextEntry()) != null;) {
+                TorBrowserPackageMetadata.check(cancelled);
                 String name = safeName(entry.getName());
                 boolean symbolic = entry.isSymbolicLink(), hard = entry.isLink(), directory = entry.isDirectory();
                 boolean regular = entry.getLinkFlag() == TarConstants.LF_NORMAL || entry.getLinkFlag() == TarConstants.LF_OLDNORM;
@@ -125,7 +146,7 @@ public final class TorBrowserInstaller {
                     try (OutputStream stream = Files.newOutputStream(path, StandardOpenOption.CREATE_NEW)) {
                         byte[] buffer = new byte[65536]; long written = 0;
                         for (int read; (read = tar.read(buffer)) != -1;) {
-                            if ((written += read) > entry.getSize()) throw new IOException("Неверный размер записи Tor Browser");
+                            TorBrowserPackageMetadata.check(cancelled);if ((written += read) > entry.getSize()) throw new IOException("Неверный размер записи Tor Browser");
                             stream.write(buffer, 0, read);
                         }
                         if (written != entry.getSize()) throw new IOException("Обрезанная запись Tor Browser");
@@ -136,6 +157,7 @@ public final class TorBrowserInstaller {
         }
         if (roots.size() != 1) throw new IOException("Нужен единый корневой каталог официального Tor Browser");
         for (Member member : members.values()) {
+            TorBrowserPackageMetadata.check(cancelled);
             Path parent = Path.of(member.name()).getParent();
             while (parent != null) {
                 Member ancestor = members.get(parent.toString().replace('\\', '/'));
@@ -145,6 +167,7 @@ public final class TorBrowserInstaller {
             if (member.symbolic() || member.hard()) resolveLink(member, members);
         }
         for (Member member : members.values()) if (member.hard()) {
+            TorBrowserPackageMetadata.check(cancelled);
             String resolved = resolveLink(member, members);
             Member target = members.get(resolved);
             if (target == null || target.directory()) throw new IOException("Hardlink должен указывать на обычный файл");
@@ -152,6 +175,7 @@ public final class TorBrowserInstaller {
             Files.createLink(path, output.resolve(resolved));
         }
         for (Member member : members.values()) if (member.symbolic()) {
+            TorBrowserPackageMetadata.check(cancelled);
             Path path = output.resolve(member.name()); Files.createDirectories(path.getParent());
             Files.createSymbolicLink(path, Path.of(member.target()));
         }
@@ -192,17 +216,18 @@ public final class TorBrowserInstaller {
         return current.name();
     }
 
-    private static void installWindows(Path executable, Path destination) throws IOException {
+    private static void installWindows(Path executable, Path destination,BooleanSupplier cancelled) throws IOException {
         String path = destination.toAbsolutePath().toString();
         if (path.indexOf('"') >= 0 || path.chars().anyMatch(value -> value < 32)) throw new IOException("Небезопасный каталог Windows");
         // NSIS requires its final /D= argument unquoted, including directory spaces.
         // CreateProcessW avoids ProcessBuilder's automatic argument quoting. No shell,
         // inherited handles or account secrets are passed to the authenticated installer.
-        WindowsPortable.install(executable, destination);
+        WindowsPortable.install(executable, destination,cancelled);
     }
 
     private static final class WindowsPortable {
-        static void install(Path executable, Path destination) throws IOException {
+        static void install(Path executable, Path destination,BooleanSupplier cancelled) throws IOException {
+            TorBrowserPackageMetadata.check(cancelled);
             var kernel = com.sun.jna.platform.win32.Kernel32.INSTANCE;
             var startup = new com.sun.jna.platform.win32.WinBase.STARTUPINFO();
             startup.cb = new com.sun.jna.platform.win32.WinDef.DWORD(startup.size());
@@ -210,22 +235,39 @@ public final class TorBrowserInstaller {
             String exe = executable.toAbsolutePath().toString();
             String command = "\"" + exe + "\" /S /D=" + destination.toAbsolutePath();
             char[] mutable = com.sun.jna.Native.toCharArray(command);
+            try(var job=new WindowsInstallerJob()){
             if (!kernel.CreateProcessW(exe, mutable, null, null, false,
-                    new com.sun.jna.platform.win32.WinDef.DWORD(0x08000000), null,
+                    new com.sun.jna.platform.win32.WinDef.DWORD(0x08000004), null,
                     executable.getParent().toString(), startup, process))
                 throw new IOException("Не удалось запустить официальный installer Tor Browser: " + kernel.GetLastError());
             try {
-                int result = kernel.WaitForSingleObject(process.hProcess, 600000);
-                if (result != 0) {
-                    kernel.TerminateProcess(process.hProcess, 1);
-                    kernel.WaitForSingleObject(process.hProcess, 5000);
-                    throw new IOException("Официальный installer Tor Browser не завершился вовремя");
+                // No instruction in the verified EXE runs until job assignment succeeds.
+                job.attachAndResume(process.hProcess,process.hThread);
+                long deadline=System.nanoTime()+600_000_000_000L;
+                int result;
+                while((result=kernel.WaitForSingleObject(process.hProcess,250))==258) {
+                    if(cancelled.getAsBoolean()||Thread.currentThread().isInterrupted()||System.nanoTime()>deadline) {
+                        job.terminate();
+                        kernel.TerminateProcess(process.hProcess,1);
+                        if(kernel.WaitForSingleObject(process.hProcess,5000)!=0||!job.awaitEmpty(5000))
+                            throw new IOException("Не удалось подтвердить остановку собственного installer Tor Browser");
+                        TorBrowserPackageMetadata.check(cancelled);
+                        throw new IOException("Официальный installer Tor Browser не завершился вовремя");
+                    }
+                }
+                if(result!=0) {
+                    job.terminate();kernel.TerminateProcess(process.hProcess,1);kernel.WaitForSingleObject(process.hProcess,5000);
+                    throw new IOException("Не удалось дождаться собственного installer Tor Browser");
                 }
                 var status = new com.sun.jna.ptr.IntByReference();
                 if (!kernel.GetExitCodeProcess(process.hProcess, status) || status.getValue() != 0)
                     throw new IOException("Официальный installer Tor Browser завершился с ошибкой");
+                if(!job.awaitEmpty(5000)){job.terminate();if(!job.awaitEmpty(5000))throw new IOException("Дочерние процессы installer не завершились");throw new IOException("После installer остались дочерние процессы; установка отменена");}
             } finally {
+                // Also covers a failed job assignment while the process is suspended.
+                job.terminate();kernel.TerminateProcess(process.hProcess,1);kernel.WaitForSingleObject(process.hProcess,5000);
                 kernel.CloseHandle(process.hThread); kernel.CloseHandle(process.hProcess);
+            }
             }
         }
     }
@@ -240,14 +282,14 @@ public final class TorBrowserInstaller {
         }
     }
 
-    private static void copyBundle(Path source, Path target) throws IOException {
+    private static void copyBundle(Path source, Path target,BooleanSupplier cancelled) throws IOException {
         try (var paths = Files.walk(source)) {
             for (Path file : paths.toList()) {
-                if (file.equals(source)) continue;
+                TorBrowserPackageMetadata.check(cancelled);if (file.equals(source)) continue;
                 Path out = target.resolve(source.relativize(file));
                 if (Files.isSymbolicLink(file)) Files.createSymbolicLink(out, Files.readSymbolicLink(file));
                 else if (Files.isDirectory(file, LinkOption.NOFOLLOW_LINKS)) { Files.createDirectories(out); privateDirectory(out); }
-                else { Files.copy(file, out, LinkOption.NOFOLLOW_LINKS); privateFile(out, Files.isExecutable(file)); }
+                else { try(InputStream input=Files.newInputStream(file,LinkOption.NOFOLLOW_LINKS);OutputStream output=Files.newOutputStream(out,StandardOpenOption.CREATE_NEW)){byte[] bytes=new byte[65536];for(int n;(n=input.read(bytes))!=-1;){TorBrowserPackageMetadata.check(cancelled);output.write(bytes,0,n);}} privateFile(out, Files.isExecutable(file)); }
             }
         }
     }
@@ -271,11 +313,11 @@ public final class TorBrowserInstaller {
         }
     }
     private static final class LimitedInput extends FilterInputStream {
-        private long left;
-        LimitedInput(InputStream input, long limit) { super(input); left = limit; }
+        private long left;private final BooleanSupplier cancelled;
+        LimitedInput(InputStream input, long limit,BooleanSupplier cancelled) { super(input); left = limit;this.cancelled=cancelled; }
         private void count(long read) throws IOException { if (read > 0 && (left -= read) < 0) throw new IOException("Превышен лимит распаковки Tor Browser"); }
-        @Override public int read() throws IOException { int value = in.read(); count(value < 0 ? 0 : 1); return value; }
-        @Override public int read(byte[] buffer, int offset, int length) throws IOException { int read = in.read(buffer, offset, (int) Math.min(length, Math.max(1, left + 1))); count(read); return read; }
-        @Override public long skip(long amount) throws IOException { long skipped = in.skip(Math.min(amount, Math.max(1, left + 1))); count(skipped); return skipped; }
+        @Override public int read() throws IOException { TorBrowserPackageMetadata.check(cancelled);int value = in.read(); count(value < 0 ? 0 : 1); return value; }
+        @Override public int read(byte[] buffer, int offset, int length) throws IOException { TorBrowserPackageMetadata.check(cancelled);int read = in.read(buffer, offset, (int) Math.min(length, Math.max(1, left + 1))); count(read); return read; }
+        @Override public long skip(long amount) throws IOException { TorBrowserPackageMetadata.check(cancelled);long skipped = in.skip(Math.min(amount, Math.max(1, left + 1))); count(skipped); return skipped; }
     }
 }

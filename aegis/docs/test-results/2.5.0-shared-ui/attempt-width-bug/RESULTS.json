@@ -1,0 +1,38 @@
+{
+  "productionReady": false,
+  "scope": "Fresh shared application JARs only, smoke classes compiled separately; no production override",
+  "tests": [
+    {
+      "name": "Interface250RefinementSmoke",
+      "exitCode": 0,
+      "cleanRendering": true,
+      "status": "PASS_HEADLESS",
+      "log": "Interface250RefinementSmoke.log"
+    },
+    {
+      "name": "SettingsResponsive200Smoke",
+      "exitCode": 0,
+      "cleanRendering": true,
+      "status": "PASS_HEADLESS",
+      "log": "SettingsResponsive200Smoke.log"
+    },
+    {
+      "name": "SingleWindowSmoke",
+      "exitCode": 0,
+      "cleanRendering": true,
+      "status": "PASS_HEADLESS",
+      "log": "SingleWindowSmoke.log"
+    },
+    {
+      "name": "InWindowDialogs200Smoke",
+      "exitCode": 1,
+      "cleanRendering": false,
+      "status": "FAIL",
+      "log": "InWindowDialogs200Smoke.log"
+    }
+  ],
+  "nativeWindows11": "NOT_RUN",
+  "nativeCachyOSKDEWayland": "NOT_RUN",
+  "nativeCachyOSKDEX11": "NOT_RUN",
+  "TorBrowserAudioNative": "NOT_RUN"
+}

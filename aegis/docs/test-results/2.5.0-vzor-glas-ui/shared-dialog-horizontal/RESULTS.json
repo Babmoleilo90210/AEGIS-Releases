@@ -1,0 +1,32 @@
+{
+  "status": "PASS_HEADLESS",
+  "environment": {
+    "os": "Linux",
+    "glassPlatform": "Monocle"
+  },
+  "actualScenePixels": [
+    800,
+    600
+  ],
+  "themeScaleCombinations": 8,
+  "themes": [
+    "minimal-dark",
+    "classic-light"
+  ],
+  "scalesPercent": [
+    100,
+    125,
+    150,
+    200
+  ],
+  "wrappedContentRows": 24,
+  "unclippedRussianOkCancelAfterScroll": "PASS",
+  "draftRestorationAndNestedPageCleanup": "PASS",
+  "showingStageCount": 1,
+  "sourceSha256": {
+    "client-ui/src/main/java/org/securemail/ui/InWindowDialog.java": "cd3f5bb55005aa6f65079af52d89665ea69497765cdbe764159dcca226720f97"
+  },
+  "runtimeScope": "Isolated InWindowDialog source override ahead of current root JAR/classes; not final installer acceptance.",
+  "nativeWindows11CachyOS": "NOT_RUN",
+  "productionReady": false
+}

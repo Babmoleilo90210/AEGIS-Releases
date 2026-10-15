@@ -31,23 +31,113 @@ public final class SafeWebSessions {
   public Path root(){return root;}
   public Path newInstallationPath()throws IOException{checkRoots();Path p=templates.resolve("install-"+UUID.randomUUID());if(Files.exists(p,LinkOption.NOFOLLOW_LINKS))throw new IOException("Каталог уже существует");return p;}
   /** Call only after TorBrowserSignature verification and successful extraction by TorBrowserInstaller. */
-  public synchronized void registerVerifiedBundle(Path source,String archiveHash)throws IOException{
+  public synchronized void registerVerifiedBundle(Path source,String archiveHash)throws IOException{registerVerifiedBundle(source,archiveHash,null,false);}
+  @FunctionalInterface private interface BeforeSelect {void run()throws IOException;}
+  private void registerVerifiedBundle(Path source,String archiveHash,BeforeSelect beforeSelect,boolean authenticatedRepair)throws IOException{
     checkRoots();if(!archiveHash.matches("[a-f0-9]{64}"))throw new IOException("Некорректный отпечаток официального пакета");
     source=source.toAbsolutePath().normalize();if(!source.startsWith(templates)||source.equals(templates))throw new IOException("Пакет должен находиться в отдельном каталоге установки");
     rejectLinksInParents(source);String id="template-"+archiveHash;Path target=templates.resolve(id);
     // A failed copy must never leave a partial directory under its published ID.
-    // The caller holds the Safe Web manager lock for this entire transaction.
+    // The caller holds the Взор manager lock for this entire transaction.
     JsonObject authenticated=snapshot(source);
     if(Files.exists(target,LinkOption.NOFOLLOW_LINKS)){
-      verify(target,authenticated);
-      if(Files.exists(manifestPath(id),LinkOption.NOFOLLOW_LINKS))verify(target,readManifest(id));
-      else writeManifest(id,authenticated); // recovery against the freshly verified official source
+      if(authenticatedRepair){
+        boolean valid=false;try{verify(target,authenticated);valid=true;}catch(AccessDeniedException denied){throw denied;}catch(IOException changed){/* fresh authenticated source is the repair authority */}
+        if(!valid){Path staging=templates.resolve(".template-stage-"+UUID.randomUUID());try{copyTree(source,staging);verify(staging,authenticated);replaceAuthenticated(staging,target);}finally{removeTree(staging);}}
+        writeManifest(id,authenticated);
+      }else{
+        verify(target,authenticated);
+        if(Files.exists(manifestPath(id),LinkOption.NOFOLLOW_LINKS))verify(target,readManifest(id));
+        else writeManifest(id,authenticated); // recovery against the freshly verified official source
+      }
     } else {
       Path staging=templates.resolve(".template-stage-"+UUID.randomUUID());
       try{copyTree(source,staging);verify(staging,authenticated);writeManifest(id,authenticated);publish(staging,target);}
       finally{removeTree(staging);}
     }
+    if(authenticatedRepair){
+      Path existing=bundles.resolve("normal-"+archiveHash.substring(0,16));
+      if(Files.exists(existing,LinkOption.NOFOLLOW_LINKS)){
+        boolean valid=false;try{verify(existing,authenticated);valid=true;}catch(AccessDeniedException denied){throw denied;}catch(IOException changed){/* binary repair never trusts local hashes */}
+        if(!valid){Path staging=bundles.resolve(".session-stage-"+UUID.randomUUID());try{copyTree(target,staging);copyBrowserData(existing,staging);verify(staging,authenticated);replaceAuthenticated(staging,existing);}finally{removeTree(staging);}}
+      }
+    }
+    if(beforeSelect!=null)beforeSelect.run();
     AtomicFiles.write(control.resolve("selected-template"),id.getBytes(java.nio.charset.StandardCharsets.US_ASCII));
+  }
+  /** Authenticated imports bind the actual signed Tor Browser version, architecture
+   * and developer fingerprint outside every sandbox. A later cancel does not undo
+   * an already committed selected-template pointer. Caller holds manager lock. */
+  public synchronized void registerVerifiedBundle(TorBrowserInstaller.Installed installed)throws IOException{
+    Objects.requireNonNull(installed);checkRoots();
+    if(!installed.fingerprint().equals(TorBrowserSignature.PRIMARY_FINGERPRINT)||!installed.archiveSha256().matches("[a-f0-9]{64}")||!installed.version().matches("[0-9]{1,3}(?:\\.[0-9]{1,4}){1,3}")||!Set.of("linux-x86_64","windows-x86_64").contains(installed.architecture()))throw new IOException("Некорректная удостоверенная версия Tor Browser");
+    var actual=TorBrowserPackageMetadata.bundle(installed.bundle());TorBrowserPackageMetadata.require(actual,installed.version(),installed.architecture().startsWith("windows"));
+    Path floor=control.resolve("minimum-installed-"+installed.architecture()+".txt");
+    String minimum=null;
+    if(Files.exists(floor,LinkOption.NOFOLLOW_LINKS)){
+      minimum=new String(AtomicFiles.read(floor,64),java.nio.charset.StandardCharsets.US_ASCII).strip();
+      if(!minimum.matches("[0-9]{1,3}(?:\\.[0-9]{1,4}){1,3}"))throw new IOException("Повреждена доверенная отметка версии браузера");
+    }
+    // The authenticated current template repairs a crash between pointer commit
+    // and floor write; the floor can never be silently reduced by that crash.
+    if(Files.exists(control.resolve("selected-template"),LinkOption.NOFOLLOW_LINKS)){
+      try{
+        String selected=verifiedTemplate();Path origin=templates.resolve(selected);
+        Path version=origin.resolve("Browser/tbb_version.json");
+        if(Files.exists(version,LinkOption.NOFOLLOW_LINKS)){
+          var current=TorBrowserPackageMetadata.bundle(origin);
+          if(current.architecture().equals(installed.architecture())&&(minimum==null||TorBrowserDownloadService.compareVersions(current.version(),minimum)>0))minimum=current.version();
+        }
+      }catch(NeedsReattestationException repair){/* protected version floor is still enforced */}
+    }
+    if(minimum!=null&&TorBrowserDownloadService.compareVersions(installed.version(),minimum)<0)throw new IOException("Установка более старого Tor Browser запрещена; действующая версия сохранена");
+    JsonObject receipt=new JsonObject();receipt.addProperty("version",installed.version());receipt.addProperty("architecture",installed.architecture());receipt.addProperty("archiveSha256",installed.archiveSha256());receipt.addProperty("developerFingerprint",installed.fingerprint());
+    AtomicFiles.write(control.resolve("template-"+installed.archiveSha256()+".receipt.json"),receipt.toString().getBytes(java.nio.charset.StandardCharsets.UTF_8));
+    // Commit the monotonic floor after the complete authenticated template exists,
+    // before selecting it. No fallible write remains after pointer publication.
+    registerVerifiedBundle(installed.bundle(),installed.archiveSha256(),()->AtomicFiles.write(floor,(installed.version()+"\n").getBytes(java.nio.charset.StandardCharsets.US_ASCII)),true);
+  }
+  /** Integrity failure is recoverable only with a freshly signature-verified
+   * official archive; it must never cause local self-resealing. */
+  public static final class NeedsReattestationException extends IOException{
+    private static final long serialVersionUID=1L;
+    NeedsReattestationException(IOException cause){super("Требуется свежий удостоверенный официальный пакет Tor Browser",cause);}
+    NeedsReattestationException(){super("Сначала подготовьте официальный Tor Browser");}
+  }
+  public synchronized void verifyInstalled()throws IOException{
+    checkRoots();
+    if(!Files.exists(control.resolve("selected-template"),LinkOption.NOFOLLOW_LINKS))throw new NeedsReattestationException();
+    try{
+      String template=verifiedTemplate();JsonObject trusted=readManifest(template);
+      Path persistent=bundles.resolve("normal-"+template.substring(9,25));
+      if(Files.exists(persistent,LinkOption.NOFOLLOW_LINKS))verify(persistent,trusted);
+    }catch(AccessDeniedException denied){throw denied;}catch(IOException changed){throw new NeedsReattestationException(changed);}
+  }
+  private String verifiedTemplate()throws IOException{
+    try{String template=selected();verify(templates.resolve(template),readManifest(template));return template;}
+    catch(AccessDeniedException denied){throw denied;}catch(IOException changed){throw new NeedsReattestationException(changed);}
+  }
+  /** The backup has a deterministic bounded name. A crash after moving the old
+   * directory is repaired under the manager lock before stale staging is removed.
+   * The browser never receives either staging or backup paths. */
+  private void replaceAuthenticated(Path staging,Path target)throws IOException{
+    rejectLinksInParents(target);Path backup=target.resolveSibling(".repair-backup-"+target.getFileName());
+    if(Files.exists(backup,LinkOption.NOFOLLOW_LINKS))removeTree(backup);
+    Files.move(target,backup,StandardCopyOption.ATOMIC_MOVE);AtomicFiles.syncDirectory(target.getParent());
+    try{publish(staging,target);}catch(IOException failure){
+      if(!Files.exists(target,LinkOption.NOFOLLOW_LINKS))try{Files.move(backup,target,StandardCopyOption.ATOMIC_MOVE);}catch(IOException restore){failure.addSuppressed(restore);}
+      throw failure;
+    }
+    removeTree(backup);AtomicFiles.syncDirectory(target.getParent());
+  }
+  private void recoverRepairBackups()throws IOException{
+    for(Path parent:List.of(templates,bundles))try(var entries=Files.newDirectoryStream(parent)){
+      int count=0;for(Path backup:entries){if(++count>10000)throw new IOException("Слишком много каталогов восстановления браузера");String name=backup.getFileName().toString();
+        String prefix=".repair-backup-";if(!name.startsWith(prefix))continue;String original=name.substring(prefix.length());
+        if(!(parent.equals(templates)&&original.matches("template-[a-f0-9]{64}")||parent.equals(bundles)&&original.matches("normal-[a-f0-9]{16}")))throw new IOException("Неверный каталог восстановления браузера");
+        Path target=parent.resolve(original);if(!Files.exists(target,LinkOption.NOFOLLOW_LINKS)){if(Files.isSymbolicLink(backup)||!Files.isDirectory(backup,LinkOption.NOFOLLOW_LINKS))throw new IOException("Небезопасная резервная копия браузера");Files.move(backup,target,StandardCopyOption.ATOMIC_MOVE);AtomicFiles.syncDirectory(parent);}
+      }
+    }
   }
   public synchronized boolean installed(){try{selected();return true;}catch(IOException absent){return false;}}
   public synchronized String installedFingerprint()throws IOException{return selected().substring("template-".length());}
@@ -87,7 +177,12 @@ public final class SafeWebSessions {
   }
   private static void copyBrowserData(Path old,Path next)throws IOException{
     for(String relative:List.of("Browser/TorBrowser/Data","aegis-downloads")){
-      Path source=old.resolve(relative);if(!Files.exists(source,LinkOption.NOFOLLOW_LINKS))continue;Path target=next.resolve(relative);removeTree(target);copyTree(source,target);
+      Path source=old.resolve(relative);if(!Files.exists(source,LinkOption.NOFOLLOW_LINKS))continue;Path target=next.resolve(relative);removeTree(target);
+      // Browser ownership has been confirmed stopped before this migration. These
+      // exact stock Firefox lock leaves are process mutex metadata, not user data.
+      // Never follow/read a stale symlink, and never relax any other link check.
+      if(relative.equals("Browser/TorBrowser/Data"))copyTree(source,target,Set.of("Browser/profile.default/lock","Browser/profile.default/.parentlock","Browser/profile.default/parent.lock"));
+      else copyTree(source,target);
     }
   }
   public synchronized void complete(Session session)throws IOException{
@@ -107,8 +202,8 @@ public final class SafeWebSessions {
    * Temporary mode authorizes ordinary filesystem deletion, not forensic erasure.
    */
   public synchronized int cleanupStaleTemporarySessions(FileLock exclusiveManagerLock)throws IOException{
-    if(exclusiveManagerLock==null||!exclusiveManagerLock.isValid()||exclusiveManagerLock.isShared())throw new IOException("Для очистки требуется исключительная блокировка Safe Web");
-    checkRoots();int cleaned=0;
+    if(exclusiveManagerLock==null||!exclusiveManagerLock.isValid()||exclusiveManagerLock.isShared())throw new IOException("Для очистки требуется исключительная блокировка Взор");
+    checkRoots();recoverRepairBackups();int cleaned=0;
     for(Path parent:List.of(bundles,control,templates))try(var entries=Files.newDirectoryStream(parent)){
       for(Path entry:entries){String name=entry.getFileName().toString();
         boolean temporary=name.matches("temporary-"+UUID_PATTERN);
@@ -174,7 +269,8 @@ public final class SafeWebSessions {
     while(!Files.exists(current,LinkOption.NOFOLLOW_LINKS)){if(current.getParent()==null)throw new IOException("Недоступен путь хранилища");suffix.addFirst(current.getFileName());current=current.getParent();}
     Path result=current.toRealPath();for(Path name:suffix)result=result.resolve(name);return result.normalize();
   }
-  static void copyTree(Path source,Path target)throws IOException{
+  static void copyTree(Path source,Path target)throws IOException{copyTree(source,target,Set.of());}
+  private static void copyTree(Path source,Path target,Set<String> excludedMutexLeaves)throws IOException{
     rejectLinksInParents(source);rejectLinksInParents(target);
     if(!Files.isDirectory(source,LinkOption.NOFOLLOW_LINKS))throw new IOException("Требуется каталог браузера");
     Path absoluteSource=source.toAbsolutePath().normalize(),absoluteTarget=target.toAbsolutePath().normalize();
@@ -187,9 +283,11 @@ public final class SafeWebSessions {
         Path relative=source.relativize(path);safeRelative(relative.toString().replace('\\','/'));return target.resolve(relative);
       }
       @Override public FileVisitResult preVisitDirectory(Path directory,BasicFileAttributes attrs)throws IOException{
+        if(excludedMutexLeaves.contains(source.relativize(directory).toString().replace('\\','/')))throw new IOException("Каталог вместо служебного lock-файла профиля браузера");
         if(!directory.equals(source))AtomicFiles.directory(destination(directory));return FileVisitResult.CONTINUE;
       }
       @Override public FileVisitResult visitFile(Path path,BasicFileAttributes attrs)throws IOException{
+        if(excludedMutexLeaves.contains(source.relativize(path).toString().replace('\\','/')))return FileVisitResult.CONTINUE;
         Path dest=destination(path);
         if(attrs.isSymbolicLink()){Path link=Files.readSymbolicLink(path);if(link.isAbsolute()||!path.getParent().resolve(link).normalize().startsWith(source)||!path.toRealPath().startsWith(realSource))throw new IOException("Внешняя ссылка браузера");Files.createSymbolicLink(dest,link);}
         else if(attrs.isRegularFile()){

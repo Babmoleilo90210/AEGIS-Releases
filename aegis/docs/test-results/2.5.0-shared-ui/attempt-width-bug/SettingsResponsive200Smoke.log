@@ -1,0 +1,6 @@
+startedUTC=2026-10-15T10:07:15.824825+00:00
+command=['/workspace/scratch/aa629f360927/inputs/jdk-21.0.12.1+1/bin/java', '--limit-modules', 'java.se,jdk.unsupported,jdk.charsets,jdk.crypto.ec', '-Xmx768m', '-Daegis.native.root=/workspace/scratch/aa629f360927/inputs/squashfs-root', '-Dprism.order=sw', '-Dquantum.multithreaded=false', '-Dglass.platform=Monocle', '-Dmonocle.platform=Headless', '-Dheadless.geometry=1600x1200-32', '-cp', '/tmp/aegis-final-shared-ui250-z3faeuwp:/workspace/scratch/aa629f360927/aegis/aegis/build/local-java21/*:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/*:/workspace/scratch/aa629f360927/inputs/deps/*', 'org.securemail.ui.SettingsResponsive200Smoke']
+Oct 15, 2026 12:07:16 PM com.sun.javafx.application.PlatformImpl startup
+WARNING: Unsupported JavaFX configuration: classes were loaded from 'unnamed module @192b07fd'
+SettingsResponsive200Smoke PASS: real 800x600 layout at 100/125/150/200%, 2 themes, category wrapping/equal heights/content below/shared scrolling, offline signed avatar refresh/removal; native OS and live Relay NOT_RUN
+exitCode=0

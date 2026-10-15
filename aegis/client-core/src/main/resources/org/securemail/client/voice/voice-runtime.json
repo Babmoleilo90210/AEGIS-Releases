@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "libraries": {
+    "linux-x86_64": {
+      "libopus.so": "86de12c992211fff80ae100b56c0e4699ae54fb16e0a9877a3228c3f14a329c8",
+      "libspeexdsp.so": "89a05213790b0549b9fd6ee774a5602db7e9b0b20e990305eec7b88677253262"
+    },
+    "windows-x86_64": {
+      "opus.dll": "95e018320376a89a37182763675b01d6ba684717444921c01e20644dfa238d3d",
+      "speexdsp.dll": "7b4194da26b08e4d6be25d25f93393a38cdbc6f6cc8f76175b3102407cd6589b"
+    }
+  }
+}

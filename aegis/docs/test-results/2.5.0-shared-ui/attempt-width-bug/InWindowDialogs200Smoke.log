@@ -1,0 +1,21 @@
+startedUTC=2026-10-15T10:07:22.199829+00:00
+command=['/workspace/scratch/aa629f360927/inputs/jdk-21.0.12.1+1/bin/java', '--limit-modules', 'java.se,jdk.unsupported,jdk.charsets,jdk.crypto.ec', '-Xmx768m', '-Daegis.native.root=/workspace/scratch/aa629f360927/inputs/squashfs-root', '-Dprism.order=sw', '-Dquantum.multithreaded=false', '-Dglass.platform=Monocle', '-Dmonocle.platform=Headless', '-Dheadless.geometry=1600x1200-32', '-cp', '/tmp/aegis-final-shared-ui250-z3faeuwp:/workspace/scratch/aa629f360927/aegis/aegis/build/local-java21/*:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/*:/workspace/scratch/aa629f360927/inputs/deps/*', 'org.securemail.ui.InWindowDialogs200Smoke']
+Oct 15, 2026 12:07:22 PM com.sun.javafx.application.PlatformImpl startup
+WARNING: Unsupported JavaFX configuration: classes were loaded from 'unnamed module @6f1fba17'
+Exception in thread "main" java.util.concurrent.ExecutionException: java.lang.AssertionError: Action outside Scene
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:396)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2096)
+	at org.securemail.ui.MessengerSmoke.fx(MessengerSmoke.java:22)
+	at org.securemail.ui.InWindowDialogs200Smoke.main(InWindowDialogs200Smoke.java:35)
+Caused by: java.lang.AssertionError: Action outside Scene
+	at org.securemail.ui.InWindowDialogs200Smoke.check(InWindowDialogs200Smoke.java:15)
+	at org.securemail.ui.InWindowDialogs200Smoke.visibleInsideScene(InWindowDialogs200Smoke.java:19)
+	at org.securemail.ui.InWindowDialogs200Smoke.lambda$main$6(InWindowDialogs200Smoke.java:38)
+	at org.securemail.ui.MessengerSmoke.lambda$fx$0(MessengerSmoke.java:22)
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$10(PlatformImpl.java:456)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$11(PlatformImpl.java:455)
+	at com.sun.glass.ui.monocle.RunnableProcessor.runLoop(RunnableProcessor.java:92)
+	at com.sun.glass.ui.monocle.RunnableProcessor.run(RunnableProcessor.java:51)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+exitCode=1

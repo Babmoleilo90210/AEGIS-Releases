@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="JUnit Jupiter" tests="20" skipped="0" failures="0" errors="0" time="0.332" hostname="9baed28aafd3" timestamp="2026-10-15T11:36:32">
+<properties>
+<property name="file.encoding" value="UTF-8"/>
+<property name="file.separator" value="/"/>
+<property name="java.class.path" value="/workspace/scratch/aa629f360927/inputs/preflight-test-classes:client-core/src/main/resources:build/local-java21/client-core/classes:build/local-java21/common-protocol/classes:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/fontbox-3.0.8.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/commons-logging-1.3.5.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/jna-platform-5.19.1.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/common-lang-3.14.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/tink-1.23.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/imageio-metadata-3.14.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/commons-codec-1.19.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/pdfbox-io-3.0.8.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/bcprov-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/commons-lang3-3.18.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/imageio-webp-3.14.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/common-io-3.14.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/pdfbox-3.0.8.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/commons-io-2.20.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/bcutil-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/javafx-controls-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/client-core-2.0.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/javafx-base-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/xz-1.12.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/jna-5.19.1.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/bcpg-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/commons-compress-1.28.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/protobuf-java-4.33.6.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/client-ui-2.0.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/zip4j-2.11.6.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/gson-2.14.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/jsr305-3.0.2.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/imageio-core-3.14.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/error_prone_annotations-2.48.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/common-protocol-0.2.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/common-image-3.14.0.jar:/workspace/scratch/aa629f360927/inputs/squashfs-root/app/javafx-graphics-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs/deps/slf4j-api-2.0.17.jar:/workspace/scratch/aa629f360927/inputs/deps/junit-platform-console-standalone-1.13.4.jar:/workspace/scratch/aa629f360927/inputs/deps/sqlite-jdbc-3.53.4.0.jar:/workspace/scratch/aa629f360927/inputs/deps/openjfx-monocle-21.0.2.jar:/workspace/scratch/aa629f360927/inputs/deps/password4j-1.8.4.jar:/workspace/scratch/aa629f360927/inputs/deps/slf4j-nop-2.0.17.jar"/>
+<property name="java.class.version" value="65.0"/>
+<property name="java.home" value="/workspace/scratch/aa629f360927/inputs/jdk-21.0.12.1+1"/>
+<property name="java.io.tmpdir" value="/tmp"/>
+<property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/>
+<property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+<property name="java.runtime.version" value="21.0.12.1+1-LTS"/>
+<property name="java.specification.name" value="Java Platform API Specification"/>
+<property name="java.specification.vendor" value="Oracle Corporation"/>
+<property name="java.specification.version" value="21"/>
+<property name="java.vendor" value="Eclipse Adoptium"/>
+<property name="java.vendor.url" value="https://adoptium.net/"/>
+<property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
+<property name="java.vendor.version" value="Temurin-21.0.12.1+1"/>
+<property name="java.version" value="21.0.12.1"/>
+<property name="java.version.date" value="2026-08-18"/>
+<property name="java.vm.compressedOopsMode" value="32-bit"/>
+<property name="java.vm.info" value="mixed mode, sharing"/>
+<property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+<property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+<property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+<property name="java.vm.specification.version" value="21"/>
+<property name="java.vm.vendor" value="Eclipse Adoptium"/>
+<property name="java.vm.version" value="21.0.12.1+1-LTS"/>
+<property name="jdk.debug" value="release"/>
+<property name="junit.docs.version" value="1.13.4"/>
+<property name="line.separator" value="&#10;"/>
+<property name="native.encoding" value="UTF-8"/>
+<property name="os.arch" value="amd64"/>
+<property name="os.name" value="Linux"/>
+<property name="os.version" value="6.18.44"/>
+<property name="path.separator" value=":"/>
+<property name="stderr.encoding" value="UTF-8"/>
+<property name="stdout.encoding" value="UTF-8"/>
+<property name="sun.arch.data.model" value="64"/>
+<property name="sun.boot.library.path" value="/workspace/scratch/aa629f360927/inputs/jdk-21.0.12.1+1/lib"/>
+<property name="sun.cpu.endian" value="little"/>
+<property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+<property name="sun.java.command" value="org.junit.platform.console.ConsoleLauncher execute --select-class org.securemail.client.safeweb.SandboxPrerequisitesTest --select-class org.securemail.client.safeweb.LinuxSafeWebSandboxTest --select-class org.securemail.client.safeweb.WindowsSafeWebSandboxTest --details=summary --reports-dir docs/test-results/2.5.0-sandbox-preflight"/>
+<property name="sun.java.launcher" value="SUN_STANDARD"/>
+<property name="sun.jnu.encoding" value="UTF-8"/>
+<property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+<property name="user.dir" value="/workspace/scratch/aa629f360927/aegis/aegis"/>
+<property name="user.home" value="/root"/>
+<property name="user.language" value="en"/>
+<property name="user.name" value="root"/>
+<property name="user.timezone" value="Europe/Paris"/>
+</properties>
+<testcase name="hostListIsStrictAndUnknownVmStateRemainsActive()" classname="org.securemail.client.safeweb.WindowsSafeWebSandboxTest" time="0.009">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.WindowsSafeWebSandboxTest]/[method:hostListIsStrictAndUnknownVmStateRemainsActive()]
+display-name: hostListIsStrictAndUnknownVmStateRemainsActive()
+]]></system-out>
+</testcase>
+<testcase name="cookieIsPrivateWellFormedAndDifferentEverySession()" classname="org.securemail.client.safeweb.LinuxSafeWebSandboxTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.LinuxSafeWebSandboxTest]/[method:cookieIsPrivateWellFormedAndDifferentEverySession()]
+display-name: cookieIsPrivateWellFormedAndDifferentEverySession()
+]]></system-out>
+</testcase>
+<testcase name="isolatesNetworkAndOnlyExposesDedicatedFiles()" classname="org.securemail.client.safeweb.LinuxSafeWebSandboxTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.LinuxSafeWebSandboxTest]/[method:isolatesNetworkAndOnlyExposesDedicatedFiles()]
+display-name: isolatesNetworkAndOnlyExposesDedicatedFiles()
+]]></system-out>
+</testcase>
+<testcase name="displayMustBeLocalWithoutShellOrNetworkSyntax()" classname="org.securemail.client.safeweb.SandboxPrerequisitesTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SandboxPrerequisitesTest]/[method:displayMustBeLocalWithoutShellOrNetworkSyntax()]
+display-name: displayMustBeLocalWithoutShellOrNetworkSyntax()
+]]></system-out>
+</testcase>
+<testcase name="platformPolicyRejectsMacAndUnsupportedArchitectures()" classname="org.securemail.client.safeweb.SandboxPrerequisitesTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SandboxPrerequisitesTest]/[method:platformPolicyRejectsMacAndUnsupportedArchitectures()]
+display-name: platformPolicyRejectsMacAndUnsupportedArchitectures()
+]]></system-out>
+</testcase>
+<testcase name="dependencyOwnershipAndWritableBitsFailClosed()" classname="org.securemail.client.safeweb.SandboxPrerequisitesTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SandboxPrerequisitesTest]/[method:dependencyOwnershipAndWritableBitsFailClosed()]
+display-name: dependencyOwnershipAndWritableBitsFailClosed()
+]]></system-out>
+</testcase>
+<testcase name="windowsBuildAndEditionAreExplicit()" classname="org.securemail.client.safeweb.SandboxPrerequisitesTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SandboxPrerequisitesTest]/[method:windowsBuildAndEditionAreExplicit()]
+display-name: windowsBuildAndEditionAreExplicit()
+]]></system-out>
+</testcase>
+<testcase name="executionAliasMustBindOfficialPackageAndProtectedTarget()" classname="org.securemail.client.safeweb.WindowsSafeWebSandboxTest" time="0.012">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.WindowsSafeWebSandboxTest]/[method:executionAliasMustBindOfficialPackageAndProtectedTarget()]
+display-name: executionAliasMustBindOfficialPackageAndProtectedTarget()
+]]></system-out>
+</testcase>
+<testcase name="rejectsUnsupportedEditionsAndInjectedSessionCommands()" classname="org.securemail.client.safeweb.WindowsSafeWebSandboxTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.WindowsSafeWebSandboxTest]/[method:rejectsUnsupportedEditionsAndInjectedSessionCommands()]
+display-name: rejectsUnsupportedEditionsAndInjectedSessionCommands()
+]]></system-out>
+</testcase>
+<testcase name="customSecretDirectoriesInSystemMountsAreRejectedEvenThroughSymlinks()" classname="org.securemail.client.safeweb.LinuxSafeWebSandboxTest" time="0.019">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.LinuxSafeWebSandboxTest]/[method:customSecretDirectoriesInSystemMountsAreRejectedEvenThroughSymlinks()]
+display-name: customSecretDirectoriesInSystemMountsAreRejectedEvenThroughSymlinks()
+]]></system-out>
+</testcase>
+<testcase name="successfulStartupFailureCleanupThrowsOriginalFailureAfterOwnedChildStopped()" classname="org.securemail.client.safeweb.LinuxSafeWebSandboxTest" time="0.021">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.LinuxSafeWebSandboxTest]/[method:successfulStartupFailureCleanupThrowsOriginalFailureAfterOwnedChildStopped()]
+display-name: successfulStartupFailureCleanupThrowsOriginalFailureAfterOwnedChildStopped()
+]]></system-out>
+</testcase>
+<testcase name="guestBootstrapIsPackagedAndUsesDataRatherThanCommandInterpolation()" classname="org.securemail.client.safeweb.WindowsSafeWebSandboxTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.WindowsSafeWebSandboxTest]/[method:guestBootstrapIsPackagedAndUsesDataRatherThanCommandInterpolation()]
+display-name: guestBootstrapIsPackagedAndUsesDataRatherThanCommandInterpolation()
+]]></system-out>
+</testcase>
+<testcase name="failedStartupRetainsControllerAndFilesWhenCleanupCannotStopOwnedChild()" classname="org.securemail.client.safeweb.LinuxSafeWebSandboxTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.LinuxSafeWebSandboxTest]/[method:failedStartupRetainsControllerAndFilesWhenCleanupCannotStopOwnedChild()]
+display-name: failedStartupRetainsControllerAndFilesWhenCleanupCannotStopOwnedChild()
+]]></system-out>
+</testcase>
+<testcase name="missingDependencyIsTypedAndDoesNotExposeUntrustedPath(Path)" classname="org.securemail.client.safeweb.SandboxPrerequisitesTest" time="0.041">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SandboxPrerequisitesTest]/[method:missingDependencyIsTypedAndDoesNotExposeUntrustedPath(java.nio.file.Path)]
+display-name: missingDependencyIsTypedAndDoesNotExposeUntrustedPath(Path)
+]]></system-out>
+</testcase>
+<testcase name="failedStartRetainsTheExactOwnerUntilVmCleanupIsProved()" classname="org.securemail.client.safeweb.WindowsSafeWebSandboxTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.WindowsSafeWebSandboxTest]/[method:failedStartRetainsTheExactOwnerUntilVmCleanupIsProved()]
+display-name: failedStartRetainsTheExactOwnerUntilVmCleanupIsProved()
+]]></system-out>
+</testcase>
+<testcase name="displayLeaseStopsItsChildWhenControllerPipeCloses()" classname="org.securemail.client.safeweb.LinuxSafeWebSandboxTest" time="0.106">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.LinuxSafeWebSandboxTest]/[method:displayLeaseStopsItsChildWhenControllerPipeCloses()]
+display-name: displayLeaseStopsItsChildWhenControllerPipeCloses()
+]]></system-out>
+</testcase>
+<testcase name="mapsOnlyDedicatedBundleAndDisablesHostChannels()" classname="org.securemail.client.safeweb.WindowsSafeWebSandboxTest" time="0.023">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.WindowsSafeWebSandboxTest]/[method:mapsOnlyDedicatedBundleAndDisablesHostChannels()]
+display-name: mapsOnlyDedicatedBundleAndDisablesHostChannels()
+]]></system-out>
+</testcase>
+<testcase name="cookieDoesNotFollowSymbolicLinks()" classname="org.securemail.client.safeweb.LinuxSafeWebSandboxTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.LinuxSafeWebSandboxTest]/[method:cookieDoesNotFollowSymbolicLinks()]
+display-name: cookieDoesNotFollowSymbolicLinks()
+]]></system-out>
+</testcase>
+<testcase name="cleanupWaitsForEveryCapturedOwnedHandleAndPreservesForeignProcess()" classname="org.securemail.client.safeweb.LinuxSafeWebSandboxTest" time="0.027">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.LinuxSafeWebSandboxTest]/[method:cleanupWaitsForEveryCapturedOwnedHandleAndPreservesForeignProcess()]
+display-name: cleanupWaitsForEveryCapturedOwnedHandleAndPreservesForeignProcess()
+]]></system-out>
+</testcase>
+<testcase name="urlIsAlwaysOnePositionalArgumentNeverShellSource()" classname="org.securemail.client.safeweb.LinuxSafeWebSandboxTest" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.LinuxSafeWebSandboxTest]/[method:urlIsAlwaysOnePositionalArgumentNeverShellSource()]
+display-name: urlIsAlwaysOnePositionalArgumentNeverShellSource()
+]]></system-out>
+</testcase>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]
+display-name: JUnit Jupiter
+]]></system-out>
+</testsuite>

@@ -1,0 +1,18 @@
+Oct 15, 2026 11:47:10 AM com.sun.javafx.application.PlatformImpl startup
+WARNING: Unsupported JavaFX configuration: classes were loaded from 'unnamed module @1b9e1916'
+Exception in thread "main" java.util.concurrent.ExecutionException: java.lang.AssertionError: A card row exceeds available width: TitledPane page=glas-page scale=200 cardWidth=276.0 child=BoundingBox [minX:14.0, minY:852.0, minZ:0.0, width:309.0, height:34.0, depth:0.0, maxX:323.0, maxY:886.0, maxZ:0.0] layout=BoundingBox [minX:0.0, minY:0.0, minZ:0.0, width:309.0, height:34.0, depth:0.0, maxX:309.0, maxY:34.0, maxZ:0.0]
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:396)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2096)
+	at org.securemail.ui.VzorGlas250Smoke.fx(VzorGlas250Smoke.java:29)
+	at org.securemail.ui.VzorGlas250Smoke.main(VzorGlas250Smoke.java:94)
+Caused by: java.lang.AssertionError: A card row exceeds available width: TitledPane page=glas-page scale=200 cardWidth=276.0 child=BoundingBox [minX:14.0, minY:852.0, minZ:0.0, width:309.0, height:34.0, depth:0.0, maxX:323.0, maxY:886.0, maxZ:0.0] layout=BoundingBox [minX:0.0, minY:0.0, minZ:0.0, width:309.0, height:34.0, depth:0.0, maxX:309.0, maxY:34.0, maxZ:0.0]
+	at org.securemail.ui.VzorGlas250Smoke.check(VzorGlas250Smoke.java:30)
+	at org.securemail.ui.VzorGlas250Smoke.geometry(VzorGlas250Smoke.java:54)
+	at org.securemail.ui.VzorGlas250Smoke.lambda$main$19(VzorGlas250Smoke.java:99)
+	at org.securemail.ui.VzorGlas250Smoke.lambda$fx$0(VzorGlas250Smoke.java:29)
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$10(PlatformImpl.java:456)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$11(PlatformImpl.java:455)
+	at com.sun.glass.ui.monocle.RunnableProcessor.runLoop(RunnableProcessor.java:92)
+	at com.sun.glass.ui.monocle.RunnableProcessor.run(RunnableProcessor.java:51)
+	at java.base/java.lang.Thread.run(Thread.java:1583)

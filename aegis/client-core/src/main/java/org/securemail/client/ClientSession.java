@@ -13,6 +13,7 @@ public final class ClientSession implements AutoCloseable {
   private final NetworkService network;
   private final LocalFeatures features;
   private final org.securemail.client.lifecycle.LifecycleService lifecycle;
+  private final org.securemail.client.voice.VoiceCallService calls;
   private int contactCursor;
   private int revocationCursor;
   private volatile int relayCapabilities=-1;
@@ -47,6 +48,7 @@ public final class ClientSession implements AutoCloseable {
                 local,
                 config.maxCiphertext());
     if(network!=null){network.packetAcceptor(lifecycle::accept);lifecycle.network(network);}
+    try{calls=new org.securemail.client.voice.VoiceCallService(local,features,network);}catch(IOException|java.security.GeneralSecurityException failure){lifecycle.close();local.close();throw failure;}
     cleanup.scheduleAtFixedRate(
         () -> {
           try {
@@ -80,7 +82,7 @@ public final class ClientSession implements AutoCloseable {
   private void rebuildPeerRoute(){synchronized(routingLock){
     closeRouting();if(closed||network==null||!network.loggedIn())return;
     try {
-      peer = new PeerServer(config.localServicePort(), local, config.maxCiphertext(),p->{var receipt=lifecycle.accept(p);local.deliveryRoute(p.messageId(),"P2P");return receipt;},lifecycle::capabilities);
+      peer = new PeerServer(config.localServicePort(), local, config.maxCiphertext(),p->{var receipt=lifecycle.accept(p);local.deliveryRoute(p.messageId(),"P2P");return receipt;},lifecycle::capabilities,calls::handleIncoming);
       peer.start();
       control = new TorControl(config.torControlPort(), config.torCookiePath());
       onion = control.publish(peer.port());
@@ -89,6 +91,7 @@ public final class ClientSession implements AutoCloseable {
     }
   }}
   private void closeRouting(){
+    calls.networkAvailable(false);
     if(control!=null)try{control.close();}catch(IOException ignored){}control=null;onion=null;
     if(peer!=null)try{peer.close();}catch(IOException ignored){}peer=null;
   }
@@ -122,7 +125,9 @@ public final class ClientSession implements AutoCloseable {
       if(e instanceof org.securemail.client.net.RequestRejected rejected&&rejected.code()==1)network.forgetSession();
       status = peer!=null?"Tor ●  Relay недоступен  P2P ●":"Синхронизация не завершена · проверьте Tor, вход и доверенные контакты";
     }
+    calls.networkAvailable(p2pReady());
   }
+  private boolean p2pReady(){synchronized(routingLock){if(control==null)return false;try{return control.bootstrapped();}catch(Exception unavailable){return false;}}}
   public synchronized void syncPublicData(org.securemail.protocol.UserInfo selected)throws Exception{
     if(!online()||deliverySuspended)return;
     lifecycle.sync(selected);if(lifecycle.takeFriendshipChanged())friendshipChanged.set(true);
@@ -137,7 +142,7 @@ public final class ClientSession implements AutoCloseable {
         // enforced PNG normalization. The identity and profile wire format stay unchanged.
         pixels=avatar==null?new byte[0]:org.securemail.client.storage.AvatarCodec.normalize(avatar);
         var profile=local.identity().profile(local.nickname(),revision,localProfile.visible(),localProfile.about(),pixels);
-        network.publishProfile(profile);local.cacheProfile(profile);features.profilePublished(localProfile.generation());
+        network.publishProfile(profile);local.cacheProfile(profile);features.profilePublished(localProfile);
       }finally{if(avatar!=null)java.util.Arrays.fill(avatar,(byte)0);if(pixels!=null)java.util.Arrays.fill(pixels,(byte)0);}
     }
     }catch(IOException|java.security.GeneralSecurityException profileFailure){profileSynced=false;}
@@ -162,9 +167,10 @@ public final class ClientSession implements AutoCloseable {
         if(features.friendship(selected,relationship.ours(),relationship.theirs()))friendshipChanged.set(true);
       }
     }
-    publicStatus=profileSynced?"Публичные данные синхронизированы":"Профиль пока не синхронизирован";
+    publicStatus=(relayCapabilities&1)==0?"Сервер не поддерживает публичные профили · изменения сохранены на устройстве":profileSynced?"Публичные данные синхронизированы":"Профиль пока не синхронизирован";
   }
   public LocalFeatures features(){return features;}
+  public org.securemail.client.voice.VoiceCallService calls(){return calls;}
   public org.securemail.client.lifecycle.LifecycleService lifecycle(){return lifecycle;}
   public int relayCapabilities(){return relayCapabilities;}
   public String publicStatus(){return publicStatus;}
@@ -197,6 +203,7 @@ public final class ClientSession implements AutoCloseable {
   public void close() throws IOException {
     if (closed) return;
     closed = true;
+    calls.close();
     poll.shutdownNow();
     cleanup.shutdownNow();
     if (network != null) network.forgetSession();

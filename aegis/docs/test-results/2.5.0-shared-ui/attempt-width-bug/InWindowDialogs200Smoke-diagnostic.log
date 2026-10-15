@@ -1,0 +1,21 @@
+Oct 15, 2026 12:09:31 PM com.sun.javafx.application.PlatformImpl startup
+WARNING: Unsupported JavaFX configuration: classes were loaded from 'unnamed module @6f1fba17'
+dialog case minimal-dark/100 OK=BoundingBox [minX:672.0, minY:540.0, minZ:0.0, width:85.0, height:38.0, depth:0.0, maxX:757.0, maxY:578.0, maxZ:0.0] CANCEL=BoundingBox [minX:577.0, minY:540.0, minZ:0.0, width:85.0, height:38.0, depth:0.0, maxX:662.0, maxY:578.0, maxZ:0.0]
+dialog case minimal-dark/125 OK=BoundingBox [minX:640.0, minY:525.0, minZ:0.0, width:106.25, height:47.5, depth:0.0, maxX:746.25, maxY:572.5, maxZ:0.0] CANCEL=BoundingBox [minX:521.25, minY:525.0, minZ:0.0, width:106.25, height:47.5, depth:0.0, maxX:627.5, maxY:572.5, maxZ:0.0]
+dialog case minimal-dark/150 OK=BoundingBox [minX:609.0, minY:1158.0, minZ:0.0, width:127.5, height:57.0, depth:0.0, maxX:736.5, maxY:1215.0, maxZ:0.0] CANCEL=BoundingBox [minX:466.5, minY:1158.0, minZ:0.0, width:127.5, height:57.0, depth:0.0, maxX:594.0, maxY:1215.0, maxZ:0.0]
+Exception in thread "main" java.util.concurrent.ExecutionException: java.lang.AssertionError: Action outside Scene: BoundingBox [minX:609.0, minY:1158.0, minZ:0.0, width:127.5, height:57.0, depth:0.0, maxX:736.5, maxY:1215.0, maxZ:0.0] scene=800.0x600.0
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:396)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2096)
+	at org.securemail.ui.MessengerSmoke.fx(MessengerSmoke.java:22)
+	at org.securemail.ui.InWindowDialogs200Smoke.main(InWindowDialogs200Smoke.java:35)
+Caused by: java.lang.AssertionError: Action outside Scene: BoundingBox [minX:609.0, minY:1158.0, minZ:0.0, width:127.5, height:57.0, depth:0.0, maxX:736.5, maxY:1215.0, maxZ:0.0] scene=800.0x600.0
+	at org.securemail.ui.InWindowDialogs200Smoke.check(InWindowDialogs200Smoke.java:15)
+	at org.securemail.ui.InWindowDialogs200Smoke.visibleInsideScene(InWindowDialogs200Smoke.java:19)
+	at org.securemail.ui.InWindowDialogs200Smoke.lambda$main$6(InWindowDialogs200Smoke.java:40)
+	at org.securemail.ui.MessengerSmoke.lambda$fx$0(MessengerSmoke.java:22)
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$10(PlatformImpl.java:456)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$11(PlatformImpl.java:455)
+	at com.sun.glass.ui.monocle.RunnableProcessor.runLoop(RunnableProcessor.java:92)
+	at com.sun.glass.ui.monocle.RunnableProcessor.run(RunnableProcessor.java:51)
+	at java.base/java.lang.Thread.run(Thread.java:1583)

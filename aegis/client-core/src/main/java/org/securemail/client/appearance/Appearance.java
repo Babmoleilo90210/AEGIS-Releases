@@ -22,13 +22,14 @@ public final class Appearance {
   public enum Mode {MANUAL,SYSTEM,SCHEDULE;public String toString(){return switch(this){case MANUAL->"Вручную";case SYSTEM->"Как в системе";case SCHEDULE->"По расписанию";};}}
   public enum Background {SOLID,GRADIENT,IMAGE;public String toString(){return switch(this){case SOLID->"Цвет";case GRADIENT->"Градиент";case IMAGE->"Локальное изображение";};}}
   public enum Weight {NORMAL,MEDIUM,BOLD;public String toString(){return switch(this){case NORMAL->"Обычный";case MEDIUM->"Средний";case BOLD->"Жирный";};}}
-  public static final List<String> SECTIONS=List.of("search","profile","contacts","letters","archive","safeweb","settings");
+  public static final List<String> SECTIONS=List.of("search","profile","contacts","letters","archive","safeweb","glas","settings");
   private static final List<String> OLD_SECTIONS=List.of("letters","contacts","friends","search","profile","settings");
   private static List<String> migrateNavigation(List<String> order){
     if(order.equals(OLD_SECTIONS))return SECTIONS;
     List<String> next=new ArrayList<>(order);
     if(next.remove("friends")&&!next.contains("archive")){int mail=next.indexOf("letters");next.add(mail<0?next.size():mail+1,"archive");}
     if(!next.contains("safeweb")){int archive=next.indexOf("archive"),settings=next.indexOf("settings");next.add(archive>=0?archive+1:settings>=0?settings:next.size(),"safeweb");}
+    if(!next.contains("glas")){int browser=next.indexOf("safeweb");next.add(browser>=0?browser+1:next.size(),"glas");}
     return List.copyOf(next);
   }
 
@@ -74,7 +75,7 @@ public final class Appearance {
     public Layout panels(int folders,int list){return new Layout(zone,labels,order,collapsed,navigationWidth,mail,rows,folders,list,composer,textWidth,viewPadding,viewCard,metadataTop,actions,fields,previewBelow);}
     public Layout below(boolean value){return new Layout(zone,labels,order,collapsed,navigationWidth,mail,rows,foldersPercent,listPercent,composer,textWidth,viewPadding,viewCard,metadataTop,actions,fields,value);}
     public JsonObject json(){JsonObject o=new JsonObject();o.addProperty("zone",zone.name());o.addProperty("labels",labels.name());o.add("order",strings(order));o.addProperty("collapsed",collapsed);o.addProperty("navigationWidth",navigationWidth);o.addProperty("mail",mail.name());o.addProperty("rows",rows.name());o.addProperty("foldersPercent",foldersPercent);o.addProperty("listPercent",listPercent);o.addProperty("composer",composer.name());o.addProperty("textWidth",textWidth);o.addProperty("viewPadding",viewPadding);o.addProperty("viewCard",viewCard);o.addProperty("metadataTop",metadataTop);o.add("actions",strings(actions));o.add("fields",fields.json());o.addProperty("previewBelow",previewBelow);return o;}
-    public static Layout parse(JsonObject o)throws IOException{JsonData.fields(o,"zone","labels","order","collapsed","navigationWidth","mail","rows","foldersPercent","listPercent","composer","textWidth","viewPadding","viewCard","metadataTop","actions","fields","previewBelow");return checked(()->new Layout(value(Zone.class,o,"zone"),value(Labels.class,o,"labels"),list(o,"order",7),JsonData.bool(o,"collapsed"),integer(o,"navigationWidth"),value(MailLayout.class,o,"mail"),value(Rows.class,o,"rows"),integer(o,"foldersPercent"),integer(o,"listPercent"),value(Composer.class,o,"composer"),integer(o,"textWidth"),integer(o,"viewPadding"),JsonData.bool(o,"viewCard"),JsonData.bool(o,"metadataTop"),list(o,"actions",3),Fields.parse(object(o,"fields")),JsonData.bool(o,"previewBelow")));}
+    public static Layout parse(JsonObject o)throws IOException{JsonData.fields(o,"zone","labels","order","collapsed","navigationWidth","mail","rows","foldersPercent","listPercent","composer","textWidth","viewPadding","viewCard","metadataTop","actions","fields","previewBelow");return checked(()->new Layout(value(Zone.class,o,"zone"),value(Labels.class,o,"labels"),list(o,"order",8),JsonData.bool(o,"collapsed"),integer(o,"navigationWidth"),value(MailLayout.class,o,"mail"),value(Rows.class,o,"rows"),integer(o,"foldersPercent"),integer(o,"listPercent"),value(Composer.class,o,"composer"),integer(o,"textWidth"),integer(o,"viewPadding"),JsonData.bool(o,"viewCard"),JsonData.bool(o,"metadataTop"),list(o,"actions",3),Fields.parse(object(o,"fields")),JsonData.bool(o,"previewBelow")));}
   }
   public record Backdrop(Background mode,String color,String gradient,String image){
     public Backdrop {Objects.requireNonNull(mode);Appearance.color(color);Appearance.color(gradient);Objects.requireNonNull(image);if(!image.isEmpty()&&!image.matches("[a-f0-9]{64}"))throw new IllegalArgumentException("Недопустимое изображение");if(mode==Background.IMAGE&&image.isEmpty())throw new IllegalArgumentException("Выберите фоновое изображение");}

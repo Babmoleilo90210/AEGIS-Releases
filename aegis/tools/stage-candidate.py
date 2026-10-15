@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'packaging'))
 from client_runtime import SAFE_WEB_ARTIFACTS, SAFE_WEB_RUNTIME, sha256, verify_safe_web_runtime
 
-MODULES = {'client-core': '2.0.0', 'client-ui': '2.0.0', 'common-protocol': '0.2.0'}
+MODULES = {'client-core': '2.5.0', 'client-ui': '2.5.0', 'common-protocol': '0.2.0'}
 OWN_PREFIXES = ('client-core-', 'client-ui-', 'common-protocol-', 'relay-server-')
 
 
@@ -73,8 +73,8 @@ def stage(linux_base, windows_base, build, dependencies, destination):
             name = module + '-' + version + '.jar'
             if inventories['linux'][name] != inventories['win'][name]:
                 raise ValueError('Application JAR differs between client platforms: ' + name)
-        (prepared / 'RUNTIME-STAGE-2.0.0.json').write_text(json.dumps({
-            'version': '2.0.0', 'productionReady': False,
+        (prepared / 'RUNTIME-STAGE-2.5.0.json').write_text(json.dumps({
+            'version': '2.5.0', 'productionReady': False,
             'scope': 'offline copied runtime inventory; compilation/native acceptance not asserted',
             'applicationJarHashesMatchAcrossPlatforms': True,
             'runtimeJars': inventories, 'safeWebRuntimePins': SAFE_WEB_RUNTIME,

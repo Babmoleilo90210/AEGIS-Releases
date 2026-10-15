@@ -25,6 +25,7 @@ import org.securemail.protocol.*;
 import org.securemail.client.update.*;
 import org.securemail.client.security.*;
 import org.securemail.client.appearance.Appearance;
+import org.securemail.client.voice.VoiceCallService;
 
 /** Desktop UI. Work that can block is confined to a single background executor. */
 public final class MessengerApp extends Application {
@@ -32,9 +33,9 @@ public final class MessengerApp extends Application {
   private Stage stage;private BorderPane root;private ClientConfig config;private AppPaths.Instance instance;
   private final ExecutorService safeWebWorker=Executors.newSingleThreadExecutor(r->{var t=new Thread(r,"aegis-safeweb-work");t.setDaemon(true);return t;});
   private final org.securemail.client.safeweb.SafeWebProcess safeWeb=new org.securemail.client.safeweb.SafeWebProcess();
-  private TextField safeWebAddress;private Label safeWebState;
+  private VzorView vzorView;private GlasView glasView;private AutoCloseable callListener;private final HBox callBanner=new HBox(8);private String displayedCall="";private final java.util.concurrent.atomic.AtomicBoolean callUiPending=new java.util.concurrent.atomic.AtomicBoolean();
   private ArchiveView archiveView;private Label inlineStatus=new Label(),connectionText;private boolean wantsNetwork=true,networkPrompted;
-  private TorConnection tor;private ClientSession session;private volatile boolean stopping;
+  private volatile TorConnection tor;private ClientSession session;private volatile boolean stopping;
   private final ExecutorService worker=Executors.newSingleThreadExecutor(r->{var t=new Thread(r,"aegis-ui-work");t.setDaemon(true);return t;});
   private final AutomaticEncryption automatic=new AutomaticEncryption(Clock.systemUTC());
   private final ThemeManager themes=new ThemeManager();
@@ -79,8 +80,9 @@ public final class MessengerApp extends Application {
   @FunctionalInterface private interface Work<T>{T run()throws Exception;}
 
   @Override public void start(Stage stage){
+    Locale.setDefault(Locale.forLanguageTag("ru-RU"));
     this.stage=stage;stage.initStyle(StageStyle.UNDECORATED);stage.setTitle("АЕГИС");stage.setMinWidth(760);stage.setMinHeight(580);
-    root=new BorderPane();notifications=new NotificationCenter(stage,root);BorderPane window=new BorderPane(root);window.setTop(new WindowChrome(stage));inlineStatus.setWrapText(true);inlineStatus.setPadding(new Insets(5,14,5,14));inlineStatus.setVisible(false);inlineStatus.setManaged(false);window.setBottom(inlineStatus);var scene=new Scene(window,1020,730);scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("messenger.css")).toExternalForm());themes.apply(window);themes.apply(root);stage.setScene(scene);InWindowDialog.bind(stage,window);WindowChrome.resize(stage,scene);
+    root=new BorderPane();notifications=new NotificationCenter(stage,root);BorderPane window=new BorderPane(root);window.setTop(new WindowChrome(stage));inlineStatus.setWrapText(true);inlineStatus.setPadding(new Insets(5,14,5,14));inlineStatus.setVisible(false);inlineStatus.setManaged(false);callBanner.setPadding(new Insets(6,12,6,12));callBanner.getStyleClass().add("settings-card");callBanner.setVisible(false);callBanner.setManaged(false);window.setBottom(new VBox(callBanner,inlineStatus));var scene=new Scene(window,1020,730);scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("messenger.css")).toExternalForm());themes.apply(window);themes.apply(root);stage.setScene(scene);InWindowDialog.bind(stage,window);WindowChrome.resize(stage,scene);
     root.centerProperty().addListener((o,a,b)->{if(b!=null&&themes.settings().components().animations()){b.setOpacity(0);FadeTransition fade=new FadeTransition(Duration.millis(150),b);fade.setFromValue(0);fade.setToValue(1);fade.play();}});
     for(int n:new int[]{16,24,32,48,64,128,256}){var icon=getClass().getResourceAsStream("icons/icon-"+n+".png");if(icon!=null)stage.getIcons().add(new Image(icon));}
     connectivity.listener(s->Platform.runLater(()->{if(!stopping){if(connectionCard!=null)connectionCard.update(s);if(detailConnectionCard!=null)detailConnectionCard.update(s);if(connectionText!=null)connectionText.setText(s.label());}}));
@@ -227,7 +229,7 @@ public final class MessengerApp extends Application {
     if(timer!=null)timer.stop();if(notifications==null)notifications=new NotificationCenter(stage,root);page(null);clearCompose();
     themes.listener(this::appearanceChanged);previousAppearance=themes.settings();layout=previousAppearance.legacy();
     if(!geometryBound){geometryBound=true;root.widthProperty().addListener((o,a,b)->{adaptGeometry();if(session==null||changingLayout)return;boolean narrow=b.doubleValue()<700;if(narrow!=narrowNavigation){arrangeNavigation();if(section.equals("mail"))arrangeMail();}if(section.equals("compose"))placeComposer();});}
-    arrangeNavigation();timer=new Timeline(new KeyFrame(Duration.seconds(1),e->refresh()));timer.setCycleCount(Animation.INDEFINITE);timer.play();mailboxPage(false);updateChanged(updates.snapshot());
+    arrangeNavigation();bindCalls();timer=new Timeline(new KeyFrame(Duration.seconds(1),e->refresh()));timer.setCycleCount(Animation.INDEFINITE);timer.play();mailboxPage(false);updateChanged(updates.snapshot());
   }
   private void appearanceChanged(Appearance.Settings value){
     Appearance.Settings old=previousAppearance;previousAppearance=value;layout=value.legacy();
@@ -253,8 +255,8 @@ public final class MessengerApp extends Application {
       Pane nav=l.zone()==Appearance.Zone.LEFT?new VBox(settings.components().spacing()):new FlowPane(settings.components().spacing(),6);nav.getStyleClass().add("navigation");nav.setPadding(new Insets(8));
       nav.getChildren().add(collapse);
       for(String id:l.order()){
-        String name=switch(id){case "letters"->"Письма";case "contacts"->"Контакты";case "archive"->"Архив";case "safeweb"->"Safe Web";case "search"->"Поиск";case "profile"->"Профиль";default->"Настройки";};
-        Runnable action=switch(id){case "letters"->()->mailboxPage(false);case "contacts"->this::contactsPage;case "archive"->this::archivePage;case "safeweb"->this::safeWebPage;case "search"->this::searchPage;case "profile"->this::profile;default->this::settings;};
+        String name=switch(id){case "letters"->"Письма";case "contacts"->"Контакты";case "archive"->"Архив";case "safeweb"->"Взор";case "glas"->"Глас";case "search"->"Поиск";case "profile"->"Профиль";default->"Настройки";};
+        Runnable action=switch(id){case "letters"->()->mailboxPage(false);case "contacts"->this::contactsPage;case "archive"->this::archivePage;case "safeweb"->this::safeWebPage;case "glas"->this::glasPage;case "search"->this::searchPage;case "profile"->this::profile;default->this::settings;};
         Button item=button(labelMode==Appearance.Labels.ICONS?"":name,action);item.setAccessibleText(name);item.setTooltip(new Tooltip(name));item.getStyleClass().add("nav-item");item.setAlignment(labelMode==Appearance.Labels.BOTH?Pos.CENTER_LEFT:Pos.CENTER);item.setMinHeight(44);item.setPrefHeight(44);if(labelMode!=Appearance.Labels.TEXT)item.setGraphic(NavigationGlyph.create(id,settings.components().iconSize()));if(nav instanceof VBox)item.setMaxWidth(Double.MAX_VALUE);nav.getChildren().add(item);
       }
       navigationNode=nav;root.setLeft(null);root.setBottom(null);root.setTop(null);
@@ -421,7 +423,7 @@ public final class MessengerApp extends Application {
         public void reply(LocalStore.HistoryItem item,PlainMessage plain){prepareResponse(item,plain,"",null,false);}
         public void forward(LocalStore.HistoryItem item,PlainMessage plain,String body,PlainMessage.FileBundle files){prepareResponse(item,plain,body,files,true);}
         public void original(MailContext reference){openReference(reference);}
-        public void safeWeb(String url){safeWebPage();safeWebAddress.setText(url);info("Проверьте адрес и нажмите «Открыть браузер / ссылку». Передаётся только выбранный URL.");}
+        public void safeWeb(String url){safeWebPage();vzorView.address(url);info("Проверьте адрес и нажмите «Открыть Взор».");}
         public void archive(LocalStore.HistoryItem item,PlainMessage plain,String body,Runnable finished){
           if(session.lifecycle().expiring(item.id())){InWindowAlert warning=new InWindowAlert(Alert.AlertType.CONFIRMATION,"Архивная копия может сохраняться после исчезновения оригинала. Его таймер продолжает идти. Сохранить отдельную копию?",ButtonType.OK,ButtonType.CANCEL);warning.initOwner(stage);warning.setHeaderText(null);themes.apply(warning.getDialogPane());if(warning.showAndWait().orElse(ButtonType.CANCEL)!=ButtonType.OK){finished.run();return;}}
           ClientSession owner=session;ArchiveView target=personalArchive();target.ensureUnlocked(()->{if(stopping||session!=owner||expiresAt()<=owner.local().now()){finished.run();if(!stopping)info("Срок письма истёк; архивная копия не создана");return;}target.archiveMail(item,plain,body,finished);},finished);
@@ -589,7 +591,7 @@ public final class MessengerApp extends Application {
     clearCompose();section="settings";viewGeneration++;ListView<String> categories=new ListView<>();
     VBox contentArea=new VBox();contentArea.setId("settings-content");contentArea.setMinWidth(0);
     TilePane groups=new TilePane(8,8);groups.setId("settings-categories");groups.setPrefTileWidth(200);groups.setPrefTileHeight(56);groups.getStyleClass().add("settings-card");FlowPane details=new FlowPane(8,8);
-    String[][] sections={{"Аккаунт и профиль","Профиль","Сессии"},{"Безопасность и данные","Безопасность","Резервные копии","Архив"},{"Сеть и обновления","Соединение","Обновления"},{"Интерфейс","Внешний вид","Уведомления"},{"О приложении","О программе","Диагностика"}};
+    String[][] sections={{"Аккаунт и профиль","Профиль","Сессии"},{"Безопасность и данные","Безопасность","Резервные копии","Архив"},{"Сеть и обновления","Соединение","Глас","Обновления"},{"Интерфейс","Внешний вид","Уведомления"},{"О приложении","О программе","Диагностика"}};
     ToggleGroup selectedGroup=new ToggleGroup();
     for(String[] group:sections){ToggleButton tab=new ToggleButton(group[0]);tab.setToggleGroup(selectedGroup);tab.setMinHeight(36);tab.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);tab.setWrapText(true);tab.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);tab.setAccessibleText(group[0]);groups.getChildren().add(tab);tab.setOnAction(e->{tab.setSelected(true);details.getChildren().clear();for(int i=1;i<group.length;i++){String name=group[i];details.getChildren().add(button(name,()->{categories.getItems().setAll(name);categories.getSelectionModel().selectFirst();}));}categories.getItems().setAll(group[1]);categories.getSelectionModel().selectFirst();});}
     // Categories and their content share one scroll surface. At 200% the category
@@ -603,11 +605,12 @@ public final class MessengerApp extends Application {
         case "Уведомления"->content=notificationPreferences();
         case "Внешний вид"->content=new AppearanceView(stage,themes,worker).node();
         case "Соединение"->{detailConnectionCard=new ConnectionCard(()->{wantsNetwork=true;if(connectingTor)return;if(tor==null||!tor.ready())startTor();else preconnect();});detailConnectionCard.update(connectivity.snapshot());content=new VBox(14,detailConnectionCard,button("Войти после восстановления связи",this::reconnectAccount));}
+        case "Глас"->content=glasView().settingsNode();
         case "Обновления"->{updatesView=makeUpdatesView();content=updatesView.node();}
         case "Резервные копии"->{Label hint=new Label("Резервная копия идентичности не включает все письма. Архив имеет собственные зашифрованные копии и восстановление.");hint.setWrapText(true);content=new VBox(14,hint,button("Экспорт идентичности",this::backup),button("Открыть архив",this::archivePage));}
         case "Архив"->{Label hint=new Label("Пароль, ключ восстановления, резервные копии и восстановление контейнера доступны в управлении личным архивом.");hint.setWrapText(true);content=new VBox(12,hint,button("Открыть архив",this::archivePage));}
-        case "Диагностика"->{Label data=new Label("АЕГИС "+SignedManifest.CURRENT+" · protocol 1\nTor: "+connectivity.snapshot().mode()+" "+connectivity.snapshot().progress()+"%\nSOCKS: 127.0.0.1:"+config.torSocksPort()+"\nHTTPS SOCKS: 127.0.0.1:"+config.torUpdateSocksPort()+"\nControl: 127.0.0.1:"+config.torControlPort()+"\nRelay: "+config.relayOnionAddress()+"\n"+session.status());data.setWrapText(true);content=new VBox(14,data);}
-        default->{Label about=new Label("АЕГИС "+SignedManifest.CURRENT+"\nАвтономная Единая Гибридная Информационная Система\nJava 21 · protocol 1");about.setWrapText(true);content=new VBox(14,about);}
+        case "Диагностика"->{Label data=new Label("АЕГИС "+SignedManifest.CURRENT+" · протокол 1\nTor: "+torModeLabel(connectivity.snapshot().mode())+" "+connectivity.snapshot().progress()+"%\nSOCKS: 127.0.0.1:"+config.torSocksPort()+"\nHTTPS SOCKS: 127.0.0.1:"+config.torUpdateSocksPort()+"\nControl: 127.0.0.1:"+config.torControlPort()+"\nRelay: "+config.relayOnionAddress()+"\n"+session.status());data.setWrapText(true);content=new VBox(14,data);}
+        default->{Label about=new Label("АЕГИС "+SignedManifest.CURRENT+"\nАвтономная Единая Гибридная Информационная Система\nJava 21 · протокол 1");about.setWrapText(true);content=new VBox(14,about);}
       }}catch(Exception failed){error(failed);content=new Label("Раздел недоступен");}
       if(content instanceof Region region)region.setMinWidth(0);contentArea.getChildren().setAll(content);if(content instanceof Parent styled)themes.apply(styled);settingsScroll.setVvalue(0);
     });root.setCenter(settingsScroll);((ToggleButton)groups.getChildren().getFirst()).fire();
@@ -622,45 +625,39 @@ public final class MessengerApp extends Application {
     VBox content=new VBox(12,quiet,mail,friends,events,releases,receipts,save);content.setMaxWidth(720);return content;
   }
   private <T> void safeWebWork(Button button,Work<T> action,java.util.function.Consumer<T> done){
-    if(stopping||installingUpdate){if(!stopping)info("Safe Web недоступен во время установки обновления АЕГИС");return;}
+    if(stopping||installingUpdate){if(!stopping)info("Взор недоступен во время установки обновления АЕГИС");return;}
     if(button!=null)button.setDisable(true);
     safeWebWorker.execute(()->{try{T result=action.run();Platform.runLater(()->{if(button!=null)button.setDisable(false);if(!stopping)done.accept(result);else if(result instanceof AutoCloseable closeable)try{closeable.close();}catch(Exception ignored){};});}
-      catch(Exception failure){Platform.runLater(()->{if(button!=null)button.setDisable(false);if(!stopping){String message=failure.getMessage();info("Safe Web: "+(message==null?"не удалось выполнить действие":message.replace('\n',' ').replace('\r',' ')));}});}});
-  }
-  private boolean confirmBrowserRestart(){
-    if(!safeWeb.running())return true;
-    InWindowAlert ask=new InWindowAlert(Alert.AlertType.CONFIRMATION,"Закрыть все вкладки Safe Web и запустить выбранную сессию? Несохранённые данные вкладок будут потеряны. Загрузки временной сессии будут удалены.",ButtonType.OK,ButtonType.CANCEL);
-    ask.initOwner(stage);ask.setHeaderText("Перезапуск браузера");themes.apply(ask.getDialogPane());return ask.showAndWait().orElse(ButtonType.CANCEL)==ButtonType.OK;
+      catch(Exception failure){Platform.runLater(()->{if(button!=null)button.setDisable(false);if(!stopping){String message=failure.getMessage();info("Взор: "+(message==null?"не удалось выполнить действие":message.replace('\n',' ').replace('\r',' ')));}});}});
   }
   private void safeWebPage(){
     clearCompose();section="safeweb";viewGeneration++;
-    Label title=new Label("Safe Web");title.getStyleClass().add("heading");
-    Label limits=new Label("Официальный Tor Browser работает отдельным окном со своим Tor и отдельным хранилищем. Состояние подключения и уровень безопасности показаны в самом браузере.");limits.setWrapText(true);
-    safeWebState=new Label(safeWeb.snapshot().status());safeWebState.setWrapText(true);
-    safeWeb.listener(snapshot->Platform.runLater(()->{if(!stopping&&safeWebState!=null)safeWebState.setText(snapshot.status());}));
-    safeWebAddress=field("https://example.org или http://…onion");safeWebAddress.setText("https://check.torproject.org/");
-    Selector<org.securemail.client.safeweb.SafeWebSessions.Mode> mode=new Selector<>(themes);mode.getItems().addAll(org.securemail.client.safeweb.SafeWebSessions.Mode.values());mode.setValue(org.securemail.client.safeweb.SafeWebSessions.Mode.PERSISTENT);
-    Label modeHelp=new Label("Обычная сессия сохраняет настройки и закладки. Временная удаляет свой отдельный профиль и загрузки после закрытия. Это не гарантированное стирание с накопителя.");modeHelp.setWrapText(true);
-    Button install=new Button("Установить / обновить Tor Browser…");install.setWrapText(true);install.setMinWidth(0);install.setMaxWidth(420);install.getStyleClass().add("wrapped-action");
-    install.setOnAction(event->{
-      if(safeWeb.busy()){info("Сначала завершите текущую операцию и закройте Safe Web");return;}
-      InWindowFileChooser packagePicker=new InWindowFileChooser();packagePicker.setTitle("Официальный пакет Tor Browser: .tar.xz или portable .exe");packagePicker.getExtensionFilters().add(new FileChooser.ExtensionFilter("Tor Browser","*.tar.xz","*.exe"));var archive=packagePicker.showOpenDialog(stage);if(archive==null)return;
-      InWindowFileChooser signaturePicker=new InWindowFileChooser();signaturePicker.setTitle("Отделённая подпись того же пакета Tor Browser (.asc)");signaturePicker.getExtensionFilters().add(new FileChooser.ExtensionFilter("OpenPGP подпись","*.asc"));var signature=signaturePicker.showOpenDialog(stage);if(signature==null)return;
-      safeWebWork(install,()->safeWeb.install(archive.toPath(),signature.toPath()),label->info("Tor Browser установлен в отдельное хранилище. Подпись официального разработчика проверена."));
-    });
-    Label source=new Label("Пакет и соответствующую .asc-подпись получите на www.torproject.org/download/. АЕГИС проверяет подпись Tor Browser Developers до распаковки или запуска установщика. Обычный профиль Firefox не используется.");source.setWrapText(true);
-    Button open=new Button("Открыть браузер / ссылку");open.getStyleClass().add("primary");
-    open.setOnAction(e->{String address=safeWebAddress.getText();var selectedMode=mode.getValue();try{org.securemail.client.safeweb.SafeWebUrl.parse(address);}catch(IllegalArgumentException invalid){info(invalid.getMessage());return;}if(!confirmBrowserRestart())return;List<Path> protectedPaths=List.of(config.storagePath(),personalArchive().location());safeWebWork(open,()->{safeWeb.privatePaths(protectedPaths);if(safeWeb.running())safeWeb.newSession(selectedMode,address);else safeWeb.open(selectedMode,address);return true;},v->{});});
-    Button close=new Button("Закрыть браузер");close.setOnAction(e->safeWebWork(close,()->{safeWeb.close();return true;},v->{}));
-    Button identity=new Button("Новая сессия");identity.setOnAction(e->{String address=safeWebAddress.getText();var selectedMode=mode.getValue();try{org.securemail.client.safeweb.SafeWebUrl.parse(address);}catch(IllegalArgumentException invalid){info(invalid.getMessage());return;}if(confirmBrowserRestart()){List<Path> protectedPaths=List.of(config.storagePath(),personalArchive().location());safeWebWork(identity,()->{safeWeb.privatePaths(protectedPaths);safeWeb.newSession(selectedMode,address);return true;},v->{});}});
-    Label securityText=new Label("Уровень безопасности меняется в официальном Tor Browser: меню → Настройки → Приватность и защита. «Новая личность» доступна в меню браузера. АЕГИС не устанавливает расширения и не ослабляет защиту от fingerprinting.\n\nLinux: нужны bubblewrap, slirp4netns, Xephyr и локальный X11/Xwayland с разрешёнными user namespaces. Windows: нужны Windows 11 24H2 или новее и установленный Windows Sandbox с CLI (Pro / Enterprise / Education); Home не поддерживает этот механизм. Буфер обмена, каталоги АЕГИС и устройства записи в среду браузера не передаются.\n\nСобственный Tor браузера не связан с Tor мессенджера. Абсолютная анонимность не гарантируется. Проверки Tor, DNS и WebRTC входят в нативную приёмку.");securityText.setWrapText(true);
-    TitledPane security=new TitledPane("Безопасность и изоляция",securityText);security.setExpanded(false);
-    ListView<Path> downloads=new ListView<>();downloads.setPrefHeight(160);downloads.setCellFactory(v->new ListCell<>(){protected void updateItem(Path file,boolean empty){super.updateItem(file,empty);setText(empty||file==null?null:file.getFileName().toString());}});
-    Button refreshDownloads=new Button("Обновить загрузки");refreshDownloads.setOnAction(e->safeWebWork(refreshDownloads,safeWeb::downloads,files->downloads.getItems().setAll(files)));
-    Button importFile=button("Импортировать в архив",()->{Path file=downloads.getSelectionModel().getSelectedItem();if(file==null)return;ArchiveView archive=personalArchive();archive.ensureUnlocked(()->safeWebWork(null,()->safeWeb.snapshotDownload(file),archive::importDownload),()->{});});
-    Label downloadHint=new Label("Загрузки — открытие файлов только по вашему выбору");downloadHint.setWrapText(true);downloadHint.setMinWidth(0);
-    VBox body=new VBox(12,title,limits,safeWebState,install,source,new Label("Режим сессии"),mode,modeHelp,new Label("Адрес сайта"),safeWebAddress,new FlowPane(8,8,open,identity,close),security,downloadHint,downloads,new FlowPane(8,8,refreshDownloads,importFile));body.getStyleClass().add("settings-card");body.setPadding(new Insets(16));body.setMaxWidth(900);body.setMinWidth(0);ScrollPane scroll=new ScrollPane(body);scroll.setFitToWidth(true);root.setCenter(scroll);
-    safeWebWork(null,()->{safeWeb.initialize();return true;},v->{});
+    if(vzorView==null)vzorView=new VzorView(stage,themes,config,safeWeb,safeWebWorker,
+      ()->tor!=null&&tor.ready(),()->{wantsNetwork=true;if(!connectingTor&&(tor==null||!tor.ready()))startTor();},
+      ()->List.of(config.storagePath(),personalArchive().location()),
+      file->{ArchiveView archive=personalArchive();archive.ensureUnlocked(()->safeWebWork(null,()->safeWeb.snapshotDownload(file),archive::importDownload),()->{});},this::info);
+    root.setCenter(vzorView.node());
+  }
+  private Future<?> stopVzorForTransition(){
+    if(vzorView!=null)vzorView.close();
+    return safeWebWorker.submit(()->{safeWeb.close();return Boolean.TRUE;});
+  }
+  private GlasView glasView(){if(glasView==null)glasView=new GlasView(session,themes,worker,this::avatar,this::info);return glasView;}
+  private void glasPage(){clearCompose();section="glas";viewGeneration++;root.setCenter(glasView().node());}
+  private void bindCalls(){
+    if(callListener!=null)try{callListener.close();}catch(Exception ignored){}
+    var active=session;callListener=active.calls().listen(()->{if(callUiPending.compareAndSet(false,true))Platform.runLater(()->{callUiPending.set(false);if(!stopping&&session==active)refreshCallBanner();});});refreshCallBanner();
+  }
+  private void refreshCallBanner(){
+    if(session==null)return;var call=session.calls().snapshot();boolean incoming=call.state()==VoiceCallService.State.INCOMING;
+    boolean show=call.busy()&&(incoming?session.calls().notificationsEnabled():!section.equals("glas"));callBanner.setVisible(show);callBanner.setManaged(show);
+    if(!show){callBanner.getChildren().clear();displayedCall="";return;}
+    String key=call.callId()+":"+call.state()+":"+call.microphoneEnabled();
+    if(key.equals(displayedCall))return;displayedCall=key;
+    Label label=new Label((incoming?"Входящий звонок: ":"Глас · ")+(call.contact()==null?"Контакт":call.contact().nickname()));label.setWrapText(true);HBox.setHgrow(label,Priority.ALWAYS);
+    callBanner.getChildren().setAll(label);
+    if(incoming){callBanner.getChildren().add(button("Принять",()->{session.calls().accept(call.callId());glasPage();}));callBanner.getChildren().add(button("Отклонить",()->session.calls().decline(call.callId())));}
+    else {callBanner.getChildren().add(button("Открыть Глас",this::glasPage));callBanner.getChildren().add(button("Завершить",()->session.calls().hangup()));}
   }
   private ArchiveView personalArchive(){if(archiveView==null)archiveView=new ArchiveView(stage,themes,session.local());return archiveView;}
   private void archivePage(){clearCompose();section="archive";viewGeneration++;root.setCenter(personalArchive().node());}
@@ -704,7 +701,7 @@ public final class MessengerApp extends Application {
     clearCompose();section="profile";viewGeneration++;ScrollPane profileScroll=new ScrollPane(profileCard());profileScroll.setFitToWidth(true);root.setCenter(profileScroll);
   }
   private Node profileCard(){
-    String nick=session.local().nickname();Label heading=new Label("Профиль");heading.getStyleClass().add("brand");TextField immutable=new TextField(nick);immutable.setEditable(false);immutable.setAccessibleText("Nickname аккаунта");Label nicknameHint=new Label("Nickname закреплён за идентичностью на сервере. Изменение имени требует поддержки Relay; ключи аккаунта сохраняются.");nicknameHint.setWrapText(true);nicknameHint.getStyleClass().add("muted");
+    String nick=session.local().nickname();Label heading=new Label("Профиль");heading.getStyleClass().add("brand");TextField immutable=new TextField(nick);immutable.setEditable(false);immutable.setAccessibleText("Имя аккаунта");Label nicknameHint=new Label("Имя закреплено за идентичностью на сервере. Изменение имени требует поддержки Relay; ключи аккаунта сохраняются.");nicknameHint.setWrapText(true);nicknameHint.getStyleClass().add("muted");
     TextArea about=new TextArea(session.features().about());about.setPromptText("О себе");about.setWrapText(true);about.setPrefRowCount(4);
     CheckBox visible=new CheckBox("Публичный профиль");visible.setSelected(session.features().visible());
     Label status=new Label(session.publicStatus());status.getStyleClass().add("muted");
@@ -717,13 +714,13 @@ public final class MessengerApp extends Application {
   private void resumeNetwork(){if(session==null||!relayReady||resumingNetwork)return;if(pendingRelayToken.isEmpty()){automaticNetworkLogin();return;}if(System.currentTimeMillis()>=pendingRelayExpiry){pendingRelayToken="";automaticNetworkLogin();return;}resumingNetwork=true;ClientSession active=session;String token=pendingRelayToken;pendingRelayToken="";worker.execute(()->{try{active.resume(token);}catch(Exception unavailable){/* A rebooted relay or expired token requires the account password again. */}finally{Platform.runLater(()->{resumingNetwork=false;if(active==session){refresh();automaticNetworkLogin();}});}});}
   private void automaticNetworkLogin(){if(wantsNetwork&&!networkPrompted&&session!=null&&relayReady&&!session.online()){networkPrompted=true;Platform.runLater(this::reconnectAccount);}}
   private void reconnectAccount(){if(session==null||!relayReady){info("Нет соединения с сервером");return;}char[] password=askPassword("Войти в сеть","Пароль аккаунта");if(password==null)return;ClientSession active=session;work(accountReconnect,"Вход…",()->{try{active.reauthenticate(password);if(rememberedExpires>0)saveRemembered(active);return true;}finally{Arrays.fill(password,'\0');}},v->refresh());}
-  private void endRemembered(){if(stage!=null)InWindowDialog.closeAll(stage);ArchiveView endingArchive=archiveView;if(endingArchive!=null){endingArchive.close();archiveView=null;}clearRenderedMail();if(timer!=null)timer.stop();ClientSession active=session;session=null;rememberedExpires=0;pendingRelayToken="";viewGeneration++;clearCompose(false);for(var view:viewers)view.close();viewers.clear();avatarImages.clear();loginPage();worker.execute(()->{try{if(endingArchive!=null&&!endingArchive.awaitClosed(20))throw new IOException("Archive shutdown timed out");if(active!=null&&active.network()!=null)active.network().logout();if(active!=null)active.close();if(remembered!=null)remembered.clear();else Files.deleteIfExists(AppPaths.root().resolve("session/resume.enc"));}catch(Exception failure){Platform.runLater(()->{if(!stopping)info("Не удалось полностью удалить сохранённую сессию. Проверьте доступ к хранилищу системы.");});}});}
+  private void endRemembered(){Future<?> browserStopped=stopVzorForTransition();if(callListener!=null)try{callListener.close();}catch(Exception ignored){};if(glasView!=null)glasView.close();if(vzorView!=null)vzorView.close();if(stage!=null)InWindowDialog.closeAll(stage);ArchiveView endingArchive=archiveView;if(endingArchive!=null){endingArchive.close();archiveView=null;}clearRenderedMail();if(timer!=null)timer.stop();ClientSession active=session;if(active!=null)active.calls().hangup();glasView=null;vzorView=null;callListener=null;callBanner.getChildren().clear();callBanner.setVisible(false);callBanner.setManaged(false);session=null;rememberedExpires=0;pendingRelayToken="";viewGeneration++;clearCompose(false);for(var view:viewers)view.close();viewers.clear();avatarImages.clear();loginPage();worker.execute(()->{try{if(endingArchive!=null&&!endingArchive.awaitClosed(20))throw new IOException("Archive shutdown timed out");try{browserStopped.get(90,TimeUnit.SECONDS);}catch(Exception browserFailure){Platform.runLater(()->{if(!stopping)info("Закрытие Взора не подтверждено. Повторите закрытие в разделе браузера.");});}if(active!=null&&active.network()!=null)active.network().logout();if(active!=null)active.close();if(remembered!=null)remembered.clear();else Files.deleteIfExists(AppPaths.root().resolve("session/resume.enc"));}catch(Exception failure){Platform.runLater(()->{if(!stopping)info("Не удалось полностью удалить сохранённую сессию. Проверьте доступ к хранилищу системы.");});}});}
   private void updateChanged(UpdateService.Snapshot snapshot){if(stopping)return;if(updatesView!=null&&updatesView.showing())updatesView.refresh(snapshot);if(updateBadge!=null){boolean available=snapshot.manifest()!=null&&snapshot.manifest().newerThan(SignedManifest.CURRENT);updateBadge.setVisible(available);updateBadge.setManaged(available);updateBadge.setText(narrowNavigation?"↓":available&&snapshot.manifest().requiredFor(SignedManifest.CURRENT)?"⬇ Требуется обновление":"⬇ Обновление");updateBadge.setTooltip(new Tooltip(available?"Обновление АЕГИС "+snapshot.manifest().version():"Обновления"));}if(snapshot.announcement()&&snapshot.manifest()!=null&&session!=null){try{updates.announcementShown();}catch(IOException ignored){/* The verified history remains available; a failed marker cannot forge a letter. */}}}
   private void updatesPage(){clearCompose();section="updates";viewGeneration++;updatesView=makeUpdatesView();root.setCenter(updatesView.node());}
   private void systemLetters(){clearCompose();section="system";viewGeneration++;long generation=viewGeneration;
     ListView<UpdateEvents.Event> list=new ListView<>();list.setPlaceholder(new Label("Системных писем пока нет"));
     list.setCellFactory(v->new ListCell<>(){@Override protected void updateItem(UpdateEvents.Event e,boolean empty){super.updateItem(e,empty);setText(null);setGraphic(null);if(empty||e==null)return;
-      Label trusted=new Label("АЕГИС · системное письмо"),title=new Label(e.title()),date=new Label(e.channel()+" · "+e.time());title.setWrapText(true);trusted.getStyleClass().add("muted");date.getStyleClass().add("muted");Label summary=new Label(e.kind()==UpdateEvents.Kind.INSTALLED?"Версия запущена, установка подтверждена.":e.release().announcement().summary());summary.setWrapText(true);
+      Label trusted=new Label("АЕГИС · системное письмо"),title=new Label(e.title()),date=new Label(UpdatesView.channelLabel(e.channel())+" · "+UpdatesView.eventDate(e.time()));title.setWrapText(true);trusted.getStyleClass().add("muted");date.getStyleClass().add("muted");Label summary=new Label(e.kind()==UpdateEvents.Kind.INSTALLED?"Версия запущена, установка подтверждена.":e.release().announcement().summary());summary.setWrapText(true);
       Label signature=new Label("Ed25519 проверена"),changes=new Label(e.release().releaseNotes().text()),link=new Label(e.release().changelog().url().toString());changes.setWrapText(true);link.setWrapText(true);TitledPane details=new TitledPane("Изменения",new VBox(8,changes,link));details.setExpanded(false);boolean exactAvailable=e.kind()==UpdateEvents.Kind.AVAILABLE&&e.release().newerThan(SignedManifest.CURRENT)&&updates.snapshot().manifest()!=null&&e.version().equals(updates.snapshot().manifest().version())&&e.channel().equals(updates.snapshot().manifest().channel());
       VBox letter=new VBox(8,trusted,title,date,signature,summary,details,new HBox(8,button("Что нового",()->UpdatesView.notes(stage,themes,e.release())),button(exactAvailable?"Обновить":"Обновления",()->{updatesPage();if(exactAvailable&&updates.snapshot().state()==UpdateService.State.AVAILABLE)updates.download();})));letter.getStyleClass().add("system-letter");setGraphic(letter);
     }});
@@ -732,7 +729,7 @@ public final class MessengerApp extends Application {
   }
   private void clearRenderedMail(){if(letters!=null)letters.getItems().clear();if(threadResults!=null)threadResults.getItems().clear();letters=null;threadResults=null;mailboxFolderChoice=null;mailListColumn=null;mailFolders=null;if(mailSplit!=null)mailSplit.getItems().clear();mailSplit=null;}
   private boolean unsavedDraft(){return composer!=null&&(!composer.getText().isBlank()||!subjectField.getText().isBlank()||!recipientField.getText().isBlank()||!attachments.isEmpty()||letterPassword!=null&&!letterPassword.hidden.getText().isEmpty()||secondCode!=null&&!secondCode.hidden.getText().isEmpty())||draft!=null&&(!draft.body.isBlank()||!draft.subject.isBlank()||!draft.recipient.isBlank()||!draft.files.isEmpty()||draft.password.length>0||draft.code.length>0);}
-  private void installUpdate(){if(installingUpdate||updates.snapshot().state()!=UpdateService.State.READY_TO_INSTALL)return;if(unsavedDraft()){info("Перед обновлением завершите или очистите черновик. Он хранится в памяти устройства.");return;}InWindowAlert confirm=new InWindowAlert(Alert.AlertType.CONFIRMATION,"Установить проверенное обновление и перезапустить АЕГИС?",ButtonType.OK,ButtonType.CANCEL);confirm.setHeaderText(null);confirm.initOwner(stage);themes.apply(confirm.getDialogPane());if(confirm.showAndWait().orElse(ButtonType.CANCEL)!=ButtonType.OK)return;installingUpdate=true;ArchiveView closingArchive=archiveView;if(closingArchive!=null){closingArchive.close();archiveView=null;}worker.execute(()->{try{if(closingArchive!=null&&!closingArchive.awaitClosed(20))throw new IOException("Archive worker is still active; update stopped");safeWeb.close();long launcher=AppPaths.windows()?ProcessHandle.current().parent().orElseThrow().pid():0;Path job=updates.prepareInstall(AppPaths.bundle(),ProcessHandle.current().pid(),launcher);UpdateInstaller.launch(job);updates.restarting();Platform.runLater(this::stop);}catch(Exception failure){updates.installFailed();Platform.runLater(()->{installingUpdate=false;if(!stopping)info("Обновление не установлено. Текущая версия сохранена.");});}});}
+  private void installUpdate(){if(installingUpdate||updates.snapshot().state()!=UpdateService.State.READY_TO_INSTALL)return;if(unsavedDraft()){info("Перед обновлением завершите или очистите черновик. Он хранится в памяти устройства.");return;}InWindowAlert confirm=new InWindowAlert(Alert.AlertType.CONFIRMATION,"Установить проверенное обновление и перезапустить АЕГИС?",ButtonType.OK,ButtonType.CANCEL);confirm.setHeaderText(null);confirm.initOwner(stage);themes.apply(confirm.getDialogPane());if(confirm.showAndWait().orElse(ButtonType.CANCEL)!=ButtonType.OK)return;installingUpdate=true;Future<?> browserStopped=stopVzorForTransition();ArchiveView closingArchive=archiveView;if(closingArchive!=null){closingArchive.close();archiveView=null;}worker.execute(()->{try{if(closingArchive!=null&&!closingArchive.awaitClosed(20))throw new IOException("Archive worker is still active; update stopped");session.calls().hangup();browserStopped.get(90,TimeUnit.SECONDS);long voiceDeadline=System.nanoTime()+TimeUnit.SECONDS.toNanos(20);while(session.calls().busy()){if(System.nanoTime()>=voiceDeadline)throw new IOException("Завершение звонка не подтверждено");Thread.sleep(25);}long launcher=AppPaths.windows()?ProcessHandle.current().parent().orElseThrow().pid():0;Path job=updates.prepareInstall(AppPaths.bundle(),ProcessHandle.current().pid(),launcher);UpdateInstaller.launch(job);updates.restarting();Platform.runLater(this::stop);}catch(Exception failure){updates.installFailed();Platform.runLater(()->{installingUpdate=false;vzorView=null;if(!stopping)info("Обновление не установлено. Текущая версия сохранена.");});}});}
   private void backup(){InWindowFileChooser chooser=new InWindowFileChooser();chooser.setInitialFileName("AEGIS-identity.aegis-backup");var file=chooser.showSaveDialog(stage);if(file!=null)work(null,"",()->{session.local().exportIdentity(file.toPath());return true;},v->info("Резервная копия сохранена. Для восстановления используется пароль аккаунта на момент экспорта."));}
   private void restore(){InWindowFileChooser chooser=new InWindowFileChooser();chooser.setTitle("Восстановить идентичность");var file=chooser.showOpenDialog(stage);if(file==null)return;char[] pass=askPassword("Восстановить идентичность","Пароль резервной копии / хранилища");if(pass==null)return;Path target=AppPaths.root().resolve("restored-"+UUID.randomUUID());work(null,"",()->{try{LocalStore.restoreIdentity(file.toPath(),target,pass,config.maxCiphertext(),config.maxLocalStorage());var c=config.withStorage(target);c.save(AppPaths.config());return c;}finally{Arrays.fill(pass,'\0');}},c->{config=c;info("Идентичность восстановлена. Войдите в аккаунт.");loginPage();});}
   private char[] askPassword(String title,String prompt){InWindowDialog<char[]> d=new InWindowDialog<>();d.initOwner(stage);d.setTitle(title);PasswordField p=password(prompt);p.getStyleClass().add("secret-entry");VBox body=form(title,new Label(prompt),p);if(title.equals("Обновление хранилища"))body.getChildren().add(new Label("Требуется один раз для переноса данных старой версии."));d.getDialogPane().setContent(body);d.getDialogPane().getButtonTypes().addAll(ButtonType.OK,ButtonType.CANCEL);d.setResultConverter(b->b==ButtonType.OK?p.getText().toCharArray():null);themes.apply(d.getDialogPane());var result=d.showAndWait().orElse(null);p.clear();return result;}
@@ -740,7 +737,8 @@ public final class MessengerApp extends Application {
     clearCompose();section="connection";viewGeneration++;detailConnectionCard=new ConnectionCard(()->{wantsNetwork=true;if(connectingTor)return;if(tor==null||!tor.ready())startTor();else preconnect();});detailConnectionCard.update(connectivity.snapshot());
     VBox page=new VBox(12,detailConnectionCard,button("Диагностика",this::diagnostics));page.setPadding(new Insets(14));root.setCenter(page);
   }
-  private void diagnostics(){info("Версия: "+SignedManifest.CURRENT+" · protocol 1\nTor: "+(tor!=null&&tor.ready()?"100%":"не подключён")+"\nSOCKS: 127.0.0.1:"+config.torSocksPort()+"\nОбновления SOCKS: 127.0.0.1:"+config.torUpdateSocksPort()+"\nControlPort: 127.0.0.1:"+config.torControlPort()+"\nRelay: "+config.relayOnionAddress()+"\n"+(session==null?"":session.status())+"\nРежим: "+(tor==null?"—":tor.mode())+"\nЛоги: "+AppPaths.root().resolve("logs"));}
+  private void diagnostics(){info("Версия: "+SignedManifest.CURRENT+" · протокол 1\nTor: "+(tor!=null&&tor.ready()?"100%":"не подключён")+"\nSOCKS: 127.0.0.1:"+config.torSocksPort()+"\nОбновления SOCKS: 127.0.0.1:"+config.torUpdateSocksPort()+"\nControlPort: 127.0.0.1:"+config.torControlPort()+"\nRelay: "+config.relayOnionAddress()+"\n"+(session==null?"":session.status())+"\nРежим: "+(tor==null?"—":torModeLabel(tor.mode()))+"\nЛоги: "+AppPaths.root().resolve("logs"));}
+  private static String torModeLabel(EmbeddedTor.Mode mode){return mode==EmbeddedTor.Mode.DIRECT?"Tor Direct":"Snowflake";}
   private void info(String text){inlineStatus.setText(text);inlineStatus.setVisible(true);inlineStatus.setManaged(true);}
   private void error(Throwable error){String message;
     if(error instanceof PlainMessage.FileLimitException)message="Файл превышает допустимый размер сервера.";
@@ -750,11 +748,12 @@ public final class MessengerApp extends Application {
     else if(error instanceof java.security.GeneralSecurityException)message="Не удалось открыть зашифрованные данные";
     else if(error instanceof LinkageError)message="Компонент приложения недоступен. Распакуйте полный пакет АЕГИС.";
     else message="Не удалось выполнить действие. Проверьте соединение и доступ к локальным данным.";
-    info(message);inlineStatus.setTooltip(new Tooltip("Тип ошибки: "+error.getClass().getSimpleName()));
+    if(message==null||!message.matches("(?s).*[А-Яа-яЁё].*"))message="Не удалось выполнить действие. Проверьте введённые параметры и соединение.";
+    info(message);inlineStatus.setTooltip(new Tooltip("Код для диагностики: "+error.getClass().getSimpleName()));
   }
   @Override public void stop(){
     if(stopping)return;stopping=true;ArchiveView endingArchive=archiveView;if(endingArchive!=null){endingArchive.close();archiveView=null;}
-    if(stage!=null)InWindowDialog.closeAll(stage);if(timer!=null)timer.stop();clearRenderedMail();clearCompose(false);for(var view:viewers)view.close();viewers.clear();avatarImages.clear();pendingRelayToken="";themes.close();if(updates!=null)updates.close();if(notifications!=null)notifications.close();worker.shutdownNow();connectionWorker.shutdownNow();safeWebWorker.shutdownNow();
+    if(callListener!=null)try{callListener.close();}catch(Exception ignored){};if(glasView!=null)glasView.close();if(vzorView!=null)vzorView.close();if(stage!=null)InWindowDialog.closeAll(stage);if(timer!=null)timer.stop();clearRenderedMail();clearCompose(false);for(var view:viewers)view.close();viewers.clear();avatarImages.clear();pendingRelayToken="";themes.close();if(updates!=null)updates.close();if(notifications!=null)notifications.close();worker.shutdownNow();connectionWorker.shutdownNow();safeWebWorker.shutdownNow();
     ClientSession endingSession=session;TorConnection endingTor=tor;AutoCloseable endingInstance=instance;
     Thread.ofPlatform().name("aegis-shutdown").start(()->{
       try{safeWeb.close();}catch(IOException ignored){}

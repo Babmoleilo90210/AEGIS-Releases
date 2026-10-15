@@ -1,0 +1,5 @@
+Public discovery data transcribed from the web retrieval tool on 2026-10-15, not a native application download and not a PGP authentication result.
+Sources:
+https://aus1.torproject.org/torbrowser/update_3/release/download-linux-x86_64.json
+https://aus1.torproject.org/torbrowser/update_3/release/download-windows-x86_64.json
+Native requests from this environment returned a 195-byte text/html SiteUnavailable response. These fixtures test the published JSON schema only; production resolves fresh JSON through Tor and verifies the signed archive.

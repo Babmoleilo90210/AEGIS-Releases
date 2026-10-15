@@ -1,0 +1,28 @@
+{
+  "scope": "Tor Browser automatic package acquisition and import",
+  "date": "2026-10-15",
+  "localTests": {
+    "status": "PASS",
+    "tests": 69,
+    "failures": 0,
+    "kind": "Unit and fixture integration; disposable OpenPGP keys, serialized official-schema metadata and HTTP responses; real loopback SOCKS sockets",
+    "additionalCoverage": [
+      "authenticated preflight",
+      "same-version fresh attestation repair",
+      "bookmark/download preservation",
+      "failed repair rollback and retry",
+      "crash backup recovery before stale stage cleanup",
+      "stale Mozilla mutex omission without following link",
+      "nonmutex symlink remains refused",
+      "legacy authenticated template floor survives modified persistent session"
+    ]
+  },
+  "officialNativeMetadataRequest": "BLOCKED_HTML",
+  "officialPackageDownload": "NOT_RUN",
+  "officialPackageSignatureValidationInThisEnvironment": "NOT_RUN",
+  "windows11InstallerAndJobObject": "NOT_RUN",
+  "cachyOSWaylandOfficialBrowserLaunch": "NOT_RUN",
+  "cachyOSX11OfficialBrowserLaunch": "NOT_RUN",
+  "productionReady": false,
+  "sourcePin": "EF6E286DDA85EA2A4BA7DE684E2C6E8793298290"
+}

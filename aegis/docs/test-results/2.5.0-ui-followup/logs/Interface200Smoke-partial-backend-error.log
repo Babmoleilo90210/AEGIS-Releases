@@ -1,0 +1,16 @@
+Oct 15, 2026 11:38:17 AM com.sun.javafx.application.PlatformImpl startup
+WARNING: Unsupported JavaFX configuration: classes were loaded from 'unnamed module @6ae40994'
+java.lang.IllegalArgumentException: Too small int buffer size 1280x850 [1088000] > 380800
+	at com.sun.glass.ui.Pixels.<init>(Pixels.java:129)
+	at com.sun.glass.ui.monocle.MonoclePixels.<init>(MonoclePixels.java:49)
+	at com.sun.glass.ui.monocle.MonocleApplication.createPixels(MonocleApplication.java:202)
+	at com.sun.prism.impl.QueuedPixelSource.getUnusedPixels(QueuedPixelSource.java:160)
+	at com.sun.javafx.tk.quantum.UploadingPainter.run(UploadingPainter.java:157)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572)
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:358)
+	at com.sun.javafx.tk.RenderJob.run(RenderJob.java:58)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at com.sun.javafx.tk.quantum.QuantumRenderer$PipelineRunnable.run(QuantumRenderer.java:126)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Interface200Smoke PASS: actual create/import/preview/search/lock, all presets, 3 display modes, 3 navigation zones, responsive window, draft preservation, encrypted preferences, one Stage; native Windows11/KDE NOT_RUN

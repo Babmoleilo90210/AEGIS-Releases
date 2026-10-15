@@ -1,0 +1,21 @@
+test_artifact_symlink_rejected (test_release_manifest.ReleaseManifestTest.test_artifact_symlink_rejected) ... ok
+test_changed_binary_same_size_rejected (test_release_manifest.ReleaseManifestTest.test_changed_binary_same_size_rejected) ... ok
+test_changed_json_rejected_before_parsing (test_release_manifest.ReleaseManifestTest.test_changed_json_rejected_before_parsing) ... ok
+test_changed_signature_rejected (test_release_manifest.ReleaseManifestTest.test_changed_signature_rejected) ... ok
+test_downgrade_rejected (test_release_manifest.ReleaseManifestTest.test_downgrade_rejected) ... ok
+test_duplicate_json_field_rejected (test_release_manifest.ReleaseManifestTest.test_duplicate_json_field_rejected) ... ok
+test_other_repository_url_rejected (test_release_manifest.ReleaseManifestTest.test_other_repository_url_rejected) ... ok
+test_oversize_manifest_rejected (test_release_manifest.ReleaseManifestTest.test_oversize_manifest_rejected) ... ok
+test_signature_length_rejected (test_release_manifest.ReleaseManifestTest.test_signature_length_rejected) ... ok
+test_signing_and_no_overwrite (test_release_manifest.ReleaseManifestTest.test_signing_and_no_overwrite) ... ok
+test_unsafe_filename_rejected (test_release_manifest.ReleaseManifestTest.test_unsafe_filename_rejected) ... ok
+test_valid_manifest_and_files (test_release_manifest.ReleaseManifestTest.test_valid_manifest_and_files) ... ok
+test_wrong_authenticated_sha_rejected (test_release_manifest.ReleaseManifestTest.test_wrong_authenticated_sha_rejected) ... ok
+test_wrong_authenticated_size_rejected (test_release_manifest.ReleaseManifestTest.test_wrong_authenticated_size_rejected) ... ok
+test_wrong_public_key_rejected (test_release_manifest.ReleaseManifestTest.test_wrong_public_key_rejected) ... ok
+test_wrong_signing_key_has_no_output (test_release_manifest.ReleaseManifestTest.test_wrong_signing_key_has_no_output) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.549s
+
+OK

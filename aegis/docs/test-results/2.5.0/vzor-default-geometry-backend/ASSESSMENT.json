@@ -1,0 +1,10 @@
+{
+  "status": "PARTIAL_BACKEND_ERROR",
+  "exitCode": 0,
+  "smokeAssertionStatus": "PASS_HEADLESS",
+  "cleanRendering": false,
+  "cause": "Monocle default virtual screen smaller than 1280x850 fixture, UploadingPainter BufferOverflowException",
+  "followup": "explicit headless.geometry=1920x1200-32; no production source change",
+  "nativeAcceptance": "NOT_RUN",
+  "productionReady": false
+}

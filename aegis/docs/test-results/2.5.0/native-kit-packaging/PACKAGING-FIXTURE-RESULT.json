@@ -1,0 +1,21 @@
+{
+  "status": "PASS_BUILD_PACKAGING_FIXTURE",
+  "sourceZipSha256": "7a5630a2bd1817c9b62cad4cb6b7ed88a62740e5552176f400daa9b0b4ccdd11",
+  "candidateInputAssembly": "current frozen-build module JARs + vetted dependency set; NOT final release ZIP",
+  "checks": [
+    "actual JDK21 javac of native+voice+current UI fixture classes",
+    "test-only JAR partition and absence of obsolete browser UI acceptance",
+    "same-source disposable Relay and two Tor probes compilation",
+    "frozen parser source SHA256/provenance",
+    "all SHA256SUMS entries verified",
+    "ZIP CRC verified",
+    "Linux wrappers bash -n",
+    "Windows CRLF wrappers structural check"
+  ],
+  "nativeAcceptanceExecuted": false,
+  "windowsCmdExecution": "NOT_RUN",
+  "targetPlatformAcceptance": "NOT_RUN",
+  "microphoneCapture": "NOT_RUN",
+  "officialTorBrowser": "NOT_RUN",
+  "productionReady": false
+}

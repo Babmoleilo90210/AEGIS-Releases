@@ -20,6 +20,9 @@ final class ThemeManager implements AutoCloseable {
   private Theme selected=systemDefault();private UiPreferences layout=UiPreferences.builtins().get("Компактный");private AppearanceEngine engine;
   private Consumer<Settings> listener=s->{};
   private final Set<Parent> roots=Collections.newSetFromMap(new WeakHashMap<>());
+  private final Map<javafx.scene.control.MenuItem,String> popupItemStyles=new WeakHashMap<>();
+  private final Set<Parent> popupRoots=Collections.newSetFromMap(new WeakHashMap<>());
+  private final Set<javafx.scene.Scene> popupScenes=Collections.newSetFromMap(new WeakHashMap<>());
   private final Set<javafx.scene.control.ComboBox<?>> popups=Collections.newSetFromMap(new WeakHashMap<>());
   private final Set<javafx.scene.layout.Region> workspaces=Collections.newSetFromMap(new WeakHashMap<>());
   private final Map<javafx.scene.Scene,java.lang.ref.WeakReference<ScaledRoot>> scenes=new WeakHashMap<>();
@@ -59,17 +62,35 @@ final class ThemeManager implements AutoCloseable {
     if(first)root.sceneProperty().addListener((o,a,b)->{if(b!=null)javafx.application.Platform.runLater(()->track(b));});
     if(root.getScene()!=null)javafx.application.Platform.runLater(()->track(root.getScene()));
   }
-  private void style(Parent root){Settings s=settings();root.getStyleClass().removeAll("density-compact","density-normal","density-large");root.getStyleClass().add("density-"+s.density().name().toLowerCase(Locale.ROOT));root.setStyle(AppearanceEngine.paletteStyle(visualTheme(),s));
+  private void style(Parent root){Settings s=settings();root.getStyleClass().removeAll("density-compact","density-normal","density-large");root.getStyleClass().add("density-"+s.density().name().toLowerCase(Locale.ROOT));root.setStyle(AppearanceEngine.paletteStyle(visualTheme(),s)+(popupRoots.contains(root)?"-fx-font-size:"+(s.typography().mail().size()*s.scale()/100.0)+"px;":""));
     if(engine!=null)try{String css=engine.stylesheet();root.getStylesheets().removeIf(p->p.contains("/appearance/cache/")&&!p.equals(css));if(!root.getStylesheets().contains(css))root.getStylesheets().add(css);}catch(IOException failure){engine.styleFailure();}
   }
   private void refresh(){Settings s=settings();layout=s.legacy();for(var root:new ArrayList<>(roots))style(root);for(var reference:scenes.values()){var scaled=reference.get();if(scaled!=null)scaled.scale(s.scale());}if(engine!=null)for(var workspace:new ArrayList<>(workspaces))engine.workspace(workspace);listener.accept(s);}
   void track(javafx.scene.Scene scene){
-    if(scene==null||scenes.containsKey(scene))return;Parent original=scene.getRoot();
+    if(scene==null||scenes.containsKey(scene)||popupScenes.contains(scene))return;Parent original=scene.getRoot();
     if(original instanceof ScaledRoot scaled){scenes.put(scene,new java.lang.ref.WeakReference<>(scaled));scaled.scale(settings().scale());return;}
-    if(scene.getWindow() instanceof javafx.stage.PopupWindow){if(original instanceof javafx.scene.layout.Pane pane&&!pane.getChildren().isEmpty()){var children=new ArrayList<>(pane.getChildren());pane.getChildren().clear();var body=new javafx.scene.layout.StackPane();body.getChildren().setAll(children);apply(body);var scaled=new ScaledRoot(body);pane.getChildren().add(scaled);scenes.put(scene,new java.lang.ref.WeakReference<>(scaled));scaled.scale(settings().scale());}return;}
+    if(scene.getWindow() instanceof javafx.stage.PopupWindow window){
+      // Popup skins own their CSSBridge and measure their own children. Reparenting
+      // those children through ScaledRoot clips the skin at non-default scales.
+      popupScenes.add(scene);popupRoots.add(original);apply(original);window.setAutoFix(true);
+      window.showingProperty().addListener((o,a,b)->{if(b)javafx.application.Platform.runLater(()->fitPopup(window));});
+      if(window.isShowing())javafx.application.Platform.runLater(()->fitPopup(window));return;
+    }
     var scaled=new ScaledRoot(original);scene.setRoot(scaled);scenes.put(scene,new java.lang.ref.WeakReference<>(scaled));scaled.scale(settings().scale());
   }
   void layout(UiPreferences value){layout=value;if(engine==null)refresh();else{Settings s=settings();Settings next=new Settings(s.theme(),s.mode(),s.lightTheme(),s.darkTheme(),s.lightAt(),s.darkAt(),value.scale(),value.density(),s.typography(),s.components(),s.layout(),s.backdrop());engine.preview(next);}}
-  void stylePopup(javafx.scene.control.ComboBox<?> combo){if(!popups.add(combo))return;Consumer<javafx.scene.control.Skin<?>> applySkin=skin->{if(skin instanceof javafx.scene.control.skin.ComboBoxListViewSkin<?> view&&view.getPopupContent() instanceof Parent popup)apply(popup);};combo.skinProperty().addListener((o,a,b)->applySkin.accept(b));if(combo.getSkin()!=null)applySkin.accept(combo.getSkin());combo.setVisibleRowCount(Math.min(8,Math.max(1,combo.getVisibleRowCount())));}
-  @Override public void close(){javafx.stage.Window.getWindows().removeListener(windows);if(engine!=null)engine.close();roots.clear();scenes.clear();workspaces.clear();popups.clear();}
+  void stylePopup(javafx.scene.control.ComboBox<?> combo){if(!popups.add(combo))return;Consumer<javafx.scene.control.Skin<?>> applySkin=skin->{if(skin instanceof javafx.scene.control.skin.ComboBoxListViewSkin<?> view&&view.getPopupContent() instanceof Parent popup){popupRoots.add(popup);apply(popup);}};combo.skinProperty().addListener((o,a,b)->applySkin.accept(b));if(combo.getSkin()!=null)applySkin.accept(combo.getSkin());combo.setVisibleRowCount(Math.min(8,Math.max(1,combo.getVisibleRowCount())));}
+  private void fitPopup(javafx.stage.PopupWindow window){
+    if(!window.isShowing())return;var screen=javafx.stage.Screen.getScreensForRectangle(window.getX(),window.getY(),Math.max(1,window.getWidth()),Math.max(1,window.getHeight())).stream().findFirst().orElse(javafx.stage.Screen.getPrimary());
+    var bounds=screen.getVisualBounds();double maximumWidth=Math.max(100,bounds.getWidth()-16),maximumHeight=Math.max(80,bounds.getHeight()-16);
+    if(window instanceof javafx.scene.control.PopupControl popup)popup.setMaxSize(maximumWidth,maximumHeight);
+    if(window instanceof javafx.scene.control.ContextMenu menu)styleMenuItems(menu.getItems());
+    Parent body=window.getScene().getRoot();if(body instanceof javafx.scene.layout.Region region){region.setMaxSize(maximumWidth,maximumHeight);region.applyCss();region.layout();}
+    window.sizeToScene();window.setX(Math.max(bounds.getMinX()+8,Math.min(window.getX(),bounds.getMaxX()-window.getWidth()-8)));window.setY(Math.max(bounds.getMinY()+8,Math.min(window.getY(),bounds.getMaxY()-window.getHeight()-8)));
+  }
+  private void styleMenuItems(java.util.List<javafx.scene.control.MenuItem> items){
+    Settings s=settings();String font="-fx-font-family:'"+s.typography().mail().family()+"';-fx-font-size:"+(s.typography().mail().size()*s.scale()/100.0)+"px;";
+    for(var item:items){String original=popupItemStyles.computeIfAbsent(item,k->java.util.Objects.requireNonNullElse(k.getStyle(),""));item.setStyle(original+";"+font);if(item instanceof javafx.scene.control.Menu menu)styleMenuItems(menu.getItems());}
+  }
+  @Override public void close(){javafx.stage.Window.getWindows().removeListener(windows);if(engine!=null)engine.close();roots.clear();scenes.clear();workspaces.clear();popups.clear();popupRoots.clear();popupScenes.clear();popupItemStyles.clear();}
 }

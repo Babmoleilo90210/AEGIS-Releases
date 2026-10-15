@@ -116,6 +116,16 @@ public final class NetworkService {
     UserInfo remote=find(contact.nickname());if(!remote.userId().equals(contact.userId())||!MessageDigest.isEqual(remote.publicKey(),contact.publicKey()))throw new IOException("Ключ контакта изменился");return remote;
   }
 
+  /** Voice is a client-only extension on the existing signed onion route.
+   * There is deliberately no STORE/Relay or direct-IP fallback for call traffic. */
+  public Socket connectVoice(UserInfo contact)throws IOException {
+    UserInfo pinned=local.contact(contact.nickname());
+    if(pinned==null||!pinned.userId().equals(contact.userId())||!MessageDigest.isEqual(pinned.publicKey(),contact.publicKey()))throw new IOException("Добавьте и проверьте контакт");
+    UserInfo remote=resolveTrusted(pinned);Route route=remote.route();
+    if(!validRoute(route,pinned,local.now())||route.port()!=org.securemail.client.lifecycle.DeviceCapabilities.ONION_PORT)throw new IOException("Контакт сейчас недоступен для звонка");
+    return tor.connectPeer(route.onionAddress(),route.port());
+  }
+
   public void publish(Route route) throws IOException {
     request(Operation.PUBLISH, route::write, i -> null);
   }

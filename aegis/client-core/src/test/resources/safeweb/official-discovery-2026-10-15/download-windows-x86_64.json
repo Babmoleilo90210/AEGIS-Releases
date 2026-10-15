@@ -1,0 +1,6 @@
+{
+  "binary": "https://dist.torproject.org/torbrowser/15.0.25/tor-browser-windows-x86_64-portable-15.0.25.exe",
+  "git_tag": "tbb-15.0.25-build2",
+  "sig": "https://dist.torproject.org/torbrowser/15.0.25/tor-browser-windows-x86_64-portable-15.0.25.exe.asc",
+  "version": "15.0.25"
+}

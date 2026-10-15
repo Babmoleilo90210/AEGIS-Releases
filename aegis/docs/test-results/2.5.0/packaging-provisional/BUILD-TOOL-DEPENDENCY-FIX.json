@@ -1,0 +1,6 @@
+{
+  "file": "liblzo2-2_2.10-2build4_amd64.deb",
+  "version": "2.10-2build4",
+  "sha256": "e0d13be155013138b8db4cfe68212b866080af661c78302c2eab0d2f9d0d454e",
+  "trustedSource": "Ubuntu authenticated APT metadata; exact apt-cache SHA256; extracted private build tool dependency only; no system installation"
+}

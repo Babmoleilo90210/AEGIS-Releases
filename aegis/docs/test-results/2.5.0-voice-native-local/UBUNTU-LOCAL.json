@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "applicationVersion": "2.5.0",
+  "recordedAtUtc": "2026-10-15T09:32:43.483517820Z",
+  "osName": "Linux",
+  "osVersion": "6.18.44",
+  "architecture": "amd64",
+  "javaVersion": "21.0.12.1",
+  "sessionType": "unknown",
+  "physicalMicrophoneCapture": "NOT_RUN",
+  "checks": [
+    {
+      "name": "compiled_audio_pins",
+      "evidence": {
+        "compiledRegistryVerified": true,
+        "platform": "linux-x86_64",
+        "sha256": {
+          "libopus.so": "86de12c992211fff80ae100b56c0e4699ae54fb16e0a9877a3228c3f14a329c8",
+          "libspeexdsp.so": "89a05213790b0549b9fd6ee774a5602db7e9b0b20e990305eec7b88677253262"
+        }
+      },
+      "result": "PASS",
+      "elapsedMillis": 85
+    },
+    {
+      "name": "audio_device_enumeration",
+      "evidence": {
+        "note": "Enumeration success does not prove a physical device works",
+        "outputs": 0,
+        "inputs": 0,
+        "playbackOpened": false,
+        "devices": [],
+        "captureOpened": false
+      },
+      "result": "PASS",
+      "elapsedMillis": 7
+    },
+    {
+      "name": "synthetic_native_Opus_Speex_fixture",
+      "evidence": {
+        "channels": 1,
+        "physicalAudioOpened": false,
+        "syntheticFrames": 16,
+        "encodedBytes": 1007,
+        "frameMillis": 20,
+        "sampleRate": 48000
+      },
+      "result": "PASS",
+      "elapsedMillis": 106
+    }
+  ],
+  "allRequestedLocalChecksPassed": true,
+  "nativeVoiceAcceptance": "NOT_RUN",
+  "twoPhysicalMachinesOnDifferentNetworks": "NOT_RUN",
+  "sixtyMinuteOnionCall": "NOT_RUN",
+  "physicalPlaybackAndSpeechQuality": "NOT_RUN",
+  "productionReady": false,
+  "networkConnectionsInitiated": false,
+  "productionProfilesRead": false,
+  "audioFilesWritten": false,
+  "secretsOrConversationContentIncluded": false,
+  "hardwareDeviceNamesIncluded": true
+}

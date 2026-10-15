@@ -37,15 +37,11 @@ public final class LinuxSafeWebSandbox {
     return start(bundle,sessionRoot,url,List.of());
   }
   public static Launch start(Path bundle,Path sessionRoot,URI url,Collection<Path> protectedPaths)throws IOException {
-    if(!System.getProperty("os.name","").equals("Linux"))throw new IOException("Safe Web Linux: неподдерживаемая ОС");
+    String hostDisplay=requireEnvironment();
     Objects.requireNonNull(url);SafeWebUrl.parse(url.toASCIIString());
-    requireSystemExecutable(BWRAP);requireSystemExecutable(SLIRP);requireSystemExecutable(XEPHYR);
     checkHiddenPaths(protectedPaths);
-    String hostDisplay=System.getenv("DISPLAY");
-    if(hostDisplay==null||!hostDisplay.matches(":[0-9]{1,5}(\\.[0-9]{1,2})?"))
-      throw new IOException("Safe Web требует локальный X11/Xwayland и Xephyr; прямой доступ к экрану отключён");
     Path base=existingDirectory(bundle);Path root=privateDirectory(sessionRoot);
-    if(base.equals(root)||root.startsWith(base))throw new IOException("Каталог управления Safe Web должен находиться вне браузерного пакета");
+    if(base.equals(root)||root.startsWith(base))throw new IOException("Каталог управления Взор должен находиться вне браузерного пакета");
     if(!Files.isExecutable(base.resolve("Browser/start-tor-browser")))throw new IOException("Не найден официальный Linux Tor Browser");
     Path downloads=privateDirectory(base.resolve("aegis-downloads"));
     Path run=Files.createTempDirectory(root,"display-",PosixFilePermissions.asFileAttribute(PosixFilePermissions.fromString("rwx------")));
@@ -63,7 +59,7 @@ public final class LinuxSafeWebSandbox {
       long childPid=readChildPid(launch.process,START_TIMEOUT);
       // Check the published PID is actually a child of our bwrap, not an arbitrary
       // host process. No external PID is ever signalled or adopted by this class.
-      if(launch.process.descendants().noneMatch(p->p.pid()==childPid))throw new IOException("Недостоверный PID сетевого контекста Safe Web");
+      if(launch.process.descendants().noneMatch(p->p.pid()==childPid))throw new IOException("Недостоверный PID сетевого контекста Взор");
       launch.slirp=startNetwork(childPid,launch);
       launch.process.getOutputStream().write(1);launch.process.getOutputStream().flush();
       launch.process.getOutputStream().close();
@@ -86,7 +82,7 @@ public final class LinuxSafeWebSandbox {
     }
     if(failure instanceof IOException io)throw io;
     if(failure instanceof RuntimeException runtime)throw runtime;
-    throw new IOException("Запуск Safe Web не выполнен",failure);
+    throw new IOException("Запуск Взор не выполнен",failure);
   }
 
   static List<String> sandboxCommand(Path bundle,Path downloads,Path auth,Path socket,int display,URI url) {
@@ -119,7 +115,7 @@ public final class LinuxSafeWebSandbox {
       int display=100+RANDOM.nextInt(20000);Path socket=Path.of("/tmp/.X11-unix/X"+display);
       if(Files.exists(socket,LinkOption.NOFOLLOW_LINKS)||Files.exists(Path.of("/tmp/.X"+display+"-lock"),LinkOption.NOFOLLOW_LINKS))continue;
       Path auth=run.resolve("Xauthority");writeXAuthority(auth,display);
-      ProcessBuilder builder=cleanBuilder(monitoredDisplayCommand(List.of(XEPHYR.toString(),":"+display,"-auth",auth.toString(),"-nolisten","tcp","-screen","1280x800","-resizeable","-terminate","-br","-title","AEGIS Safe Web — Tor Browser")));
+      ProcessBuilder builder=cleanBuilder(monitoredDisplayCommand(List.of(XEPHYR.toString(),":"+display,"-auth",auth.toString(),"-nolisten","tcp","-screen","1280x800","-resizeable","-terminate","-br","-title","AEGIS Взор — Tor Browser")));
       builder.environment().putAll(hostEnv);builder.environment().put("HOME",run.toString());
       builder.redirectOutput(ProcessBuilder.Redirect.DISCARD).redirectError(ProcessBuilder.Redirect.DISCARD);
       Process process=launch.own(builder.start());launch.display=process;
@@ -131,7 +127,7 @@ public final class LinuxSafeWebSandbox {
       }
       stop(launch,process);launch.display=null;
     }
-    throw new IOException("Не удалось создать изолированный экран Safe Web (проверьте Xephyr/Xwayland)");
+    throw new IOException("Не удалось создать изолированный экран Взор (проверьте Xephyr/Xwayland)");
   }
 
   /** A private stdin lease also tears down the nested display after JVM crashes.
@@ -169,11 +165,11 @@ public final class LinuxSafeWebSandbox {
       try {
         int ready=readByte(process,Duration.ofSeconds(5));
         if(ready=='1'&&process.isAlive())return process;
-        last=new IOException("Сетевой контекст Safe Web не подтвердил готовность");
+        last=new IOException("Сетевой контекст Взор не подтвердил готовность");
       }catch(IOException error){last=error;}
       stop(launch,process);pause(50);
     }
-    throw new IOException("Изолированная сеть Safe Web недоступна (slirp4netns/user namespaces)",last);
+    throw new IOException("Изолированная сеть Взор недоступна (slirp4netns/user namespaces)",last);
   }
 
   private static long readChildPid(Process process,Duration timeout)throws IOException {
@@ -190,7 +186,7 @@ public final class LinuxSafeWebSandbox {
       } else if(!process.isAlive())throw new IOException("bwrap не смог создать песочницу: проверьте поддержку unprivileged user namespaces");
       else pause(20);
     }
-    throw new IOException("Истекло время создания песочницы Safe Web");
+    throw new IOException("Истекло время создания песочницы Взор");
   }
   private static int readByte(Process process,Duration timeout)throws IOException {
     long until=System.nanoTime()+timeout.toNanos();
@@ -198,12 +194,12 @@ public final class LinuxSafeWebSandbox {
     throw new IOException("Истекло время запуска изолированной сети");
   }
   private static int pollByte(Process process)throws IOException {return process.getInputStream().available()>0?process.getInputStream().read():-1;}
-  private static void pause(long millis)throws IOException {try{Thread.sleep(millis);}catch(InterruptedException interrupted){Thread.currentThread().interrupt();throw new IOException("Запуск Safe Web прерван",interrupted);}}
+  private static void pause(long millis)throws IOException {try{Thread.sleep(millis);}catch(InterruptedException interrupted){Thread.currentThread().interrupt();throw new IOException("Запуск Взор прерван",interrupted);}}
   private static ProcessBuilder cleanBuilder(List<String> command) {
     ProcessBuilder builder=new ProcessBuilder(command);builder.environment().clear();builder.environment().put("PATH","/usr/bin:/bin");builder.environment().put("LANG","C.UTF-8");return builder;
   }
   private static Path existingDirectory(Path path)throws IOException {
-    if(Files.isSymbolicLink(path)||!Files.isDirectory(path,LinkOption.NOFOLLOW_LINKS))throw new IOException("Небезопасный каталог Safe Web");return path.toRealPath();
+    if(Files.isSymbolicLink(path)||!Files.isDirectory(path,LinkOption.NOFOLLOW_LINKS))throw new IOException("Небезопасный каталог Взор");return path.toRealPath();
   }
   /** The orchestrator passes paths only, never identity/archive/key objects.
    * Reject custom storage locations that would be readable in a distro bind.
@@ -228,14 +224,29 @@ public final class LinuxSafeWebSandbox {
     Path resolved=current.toRealPath();for(Path part:suffix)resolved=resolved.resolve(part);return resolved.normalize();
   }
   private static Path privateDirectory(Path path)throws IOException {
-    if(Files.isSymbolicLink(path))throw new IOException("Ссылка вместо каталога Safe Web");
+    if(Files.isSymbolicLink(path))throw new IOException("Ссылка вместо каталога Взор");
     Files.createDirectories(path);Path real=existingDirectory(path);Files.setPosixFilePermissions(real,PosixFilePermissions.fromString("rwx------"));return real;
   }
-  private static void requireSystemExecutable(Path path)throws IOException {
-    if(!Files.isExecutable(path)||!Files.isRegularFile(path))throw new IOException("Для изоляции Safe Web установите системный компонент: "+path.getFileName());
-    Path real=path.toRealPath();Set<java.nio.file.attribute.PosixFilePermission> permissions=Files.getPosixFilePermissions(real);
-    if(!Integer.valueOf(0).equals(Files.getAttribute(real,"unix:uid"))||permissions.contains(java.nio.file.attribute.PosixFilePermission.GROUP_WRITE)||permissions.contains(java.nio.file.attribute.PosixFilePermission.OTHERS_WRITE))
-      throw new IOException("Небезопасные права системного компонента Safe Web");
+  /** Read-only shared preflight; namespaces and actual X access are checked only on launch. */
+  static String requireEnvironment()throws IOException {
+    String os=System.getProperty("os.name","");
+    SandboxPrerequisites.requirePlatform(os,System.getProperty("os.arch",""));
+    if(!os.equals("Linux"))throw new SandboxPrerequisites.Failure(SandboxPrerequisites.Code.UNSUPPORTED_OS);
+    SandboxPrerequisites.requireSystemExecutable(BWRAP,SandboxPrerequisites.Code.LINUX_BWRAP_MISSING);
+    SandboxPrerequisites.requireSystemExecutable(SLIRP,SandboxPrerequisites.Code.LINUX_SLIRP_MISSING);
+    SandboxPrerequisites.requireSystemExecutable(XEPHYR,SandboxPrerequisites.Code.LINUX_XEPHYR_MISSING);
+    String display=SandboxPrerequisites.requireLocalDisplay(System.getenv("DISPLAY"));
+    String number=display.substring(1).split("\\.",2)[0];
+    Path socket=Path.of("/tmp/.X11-unix/X"+number);
+    try {
+      if(Files.isSymbolicLink(socket)||!Files.exists(socket,LinkOption.NOFOLLOW_LINKS)||
+          (((Integer)Files.getAttribute(socket,"unix:mode",LinkOption.NOFOLLOW_LINKS))&0170000)!=0140000)
+        throw new SandboxPrerequisites.Failure(SandboxPrerequisites.Code.LINUX_DISPLAY_REQUIRED);
+    }catch(IOException|RuntimeException error){
+      if(error instanceof SandboxPrerequisites.Failure failure)throw failure;
+      throw new SandboxPrerequisites.Failure(SandboxPrerequisites.Code.LINUX_DISPLAY_REQUIRED,error);
+    }
+    return display;
   }
   private static void watch(Launch launch,Process owned) {Thread.startVirtualThread(()->{try{owned.waitFor();launch.close();}catch(InterruptedException interrupted){Thread.currentThread().interrupt();}catch(IOException ignored){/* status remains failed/closed; no private browser output is logged */}});}
   private static void stop(Launch launch,Process process)throws IOException {
@@ -252,9 +263,9 @@ public final class LinuxSafeWebSandbox {
       for(ProcessHandle child:children)if(child.isAlive())child.destroyForcibly();
       long until=System.nanoTime()+TimeUnit.SECONDS.toNanos(3);
       while(children.stream().anyMatch(ProcessHandle::isAlive)&&System.nanoTime()<until)Thread.sleep(20);
-      if(process.isAlive()||children.stream().anyMatch(ProcessHandle::isAlive))throw new IOException("Процессы Safe Web ещё завершаются");
-    }catch(InterruptedException interrupted){Thread.currentThread().interrupt();process.destroyForcibly();throw new IOException("Остановка Safe Web прервана",interrupted);}
-     catch(RuntimeException failure){throw new IOException("Не удалось завершить собственные процессы Safe Web",failure);}
+      if(process.isAlive()||children.stream().anyMatch(ProcessHandle::isAlive))throw new IOException("Процессы Взор ещё завершаются");
+    }catch(InterruptedException interrupted){Thread.currentThread().interrupt();process.destroyForcibly();throw new IOException("Остановка Взор прервана",interrupted);}
+     catch(RuntimeException failure){throw new IOException("Не удалось завершить собственные процессы Взор",failure);}
   }
 
   public static final class Launch implements AutoCloseable {
@@ -268,8 +279,8 @@ public final class LinuxSafeWebSandbox {
     private boolean anyAlive(){return children.entrySet().stream().anyMatch(entry->entry.getKey().isAlive()||entry.getValue().stream().anyMatch(ProcessHandle::isAlive));}
     public synchronized boolean running(){return started&&anyAlive();}
     public synchronized String status(){
-      if(startupFailed)return anyAlive()?"Ошибка запуска Safe Web; собственные процессы ещё завершаются. Повторите закрытие":"Запуск Safe Web не выполнен; собственные процессы остановлены";
-      return closed?(anyAlive()?"Процессы Safe Web ещё завершаются":cleanupComplete?"Safe Web остановлен":"Процессы Safe Web остановлены; очистка не завершена"):running()?"Tor Browser: изолированный процесс запущен; состояние Tor проверяется в браузере":"Safe Web запускается";
+      if(startupFailed)return anyAlive()?"Ошибка запуска Взор; собственные процессы ещё завершаются. Повторите закрытие":"Запуск Взор не выполнен; собственные процессы остановлены";
+      return closed?(anyAlive()?"Процессы Взор ещё завершаются":cleanupComplete?"Взор остановлен":"Процессы Взор остановлены; очистка не завершена"):running()?"Tor Browser: изолированный процесс запущен; состояние Tor проверяется в браузере":"Взор запускается";
     }
     @Override public synchronized void close()throws IOException {
       if(cleanupComplete)return;closed=true;IOException problem=null;
@@ -278,8 +289,8 @@ public final class LinuxSafeWebSandbox {
       // Includes partially started slirp attempts whose ready-fd never succeeded.
       for(Process owned:children.keySet())if(owned!=process&&owned!=display)order.add(owned);
       for(Process owned:new Process[]{process,display})if(owned!=null&&!order.contains(owned))order.add(owned);
-      for(Process owned:order)try{stop(this,owned);}catch(IOException|RuntimeException failure){IOException error=failure instanceof IOException io?io:new IOException("Не удалось завершить собственный процесс Safe Web",failure);if(problem==null)problem=error;else problem.addSuppressed(error);}
-      if(anyAlive()){if(problem==null)problem=new IOException("Собственные процессы Safe Web ещё завершаются");throw problem;}
+      for(Process owned:order)try{stop(this,owned);}catch(IOException|RuntimeException failure){IOException error=failure instanceof IOException io?io:new IOException("Не удалось завершить собственный процесс Взор",failure);if(problem==null)problem=error;else problem.addSuppressed(error);}
+      if(anyAlive()){if(problem==null)problem=new IOException("Собственные процессы Взор ещё завершаются");throw problem;}
       try{Files.deleteIfExists(displayRoot.resolve("Xauthority"));Files.deleteIfExists(displayRoot.resolve("resolv.conf"));Files.deleteIfExists(displayRoot);}catch(IOException error){if(problem==null)problem=error;else problem.addSuppressed(error);}
       if(problem!=null)throw problem;cleanupComplete=true;
     }

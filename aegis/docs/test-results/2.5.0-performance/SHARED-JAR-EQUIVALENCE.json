@@ -1,0 +1,27 @@
+{
+  "capturedUTC": "2026-10-15T10:08:22.834356+00:00",
+  "scope": "ZIP entry byte comparison, not a repeat of benchmark on final container JAR",
+  "applicationJars": {
+    "client-core.jar": {
+      "benchmarkJarSha256": "68f865dcda531fb9e6a0b87c1cd4b4f40529bb8790d5eb2446589e94295c4b76",
+      "newerSharedJarSha256": "b13151904e9a2461158466a9da313e5439e816f96c32a226d51de00df830abdf",
+      "entryCountBenchmark": 305,
+      "entryCountNewerShared": 305,
+      "onlyBenchmark": [],
+      "onlyNewerShared": [],
+      "changedEntryBytes": [
+        "org/securemail/client/update/UpdateDiagnostic.class"
+      ]
+    },
+    "common-protocol.jar": {
+      "benchmarkJarSha256": "c086bb60fd2ae056a7be8c9e01ddd75acb230404446228ff6994ae258a264286",
+      "newerSharedJarSha256": "55027fee83e95b85c943893d6f07b62de06fa80dbb06da8be63aecd165b89788",
+      "entryCountBenchmark": 17,
+      "entryCountNewerShared": 17,
+      "onlyBenchmark": [],
+      "onlyNewerShared": [],
+      "changedEntryBytes": []
+    }
+  },
+  "interpretation": "All workload classes/resources are byte-identical; only updater diagnostic class changed in newer Core. No extrapolation to updater/startup/network. Exact benchmark JAR hashes remain in INPUTS.json."
+}

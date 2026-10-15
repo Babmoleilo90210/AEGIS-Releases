@@ -13,6 +13,10 @@ public final class PeerServer implements AutoCloseable {
   private final int maxCiphertext;
   private final PacketAcceptor acceptor;
   private final java.util.function.Function<byte[],org.securemail.client.lifecycle.DeviceCapabilities> capabilities;
+  @FunctionalInterface public interface Extension { void handle(Socket socket)throws Exception; }
+  private final Extension voice;
+  private final ExecutorService preface = new ThreadPoolExecutor(0,2,30,TimeUnit.SECONDS,new SynchronousQueue<>(),new ThreadPoolExecutor.AbortPolicy());
+  private final ExecutorService voiceWorker = new ThreadPoolExecutor(0,2,30,TimeUnit.SECONDS,new SynchronousQueue<>(),new ThreadPoolExecutor.AbortPolicy());
   private final ExecutorService worker =
       new ThreadPoolExecutor(
           1,
@@ -34,9 +38,12 @@ public final class PeerServer implements AutoCloseable {
     this(port,store,max,store::accept,null);
   }
   public PeerServer(int port,LocalStore store,int max,PacketAcceptor acceptor,java.util.function.Function<byte[],org.securemail.client.lifecycle.DeviceCapabilities> capabilities)throws IOException {
+    this(port,store,max,acceptor,capabilities,null);
+  }
+  public PeerServer(int port,LocalStore store,int max,PacketAcceptor acceptor,java.util.function.Function<byte[],org.securemail.client.lifecycle.DeviceCapabilities> capabilities,Extension voice)throws IOException {
     this.store = store;
     maxCiphertext = max;
-    this.acceptor=acceptor;this.capabilities=capabilities;
+    this.acceptor=acceptor;this.capabilities=capabilities;this.voice=voice;
     listener = new ServerSocket();
     listener.bind(
         new InetSocketAddress(InetAddress.getByAddress(new byte[] {127, 0, 0, 1}), port), 4);
@@ -55,10 +62,10 @@ public final class PeerServer implements AutoCloseable {
               while (!closed)
                 try {
                   Socket s = listener.accept();
-                  s.setSoTimeout(30_000);
+                  s.setSoTimeout(10_000);
                   sockets.add(s);
                   try {
-                    worker.execute(() -> handle(s));
+                    preface.execute(() -> route(s));
                   } catch (RejectedExecutionException e) {
                     sockets.remove(s);
                     s.close();
@@ -69,7 +76,20 @@ public final class PeerServer implements AutoCloseable {
             });
   }
 
-  private void handle(Socket socket) {
+  /** Read only the fixed preface before TLS. Buffered read-ahead would consume TLS bytes. */
+  private void route(Socket socket){
+    var deadline=timer.schedule(()->{try{socket.close();}catch(IOException ignored){}},10,TimeUnit.SECONDS);
+    try{
+      var input=new DataInputStream(socket.getInputStream());Binary.header(input);int operation=input.readUnsignedByte();
+      if(!Binary.text(input,64).isEmpty())throw new IOException("Bad peer request");
+      if(operation==101&&voice!=null){
+        voiceWorker.execute(()->{try(socket){voice.handle(socket);}catch(Exception ignored){}finally{sockets.remove(socket);}});
+      }else worker.execute(()->handle(socket,operation));
+    }catch(IOException|RejectedExecutionException failure){sockets.remove(socket);try{socket.close();}catch(IOException ignored){}}
+    finally{deadline.cancel(false);}
+  }
+
+  private void handle(Socket socket,int operation) {
     var timeout =
         timer.schedule(
             () -> {
@@ -84,8 +104,7 @@ public final class PeerServer implements AutoCloseable {
         var in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
         var out = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()))) {
       try {
-        Binary.header(in);
-        int operation=in.readUnsignedByte();if(!Binary.text(in,64).isEmpty())throw new IOException("Bad peer request");
+        socket.setSoTimeout(30_000);
         if(operation==org.securemail.client.lifecycle.DeviceCapabilities.OPERATION&&capabilities!=null){byte[] challenge=Binary.bytes(in,32);if(challenge.length!=32)throw new IOException("Challenge length");var answer=capabilities.apply(challenge);Binary.header(out);out.writeInt(0);answer.write(out);out.flush();return;}
         if(operation!=Operation.DELIVER.code)throw new IOException("Bad peer operation");
         var ack = acceptor.accept(PacketCodec.read(in, maxCiphertext()));
@@ -119,6 +138,7 @@ public final class PeerServer implements AutoCloseable {
       } catch (IOException ignored) {
       }
     worker.shutdownNow();
+    preface.shutdownNow();voiceWorker.shutdownNow();
     timer.shutdownNow();
   }
 }

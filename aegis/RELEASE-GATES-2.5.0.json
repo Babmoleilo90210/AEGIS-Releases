@@ -1,0 +1,1632 @@
+{
+  "schemaVersion": 1,
+  "application": "АЕГИС",
+  "version": "2.5.0",
+  "generatedAtUtc": "2026-10-15T10:20:54.691998+00:00",
+  "status": "RELEASE_CANDIDATE_ACCEPTANCE_INCOMPLETE",
+  "source": {
+    "baseCommit": "f173b4a1bb5f1e3ed121870aa04a6583833f93e9",
+    "branch": "development/aegis-2.5.0",
+    "implementationCommit": null,
+    "sourceState": "Final frozen production files; exact source commit/tree is bound in generated BUILD-PROVENANCE-2.5.0.json after Git freeze",
+    "implementationCommitCompanion": "BUILD-PROVENANCE-2.5.0.json in final artifact directory; generated after source freeze to avoid self-referential Git hash",
+    "observedGitHeadAtInitialAudit": "f173b4a1bb5f1e3ed121870aa04a6583833f93e9"
+  },
+  "statusVocabulary": [
+    "PASS",
+    "FAIL",
+    "BLOCKED",
+    "NOT_RUN"
+  ],
+  "interpretation": {
+    "PASS": "Успех только явно указанного scope с указанным реальным доказательством.",
+    "FAIL": "Выполненная проверка не удовлетворила критерию.",
+    "BLOCKED": "Попытка/предусловие заблокированы; зависимые операции не считаются выполненными.",
+    "NOT_RUN": "Проверка не выполнялась или нет соответствующего доказательства.",
+    "codeImplementedIsNotAcceptancePass": true,
+    "localFixturePassIsNotOfficialOrNativePass": true,
+    "missingOrUnknownStatusCannotPass": true
+  },
+  "mandatory": [
+    {
+      "id": "JAVA_AUTOMATED",
+      "mandatory": true,
+      "status": "PASS",
+      "scope": "Полный локальный JUnit: 367 PASS, 1 Windows DPAPI skip, 0 failures/errors. Это не целевая нативная приёмка.",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0/full-java/common-protocol/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "4f9fdcfe641255f7dfc4823934c69864b5d24ff05a49048cad6a926e2cf128dc"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/relay-server/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "0e4d0240fdadaa422ed267b8c8466a0a196295ef31e255b287c9a1e929111790"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/integration-tests/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "b6aa9bf53aa55a5fa1271fbc843fa64ce663bd960ef09acb79de2c621eabaff6"
+        }
+      ],
+      "counts": {
+        "found": 368,
+        "passed": 367,
+        "skipped": 1,
+        "failed": 0,
+        "errors": 0
+      },
+      "skipped": [
+        "nativeDpapiCurrentUserRoundTrip()"
+      ]
+    },
+    {
+      "id": "PACKAGING_TOOLS",
+      "mandatory": true,
+      "status": "PASS",
+      "scope": "67 executed local tools tests, including pinned Russian-locale runtime registry; native installations not executed.",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0/full-java/python-final-tools.log",
+          "kind": "executed_report",
+          "sha256": "b22cd48a6fcc15325129f9aa48296b30e5e1edb553871c33b3e635244a1d6262"
+        }
+      ],
+      "tests": 67
+    },
+    {
+      "id": "WINDOWS_HELPER_POLICY",
+      "mandatory": true,
+      "status": "PASS",
+      "scope": "1 локальный Windows helper policy test; Windows API/VM не запускались.",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-packaging-audit/result.json",
+          "kind": "executed_report",
+          "sha256": "955fd5344f2baf4ba70f6fd7de3f895e8ac9f8862bf31ae2e773292b563160fc"
+        },
+        {
+          "path": "docs/test-results/2.5.0-packaging-audit/windows-helper-policy.txt",
+          "kind": "executed_report",
+          "sha256": "0276289a917b36926f4a82fd7b7e1660cb3eb443b96c998d41c5d3cf04007a39"
+        }
+      ],
+      "tests": 1
+    },
+    {
+      "id": "FIXED_SOURCE_ARTIFACT_BINDING",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Требуется финальный зафиксированный source commit и доказательство соответствия всех конечных бинарников/архивов одной версии. Текущий HEAD является базой, реализация находится в рабочем дереве.",
+      "evidence": [
+        {
+          "path": "TEST-REPORT-2.5.0.md",
+          "kind": "unavailable_or_pending_acceptance_explanation"
+        }
+      ]
+    },
+    {
+      "id": "FINAL_HEADLESS_UI",
+      "mandatory": true,
+      "status": "PASS",
+      "scope": "Five clean headless probes against final shared production JARs, no production overrides; 100+48 actual screenshots, not native Windows/CachyOS.",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-shared-ui/final/RESULTS.json",
+          "kind": "executed_report",
+          "sha256": "64f5b8f8c51b0072b988e8c844de2b538a30b94dbc5003d67da0acadc52069c5"
+        },
+        {
+          "path": "docs/test-results/2.5.0-final-vzor-ui/RESULTS.json",
+          "kind": "executed_report",
+          "sha256": "90ebf7d1926472b5197633c113d62a0683731f39b204caf823a962cb9b7cd4e9"
+        },
+        {
+          "path": "docs/test-results/2.5.0-final-vzor-ui/JAR-INPUTS.json",
+          "kind": "executed_report",
+          "sha256": "df6df63b5bbaa87929d3713f519fb481e5e0ed5f5f076eccb4a9fa0cb5da3d0a"
+        }
+      ],
+      "executionState": "IN_PROGRESS"
+    },
+    {
+      "id": "NATIVE_WINDOWS11",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Реальная Windows 11 x64 с конкретными edition/build, GUI, аудио, браузером, миграцией и установкой.",
+      "evidence": [
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "executed_report",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ]
+    },
+    {
+      "id": "NATIVE_CACHYOS_KDE_WAYLAND",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Реальная CachyOS KDE Wayland: GUI/масштаб/звук/изоляция/миграция.",
+      "evidence": [
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "executed_report",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ]
+    },
+    {
+      "id": "NATIVE_CACHYOS_KDE_X11",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Реальная CachyOS KDE X11: GUI/масштаб/звук/изоляция/миграция.",
+      "evidence": [
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "executed_report",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ]
+    },
+    {
+      "id": "ACTUAL_TOR_BOOTSTRAP",
+      "mandatory": true,
+      "status": "BLOCKED",
+      "scope": "Выполнялся настоящий bundled Tor на одном Ubuntu host: DIRECT max0%, SNOWFLAKE max10%; готовность не достигнута. Нет SOCKS harness под видом Tor.",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0/tor-profiles/RESULTS.json",
+          "kind": "executed_report",
+          "sha256": "d3cce1caca43297c679e691630adb14f0786d0ff34f47d9093d250aabbe53858"
+        },
+        {
+          "path": "docs/test-results/2.5.0/tor-profiles/probe.log",
+          "kind": "executed_report",
+          "sha256": "31ff604ede0d0e6827fc5ce4f87b5d1460afa47b20eb27f2d453044019effa38"
+        }
+      ],
+      "directMaximumPercent": 0,
+      "snowflakeMaximumPercent": 10
+    },
+    {
+      "id": "REAL_PUBLIC_PROFILE_AVATAR_AB",
+      "mandatory": true,
+      "status": "BLOCKED",
+      "scope": "Семь запланированных реальных avatar/profile операций не выполнялись из-за actual Tor bootstrap; production Relay не менялся.",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0/tor-profiles/RESULTS.json",
+          "kind": "executed_report",
+          "sha256": "d3cce1caca43297c679e691630adb14f0786d0ff34f47d9093d250aabbe53858"
+        },
+        {
+          "path": "PROFILE-SYNC-AUDIT-2.5.0.md",
+          "kind": "executed_report",
+          "sha256": "27b4515673093531a66471f32c7c59fe5aae3639a38a605f30fcc25dd76a2fc3"
+        }
+      ],
+      "checksNotRun": [
+        "publish",
+        "crossAccountReceive",
+        "changedAvatar",
+        "privacyRestriction",
+        "avatarRemoval",
+        "offlineCacheAfterRestart",
+        "relayRestartPersistence"
+      ]
+    },
+    {
+      "id": "MIGRATION_NATIVE_REGRESSION",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Нативное обновление копий профиля 1.5/2.0→2.5 с аккаунтами, identity, письмами, архивом, темами и макетами; local fixtures не заменяют установку.",
+      "evidence": [
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "executed_report",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ]
+    },
+    {
+      "id": "SIGNED_UPDATER_END_TO_END",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Отдельный owner-signed тестовый канал: download через Tor, проверка, подтверждение, выход, установка, перезапуск и сохранность данных. Manifest-only тест не закрывает gate.",
+      "evidence": [
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "executed_report",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        },
+        {
+          "path": "OWNER-OFFLINE-MANIFEST-2.5.0.md",
+          "kind": "executed_report",
+          "sha256": "f68b41f0c8bb69d406ac3cf7d61ffa88d362fc6188df14193811934ecdce39f8"
+        }
+      ]
+    },
+    {
+      "id": "UPDATER_ROLLBACK_NATIVE",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Реальный сбой установки и подтверждённый rollback на обеих платформах в тестовой копии.",
+      "evidence": [
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "executed_report",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ]
+    },
+    {
+      "id": "FINAL_ARTIFACTS_HASHES_AND_INSTALL",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Требуются окончательные Setup/Portable/AppImage/source/native kit, SHA256SUMS и реальные установки; tests packaging policy не равны этому gate.",
+      "evidence": [
+        {
+          "path": "TEST-REPORT-2.5.0.md",
+          "kind": "unavailable_or_pending_acceptance_explanation"
+        }
+      ]
+    },
+    {
+      "id": "OWNER_OFFLINE_SIGNATURE",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Подписываемый manifest должен пройти офлайн-подпись владельцем и проверку pinned Ed25519 public key. Приватный ключ не используется этой работой.",
+      "evidence": [
+        {
+          "path": "OWNER-OFFLINE-MANIFEST-2.5.0.md",
+          "kind": "executed_report",
+          "sha256": "f68b41f0c8bb69d406ac3cf7d61ffa88d362fc6188df14193811934ecdce39f8"
+        }
+      ]
+    },
+    {
+      "id": "PRODUCTION_FEED_POLICY",
+      "mandatory": true,
+      "status": "PASS",
+      "scope": "Read-only git diff: production stable.json/.sig не изменены относительно базового commit. Публикация Stable не выполнялась. Этот PASS не является разрешением на публикацию.",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0/base-source-verification.json",
+          "kind": "executed_report",
+          "sha256": "539e5e9b53debce5c41de0b27a4a753f0e1000b3c60cc6efc18693e852e8b30c"
+        }
+      ],
+      "validationMethod": "git diff --name-only BASE -- updates/stable.json updates/stable.json.sig",
+      "changedPaths": []
+    },
+    {
+      "id": "BROWSER01",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Определение поддерживаемой ОС и архитектуры",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "PASS",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+        }
+      ]
+    },
+    {
+      "id": "BROWSER02",
+      "mandatory": true,
+      "status": "BLOCKED",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Получение официального пакета Tor Browser",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "PASS",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+        },
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/metadata-fetch-results.json",
+          "kind": "executed_report",
+          "sha256": "d5c4cf7e40283428024cf18beca54119b3472e348e8fc0028b2eac9ea24ec71b"
+        }
+      ]
+    },
+    {
+      "id": "BROWSER03",
+      "mandatory": true,
+      "status": "BLOCKED",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Получение соответствующей OpenPGP-подписи пакета",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "PASS",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+        }
+      ]
+    },
+    {
+      "id": "BROWSER04",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Проверка подлинности официального пакета",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "PASS",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+        }
+      ]
+    },
+    {
+      "id": "BROWSER05",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Отклонение неверной подписи",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "PASS",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+        }
+      ]
+    },
+    {
+      "id": "BROWSER06",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Отклонение неподдерживаемой версии",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "PASS",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+        }
+      ]
+    },
+    {
+      "id": "BROWSER07",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Безопасная распаковка пакета",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "PASS",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+        }
+      ]
+    },
+    {
+      "id": "BROWSER08",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Защита от path traversal",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "PASS",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+        }
+      ]
+    },
+    {
+      "id": "BROWSER09",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Атомарность установки",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "PASS",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+        }
+      ]
+    },
+    {
+      "id": "BROWSER10",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Восстановление после ошибки установки",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "PASS",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+        }
+      ]
+    },
+    {
+      "id": "BROWSER11",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Повторное открытие без повторного скачивания",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "PASS",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+        }
+      ]
+    },
+    {
+      "id": "BROWSER12",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Обнаружение установленного Tor Browser",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "PASS",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+        }
+      ]
+    },
+    {
+      "id": "BROWSER13",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Отсутствие переноса чужого браузерного профиля",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "PASS",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+        }
+      ]
+    },
+    {
+      "id": "BROWSER14",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Изоляция браузера",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "PASS",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+        }
+      ]
+    },
+    {
+      "id": "BROWSER15",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Отсутствие clearnet fallback",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "PASS",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+        }
+      ]
+    },
+    {
+      "id": "BROWSER16",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Отсутствие DNS-утечек",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "NOT_RUN",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ]
+    },
+    {
+      "id": "BROWSER17",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Отсутствие WebRTC/IP-утечек",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "NOT_RUN",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ]
+    },
+    {
+      "id": "BROWSER18",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Открытие обычного HTTPS-сайта",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "NOT_RUN",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ]
+    },
+    {
+      "id": "BROWSER19",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Открытие onion-ресурса",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "NOT_RUN",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ]
+    },
+    {
+      "id": "BROWSER20",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Корректное завершение принадлежащего приложению браузерного процесса",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "PASS",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+        }
+      ]
+    },
+    {
+      "id": "BROWSER21",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Недоступность identity keys и данных архива браузеру",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "PASS",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+        }
+      ]
+    },
+    {
+      "id": "BROWSER22",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Безопасные загрузки и явный импорт",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "PASS",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+        }
+      ]
+    },
+    {
+      "id": "BROWSER23",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Открытие ссылок из писем",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "PASS",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+        }
+      ]
+    },
+    {
+      "id": "BROWSER24",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Совместимость со штатным updater Tor Browser",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "PASS",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+        }
+      ]
+    },
+    {
+      "id": "BROWSER25",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Нативная приёмка браузера на всех целевых платформах",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "NOT_RUN",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-tor-browser/TOR-BROWSER-ACQUISITION-EVIDENCE.json",
+          "kind": "executed_report",
+          "sha256": "fcd5c1ff4170e2e6b2fad5ac476da4cc3f0f646ff3994afc71793b806156a4e1"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ]
+    },
+    {
+      "id": "VOICE32",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Проверка CPU/RAM нагрузки",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "NOT_RUN",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ]
+    },
+    {
+      "id": "VOICE33",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Разговор продолжительностью не менее 60 минут",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "PASS",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+        }
+      ]
+    },
+    {
+      "id": "VOICE34",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Работа при высокой задержке Tor",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "PASS",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+        }
+      ]
+    },
+    {
+      "id": "VOICE35",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Адаптивные буфер и bitrate",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "PASS",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+        }
+      ]
+    },
+    {
+      "id": "VOICE36",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Одновременная работа Взора и Гласа",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "NOT_RUN",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ]
+    },
+    {
+      "id": "VOICE37",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Письма во время звонка",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "PASS",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+        }
+      ]
+    },
+    {
+      "id": "VOICE38",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Архив во время звонка",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "NOT_RUN",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ]
+    },
+    {
+      "id": "VOICE39",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Освобождение аудиоресурсов",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "PASS",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+        }
+      ]
+    },
+    {
+      "id": "VOICE40",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Отсутствие утечек потоков и памяти",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "PASS",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+        }
+      ]
+    },
+    {
+      "id": "VOICE41",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Отклонение повреждённых, слишком больших и malformed пакетов",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "PASS",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+        }
+      ]
+    },
+    {
+      "id": "VOICE42",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Отсутствие nonce/key reuse",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "PASS",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+        }
+      ]
+    },
+    {
+      "id": "VOICE43",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Защита от подмены identity-ключа",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "PASS",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+        }
+      ]
+    },
+    {
+      "id": "VOICE44",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Отсутствие аудио до аутентификации и принятия",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "PASS",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+        }
+      ]
+    },
+    {
+      "id": "VOICE45",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Отсутствие секретов в crash dumps/диагностике в границах возможностей ОС",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "NOT_RUN",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ]
+    },
+    {
+      "id": "VOICE46",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Блокировка экрана и sleep/resume",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "NOT_RUN",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        }
+      ]
+    },
+    {
+      "id": "VOICE47",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Аварийное завершение одного клиента",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "PASS",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+        }
+      ]
+    },
+    {
+      "id": "VOICE48",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Совместимость со старыми клиентами",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "PASS",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+        }
+      ]
+    },
+    {
+      "id": "VOICE49",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Отсутствие несанкционированной записи",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "PASS",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+        }
+      ]
+    },
+    {
+      "id": "VOICE50",
+      "mandatory": true,
+      "status": "NOT_RUN",
+      "scope": "Полная приёмка требования в официальном/нативном сценарии; не равна локальным fixture-тестам.",
+      "requirementRu": "Недоступный или заблокированный контакт",
+      "origin": "provided_2.5.0_requirement_numbering",
+      "localVerificationStatus": "PASS",
+      "officialOrNativeEndToEndStatus": "NOT_RUN",
+      "evidence": [
+        {
+          "path": "docs/test-results/2.5.0-voice-controller/README.md",
+          "kind": "executed_report",
+          "sha256": "365b6f20c8cacfb94d563baacb633246f68d514bdfcb640ecbedc293ea5167e9"
+        },
+        {
+          "path": "GLAS-AUDIO-2.5.0-RU.md",
+          "kind": "implementation_and_local_test_scope",
+          "sha256": "a8e7f06c74324b5d9f28698fb49e3489d1945924c7bc4bd8c8452842d3634de3"
+        },
+        {
+          "path": "NATIVE-ACCEPTANCE-2.5.0.md",
+          "kind": "pending_acceptance_plan_not_result",
+          "sha256": "d729b8cb44713ddfbf57bcfb5c5384a610c9a8c7f3b29205f3027fb8c53277bb"
+        },
+        {
+          "path": "docs/test-results/2.5.0/full-java/client-core/TEST-junit-jupiter.xml",
+          "kind": "executed_report",
+          "sha256": "206b2aca257867365a65311e8e19b36a4064d2e6fb5725fbb03543c8467cbc93"
+        }
+      ]
+    }
+  ],
+  "evaluation": {
+    "expression": "bool(mandatory) and all(gate[\"status\"] == \"PASS\" for gate in mandatory)",
+    "mandatoryCount": 60,
+    "statusCounts": {
+      "PASS": 5,
+      "NOT_RUN": 51,
+      "BLOCKED": 4
+    },
+    "allMandatoryPass": false,
+    "unmetMandatoryIds": [
+      "FIXED_SOURCE_ARTIFACT_BINDING",
+      "FINAL_HEADLESS_UI",
+      "NATIVE_WINDOWS11",
+      "NATIVE_CACHYOS_KDE_WAYLAND",
+      "NATIVE_CACHYOS_KDE_X11",
+      "ACTUAL_TOR_BOOTSTRAP",
+      "REAL_PUBLIC_PROFILE_AVATAR_AB",
+      "MIGRATION_NATIVE_REGRESSION",
+      "SIGNED_UPDATER_END_TO_END",
+      "UPDATER_ROLLBACK_NATIVE",
+      "FINAL_ARTIFACTS_HASHES_AND_INSTALL",
+      "OWNER_OFFLINE_SIGNATURE",
+      "BROWSER01",
+      "BROWSER02",
+      "BROWSER03",
+      "BROWSER04",
+      "BROWSER05",
+      "BROWSER06",
+      "BROWSER07",
+      "BROWSER08",
+      "BROWSER09",
+      "BROWSER10",
+      "BROWSER11",
+      "BROWSER12",
+      "BROWSER13",
+      "BROWSER14",
+      "BROWSER15",
+      "BROWSER16",
+      "BROWSER17",
+      "BROWSER18",
+      "BROWSER19",
+      "BROWSER20",
+      "BROWSER21",
+      "BROWSER22",
+      "BROWSER23",
+      "BROWSER24",
+      "BROWSER25",
+      "VOICE32",
+      "VOICE33",
+      "VOICE34",
+      "VOICE35",
+      "VOICE36",
+      "VOICE37",
+      "VOICE38",
+      "VOICE39",
+      "VOICE40",
+      "VOICE41",
+      "VOICE42",
+      "VOICE43",
+      "VOICE44",
+      "VOICE45",
+      "VOICE46",
+      "VOICE47",
+      "VOICE48",
+      "VOICE49",
+      "VOICE50"
+    ],
+    "automaticPromotionAllowed": false,
+    "signingOrPublicationPerformedByEvaluation": false
+  },
+  "productionReady": false,
+  "stablePublicationAuthorized": false,
+  "stablePublished": false,
+  "productionRelayChanged": false,
+  "stableFeedChanged": false,
+  "pinnedPublicKeyChanged": false,
+  "ownerPrivateSigningKeyUsed": false,
+  "requirementMatrix": "FINAL-VERIFICATION-2.5.0.json",
+  "evaluatorContract": {
+    "input": "mandatory[].status",
+    "writeBack": false,
+    "nonPassStatusesBlockReadiness": true,
+    "productionReadyCannotBeSetFromBuildOrUnitTestsAlone": true,
+    "ownerStablePermissionRemainsSeparate": true
+  }
+}

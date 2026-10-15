@@ -1,0 +1,3 @@
+Oct 15, 2026 11:49:10 AM com.sun.javafx.application.PlatformImpl startup
+WARNING: Unsupported JavaFX configuration: classes were loaded from 'unnamed module @1b9e1916'
+VzorGlas250Smoke PASS_HEADLESS: actual MessengerApp 8 sections, 8 theme/scale combinations at 800x600, 37 real JavaFX screenshots; compact/advanced Vzor, Russian picker cancellation, invalid URL; unavailable prerequisite scenario=LINUX_SLIRP_MISSING; Glas idle/audio preference save with no automatic microphone; one Stage. Tor/browser/call transport/native OS NOT_RUN.

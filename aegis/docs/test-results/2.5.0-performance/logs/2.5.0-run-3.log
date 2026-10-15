@@ -1,0 +1,4 @@
+startedUTC=2026-10-15T10:03:17.894265+00:00
+command=['/workspace/scratch/aa629f360927/inputs/jdk-21.0.12.1+1/bin/java', '-Xms128m', '-Xmx768m', '-Djava.awt.headless=true', '-cp', '/tmp/aegis-core-baseline250/final/classes:/tmp/aegis-core-baseline250/runtime/2.5.0/*:/tmp/aegis-core-baseline250/runtime/dependencies/*', 'org.securemail.client.archive.CoreBaselineBenchmark', '2.5.0', '3', '/tmp/aegis-core-baseline250/final/fixtures', '/tmp/aegis-core-baseline250/final/runs/2.5.0-run-3.json']
+CoreBaselineBenchmark 2.5.0 repetition=3 PASS (synthetic offline core only)
+exitCode=0

@@ -1,0 +1,94 @@
+{
+  "versionLabel": "2.0.0",
+  "repetition": 3,
+  "startedUTC": "2026-10-15T10:03:12.764830790Z",
+  "cpuCounterPreference": "public OperatingSystemMXBean.getProcessCpuTime via reflection; optional ProcessHandle fallback; missing or regressing counter is UNAVAILABLE",
+  "loadedApplicationSources": {
+    "EncryptedArchive": "file:/tmp/aegis-core-baseline250/runtime/2.0.0/client-core.jar",
+    "LocalStore": "file:/tmp/aegis-core-baseline250/runtime/2.0.0/client-core.jar",
+    "Protocol": "file:/tmp/aegis-core-baseline250/runtime/2.0.0/common-protocol.jar"
+  },
+  "environment": {
+    "javaVersion": "21.0.12.1",
+    "osVersion": "6.18.44",
+    "vmName": "OpenJDK 64-Bit Server VM",
+    "vmArguments": [
+      "-Xms128m",
+      "-Xmx768m",
+      "-Djava.awt.headless\u003dtrue"
+    ],
+    "osName": "Linux",
+    "logicalProcessors": 8,
+    "javaVendor": "Eclipse Adoptium",
+    "osArch": "amd64"
+  },
+  "fixture": {
+    "binarySha256": "20f364a23762cb1a2e4f14f7036e9718ed806447caad2881a27fc4af14050415",
+    "binaryPattern": "constant 0x41 stream, no plaintext file staging",
+    "vault": "one synthetic bound identity, no mail/contacts/avatar",
+    "randomCryptoMaterial": "normal SecureRandom; intentionally not seeded",
+    "textDocuments": 32,
+    "searchExpectedMatches": 1,
+    "textBytesEach": 8192,
+    "clock": "2026-10-15T00:00:00Z",
+    "searchQuery": "benchmark-needle-31",
+    "binaryBytes": 33554432
+  },
+  "archiveRepeatedFullTextSearchNanos": [
+    30576959,
+    20061204,
+    22162724,
+    16160080,
+    21622146
+  ],
+  "timingNanos": {
+    "localVaultCreateBindCloseNanos": 581037557,
+    "localVaultOpenOfflineNanos": 277643451,
+    "archiveCreateNanos": 269373154,
+    "archiveBinaryImport32MiBNanos": 638178596,
+    "archiveTextImport32x8KiBNanos": 233852478,
+    "archiveOpenPopulatedNanos": 210362664,
+    "archiveFullTextFirstSearchNanos": 65143556
+  },
+  "workWallNanos": 2387476798,
+  "workCpuCounterBeforeNanos": 270000000,
+  "workCpuCounterAfterNanos": 4190000000,
+  "workProcessCpuNanos": 3920000000,
+  "memoryAfterWorkBeforeExplicitGc": {
+    "heapUsedBytes": 123287360,
+    "heapCommittedBytes": 551550976,
+    "heapMaximumBytes": 805306368,
+    "linuxPeakRssBytes": 315604992,
+    "linuxRssBytes": 315604992
+  },
+  "memoryAfterExplicitGcAnd500msSettle": {
+    "heapUsedBytes": 8823472,
+    "heapCommittedBytes": 134217728,
+    "heapMaximumBytes": 805306368,
+    "linuxPeakRssBytes": 320405504,
+    "linuxRssBytes": 208375808
+  },
+  "boundedIdle": {
+    "wallNanos": 2000129392,
+    "cpuCounterBeforeNanos": 4260000000,
+    "cpuCounterAfterNanos": 4260000000,
+    "vaultAndArchiveRemainOpen": true,
+    "applicationUiNetworkAudioThreadsStarted": false,
+    "cpuStatus": "MEASURED",
+    "processCpuNanosDelta": 0,
+    "oneCoreCpuPercent": 0.0,
+    "normalizedCpuPercent": 0.0
+  },
+  "memoryAfterIdle": {
+    "heapUsedBytes": 8823472,
+    "heapCommittedBytes": 134217728,
+    "heapMaximumBytes": 805306368,
+    "linuxPeakRssBytes": 320405504,
+    "linuxRssBytes": 208379904
+  },
+  "fixtureChecks": "PASS",
+  "nativeAcceptance": "NOT_RUN",
+  "networkAuthentication": "NOT_RUN",
+  "TorBrowserAudioStartup": "NOT_RUN",
+  "finishedUTC": "2026-10-15T10:03:17.774679154Z"
+}

@@ -1,0 +1,204 @@
+{
+  "capturedUTC": "2026-10-15T09:59:02.368495+00:00",
+  "baseline": "locally available published2.0.0 AppImage extracted JARs; hashes match bundled SOURCE-PROVENANCE-2.0.0.json",
+  "baselineRuntimeSourceCommit": "0a8efa98c1307ae2dc88c00d6b3208cdb260282b",
+  "baselineAppImageSha256": "4e75b00b93b3ed6321f40b5e6052cb954d5ceafaad1ed7ad802c3eb57fb6e687",
+  "applicationJars": {
+    "2.0.0": {
+      "client-core.jar": {
+        "sha256": "d045d7cf34751644e15793b90c4fb477a64a3b02ed10c6b40d1ae4ba71ed330c",
+        "bytes": 552713,
+        "source": "/workspace/scratch/aa629f360927/inputs/squashfs-root/app/client-core-2.0.0.jar"
+      },
+      "common-protocol.jar": {
+        "sha256": "8e2fc7581e5460d8292ff1b79c1066dea51335654de0f3d1e0270e69b5e261c6",
+        "bytes": 20465,
+        "source": "/workspace/scratch/aa629f360927/inputs/squashfs-root/app/common-protocol-0.2.0.jar"
+      }
+    },
+    "2.5.0": {
+      "client-core.jar": {
+        "sha256": "68f865dcda531fb9e6a0b87c1cd4b4f40529bb8790d5eb2446589e94295c4b76",
+        "bytes": 704450,
+        "source": "/workspace/scratch/aa629f360927/aegis/aegis/build/local-java21/client-core.jar"
+      },
+      "common-protocol.jar": {
+        "sha256": "c086bb60fd2ae056a7be8c9e01ddd75acb230404446228ff6994ae258a264286",
+        "bytes": 20465,
+        "source": "/workspace/scratch/aa629f360927/aegis/aegis/build/local-java21/common-protocol.jar"
+      }
+    }
+  },
+  "identicalDependencyJars": [
+    {
+      "name": "bcpg-jdk18on-1.86.jar",
+      "sha256": "8a52ea45b2063f6d41b8ca94409f255a1f4604922f7451c18a7cfd3a3c5b85ab",
+      "bytes": 729938
+    },
+    {
+      "name": "bcprov-jdk18on-1.86.jar",
+      "sha256": "2af190b300cbb0b35e248ccf5f4a06b6072030aeb3da7a98ec73abe5b4cb371f",
+      "bytes": 7224011
+    },
+    {
+      "name": "bcutil-jdk18on-1.86.jar",
+      "sha256": "1c268e15f785aafb1e4670d8d6e5f856f69475e96c162dadcd1ff9b350e9139f",
+      "bytes": 789287
+    },
+    {
+      "name": "common-image-3.14.0.jar",
+      "sha256": "9edb1afd32278d20ad660869bfa5b0a27cf9b3553b6eb3f8fc51a2fc13109b66",
+      "bytes": 79630
+    },
+    {
+      "name": "common-io-3.14.0.jar",
+      "sha256": "ae01308bd48c68e76f6a1f76880cf7f4a3a004aa83d78e5448de358a4d957e8f",
+      "bytes": 92356
+    },
+    {
+      "name": "common-lang-3.14.0.jar",
+      "sha256": "8d4529d6f56a010bc7e130ebfcdaf14bc11586e9d9ae66f6dca66f91da7eafef",
+      "bytes": 121885
+    },
+    {
+      "name": "commons-codec-1.19.0.jar",
+      "sha256": "5c3881e4f556855e9c532927ee0c9dfde94cc66760d5805c031a59887070af5f",
+      "bytes": 374716
+    },
+    {
+      "name": "commons-compress-1.28.0.jar",
+      "sha256": "e1522945218456f3649a39bc4afd70ce4bd466221519dba7d378f2141a4642ca",
+      "bytes": 1117221
+    },
+    {
+      "name": "commons-io-2.20.0.jar",
+      "sha256": "df90bba0fe3cb586b7f164e78fe8f8f4da3f2dd5c27fa645f888100ccc25dd72",
+      "bytes": 563971
+    },
+    {
+      "name": "commons-lang3-3.18.0.jar",
+      "sha256": "4eeeae8d20c078abb64b015ec158add383ac581571cddc45c68f0c9ae0230720",
+      "bytes": 702952
+    },
+    {
+      "name": "commons-logging-1.3.5.jar",
+      "sha256": "6d7a744e4027649fbb50895df9497d109f98c766a637062fe8d2eabbb3140ba4",
+      "bytes": 73737
+    },
+    {
+      "name": "error_prone_annotations-2.48.0.jar",
+      "sha256": "b49c5c958316ed67a09c699dda9aa749caf434d51d863dea599ef36a49b9c855",
+      "bytes": 20255
+    },
+    {
+      "name": "fontbox-3.0.8.jar",
+      "sha256": "a1915c24e3edbe0ecec93896dfbf6d41427810b663ade97bd4e8bae86ec3fdab",
+      "bytes": 1647000
+    },
+    {
+      "name": "gson-2.14.0.jar",
+      "sha256": "2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f",
+      "bytes": 313604
+    },
+    {
+      "name": "imageio-core-3.14.0.jar",
+      "sha256": "a1b832b5090bd4677696f999b5ccb8954e987eb9674632a6286a6de2bb1c3c78",
+      "bytes": 122975
+    },
+    {
+      "name": "imageio-metadata-3.14.0.jar",
+      "sha256": "03768fc012bd2573236da803099aba6961dfb29c190103f9790fc49ac27f84c1",
+      "bytes": 83630
+    },
+    {
+      "name": "imageio-webp-3.14.0.jar",
+      "sha256": "40e5b82b99bde56889f810349615f9403aae6a0d39cdc27c6899754770bb3752",
+      "bytes": 81195
+    },
+    {
+      "name": "javafx-base-21.0.12-linux.jar",
+      "sha256": "ac83213e343d734d7d315b4a850b309d8de4a4950c6e46497d8bc68e744b245d",
+      "bytes": 753227
+    },
+    {
+      "name": "javafx-controls-21.0.12-linux.jar",
+      "sha256": "de5417dbb39920d19376073dbbe896b97cbd5a4e88d56cc6627ff0a32666dc04",
+      "bytes": 2582535
+    },
+    {
+      "name": "javafx-graphics-21.0.12-linux.jar",
+      "sha256": "200ee46c819d03811c736900cdfacb2047921313b261d93e52cdeef1eaf1ebb7",
+      "bytes": 4682157
+    },
+    {
+      "name": "jna-5.19.1.jar",
+      "sha256": "4fb141dd8ef6b0585ffceea4bc49602fbc6312fa977e2c488794ea3e6aafecae",
+      "bytes": 1950853
+    },
+    {
+      "name": "jna-platform-5.19.1.jar",
+      "sha256": "3b3864f5b449e9c3c24b16861524b622b086563f44e0cd8384c8efc5a6052f82",
+      "bytes": 1416385
+    },
+    {
+      "name": "jsr305-3.0.2.jar",
+      "sha256": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7",
+      "bytes": 19936
+    },
+    {
+      "name": "pdfbox-3.0.8.jar",
+      "sha256": "97647cfbde61ebcfc06b4cf8c9b0ffcaaee073396eceb4a7f6836a9b9128903c",
+      "bytes": 2070583
+    },
+    {
+      "name": "pdfbox-io-3.0.8.jar",
+      "sha256": "36a0e04001010b4c764857817412b96339930b19755e728959805cc0352061b2",
+      "bytes": 51906
+    },
+    {
+      "name": "protobuf-java-4.33.6.jar",
+      "sha256": "c24b2464ecfe9ac1d44e3a8fe281fca09e6ad2ca73dbd689dd7d6d719df987b5",
+      "bytes": 1886534
+    },
+    {
+      "name": "tink-1.23.0.jar",
+      "sha256": "5bcdc8798ce106f5145acb4a0e993c5e5861337b1e75ca88ceb6ab9da10fa512",
+      "bytes": 2775464
+    },
+    {
+      "name": "xz-1.12.jar",
+      "sha256": "3e158a87bd73d8afb4b6e8239c013b7d049c48563f45860ce99cd2e448cf4a6b",
+      "bytes": 168792
+    },
+    {
+      "name": "zip4j-2.11.6.jar",
+      "sha256": "5f1eb1e9d67cfee200a695e4079751b49e73a226b154193e13f7c602efbe72fb",
+      "bytes": 213881
+    }
+  ],
+  "currentScope": "snapshot of current root intermediate build/local-java21 Core/Protocol JARs; not a claim for later replacements",
+  "javaExecutable": "/workspace/scratch/aa629f360927/inputs/jdk-21.0.12.1+1/bin/java",
+  "javaOptions": [
+    "-Xms128m",
+    "-Xmx768m",
+    "-Djava.awt.headless=true"
+  ],
+  "benchmarkSourceSha256": "812731c50216453c8be270ece9e3f800ba6f8a5d3337b29b48c7306698323cb1",
+  "sequentialOrder": [
+    "2.0.0/1",
+    "2.5.0/1",
+    "2.5.0/2",
+    "2.0.0/2",
+    "2.0.0/3",
+    "2.5.0/3"
+  ],
+  "repetitionsPerVersion": 3,
+  "physicalLoad": "NOT_RUN",
+  "nativeOsAcceptance": "NOT_RUN",
+  "backgroundHostLoadAtCapture": "0.50 0.50 0.53 1/197 5",
+  "cpuCounterChange": "ProcessHandle-only attempt reported UNAVAILABLE; now public OS bean via reflection with fallback; prior attempt preserved",
+  "measurementStartedUTC": "2026-10-15T10:01:50.185954+00:00",
+  "runStartedUTC": "2026-10-15T10:02:50.026216+00:00",
+  "runtimeSnapshot": "/tmp/aegis-core-baseline250/runtime",
+  "runnerSha256": "cb4d72efa7ffcef197c93954e6a58afab9f80308566246865ceed70f58db11f9"
+}

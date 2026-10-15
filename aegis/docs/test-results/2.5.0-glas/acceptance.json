@@ -1,0 +1,14 @@
+{
+  "automatedCodecAndLifecycleTests": {
+    "tests": 11,
+    "status": "PASS"
+  },
+  "linuxCodecNativeExecution": "PASS",
+  "windowsCrossCompilation": "PASS",
+  "windowsRuntime": "NOT_RUN",
+  "windows11MicrophoneSpeaker": "NOT_RUN",
+  "cachyosKdeWaylandAudio": "NOT_RUN",
+  "cachyosKdeX11Audio": "NOT_RUN",
+  "realAcousticEchoCancellation": "NOT_RUN",
+  "reason": "No /dev/snd or native target desktop available; lifecycle device seams are simulated, codec/DSP fixtures use real native libraries."
+}

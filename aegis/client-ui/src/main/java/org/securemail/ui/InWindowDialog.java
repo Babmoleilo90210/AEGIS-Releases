@@ -14,7 +14,9 @@ import javafx.stage.*;
 class InWindowDialog<R> {
   private static final Map<Stage,BorderPane> hosts=new WeakHashMap<>();
   private static final Map<Stage,List<InWindowDialog<?>>> pages=new WeakHashMap<>();
-  private final DialogPane pane=new DialogPane();
+  // Wrapped content needs the allocated width when its preferred height is
+  // measured by the scrolling document. DialogPane otherwise reports no bias.
+  private final DialogPane pane=new DialogPane(){@Override public javafx.geometry.Orientation getContentBias(){return javafx.geometry.Orientation.HORIZONTAL;}};
   private final Label heading=new Label();
   private Stage owner;private BorderPane host;private Node previous;private BorderPane page;
   private Function<ButtonType,R> converter;private R result;private boolean showing,waiting;private Runnable hidden=()->{};
@@ -28,7 +30,7 @@ class InWindowDialog<R> {
     else {found=new BorderPane(root);owner.getScene().setRoot(found);}
     hosts.put(owner,found);return found;
   }
-  InWindowDialog(){pane.getStyleClass().add("in-window-content");}
+  InWindowDialog(){pane.getStyleClass().add("in-window-content");pane.setMinWidth(0);}
   void initOwner(Window owner){if(!(owner instanceof Stage stage))throw new IllegalArgumentException("Main stage required");this.owner=stage;}
   void setTitle(String title){heading.setText(title);}
   void setHeaderText(String text){pane.setHeaderText(text);}
@@ -39,12 +41,19 @@ class InWindowDialog<R> {
   boolean isShowing(){return showing;}
   void show(){
     if(showing)return;if(owner==null)owner=main();host=host(owner);previous=host.getCenter();
-    Button back=new Button("← Назад");back.setOnAction(e->close());heading.getStyleClass().add("heading");
-    HBox bar=new HBox(12,back,heading);bar.setPadding(new Insets(12,16,12,16));
-    ScrollPane scroll=new ScrollPane(pane);scroll.setFitToWidth(true);scroll.setFitToHeight(true);
+    Button back=new Button("← Назад");back.setMinWidth(Region.USE_PREF_SIZE);back.setOnAction(e->close());heading.getStyleClass().add("heading");
+    heading.setWrapText(true);heading.setMinWidth(0);heading.setMaxWidth(Double.MAX_VALUE);HBox.setHgrow(heading,Priority.ALWAYS);
+    HBox bar=new HBox(12,back,heading);bar.setAlignment(javafx.geometry.Pos.CENTER_LEFT);bar.setPadding(new Insets(12,16,12,16));
+    VBox document=new VBox(pane);document.setMinWidth(0);pane.setMaxWidth(Double.MAX_VALUE);
+    ScrollPane scroll=new ScrollPane(document);scroll.setFitToWidth(true);
     page=new BorderPane(scroll);page.setTop(bar);page.getStyleClass().add("in-window-page");
     for(ButtonType type:pane.getButtonTypes()){
-      Node node=pane.lookupButton(type);if(node instanceof Button button)button.addEventHandler(ActionEvent.ACTION,e->{
+      Node node=pane.lookupButton(type);
+      if(node instanceof Button localized){
+        String label=type==ButtonType.CANCEL?"Отмена":type==ButtonType.OK?"ОК":type==ButtonType.CLOSE?"Закрыть":type==ButtonType.YES?"Да":type==ButtonType.NO?"Нет":type==ButtonType.APPLY?"Применить":type==ButtonType.FINISH?"Готово":type==ButtonType.NEXT?"Далее":type==ButtonType.PREVIOUS?"Назад":null;
+        if(label!=null)localized.setText(label);
+      }
+      if(node instanceof Button button)button.addEventHandler(ActionEvent.ACTION,e->{
         if(e.isConsumed())return;
         if(converter!=null)result=converter.apply(type);else { @SuppressWarnings("unchecked") R value=(R)type;result=value; }
         close();e.consume();

@@ -1,0 +1,20 @@
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+Oct 15, 2026 11:36:32 AM org.junit.jupiter.engine.extension.TempDirectory$CloseablePath$1 warnAboutLinkWithTargetOutsideTempDir
+WARNING: Deleting symbolic link from location inside of temp dir (/tmp/junit-3101845364880056658/alias) to location outside of temp dir (/usr) but not the target file/directory
+
+Test run finished after 425 ms
+[         6 containers found      ]
+[         0 containers skipped    ]
+[         6 containers started    ]
+[         0 containers aborted    ]
+[         6 containers successful ]
+[         0 containers failed     ]
+[        20 tests found           ]
+[         0 tests skipped         ]
+[        20 tests started         ]
+[         0 tests aborted         ]
+[        20 tests successful      ]
+[         0 tests failed          ]
+

@@ -1,0 +1,721 @@
+{
+  "productionReady": false,
+  "generatedUTC": "2026-10-15T09:50:29.874325+00:00",
+  "baseCommit": "f173b4a1bb5f1e3ed121870aa04a6583833f93e9",
+  "scope": "Isolated current UI source overlay over copied intermediate root 2.5 JARs, not final later application binaries",
+  "tests": [
+    {
+      "name": "Interface250RefinementSmoke",
+      "status": "PASS_HEADLESS",
+      "exitCode": 0,
+      "cleanRendering": true,
+      "log": "logs/Interface250RefinementSmoke.log",
+      "sourceInputs": "source-inputs.json",
+      "coverage": [
+        "800x600 Scene",
+        "100/125/150/200%",
+        "minimal-dark/classic-light",
+        "16 distinct rendered preset previews",
+        "long Russian theme name and separate favorite controls",
+        "favorite persistence, search, categories, actual Apply",
+        "raw archive type IDs preserved and Russian display",
+        "11 embedded management forms at wide and 200% narrow layouts",
+        "no unexpected Stage",
+        "secret cleanup after nested page return and later entry",
+        "actual encrypted archive create/import/search",
+        "actual ComboBox/MenuButton/second and third-level context popup bounds/font",
+        "Russian safe errors without parser/path leak, bounded diagnostic cause types, stored System font ID",
+        "optional jdk.management absent"
+      ]
+    },
+    {
+      "name": "SettingsResponsive200Smoke",
+      "status": "PASS_HEADLESS",
+      "exitCode": 0,
+      "cleanRendering": true,
+      "log": "logs/SettingsResponsive200Smoke.log",
+      "sourceInputs": "source-inputs.json",
+      "coverage": [
+        "real800x600 across100/125/150/200% and2themes",
+        "5 groups shared category panel",
+        "content below, shared scrolling, equal controls",
+        "signed offline avatar refresh/removal"
+      ]
+    },
+    {
+      "name": "Interface200Smoke",
+      "status": "PARTIAL_BACKEND_ERROR",
+      "exitCode": 0,
+      "functionalAssertions": "PASS",
+      "cleanRendering": false,
+      "log": "logs/Interface200Smoke-partial-backend-error.log",
+      "sourceInputs": "source-inputs-legacy-regression.json",
+      "failure": "MonoclePixels/UploadingPainter IllegalArgumentException Too small int buffer on680x560 to1280x850 resize; waiting for Scene dimensions did not remove backend error"
+    }
+  ],
+  "optionalCpuModule": {
+    "moduleLimit": "java.se,jdk.unsupported,jdk.charsets,jdk.crypto.ec",
+    "status": "UNAVAILABLE_OPTIONAL_JDK_MANAGEMENT",
+    "directComSunManagementLinkage": false
+  },
+  "screenshots": [
+    {
+      "path": "screenshots/refinement/actions-classic-light-100-popup-0.png",
+      "width": 175,
+      "height": 121,
+      "sha256": "ce2c5e37b5f29a932f07c4cb1591b114747f741649094242c50990fe8df8bb66",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/actions-classic-light-125-popup-0.png",
+      "width": 242,
+      "height": 192,
+      "sha256": "2b8c73e20799d179481bbeeeef928ae83d56473b48c3eb5c91d2367da53c33bb",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/actions-classic-light-150-popup-0.png",
+      "width": 277,
+      "height": 217,
+      "sha256": "24b6ea577184fc611a64b9e0fabdf006f9573793f2ce13ac4041ad58f8943865",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/actions-classic-light-200-popup-0.png",
+      "width": 346,
+      "height": 262,
+      "sha256": "3606a1cd106a642cb558aefaae47bba568611c9c37b1c9eb141100c39227b7f4",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/actions-minimal-dark-100-popup-0.png",
+      "width": 175,
+      "height": 121,
+      "sha256": "e44d23a5b1eb7ed70d69f84b3ee0cffbe24e619f8b34c1a8a5cff6d11b36f5af",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/actions-minimal-dark-125-popup-0.png",
+      "width": 242,
+      "height": 192,
+      "sha256": "1376fb8e70a96f25a0e50b490d41333291d9517ddcb86467fe5d52079c86b0f4",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/actions-minimal-dark-150-popup-0.png",
+      "width": 277,
+      "height": 217,
+      "sha256": "32cd98acebf088fff45062295abd9bd67f3c6eda63f2e61fe4b0717b3647ef53",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/actions-minimal-dark-200-popup-0.png",
+      "width": 346,
+      "height": 262,
+      "sha256": "0c143684e9e2fec140b425c7981904b6423ab6022a1161c472072f1e95a446b1",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/archive-classic-light-100.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "d1e6beb076a633e8434038400a9fd0dada88bdb16e2d9e05358bb6571974a3f8",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/archive-classic-light-125.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "64a16f493763ee0eb71b9fc0f3f00d138cc4665ab0297838800b141022dbb3b0",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/archive-classic-light-150.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "d5fe3d3be055de48e6f06db3cef73d09af7528078470e63eb951209d9d971cb8",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/archive-classic-light-200.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "6bf96186ec731b1fadd23c5f35a96ee20f3ab5e90583e5247ddc5f34d6bc3282",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/archive-minimal-dark-100.png",
+      "width": 1280,
+      "height": 850,
+      "sha256": "a71f46153d63a47acc7af48067e24caa3cf11e2f01e7678433acde07bc350fd6",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/archive-minimal-dark-125.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "52c279837ccecc80e8df0b0c4e4a138b756ba7192d0a7c129cd1db5713479dd3",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/archive-minimal-dark-150.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "ff0b139d8a1d73e118e858eed24df4927da726923168a72d7a3c0c19d0f81279",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/archive-minimal-dark-200.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "90f78239c1d8af5c6c4f317ceb0a689f26cfe004f446768b35241e7e3907b45c",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/archive-panel-classic-light-200-1.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "fbd7909a1603018f2238243adcd4dd62c09ae0e9f121ff335497ae52dc66ee23",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/archive-panel-classic-light-200-5.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "097f2e15d0f53fb0484b09fe12bd4be8a178d9d62132e04bebfd3d1c91a6c86c",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/archive-panel-classic-light-200-9.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "641813ec590ef3d737218fd9099e7b64c5cd1250c55aabe4ccf8caa0b51af745",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/archive-panel-minimal-dark-200-1.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "8b81e16b3a04c6942bf974645aef2d891f7ee030696795d83adf62682a93f4eb",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/archive-panel-minimal-dark-200-5.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "c33f705ec036519ae38f42fa7878efa4b3a5b94ccc30082c3bbec0ad4580cf9f",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/archive-panel-minimal-dark-200-9.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "91b4aee5e55de7581e4937fc5079e619b079d23034d182b072c5086dcf4d6825",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/backup-menu-classic-light-125-popup-0.png",
+      "width": 242,
+      "height": 192,
+      "sha256": "2b8c73e20799d179481bbeeeef928ae83d56473b48c3eb5c91d2367da53c33bb",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/backup-menu-classic-light-125-popup-1.png",
+      "width": 219,
+      "height": 127,
+      "sha256": "0a4598bfc3bcc446fa9befe507e7608024d9caa5e6e8947cc9b4e6618160dfc8",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/backup-menu-classic-light-125-popup-2.png",
+      "width": 293,
+      "height": 158,
+      "sha256": "1a3d33ff234a5bacfa6c36004f38b4babc1ca89db3c83a76e63a25fda479c259",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/backup-menu-classic-light-150-popup-0.png",
+      "width": 277,
+      "height": 217,
+      "sha256": "24b6ea577184fc611a64b9e0fabdf006f9573793f2ce13ac4041ad58f8943865",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/backup-menu-classic-light-150-popup-1.png",
+      "width": 253,
+      "height": 142,
+      "sha256": "b660efbed4d20278f8e853ed045cf4bb975413c4e60cc6d8d0e9bb1195b11a06",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/backup-menu-classic-light-150-popup-2.png",
+      "width": 344,
+      "height": 178,
+      "sha256": "8402b3ea5549c1448100fa290fadae0488b786cef49323f428aab659a4b5c9aa",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/backup-menu-classic-light-200-popup-0.png",
+      "width": 346,
+      "height": 262,
+      "sha256": "3606a1cd106a642cb558aefaae47bba568611c9c37b1c9eb141100c39227b7f4",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/backup-menu-classic-light-200-popup-1.png",
+      "width": 320,
+      "height": 169,
+      "sha256": "f1d7b8da0e57b8b4d3c921f0125aabc3302229c316eae0caf651e76ad01eccda",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/backup-menu-classic-light-200-popup-2.png",
+      "width": 445,
+      "height": 214,
+      "sha256": "6d2ad13ed16d4e250aed5e62479c4b89d51d66a8b07047834c601fb93c7acc23",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/backup-menu-minimal-dark-125-popup-0.png",
+      "width": 242,
+      "height": 192,
+      "sha256": "1376fb8e70a96f25a0e50b490d41333291d9517ddcb86467fe5d52079c86b0f4",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/backup-menu-minimal-dark-125-popup-1.png",
+      "width": 219,
+      "height": 127,
+      "sha256": "f866d5643a084720a17327e6c6aeb7cda787e76caa57afd3e47b06b10eb0852b",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/backup-menu-minimal-dark-125-popup-2.png",
+      "width": 293,
+      "height": 158,
+      "sha256": "c88da076899b5a6db228c14bff626d755f28d58b98c4895144beb7f8b75cefaa",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/backup-menu-minimal-dark-150-popup-0.png",
+      "width": 277,
+      "height": 217,
+      "sha256": "32cd98acebf088fff45062295abd9bd67f3c6eda63f2e61fe4b0717b3647ef53",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/backup-menu-minimal-dark-150-popup-1.png",
+      "width": 253,
+      "height": 142,
+      "sha256": "20583e7a66fc18fe1bd937f28dd2729206492406335def30624e09069a46f60e",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/backup-menu-minimal-dark-150-popup-2.png",
+      "width": 344,
+      "height": 178,
+      "sha256": "5c9f6d330ff430da664ca77dd7aba400700477bea5367a4af08295f793710e57",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/backup-menu-minimal-dark-200-popup-0.png",
+      "width": 346,
+      "height": 262,
+      "sha256": "0c143684e9e2fec140b425c7981904b6423ab6022a1161c472072f1e95a446b1",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/backup-menu-minimal-dark-200-popup-1.png",
+      "width": 320,
+      "height": 169,
+      "sha256": "990a88cdb935ff70d04beab893ab7a3760e1915238958f4e792c772f1d8635ab",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/backup-menu-minimal-dark-200-popup-2.png",
+      "width": 445,
+      "height": 214,
+      "sha256": "b9e4ef0fe4f78a2cc3da5ae67cafd67dd25ed2c07b9aa921a6c69fc81f5713b5",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/gallery-cards-classic-light-100.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "55084901260311b5972eb0ee2706e7a67026c78589760d69d1933d8dda00ee77",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/gallery-cards-classic-light-125.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "7c225136f45c225c86827128397d96cb4da4a71e8b4e872f3e8866eee01d3267",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/gallery-cards-classic-light-150.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "19487b6e20c7e33284a49ec6d5e3b49e972c86db5b170b8cf6e20f33f5e52827",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/gallery-cards-classic-light-200.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "33969b634d81a4190acd2593dff92f678fa80add6b469b58108c825c110502f0",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/gallery-cards-minimal-dark-100.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "2c1fe4192891158160b78773caedba4a3a1af7ce1cc77fb0b89c6b92801aa763",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/gallery-cards-minimal-dark-125.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "86266e9c3a38274b1115fc78f673930ecf0cb08f19bf26f7a12458666965aec7",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/gallery-cards-minimal-dark-150.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "1d4b18a824a30a0b058ddc43633279cbfb4462c538420e626e276dbfd7a925c4",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/gallery-cards-minimal-dark-200.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "230eb48e7f096b9ae7eac835e7b6c142989ebdba21e3c5831be896ff34ffeb3c",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/gallery-classic-light-100.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "8395475513e3064d6c3bdd1611c9816a3600213cf1caa5d47f5eceb1a1539a5a",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/gallery-classic-light-125.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "f0033e3d95632ca5c7d63c589f887856ae33753e3e01f70a9ad73d87838b859f",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/gallery-classic-light-150.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "d5d3dab519fa88cef486e62b5fe29fc48a31be3e657f65a1b284a8eb626edf2d",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/gallery-classic-light-200.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "b47a5e246d7bb1600db203c054d305ca98c4b37cc36b744420727bba6e0bfcfa",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/gallery-minimal-dark-100.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "71fcddeb260474be1843ff62da140805aae0dc994e862040970ec1a245d04212",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/gallery-minimal-dark-125.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "dcb219320cb484540ce7e9d2fffb8ca727f0db60bd2864b14770f1e614b7dfdd",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/gallery-minimal-dark-150.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "451408b1030c9a8f8dbaf61c08334b87922abdf632ce6356899e7ce496de41c2",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/gallery-minimal-dark-200.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "9de2755e8582325432c898ca558e3c689f3c79fb89e652dfa5c17103b52b5956",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/management-classic-light-125-popup-0.png",
+      "width": 242,
+      "height": 192,
+      "sha256": "2b8c73e20799d179481bbeeeef928ae83d56473b48c3eb5c91d2367da53c33bb",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/management-classic-light-125-popup-1.png",
+      "width": 219,
+      "height": 127,
+      "sha256": "0a4598bfc3bcc446fa9befe507e7608024d9caa5e6e8947cc9b4e6618160dfc8",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/management-classic-light-150-popup-0.png",
+      "width": 277,
+      "height": 217,
+      "sha256": "24b6ea577184fc611a64b9e0fabdf006f9573793f2ce13ac4041ad58f8943865",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/management-classic-light-150-popup-1.png",
+      "width": 253,
+      "height": 142,
+      "sha256": "b660efbed4d20278f8e853ed045cf4bb975413c4e60cc6d8d0e9bb1195b11a06",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/management-classic-light-200-popup-0.png",
+      "width": 346,
+      "height": 262,
+      "sha256": "3606a1cd106a642cb558aefaae47bba568611c9c37b1c9eb141100c39227b7f4",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/management-classic-light-200-popup-1.png",
+      "width": 320,
+      "height": 169,
+      "sha256": "f1d7b8da0e57b8b4d3c921f0125aabc3302229c316eae0caf651e76ad01eccda",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/management-minimal-dark-125-popup-0.png",
+      "width": 242,
+      "height": 192,
+      "sha256": "1376fb8e70a96f25a0e50b490d41333291d9517ddcb86467fe5d52079c86b0f4",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/management-minimal-dark-125-popup-1.png",
+      "width": 219,
+      "height": 127,
+      "sha256": "f866d5643a084720a17327e6c6aeb7cda787e76caa57afd3e47b06b10eb0852b",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/management-minimal-dark-150-popup-0.png",
+      "width": 277,
+      "height": 217,
+      "sha256": "32cd98acebf088fff45062295abd9bd67f3c6eda63f2e61fe4b0717b3647ef53",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/management-minimal-dark-150-popup-1.png",
+      "width": 253,
+      "height": 142,
+      "sha256": "20583e7a66fc18fe1bd937f28dd2729206492406335def30624e09069a46f60e",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/management-minimal-dark-200-popup-0.png",
+      "width": 346,
+      "height": 262,
+      "sha256": "0c143684e9e2fec140b425c7981904b6423ab6022a1161c472072f1e95a446b1",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/management-minimal-dark-200-popup-1.png",
+      "width": 320,
+      "height": 169,
+      "sha256": "990a88cdb935ff70d04beab893ab7a3760e1915238958f4e792c772f1d8635ab",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/types-classic-light-100-popup-0.png",
+      "width": 286,
+      "height": 243,
+      "sha256": "14b4f03a4ffb6ea1f3641d8f17ecf4a88801fab62d1c9a6e2b7f2965048d3653",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/types-classic-light-125-popup-0.png",
+      "width": 286,
+      "height": 264,
+      "sha256": "4a13e87702b8dabf084b648b42dd301afe59d7316c3cfa332e9a38de2b6e8e8f",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/types-classic-light-150-popup-0.png",
+      "width": 286,
+      "height": 299,
+      "sha256": "5f0c0a4077bbd2641f350d7f21b4180955a0ebfdaf8523edbb726bf85af65261",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/types-classic-light-200-popup-0.png",
+      "width": 286,
+      "height": 362,
+      "sha256": "549d3ca975d10a181543b92897fef3d10966bd4e98198d3a71cdb0398cf6a1a5",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/types-minimal-dark-100-popup-0.png",
+      "width": 182,
+      "height": 243,
+      "sha256": "2174cc66c3dcec349516d4637c58afb122ac0c26eb2ef473db6bbcd153b8b556",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/types-minimal-dark-125-popup-0.png",
+      "width": 208,
+      "height": 264,
+      "sha256": "d1d1e18c98ac05b7763372f85c9dd869edde83d3ef5da3663c766228b8e46d7b",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/types-minimal-dark-150-popup-0.png",
+      "width": 234,
+      "height": 299,
+      "sha256": "be43012b84b41bc97f30b387a565090fb61cf33ad1fb004f694d2e7f8778113e",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/refinement/types-minimal-dark-200-popup-0.png",
+      "width": 286,
+      "height": 362,
+      "sha256": "feaa59d73c4043f69d1b232b7e6485395579853ee4d3826fd73f220f9498d412",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/settings/settings-800x600-classic-light-100.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "3ada2d2a46c3d35e9b96f78eb39af6215dc0d3db90b96b8b1f96ac3fa1303d7d",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/settings/settings-800x600-classic-light-125.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "a786285883406eaf6656f998a82acf65d836c65791cb545046a15ce598ff12e1",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/settings/settings-800x600-classic-light-150.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "6a6c78e81f67e6e6aa3ecc2a6512ddba638c0458a3d3676345d993c53d4105a0",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/settings/settings-800x600-classic-light-200.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "023594ca84c881f85f1fb7574f563db358814ccb60ec82387cde64c4b5901f04",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/settings/settings-800x600-minimal-dark-100.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "f1a8ba3a63e0d6f85e95eaaf210d71d92a74847e94451e749374d60772050369",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/settings/settings-800x600-minimal-dark-125.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "8c16744b1b618964721d1f52c07bd0255b518f71c20c73971a4f1d080ef58610",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/settings/settings-800x600-minimal-dark-150.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "2f5171c37664bfb25f2341a2cceefe89cdabe2fe844c4f498a1e8ff77c329f93",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/settings/settings-800x600-minimal-dark-200.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "dcf1c3dbdbf5d0177072837f9090e8f01eaea31ec06a4f0f6abeb77709d7eef5",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/settings/settings-content-800x600-classic-light-100.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "b2e5520a4c6832331a99530f9a5a32c412734bd8857833e1ab4c82f8cf1ec7af",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/settings/settings-content-800x600-classic-light-125.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "53a5dbdbcb05ea6f4e33aa5036bb2a7d18e6f995f3bc96792b6a0914e8e705b0",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/settings/settings-content-800x600-classic-light-150.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "eec421ee3abffe82953f61b45bdf5542a7abe6b4ef2f98864764e68b847f54e1",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/settings/settings-content-800x600-classic-light-200.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "d17a79d5c283709f458fb844bc7f4993c469209845694c8a069b43ad65469d84",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/settings/settings-content-800x600-minimal-dark-100.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "396c9c81dbc9eb5e20ae7543353ea1a16895fbe754abc2f5c2e2057c2658e567",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/settings/settings-content-800x600-minimal-dark-125.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "146cd5e25d1248824497570006aed788fceb50be8f3f6383ada49f9c30594ea3",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/settings/settings-content-800x600-minimal-dark-150.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "403424443174dfa351f0eb663acdb9cbb969fab37c1fbed3bb69483fec914faa",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    },
+    {
+      "path": "screenshots/settings/settings-content-800x600-minimal-dark-200.png",
+      "width": 800,
+      "height": 600,
+      "sha256": "784fb900b8e0d0334e6e50eacdcae4c47286bb150f621f7ba09f31d3e25d7df2",
+      "kind": "actual JavaFX Monocle synthetic fixture; not native Windows/KDE"
+    }
+  ],
+  "nativeWindows11": "NOT_RUN",
+  "nativeCachyOSKDEWayland": "NOT_RUN",
+  "nativeCachyOSKDEX11": "NOT_RUN",
+  "liveTorBrowserNetworkIsolation": "NOT_RUN",
+  "liveRelayAvatarAB": "NOT_RUN",
+  "performanceBaseline": "NOT_RUN",
+  "knownLimitations": [
+    "Monocle headless runs are not native acceptance",
+    "at800x600 and200% gallery uses scrolling; initial viewport mostly title and filters",
+    "legacy resize probe has a captured backend rendering exception",
+    "intermediate JAR evidence cannot be attributed to final future JARs"
+  ],
+  "stableFeedModified": false,
+  "runtimeProvenance": "environment label does not assume Monocle; actual runtime os/java/glass/prism/session properties recorded in performance.json"
+}

@@ -1,0 +1,16 @@
+[
+  {
+    "url": "https://aus1.torproject.org/torbrowser/update_3/release/download-linux-x86_64.json",
+    "status": "BLOCKED_HTML",
+    "contentType": "text/html",
+    "bytes": 195,
+    "sha256": "5b131ca14aa96311d3432b0062c7443d3b0e6346ec279bd376a75f0a76bcd5d7"
+  },
+  {
+    "url": "https://aus1.torproject.org/torbrowser/update_3/release/download-windows-x86_64.json",
+    "status": "BLOCKED_HTML",
+    "contentType": "text/html",
+    "bytes": 195,
+    "sha256": "5b131ca14aa96311d3432b0062c7443d3b0e6346ec279bd376a75f0a76bcd5d7"
+  }
+]

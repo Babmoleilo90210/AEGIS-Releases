@@ -1,0 +1,348 @@
+{
+  "status": "PASS_OFFLINE_SYNTHETIC_MEASUREMENTS",
+  "productionReady": false,
+  "repetitionsPerVersion": 3,
+  "freshJvmPerRepetition": true,
+  "measurements": {
+    "localVaultCreateBindCloseNanos": {
+      "2.0.0": {
+        "minimum": 563695011,
+        "median": 581037557,
+        "maximum": 584847913,
+        "samples": [
+          563695011,
+          584847913,
+          581037557
+        ]
+      },
+      "2.5.0": {
+        "minimum": 517684106,
+        "median": 544048029,
+        "maximum": 591904480,
+        "samples": [
+          591904480,
+          517684106,
+          544048029
+        ]
+      },
+      "medianRatio250to200": 0.9363388346340579,
+      "medianChangePercent": -6.3661165365942125
+    },
+    "localVaultOpenOfflineNanos": {
+      "2.0.0": {
+        "minimum": 277643451,
+        "median": 325018002,
+        "maximum": 331327301,
+        "samples": [
+          325018002,
+          331327301,
+          277643451
+        ]
+      },
+      "2.5.0": {
+        "minimum": 250402854,
+        "median": 278789735,
+        "maximum": 292487935,
+        "samples": [
+          292487935,
+          278789735,
+          250402854
+        ]
+      },
+      "medianRatio250to200": 0.8577670568536693,
+      "medianChangePercent": -14.223294314633073
+    },
+    "archiveCreateNanos": {
+      "2.0.0": {
+        "minimum": 269373154,
+        "median": 293841624,
+        "maximum": 297477843,
+        "samples": [
+          293841624,
+          297477843,
+          269373154
+        ]
+      },
+      "2.5.0": {
+        "minimum": 234282783,
+        "median": 283454987,
+        "maximum": 313739793,
+        "samples": [
+          283454987,
+          313739793,
+          234282783
+        ]
+      },
+      "medianRatio250to200": 0.9646522611105635,
+      "medianChangePercent": -3.534773888943654
+    },
+    "archiveBinaryImport32MiBNanos": {
+      "2.0.0": {
+        "minimum": 638178596,
+        "median": 671712226,
+        "maximum": 703959928,
+        "samples": [
+          703959928,
+          671712226,
+          638178596
+        ]
+      },
+      "2.5.0": {
+        "minimum": 574787642,
+        "median": 586272906,
+        "maximum": 617493533,
+        "samples": [
+          617493533,
+          574787642,
+          586272906
+        ]
+      },
+      "medianRatio250to200": 0.8728036848327367,
+      "medianChangePercent": -12.719631516726327
+    },
+    "archiveTextImport32x8KiBNanos": {
+      "2.0.0": {
+        "minimum": 233852478,
+        "median": 315601339,
+        "maximum": 358248638,
+        "samples": [
+          315601339,
+          358248638,
+          233852478
+        ]
+      },
+      "2.5.0": {
+        "minimum": 264764839,
+        "median": 288675750,
+        "maximum": 322844322,
+        "samples": [
+          264764839,
+          322844322,
+          288675750
+        ]
+      },
+      "medianRatio250to200": 0.9146848074684499,
+      "medianChangePercent": -8.531519253155007
+    },
+    "archiveOpenPopulatedNanos": {
+      "2.0.0": {
+        "minimum": 210362664,
+        "median": 228568116,
+        "maximum": 292932389,
+        "samples": [
+          292932389,
+          228568116,
+          210362664
+        ]
+      },
+      "2.5.0": {
+        "minimum": 213586053,
+        "median": 236347962,
+        "maximum": 255548069,
+        "samples": [
+          213586053,
+          236347962,
+          255548069
+        ]
+      },
+      "medianRatio250to200": 1.0340373195358534,
+      "medianChangePercent": 3.4037319535853428
+    },
+    "archiveFullTextFirstSearchNanos": {
+      "2.0.0": {
+        "minimum": 58594687,
+        "median": 65143556,
+        "maximum": 83560266,
+        "samples": [
+          58594687,
+          83560266,
+          65143556
+        ]
+      },
+      "2.5.0": {
+        "minimum": 54985455,
+        "median": 60730560,
+        "maximum": 82693328,
+        "samples": [
+          54985455,
+          60730560,
+          82693328
+        ]
+      },
+      "medianRatio250to200": 0.9322573670985969,
+      "medianChangePercent": -6.774263290140315
+    },
+    "repeatedSearchMedianPerJvmNanos": {
+      "2.0.0": {
+        "minimum": 21622146,
+        "median": 24735126,
+        "maximum": 30362045,
+        "samples": [
+          30362045,
+          24735126,
+          21622146
+        ]
+      },
+      "2.5.0": {
+        "minimum": 20285093,
+        "median": 21011714,
+        "maximum": 31369715,
+        "samples": [
+          21011714,
+          31369715,
+          20285093
+        ]
+      }
+    }
+  },
+  "memory": {
+    "2.0.0": {
+      "heapAfterGcBytes": {
+        "minimum": 8808328,
+        "median": 8823472,
+        "maximum": 8835744,
+        "samples": [
+          8835744,
+          8808328,
+          8823472
+        ]
+      },
+      "linuxRssAfterIdleBytes": {
+        "minimum": 206708736,
+        "median": 208379904,
+        "maximum": 208416768,
+        "samples": [
+          208416768,
+          206708736,
+          208379904
+        ]
+      },
+      "linuxPeakRssBytes": {
+        "minimum": 320405504,
+        "median": 417136640,
+        "maximum": 488493056,
+        "samples": [
+          417136640,
+          488493056,
+          320405504
+        ]
+      }
+    },
+    "2.5.0": {
+      "heapAfterGcBytes": {
+        "minimum": 8809640,
+        "median": 8846440,
+        "maximum": 8887928,
+        "samples": [
+          8887928,
+          8846440,
+          8809640
+        ]
+      },
+      "linuxRssAfterIdleBytes": {
+        "minimum": 209793024,
+        "median": 210575360,
+        "maximum": 211623936,
+        "samples": [
+          209793024,
+          210575360,
+          211623936
+        ]
+      },
+      "linuxPeakRssBytes": {
+        "minimum": 363208704,
+        "median": 363565056,
+        "maximum": 566697984,
+        "samples": [
+          363565056,
+          566697984,
+          363208704
+        ]
+      }
+    }
+  },
+  "boundedIdle": {
+    "2.0.0": [
+      {
+        "wallNanos": 2003198570,
+        "cpuCounterBeforeNanos": 4900000000,
+        "cpuCounterAfterNanos": 4900000000,
+        "vaultAndArchiveRemainOpen": true,
+        "applicationUiNetworkAudioThreadsStarted": false,
+        "cpuStatus": "MEASURED",
+        "processCpuNanosDelta": 0,
+        "oneCoreCpuPercent": 0.0,
+        "normalizedCpuPercent": 0.0
+      },
+      {
+        "wallNanos": 2000131448,
+        "cpuCounterBeforeNanos": 4660000000,
+        "cpuCounterAfterNanos": 4670000000,
+        "vaultAndArchiveRemainOpen": true,
+        "applicationUiNetworkAudioThreadsStarted": false,
+        "cpuStatus": "MEASURED",
+        "processCpuNanosDelta": 10000000,
+        "oneCoreCpuPercent": 0.49996714015968013,
+        "normalizedCpuPercent": 0.06249589251996002
+      },
+      {
+        "wallNanos": 2000129392,
+        "cpuCounterBeforeNanos": 4260000000,
+        "cpuCounterAfterNanos": 4260000000,
+        "vaultAndArchiveRemainOpen": true,
+        "applicationUiNetworkAudioThreadsStarted": false,
+        "cpuStatus": "MEASURED",
+        "processCpuNanosDelta": 0,
+        "oneCoreCpuPercent": 0.0,
+        "normalizedCpuPercent": 0.0
+      }
+    ],
+    "2.5.0": [
+      {
+        "wallNanos": 2000137844,
+        "cpuCounterBeforeNanos": 4390000000,
+        "cpuCounterAfterNanos": 4390000000,
+        "vaultAndArchiveRemainOpen": true,
+        "applicationUiNetworkAudioThreadsStarted": false,
+        "cpuStatus": "MEASURED",
+        "processCpuNanosDelta": 0,
+        "oneCoreCpuPercent": 0.0,
+        "normalizedCpuPercent": 0.0
+      },
+      {
+        "wallNanos": 2000109848,
+        "cpuCounterBeforeNanos": 4400000000,
+        "cpuCounterAfterNanos": 4410000000,
+        "vaultAndArchiveRemainOpen": true,
+        "applicationUiNetworkAudioThreadsStarted": false,
+        "cpuStatus": "MEASURED",
+        "processCpuNanosDelta": 10000000,
+        "oneCoreCpuPercent": 0.49997253950824005,
+        "normalizedCpuPercent": 0.06249656743853001
+      },
+      {
+        "wallNanos": 2000117681,
+        "cpuCounterBeforeNanos": 4340000000,
+        "cpuCounterAfterNanos": 4350000000,
+        "vaultAndArchiveRemainOpen": true,
+        "applicationUiNetworkAudioThreadsStarted": false,
+        "cpuStatus": "MEASURED",
+        "processCpuNanosDelta": 10000000,
+        "oneCoreCpuPercent": 0.4999705814810004,
+        "normalizedCpuPercent": 0.06249632268512505
+      }
+    ]
+  },
+  "notRun": [
+    "native application startup",
+    "network authentication/login",
+    "Tor connection",
+    "actual browser startup/network",
+    "microphone/audio device use",
+    "physical host stress/soak",
+    "Windows11 native performance",
+    "CachyOS KDE Wayland/X11 native performance"
+  ],
+  "interpretation": "Descriptive three-run values only; no claim of statistical significance or whole-application optimization. Container/host activity is not fully controlled.",
+  "finishedUTC": "2026-10-15T10:03:23.044220+00:00"
+}

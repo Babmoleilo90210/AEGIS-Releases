@@ -13,10 +13,38 @@ import stat
 import struct
 import zipfile
 from verify_appimage import verify
-from client_runtime import verify_safe_web_runtime
+from client_runtime import verify_safe_web_runtime, verify_voice_native
+from java_runtime import verify_java_runtime
 
 ROOT_KEY = b'MCowBQYDK2VwAyEAswWYCFStSEhQdrgqUJFF3x12ltmfUA0PvQtlh684B2g='
 ICON_SIZES = {16, 24, 32, 48, 64, 128, 256}
+CLIENT_VERSION = (2, 5, 0, 0)
+PE_VERSION_WORDS = ((CLIENT_VERSION[0] << 16) | CLIENT_VERSION[1],
+                    (CLIENT_VERSION[2] << 16) | CLIENT_VERSION[3]) * 2
+OWN_JARS = ['client-core-2.5.0.jar', 'client-ui-2.5.0.jar', 'common-protocol-0.2.0.jar']
+TEST_UTILITIES = {'NativeAcceptanceMain', 'VoiceNativeAcceptanceMain', 'NativeCredentialStoreSmoke',
+                  'TorProcessSmoke', 'DemoTorNetworkProbe', 'DemoCompatibilityProbe', 'Bug11RealTorProbe',
+                  'VisualCompatibilityProbe', 'ArchivePerformanceMain'}
+
+
+def expected_pe_version(resource):
+    at = resource.find(struct.pack('<I', 0xFEEF04BD))
+    return at >= 0 and len(resource) >= at + 24 and struct.unpack_from('<IIII', resource, at + 8) == PE_VERSION_WORDS
+
+
+def verify_application_entries(archive):
+    names = archive.namelist()
+    if len(names) != len(set(names)):
+        raise ValueError('Duplicate application JAR entry')
+    for entry in names:
+        path = PurePosixPath(entry)
+        if path.is_absolute() or '..' in path.parts or '\\' in entry:
+            raise ValueError('Unsafe application JAR entry')
+        stem = path.name.removesuffix('.class').split('$', 1)[0]
+        if '/test/' in entry or '/tests/' in entry or '/frozen/' in entry or entry.startswith('safeweb/official-discovery-') or \
+                (entry.endswith('.class') and (stem.endswith(('Test', 'Tests')) or stem in TEST_UTILITIES)):
+            raise ValueError('Test classes/resources found in application JAR')
+
 
 
 def sha256(path):
@@ -51,7 +79,7 @@ def pe_check(path, expected_icons, require_amd64=True):
     optional_size = struct.unpack_from('<H', data, pe + 20)[0]
     optional = pe + 24
     magic = struct.unpack_from('<H', data, optional)[0]
-    if (require_amd64 and (machine, magic) != (0x8664, 0x20b)) or magic not in (0x10b, 0x20b):
+    if (machine, magic) not in ((0x8664, 0x20b), (0x14c, 0x10b)) or (require_amd64 and machine != 0x8664):
         raise ValueError('Unexpected PE architecture')
     subsystem, flags = struct.unpack_from('<HH', data, optional + 68)
     if subsystem != 2 or flags & 0x140 != 0x140:
@@ -116,34 +144,33 @@ def pe_check(path, expected_icons, require_amd64=True):
     if matched_sizes != ICON_SIZES:
         raise ValueError('Executable icon differs from the supplied seven-size ICO: ' + path.name)
     versions = [value for key, value in leaves.items() if key[0] == 16]
-    correct_version = False
-    for value in versions:
-        at = value.find(struct.pack('<I', 0xFEEF04BD))
-        if at >= 0 and len(value) >= at + 24:
-            numbers = struct.unpack_from('<IIII', value, at + 8)
-            if numbers == (0x00020000, 0x00000000, 0x00020000, 0x00000000):
-                correct_version = True
+    correct_version = any(expected_pe_version(value) for value in versions)
     if not correct_version:
-        raise ValueError('EXE file/product version is not 2.0.0.0: ' + path.name)
+        raise ValueError('EXE file/product version is not 2.5.0.0: ' + path.name)
     return {'machine': 'AMD64' if machine == 0x8664 else 'I386', 'PE32_plus': magic == 0x20b,
             'GUI': True, 'ASLR': True, 'NX': True, 'asInvoker': True,
-            'icon_sizes': sorted(matched_sizes), 'icon_payload_matches_ICO': True, 'file_product_version': '2.0.0.0'}
+            'icon_sizes': sorted(matched_sizes), 'icon_payload_matches_ICO': True, 'file_product_version': '2.5.0.0'}
 
 
 def app_jars(app):
-    if list(app.glob('*relay*')):
-        raise ValueError('Relay JAR must not be shipped in a client')
+    for file in app.glob('*.jar'):
+        if file.is_symlink():
+            raise ValueError('Symlink application/runtime JAR')
+        lower = file.name.lower()
+        if 'relay' in lower or lower.startswith(('junit-', 'openjfx-monocle-', 'mockito-', 'hamcrest-', 'password4j-', 'sqlite-jdbc-')) or lower.endswith(('-test.jar', '-tests.jar')):
+            raise ValueError('Test/server/Relay JAR must not be shipped in a client')
+        if file.name.startswith(('client-core-', 'client-ui-', 'common-protocol-')) and file.name not in OWN_JARS:
+            raise ValueError('Conflicting application JAR version')
     verify_safe_web_runtime(app)
-    names = ['client-core-2.0.0.jar', 'client-ui-2.0.0.jar', 'common-protocol-0.2.0.jar']
+    names = OWN_JARS
     for name in names:
         with zipfile.ZipFile(app / name) as archive:
             if archive.testzip() is not None:
                 raise ValueError('JAR CRC failure')
-            if any('/test/' in item or item.endswith('Test.class') for item in archive.namelist()):
-                raise ValueError('Test classes found in application JAR')
+            verify_application_entries(archive)
             if name.startswith('client-core'):
                 clazz = archive.read('org/securemail/client/update/SignedManifest.class')
-                if ROOT_KEY not in clazz or b'2.0.0' not in clazz or 'org/securemail/client/update/UpdaterMain.class' not in archive.namelist():
+                if ROOT_KEY not in clazz or b'2.5.0' not in clazz or 'org/securemail/client/update/UpdaterMain.class' not in archive.namelist():
                     raise ValueError('Pinned production public key or updater helper missing')
     return {name: sha256(app / name) for name in names}
 
@@ -154,9 +181,9 @@ def verify_release(output):
     linux = output / 'stage/AEGIS.AppDir'
     icons = ico_images((windows / 'resources/icon.ico').read_bytes())
     pe = {name: pe_check(windows / name, icons) for name in ['AEGIS.exe', 'AEGIS-Maintenance.exe', 'AEGIS-Updater.exe']}
-    setup = output / 'AEGIS-Setup-2.0.0-x64.exe'
+    setup = output / 'AEGIS-Setup-2.5.0-x64.exe'
     setup_check = pe_check(setup, icons, require_amd64=False)
-    payload = output / 'AEGIS-2.0.0-Windows-x64.zip'
+    payload = output / 'AEGIS-2.5.0-Windows-x64.zip'
     with zipfile.ZipFile(payload) as archive:
         if archive.testzip() is not None:
             raise ValueError('Windows ZIP CRC failure')
@@ -176,6 +203,7 @@ def verify_release(output):
                     raise ValueError('ZIP payload mismatch')
         required = {'AEGIS/runtime/bin/javaw.exe', 'AEGIS/tor/tor.exe',
                     'AEGIS/tor/pluggable_transports/lyrebird.exe', 'AEGIS/native/libsodium.dll',
+                    'AEGIS/native/opus.dll', 'AEGIS/native/speexdsp.dll',
                     'AEGIS/AEGIS.exe', 'AEGIS/AEGIS-Updater.exe'}
         expected = {'AEGIS/' + path.relative_to(windows).as_posix() for path in windows.rglob('*') if path.is_file()}
         if actual != expected or not required <= actual:
@@ -186,14 +214,18 @@ def verify_release(output):
     win_jars, linux_jars = app_jars(windows / 'app'), app_jars(linux / 'app')
     if win_jars != linux_jars:
         raise ValueError('Client application/common JARs differ between platforms')
+    voice_native = {platform: verify_voice_native(bundle, platform, core_jar=bundle / 'app/client-core-2.5.0.jar')
+                    for bundle, platform in [(windows, 'win'), (linux, 'linux')]}
+    java_runtime = {platform: verify_java_runtime(bundle / 'runtime', platform)
+                    for bundle, platform in [(windows, 'win'), (linux, 'linux')]}
     for app, platform in [(windows, 'win'), (linux, 'linux')]:
         stage = Path(__file__).resolve().parents[1] / 'client-ui/build/stage' / platform
         expected = {path.name: sha256(path) for path in stage.glob('*.jar')}
         actual = {path.name: sha256(path) for path in (app / 'app').glob('*.jar')}
         if actual != expected:
             raise ValueError('Packaged JARs differ from final Gradle stage')
-    image = output / 'AEGIS-2.0.0-CachyOS-x86_64.AppImage'
-    if 'X-AppImage-Version=2.0.0\n' not in (linux / 'aegis.desktop').read_text('utf-8'):
+    image = output / 'AEGIS-2.5.0-CachyOS-x86_64.AppImage'
+    if 'X-AppImage-Version=2.5.0\n' not in (linux / 'aegis.desktop').read_text('utf-8'):
         raise ValueError('AppImage desktop metadata has the wrong version')
     appimage = verify(image, linux)
     names = [setup.name, payload.name, image.name]
@@ -206,6 +238,10 @@ def verify_release(output):
             'Windows_Linux_application_JARs_identical': True, 'final_client_stage_matches_packages': True,
             'safeWebInstallerRuntimeDependencies': verify_safe_web_runtime(windows / 'app'),
             'safeWebOfficialPublicVerificationKeyResource': True,
+            'voiceNativeSHA256': voice_native, 'voiceNativeArchitecture': {'win': 'PE64_AMD64_DLL', 'linux': 'ELF64_AMD64_DYN'},
+            'voiceCompiledRegistryMatchesNativeProvenance': True, 'voiceBSDLicenseHashesVerified': True,
+            'reviewedJavaRuntimesWithRussianLocale': java_runtime,
+            'productionTestClassesExcluded': True,
             'pinned_public_key_embedded_in_both_core_JARs': ROOT_KEY.decode('ascii'),
             'relay_JAR_in_client': False, 'production_signature_created': False,
             'ICO_SHA256': sha256(windows / 'resources/icon.ico'),

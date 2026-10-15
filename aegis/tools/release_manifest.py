@@ -11,6 +11,23 @@ from datetime import datetime
 REPOSITORY = 'Babmoleilo90210/AEGIS-Releases'
 PUBLIC_KEY = b'-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAswWYCFStSEhQdrgqUJFF3x12ltmfUA0PvQtlh684B2g=\n-----END PUBLIC KEY-----\n'
 MAX_MANIFEST = 65536
+MAX_ASSET = 512 * 1024 * 1024
+
+
+def release_url(number, name):
+    """One exact version/tag namespace shared by generation and validation."""
+    version(number)
+    return f'https://github.com/{REPOSITORY}/releases/download/v{number}/{name}'
+
+
+def expected_artifacts(number):
+    version(number)
+    return {
+        f'AEGIS-Setup-{number}-x64.exe': ('windows-x64', 'installer'),
+        f'AEGIS-{number}-Windows-x64.zip': ('windows-x64', 'portable'),
+        f'AEGIS-{number}-CachyOS-x86_64.AppImage': ('cachyos-x86_64', 'appimage'),
+        f'AEGIS-{number}-client-source.zip': ('source', 'source'),
+    }
 
 
 def version(value):
@@ -73,6 +90,8 @@ def unique_object(pairs):
 
 
 def parse_manifest(data, minimum_version='0.0.0'):
+    if not isinstance(data, bytes) or not 0 < len(data) <= MAX_MANIFEST:
+        raise ValueError('Invalid manifest size')
     document = json.loads(data.decode('utf-8'), object_pairs_hook=unique_object)
     fields = {'schemaVersion', 'application', 'channel', 'version', 'tag', 'repository',
               'protocolVersion', 'relayCompatibility', 'artifacts', 'checksums', 'changelog',
@@ -86,9 +105,10 @@ def parse_manifest(data, minimum_version='0.0.0'):
             or document['relayCompatibility'] != ['0.2.0']):
         raise ValueError('Wrong release/protocol/repository')
     number = document['version']
+    parsed_version = version(number)
     if document['channel'] == 'stable' and '-' in number:
         raise ValueError('Prerelease is not a stable release')
-    if version(number) < version(minimum_version):
+    if parsed_version < version(minimum_version):
         raise ValueError('Version rollback rejected')
     if document['tag'] != 'v' + number:
         raise ValueError('Release tag mismatch')
@@ -116,12 +136,7 @@ def parse_manifest(data, minimum_version='0.0.0'):
     if (document['updatePolicy'] == 'required' and notes['type'] != 'Security'
             and version(document['minimumSupported']) <= version(minimum_version)):
         raise ValueError('Unsupported mandatory update')
-    expected = {
-        f'AEGIS-Setup-{number}-x64.exe': ('windows-x64', 'installer'),
-        f'AEGIS-{number}-Windows-x64.zip': ('windows-x64', 'portable'),
-        f'AEGIS-{number}-CachyOS-x86_64.AppImage': ('cachyos-x86_64', 'appimage'),
-        f'AEGIS-{number}-client-source.zip': ('source', 'source'),
-    }
+    expected = expected_artifacts(number)
     artifacts = document['artifacts']
     if not isinstance(artifacts, list) or len(artifacts) != len(expected):
         raise ValueError('Wrong artifact count')
@@ -143,13 +158,13 @@ def validate_file(item, number, fields):
     if not isinstance(item, dict) or set(item) != fields:
         raise ValueError('Unknown asset schema')
     name = item['fileName']
-    if not isinstance(name, str) or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._-]{0,180}', name):
+    if not isinstance(name, str) or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._-]{0,179}', name):
         raise ValueError('Unsafe asset filename')
-    if type(item['size']) is not int or not 0 < item['size'] <= 512 * 1024 * 1024:
+    if type(item['size']) is not int or not 0 < item['size'] <= MAX_ASSET:
         raise ValueError('Invalid asset size')
     if not isinstance(item['sha256'], str) or not re.fullmatch('[a-f0-9]{64}', item['sha256']):
         raise ValueError('Invalid asset SHA-256')
-    expected_url = f'https://github.com/{REPOSITORY}/releases/download/v{number}/{name}'
+    expected_url = release_url(number, name)
     if item['url'] != expected_url:
         raise ValueError('Asset URL rejected')
 

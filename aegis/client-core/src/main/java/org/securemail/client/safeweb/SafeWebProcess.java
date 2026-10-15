@@ -68,7 +68,7 @@ public final class SafeWebProcess implements AutoCloseable {
     Path path=storage().root().resolve("control/manager.lock");SafeWebSessions.rejectLinksInParents(path);
     lockChannel=FileChannel.open(path,StandardOpenOption.CREATE,StandardOpenOption.WRITE,LinkOption.NOFOLLOW_LINKS);
     try{lock=lockChannel.tryLock();}catch(OverlappingFileLockException busy){lock=null;}
-    if(lock==null){release();throw new IOException("Safe Web уже управляется другим экземпляром АЕГИС");}
+    if(lock==null){release();throw new IOException("Взор уже управляется другим экземпляром АЕГИС");}
     try{if(AppPaths.windows())WindowsSafeWebSandbox.recoverAbandoned(storage().root());storage().cleanupStaleTemporarySessions(lock);}catch(IOException failure){release();throw failure;}
   }
   private void release()throws IOException{
@@ -90,15 +90,30 @@ public final class SafeWebProcess implements AutoCloseable {
     while(!Files.exists(current,LinkOption.NOFOLLOW_LINKS)){if(current.getParent()==null)throw new IOException("Недоступен путь защищённых данных");suffix.addFirst(current.getFileName());current=current.getParent();}
     Path resolved=current.toRealPath();for(Path part:suffix)resolved=resolved.resolve(part);return resolved.normalize();
   }
+  /** Off-FX preflight: false requests a newly authenticated vendor package.
+   * It never reseals changed files, adopts another browser, or mutates browser data.
+   * Close an existing session first; files of a running browser can legitimately
+   * change through its own updater. Infrastructure/access errors remain errors. */
+  public synchronized boolean authenticatedPreflight()throws IOException{
+    if(running())throw new IOException("Перед проверкой закройте текущую сессию Взор");
+    if(browser!=null)finish(browser);else if(session!=null)finishPrepared();
+    acquire();operationInProgress=true;
+    try{storage().verifyInstalled();return true;}
+    catch(SafeWebSessions.NeedsReattestationException repair){status="Требуется проверенный официальный пакет Tor Browser";return false;}
+    finally{try{release();}finally{operationInProgress=false;changed();}}
+  }
   /** Installs only detached-signature-authenticated stable vendor packages. */
-  public synchronized String install(Path archive,Path signature)throws IOException{
+  public synchronized String install(Path archive,Path signature)throws IOException{return install(archive,signature,()->false);}
+  public synchronized String install(Path archive,Path signature,java.util.function.BooleanSupplier cancelled)throws IOException{
+    Objects.requireNonNull(cancelled);TorBrowserPackageMetadata.check(cancelled);
     if(running())throw new IOException("Сначала закройте браузер; его профиль не будет изменён во время работы");
     if(browser!=null)finish(browser);else if(session!=null)finishPrepared();
     acquire();operationInProgress=true;Path target=null;
     try{
       status="Проверка подписи официального Tor Browser…";changed();target=storage().newInstallationPath();
-      var installed=TorBrowserInstaller.install(archive,signature,target);
-      storage().registerVerifiedBundle(installed.bundle(),installed.archiveSha256());
+      var installed=TorBrowserInstaller.install(archive,signature,target,cancelled);
+      TorBrowserPackageMetadata.check(cancelled);
+      storage().registerVerifiedBundle(installed);
       status="Официальный пакет Tor Browser · подпись разработчика проверена · браузер остановлен";changed();return installed.label();
     }catch(IOException|RuntimeException failure){status="Установка Tor Browser не выполнена; предыдущая версия сохранена";changed();throw failure;}
     finally{try{try{if(target!=null)SafeWebSessions.removeTree(target);}finally{release();}}finally{operationInProgress=false;changed();}}
@@ -111,25 +126,25 @@ public final class SafeWebProcess implements AutoCloseable {
     acquire();operationInProgress=true;SafeWebSessions.Session prepared=null;
     try{
       status="Подготовка изолированной сессии…";changed();prepared=storage().prepare(mode);session=prepared;changed();
-      browser=Objects.requireNonNull(launcher.launch(prepared,url,privatePaths),"Safe Web launcher returned no owned browser");
-      if(!ownedRunning(browser))throw new IOException("Процесс Safe Web завершился до подтверждения запуска");
+      browser=Objects.requireNonNull(launcher.launch(prepared,url,privatePaths),"Взор launcher returned no owned browser");
+      if(!ownedRunning(browser))throw new IOException("Процесс Взор завершился до подтверждения запуска");
       Browser owned=browser;status=owned.status();changed();
       Thread.ofPlatform().daemon().name("aegis-safeweb-lifecycle").start(()->{
         try{while(ownedRunning(owned)){
           synchronized(SafeWebProcess.this){if(browser!=owned)return;String current=owned.status();if(!current.equals(status)){status=current;changed();}}
           Thread.sleep(500);
         }}catch(InterruptedException interrupted){Thread.currentThread().interrupt();return;}
-        synchronized(SafeWebProcess.this){if(browser==owned)try{finish(owned);}catch(IOException error){status="Safe Web завершился; очистка не завершена. Повторите закрытие";changed();}}
+        synchronized(SafeWebProcess.this){if(browser==owned)try{finish(owned);}catch(IOException error){status="Взор завершился; очистка не завершена. Повторите закрытие";changed();}}
       });
     }catch(IOException|RuntimeException failure){
       if(browser!=null){
-        try{browser.close();if(ownedRunning(browser))throw new IOException("Процессы Safe Web ещё завершаются");}catch(IOException cleanup){
-          failure.addSuppressed(cleanup);status="Запуск не завершён; процессы Safe Web требуют закрытия";changed();throw failure;
+        try{browser.close();if(ownedRunning(browser))throw new IOException("Процессы Взор ещё завершаются");}catch(IOException cleanup){
+          failure.addSuppressed(cleanup);status="Запуск не завершён; процессы Взор требуют закрытия";changed();throw failure;
         }
         browser=null;
       }
-      if(prepared!=null)try{storage().complete(prepared);}catch(IOException cleanup){failure.addSuppressed(cleanup);status="Запуск Safe Web не выполнен; очистка сессии требует повторного закрытия";changed();throw failure;}
-      session=null;try{release();}catch(IOException cleanup){failure.addSuppressed(cleanup);}status="Запуск Safe Web не выполнен · небезопасный обход отключён";changed();throw failure;
+      if(prepared!=null)try{storage().complete(prepared);}catch(IOException cleanup){failure.addSuppressed(cleanup);status="Запуск Взор не выполнен; очистка сессии требует повторного закрытия";changed();throw failure;}
+      session=null;try{release();}catch(IOException cleanup){failure.addSuppressed(cleanup);}status="Запуск Взор не выполнен · небезопасный обход отключён";changed();throw failure;
     }finally{operationInProgress=false;changed();}
   }
   private static Browser launchNative(SafeWebSessions.Session prepared,URI url,List<Path> privatePaths)throws IOException{
@@ -141,7 +156,7 @@ public final class SafeWebProcess implements AutoCloseable {
       var owned=LinuxSafeWebSandbox.start(prepared.bundle(),prepared.control(),url,privatePaths);
       return new Browser(){public Process process(){return owned.process();}public boolean running(){return owned.running();}public String status(){return owned.status();}public void close()throws IOException{owned.close();}};
     }
-    throw new IOException("Safe Web поддерживает Windows 11 x64 и Linux x86_64");
+    throw new IOException("Взор поддерживает Windows 11 x64 и Linux x86_64");
   }
 
   /** Explicit restart, not an unsupported remote command or 'new identity' IPC. */
@@ -154,7 +169,7 @@ public final class SafeWebProcess implements AutoCloseable {
   public synchronized Path selectedDownload(Path selected)throws IOException{
     Path absolute=Objects.requireNonNull(selected).toAbsolutePath().normalize();
     for(Path candidate:downloads())if(candidate.toAbsolutePath().normalize().equals(absolute))return candidate;
-    throw new IOException("Выбранный файл больше не находится в загрузках Safe Web");
+    throw new IOException("Выбранный файл больше не находится в загрузках Взор");
   }
   /** Freeze the explicitly selected download outside the browser's mount before
    * the archive worker reads it; no original path is handed to that worker. */
@@ -166,10 +181,10 @@ public final class SafeWebProcess implements AutoCloseable {
     if(owned!=browser)return;
     try{
       owned.close(); // Must succeed before the profile or management lock is released.
-      if(ownedRunning(owned))throw new IOException("Процесс Safe Web ещё завершается; сессия и блокировка сохранены");
+      if(ownedRunning(owned))throw new IOException("Процесс Взор ещё завершается; сессия и блокировка сохранены");
       if(session!=null){storage().complete(session);if(session.mode()==SafeWebSessions.Mode.PERSISTENT)lastPersistent=session;}
       release();browser=null;session=null;status="Браузер остановлен · соединение почты сохранено";changed();
-    }catch(IOException failure){status="Остановка или очистка Safe Web не завершена; сессия и блокировка сохранены";changed();throw failure;}
+    }catch(IOException failure){status="Остановка или очистка Взор не завершена; сессия и блокировка сохранены";changed();throw failure;}
   }
   private void finishPrepared()throws IOException{
     if(session!=null){storage().complete(session);if(session.mode()==SafeWebSessions.Mode.PERSISTENT)lastPersistent=session;session=null;}

@@ -1,0 +1,49 @@
+{
+  "version": "2.5.0",
+  "baseCommit": "f173b4a1bb5f1e3ed121870aa04a6583833f93e9",
+  "baseSourceVerification": {
+    "path": "docs/test-results/2.5.0/base-source-verification.json",
+    "kind": "executed_report",
+    "sha256": "539e5e9b53debce5c41de0b27a4a753f0e1000b3c60cc6efc18693e852e8b30c"
+  },
+  "finalSourceCommit": "See generated BUILD-PROVENANCE-2.5.0.json alongside release artifacts (avoids a self-referential Git commit)",
+  "finalRuntimeSourceInputs": {
+    "path": "docs/test-results/2.5.0/full-java/final-runtime-source-inputs.json",
+    "kind": "executed_report",
+    "sha256": "fcf56c207bdf9db42155d39912387daed16a3322cf5aa2e1fc98659b00a9f17a"
+  },
+  "fullJavaBuild": {
+    "path": "docs/test-results/2.5.0/full-java/RESULTS.json",
+    "kind": "executed_report",
+    "sha256": "591c74703dd7521a369ec070f36319e8c3c28bf4629d52d84d27d85059480364"
+  },
+  "uiOnlyRecompile": {
+    "path": "docs/test-results/2.5.0/full-java/UI-RECOMPILE-FOLLOWUP.json",
+    "kind": "executed_report",
+    "sha256": "01b9440a769c69c756ac8884a29d306f1ad05d23d027a989e34d374ca3603898"
+  },
+  "productionInputChangesAfterFullJUnit": [
+    "client-ui/src/main/java/org/securemail/ui/InWindowDialog.java"
+  ],
+  "reason": "Only common JavaFX dialog measurement changed; fresh UI module recompiled and all five current/related headless probes run against the final shared JAR. Core/common/Relay source and JARs unchanged.",
+  "applicationJarSha256": {
+    "client-ui.jar": "686eb69a381f0fabbc46aab8df53a195904293724ee2b72c6119ed317ba0f7fe",
+    "relay-server.jar": "5a454cdc3c10845dd8463dfb53b52d0b485999577dc26af9aa696e91d0e31adf",
+    "common-protocol.jar": "55027fee83e95b85c943893d6f07b62de06fa80dbb06da8be63aecd165b89788",
+    "client-core.jar": "b13151904e9a2461158466a9da313e5439e816f96c32a226d51de00df830abdf"
+  },
+  "nativeAudioProvenance": {
+    "path": "packaging/native-kit/voice-runtime-provenance.json",
+    "kind": "executed_report",
+    "sha256": "e2c0a24e4589155a71c6a02d569a52f90ec3ffd4019c922b2e6fc6b6771f8917"
+  },
+  "reproducibleOldBinaryBuildProven": false,
+  "productionReady": false,
+  "productionStableFeedModified": false,
+  "ownerPrivateSigningKeyUsed": false,
+  "javaRuntimeProvenance": {
+    "path": "packaging/native-kit/java-runtime-provenance-2.5.0.json",
+    "sha256": "7fa3dfb5bfbb86cf1c4da4d6b2f073f087b503ef1729e71ab68fec8b88c2ae27",
+    "reason": "Actual packaged old JRE had only English locale data; Russian native formatting must be available without user JDK installation"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "javaVersion": "21.0.12.1",
+  "osName": "Linux",
+  "osArch": "amd64",
+  "jdkLocaledataModule": "false",
+  "availableRu": "false",
+  "availableRuRU": "false",
+  "monthStandalone": "Oct",
+  "dayFull": "Thu",
+  "dateJavaTime": "15 Oct 2026, Thu",
+  "dateJavaText": "2026 Oct 15, Thu",
+  "number": "1,234,567.89",
+  "decimalSeparatorCodePoint": "U+002E",
+  "groupingSeparatorCodePoint": "U+002C",
+  "displayLanguage": "Russian",
+  "displayCountry": "Russia",
+  "displayName": "Russian (Russia)",
+  "russianLocaleChecksPassed": "false"
+}

@@ -1,0 +1,22 @@
+/workspace/scratch/aa629f360927/aegis/aegis/packaging/windows/launcher.c:1: warning: "UNICODE" redefined
+    1 | #define UNICODE
+      | 
+<command-line>: note: this is the location of the previous definition
+/workspace/scratch/aa629f360927/aegis/aegis/packaging/windows/maintenance.c:1: warning: "UNICODE" redefined
+    1 | #define UNICODE
+      | 
+<command-line>: note: this is the location of the previous definition
+/workspace/scratch/aa629f360927/aegis/aegis/packaging/windows/updater.c:1: warning: "UNICODE" redefined
+    1 | #define UNICODE
+      | 
+<command-line>: note: this is the location of the previous definition
+/workspace/scratch/aa629f360927/packaging-tools/usr/bin/mksquashfs: error while loading shared libraries: liblzo2.so.2: cannot open shared object file: No such file or directory
+Traceback (most recent call last):
+  File "/workspace/scratch/aa629f360927/aegis/aegis/packaging/package-clients.py", line 102, in <module>
+    run([a.mksquashfs.resolve(),linux,squash,'-noappend','-processors','2','-comp','zstd','-b','131072','-all-root','-no-xattrs','-mkfs-time',env['SOURCE_DATE_EPOCH'],'-all-time',env['SOURCE_DATE_EPOCH']])
+  File "/workspace/scratch/aa629f360927/aegis/aegis/packaging/package-clients.py", line 15, in run
+    def run(args,**kw):subprocess.run([str(v) for v in args],check=True,**kw)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/workspace/scratch/aa629f360927/packaging-tools/usr/bin/mksquashfs', '/workspace/scratch/aa629f360927/candidate250/stage/AEGIS.AppDir', '/workspace/scratch/aa629f360927/candidate250/.appimage-build-n21ylij4/payload.squashfs', '-noappend', '-processors', '2', '-comp', 'zstd', '-b', '131072', '-all-root', '-no-xattrs', '-mkfs-time', '1791201600', '-all-time', '1791201600']' returned non-zero exit status 127.

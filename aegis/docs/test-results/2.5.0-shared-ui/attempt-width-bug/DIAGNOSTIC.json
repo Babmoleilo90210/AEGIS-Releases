@@ -1,0 +1,15 @@
+{
+  "status": "FAIL_CONFIRMED",
+  "productionReady": false,
+  "case": "800x600, minimal-dark,150%,24 wrapping text labels; shared scrollVvalue1",
+  "actualOkSceneBounds": {
+    "x": 609,
+    "y": 1158,
+    "width": 127.5,
+    "height": 57
+  },
+  "failure": "OK/Cancel belowScene; scroll content preferred height does not account for actual wrapping width",
+  "diagnosticSmokeSourceSha256": "a4660afb492ccc8f87fbbebded978bec2a6a6c4c55f3f9d55c8b859e3bdf5d7c",
+  "sourceSnapshotNote": "source-inputs.json captures initial source and sharedJARs; diagnostic source copy has added case/bounds logging, same assertions",
+  "nativeOs": "NOT_RUN"
+}

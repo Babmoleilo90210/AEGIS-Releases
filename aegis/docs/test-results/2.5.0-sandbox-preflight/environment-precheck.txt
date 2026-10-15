@@ -1,0 +1,2 @@
+PRECHECK_BLOCKED LINUX_SLIRP_MISSING
+Для изоляции Взор установите системный пакет slirp4netns через менеджер пакетов

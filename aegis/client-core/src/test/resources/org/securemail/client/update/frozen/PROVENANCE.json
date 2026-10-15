@@ -1,0 +1,57 @@
+{
+  "purpose": "Unmodified historical SignedManifest sources; owner key never used. The 1.5.0 Git tree omits JsonData/SemVersion, so only those dependencies are explicitly pinned to the 2.0.0 base. This is not a full historical 1.5.0 build.",
+  "snapshots": {
+    "v150": {
+      "signedManifestCommit": "f9ac41ab9a7aca659e23df88f020a84618af77a1",
+      "clientVersion": "1.5.0",
+      "files": {
+        "SignedManifest.java": {
+          "sourceCommit": "f9ac41ab9a7aca659e23df88f020a84618af77a1",
+          "repositoryPath": "aegis/client-core/src/main/java/org/securemail/client/update/SignedManifest.java",
+          "sha256": "96c12bc12432683a41c6c71aca2f172778e370cb70877c5be0636584994c837a"
+        },
+        "JsonData.java": {
+          "sourceCommit": "f173b4a1bb5f1e3ed121870aa04a6583833f93e9",
+          "repositoryPath": "aegis/client-core/src/main/java/org/securemail/client/update/JsonData.java",
+          "sha256": "0b466866cf8fa0c5a1349ab9303027356fd45043ba4165d9e8341297a124c6a6"
+        },
+        "SemVersion.java": {
+          "sourceCommit": "f173b4a1bb5f1e3ed121870aa04a6583833f93e9",
+          "repositoryPath": "aegis/client-core/src/main/java/org/securemail/client/update/SemVersion.java",
+          "sha256": "abcc7dae8e1a6224271487dd4110814fceb95c57e51073b71a229539287ea639"
+        },
+        "UpdateDiagnostic.java": {
+          "sourceCommit": "f9ac41ab9a7aca659e23df88f020a84618af77a1",
+          "repositoryPath": "aegis/client-core/src/main/java/org/securemail/client/update/UpdateDiagnostic.java",
+          "sha256": "b2139ade7aa1ebc58f57fba0703a610e14cc5fe6210ebbc3e4b9b386444788af"
+        }
+      }
+    },
+    "v200": {
+      "signedManifestCommit": "f173b4a1bb5f1e3ed121870aa04a6583833f93e9",
+      "clientVersion": "2.0.0",
+      "files": {
+        "SignedManifest.java": {
+          "sourceCommit": "f173b4a1bb5f1e3ed121870aa04a6583833f93e9",
+          "repositoryPath": "aegis/client-core/src/main/java/org/securemail/client/update/SignedManifest.java",
+          "sha256": "6ebec5ff6f2baed6a2931b447917bce8b2f798fdb79f2bc37968dbbe75a40075"
+        },
+        "JsonData.java": {
+          "sourceCommit": "f173b4a1bb5f1e3ed121870aa04a6583833f93e9",
+          "repositoryPath": "aegis/client-core/src/main/java/org/securemail/client/update/JsonData.java",
+          "sha256": "0b466866cf8fa0c5a1349ab9303027356fd45043ba4165d9e8341297a124c6a6"
+        },
+        "SemVersion.java": {
+          "sourceCommit": "f173b4a1bb5f1e3ed121870aa04a6583833f93e9",
+          "repositoryPath": "aegis/client-core/src/main/java/org/securemail/client/update/SemVersion.java",
+          "sha256": "abcc7dae8e1a6224271487dd4110814fceb95c57e51073b71a229539287ea639"
+        },
+        "UpdateDiagnostic.java": {
+          "sourceCommit": "f173b4a1bb5f1e3ed121870aa04a6583833f93e9",
+          "repositoryPath": "aegis/client-core/src/main/java/org/securemail/client/update/UpdateDiagnostic.java",
+          "sha256": "b2139ade7aa1ebc58f57fba0703a610e14cc5fe6210ebbc3e4b9b386444788af"
+        }
+      }
+    }
+  }
+}

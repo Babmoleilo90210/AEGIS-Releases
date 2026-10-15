@@ -20,7 +20,7 @@ public final class SafeWebDownload {
     private SafeWebDownload() { }
 
     /** Keep runtime-directory ancestors pinned while a sandbox can modify its mapped tree.
-     * Package-private lifecycle guard for the native Safe Web wrapper; creates/deletes nothing. */
+     * Package-private lifecycle guard for the native Взор wrapper; creates/deletes nothing. */
     static java.io.Closeable guardDirectory(Path directory) throws IOException {
         DirectoryAccess access = DirectoryAccess.openDirectory(absolute(directory));
         return access::close;
@@ -36,7 +36,7 @@ public final class SafeWebDownload {
     static Snapshot captureObserved(Path downloadsDirectory, Path selected, Path privateStagingRoot,
                                     CopyObserver observer) throws IOException {
         Path downloads = absolute(downloadsDirectory), source = absolute(selected), staging = absolute(privateStagingRoot);
-        if (!downloads.equals(source.getParent())) throw failure("Выберите файл непосредственно из каталога загрузок Safe Web");
+        if (!downloads.equals(source.getParent())) throw failure("Выберите файл непосредственно из каталога загрузок Взор");
         if (staging.startsWith(downloads) || downloads.startsWith(staging))
             throw failure("Каталог импорта должен быть отделён от загрузок браузера");
         Path name = source.getFileName();
@@ -192,7 +192,7 @@ public final class SafeWebDownload {
         WindowsDirectory(Path path) throws IOException {
             directory = path;
             if (path.getRoot() == null || !path.getRoot().toString().matches("[A-Za-z]:\\\\"))
-                throw failure("Загрузки Safe Web требуют локальный диск Windows");
+                throw failure("Загрузки Взор требуют локальный диск Windows");
             try {
                 Path cursor = path.getRoot();
                 hold(cursor);
