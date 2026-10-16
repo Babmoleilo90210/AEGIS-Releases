@@ -54,15 +54,22 @@ public final class LinuxSafeWebSandbox {
       int display=startDisplay(launch,run,hostDisplay);
       Path socket=Path.of("/tmp/.X11-unix/X"+display);
       List<String> command=sandboxCommand(base,downloads,run.resolve("Xauthority"),socket,display,url);
-      ProcessBuilder builder=cleanBuilder(command);builder.redirectError(ProcessBuilder.Redirect.DISCARD);
+      ProcessBuilder builder=cleanBuilder(command);
       launch.process=launch.own(builder.start());
-      long childPid=readChildPid(launch.process,START_TIMEOUT);
+      SandboxDiagnostics.Capture namespaceError=launch.captureError(launch.process,SandboxDiagnostics.Component.NAMESPACE);
+      long childPid;
+      try { childPid=readChildPid(launch.process,START_TIMEOUT); }
+      catch(IOException error) { if(!launch.process.isAlive())throw namespaceError.failure(); throw error; }
       // Check the published PID is actually a child of our bwrap, not an arbitrary
       // host process. No external PID is ever signalled or adopted by this class.
       if(launch.process.descendants().noneMatch(p->p.pid()==childPid))throw new IOException("Недостоверный PID сетевого контекста Взор");
       launch.slirp=startNetwork(childPid,launch);
       launch.process.getOutputStream().write(1);launch.process.getOutputStream().flush();
       launch.process.getOutputStream().close();
+      // Catch immediate dynamic-loader/script failures instead of displaying a
+      // transient successful launch followed by a generic 'browser stopped'.
+      pause(300);
+      if(!launch.process.isAlive())throw new SandboxPrerequisites.Failure(SandboxPrerequisites.Code.LINUX_BROWSER_START_FAILED);
       // info-fd is a closed, bounded startup channel. Browser output is redirected
       // to /dev/null by a fixed shell command with positional arguments only.
       launch.started=true;
@@ -117,18 +124,29 @@ public final class LinuxSafeWebSandbox {
       Path auth=run.resolve("Xauthority");writeXAuthority(auth,display);
       ProcessBuilder builder=cleanBuilder(monitoredDisplayCommand(List.of(XEPHYR.toString(),":"+display,"-auth",auth.toString(),"-nolisten","tcp","-screen","1280x800","-resizeable","-terminate","-br","-title","AEGIS Взор — Tor Browser")));
       builder.environment().putAll(hostEnv);builder.environment().put("HOME",run.toString());
-      builder.redirectOutput(ProcessBuilder.Redirect.DISCARD).redirectError(ProcessBuilder.Redirect.DISCARD);
+      builder.redirectOutput(ProcessBuilder.Redirect.DISCARD);
       Process process=launch.own(builder.start());launch.display=process;
+      SandboxDiagnostics.Capture displayError=launch.captureError(process,SandboxDiagnostics.Component.DISPLAY);
       long deadline=System.nanoTime()+TimeUnit.SECONDS.toNanos(8);
       while(process.isAlive()&&System.nanoTime()<deadline) {
         launch.capture(process);
-        if(Files.exists(socket,LinkOption.NOFOLLOW_LINKS)&&!Files.isSymbolicLink(socket))return display;
+        if(ownDisplaySocket(socket,run))return display;
         pause(25);
       }
-      stop(launch,process);launch.display=null;
+      boolean failed=!process.isAlive();stop(launch,process);launch.display=null;
+      if(failed)throw displayError.failure();
     }
-    throw new IOException("Не удалось создать изолированный экран Взор (проверьте Xephyr/Xwayland)");
+    throw new SandboxPrerequisites.Failure(SandboxPrerequisites.Code.LINUX_DISPLAY_START_FAILED);
   }
+  static boolean ownDisplaySocket(Path socket,Path privateRun)throws IOException {
+    if(!Files.exists(socket,LinkOption.NOFOLLOW_LINKS))return false;
+    if(Files.isSymbolicLink(socket))return false;
+    int mode=(Integer)Files.getAttribute(socket,"unix:mode",LinkOption.NOFOLLOW_LINKS);
+    int owner=(Integer)Files.getAttribute(socket,"unix:uid",LinkOption.NOFOLLOW_LINKS);
+    int own=(Integer)Files.getAttribute(privateRun,"unix:uid",LinkOption.NOFOLLOW_LINKS);
+    return displaySocketPolicy(mode,owner,own);
+  }
+  static boolean displaySocketPolicy(int mode,int owner,int own){return (mode&0170000)==0140000&&owner==own;}
 
   /** A private stdin lease also tears down the nested display after JVM crashes.
    * Fixed shell code, executable and every argument remain separate argv items.
@@ -161,15 +179,17 @@ public final class LinuxSafeWebSandbox {
     IOException last=null;
     for(int attempt=0;attempt<12&&bwrap.isAlive();attempt++) {
       List<String> command=List.of(SLIRP.toString(),"--configure","--disable-host-loopback","--ready-fd=1","--exit-fd=0","--userns-path=/proc/"+childPid+"/ns/user",Long.toString(childPid),"tap0");
-      ProcessBuilder builder=cleanBuilder(command);builder.redirectError(ProcessBuilder.Redirect.DISCARD);Process process=launch.own(builder.start());
+      ProcessBuilder builder=cleanBuilder(command);Process process=launch.own(builder.start());
+      SandboxDiagnostics.Capture networkError=launch.captureError(process,SandboxDiagnostics.Component.NETWORK);
       try {
         int ready=readByte(process,Duration.ofSeconds(5));
         if(ready=='1'&&process.isAlive())return process;
-        last=new IOException("Сетевой контекст Взор не подтвердил готовность");
-      }catch(IOException error){last=error;}
+        last=networkError.failure();
+      }catch(IOException error){last=!process.isAlive()?networkError.failure():error;}
       stop(launch,process);pause(50);
     }
-    throw new IOException("Изолированная сеть Взор недоступна (slirp4netns/user namespaces)",last);
+    if(last instanceof SandboxPrerequisites.Failure failure)throw failure;
+    throw new SandboxPrerequisites.Failure(SandboxPrerequisites.Code.LINUX_NETWORK_START_FAILED);
   }
 
   private static long readChildPid(Process process,Duration timeout)throws IOException {
@@ -235,6 +255,9 @@ public final class LinuxSafeWebSandbox {
     SandboxPrerequisites.requireSystemExecutable(BWRAP,SandboxPrerequisites.Code.LINUX_BWRAP_MISSING);
     SandboxPrerequisites.requireSystemExecutable(SLIRP,SandboxPrerequisites.Code.LINUX_SLIRP_MISSING);
     SandboxPrerequisites.requireSystemExecutable(XEPHYR,SandboxPrerequisites.Code.LINUX_XEPHYR_MISSING);
+    if("wayland".equalsIgnoreCase(System.getenv("XDG_SESSION_TYPE")))
+      SandboxPrerequisites.requireSystemExecutable(Path.of("/usr/bin/Xwayland"),SandboxPrerequisites.Code.LINUX_XWAYLAND_MISSING);
+    SandboxPrerequisites.requireBrowserLibraries();
     String display=SandboxPrerequisites.requireLocalDisplay(System.getenv("DISPLAY"));
     String number=display.substring(1).split("\\.",2)[0];
     Path socket=Path.of("/tmp/.X11-unix/X"+number);
@@ -248,7 +271,32 @@ public final class LinuxSafeWebSandbox {
     }
     return display;
   }
-  private static void watch(Launch launch,Process owned) {Thread.startVirtualThread(()->{try{owned.waitFor();launch.close();}catch(InterruptedException interrupted){Thread.currentThread().interrupt();}catch(IOException ignored){/* status remains failed/closed; no private browser output is logged */}});}
+  /** Harmless isolated /usr/bin/true, without browser, host home or network
+   * egress. This discovers kernel/seccomp restrictions before any browser install.
+   * It does not certify a working X server or Tor/DNS/WebRTC behavior.
+   */
+  public static void probeNamespaces()throws IOException {
+    SandboxPrerequisites.requireSystemExecutable(BWRAP,SandboxPrerequisites.Code.LINUX_BWRAP_MISSING);
+    SandboxPrerequisites.requireSystemExecutable(Path.of("/usr/bin/true"),SandboxPrerequisites.Code.LINUX_UNSAFE_DEPENDENCY);
+    ProcessBuilder builder=cleanBuilder(namespaceProbeCommand());builder.redirectOutput(ProcessBuilder.Redirect.DISCARD);
+    Process probe=builder.start();SandboxDiagnostics.Capture diagnostic=new SandboxDiagnostics.Capture(probe,SandboxDiagnostics.Component.NAMESPACE);
+    probe.getOutputStream().close();
+    try {
+      if(!probe.waitFor(8,TimeUnit.SECONDS)){probe.destroyForcibly();probe.waitFor(2,TimeUnit.SECONDS);throw new SandboxPrerequisites.Failure(SandboxPrerequisites.Code.LINUX_NAMESPACE_UNAVAILABLE);}
+      if(probe.exitValue()!=0)throw diagnostic.failure();
+    }catch(InterruptedException error){Thread.currentThread().interrupt();probe.destroyForcibly();throw new IOException("Проверка изоляции Взора прервана");}
+  }
+  static List<String> namespaceProbeCommand() {
+    List<String> result=new ArrayList<>(List.of(BWRAP.toString(),"--die-with-parent","--new-session","--unshare-all","--cap-drop","ALL","--clearenv","--ro-bind","/usr","/usr"));
+    for(String library:List.of("/lib","/lib64"))if(Files.exists(Path.of(library)))result.addAll(List.of("--ro-bind",library,library));
+    result.addAll(List.of("--symlink","usr/bin","/bin","--proc","/proc","--dev","/dev","--","/usr/bin/true"));return List.copyOf(result);
+  }
+  private static void watch(Launch launch,Process owned) {Thread.startVirtualThread(()->{try{
+    int exit=owned.waitFor();
+    synchronized(launch){if(!launch.closed&&exit!=0){SandboxDiagnostics.Capture diagnostic=launch.diagnostics.get(owned);
+      launch.failedReason=owned==launch.process?SandboxPrerequisites.Code.LINUX_BROWSER_START_FAILED:diagnostic==null?SandboxPrerequisites.Code.LINUX_NAMESPACE_UNAVAILABLE:diagnostic.reason();}}
+    launch.close();
+  }catch(InterruptedException interrupted){Thread.currentThread().interrupt();}catch(IOException ignored){/* status remains failed/closed; no private browser output is logged */}});}
   private static void stop(Launch launch,Process process)throws IOException {
     if(process==null)return;
     // Only descendants captured from our own process, never process-name matching.
@@ -271,14 +319,19 @@ public final class LinuxSafeWebSandbox {
   public static final class Launch implements AutoCloseable {
     private Process process,slirp,display;private final Path downloads,displayRoot;private boolean started,closed,cleanupComplete,startupFailed;
     private final Map<Process,Set<ProcessHandle>> children=new LinkedHashMap<>();
+    private final Map<Process,SandboxDiagnostics.Capture> diagnostics=new LinkedHashMap<>();
+    private SandboxPrerequisites.Code failedReason;
     Launch(Path downloads,Path displayRoot){this.downloads=downloads;this.displayRoot=displayRoot;}
     synchronized Process own(Process owned){children.computeIfAbsent(owned,ignored->new LinkedHashSet<>());capture(owned);return owned;}
+    synchronized SandboxDiagnostics.Capture captureError(Process owned,SandboxDiagnostics.Component component){SandboxDiagnostics.Capture result=new SandboxDiagnostics.Capture(owned,component);diagnostics.put(owned,result);return result;}
     private synchronized void capture(Process owned){Set<ProcessHandle> tracked=children.computeIfAbsent(owned,ignored->new LinkedHashSet<>());owned.descendants().forEach(tracked::add);}
     public synchronized Process process(){return process;}
     public Path downloads(){return downloads;}
     private boolean anyAlive(){return children.entrySet().stream().anyMatch(entry->entry.getKey().isAlive()||entry.getValue().stream().anyMatch(ProcessHandle::isAlive));}
     public synchronized boolean running(){return started&&anyAlive();}
+    public synchronized String failureReason(){return failedReason==null?null:failedReason.message();}
     public synchronized String status(){
+      if(failedReason!=null)return failedReason.message();
       if(startupFailed)return anyAlive()?"Ошибка запуска Взор; собственные процессы ещё завершаются. Повторите закрытие":"Запуск Взор не выполнен; собственные процессы остановлены";
       return closed?(anyAlive()?"Процессы Взор ещё завершаются":cleanupComplete?"Взор остановлен":"Процессы Взор остановлены; очистка не завершена"):running()?"Tor Browser: изолированный процесс запущен; состояние Tor проверяется в браузере":"Взор запускается";
     }

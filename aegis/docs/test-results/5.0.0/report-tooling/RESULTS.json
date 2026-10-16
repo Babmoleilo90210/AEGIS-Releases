@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "version": "5.0.0",
+  "recordedAt": "2026-10-15T14:56:49.113851+00:00",
+  "status": "PASS_LOCAL_TOOLING",
+  "sourceCommit": null,
+  "sourceChangedDuringRun": false,
+  "sourceSha256": {
+    "tools/report-release500.py": "b3aee93886c07ecbaf6ef18557dc3f90ffb2b878e4eee2128745f985c530079d",
+    "tools/release500-matrix.json": "fbf35cbdac1223f86b7a52601a78ee667fc71cff239417b1a1c47e92475a3853",
+    "tools/test_report_release500.py": "cefe3e7b5415875ce3507b504bbed26b35b3495a722715b5817ab588fac4fe2d",
+    "tools/REPORT-RELEASE500.md": "5585e1aa4b3c3be399ee03ee424f65b17f9c4cc093539143bd77718bb6a123cf"
+  },
+  "command": [
+    "python",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tools",
+    "-p",
+    "test_report_release500.py",
+    "-v"
+  ],
+  "testProcessExitCode": 0,
+  "scope": "Actual Python unittest policy tests using disposable Git/JUnit XML fixtures: exact mapping, stale XML, source/commit binding, skipped/failure propagation, sanitized evidence and false readiness. Not actual native/physical/updater acceptance. Gradle inventory is recorded separately and not counted into this tooling run.",
+  "testsFound": 13,
+  "testsPassed": 13,
+  "productionReady": false
+}

@@ -1,0 +1,322 @@
+{
+  "schemaVersion": 1,
+  "scope": "Single-host real SQLite/AccessControl/ContentService benchmark; synthetic data; NOT Tor, native desktop, physical-device or production load acceptance",
+  "machine": {
+    "os.name": "Linux",
+    "os.version": "6.18.44",
+    "os.arch": "amd64",
+    "java.version": "21.0.12.1",
+    "java.vendor": "Eclipse Adoptium",
+    "java.vm.name": "OpenJDK 64-Bit Server VM",
+    "availableProcessors": 8,
+    "maxHeapBytes": 402653184,
+    "jvmArguments": [
+      "-Xms64m",
+      "-Xmx384m"
+    ]
+  },
+  "datasets": [
+    {
+      "materials": 100,
+      "privateFraction": 0.25,
+      "readerRole": "no assigned roles",
+      "writerRole": "fixture SQL grant; all content changes use production handlers",
+      "memoryBefore": {
+        "heapUsedBytes": 2147936,
+        "heapCommittedBytes": 69206016,
+        "heapMaxBytes": 402653184,
+        "liveThreads": 6,
+        "peakThreads": 6,
+        "processRssKiB": 40448
+      },
+      "generationWallMs": 453.08417,
+      "generationThreadCpuMs": 443.610008,
+      "fixturePublicMaterials": 75,
+      "fixturePrivateMaterials": 25,
+      "fixtureApprovedEdges": 99,
+      "graphPagesPerTraversal": 1,
+      "operations": {
+        "getAllowed": {
+          "samples": 30,
+          "p50Ms": 0.179921,
+          "p95Ms": 0.370357,
+          "minMs": 0.150767,
+          "maxMs": 0.725321,
+          "meanMs": 0.21916303333333334,
+          "threadCpuTotalMs": 6.630789
+        },
+        "getDenied": {
+          "samples": 30,
+          "p50Ms": 0.153241,
+          "p95Ms": 0.343607,
+          "minMs": 0.110657,
+          "maxMs": 0.408955,
+          "meanMs": 0.18493893333333336,
+          "threadCpuTotalMs": 5.63549
+        },
+        "firstPage100": {
+          "samples": 20,
+          "p50Ms": 11.286932,
+          "p95Ms": 14.625319,
+          "minMs": 9.112169,
+          "maxMs": 17.022901,
+          "meanMs": 11.739547550000001,
+          "threadCpuTotalMs": 230.81601
+        },
+        "searchHiddenCanary": {
+          "samples": 10,
+          "p50Ms": 6.663354,
+          "p95Ms": 16.84934,
+          "minMs": 6.307349,
+          "maxMs": 16.84934,
+          "meanMs": 9.348935,
+          "threadCpuTotalMs": 87.777487
+        },
+        "graphFirst100": {
+          "samples": 20,
+          "p50Ms": 14.50318,
+          "p95Ms": 17.239307,
+          "minMs": 10.266706,
+          "maxMs": 18.232001,
+          "meanMs": 14.16681675,
+          "threadCpuTotalMs": 277.834383
+        },
+        "graphAllPages": {
+          "samples": 3,
+          "p50Ms": 13.284677,
+          "p95Ms": 14.401286,
+          "minMs": 9.263868,
+          "maxMs": 14.401286,
+          "meanMs": 12.316610333333335,
+          "threadCpuTotalMs": 36.978655
+        }
+      },
+      "memoryAfter": {
+        "heapUsedBytes": 20174760,
+        "heapCommittedBytes": 69206016,
+        "heapMaxBytes": 402653184,
+        "liveThreads": 7,
+        "peakThreads": 7,
+        "processRssKiB": 147016
+      },
+      "sqliteBytes": 909312,
+      "auditIntegrity": true,
+      "assertions": {
+        "graphOnlyAllowedEndpoints": true,
+        "hiddenSearchEmpty": true,
+        "closedGetDenied": true,
+        "allPublicNodesPagedExactlyOnce": true
+      }
+    },
+    {
+      "materials": 1000,
+      "privateFraction": 0.25,
+      "readerRole": "no assigned roles",
+      "writerRole": "fixture SQL grant; all content changes use production handlers",
+      "memoryBefore": {
+        "heapUsedBytes": 21223336,
+        "heapCommittedBytes": 69206016,
+        "heapMaxBytes": 402653184,
+        "liveThreads": 7,
+        "peakThreads": 7,
+        "processRssKiB": 147344
+      },
+      "generationWallMs": 2368.918624,
+      "generationThreadCpuMs": 2331.314111,
+      "fixturePublicMaterials": 750,
+      "fixturePrivateMaterials": 250,
+      "fixtureApprovedEdges": 100,
+      "graphPagesPerTraversal": 8,
+      "operations": {
+        "getAllowed": {
+          "samples": 30,
+          "p50Ms": 0.234242,
+          "p95Ms": 0.35896,
+          "minMs": 0.208794,
+          "maxMs": 0.391568,
+          "meanMs": 0.25077503333333334,
+          "threadCpuTotalMs": 7.603165
+        },
+        "getDenied": {
+          "samples": 30,
+          "p50Ms": 0.084537,
+          "p95Ms": 0.295284,
+          "minMs": 0.07959,
+          "maxMs": 0.786483,
+          "meanMs": 0.13572579999999998,
+          "threadCpuTotalMs": 4.103962
+        },
+        "firstPage100": {
+          "samples": 20,
+          "p50Ms": 26.237363,
+          "p95Ms": 38.269722,
+          "minMs": 20.642872,
+          "maxMs": 44.178958,
+          "meanMs": 27.83658105,
+          "threadCpuTotalMs": 543.513639
+        },
+        "searchHiddenCanary": {
+          "samples": 10,
+          "p50Ms": 56.61538,
+          "p95Ms": 67.055102,
+          "minMs": 53.237128,
+          "maxMs": 67.055102,
+          "meanMs": 58.687094200000004,
+          "threadCpuTotalMs": 572.86733
+        },
+        "graphFirst100": {
+          "samples": 20,
+          "p50Ms": 21.086818,
+          "p95Ms": 26.807413,
+          "minMs": 19.199129,
+          "maxMs": 31.867415,
+          "meanMs": 22.7460259,
+          "threadCpuTotalMs": 447.854325
+        },
+        "graphAllPages": {
+          "samples": 3,
+          "p50Ms": 131.22156,
+          "p95Ms": 143.206267,
+          "minMs": 131.152297,
+          "maxMs": 143.206267,
+          "meanMs": 135.19337466666667,
+          "threadCpuTotalMs": 404.306603
+        }
+      },
+      "memoryAfter": {
+        "heapUsedBytes": 23604408,
+        "heapCommittedBytes": 69206016,
+        "heapMaxBytes": 402653184,
+        "liveThreads": 7,
+        "peakThreads": 7,
+        "processRssKiB": 140780
+      },
+      "sqliteBytes": 4960256,
+      "auditIntegrity": true,
+      "assertions": {
+        "graphOnlyAllowedEndpoints": true,
+        "hiddenSearchEmpty": true,
+        "closedGetDenied": true,
+        "allPublicNodesPagedExactlyOnce": true
+      }
+    },
+    {
+      "materials": 3000,
+      "privateFraction": 0.25,
+      "readerRole": "no assigned roles",
+      "writerRole": "fixture SQL grant; all content changes use production handlers",
+      "memoryBefore": {
+        "heapUsedBytes": 29895864,
+        "heapCommittedBytes": 69206016,
+        "heapMaxBytes": 402653184,
+        "liveThreads": 7,
+        "peakThreads": 7,
+        "processRssKiB": 140784
+      },
+      "generationWallMs": 5301.508263,
+      "generationThreadCpuMs": 5284.345246,
+      "fixturePublicMaterials": 2250,
+      "fixturePrivateMaterials": 750,
+      "fixtureApprovedEdges": 100,
+      "graphPagesPerTraversal": 23,
+      "operations": {
+        "getAllowed": {
+          "samples": 30,
+          "p50Ms": 0.116565,
+          "p95Ms": 0.457068,
+          "minMs": 0.096264,
+          "maxMs": 0.497258,
+          "meanMs": 0.1708946,
+          "threadCpuTotalMs": 5.161265
+        },
+        "getDenied": {
+          "samples": 30,
+          "p50Ms": 0.071047,
+          "p95Ms": 0.285449,
+          "minMs": 0.064908,
+          "maxMs": 0.541284,
+          "meanMs": 0.11159623333333334,
+          "threadCpuTotalMs": 3.367156
+        },
+        "firstPage100": {
+          "samples": 20,
+          "p50Ms": 36.013776,
+          "p95Ms": 41.593875,
+          "minMs": 32.238512,
+          "maxMs": 44.828615,
+          "meanMs": 36.019392599999996,
+          "threadCpuTotalMs": 719.3449
+        },
+        "searchHiddenCanary": {
+          "samples": 10,
+          "p50Ms": 170.473012,
+          "p95Ms": 197.142569,
+          "minMs": 151.518932,
+          "maxMs": 197.142569,
+          "meanMs": 172.03368070000002,
+          "threadCpuTotalMs": 1701.977377
+        },
+        "graphFirst100": {
+          "samples": 20,
+          "p50Ms": 35.309007,
+          "p95Ms": 54.52111,
+          "minMs": 32.705031,
+          "maxMs": 76.927928,
+          "meanMs": 39.8747355,
+          "threadCpuTotalMs": 796.600003
+        },
+        "graphAllPages": {
+          "samples": 3,
+          "p50Ms": 542.928801,
+          "p95Ms": 645.754879,
+          "minMs": 530.774611,
+          "maxMs": 645.754879,
+          "meanMs": 573.1527636666666,
+          "threadCpuTotalMs": 1712.288437
+        }
+      },
+      "memoryAfter": {
+        "heapUsedBytes": 19025552,
+        "heapCommittedBytes": 69206016,
+        "heapMaxBytes": 402653184,
+        "liveThreads": 7,
+        "peakThreads": 7,
+        "processRssKiB": 147340
+      },
+      "sqliteBytes": 13705216,
+      "auditIntegrity": true,
+      "assertions": {
+        "graphOnlyAllowedEndpoints": true,
+        "hiddenSearchEmpty": true,
+        "closedGetDenied": true,
+        "allPublicNodesPagedExactlyOnce": true
+      }
+    }
+  ],
+  "startedUtc": "2026-10-15T13:59:23.166647+00:00",
+  "finishedUtc": "2026-10-15T13:59:41.380943+00:00",
+  "wallSecondsIncludingCompile": 18.214300229999935,
+  "javaVersionOutput": "openjdk version \"21.0.12.1\" 2026-08-18 LTS\nOpenJDK Runtime Environment Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS, mixed mode, sharing)",
+  "sourceSha256": {
+    "community-server/src/main/java/org/securemail/community/core/CanonicalJson.java": "7deb5be33fc59039c9a6797ee6069d1ffc41db2f38a883390ffaf6914da97638",
+    "community-server/src/main/java/org/securemail/community/core/CommunityException.java": "632772ef1bbcb044184bea183727a3eaaaa7aac501bf16e8764795cff1a0825e",
+    "community-server/src/main/java/org/securemail/community/core/CommunityStore.java": "0ee0320a3ec451ca9a49320f329f07797a105ddb6fe689d72340b9893233a216",
+    "community-server/src/main/java/org/securemail/community/core/ImageSanitizer.java": "ed4be2bdca27cbc94ce74820b94c8cb22324173c2a7bfbb3d49a44ece7d767e1",
+    "community-server/src/main/java/org/securemail/community/core/Totp.java": "53caa4fa0b3c8d4870341780430b6946f8533b69f475e4cf80afddbf5163676d",
+    "community-server/src/main/java/org/securemail/community/core/Values.java": "b4c9367b2d42c4c88bd9f3ea292d0b54f37e4892069feca3a989a9754edc9b83",
+    "community-server/src/main/java/org/securemail/community/access/AccessControl.java": "d472d866e5d0b248322c71d46909f22ebc109e066cad27851d72657ea58445ca",
+    "community-server/src/main/java/org/securemail/community/access/ResourcePolicy.java": "6d08c80a3d0e1d038ddfc0f1d4baca4fe09047c5382cd404c865fe2329f6b3f4",
+    "community-server/src/main/java/org/securemail/community/content/ContentInput.java": "3dec0cd8a7e207d470457515e8c4782562d36e06f9ea5826f85907fb6c754ae2",
+    "community-server/src/main/java/org/securemail/community/content/ContentService.java": "c00170fcdb99f2de29a7acb633531e882696ef94c9cfaa9b27c970327f4874f1",
+    "community-server/src/test/java/org/securemail/community/content/CommunityLoad500Smoke.java": "30e9362714e367a7e6f36d17bb6dd9d32deab7fb9400e8ecf266422ee0b050e3",
+    "tools/benchmark-community500.py": "df2acec4a78937705db513e0d590cabc05c1a8407cab9ff1a0bf4cf3b119a81f"
+  },
+  "dependencySha256": {
+    "sqlite-jdbc-3.53.4.0.jar": "bcb1f51e36f940867e83342f9efbf5968ac44a6bef4d397bb4af7b17b45cd2fb",
+    "slf4j-api-2.0.17.jar": "7b751d952061954d5abfed7181c1f645d336091b679891591d63329c622eb832",
+    "slf4j-nop-2.0.17.jar": "3716f83649ec66161a2edefd4f49df34d1dd1c51cdcf941996c6987260f0a829"
+  },
+  "compilerSha256": "55859b80e7a9c4c4736be19ad3addeb35112ca6d17a30c4e0e116afc0a499bdb",
+  "javaLauncherSha256": "2a207f5e7d075afa01d97f8048389a64432a44c4a5af0f5e77d6e286ec5f401d",
+  "productionReady": false
+}

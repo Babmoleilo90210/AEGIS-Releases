@@ -1,4 +1,5 @@
 .gradle/
+.native-test/
 **/build/
 *.db
 *.db-*

@@ -1,0 +1,839 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="JUnit Jupiter" tests="129" skipped="1" failures="0" errors="0" time="6.012" hostname="9baed28aafd3" timestamp="2026-10-15T16:18:54">
+<properties>
+<property name="file.encoding" value="UTF-8"/>
+<property name="file.separator" value="/"/>
+<property name="java.class.path" value="/workspace/scratch/aa629f360927/vzor500-final-classes/main:/workspace/scratch/aa629f360927/vzor500-final-classes/test:/workspace/scratch/aa629f360927/aegis/aegis/client-core/src/main/resources:/workspace/scratch/aa629f360927/aegis/aegis/client-core/src/test/resources:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/bcpg-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/bcprov-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/bcutil-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/client-core-2.5.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/client-ui-2.5.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/common-image-3.14.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/common-io-3.14.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/common-lang-3.14.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/common-protocol-0.2.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/commons-codec-1.19.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/commons-compress-1.28.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/commons-io-2.20.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/commons-lang3-3.18.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/error_prone_annotations-2.48.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/fontbox-3.0.8.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/gson-2.14.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/imageio-core-3.14.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/imageio-metadata-3.14.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/imageio-webp-3.14.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/javafx-base-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/javafx-controls-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/javafx-graphics-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/jna-5.19.1.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/jna-platform-5.19.1.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/jsr305-3.0.2.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/pdfbox-3.0.8.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/pdfbox-io-3.0.8.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/protobuf-java-4.33.6.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/tink-1.23.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/xz-1.12.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/zip4j-2.11.6.jar:/workspace/scratch/aa629f360927/inputs500/deps/junit-platform-console-standalone-1.13.4.jar:/workspace/scratch/aa629f360927/inputs500/deps/openjfx-monocle-21.0.2.jar:/workspace/scratch/aa629f360927/inputs500/deps/password4j-1.8.4.jar:/workspace/scratch/aa629f360927/inputs500/deps/slf4j-api-2.0.17.jar:/workspace/scratch/aa629f360927/inputs500/deps/slf4j-nop-2.0.17.jar:/workspace/scratch/aa629f360927/inputs500/deps/sqlite-jdbc-3.53.4.0.jar:/workspace/scratch/aa629f360927/inputs500/runtime-deps/commons-logging-1.4.0.jar"/>
+<property name="java.class.version" value="65.0"/>
+<property name="java.home" value="/workspace/scratch/aa629f360927/inputs500/jdk-21.0.12.1+1"/>
+<property name="java.io.tmpdir" value="/tmp"/>
+<property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/>
+<property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+<property name="java.runtime.version" value="21.0.12.1+1-LTS"/>
+<property name="java.specification.name" value="Java Platform API Specification"/>
+<property name="java.specification.vendor" value="Oracle Corporation"/>
+<property name="java.specification.version" value="21"/>
+<property name="java.vendor" value="Eclipse Adoptium"/>
+<property name="java.vendor.url" value="https://adoptium.net/"/>
+<property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
+<property name="java.vendor.version" value="Temurin-21.0.12.1+1"/>
+<property name="java.version" value="21.0.12.1"/>
+<property name="java.version.date" value="2026-08-18"/>
+<property name="java.vm.compressedOopsMode" value="32-bit"/>
+<property name="java.vm.info" value="mixed mode, sharing"/>
+<property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+<property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+<property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+<property name="java.vm.specification.version" value="21"/>
+<property name="java.vm.vendor" value="Eclipse Adoptium"/>
+<property name="java.vm.version" value="21.0.12.1+1-LTS"/>
+<property name="jdk.debug" value="release"/>
+<property name="junit.docs.version" value="1.13.4"/>
+<property name="line.separator" value="&#10;"/>
+<property name="native.encoding" value="UTF-8"/>
+<property name="os.arch" value="amd64"/>
+<property name="os.name" value="Linux"/>
+<property name="os.version" value="6.18.44"/>
+<property name="path.separator" value=":"/>
+<property name="stderr.encoding" value="UTF-8"/>
+<property name="stdout.encoding" value="UTF-8"/>
+<property name="sun.arch.data.model" value="64"/>
+<property name="sun.boot.library.path" value="/workspace/scratch/aa629f360927/inputs500/jdk-21.0.12.1+1/lib"/>
+<property name="sun.cpu.endian" value="little"/>
+<property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+<property name="sun.java.command" value="org.junit.platform.console.ConsoleLauncher execute --scan-class-path=/workspace/scratch/aa629f360927/vzor500-final-classes/test --include-package=org.securemail.client.safeweb --details=summary --reports-dir=/workspace/scratch/aa629f360927/aegis/aegis/docs/test-results/5.0.0/vzor/junit"/>
+<property name="sun.java.launcher" value="SUN_STANDARD"/>
+<property name="sun.jnu.encoding" value="UTF-8"/>
+<property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+<property name="user.dir" value="/workspace/scratch/aa629f360927/aegis/aegis"/>
+<property name="user.home" value="/root"/>
+<property name="user.language" value="en"/>
+<property name="user.name" value="root"/>
+<property name="user.timezone" value="Europe/Paris"/>
+</properties>
+<testcase name="authenticatesRealFixtureBytesAndSignedInternalVersionBeforeReady()" classname="org.securemail.client.safeweb.TorBrowserDownloadServiceTest" time="0.029">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserDownloadServiceTest]/[method:authenticatesRealFixtureBytesAndSignedInternalVersionBeforeReady()]
+display-name: authenticatesRealFixtureBytesAndSignedInternalVersionBeforeReady()
+]]></system-out>
+</testcase>
+<testcase name="refusesSpecialFilesDuplicateMembersAndMultipleRoots()" classname="org.securemail.client.safeweb.TorBrowserInstallerTest" time="0.052">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserInstallerTest]/[method:refusesSpecialFilesDuplicateMembersAndMultipleRoots()]
+display-name: refusesSpecialFilesDuplicateMembersAndMultipleRoots()
+]]></system-out>
+</testcase>
+<testcase name="messengerRootAliasCannotOverlapBrowserStorage()" classname="org.securemail.client.safeweb.SafeWebSessionsTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebSessionsTest]/[method:messengerRootAliasCannotOverlapBrowserStorage()]
+display-name: messengerRootAliasCannotOverlapBrowserStorage()
+]]></system-out>
+</testcase>
+<testcase name="closeRefusesReplacedDirectoryInsteadOfDeletingAnotherTree()" classname="org.securemail.client.safeweb.SafeWebDownloadTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebDownloadTest]/[method:closeRefusesReplacedDirectoryInsteadOfDeletingAnotherTree()]
+display-name: closeRefusesReplacedDirectoryInsteadOfDeletingAnotherTree()
+]]></system-out>
+</testcase>
+<testcase name="failedStartRetainsTheExactOwnerUntilVmCleanupIsProved()" classname="org.securemail.client.safeweb.WindowsSafeWebSandboxTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.WindowsSafeWebSandboxTest]/[method:failedStartRetainsTheExactOwnerUntilVmCleanupIsProved()]
+display-name: failedStartRetainsTheExactOwnerUntilVmCleanupIsProved()
+]]></system-out>
+</testcase>
+<testcase name="refusesMembersUnderSymlinkEvenWhenTargetIsInternal()" classname="org.securemail.client.safeweb.TorBrowserInstallerTest" time="0.021">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserInstallerTest]/[method:refusesMembersUnderSymlinkEvenWhenTargetIsInternal()]
+display-name: refusesMembersUnderSymlinkEvenWhenTargetIsInternal()
+]]></system-out>
+</testcase>
+<testcase name="supportsPaxLongNamesAndInternalSymlinks()" classname="org.securemail.client.safeweb.TorBrowserInstallerTest" time="0.022">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserInstallerTest]/[method:supportsPaxLongNamesAndInternalSymlinks()]
+display-name: supportsPaxLongNamesAndInternalSymlinks()
+]]></system-out>
+</testcase>
+<testcase name="displayReadinessRejectsARegularFileOrLink()" classname="org.securemail.client.safeweb.SandboxDiagnosticsTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SandboxDiagnosticsTest]/[method:displayReadinessRejectsARegularFileOrLink()]
+display-name: displayReadinessRejectsARegularFileOrLink()
+]]></system-out>
+</testcase>
+<testcase name="rejectsCommandsLocalDestinationsCredentialsAndAmbiguousInputs()" classname="org.securemail.client.safeweb.SafeWebTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebTest]/[method:rejectsCommandsLocalDestinationsCredentialsAndAmbiguousInputs()]
+display-name: rejectsCommandsLocalDestinationsCredentialsAndAmbiguousInputs()
+]]></system-out>
+</testcase>
+<testcase name="verifiesCertifiedSigningSubkeyAndBackSignature()" classname="org.securemail.client.safeweb.TorBrowserSignatureTest" time="0.022">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserSignatureTest]/[method:verifiesCertifiedSigningSubkeyAndBackSignature()]
+display-name: verifiesCertifiedSigningSubkeyAndBackSignature()
+]]></system-out>
+</testcase>
+<testcase name="namespaceProbeHasNoHomeDisplayNetworkSharingOrUserCommand()" classname="org.securemail.client.safeweb.SandboxDiagnosticsTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SandboxDiagnosticsTest]/[method:namespaceProbeHasNoHomeDisplayNetworkSharingOrUserCommand()]
+display-name: namespaceProbeHasNoHomeDisplayNetworkSharingOrUserCommand()
+]]></system-out>
+</testcase>
+<testcase name="allowsInternalExecutableLinkAndManualBrowserDirectorySelection()" classname="org.securemail.client.safeweb.TorBrowserDiscoveryTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserDiscoveryTest]/[method:allowsInternalExecutableLinkAndManualBrowserDirectorySelection()]
+display-name: allowsInternalExecutableLinkAndManualBrowserDirectorySelection()
+]]></system-out>
+</testcase>
+<testcase name="supportsAsciiArmoredDetachedSignatureAndPublicKey()" classname="org.securemail.client.safeweb.TorBrowserSignatureTest" time="0.024">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserSignatureTest]/[method:supportsAsciiArmoredDetachedSignatureAndPublicKey()]
+display-name: supportsAsciiArmoredDetachedSignatureAndPublicKey()
+]]></system-out>
+</testcase>
+<testcase name="supportsInternalDirectorySymlink()" classname="org.securemail.client.safeweb.TorBrowserInstallerTest" time="0.012">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserInstallerTest]/[method:supportsInternalDirectorySymlink()]
+display-name: supportsInternalDirectorySymlink()
+]]></system-out>
+</testcase>
+<testcase name="windowsBuildAndEditionAreExplicit()" classname="org.securemail.client.safeweb.SandboxPrerequisitesTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SandboxPrerequisitesTest]/[method:windowsBuildAndEditionAreExplicit()]
+display-name: windowsBuildAndEditionAreExplicit()
+]]></system-out>
+</testcase>
+<testcase name="refusesSymlinksAndOversizedDistribution()" classname="org.securemail.client.safeweb.TorBrowserSignatureTest" time="0.012">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserSignatureTest]/[method:refusesSymlinksAndOversizedDistribution()]
+display-name: refusesSymlinksAndOversizedDistribution()
+]]></system-out>
+</testcase>
+<testcase name="discoversKnownInstallationWithoutExecutingOrReadingOrCopyingProfile()" classname="org.securemail.client.safeweb.TorBrowserDiscoveryTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserDiscoveryTest]/[method:discoversKnownInstallationWithoutExecutingOrReadingOrCopyingProfile()]
+display-name: discoversKnownInstallationWithoutExecutingOrReadingOrCopyingProfile()
+]]></system-out>
+</testcase>
+<testcase name="rejectsUnsupportedEditionsAndInjectedSessionCommands()" classname="org.securemail.client.safeweb.WindowsSafeWebSandboxTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.WindowsSafeWebSandboxTest]/[method:rejectsUnsupportedEditionsAndInjectedSessionCommands()]
+display-name: rejectsUnsupportedEditionsAndInjectedSessionCommands()
+]]></system-out>
+</testcase>
+<testcase name="distroMetadataCannotInjectOptionsShellCodeOrContradictoryIds()" classname="org.securemail.client.safeweb.SandboxPreparationTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SandboxPreparationTest]/[method:distroMetadataCannotInjectOptionsShellCodeOrContradictoryIds()]
+display-name: distroMetadataCannotInjectOptionsShellCodeOrContradictoryIds()
+]]></system-out>
+</testcase>
+<testcase name="actualLoopbackSocksHandshakeSendsDomainAndPortWithoutLocalDestinationDns()" classname="org.securemail.client.safeweb.TorBrowserHttpsTest" time="0.043">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserHttpsTest]/[method:actualLoopbackSocksHandshakeSendsDomainAndPortWithoutLocalDestinationDns()]
+display-name: actualLoopbackSocksHandshakeSendsDomainAndPortWithoutLocalDestinationDns()
+]]></system-out>
+</testcase>
+<testcase name="rejectsMissingBackSignature()" classname="org.securemail.client.safeweb.TorBrowserSignatureTest" time="0.016">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserSignatureTest]/[method:rejectsMissingBackSignature()]
+display-name: rejectsMissingBackSignature()
+]]></system-out>
+</testcase>
+<testcase name="alteredPayloadCannotReachReadyAndTemporaryFilesAreRemoved()" classname="org.securemail.client.safeweb.TorBrowserDownloadServiceTest" time="0.135">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserDownloadServiceTest]/[method:alteredPayloadCannotReachReadyAndTemporaryFilesAreRemoved()]
+display-name: alteredPayloadCannotReachReadyAndTemporaryFilesAreRemoved()
+]]></system-out>
+</testcase>
+<testcase name="naturalExitCleansTemporaryProfileButKeepsPersistentDownloads()" classname="org.securemail.client.safeweb.SafeWebProcessTest" time="1.032">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebProcessTest]/[method:naturalExitCleansTemporaryProfileButKeepsPersistentDownloads()]
+display-name: naturalExitCleansTemporaryProfileButKeepsPersistentDownloads()
+]]></system-out>
+</testcase>
+<testcase name="detectsActualMutationDuringStreamingAndRemovesPartialSnapshot()" classname="org.securemail.client.safeweb.SafeWebDownloadTest" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebDownloadTest]/[method:detectsActualMutationDuringStreamingAndRemovesPartialSnapshot()]
+display-name: detectsActualMutationDuringStreamingAndRemovesPartialSnapshot()
+]]></system-out>
+</testcase>
+<testcase name="interruptDoesNotKillAnAlreadyAuthorizedSystemTransaction()" classname="org.securemail.client.safeweb.SandboxPreparationTest" time="0.104">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SandboxPreparationTest]/[method:interruptDoesNotKillAnAlreadyAuthorizedSystemTransaction()]
+display-name: interruptDoesNotKillAnAlreadyAuthorizedSystemTransaction()
+]]></system-out>
+</testcase>
+<testcase name="socketPolicyRequiresSocketTypeAndExactUserOwnership()" classname="org.securemail.client.safeweb.SandboxDiagnosticsTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SandboxDiagnosticsTest]/[method:socketPolicyRequiresSocketTypeAndExactUserOwnership()]
+display-name: socketPolicyRequiresSocketTypeAndExactUserOwnership()
+]]></system-out>
+</testcase>
+<testcase name="rejectsMalformedOversizedAndCompressedMetadataBeforeParsing()" classname="org.securemail.client.safeweb.TorBrowserSignatureTest" time="0.018">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserSignatureTest]/[method:rejectsMalformedOversizedAndCompressedMetadataBeforeParsing()]
+display-name: rejectsMalformedOversizedAndCompressedMetadataBeforeParsing()
+]]></system-out>
+</testcase>
+<testcase name="rejectsKeyWithoutSigningPermission()" classname="org.securemail.client.safeweb.TorBrowserSignatureTest" time="0.013">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserSignatureTest]/[method:rejectsKeyWithoutSigningPermission()]
+display-name: rejectsKeyWithoutSigningPermission()
+]]></system-out>
+</testcase>
+<testcase name="timeoutReportsStillRunningWithoutKillingTheTransaction()" classname="org.securemail.client.safeweb.SandboxPreparationTest" time="0.252">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SandboxPreparationTest]/[method:timeoutReportsStillRunningWithoutKillingTheTransaction()]
+display-name: timeoutReportsStillRunningWithoutKillingTheTransaction()
+]]></system-out>
+</testcase>
+<testcase name="offlineTorHasNoFetchNoFilesystemMutationAndNoFallback()" classname="org.securemail.client.safeweb.TorBrowserDownloadServiceTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserDownloadServiceTest]/[method:offlineTorHasNoFetchNoFilesystemMutationAndNoFallback()]
+display-name: offlineTorHasNoFetchNoFilesystemMutationAndNoFallback()
+]]></system-out>
+</testcase>
+<testcase name="rejectsMultipleDetachedSignatures()" classname="org.securemail.client.safeweb.TorBrowserSignatureTest" time="0.012">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserSignatureTest]/[method:rejectsMultipleDetachedSignatures()]
+display-name: rejectsMultipleDetachedSignatures()
+]]></system-out>
+</testcase>
+<testcase name="nativeFailureReasonSurvivesCleanupAndIsNotReplacedByNeutralStoppedStatus()" classname="org.securemail.client.safeweb.SafeWebProcessTest" time="0.521">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebProcessTest]/[method:nativeFailureReasonSurvivesCleanupAndIsNotReplacedByNeutralStoppedStatus()]
+display-name: nativeFailureReasonSurvivesCleanupAndIsNotReplacedByNeutralStoppedStatus()
+]]></system-out>
+</testcase>
+<testcase name="platformPolicyRejectsMacAndUnsupportedArchitectures()" classname="org.securemail.client.safeweb.SandboxPrerequisitesTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SandboxPrerequisitesTest]/[method:platformPolicyRejectsMacAndUnsupportedArchitectures()]
+display-name: platformPolicyRejectsMacAndUnsupportedArchitectures()
+]]></system-out>
+</testcase>
+<testcase name="rejectsWrongPrimaryFingerprint()" classname="org.securemail.client.safeweb.TorBrowserSignatureTest" time="0.011">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserSignatureTest]/[method:rejectsWrongPrimaryFingerprint()]
+display-name: rejectsWrongPrimaryFingerprint()
+]]></system-out>
+</testcase>
+<testcase name="malformedSignatureRefusedBeforeExtractionAndExistingDataPreserved()" classname="org.securemail.client.safeweb.TorBrowserInstallerTest" time="0.017">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserInstallerTest]/[method:malformedSignatureRefusedBeforeExtractionAndExistingDataPreserved()]
+display-name: malformedSignatureRefusedBeforeExtractionAndExistingDataPreserved()
+]]></system-out>
+</testcase>
+<testcase name="executionAliasMustBindOfficialPackageAndProtectedTarget()" classname="org.securemail.client.safeweb.WindowsSafeWebSandboxTest" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.WindowsSafeWebSandboxTest]/[method:executionAliasMustBindOfficialPackageAndProtectedTarget()]
+display-name: executionAliasMustBindOfficialPackageAndProtectedTarget()
+]]></system-out>
+</testcase>
+<testcase name="rejectsSourceDirectoriesAndHardLinks()" classname="org.securemail.client.safeweb.SafeWebDownloadTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebDownloadTest]/[method:rejectsSourceDirectoriesAndHardLinks()]
+display-name: rejectsSourceDirectoriesAndHardLinks()
+]]></system-out>
+</testcase>
+<testcase name="preflightAndFreshAuthenticatedSameVersionRepairPreserveBookmarksAndDownloads()" classname="org.securemail.client.safeweb.TorBrowserDiscoveryTest" time="0.031">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserDiscoveryTest]/[method:preflightAndFreshAuthenticatedSameVersionRepairPreserveBookmarksAndDownloads()]
+display-name: preflightAndFreshAuthenticatedSameVersionRepairPreserveBookmarksAndDownloads()
+]]></system-out>
+</testcase>
+<testcase name="migrationPreservesCustomNavigationAndIsIdempotent()" classname="org.securemail.client.safeweb.SafeWebTest" time="0.024">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebTest]/[method:migrationPreservesCustomNavigationAndIsIdempotent()]
+display-name: migrationPreservesCustomNavigationAndIsIdempotent()
+]]></system-out>
+</testcase>
+<testcase name="closeUnlinksSubstitutedSymlinkAndPreservesItsTarget()" classname="org.securemail.client.safeweb.SafeWebDownloadTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebDownloadTest]/[method:closeUnlinksSubstitutedSymlinkAndPreservesItsTarget()]
+display-name: closeUnlinksSubstitutedSymlinkAndPreservesItsTarget()
+]]></system-out>
+</testcase>
+<testcase name="extractsBoundedXzTarWithoutChangingFileBytesOrKeepingSetuidBits()" classname="org.securemail.client.safeweb.TorBrowserInstallerTest" time="0.01">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserInstallerTest]/[method:extractsBoundedXzTarWithoutChangingFileBytesOrKeepingSetuidBits()]
+display-name: extractsBoundedXzTarWithoutChangingFileBytesOrKeepingSetuidBits()
+]]></system-out>
+</testcase>
+<testcase name="failedCloseRetainsProcessSessionAndManagerLockForRetry()" classname="org.securemail.client.safeweb.SafeWebProcessTest" time="0.019">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebProcessTest]/[method:failedCloseRetainsProcessSessionAndManagerLockForRetry()]
+display-name: failedCloseRetainsProcessSessionAndManagerLockForRetry()
+]]></system-out>
+</testcase>
+<testcase name="rejectsOversizedFileBeforeCopyingAndCleansNothingUnrelated()" classname="org.securemail.client.safeweb.SafeWebDownloadTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebDownloadTest]/[method:rejectsOversizedFileBeforeCopyingAndCleansNothingUnrelated()]
+display-name: rejectsOversizedFileBeforeCopyingAndCleansNothingUnrelated()
+]]></system-out>
+</testcase>
+<testcase name="managerRecoversRepairCrashBackupBeforeRemovingStaging()" classname="org.securemail.client.safeweb.TorBrowserDiscoveryTest" time="0.016">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserDiscoveryTest]/[method:managerRecoversRepairCrashBackupBeforeRemovingStaging()]
+display-name: managerRecoversRepairCrashBackupBeforeRemovingStaging()
+]]></system-out>
+</testcase>
+<testcase name="heldDirectoryPreventsParentSymlinkSwapFromReadingOutsideDownload()" classname="org.securemail.client.safeweb.SafeWebDownloadTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebDownloadTest]/[method:heldDirectoryPreventsParentSymlinkSwapFromReadingOutsideDownload()]
+display-name: heldDirectoryPreventsParentSymlinkSwapFromReadingOutsideDownload()
+]]></system-out>
+</testcase>
+<testcase name="rejectsSymlinkInDownloadAncestors()" classname="org.securemail.client.safeweb.SafeWebDownloadTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebDownloadTest]/[method:rejectsSymlinkInDownloadAncestors()]
+display-name: rejectsSymlinkInDownloadAncestors()
+]]></system-out>
+</testcase>
+<testcase name="capturesPrivateIndependentCopyAndPreservesOriginalBasename()" classname="org.securemail.client.safeweb.SafeWebDownloadTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebDownloadTest]/[method:capturesPrivateIndependentCopyAndPreservesOriginalBasename()]
+display-name: capturesPrivateIndependentCopyAndPreservesOriginalBasename()
+]]></system-out>
+</testcase>
+<testcase name="missingVerificationFailsClosed()" classname="org.securemail.client.safeweb.SafeWebTest" time="0.007">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebTest]/[method:missingVerificationFailsClosed()]
+display-name: missingVerificationFailsClosed()
+]]></system-out>
+</testcase>
+<testcase name="repeatedOpenCannotCreateAnotherProcess()" classname="org.securemail.client.safeweb.SafeWebProcessTest" time="0.014">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebProcessTest]/[method:repeatedOpenCannotCreateAnotherProcess()]
+display-name: repeatedOpenCannotCreateAnotherProcess()
+]]></system-out>
+</testcase>
+<testcase name="successfulStartupFailureCleanupThrowsOriginalFailureAfterOwnedChildStopped()" classname="org.securemail.client.safeweb.LinuxSafeWebSandboxTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.LinuxSafeWebSandboxTest]/[method:successfulStartupFailureCleanupThrowsOriginalFailureAfterOwnedChildStopped()]
+display-name: successfulStartupFailureCleanupThrowsOriginalFailureAfterOwnedChildStopped()
+]]></system-out>
+</testcase>
+<testcase name="mutableRootsCannotEscapeAndOnlyRootDesktopLauncherMayChange()" classname="org.securemail.client.safeweb.SafeWebSessionsTest" time="0.01">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebSessionsTest]/[method:mutableRootsCannotEscapeAndOnlyRootDesktopLauncherMayChange()]
+display-name: mutableRootsCannotEscapeAndOnlyRootDesktopLauncherMayChange()
+]]></system-out>
+</testcase>
+<testcase name="refusesEscapingLinkAndDoesNotWriteOutsideExtraction()" classname="org.securemail.client.safeweb.TorBrowserInstallerTest" time="0.013">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserInstallerTest]/[method:refusesEscapingLinkAndDoesNotWriteOutsideExtraction()]
+display-name: refusesEscapingLinkAndDoesNotWriteOutsideExtraction()
+]]></system-out>
+</testcase>
+<testcase name="vendorPolicyRejectsLocalAndArbitraryDestinationsBeforeSocketConnect()" classname="org.securemail.client.safeweb.TorBrowserHttpsTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserHttpsTest]/[method:vendorPolicyRejectsLocalAndArbitraryDestinationsBeforeSocketConnect()]
+display-name: vendorPolicyRejectsLocalAndArbitraryDestinationsBeforeSocketConnect()
+]]></system-out>
+</testcase>
+<testcase name="failedLaunchCleansOnlyPreparedTemporarySessionAndAllowsRetry()" classname="org.securemail.client.safeweb.SafeWebProcessTest" time="0.017">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebProcessTest]/[method:failedLaunchCleansOnlyPreparedTemporarySessionAndAllowsRetry()]
+display-name: failedLaunchCleansOnlyPreparedTemporarySessionAndAllowsRetry()
+]]></system-out>
+</testcase>
+<testcase name="supportedArchitectureAndNumericVersionOrdering()" classname="org.securemail.client.safeweb.TorBrowserDownloadServiceTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserDownloadServiceTest]/[method:supportedArchitectureAndNumericVersionOrdering()]
+display-name: supportedArchitectureAndNumericVersionOrdering()
+]]></system-out>
+</testcase>
+<testcase name="refusesSymlinkDownloadRootAndPreservesOutsideSentinel()" classname="org.securemail.client.safeweb.TorBrowserDownloadServiceTest" time="0.02">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserDownloadServiceTest]/[method:refusesSymlinkDownloadRootAndPreservesOutsideSentinel()]
+display-name: refusesSymlinkDownloadRootAndPreservesOutsideSentinel()
+]]></system-out>
+</testcase>
+<testcase name="ordinaryFirefoxAndEscapingExecutableLinksAreNotBrowserCandidates()" classname="org.securemail.client.safeweb.TorBrowserDiscoveryTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserDiscoveryTest]/[method:ordinaryFirefoxAndEscapingExecutableLinksAreNotBrowserCandidates()]
+display-name: ordinaryFirefoxAndEscapingExecutableLinksAreNotBrowserCandidates()
+]]></system-out>
+</testcase>
+<testcase name="legacyAuthenticatedTemplateVersionPreventsDowngradeEvenWhenSessionNeedsRepair()" classname="org.securemail.client.safeweb.TorBrowserDiscoveryTest" time="0.01">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserDiscoveryTest]/[method:legacyAuthenticatedTemplateVersionPreventsDowngradeEvenWhenSessionNeedsRepair()]
+display-name: legacyAuthenticatedTemplateVersionPreventsDowngradeEvenWhenSessionNeedsRepair()
+]]></system-out>
+</testcase>
+<testcase name="refusesCyclicAndDanglingLinks()" classname="org.securemail.client.safeweb.TorBrowserInstallerTest" time="0.061">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserInstallerTest]/[method:refusesCyclicAndDanglingLinks()]
+display-name: refusesCyclicAndDanglingLinks()
+]]></system-out>
+</testcase>
+<testcase name="nonMutexProfileSymlinkStillBlocksUpgradeAndPreservesBrowserData()" classname="org.securemail.client.safeweb.TorBrowserDiscoveryTest" time="0.045">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserDiscoveryTest]/[method:nonMutexProfileSymlinkStillBlocksUpgradeAndPreservesBrowserData()]
+display-name: nonMutexProfileSymlinkStillBlocksUpgradeAndPreservesBrowserData()
+]]></system-out>
+</testcase>
+<testcase name="authenticatedUpgradeOmitsOnlyStaleStockMozillaMutexLeavesWithoutTouchingSource()" classname="org.securemail.client.safeweb.TorBrowserDiscoveryTest" time="0.036">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserDiscoveryTest]/[method:authenticatedUpgradeOmitsOnlyStaleStockMozillaMutexLeavesWithoutTouchingSource()]
+display-name: authenticatedUpgradeOmitsOnlyStaleStockMozillaMutexLeavesWithoutTouchingSource()
+]]></system-out>
+</testcase>
+<testcase name="rejectsWeakSha1DetachedSignature()" classname="org.securemail.client.safeweb.TorBrowserSignatureTest" time="0.02">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserSignatureTest]/[method:rejectsWeakSha1DetachedSignature()]
+display-name: rejectsWeakSha1DetachedSignature()
+]]></system-out>
+</testcase>
+<testcase name="productionPinCannotBeReplacedByCallerProvidedKey()" classname="org.securemail.client.safeweb.TorBrowserSignatureTest" time="0.056">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserSignatureTest]/[method:productionPinCannotBeReplacedByCallerProvidedKey()]
+display-name: productionPinCannotBeReplacedByCallerProvidedKey()
+]]></system-out>
+</testcase>
+<testcase name="hostListIsStrictAndUnknownVmStateRemainsActive()" classname="org.securemail.client.safeweb.WindowsSafeWebSandboxTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.WindowsSafeWebSandboxTest]/[method:hostListIsStrictAndUnknownVmStateRemainsActive()]
+display-name: hostListIsStrictAndUnknownVmStateRemainsActive()
+]]></system-out>
+</testcase>
+<testcase name="displayMustBeLocalWithoutShellOrNetworkSyntax()" classname="org.securemail.client.safeweb.SandboxPrerequisitesTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SandboxPrerequisitesTest]/[method:displayMustBeLocalWithoutShellOrNetworkSyntax()]
+display-name: displayMustBeLocalWithoutShellOrNetworkSyntax()
+]]></system-out>
+</testcase>
+<testcase name="backendCannotReleaseOwnershipWhileItsProcessRemainsAlive()" classname="org.securemail.client.safeweb.SafeWebProcessTest" time="0.014">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebProcessTest]/[method:backendCannotReleaseOwnershipWhileItsProcessRemainsAlive()]
+display-name: backendCannotReleaseOwnershipWhileItsProcessRemainsAlive()
+]]></system-out>
+</testcase>
+<testcase name="rejectsRevokedSigningSubkey()" classname="org.securemail.client.safeweb.TorBrowserSignatureTest" time="0.022">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserSignatureTest]/[method:rejectsRevokedSigningSubkey()]
+display-name: rejectsRevokedSigningSubkey()
+]]></system-out>
+</testcase>
+<testcase name="authenticatesBinaryBytesAndReturnsExactHash()" classname="org.securemail.client.safeweb.TorBrowserSignatureTest" time="0.018">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserSignatureTest]/[method:authenticatesBinaryBytesAndReturnsExactHash()]
+display-name: authenticatesBinaryBytesAndReturnsExactHash()
+]]></system-out>
+</testcase>
+<testcase name="downloadsSurviveNormalCloseAndAuthenticatedUpgrade()" classname="org.securemail.client.safeweb.SafeWebSessionsTest" time="0.017">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebSessionsTest]/[method:downloadsSurviveNormalCloseAndAuthenticatedUpgrade()]
+display-name: downloadsSurviveNormalCloseAndAuthenticatedUpgrade()
+]]></system-out>
+</testcase>
+<testcase name="cancellationInterruptsRealSocketWhileSocksHandshakeIsWaiting()" classname="org.securemail.client.safeweb.TorBrowserHttpsTest" time="0.008">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserHttpsTest]/[method:cancellationInterruptsRealSocketWhileSocksHandshakeIsWaiting()]
+display-name: cancellationInterruptsRealSocketWhileSocksHandshakeIsWaiting()
+]]></system-out>
+</testcase>
+<testcase name="rejectsFutureSignature()" classname="org.securemail.client.safeweb.TorBrowserSignatureTest" time="0.021">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserSignatureTest]/[method:rejectsFutureSignature()]
+display-name: rejectsFutureSignature()
+]]></system-out>
+</testcase>
+<testcase name="failedStartupRetainsControllerAndFilesWhenCleanupCannotStopOwnedChild()" classname="org.securemail.client.safeweb.LinuxSafeWebSandboxTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.LinuxSafeWebSandboxTest]/[method:failedStartupRetainsControllerAndFilesWhenCleanupCannotStopOwnedChild()]
+display-name: failedStartupRetainsControllerAndFilesWhenCleanupCannotStopOwnedChild()
+]]></system-out>
+</testcase>
+<testcase name="onlyCachyAndArchReceiveAnImmutableFixedAllowlist()" classname="org.securemail.client.safeweb.SandboxPreparationTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SandboxPreparationTest]/[method:onlyCachyAndArchReceiveAnImmutableFixedAllowlist()]
+display-name: onlyCachyAndArchReceiveAnImmutableFixedAllowlist()
+]]></system-out>
+</testcase>
+<testcase name="signedVersionMetadataMustMatchPlatformChannelAndFilename()" classname="org.securemail.client.safeweb.TorBrowserDiscoveryTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserDiscoveryTest]/[method:signedVersionMetadataMustMatchPlatformChannelAndFilename()]
+display-name: signedVersionMetadataMustMatchPlatformChannelAndFilename()
+]]></system-out>
+</testcase>
+<testcase name="rejectsExpiredSigningKey()" classname="org.securemail.client.safeweb.TorBrowserSignatureTest" time="0.021">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserSignatureTest]/[method:rejectsExpiredSigningKey()]
+display-name: rejectsExpiredSigningKey()
+]]></system-out>
+</testcase>
+<testcase name="unknownWrongAndTruncatedArchitecturesStayIncompatible()" classname="org.securemail.client.safeweb.TorBrowserDiscoveryTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserDiscoveryTest]/[method:unknownWrongAndTruncatedArchitecturesStayIncompatible()]
+display-name: unknownWrongAndTruncatedArchitecturesStayIncompatible()
+]]></system-out>
+</testcase>
+<testcase name="refusesAmbiguityTruncationHtmlCompressionOversizeAndHeaderInjection()" classname="org.securemail.client.safeweb.TorBrowserHttpsTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserHttpsTest]/[method:refusesAmbiguityTruncationHtmlCompressionOversizeAndHeaderInjection()]
+display-name: refusesAmbiguityTruncationHtmlCompressionOversizeAndHeaderInjection()
+]]></system-out>
+</testcase>
+<testcase name="arbitraryForeignSessionCannotBeDeleted()" classname="org.securemail.client.safeweb.SafeWebSessionsTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebSessionsTest]/[method:arbitraryForeignSessionCannotBeDeleted()]
+display-name: arbitraryForeignSessionCannotBeDeleted()
+]]></system-out>
+</testcase>
+<testcase name="closeDeletesOnlyOwnSnapshotAndIsIdempotent()" classname="org.securemail.client.safeweb.SafeWebDownloadTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebDownloadTest]/[method:closeDeletesOnlyOwnSnapshotAndIsIdempotent()]
+display-name: closeDeletesOnlyOwnSnapshotAndIsIdempotent()
+]]></system-out>
+</testcase>
+<testcase name="cookieIsPrivateWellFormedAndDifferentEverySession()" classname="org.securemail.client.safeweb.LinuxSafeWebSandboxTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.LinuxSafeWebSandboxTest]/[method:cookieIsPrivateWellFormedAndDifferentEverySession()]
+display-name: cookieIsPrivateWellFormedAndDifferentEverySession()
+]]></system-out>
+</testcase>
+<testcase name="cancelledImportCreatesNothingAndCancelledExtractionStopsBeforeOutput()" classname="org.securemail.client.safeweb.TorBrowserDiscoveryTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserDiscoveryTest]/[method:cancelledImportCreatesNothingAndCancelledExtractionStopsBeforeOutput()]
+display-name: cancelledImportCreatesNothingAndCancelledExtractionStopsBeforeOutput()
+]]></system-out>
+</testcase>
+<testcase name="rejectsOutsideAndNestedSelections()" classname="org.securemail.client.safeweb.SafeWebDownloadTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebDownloadTest]/[method:rejectsOutsideAndNestedSelections()]
+display-name: rejectsOutsideAndNestedSelections()
+]]></system-out>
+</testcase>
+<testcase name="realStderrPipeIsDrainedAndReducedToFixedCode()" classname="org.securemail.client.safeweb.SandboxDiagnosticsTest" time="0.016">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SandboxDiagnosticsTest]/[method:realStderrPipeIsDrainedAndReducedToFixedCode()]
+display-name: realStderrPipeIsDrainedAndReducedToFixedCode()
+]]></system-out>
+</testcase>
+<testcase name="failedProfileUpgradePreservesPreviousAndCanBeRetried()" classname="org.securemail.client.safeweb.SafeWebSessionsTest" time="0.018">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebSessionsTest]/[method:failedProfileUpgradePreservesPreviousAndCanBeRetried()]
+display-name: failedProfileUpgradePreservesPreviousAndCanBeRetried()
+]]></system-out>
+</testcase>
+<testcase name="findsStandardAndExplicitXdgUserDataInstallationWithoutHomeScan()" classname="org.securemail.client.safeweb.TorBrowserDiscoveryTest" time="0.026">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserDiscoveryTest]/[method:findsStandardAndExplicitXdgUserDataInstallationWithoutHomeScan()]
+display-name: findsStandardAndExplicitXdgUserDataInstallationWithoutHomeScan()
+]]></system-out>
+</testcase>
+<testcase name="rejectsModifiedDistribution()" classname="org.securemail.client.safeweb.TorBrowserSignatureTest" time="0.021">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserSignatureTest]/[method:rejectsModifiedDistribution()]
+display-name: rejectsModifiedDistribution()
+]]></system-out>
+</testcase>
+<testcase name="staleCleanupRequiresExclusiveLockAndPreservesNormalSession()" classname="org.securemail.client.safeweb.SafeWebSessionsTest" time="0.014">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebSessionsTest]/[method:staleCleanupRequiresExclusiveLockAndPreservesNormalSession()]
+display-name: staleCleanupRequiresExclusiveLockAndPreservesNormalSession()
+]]></system-out>
+</testcase>
+<testcase name="displayLeaseStopsItsChildWhenControllerPipeCloses()" classname="org.securemail.client.safeweb.LinuxSafeWebSandboxTest" time="0.103">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.LinuxSafeWebSandboxTest]/[method:displayLeaseStopsItsChildWhenControllerPipeCloses()]
+display-name: displayLeaseStopsItsChildWhenControllerPipeCloses()
+]]></system-out>
+</testcase>
+<testcase name="redirectsMustRetainCanonicalHttpsHostAndExactPackagePath()" classname="org.securemail.client.safeweb.TorBrowserHttpsTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserHttpsTest]/[method:redirectsMustRetainCanonicalHttpsHostAndExactPackagePath()]
+display-name: redirectsMustRetainCanonicalHttpsHostAndExactPackagePath()
+]]></system-out>
+</testcase>
+<testcase name="detectsReplacedFilenameDuringStreamingAndRemovesPartialSnapshot()" classname="org.securemail.client.safeweb.SafeWebDownloadTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebDownloadTest]/[method:detectsReplacedFilenameDuringStreamingAndRemovesPartialSnapshot()]
+display-name: detectsReplacedFilenameDuringStreamingAndRemovesPartialSnapshot()
+]]></system-out>
+</testcase>
+<testcase name="corruptTemplateAndManifestRequireFreshAuthenticatedRepair()" classname="org.securemail.client.safeweb.TorBrowserDiscoveryTest" time="0.014">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserDiscoveryTest]/[method:corruptTemplateAndManifestRequireFreshAuthenticatedRepair()]
+display-name: corruptTemplateAndManifestRequireFreshAuthenticatedRepair()
+]]></system-out>
+</testcase>
+<testcase name="supportsForwardHardlinkChains()" classname="org.securemail.client.safeweb.TorBrowserInstallerTest" time="0.042">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserInstallerTest]/[method:supportsForwardHardlinkChains()]
+display-name: supportsForwardHardlinkChains()
+]]></system-out>
+</testcase>
+<testcase name="emptyCompletedDownloadIsHandledWithoutExecution()" classname="org.securemail.client.safeweb.SafeWebDownloadTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebDownloadTest]/[method:emptyCompletedDownloadIsHandledWithoutExecution()]
+display-name: emptyCompletedDownloadIsHandledWithoutExecution()
+]]></system-out>
+</testcase>
+<testcase name="cookieDoesNotFollowSymbolicLinks()" classname="org.securemail.client.safeweb.LinuxSafeWebSandboxTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.LinuxSafeWebSandboxTest]/[method:cookieDoesNotFollowSymbolicLinks()]
+display-name: cookieDoesNotFollowSymbolicLinks()
+]]></system-out>
+</testcase>
+<testcase name="cleanupWaitsForEveryCapturedOwnedHandleAndPreservesForeignProcess()" classname="org.securemail.client.safeweb.LinuxSafeWebSandboxTest" time="0.026">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.LinuxSafeWebSandboxTest]/[method:cleanupWaitsForEveryCapturedOwnedHandleAndPreservesForeignProcess()]
+display-name: cleanupWaitsForEveryCapturedOwnedHandleAndPreservesForeignProcess()
+]]></system-out>
+</testcase>
+<testcase name="boundsIniAndRejectsLinkedParentWithoutChangingFiles()" classname="org.securemail.client.safeweb.TorBrowserDiscoveryTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserDiscoveryTest]/[method:boundsIniAndRejectsLinkedParentWithoutChangingFiles()]
+display-name: boundsIniAndRejectsLinkedParentWithoutChangingFiles()
+]]></system-out>
+</testcase>
+<testcase name="urlIsAlwaysOnePositionalArgumentNeverShellSource()" classname="org.securemail.client.safeweb.LinuxSafeWebSandboxTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.LinuxSafeWebSandboxTest]/[method:urlIsAlwaysOnePositionalArgumentNeverShellSource()]
+display-name: urlIsAlwaysOnePositionalArgumentNeverShellSource()
+]]></system-out>
+</testcase>
+<testcase name="isolatesNetworkAndOnlyExposesDedicatedFiles()" classname="org.securemail.client.safeweb.LinuxSafeWebSandboxTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.LinuxSafeWebSandboxTest]/[method:isolatesNetworkAndOnlyExposesDedicatedFiles()]
+display-name: isolatesNetworkAndOnlyExposesDedicatedFiles()
+]]></system-out>
+</testcase>
+<testcase name="dependencyOwnershipAndWritableBitsFailClosed()" classname="org.securemail.client.safeweb.SandboxPrerequisitesTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SandboxPrerequisitesTest]/[method:dependencyOwnershipAndWritableBitsFailClosed()]
+display-name: dependencyOwnershipAndWritableBitsFailClosed()
+]]></system-out>
+</testcase>
+<testcase name="rejectsUnboundSigningSubkey()" classname="org.securemail.client.safeweb.TorBrowserSignatureTest" time="0.02">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserSignatureTest]/[method:rejectsUnboundSigningSubkey()]
+display-name: rejectsUnboundSigningSubkey()
+]]></system-out>
+</testcase>
+<testcase name="customSecretDirectoriesInSystemMountsAreRejectedEvenThroughSymlinks()" classname="org.securemail.client.safeweb.LinuxSafeWebSandboxTest" time="0.007">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.LinuxSafeWebSandboxTest]/[method:customSecretDirectoriesInSystemMountsAreRejectedEvenThroughSymlinks()]
+display-name: customSecretDirectoriesInSystemMountsAreRejectedEvenThroughSymlinks()
+]]></system-out>
+</testcase>
+<testcase name="discoveryMetadataIsStrictAndBoundToExactPlatformVersionSignatureAndOrigin()" classname="org.securemail.client.safeweb.TorBrowserDownloadServiceTest" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserDownloadServiceTest]/[method:discoveryMetadataIsStrictAndBoundToExactPlatformVersionSignatureAndOrigin()]
+display-name: discoveryMetadataIsStrictAndBoundToExactPlatformVersionSignatureAndOrigin()
+]]></system-out>
+</testcase>
+<testcase name="rejectsSourceSymlinkWithoutFollowingSecret()" classname="org.securemail.client.safeweb.SafeWebDownloadTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebDownloadTest]/[method:rejectsSourceSymlinkWithoutFollowingSecret()]
+display-name: rejectsSourceSymlinkWithoutFollowingSecret()
+]]></system-out>
+</testcase>
+<testcase name="authenticatedTemplateUpgradeKeepsOnlyBrowserData()" classname="org.securemail.client.safeweb.SafeWebSessionsTest" time="0.014">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebSessionsTest]/[method:authenticatedTemplateUpgradeKeepsOnlyBrowserData()]
+display-name: authenticatedTemplateUpgradeKeepsOnlyBrowserData()
+]]></system-out>
+</testcase>
+<testcase name="refusesAbsolutePathAndTraversalBeforeOpeningFile()" classname="org.securemail.client.safeweb.TorBrowserInstallerTest" time="0.132">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserInstallerTest]/[method:refusesAbsolutePathAndTraversalBeforeOpeningFile()]
+display-name: refusesAbsolutePathAndTraversalBeforeOpeningFile()
+]]></system-out>
+</testcase>
+<testcase name="cancellationDuringBodyClosesOwnedResourceAndRemovesPartial()" classname="org.securemail.client.safeweb.TorBrowserDownloadServiceTest" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserDownloadServiceTest]/[method:cancellationDuringBodyClosesOwnedResourceAndRemovesPartial()]
+display-name: cancellationDuringBodyClosesOwnedResourceAndRemovesPartial()
+]]></system-out>
+</testcase>
+<testcase name="uiSnapshotAndListenerDoNotWaitForSlowLaunchOrBlockingCallback()" classname="org.securemail.client.safeweb.SafeWebProcessTest" time="0.02">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebProcessTest]/[method:uiSnapshotAndListenerDoNotWaitForSlowLaunchOrBlockingCallback()]
+display-name: uiSnapshotAndListenerDoNotWaitForSlowLaunchOrBlockingCallback()
+]]></system-out>
+</testcase>
+<testcase name="supportsFixedChunkedAndCloseFramingWithMonotonicProgress()" classname="org.securemail.client.safeweb.TorBrowserHttpsTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserHttpsTest]/[method:supportsFixedChunkedAndCloseFramingWithMonotonicProgress()]
+display-name: supportsFixedChunkedAndCloseFramingWithMonotonicProgress()
+]]></system-out>
+</testcase>
+<testcase name="acceptsWebUrlsWithoutExecutingOrResolvingThem()" classname="org.securemail.client.safeweb.SafeWebTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebTest]/[method:acceptsWebUrlsWithoutExecutingOrResolvingThem()]
+display-name: acceptsWebUrlsWithoutExecutingOrResolvingThem()
+]]></system-out>
+</testcase>
+<testcase name="mapsOnlyDedicatedBundleAndDisablesHostChannels()" classname="org.securemail.client.safeweb.WindowsSafeWebSandboxTest" time="0.017">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.WindowsSafeWebSandboxTest]/[method:mapsOnlyDedicatedBundleAndDisablesHostChannels()]
+display-name: mapsOnlyDedicatedBundleAndDisablesHostChannels()
+]]></system-out>
+</testcase>
+<testcase name="actualHarmlessTransactionCompletesWithoutInheritedShellArguments()" classname="org.securemail.client.safeweb.SandboxPreparationTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SandboxPreparationTest]/[method:actualHarmlessTransactionCompletesWithoutInheritedShellArguments()]
+display-name: actualHarmlessTransactionCompletesWithoutInheritedShellArguments()
+]]></system-out>
+</testcase>
+<testcase name="trustedImportVersionFloorSurvivesRestartAndLostFloorKeepsSelectedVersion()" classname="org.securemail.client.safeweb.TorBrowserDiscoveryTest" time="0.015">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserDiscoveryTest]/[method:trustedImportVersionFloorSurvivesRestartAndLostFloorKeepsSelectedVersion()]
+display-name: trustedImportVersionFloorSurvivesRestartAndLostFloorKeepsSelectedVersion()
+]]></system-out>
+</testcase>
+<testcase name="signedOlderArchiveRenamedAsNewerDoesNotPoisonVersionFloor()" classname="org.securemail.client.safeweb.TorBrowserDownloadServiceTest" time="0.028">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserDownloadServiceTest]/[method:signedOlderArchiveRenamedAsNewerDoesNotPoisonVersionFloor()]
+display-name: signedOlderArchiveRenamedAsNewerDoesNotPoisonVersionFloor()
+]]></system-out>
+</testcase>
+<testcase name="preCancelledPreparationNeverInspectsOrMutatesOs()" classname="org.securemail.client.safeweb.SandboxPreparationTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SandboxPreparationTest]/[method:preCancelledPreparationNeverInspectsOrMutatesOs()]
+display-name: preCancelledPreparationNeverInspectsOrMutatesOs()
+]]></system-out>
+</testcase>
+<testcase name="failedTemplateCopyNeverPublishesPartialTemplate()" classname="org.securemail.client.safeweb.SafeWebSessionsTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebSessionsTest]/[method:failedTemplateCopyNeverPublishesPartialTemplate()]
+display-name: failedTemplateCopyNeverPublishesPartialTemplate()
+]]></system-out>
+</testcase>
+<testcase name="browserCannotResealItsModifiedExecutables()" classname="org.securemail.client.safeweb.SafeWebSessionsTest" time="0.01">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebSessionsTest]/[method:browserCannotResealItsModifiedExecutables()]
+display-name: browserCannotResealItsModifiedExecutables()
+]]></system-out>
+</testcase>
+<testcase name="previouslyAuthenticatedNewerVersionPreventsRollbackBeforeBinaryFetch()" classname="org.securemail.client.safeweb.TorBrowserDownloadServiceTest" time="0.089">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserDownloadServiceTest]/[method:previouslyAuthenticatedNewerVersionPreventsRollbackBeforeBinaryFetch()]
+display-name: previouslyAuthenticatedNewerVersionPreventsRollbackBeforeBinaryFetch()
+]]></system-out>
+</testcase>
+<testcase name="cleanupNeverFollowsAnExternalSymlink()" classname="org.securemail.client.safeweb.SafeWebSessionsTest" time="0.008">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebSessionsTest]/[method:cleanupNeverFollowsAnExternalSymlink()]
+display-name: cleanupNeverFollowsAnExternalSymlink()
+]]></system-out>
+</testcase>
+<testcase name="privatePathChecksResolveMissingChildrenOfSymlinkAliases()" classname="org.securemail.client.safeweb.SafeWebProcessTest" time="0.008">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebProcessTest]/[method:privatePathChecksResolveMissingChildrenOfSymlinkAliases()]
+display-name: privatePathChecksResolveMissingChildrenOfSymlinkAliases()
+]]></system-out>
+</testcase>
+<testcase name="guestBootstrapIsPackagedAndUsesDataRatherThanCommandInterpolation()" classname="org.securemail.client.safeweb.WindowsSafeWebSandboxTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.WindowsSafeWebSandboxTest]/[method:guestBootstrapIsPackagedAndUsesDataRatherThanCommandInterpolation()]
+display-name: guestBootstrapIsPackagedAndUsesDataRatherThanCommandInterpolation()
+]]></system-out>
+</testcase>
+<testcase name="onlyMissingSupportedComponentsMayRequestElevation()" classname="org.securemail.client.safeweb.SandboxPreparationTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SandboxPreparationTest]/[method:onlyMissingSupportedComponentsMayRequestElevation()]
+display-name: onlyMissingSupportedComponentsMayRequestElevation()
+]]></system-out>
+</testcase>
+<testcase name="actualOwnedUnixSocketIsAcceptedWhenOsPermitsSockets()" classname="org.securemail.client.safeweb.SandboxDiagnosticsTest" time="0.039">
+<skipped><![CDATA[org.opentest4j.TestAbortedException: Host sandbox forbids AF_UNIX: actual socket acceptance NOT_RUN
+	at org.junit.jupiter.api.Assumptions.abort(Assumptions.java:300)
+	at org.securemail.client.safeweb.SandboxDiagnosticsTest.actualOwnedUnixSocketIsAcceptedWhenOsPermitsSockets(SandboxDiagnosticsTest.java:56)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+]]></skipped>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SandboxDiagnosticsTest]/[method:actualOwnedUnixSocketIsAcceptedWhenOsPermitsSockets()]
+display-name: actualOwnedUnixSocketIsAcceptedWhenOsPermitsSockets()
+]]></system-out>
+</testcase>
+<testcase name="missingDependencyIsTypedAndDoesNotExposeUntrustedPath(Path)" classname="org.securemail.client.safeweb.SandboxPrerequisitesTest" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SandboxPrerequisitesTest]/[method:missingDependencyIsTypedAndDoesNotExposeUntrustedPath(java.nio.file.Path)]
+display-name: missingDependencyIsTypedAndDoesNotExposeUntrustedPath(Path)
+]]></system-out>
+</testcase>
+<testcase name="failedRepairPreservesCurrentBrowserDataAndCanBeRetried()" classname="org.securemail.client.safeweb.TorBrowserDiscoveryTest" time="0.035">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserDiscoveryTest]/[method:failedRepairPreservesCurrentBrowserDataAndCanBeRetried()]
+display-name: failedRepairPreservesCurrentBrowserDataAndCanBeRetried()
+]]></system-out>
+</testcase>
+<testcase name="namespaceAndDisplayFailuresHaveActionableFixedReasonsWithoutHostText()" classname="org.securemail.client.safeweb.SandboxDiagnosticsTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SandboxDiagnosticsTest]/[method:namespaceAndDisplayFailuresHaveActionableFixedReasonsWithoutHostText()]
+display-name: namespaceAndDisplayFailuresHaveActionableFixedReasonsWithoutHostText()
+]]></system-out>
+</testcase>
+<testcase name="stagingMustBeDisjointAndCannotUseParentSymlinks()" classname="org.securemail.client.safeweb.SafeWebDownloadTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebDownloadTest]/[method:stagingMustBeDisjointAndCannotUseParentSymlinks()]
+display-name: stagingMustBeDisjointAndCannotUseParentSymlinks()
+]]></system-out>
+</testcase>
+<testcase name="rejectsRevokedPrimaryKey()" classname="org.securemail.client.safeweb.TorBrowserSignatureTest" time="0.016">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.TorBrowserSignatureTest]/[method:rejectsRevokedPrimaryKey()]
+display-name: rejectsRevokedPrimaryKey()
+]]></system-out>
+</testcase>
+<testcase name="persistentProfileAndTemporaryCleanupAreSeparate()" classname="org.securemail.client.safeweb.SafeWebSessionsTest" time="0.011">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SafeWebSessionsTest]/[method:persistentProfileAndTemporaryCleanupAreSeparate()]
+display-name: persistentProfileAndTemporaryCleanupAreSeparate()
+]]></system-out>
+</testcase>
+<testcase name="windowsOnlyEnablesTheOfficialFeatureWithoutRestartOrScript()" classname="org.securemail.client.safeweb.SandboxPreparationTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.SandboxPreparationTest]/[method:windowsOnlyEnablesTheOfficialFeatureWithoutRestartOrScript()]
+display-name: windowsOnlyEnablesTheOfficialFeatureWithoutRestartOrScript()
+]]></system-out>
+</testcase>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]
+display-name: JUnit Jupiter
+]]></system-out>
+</testsuite>

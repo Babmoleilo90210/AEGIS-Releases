@@ -1,0 +1,8 @@
+Initial probe harness tried reading a Java subprocess pipe after destroy() closed it; corrected harness uses its private regular output file. No production source changed.
+Exception in thread "main" java.io.IOException: Stream closed
+	at java.base/java.io.BufferedInputStream.ensureOpen(BufferedInputStream.java:206)
+	at java.base/java.io.BufferedInputStream.implRead(BufferedInputStream.java:411)
+	at java.base/java.io.BufferedInputStream.read(BufferedInputStream.java:405)
+	at java.base/java.io.InputStream.readNBytes(InputStream.java:412)
+	at java.base/java.io.InputStream.readAllBytes(InputStream.java:349)
+	at org.securemail.client.net.EmbeddedTorPatched500Probe.main(EmbeddedTorPatched500Probe.java:30)

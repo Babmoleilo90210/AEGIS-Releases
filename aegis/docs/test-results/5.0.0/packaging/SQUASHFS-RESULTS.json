@@ -1,0 +1,10 @@
+{
+  "scope": "Actual local mksquashfs/unsquashfs harmless fixture, not final distribution and not native acceptance",
+  "permissions": {
+    "actualSquashFSOwnersAreRoot": true,
+    "actualSquashFSReadableByUnprivilegedUsers": true,
+    "directories": 2,
+    "files": 1,
+    "setuidSetgidOrSpecialNodes": false
+  }
+}

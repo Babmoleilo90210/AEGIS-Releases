@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="JUnit Jupiter" tests="85" skipped="0" failures="0" errors="0" time="32.634" hostname="9baed28aafd3" timestamp="2026-10-15T15:36:36">
+<properties>
+<property name="aegis.native.root" value="/workspace/scratch/aa629f360927/inputs250/squashfs-root"/>
+<property name="file.encoding" value="UTF-8"/>
+<property name="file.separator" value="/"/>
+<property name="java.class.path" value="/workspace/scratch/aa629f360927/inputs500/deps/junit-platform-console-standalone-1.13.4.jar"/>
+<property name="java.class.version" value="65.0"/>
+<property name="java.home" value="/workspace/scratch/aa629f360927/inputs500/jdk-21.0.12.1+1"/>
+<property name="java.io.tmpdir" value="/tmp"/>
+<property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/>
+<property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+<property name="java.runtime.version" value="21.0.12.1+1-LTS"/>
+<property name="java.specification.name" value="Java Platform API Specification"/>
+<property name="java.specification.vendor" value="Oracle Corporation"/>
+<property name="java.specification.version" value="21"/>
+<property name="java.vendor" value="Eclipse Adoptium"/>
+<property name="java.vendor.url" value="https://adoptium.net/"/>
+<property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
+<property name="java.vendor.version" value="Temurin-21.0.12.1+1"/>
+<property name="java.version" value="21.0.12.1"/>
+<property name="java.version.date" value="2026-08-18"/>
+<property name="java.vm.compressedOopsMode" value="32-bit"/>
+<property name="java.vm.info" value="mixed mode, sharing"/>
+<property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+<property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+<property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+<property name="java.vm.specification.version" value="21"/>
+<property name="java.vm.vendor" value="Eclipse Adoptium"/>
+<property name="java.vm.version" value="21.0.12.1+1-LTS"/>
+<property name="jdk.debug" value="release"/>
+<property name="jna.loaded" value="true"/>
+<property name="jna.platform.library.path" value="/usr/lib/x86_64-linux-gnu:/lib/x86_64-linux-gnu:/usr/lib64:/lib64:/usr/lib:/lib"/>
+<property name="jnidispatch.path" value="/root/.cache/JNA/temp/jna17719706508723915483.tmp"/>
+<property name="junit.docs.version" value="1.13.4"/>
+<property name="line.separator" value="&#10;"/>
+<property name="native.encoding" value="UTF-8"/>
+<property name="os.arch" value="amd64"/>
+<property name="os.name" value="Linux"/>
+<property name="os.version" value="6.18.44"/>
+<property name="path.separator" value=":"/>
+<property name="stderr.encoding" value="UTF-8"/>
+<property name="stdout.encoding" value="UTF-8"/>
+<property name="sun.arch.data.model" value="64"/>
+<property name="sun.boot.library.path" value="/workspace/scratch/aa629f360927/inputs500/jdk-21.0.12.1+1/lib"/>
+<property name="sun.cpu.endian" value="little"/>
+<property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+<property name="sun.java.command" value="/workspace/scratch/aa629f360927/inputs500/deps/junit-platform-console-standalone-1.13.4.jar execute --class-path /workspace/scratch/aa629f360927/glas500-build/tests:/workspace/scratch/aa629f360927/glas500-build/classes:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/fontbox-3.0.8.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/commons-logging-1.3.5.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/jna-platform-5.19.1.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/common-lang-3.14.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/client-ui-2.5.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/tink-1.23.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/imageio-metadata-3.14.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/commons-codec-1.19.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/pdfbox-io-3.0.8.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/bcprov-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/commons-lang3-3.18.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/imageio-webp-3.14.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/common-io-3.14.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/pdfbox-3.0.8.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/commons-io-2.20.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/bcutil-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/javafx-controls-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/javafx-base-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/xz-1.12.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/jna-5.19.1.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/bcpg-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/commons-compress-1.28.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/protobuf-java-4.33.6.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/zip4j-2.11.6.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/gson-2.14.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/jsr305-3.0.2.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/imageio-core-3.14.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/error_prone_annotations-2.48.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/common-protocol-0.2.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/common-image-3.14.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/client-core-2.5.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/javafx-graphics-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs500/deps/slf4j-api-2.0.17.jar:/workspace/scratch/aa629f360927/inputs500/deps/junit-platform-console-standalone-1.13.4.jar:/workspace/scratch/aa629f360927/inputs500/deps/sqlite-jdbc-3.53.4.0.jar:/workspace/scratch/aa629f360927/inputs500/deps/openjfx-monocle-21.0.2.jar:/workspace/scratch/aa629f360927/inputs500/deps/password4j-1.8.4.jar:/workspace/scratch/aa629f360927/inputs500/deps/slf4j-nop-2.0.17.jar --select-package org.securemail.client.voice --select-package org.securemail.client.storage --fail-if-no-tests --reports-dir /workspace/scratch/aa629f360927/glas500-build/junit --details=summary"/>
+<property name="sun.java.launcher" value="SUN_STANDARD"/>
+<property name="sun.jnu.encoding" value="UTF-8"/>
+<property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+<property name="user.dir" value="/workspace/scratch/aa629f360927/aegis/aegis"/>
+<property name="user.home" value="/root"/>
+<property name="user.language" value="en"/>
+<property name="user.name" value="root"/>
+<property name="user.timezone" value="Europe/Paris"/>
+</properties>
+<testcase name="organizationalDecisionIsShortLivedIdentityAndDirectionBound()" classname="org.securemail.client.voice.VoiceCallPolicyTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceCallPolicyTest]/[method:organizationalDecisionIsShortLivedIdentityAndDirectionBound()]
+display-name: organizationalDecisionIsShortLivedIdentityAndDirectionBound()
+]]></system-out>
+</testcase>
+<testcase name="rejectsOversizedTruncatedUnsupportedAndTrailingOfferFields()" classname="org.securemail.client.voice.VoiceTlsTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceTlsTest]/[method:rejectsOversizedTruncatedUnsupportedAndTrailingOfferFields()]
+display-name: rejectsOversizedTruncatedUnsupportedAndTrailingOfferFields()
+]]></system-out>
+</testcase>
+<testcase name="boundedReceiveQueueAndMalformedFramesFailClosed()" classname="org.securemail.client.voice.GlasAudioTest" time="0.069">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.GlasAudioTest]/[method:boundedReceiveQueueAndMalformedFramesFailClosed()]
+display-name: boundedReceiveQueueAndMalformedFramesFailClosed()
+]]></system-out>
+</testcase>
+<testcase name="backpressureReducesRealOpusBitrateWithoutGrowingAQueue()" classname="org.securemail.client.voice.GlasAudioTest" time="2.023">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.GlasAudioTest]/[method:backpressureReducesRealOpusBitrateWithoutGrowingAQueue()]
+display-name: backpressureReducesRealOpusBitrateWithoutGrowingAQueue()
+]]></system-out>
+</testcase>
+<testcase name="rejectsExpiredAndFutureSignedOffers()" classname="org.securemail.client.voice.VoiceTlsTest" time="0.011">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceTlsTest]/[method:rejectsExpiredAndFutureSignedOffers()]
+display-name: rejectsExpiredAndFutureSignedOffers()
+]]></system-out>
+</testcase>
+<testcase name="versionOneGetsSafeIncomingAndNotificationDefaults()" classname="org.securemail.client.voice.VoiceHistoryTest" time="0.22">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceHistoryTest]/[method:versionOneGetsSafeIncomingAndNotificationDefaults()]
+display-name: versionOneGetsSafeIncomingAndNotificationDefaults()
+]]></system-out>
+</testcase>
+<testcase name="realSpeexNoiseSuppressionProcessesBoundedPcm()" classname="org.securemail.client.voice.GlasAudioTest" time="0.022">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.GlasAudioTest]/[method:realSpeexNoiseSuppressionProcessesBoundedPcm()]
+display-name: realSpeexNoiseSuppressionProcessesBoundedPcm()
+]]></system-out>
+</testcase>
+<testcase name="blockedOutputDoesNotBlockOffersOrReplayExpiredQueuedSpeech()" classname="org.securemail.client.voice.VoiceAudioQueueTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceAudioQueueTest]/[method:blockedOutputDoesNotBlockOffersOrReplayExpiredQueuedSpeech()]
+display-name: blockedOutputDoesNotBlockOffersOrReplayExpiredQueuedSpeech()
+]]></system-out>
+</testcase>
+<testcase name="sixSectionCustomOrderSurvivesLoadSaveExportAndRepeatedImport()" classname="org.securemail.client.storage.NavigationMigration200Test" time="0.021">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.NavigationMigration200Test]/[method:sixSectionCustomOrderSurvivesLoadSaveExportAndRepeatedImport()]
+display-name: sixSectionCustomOrderSurvivesLoadSaveExportAndRepeatedImport()
+]]></system-out>
+</testcase>
+<testcase name="roleMismatchFailsBeforeAnyTlsApplicationData()" classname="org.securemail.client.voice.VoiceTlsTest" time="0.009">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceTlsTest]/[method:roleMismatchFailsBeforeAnyTlsApplicationData()]
+display-name: roleMismatchFailsBeforeAnyTlsApplicationData()
+]]></system-out>
+</testcase>
+<testcase name="repeatedAuthenticatedRingingDoesNotProduceAnUnboundedUiEventStream()" classname="org.securemail.client.voice.VoiceSecurityReviewTest" time="0.795">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceSecurityReviewTest]/[method:repeatedAuthenticatedRingingDoesNotProduceAnUnboundedUiEventStream()]
+display-name: repeatedAuthenticatedRingingDoesNotProduceAnUnboundedUiEventStream()
+]]></system-out>
+</testcase>
+<testcase name="damagedOrOversizedVoiceStateFailsClosed()" classname="org.securemail.client.voice.VoiceHistoryTest" time="0.204">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceHistoryTest]/[method:damagedOrOversizedVoiceStateFailsClosed()]
+display-name: damagedOrOversizedVoiceStateFailsClosed()
+]]></system-out>
+</testcase>
+<testcase name="controlFramesCannotEnterOrDisplaceTheAudioQueue()" classname="org.securemail.client.voice.VoiceAudioQueueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceAudioQueueTest]/[method:controlFramesCannotEnterOrDisplaceTheAudioQueue()]
+display-name: controlFramesCannotEnterOrDisplaceTheAudioQueue()
+]]></system-out>
+</testcase>
+<testcase name="clearWipesAllRetainedFramesAndAllowsASeparateFreshBatch()" classname="org.securemail.client.voice.VoiceAudioQueueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceAudioQueueTest]/[method:clearWipesAllRetainedFramesAndAllowsASeparateFreshBatch()]
+display-name: clearWipesAllRetainedFramesAndAllowsASeparateFreshBatch()
+]]></system-out>
+</testcase>
+<testcase name="rejectsCrossCallAndRoleReversal()" classname="org.securemail.client.voice.VoiceTlsTest" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceTlsTest]/[method:rejectsCrossCallAndRoleReversal()]
+display-name: rejectsCrossCallAndRoleReversal()
+]]></system-out>
+</testcase>
+<testcase name="fullQueueRetainsNewestButReportsPressureAndWipesEvicted()" classname="org.securemail.client.voice.VoiceAudioQueueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceAudioQueueTest]/[method:fullQueueRetainsNewestButReportsPressureAndWipesEvicted()]
+display-name: fullQueueRetainsNewestButReportsPressureAndWipesEvicted()
+]]></system-out>
+</testcase>
+<testcase name="freshAuthenticatedReconnectKeepsIdentityAndMutesBothEndpoints()" classname="org.securemail.client.voice.VoiceCallServiceTest" time="3.719">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceCallServiceTest]/[method:freshAuthenticatedReconnectKeepsIdentityAndMutesBothEndpoints()]
+display-name: freshAuthenticatedReconnectKeepsIdentityAndMutesBothEndpoints()
+]]></system-out>
+</testcase>
+<testcase name="oversizedLengthAndUnknownTypeAreRejectedBeforeAllocation()" classname="org.securemail.client.voice.VoiceFramesTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceFramesTest]/[method:oversizedLengthAndUnknownTypeAreRejectedBeforeAllocation()]
+display-name: oversizedLengthAndUnknownTypeAreRejectedBeforeAllocation()
+]]></system-out>
+</testcase>
+<testcase name="eachAttemptUsesDifferentEphemeralCertificateAndCannotReusePending()" classname="org.securemail.client.voice.VoiceTlsTest" time="0.157">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceTlsTest]/[method:eachAttemptUsesDifferentEphemeralCertificateAndCannotReusePending()]
+display-name: eachAttemptUsesDifferentEphemeralCertificateAndCannotReusePending()
+]]></system-out>
+</testcase>
+<testcase name="compiledDigestRejectsTamperedLibraryAndSymlinks(Path)" classname="org.securemail.client.voice.GlasAudioTest" time="0.018">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.GlasAudioTest]/[method:compiledDigestRejectsTamperedLibraryAndSymlinks(java.nio.file.Path)]
+display-name: compiledDigestRejectsTamperedLibraryAndSymlinks(Path)
+]]></system-out>
+</testcase>
+<testcase name="inputBytesAreWipedForSuccessReplacementAndRejectedEncoding()" classname="org.securemail.client.voice.VoiceAudioQueueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceAudioQueueTest]/[method:inputBytesAreWipedForSuccessReplacementAndRejectedEncoding()]
+display-name: inputBytesAreWipedForSuccessReplacementAndRejectedEncoding()
+]]></system-out>
+</testcase>
+<testcase name="controlCannotCarryAudioAndUnsupportedCodecIsRejected()" classname="org.securemail.client.voice.VoiceFramesTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceFramesTest]/[method:controlCannotCarryAudioAndUnsupportedCodecIsRejected()]
+display-name: controlCannotCarryAudioAndUnsupportedCodecIsRejected()
+]]></system-out>
+</testcase>
+<testcase name="realSpeexCancelsSyntheticAcousticEcho()" classname="org.securemail.client.voice.GlasAudioTest" time="0.118">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.GlasAudioTest]/[method:realSpeexCancelsSyntheticAcousticEcho()]
+display-name: realSpeexCancelsSyntheticAcousticEcho()
+]]></system-out>
+</testcase>
+<testcase name="authenticatedDuplicateAudioSequenceClosesLinkAndNeverReachesMediaTwice()" classname="org.securemail.client.voice.VoiceSecurityReviewTest" time="0.57">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceSecurityReviewTest]/[method:authenticatedDuplicateAudioSequenceClosesLinkAndNeverReachesMediaTwice()]
+display-name: authenticatedDuplicateAudioSequenceClosesLinkAndNeverReachesMediaTwice()
+]]></system-out>
+</testcase>
+<testcase name="anAlreadyCustomizedEightSectionOrderIsNotResetOnReopen()" classname="org.securemail.client.storage.NavigationMigration250Test" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.NavigationMigration250Test]/[method:anAlreadyCustomizedEightSectionOrderIsNotResetOnReopen()]
+display-name: anAlreadyCustomizedEightSectionOrderIsNotResetOnReopen()
+]]></system-out>
+</testcase>
+<testcase name="hangupIsImmediateButOwnershipRemainsUntilSlowDeviceCleanupCompletes()" classname="org.securemail.client.voice.VoiceCallServiceTest" time="0.735">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceCallServiceTest]/[method:hangupIsImmediateButOwnershipRemainsUntilSlowDeviceCleanupCompletes()]
+display-name: hangupIsImmediateButOwnershipRemainsUntilSlowDeviceCleanupCompletes()
+]]></system-out>
+</testcase>
+<testcase name="concurrentClaimAndStopAlwaysTransferExactlyOneCleanupResponsibility()" classname="org.securemail.client.voice.GlasTestOwnershipTest" time="0.014">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.GlasTestOwnershipTest]/[method:concurrentClaimAndStopAlwaysTransferExactlyOneCleanupResponsibility()]
+display-name: concurrentClaimAndStopAlwaysTransferExactlyOneCleanupResponsibility()
+]]></system-out>
+</testcase>
+<testcase name="completedCallIdCannotRingAgainEvenWithFreshValidTlsMaterial()" classname="org.securemail.client.voice.VoiceSecurityReviewTest" time="0.534">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceSecurityReviewTest]/[method:completedCallIdCannotRingAgainEvenWithFreshValidTlsMaterial()]
+display-name: completedCallIdCannotRingAgainEvenWithFreshValidTlsMaterial()
+]]></system-out>
+</testcase>
+<testcase name="activeHandleCannotBeSilentlyOverwrittenAndRepeatedStopDoesNotDoubleClose()" classname="org.securemail.client.voice.GlasTestOwnershipTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.GlasTestOwnershipTest]/[method:activeHandleCannotBeSilentlyOverwrittenAndRepeatedStopDoesNotDoubleClose()]
+display-name: activeHandleCannotBeSilentlyOverwrittenAndRepeatedStopDoesNotDoubleClose()
+]]></system-out>
+</testcase>
+<testcase name="optInMetadataAndDeviceSettingsPersistEncryptedAndSurviveRekey()" classname="org.securemail.client.voice.VoiceHistoryTest" time="1.352">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceHistoryTest]/[method:optInMetadataAndDeviceSettingsPersistEncryptedAndSurviveRekey()]
+display-name: optInMetadataAndDeviceSettingsPersistEncryptedAndSurviveRekey()
+]]></system-out>
+</testcase>
+<testcase name="enqueuePurgesExpiredHeadAndReportsLossOnceWhileKeepingFreshTail()" classname="org.securemail.client.voice.VoiceAudioQueueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceAudioQueueTest]/[method:enqueuePurgesExpiredHeadAndReportsLossOnceWhileKeepingFreshTail()]
+display-name: enqueuePurgesExpiredHeadAndReportsLossOnceWhileKeepingFreshTail()
+]]></system-out>
+</testcase>
+<testcase name="staleHeldFrameIsWipedBeforeWritingAndPressureReachesNextOffer()" classname="org.securemail.client.voice.VoiceAudioQueueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceAudioQueueTest]/[method:staleHeldFrameIsWipedBeforeWritingAndPressureReachesNextOffer()]
+display-name: staleHeldFrameIsWipedBeforeWritingAndPressureReachesNextOffer()
+]]></system-out>
+</testcase>
+<testcase name="failedWriteWipesTheDequeuedOwnedPayload()" classname="org.securemail.client.voice.VoiceAudioQueueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceAudioQueueTest]/[method:failedWriteWipesTheDequeuedOwnedPayload()]
+display-name: failedWriteWipesTheDequeuedOwnedPayload()
+]]></system-out>
+</testcase>
+<testcase name="ttlBoundaryUsesLocalEnqueueTimeAndPreservesWireTimestamp()" classname="org.securemail.client.voice.VoiceAudioQueueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceAudioQueueTest]/[method:ttlBoundaryUsesLocalEnqueueTimeAndPreservesWireTimestamp()]
+display-name: ttlBoundaryUsesLocalEnqueueTimeAndPreservesWireTimestamp()
+]]></system-out>
+</testcase>
+<testcase name="gainClipsAndConfigurationRejectsNonFiniteValues()" classname="org.securemail.client.voice.GlasAudioTest" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.GlasAudioTest]/[method:gainClipsAndConfigurationRejectsNonFiniteValues()]
+display-name: gainClipsAndConfigurationRejectsNonFiniteValues()
+]]></system-out>
+</testcase>
+<testcase name="mutualTlsConsentGatesDevicesAndMediaWhileMailStillDelivers()" classname="org.securemail.client.voice.VoiceCallServiceTest" time="0.871">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceCallServiceTest]/[method:mutualTlsConsentGatesDevicesAndMediaWhileMailStillDelivers()]
+display-name: mutualTlsConsentGatesDevicesAndMediaWhileMailStillDelivers()
+]]></system-out>
+</testcase>
+<testcase name="rejectsTls12PeerInsteadOfDowngrading()" classname="org.securemail.client.voice.VoiceTlsTest" time="0.018">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceTlsTest]/[method:rejectsTls12PeerInsteadOfDowngrading()]
+display-name: rejectsTls12PeerInsteadOfDowngrading()
+]]></system-out>
+</testcase>
+<testcase name="ringingAndReconnectDeadlinesEndWithoutTorOrDeviceFallback()" classname="org.securemail.client.voice.VoiceCallServiceTest" time="2.856">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceCallServiceTest]/[method:ringingAndReconnectDeadlinesEndWithoutTorOrDeviceFallback()]
+display-name: ringingAndReconnectDeadlinesEndWithoutTorOrDeviceFallback()
+]]></system-out>
+</testcase>
+<testcase name="authenticatedAudioBeforeAcceptanceClosesCallWithoutOpeningAnyDevice()" classname="org.securemail.client.voice.VoiceCallServiceTest" time="0.874">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceCallServiceTest]/[method:authenticatedAudioBeforeAcceptanceClosesCallWithoutOpeningAnyDevice()]
+display-name: authenticatedAudioBeforeAcceptanceClosesCallWithoutOpeningAnyDevice()
+]]></system-out>
+</testcase>
+<testcase name="legacyPeerRejectsVoiceAndRemainsAvailableForMail()" classname="org.securemail.client.voice.VoiceCallServiceTest" time="0.497">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceCallServiceTest]/[method:legacyPeerRejectsVoiceAndRemainsAvailableForMail()]
+display-name: legacyPeerRejectsVoiceAndRemainsAvailableForMail()
+]]></system-out>
+</testcase>
+<testcase name="jitterBoundsStaleFramesAndCopiesIngress()" classname="org.securemail.client.voice.GlasAudioTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.GlasAudioTest]/[method:jitterBoundsStaleFramesAndCopiesIngress()]
+display-name: jitterBoundsStaleFramesAndCopiesIngress()
+]]></system-out>
+</testcase>
+<testcase name="unknownAndBlockedIdentitiesNeverRingOrBecomeTrusted()" classname="org.securemail.client.voice.VoiceCallServiceTest" time="0.493">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceCallServiceTest]/[method:unknownAndBlockedIdentitiesNeverRingOrBecomeTrusted()]
+display-name: unknownAndBlockedIdentitiesNeverRingOrBecomeTrusted()
+]]></system-out>
+</testcase>
+<testcase name="microphoneClosedUntilExplicitEnableMuteAndHotSwitchCloseOldDevice()" classname="org.securemail.client.voice.GlasAudioTest" time="0.322">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.GlasAudioTest]/[method:microphoneClosedUntilExplicitEnableMuteAndHotSwitchCloseOldDevice()]
+display-name: microphoneClosedUntilExplicitEnableMuteAndHotSwitchCloseOldDevice()
+]]></system-out>
+</testcase>
+<testcase name="beforeVersionOpenSnapshotsRealKeysMailArchiveAndAppearanceWithoutRewritingSources(String)[3]" classname="org.securemail.client.storage.NavigationMigration200Test" time="1.019">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.NavigationMigration200Test]/[test-template:beforeVersionOpenSnapshotsRealKeysMailArchiveAndAppearanceWithoutRewritingSources(java.lang.String)]/[test-template-invocation:#3]
+display-name: [3] 5.0.0
+]]></system-out>
+</testcase>
+<testcase name="beforeVersionOpenSnapshotsRealKeysMailArchiveAndAppearanceWithoutRewritingSources(String)[2]" classname="org.securemail.client.storage.NavigationMigration200Test" time="0.876">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.NavigationMigration200Test]/[test-template:beforeVersionOpenSnapshotsRealKeysMailArchiveAndAppearanceWithoutRewritingSources(java.lang.String)]/[test-template-invocation:#2]
+display-name: [2] 2.5.0
+]]></system-out>
+</testcase>
+<testcase name="beforeVersionOpenSnapshotsRealKeysMailArchiveAndAppearanceWithoutRewritingSources(String)[1]" classname="org.securemail.client.storage.NavigationMigration200Test" time="1.054">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.NavigationMigration200Test]/[test-template:beforeVersionOpenSnapshotsRealKeysMailArchiveAndAppearanceWithoutRewritingSources(java.lang.String)]/[test-template-invocation:#1]
+display-name: [1] 2.0.0
+]]></system-out>
+</testcase>
+<testcase name="jitterTargetAdaptsToActualArrivalVariationWithinBounds()" classname="org.securemail.client.voice.GlasAudioTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.GlasAudioTest]/[method:jitterTargetAdaptsToActualArrivalVariationWithinBounds()]
+display-name: jitterTargetAdaptsToActualArrivalVariationWithinBounds()
+]]></system-out>
+</testcase>
+<testcase name="rejectsContactIdentitySubstitution()" classname="org.securemail.client.voice.VoiceTlsTest" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceTlsTest]/[method:rejectsContactIdentitySubstitution()]
+display-name: rejectsContactIdentitySubstitution()
+]]></system-out>
+</testcase>
+<testcase name="shutdownDuringBlockedOpenRejectsEveryDelayedClaim()" classname="org.securemail.client.voice.GlasTestOwnershipTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.GlasTestOwnershipTest]/[method:shutdownDuringBlockedOpenRejectsEveryDelayedClaim()]
+display-name: shutdownDuringBlockedOpenRejectsEveryDelayedClaim()
+]]></system-out>
+</testcase>
+<testcase name="organizationDecisionMissingExpiredOrRevokedFailsClosedWithoutTrustingUnknownUsers()" classname="org.securemail.client.voice.VoiceCallServiceTest" time="1.406">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceCallServiceTest]/[method:organizationDecisionMissingExpiredOrRevokedFailsClosedWithoutTrustingUnknownUsers()]
+display-name: organizationDecisionMissingExpiredOrRevokedFailsClosedWithoutTrustingUnknownUsers()
+]]></system-out>
+</testcase>
+<testcase name="closedPendingCannotBeUsedAndNoSocketIsOpenedByLibrary()" classname="org.securemail.client.voice.VoiceTlsTest" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceTlsTest]/[method:closedPendingCannotBeUsedAndNoSocketIsOpenedByLibrary()]
+display-name: closedPendingCannotBeUsedAndNoSocketIsOpenedByLibrary()
+]]></system-out>
+</testcase>
+<testcase name="policyOwnsCollectionsAndRejectsMalformedOrOversizedIds()" classname="org.securemail.client.voice.VoiceCallPolicyTest" time="0.072">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceCallPolicyTest]/[method:policyOwnsCollectionsAndRejectsMalformedOrOversizedIds()]
+display-name: policyOwnsCollectionsAndRejectsMalformedOrOversizedIds()
+]]></system-out>
+</testcase>
+<testcase name="delayedUiCallbacksLoseOwnershipAfterStopAndAnotherOpen()" classname="org.securemail.client.voice.GlasTestOwnershipTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.GlasTestOwnershipTest]/[method:delayedUiCallbacksLoseOwnershipAfterStopAndAnotherOpen()]
+display-name: delayedUiCallbacksLoseOwnershipAfterStopAndAnotherOpen()
+]]></system-out>
+</testcase>
+<testcase name="validIdentityCannotSubstituteAnotherTlsCertificateOnWire()" classname="org.securemail.client.voice.VoiceTlsTest" time="0.068">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceTlsTest]/[method:validIdentityCannotSubstituteAnotherTlsCertificateOnWire()]
+display-name: validIdentityCannotSubstituteAnotherTlsCertificateOnWire()
+]]></system-out>
+</testcase>
+<testcase name="standardTlsKeyUpdatePreservesBidirectionalChannel()" classname="org.securemail.client.voice.VoiceTlsTest" time="0.453">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceTlsTest]/[method:standardTlsKeyUpdatePreservesBidirectionalChannel()]
+display-name: standardTlsKeyUpdatePreservesBidirectionalChannel()
+]]></system-out>
+</testcase>
+<testcase name="customized250LayoutGroupsWithoutLosingWithinBlockOrderAndIsIdempotent()" classname="org.securemail.client.storage.NavigationMigration500Test" time="0.034">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.NavigationMigration500Test]/[method:customized250LayoutGroupsWithoutLosingWithinBlockOrderAndIsIdempotent()]
+display-name: customized250LayoutGroupsWithoutLosingWithinBlockOrderAndIsIdempotent()
+]]></system-out>
+</testcase>
+<testcase name="stoppedBlockedOpenCannotReplaceNewerTest()" classname="org.securemail.client.voice.GlasTestOwnershipTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.GlasTestOwnershipTest]/[method:stoppedBlockedOpenCannotReplaceNewerTest()]
+display-name: stoppedBlockedOpenCannotReplaceNewerTest()
+]]></system-out>
+</testcase>
+<testcase name="uncheckedDeviceFailuresCloseTheCallAndLeaveServiceUsable()" classname="org.securemail.client.voice.VoiceCallServiceTest" time="1.387">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceCallServiceTest]/[method:uncheckedDeviceFailuresCloseTheCallAndLeaveServiceUsable()]
+display-name: uncheckedDeviceFailuresCloseTheCallAndLeaveServiceUsable()
+]]></system-out>
+</testcase>
+<testcase name="anotherAuthenticatedContactGetsBusyWithoutReplacingTheActiveCall()" classname="org.securemail.client.voice.VoiceCallServiceTest" time="1.18">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceCallServiceTest]/[method:anotherAuthenticatedContactGetsBusyWithoutReplacingTheActiveCall()]
+display-name: anotherAuthenticatedContactGetsBusyWithoutReplacingTheActiveCall()
+]]></system-out>
+</testcase>
+<testcase name="unavailableDeviceEndsCallAndServiceCanAcceptAnotherCall()" classname="org.securemail.client.voice.VoiceCallServiceTest" time="1.209">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceCallServiceTest]/[method:unavailableDeviceEndsCallAndServiceCanAcceptAnotherCall()]
+display-name: unavailableDeviceEndsCallAndServiceCanAcceptAnotherCall()
+]]></system-out>
+</testcase>
+<testcase name="rejectsWrongAlpnInsteadOfReturningUnauthenticatedChannel()" classname="org.securemail.client.voice.VoiceTlsTest" time="0.052">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceTlsTest]/[method:rejectsWrongAlpnInsteadOfReturningUnauthenticatedChannel()]
+display-name: rejectsWrongAlpnInsteadOfReturningUnauthenticatedChannel()
+]]></system-out>
+</testcase>
+<testcase name="nanoTimeWraparoundStillExpiresAtExactElapsedLimit()" classname="org.securemail.client.voice.VoiceAudioQueueTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceAudioQueueTest]/[method:nanoTimeWraparoundStillExpiresAtExactElapsedLimit()]
+display-name: nanoTimeWraparoundStillExpiresAtExactElapsedLimit()
+]]></system-out>
+</testcase>
+<testcase name="wireContainsNoPlaintextAudioAndTamperedTlsRecordIsRejected()" classname="org.securemail.client.voice.VoiceTlsTest" time="0.158">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceTlsTest]/[method:wireContainsNoPlaintextAudioAndTamperedTlsRecordIsRejected()]
+display-name: wireContainsNoPlaintextAudioAndTamperedTlsRecordIsRejected()
+]]></system-out>
+</testcase>
+<testcase name="versionTwoMigratesConsentWithoutRewritingIdentityAndNewPolicyPersistsEncrypted()" classname="org.securemail.client.voice.VoiceHistoryTest" time="0.458">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceHistoryTest]/[method:versionTwoMigratesConsentWithoutRewritingIdentityAndNewPolicyPersistsEncrypted()]
+display-name: versionTwoMigratesConsentWithoutRewritingIdentityAndNewPolicyPersistsEncrypted()
+]]></system-out>
+</testcase>
+<testcase name="validFrameStaysBoundedAndBufferCanBeWiped()" classname="org.securemail.client.voice.VoiceFramesTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceFramesTest]/[method:validFrameStaysBoundedAndBufferCanBeWiped()]
+display-name: validFrameStaysBoundedAndBufferCanBeWiped()
+]]></system-out>
+</testcase>
+<testcase name="signedOffersHaveBoundedRoundTripAndDefensiveArrays()" classname="org.securemail.client.voice.VoiceTlsTest" time="0.009">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceTlsTest]/[method:signedOffersHaveBoundedRoundTripAndDefensiveArrays()]
+display-name: signedOffersHaveBoundedRoundTripAndDefensiveArrays()
+]]></system-out>
+</testcase>
+<testcase name="rejectsAnotherRecipientEvenWithValidSenderSignature()" classname="org.securemail.client.voice.VoiceTlsTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceTlsTest]/[method:rejectsAnotherRecipientEvenWithValidSenderSignature()]
+display-name: rejectsAnotherRecipientEvenWithValidSenderSignature()
+]]></system-out>
+</testcase>
+<testcase name="directionRulesAndExplicitDenialOverrideSelectionOrOrganization()" classname="org.securemail.client.voice.VoiceCallPolicyTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceCallPolicyTest]/[method:directionRulesAndExplicitDenialOverrideSelectionOrOrganization()]
+display-name: directionRulesAndExplicitDenialOverrideSelectionOrOrganization()
+]]></system-out>
+</testcase>
+<testcase name="realSpeexEchoStateAcceptsPlaybackReferenceAndResets()" classname="org.securemail.client.voice.GlasAudioTest" time="0.146">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.GlasAudioTest]/[method:realSpeexEchoStateAcceptsPlaybackReferenceAndResets()]
+display-name: realSpeexEchoStateAcceptsPlaybackReferenceAndResets()
+]]></system-out>
+</testcase>
+<testcase name="currentBlockOrdersRemainCustomAndMalformedImportsAreRejected()" classname="org.securemail.client.storage.NavigationMigration500Test" time="0.011">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.NavigationMigration500Test]/[method:currentBlockOrdersRemainCustomAndMalformedImportsAreRejected()]
+display-name: currentBlockOrdersRemainCustomAndMalformedImportsAreRejected()
+]]></system-out>
+</testcase>
+<testcase name="singleCallOwnershipAndCachedSnapshotStayResponsiveDuringSlowDial()" classname="org.securemail.client.voice.VoiceCallServiceTest" time="0.225">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceCallServiceTest]/[method:singleCallOwnershipAndCachedSnapshotStayResponsiveDuringSlowDial()]
+display-name: singleCallOwnershipAndCachedSnapshotStayResponsiveDuringSlowDial()
+]]></system-out>
+</testcase>
+<testcase name="outgoingDeniedBeforeDialAndIncomingDeniedBeforeTlsResponse()" classname="org.securemail.client.voice.VoiceCallServiceTest" time="0.395">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceCallServiceTest]/[method:outgoingDeniedBeforeDialAndIncomingDeniedBeforeTlsResponse()]
+display-name: outgoingDeniedBeforeDialAndIncomingDeniedBeforeTlsResponse()
+]]></system-out>
+</testcase>
+<testcase name="contactKeyReplacementClosesAuthenticatedCallWithoutTrustingOldKey()" classname="org.securemail.client.voice.VoiceCallServiceTest" time="1.487">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceCallServiceTest]/[method:contactKeyReplacementClosesAuthenticatedCallWithoutTrustingOldKey()]
+display-name: contactKeyReplacementClosesAuthenticatedCallWithoutTrustingOldKey()
+]]></system-out>
+</testcase>
+<testcase name="interruptedVersionBackupIsRejectedAndNeverRewritesProfile()" classname="org.securemail.client.storage.NavigationMigration250Test" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.NavigationMigration250Test]/[method:interruptedVersionBackupIsRejectedAndNeverRewritesProfile()]
+display-name: interruptedVersionBackupIsRejectedAndNeverRewritesProfile()
+]]></system-out>
+</testcase>
+<testcase name="rejectsAlteredSignatureAndAlteredCertificate()" classname="org.securemail.client.voice.VoiceTlsTest" time="0.007">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceTlsTest]/[method:rejectsAlteredSignatureAndAlteredCertificate()]
+display-name: rejectsAlteredSignatureAndAlteredCertificate()
+]]></system-out>
+</testcase>
+<testcase name="realOpusRoundTripAndPacketBounds()" classname="org.securemail.client.voice.GlasAudioTest" time="0.019">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.GlasAudioTest]/[method:realOpusRoundTripAndPacketBounds()]
+display-name: realOpusRoundTripAndPacketBounds()
+]]></system-out>
+</testcase>
+<testcase name="selectedContactPolicyPersistsAndRevocationClosesDevices()" classname="org.securemail.client.voice.VoiceCallServiceTest" time="0.797">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceCallServiceTest]/[method:selectedContactPolicyPersistsAndRevocationClosesDevices()]
+display-name: selectedContactPolicyPersistsAndRevocationClosesDevices()
+]]></system-out>
+</testcase>
+<testcase name="snapshotBeforeEightSectionMigrationRetainsIdentityMailAndIndependentEncryptedArchive()" classname="org.securemail.client.storage.NavigationMigration250Test" time="1.015">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.NavigationMigration250Test]/[method:snapshotBeforeEightSectionMigrationRetainsIdentityMailAndIndependentEncryptedArchive()]
+display-name: snapshotBeforeEightSectionMigrationRetainsIdentityMailAndIndependentEncryptedArchive()
+]]></system-out>
+</testcase>
+<testcase name="authenticatesBothContactsAndTransfersDuplexRecordsOverTls13()" classname="org.securemail.client.voice.VoiceTlsTest" time="0.118">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceTlsTest]/[method:authenticatesBothContactsAndTransfersDuplexRecordsOverTls13()]
+display-name: authenticatesBothContactsAndTransfersDuplexRecordsOverTls13()
+]]></system-out>
+</testcase>
+<testcase name="damagedOptionalVoiceMetadataPreservesMailIdentityAndRequiresExplicitVoiceReset()" classname="org.securemail.client.voice.VoiceCallServiceTest" time="0.438">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceCallServiceTest]/[method:damagedOptionalVoiceMetadataPreservesMailIdentityAndRequiresExplicitVoiceReset()]
+display-name: damagedOptionalVoiceMetadataPreservesMailIdentityAndRequiresExplicitVoiceReset()
+]]></system-out>
+</testcase>
+<testcase name="codeMatchesBothDirectionsAndChangesWithFreshCertificatePair()" classname="org.securemail.client.voice.VoiceTlsTest" time="0.331">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceTlsTest]/[method:codeMatchesBothDirectionsAndChangesWithFreshCertificatePair()]
+display-name: codeMatchesBothDirectionsAndChangesWithFreshCertificatePair()
+]]></system-out>
+</testcase>
+<testcase name="declineAndDisabledIncomingDoNotOpenDevicesAndNextCallStillWorks()" classname="org.securemail.client.voice.VoiceCallServiceTest" time="1.185">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceCallServiceTest]/[method:declineAndDisabledIncomingDoNotOpenDevicesAndNextCallStillWorks()]
+display-name: declineAndDisabledIncomingDoNotOpenDevicesAndNextCallStillWorks()
+]]></system-out>
+</testcase>
+<testcase name="sixAndSevenSectionsMigrateWithoutReorderingExistingSections(List, List)[1]" classname="org.securemail.client.storage.NavigationMigration250Test" time="0.018">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.NavigationMigration250Test]/[test-template:sixAndSevenSectionsMigrateWithoutReorderingExistingSections(java.util.List, java.util.List)]/[test-template-invocation:#1]
+display-name: [1] [settings, letters, archive, contacts, profile, search], [letters, archive, contacts, profile, search, safeweb, glas, organizations, news, library, settings]
+]]></system-out>
+</testcase>
+<testcase name="validContactOfferBoundToAnotherRecipientIsRejectedBeforeTlsOrRinging()" classname="org.securemail.client.voice.VoiceSecurityReviewTest" time="0.255">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.voice.VoiceSecurityReviewTest]/[method:validContactOfferBoundToAnotherRecipientIsRejectedBeforeTlsOrRinging()]
+display-name: validContactOfferBoundToAnotherRecipientIsRejectedBeforeTlsOrRinging()
+]]></system-out>
+</testcase>
+<testcase name="sixAndSevenSectionsMigrateWithoutReorderingExistingSections(List, List)[2]" classname="org.securemail.client.storage.NavigationMigration250Test" time="0.013">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.NavigationMigration250Test]/[test-template:sixAndSevenSectionsMigrateWithoutReorderingExistingSections(java.util.List, java.util.List)]/[test-template-invocation:#2]
+display-name: [2] [settings, safeweb, contacts, archive, letters, profile, search], [contacts, archive, letters, profile, search, safeweb, glas, organizations, news, library, settings]
+]]></system-out>
+</testcase>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]
+display-name: JUnit Jupiter
+]]></system-out>
+</testsuite>

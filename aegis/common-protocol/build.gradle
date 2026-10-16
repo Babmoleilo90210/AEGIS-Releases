@@ -1,1 +1,2 @@
-// No runtime libraries, cryptography or networking.
+// No external runtime libraries, network connectors or mail decryption.
+// CommunityAuth verifies typed public protocol envelopes with standard JCA Ed25519.

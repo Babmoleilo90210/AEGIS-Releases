@@ -24,12 +24,14 @@ final class VoiceFrames {
     return new Frame(AUDIO,Binary.encode(out->{out.writeLong(sequence);out.writeLong(timestamp);Binary.bytes(out,opus);}));
   }
   static Audio audio(Frame frame)throws IOException{
-    try(var in=new DataInputStream(new ByteArrayInputStream(frame.payload()))){long sequence=in.readLong(),timestamp=in.readLong();byte[] bytes=Binary.bytes(in,MAX_OPUS);Binary.end(in);if(sequence<0||timestamp<0||bytes.length<1)throw new IOException("Voice audio bounds");return new Audio(sequence,timestamp,bytes);}
+    byte[] bytes=null;boolean accepted=false;
+    try(var in=new DataInputStream(new ByteArrayInputStream(frame.payload()))){long sequence=in.readLong(),timestamp=in.readLong();bytes=Binary.bytes(in,MAX_OPUS);Binary.end(in);if(sequence<0||timestamp<0||bytes.length<1)throw new IOException("Voice audio bounds");accepted=true;return new Audio(sequence,timestamp,bytes);}
+    finally{if(!accepted&&bytes!=null)Arrays.fill(bytes,(byte)0);}
   }
   static void write(DataOutputStream out,Frame frame)throws IOException{out.writeByte(frame.type());Binary.bytes(out,frame.payload());out.flush();}
   static Frame read(DataInputStream in)throws IOException{
     int type=in.readUnsignedByte();if(type<START||type>MUTED)throw new IOException("Voice frame type");
-    byte[] payload=Binary.bytes(in,MAX_PAYLOAD);if(type!=AUDIO&&type!=START&&payload.length!=0)throw new IOException("Voice control payload");
+    byte[] payload=Binary.bytes(in,MAX_PAYLOAD);if(type!=AUDIO&&type!=START&&payload.length!=0){Arrays.fill(payload,(byte)0);throw new IOException("Voice control payload");}
     return new Frame(type,payload);
   }
 }

@@ -131,6 +131,10 @@ class SignedManifestCompatibility250Test {
       for(String installed:List.of("1.5.0","2.0.0"))acceptedEverywhere(exact,channel,installed);
     }
   }
+  @Test void generated500StableIsAcceptedByCurrentAndFrozenSupportedParsers()throws Exception {
+    byte[] exact=generate("5.0.0","stable").exact();assertEquals("v5.0.0",JsonData.object(exact,65536).get("tag").getAsString());
+    for(String installed:List.of("1.5.0","2.0.0","2.5.0"))acceptedEverywhere(exact,"stable",installed);
+  }
   @Test void explicitPrereleaseRetainsItsExactTagAndCannotEnterStableChannel()throws Exception {
     byte[] exact=generate("2.5.0-beta.1","beta").exact();assertEquals("v2.5.0-beta.1",JsonData.object(exact,65536).get("tag").getAsString());acceptedEverywhere(exact,"beta","2.0.0");
     rejectedEverywhere(exact,sign(exact),"stable","2.0.0","2.0.0",IOException.class);
@@ -155,5 +159,22 @@ class SignedManifestCompatibility250Test {
     UpdateService.verifyFile(generated.artifacts().resolve("SHA256SUMS"),parsed.checksums());UpdateService.verifyFile(generated.artifacts().resolve("CHANGELOG-2.5.0.md"),parsed.changelog());
     SignedManifest.Asset asset=parsed.clientAsset(true);Path downloaded=generated.artifacts().resolve(asset.fileName());byte[] changed=Files.readAllBytes(downloaded);changed[0]^=1;Files.write(downloaded,changed);
     assertThrows(GeneralSecurityException.class,()->UpdateService.verifyFile(downloaded,asset));
+  }
+
+  /** Exact final-file compatibility check; ephemeral RAM-only test key, never owner signing. */
+  public static void main(String[] arguments)throws Exception {
+    if(arguments.length!=1)throw new IllegalArgumentException("Pass the exact final UNSIGNED manifest path");
+    Path manifest=Path.of(arguments[0]).toAbsolutePath();scratch=Files.createTempDirectory("aegis-final-manifest500-");
+    try{
+      freezeAndCompileHistoricalSources();byte[] exact=Files.readAllBytes(manifest);
+      assertEquals("5.0.0",JsonData.object(exact,65536).get("version").getAsString());
+      for(String installed:List.of("1.5.0","2.0.0","2.5.0"))acceptedEverywhere(exact,"stable",installed);
+      SignedManifest parsed=SignedManifest.verifyWithKey(exact,sign(exact),"stable","2.5.0","2.5.0",testKey.getPublic());
+      for(SignedManifest.Asset asset:parsed.artifacts())UpdateService.verifyFile(manifest.getParent().resolve(asset.fileName()),asset);
+      UpdateService.verifyFile(manifest.getParent().resolve("SHA256SUMS"),parsed.checksums());
+      UpdateService.verifyFile(manifest.getParent().resolve("CHANGELOG-5.0.0.md"),parsed.changelog());
+      assertThrows(GeneralSecurityException.class,()->SignedManifest.verify(exact,sign(exact),"stable","2.5.0","2.5.0"));
+      System.out.println("{\"status\":\"PASS_LOCAL_COMPATIBILITY\",\"parsers\":[\"current\",\"frozen1.5.0\",\"frozen2.0.0\"],\"installedVersions\":[\"1.5.0\",\"2.0.0\",\"2.5.0\"],\"allReferencedFileHashesVerified\":true,\"ownerKeyUsed\":false,\"productionSignatureGenerated\":false,\"updaterEndToEnd\":\"NOT_RUN\"}");
+    }finally{closeLoaders();try(var files=Files.walk(scratch)){for(Path p:files.sorted(java.util.Comparator.reverseOrder()).toList())Files.deleteIfExists(p);}}
   }
 }

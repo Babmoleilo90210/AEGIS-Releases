@@ -1,0 +1,13 @@
+#!/bin/sh
+# Operator launcher; no elevated actions, downloading, deployment or production Relay changes.
+set -eu
+case "${1:-}" in
+ --init) [ "$#" -eq 14 ] || { echo 'Используйте инструкцию первоначальной настройки.' >&2; exit 2; } ;;
+ --serve) [ "$#" -eq 2 ] || [ "$#" -eq 4 ] || { echo 'Нужны --serve DIR [--port PORT].' >&2; exit 2; } ;;
+ --inspect) [ "$#" -eq 2 ] || { echo 'Нужны --inspect DIR.' >&2; exit 2; } ;;
+ *) echo 'Допустимы --init, --serve и --inspect. Требуется Java 21.' >&2; exit 2 ;;
+esac
+aegis_program_dir=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd -P)
+aegis_java=java
+if [ -n "${JAVA_HOME:-}" ]; then aegis_java="$JAVA_HOME/bin/java"; fi
+exec "$aegis_java" -Xms32m -Xmx384m -XX:+DisableAttachMechanism -XX:-HeapDumpOnOutOfMemoryError -cp "$aegis_program_dir/lib/*" org.securemail.community.CommunityMain "$@"

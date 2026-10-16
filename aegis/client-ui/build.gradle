@@ -5,6 +5,7 @@ dependencies {
     implementation 'net.java.dev.jna:jna-platform:5.19.1'
     implementation 'net.java.dev.jna:jna:5.19.1'
     implementation project(':client-core')
+    implementation 'com.google.code.gson:gson:2.14.0'
     ['base','graphics','controls'].each { implementation("org.openjfx:javafx-${it}:21.0.12:${fxPlatform}") { transitive=false } }
 }
 application {
@@ -19,7 +20,7 @@ sourceSets {
         runtimeClasspath += output + compileClasspath
     }
 }
-dependencies { smokeRuntimeOnly 'org.testfx:openjfx-monocle:21.0.2' }
+dependencies { smokeRuntimeOnly 'org.testfx:openjfx-monocle:21.0.2'; smokeImplementation project(':community-server') }
 tasks.register('uiSmoke', JavaExec) {
     dependsOn smokeClasses
     classpath = sourceSets.smoke.runtimeClasspath

@@ -25,6 +25,9 @@ public final class TorTransport {
   /** Bounded optional peer capability probe. Still onion-only and loopback SOCKS only. */
   public Socket connectPeer(String onion,int port)throws IOException {Limits.onion(onion);return connectHost(onion,port,20_000);}
 
+  /** Separate authenticated community RPC, observed before even the SOCKS handshake. */
+  public Socket connectPeer(String onion,int port,SocketObserver observer)throws IOException {Limits.onion(onion);return connectHost(onion,port,20_000,java.util.Objects.requireNonNull(observer));}
+
   /** Explicit update-only destinations. DNS resolution is performed by Tor, never by this JVM. */
   public Socket connectUpdate(String host) throws IOException {
     if(!java.util.Set.of("github.com","raw.githubusercontent.com","release-assets.githubusercontent.com","objects.githubusercontent.com").contains(host))throw new IOException("Update destination rejected");

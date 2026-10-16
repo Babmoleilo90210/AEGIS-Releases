@@ -1,0 +1,21 @@
+{
+  "recordedAt": "2026-10-15T15:02:37.361842+00:00",
+  "scope": "Production SQLite/AccessControl/content/StrictJson tests, no Tor/native or physical devices",
+  "sourceSha256": {
+    "community-server/src/main/java/org/securemail/community/core/CanonicalJson.java": "7fd469601834526db7055990864edadf023b51141f28918db7d36c51b6cb5d13",
+    "community-server/src/main/java/org/securemail/community/core/CommunityException.java": "632772ef1bbcb044184bea183727a3eaaaa7aac501bf16e8764795cff1a0825e",
+    "community-server/src/main/java/org/securemail/community/core/CommunityStore.java": "f9719a2af5f71f49d5e08e92fcaf80f04c2a13b5fbfced709861daf3518321b6",
+    "community-server/src/main/java/org/securemail/community/core/ImageSanitizer.java": "ed4be2bdca27cbc94ce74820b94c8cb22324173c2a7bfbb3d49a44ece7d767e1",
+    "community-server/src/main/java/org/securemail/community/core/Totp.java": "53caa4fa0b3c8d4870341780430b6946f8533b69f475e4cf80afddbf5163676d",
+    "community-server/src/main/java/org/securemail/community/core/Values.java": "8f602c779f20a1b772ced14b38480a8c85b95fab85272ed99118770246caae54",
+    "community-server/src/main/java/org/securemail/community/access/AccessControl.java": "a81238dc7c2def001e6c8c51e4b32c62fc6ebfc644a120a850eb081fbb166aad",
+    "community-server/src/main/java/org/securemail/community/access/ResourcePolicy.java": "6d08c80a3d0e1d038ddfc0f1d4baca4fe09047c5382cd404c865fe2329f6b3f4",
+    "community-server/src/main/java/org/securemail/community/content/ContentInput.java": "2f7735478d628b43a042fd04c7ca1c4023fcdcd35ca60a17422e34a0883159ce",
+    "community-server/src/main/java/org/securemail/community/content/ContentResponseBudget.java": "ed32b37373bad12590f7ddacc27f1d660b02c3f828e1661cf66bb9de0edcf832",
+    "community-server/src/main/java/org/securemail/community/content/ContentService.java": "11dab2db80d3784f17c810db9290de4337efc8e7d39b3bf5ec7171d86de2c510",
+    "community-server/src/main/java/org/securemail/community/http/StrictJson.java": "2d6b6a42eb69dacff4dc9a44e3c4d5e864db2680e793359628e56d5dd0f81e0a",
+    "community-server/src/test/java/org/securemail/community/content/ContentServiceTest.java": "680bb6c43f898d99ea3330fc8e92f9213dad112b24bed4fe308b7fe01c27e3ef"
+  },
+  "exitCode": 0,
+  "testsExpected": 44
+}

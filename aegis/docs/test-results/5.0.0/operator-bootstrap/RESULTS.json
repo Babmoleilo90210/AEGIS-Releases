@@ -1,0 +1,48 @@
+{
+  "scope": "External operator-path integration proof, final production JARs + temporary SQLite + loopback Connector seam; NOT Tor/native/deployment",
+  "sourceCommit": "fd5b75730b3334e9fba660ad8a86029e778f83ed",
+  "status": "PASS",
+  "checks": {
+    "firstSignedClaimDenied": true,
+    "registrationVisibleFromIndependentSqliteConnection": true,
+    "registrationDoesNotGrantPermission": true,
+    "realTwoAdministratorCriticalRoleCreateAssignAndWorkerEnable": true,
+    "secondSignedClaimAccepted": true,
+    "registrationPersistsAfterStoreReopen": true
+  },
+  "inputsSha256": {
+    "community-server.jar": "8013130dd4f8fa14682a14588cb17f1c2fc7dc240fb68fa97a388f3672b1bfaa",
+    "news-worker.jar": "b2a3358603f730aa851a0029b63d206942f9f26e2fa7d554ff9303f7a7323181",
+    "common-protocol.jar": "10a5888b5af0253ff053c6d59d0993bc6c7637d0123af69046fe20affab6e937"
+  },
+  "evidenceSha256": {
+    "WorkerBootstrapProof.java": "c86f4d2f853df46999bcabf0f505b8e8eef52deac993b3d356a4754e1fc85ddb",
+    "result.log": "c97defefd3bd7f994a4cf3fb265a1aaaa6f2c7db668017184651c267bfa04741",
+    "OPERATOR-APPENDIX-5.0.0-RU.md": "18346b4af0913674a2e993281a2865db8e5139618ac3f5da0a8300df0d70922f"
+  },
+  "privateTestDatabaseIncluded": false,
+  "temporarySqliteStateDeleted": true,
+  "temporaryFixtureDirectoriesRemoved": 1,
+  "usedProductionJars": [
+    "community-server.jar",
+    "news-worker.jar",
+    "common-protocol.jar"
+  ],
+  "observedSixJarSha256": {
+    "common-protocol.jar": "10a5888b5af0253ff053c6d59d0993bc6c7637d0123af69046fe20affab6e937",
+    "client-core.jar": "6d263ef70f5b159aa4458125ffc75bf55c71346baf52b01db3b7db00e155ebe2",
+    "client-ui.jar": "239b95b732d74aebc2a0faebac655e2c59ccf1442bf08dc112b05f5ccc682367",
+    "relay-server.jar": "d77fe2cf1e6f1a51432bbd2d1849448c2987d68daca20fe72dabcb45c72495b4",
+    "community-server.jar": "8013130dd4f8fa14682a14588cb17f1c2fc7dc240fb68fa97a388f3672b1bfaa",
+    "news-worker.jar": "b2a3358603f730aa851a0029b63d206942f9f26e2fa7d554ff9303f7a7323181"
+  },
+  "sourceDocumentsSha256": {
+    "README-CACHYOS.md": "38a28171767cba43fb51e4e85ae9b375461194049dad3fba6b607b602c9bf0cc",
+    "SERVER-DEPLOYMENT-PROPOSAL-5.0.0-RU.md": "8e4fcb42b29b6eec181e18049bf530618e57a5f1cf983e7249baf1239e04c6ad"
+  },
+  "correctedDocumentsSha256": {
+    "README-CACHYOS.md": "d8def2a641be62672ddd526b8fad6f59ba933cdb8f8095c5b7cbca23e5ff0435",
+    "SERVER-DEPLOYMENT-PROPOSAL-5.0.0-RU.md": "90dc7d7b8ee020fae73422015f6e43fb71d957d78eea2e280fac129422abdccf"
+  },
+  "packagingNote": "Only reproducible source, sanitized log and operator appendix are included; private temporary state and intermediate corrected-doc copies are excluded. Final docs hashes are listed separately."
+}

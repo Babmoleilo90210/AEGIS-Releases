@@ -1,0 +1,194 @@
+{
+  "scope": "Actual offline signature-verified pinned archives fully staged and each member rehashed; not Windows/Cachy native or network acceptance",
+  "runtimeProofs": {
+    "linux": {
+      "schema": 1,
+      "clientVersion": "5.0.0",
+      "expertVersion": "15.0.25",
+      "torVersion": "0.4.9.14",
+      "opensslVersion": "3.5.9",
+      "platform": "linux",
+      "sourceRegistrySha256": "4de451e9d7e697aa43e9dfaf102667b08c8a9ad11b0f01558e38957857963594",
+      "upstreamArchive": {
+        "file": "tor-expert-bundle-linux-x86_64-15.0.25.tar.gz",
+        "officialUrl": "https://dist.torproject.org/torbrowser/15.0.25/tor-expert-bundle-linux-x86_64-15.0.25.tar.gz",
+        "mirror": "https://ftp.acc.umu.se/mirror/torproject.org/dist/torbrowser/15.0.25/tor-expert-bundle-linux-x86_64-15.0.25.tar.gz",
+        "sha256": "19cf18726eecb362e0f21d27afa9ea9efe5da928bfdfbb1ceb5fe54519e87f4a",
+        "bytes": 32448097
+      },
+      "upstreamSignature": {
+        "file": "tor-expert-bundle-linux-x86_64-15.0.25.tar.gz.asc",
+        "officialUrl": "https://dist.torproject.org/torbrowser/15.0.25/tor-expert-bundle-linux-x86_64-15.0.25.tar.gz.asc",
+        "mirror": "https://ftp.acc.umu.se/mirror/torproject.org/dist/torbrowser/15.0.25/tor-expert-bundle-linux-x86_64-15.0.25.tar.gz.asc",
+        "sha256": "1ae7917f8abd120f2fedca1ef5173296bcc322d800f38f8abebbe18d9da8eb26",
+        "bytes": 833
+      },
+      "primaryFingerprint": "EF6E286DDA85EA2A4BA7DE684E2C6E8793298290",
+      "runtimeFiles": {
+        "libevent-2.1.so.7": {
+          "sha256": "b51ca562ec232785856c454ce4f3621d957f39d0db87919e237590b0331544ff",
+          "bytes": 346424
+        },
+        "libcrypto.so.3": {
+          "sha256": "418208c5c738864cb5653f3eeab650debcc71afbe50d08b0bd5a04b20f1d3c05",
+          "bytes": 5493040
+        },
+        "tor": {
+          "sha256": "39c9db0654d2ec218892bd00f75eccb5b641a7222754436c2e4a8d2f764a57d3",
+          "bytes": 3614616
+        },
+        "libssl.so.3": {
+          "sha256": "9c2438d086d6c299db04b0bc337bbc8c0acd26c19c71eada2173a5b2ef7cecac",
+          "bytes": 1056448
+        },
+        "snowflake-bridges.txt": {
+          "sha256": "fc30cb710a52544c4cb17a62e3a4c774f2a87c7c4c1b96a3c13b643aa18e7351",
+          "bytes": 904
+        },
+        "pluggable_transports/lyrebird": {
+          "sha256": "ee13ec155cf9b131a3e1b87bd6d697a10c42d04f2eaaeab6b1590c9971d41421",
+          "bytes": 17621284
+        },
+        "pluggable_transports/README.CONJURE.md": {
+          "sha256": "f7e9211dd0e0089c93a0a84329fed41b2ac7b988531475b5eb2c86d38ad64d6c",
+          "bytes": 2750
+        },
+        "pluggable_transports/pt_config.json": {
+          "sha256": "2f7cf039710e96b70ea7d45473b905f9a6ce9a8b65e9f03e2507135ae8c75407",
+          "bytes": 2656
+        },
+        "pluggable_transports/conjure-client": {
+          "sha256": "8308b51e99db80774983b916035c2eab6db9e37c930916d92babc6daf9494e54",
+          "bytes": 12792100
+        },
+        "data/geoip": {
+          "sha256": "3099e91a4c8c87a1e6ab8a0b1e7407aea0314a2d8d048d654b4087b9ae103d9f",
+          "bytes": 9775942
+        },
+        "data/geoip6": {
+          "sha256": "10f50daba4156a5b1ae782c0db0478b4584901b1ed72cd619cddd4b9f2b03d6a",
+          "bytes": 16599769
+        },
+        "data/torrc-defaults": {
+          "sha256": "58cae4250134fb842582933c1348ce2b1068c3f2edccda77f3e376648a34d83d",
+          "bytes": 922
+        },
+        "licenses/tor.txt": {
+          "sha256": "5dc29ea302cc75db6db4a7c88d7b5d4638b4e0f5f1d2e6d21ce71f707470b766",
+          "bytes": 21086
+        },
+        "licenses/conjure.txt": {
+          "sha256": "0522541e3505d6669334f6eb488d4fde9c4af2234daec13170a0cf4d46d99e92",
+          "bytes": 127227
+        },
+        "licenses/lyrebird.txt": {
+          "sha256": "2331e6517a15ce87e2a1d2838c314ca1b8f3c7a347ac28d370a7fccdb5964f40",
+          "bytes": 282585
+        },
+        "licenses/openssl.txt": {
+          "sha256": "7d5450cb2d142651b8afa315b5f238efc805dad827d91ba367d8516bc9d49e7a",
+          "bytes": 10175
+        },
+        "licenses/libevent.txt": {
+          "sha256": "ff02effc9b331edcdac387d198691bfa3e575e7d244ad10cb826aa51ef085670",
+          "bytes": 4528
+        }
+      },
+      "nativeTargetAcceptance": "NOT_RUN",
+      "networkBootstrapAcceptance": "NOT_RUN"
+    },
+    "win": {
+      "schema": 1,
+      "clientVersion": "5.0.0",
+      "expertVersion": "15.0.25",
+      "torVersion": "0.4.9.14",
+      "opensslVersion": "3.5.9",
+      "platform": "win",
+      "sourceRegistrySha256": "4de451e9d7e697aa43e9dfaf102667b08c8a9ad11b0f01558e38957857963594",
+      "upstreamArchive": {
+        "file": "tor-expert-bundle-windows-x86_64-15.0.25.tar.gz",
+        "officialUrl": "https://dist.torproject.org/torbrowser/15.0.25/tor-expert-bundle-windows-x86_64-15.0.25.tar.gz",
+        "mirror": "https://ftp.acc.umu.se/mirror/torproject.org/dist/torbrowser/15.0.25/tor-expert-bundle-windows-x86_64-15.0.25.tar.gz",
+        "sha256": "c1988c701de2f24f7d098d1d6d7f507b58f27740d097f29c246e0524d639b252",
+        "bytes": 22507599
+      },
+      "upstreamSignature": {
+        "file": "tor-expert-bundle-windows-x86_64-15.0.25.tar.gz.asc",
+        "officialUrl": "https://dist.torproject.org/torbrowser/15.0.25/tor-expert-bundle-windows-x86_64-15.0.25.tar.gz.asc",
+        "mirror": "https://ftp.acc.umu.se/mirror/torproject.org/dist/torbrowser/15.0.25/tor-expert-bundle-windows-x86_64-15.0.25.tar.gz.asc",
+        "sha256": "4ecb546445aaffff1f5a95b7544af968aff276361968b4cb03c612c010bf30ca",
+        "bytes": 833
+      },
+      "primaryFingerprint": "EF6E286DDA85EA2A4BA7DE684E2C6E8793298290",
+      "runtimeFiles": {
+        "tor-gencert.exe": {
+          "sha256": "2baade3f1f0ca149cf01ed09eb26320eeb9678bdd75ecb5577d09c64347ee901",
+          "bytes": 6203904
+        },
+        "snowflake-bridges.txt": {
+          "sha256": "fc30cb710a52544c4cb17a62e3a4c774f2a87c7c4c1b96a3c13b643aa18e7351",
+          "bytes": 904
+        },
+        "tor.exe": {
+          "sha256": "8c38513b3c4584154158e7c584f4144849dc679a64cd679553d72dad28230c54",
+          "bytes": 10237952
+        },
+        "pluggable_transports/README.CONJURE.md": {
+          "sha256": "f7e9211dd0e0089c93a0a84329fed41b2ac7b988531475b5eb2c86d38ad64d6c",
+          "bytes": 2750
+        },
+        "pluggable_transports/lyrebird.exe": {
+          "sha256": "6e218e85f9a7ae2481f5402ded822471a9a9d0c7e66b05db3842b93fa5c1f02e",
+          "bytes": 17957376
+        },
+        "pluggable_transports/conjure-client.exe": {
+          "sha256": "6d3bca367226caf0cd065ced8b031b482b5cd5c3889bce886f2e903197b9b43b",
+          "bytes": 13140480
+        },
+        "pluggable_transports/pt_config.json": {
+          "sha256": "3f11d303c30191b3b1d382b9badd882d87fd87550d061f7d25a1b31226fc9b75",
+          "bytes": 2668
+        },
+        "data/geoip": {
+          "sha256": "3099e91a4c8c87a1e6ab8a0b1e7407aea0314a2d8d048d654b4087b9ae103d9f",
+          "bytes": 9775942
+        },
+        "data/geoip6": {
+          "sha256": "10f50daba4156a5b1ae782c0db0478b4584901b1ed72cd619cddd4b9f2b03d6a",
+          "bytes": 16599769
+        },
+        "data/torrc-defaults": {
+          "sha256": "0f5205266ccb37da3d8d6a4f5c52862e42dac9f1dc2650be60cad523fa6ee964",
+          "bytes": 928
+        },
+        "licenses/tor.txt": {
+          "sha256": "5dc29ea302cc75db6db4a7c88d7b5d4638b4e0f5f1d2e6d21ce71f707470b766",
+          "bytes": 21086
+        },
+        "licenses/zlib.txt": {
+          "sha256": "e32ff4e00d9d94930537635291da39e7e612703334bf6fde8c7f1686fe8a45a2",
+          "bytes": 1002
+        },
+        "licenses/conjure.txt": {
+          "sha256": "0522541e3505d6669334f6eb488d4fde9c4af2234daec13170a0cf4d46d99e92",
+          "bytes": 127227
+        },
+        "licenses/lyrebird.txt": {
+          "sha256": "2331e6517a15ce87e2a1d2838c314ca1b8f3c7a347ac28d370a7fccdb5964f40",
+          "bytes": 282585
+        },
+        "licenses/openssl.txt": {
+          "sha256": "7d5450cb2d142651b8afa315b5f238efc805dad827d91ba367d8516bc9d49e7a",
+          "bytes": 10175
+        },
+        "licenses/libevent.txt": {
+          "sha256": "ff02effc9b331edcdac387d198691bfa3e575e7d244ad10cb826aa51ef085670",
+          "bytes": 4528
+        }
+      },
+      "nativeTargetAcceptance": "NOT_RUN",
+      "networkBootstrapAcceptance": "NOT_RUN"
+    }
+  },
+  "productionReady": false
+}

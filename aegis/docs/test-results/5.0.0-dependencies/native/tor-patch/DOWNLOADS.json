@@ -1,0 +1,56 @@
+[
+  {
+    "file": "tor-expert-bundle-linux-x86_64-15.0.25.tar.gz",
+    "mirror": "https://ftp.acc.umu.se/mirror/torproject.org/dist/torbrowser/15.0.25/tor-expert-bundle-linux-x86_64-15.0.25.tar.gz",
+    "officialUrl": "https://dist.torproject.org/torbrowser/15.0.25/tor-expert-bundle-linux-x86_64-15.0.25.tar.gz",
+    "timestampUtc": "2026-10-15T14:38:59.718684+00:00",
+    "status": 200,
+    "sha256": "19cf18726eecb362e0f21d27afa9ea9efe5da928bfdfbb1ceb5fe54519e87f4a",
+    "bytes": 32448097
+  },
+  {
+    "file": "tor-expert-bundle-linux-x86_64-15.0.25.tar.gz.asc",
+    "mirror": "https://ftp.acc.umu.se/mirror/torproject.org/dist/torbrowser/15.0.25/tor-expert-bundle-linux-x86_64-15.0.25.tar.gz.asc",
+    "officialUrl": "https://dist.torproject.org/torbrowser/15.0.25/tor-expert-bundle-linux-x86_64-15.0.25.tar.gz.asc",
+    "timestampUtc": "2026-10-15T14:38:59.719940+00:00",
+    "status": 200,
+    "sha256": "1ae7917f8abd120f2fedca1ef5173296bcc322d800f38f8abebbe18d9da8eb26",
+    "bytes": 833
+  },
+  {
+    "file": "tor-expert-bundle-windows-x86_64-15.0.25.tar.gz",
+    "mirror": "https://ftp.acc.umu.se/mirror/torproject.org/dist/torbrowser/15.0.25/tor-expert-bundle-windows-x86_64-15.0.25.tar.gz",
+    "officialUrl": "https://dist.torproject.org/torbrowser/15.0.25/tor-expert-bundle-windows-x86_64-15.0.25.tar.gz",
+    "timestampUtc": "2026-10-15T14:38:59.720365+00:00",
+    "status": 200,
+    "sha256": "c1988c701de2f24f7d098d1d6d7f507b58f27740d097f29c246e0524d639b252",
+    "bytes": 22507599
+  },
+  {
+    "file": "tor-expert-bundle-windows-x86_64-15.0.25.tar.gz.asc",
+    "mirror": "https://ftp.acc.umu.se/mirror/torproject.org/dist/torbrowser/15.0.25/tor-expert-bundle-windows-x86_64-15.0.25.tar.gz.asc",
+    "officialUrl": "https://dist.torproject.org/torbrowser/15.0.25/tor-expert-bundle-windows-x86_64-15.0.25.tar.gz.asc",
+    "timestampUtc": "2026-10-15T14:38:59.721064+00:00",
+    "status": 200,
+    "sha256": "4ecb546445aaffff1f5a95b7544af968aff276361968b4cb03c612c010bf30ca",
+    "bytes": 833
+  },
+  {
+    "file": "sha256sums-signed-build.txt",
+    "mirror": "https://ftp.acc.umu.se/mirror/torproject.org/dist/torbrowser/15.0.25/sha256sums-signed-build.txt",
+    "officialUrl": "https://dist.torproject.org/torbrowser/15.0.25/sha256sums-signed-build.txt",
+    "timestampUtc": "2026-10-15T14:38:59.721920+00:00",
+    "status": 200,
+    "sha256": "539e778fa5ae4e9e061e5721a4d15108b085fd5f26e45629ba587264f021f564",
+    "bytes": 5719
+  },
+  {
+    "file": "sha256sums-signed-build.txt.asc",
+    "mirror": "https://ftp.acc.umu.se/mirror/torproject.org/dist/torbrowser/15.0.25/sha256sums-signed-build.txt.asc",
+    "officialUrl": "https://dist.torproject.org/torbrowser/15.0.25/sha256sums-signed-build.txt.asc",
+    "timestampUtc": "2026-10-15T14:38:59.722849+00:00",
+    "status": 200,
+    "sha256": "fc049cd8279d35d7616e21598c2933d2d0f4e2624cfb03037fa599d153c57a5e",
+    "bytes": 833
+  }
+]

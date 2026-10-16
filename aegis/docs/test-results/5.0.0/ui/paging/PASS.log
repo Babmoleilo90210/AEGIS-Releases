@@ -1,0 +1,4 @@
+PASS_LOCAL_INTEROP actualServerSourceRows=1000 pages=10 maxPageBytes=26356
+agentCodeSource=file:/workspace/scratch/aa629f360927/ui500-build/pinned-runtime-pagination-final/community-server.jar
+clientDecoderCodeSource=file:/workspace/scratch/aa629f360927/ui500-build/pinned-runtime-pagination-final/client-core.jar
+scope=production AgentService/AccessControl/SQLite/StrictJson/CommunityJson; direct fixture population; no network or native acceptance

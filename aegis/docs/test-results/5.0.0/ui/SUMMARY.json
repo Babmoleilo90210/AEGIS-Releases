@@ -1,0 +1,20 @@
+{
+  "archive": {
+    "exitCode": 0,
+    "status": "PASS_HEADLESS",
+    "screenshots": 8,
+    "productionClassCollocatedWithSmokeOutput": false
+  },
+  "interface": {
+    "exitCode": 0,
+    "status": "PASS_HEADLESS",
+    "screenshots": 61,
+    "productionClassCollocatedWithSmokeOutput": false
+  },
+  "flow": {
+    "exitCode": 0,
+    "status": "PASS_LOCAL_INTEGRATION",
+    "screenshots": 6,
+    "productionClassCollocatedWithSmokeOutput": false
+  }
+}

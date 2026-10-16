@@ -1,0 +1,596 @@
+/workspace/scratch/aa629f360927/aegis/aegis/client-core/src/main/java/org/securemail/client/MaintenanceMain.java:10: warning: [try] auto-closeable resource lock is never referenced in body of corresponding try statement
+      try(var lock=AppPaths.lock()){UpdateSupport.backup(config);}
+              ^
+/workspace/scratch/aa629f360927/aegis/aegis/client-core/src/main/java/org/securemail/client/archive/PdfWorkerMain.java:31: warning: [try] auto-closeable resource fallback is never referenced in body of corresponding try statement
+    try(var fallback=memoryFonts();var doc=Loader.loadPDF(data)){
+            ^
+/workspace/scratch/aa629f360927/aegis/aegis/client-core/src/main/java/org/securemail/client/net/RequestRejected.java:2: warning: [serial] serializable class RequestRejected has no definition of serialVersionUID
+public final class RequestRejected extends java.io.IOException {
+             ^
+/workspace/scratch/aa629f360927/aegis/aegis/client-core/src/main/java/org/securemail/client/safeweb/TorBrowserSignature.java:265: warning: [deprecation] RSA_SIGN in PublicKeyAlgorithmTags has been deprecated
+                && key.getAlgorithm() != PublicKeyAlgorithmTags.RSA_SIGN) || key.getBitStrength() < 3072)
+                                                               ^
+/workspace/scratch/aa629f360927/aegis/aegis/client-core/src/main/java/org/securemail/client/safeweb/WindowsSafeWebSandbox.java:167: warning: [try] auto-closeable resource sessionGuard is never referenced in body of corresponding try statement
+          try(Closeable sessionGuard=SafeWebDownload.guardDirectory(receipt.getParent())) {
+                        ^
+/workspace/scratch/aa629f360927/aegis/aegis/client-core/src/main/java/org/securemail/client/safeweb/WindowsSafeWebSandbox.java:164: warning: [try] auto-closeable resource guard is never referenced in body of corresponding try statement
+      try(lock;Closeable guard=SafeWebDownload.guardDirectory(control)) {
+                         ^
+/workspace/scratch/aa629f360927/aegis/aegis/client-core/src/main/java/org/securemail/client/update/UpdaterMain.java:31: warning: [try] auto-closeable resource appLock is never referenced in body of corresponding try statement
+    try(var appLock=AppPaths.lock()){
+            ^
+/workspace/scratch/aa629f360927/aegis/aegis/client-core/src/main/java/org/securemail/client/update/UpdaterMain.java:44: warning: [try] auto-closeable resource appLock is never referenced in body of corresponding try statement
+      try(var appLock=AppPaths.lock()){org.securemail.client.storage.ProfileSnapshot.restore(backup,previousConfig);}
+              ^
+8 warnings
+/workspace/scratch/aa629f360927/aegis/aegis/relay-server/src/main/java/org/securemail/relay/Rejection.java:2: warning: [serial] serializable class Rejection has no definition of serialVersionUID
+final class Rejection extends java.io.IOException { final int code; Rejection(int code){super("Request rejected");this.code=code;} }
+      ^
+1 warning
+/workspace/scratch/aa629f360927/aegis/aegis/community-server/src/main/java/org/securemail/community/CommunityMain.java:65: warning: [try] explicit call to close() on an auto-closeable resource
+          var stopped=new CountDownLatch(1);var closing=new AtomicBoolean();Runnable close=()->{if(closing.compareAndSet(false,true)){server.close();agent.close();try{store.close();}catch(Exception ignored){}}stopped.countDown();};Thread hook=new Thread(close,"aegis-community-shutdown");Runtime.getRuntime().addShutdownHook(hook);
+                                                                                                                                            ^
+/workspace/scratch/aa629f360927/aegis/aegis/community-server/src/main/java/org/securemail/community/CommunityMain.java:65: warning: [try] explicit call to close() on an auto-closeable resource
+          var stopped=new CountDownLatch(1);var closing=new AtomicBoolean();Runnable close=()->{if(closing.compareAndSet(false,true)){server.close();agent.close();try{store.close();}catch(Exception ignored){}}stopped.countDown();};Thread hook=new Thread(close,"aegis-community-shutdown");Runtime.getRuntime().addShutdownHook(hook);
+                                                                                                                                                          ^
+/workspace/scratch/aa629f360927/aegis/aegis/community-server/src/main/java/org/securemail/community/CommunityMain.java:65: warning: [try] explicit call to close() on an auto-closeable resource
+          var stopped=new CountDownLatch(1);var closing=new AtomicBoolean();Runnable close=()->{if(closing.compareAndSet(false,true)){server.close();agent.close();try{store.close();}catch(Exception ignored){}}stopped.countDown();};Thread hook=new Thread(close,"aegis-community-shutdown");Runtime.getRuntime().addShutdownHook(hook);
+                                                                                                                                                                            ^
+3 warnings
+/workspace/scratch/aa629f360927/aegis/aegis/client-ui/src/main/java/org/securemail/ui/ArchiveView.java:113: warning: [unchecked] unchecked generic array creation for varargs parameter of type TableColumn<ArchiveEntry,?>[]
+    list.getSelectionModel().selectedItemProperty().addListener((o,a,b)->{if(b!=null)selected(b);});table.getColumns().clear();TableColumn<ArchiveEntry,String> name=new TableColumn<>("Название"),bytes=new TableColumn<>("Размер"),added=new TableColumn<>("Добавлено"),tags=new TableColumn<>("Теги"),kind=new TableColumn<>("Тип");kind.setCellValueFactory(c->new javafx.beans.property.SimpleStringProperty(ArchiveDisplayTypes.label(c.getValue().type())));name.setCellValueFactory(c->new javafx.beans.property.SimpleStringProperty(c.getValue().name()));bytes.setCellValueFactory(c->new javafx.beans.property.SimpleStringProperty(size(c.getValue().size())));added.setCellValueFactory(c->new javafx.beans.property.SimpleStringProperty(date(c.getValue().addedAt())));tags.setCellValueFactory(c->new javafx.beans.property.SimpleStringProperty(String.join(", ",c.getValue().tags())));table.getColumns().addAll(name,kind,bytes,added,tags);table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);table.getSelectionModel().selectedItemProperty().addListener((o,a,b)->{if(b!=null)selected(b);});table.setRowFactory(v->new TableRow<>(){protected void updateItem(ArchiveEntry e,boolean empty){super.updateItem(e,empty);setContextMenu(empty||e==null?null:menu(e));} {setOnDragDetected(e->{if(getItem()!=null){var content=new ClipboardContent();content.putString(getItem().id());startDragAndDrop(TransferMode.MOVE).setContent(content);e.consume();}});}});
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ^
+/workspace/scratch/aa629f360927/aegis/aegis/client-ui/src/main/java/org/securemail/ui/VzorView.java:144: warning: [serial] serializable class RebootRequiredException has no definition of serialVersionUID
+  private static final class RebootRequiredException extends IOException {}
+                       ^
+2 warnings
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+
+Test run finished after 118 ms
+[         4 containers found      ]
+[         0 containers skipped    ]
+[         4 containers started    ]
+[         0 containers aborted    ]
+[         4 containers successful ]
+[         0 containers failed     ]
+[         4 tests found           ]
+[         0 tests skipped         ]
+[         4 tests started         ]
+[         0 tests aborted         ]
+[         4 tests successful      ]
+[         0 tests failed          ]
+
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+Oct 15, 2026 3:53:35 PM org.junit.jupiter.engine.extension.TempDirectory$CloseablePath$1 warnAboutLinkWithTargetOutsideTempDir
+WARNING: Deleting symbolic link from location inside of temp dir (/tmp/junit-6215919725153647724/alias) to location outside of temp dir (/usr) but not the target file/directory
+
+Failures (41):
+  JUnit Jupiter:MigrationTest:distinctVaultKeyAndVerifiedFullRekey()
+    MethodSource [className = 'org.securemail.client.MigrationTest', methodName = 'distinctVaultKeyAndVerifiedFullRekey', methodParameterTypes = '']
+    => java.lang.ExceptionInInitializerError
+       org.securemail.client.crypto.SodiumBox.seal(SodiumBox.java:30)
+       org.securemail.client.crypto.AutomaticEncryption.encrypt(AutomaticEncryption.java:21)
+       org.securemail.client.MigrationTest.distinctVaultKeyAndVerifiedFullRekey(MigrationTest.java:18)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       [...]
+     Caused by: java.lang.IllegalStateException: Bundled libsodium is missing
+       org.securemail.client.crypto.SodiumBox.load(SodiumBox.java:22)
+       org.securemail.client.crypto.SodiumBox$Holder.<clinit>(SodiumBox.java:25)
+       [...]
+  JUnit Jupiter:LocalMailSearch200Test:bodySubjectSenderDirectionAndProtectionFiltersUseRealPackets()
+    MethodSource [className = 'org.securemail.client.storage.LocalMailSearch200Test', methodName = 'bodySubjectSenderDirectionAndProtectionFiltersUseRealPackets', methodParameterTypes = '']
+    => java.lang.NoClassDefFoundError: Could not initialize class org.securemail.client.crypto.SodiumBox$Holder
+       org.securemail.client.crypto.SodiumBox.seal(SodiumBox.java:30)
+       org.securemail.client.crypto.AutomaticEncryption.encrypt(AutomaticEncryption.java:21)
+       org.securemail.client.storage.LocalMailSearch200Test.bodySubjectSenderDirectionAndProtectionFiltersUseRealPackets(LocalMailSearch200Test.java:22)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       [...]
+     Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.IllegalStateException: Bundled libsodium is missing [in thread "main"]
+       org.securemail.client.crypto.SodiumBox.load(SodiumBox.java:22)
+       org.securemail.client.crypto.SodiumBox$Holder.<clinit>(SodiumBox.java:25)
+       org.securemail.client.crypto.SodiumBox.seal(SodiumBox.java:30)
+       org.securemail.client.crypto.AutomaticEncryption.encrypt(AutomaticEncryption.java:21)
+       org.securemail.client.MigrationTest.distinctVaultKeyAndVerifiedFullRekey(MigrationTest.java:18)
+       [...]
+  JUnit Jupiter:LetterTest:protectedContentInsideUnchangedE2eeAndAttachmentAndOldContent()
+    MethodSource [className = 'org.securemail.client.LetterTest', methodName = 'protectedContentInsideUnchangedE2eeAndAttachmentAndOldContent', methodParameterTypes = '']
+    => java.lang.NoClassDefFoundError: Could not initialize class org.securemail.client.crypto.SodiumBox$Holder
+       org.securemail.client.crypto.SodiumBox.seal(SodiumBox.java:30)
+       org.securemail.client.crypto.AutomaticEncryption.encrypt(AutomaticEncryption.java:21)
+       org.securemail.client.LetterTest.protectedContentInsideUnchangedE2eeAndAttachmentAndOldContent(LetterTest.java:55)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       [...]
+     Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.IllegalStateException: Bundled libsodium is missing [in thread "main"]
+       org.securemail.client.crypto.SodiumBox.load(SodiumBox.java:22)
+       org.securemail.client.crypto.SodiumBox$Holder.<clinit>(SodiumBox.java:25)
+       org.securemail.client.crypto.SodiumBox.seal(SodiumBox.java:30)
+       org.securemail.client.crypto.AutomaticEncryption.encrypt(AutomaticEncryption.java:21)
+       org.securemail.client.MigrationTest.distinctVaultKeyAndVerifiedFullRekey(MigrationTest.java:18)
+       [...]
+  JUnit Jupiter:GlasAudioTest:realSpeexEchoStateAcceptsPlaybackReferenceAndResets()
+    MethodSource [className = 'org.securemail.client.voice.GlasAudioTest', methodName = 'realSpeexEchoStateAcceptsPlaybackReferenceAndResets', methodParameterTypes = '']
+    => java.io.IOException: Не найдена комплектная аудиобиблиотека: libopus.so
+       org.securemail.client.voice.GlasAudioLibraries.load(GlasAudioLibraries.java:26)
+       org.securemail.client.voice.GlasNativeAudio.<init>(GlasNativeAudio.java:54)
+       org.securemail.client.voice.GlasAudioTest.realSpeexEchoStateAcceptsPlaybackReferenceAndResets(GlasAudioTest.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+  JUnit Jupiter:GlasAudioTest:microphoneClosedUntilExplicitEnableMuteAndHotSwitchCloseOldDevice()
+    MethodSource [className = 'org.securemail.client.voice.GlasAudioTest', methodName = 'microphoneClosedUntilExplicitEnableMuteAndHotSwitchCloseOldDevice', methodParameterTypes = '']
+    => java.io.IOException: Не найдена комплектная аудиобиблиотека: libopus.so
+       org.securemail.client.voice.GlasAudioLibraries.load(GlasAudioLibraries.java:26)
+       org.securemail.client.voice.GlasNativeAudio.<init>(GlasNativeAudio.java:54)
+       org.securemail.client.voice.GlasAudioSession.<init>(GlasAudioSession.java:63)
+       org.securemail.client.voice.GlasAudioTest.microphoneClosedUntilExplicitEnableMuteAndHotSwitchCloseOldDevice(GlasAudioTest.java:76)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+  JUnit Jupiter:GlasAudioTest:compiledDigestRejectsTamperedLibraryAndSymlinks(Path)
+    MethodSource [className = 'org.securemail.client.voice.GlasAudioTest', methodName = 'compiledDigestRejectsTamperedLibraryAndSymlinks', methodParameterTypes = 'java.nio.file.Path']
+    => java.nio.file.NoSuchFileException: /workspace/scratch/aa629f360927/inputs250/squashfs-root/native/native/libopus.so
+       java.base/sun.nio.fs.UnixException.translateToIOException(UnixException.java:92)
+       java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:106)
+       java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:111)
+       java.base/sun.nio.fs.UnixFileSystem.copy(UnixFileSystem.java:1019)
+       java.base/sun.nio.fs.UnixFileSystemProvider.copy(UnixFileSystemProvider.java:300)
+       java.base/java.nio.file.Files.copy(Files.java:1305)
+       org.securemail.client.voice.GlasAudioTest.compiledDigestRejectsTamperedLibraryAndSymlinks(GlasAudioTest.java:129)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+  JUnit Jupiter:GlasAudioTest:backpressureReducesRealOpusBitrateWithoutGrowingAQueue()
+    MethodSource [className = 'org.securemail.client.voice.GlasAudioTest', methodName = 'backpressureReducesRealOpusBitrateWithoutGrowingAQueue', methodParameterTypes = '']
+    => java.io.IOException: Не найдена комплектная аудиобиблиотека: libopus.so
+       org.securemail.client.voice.GlasAudioLibraries.load(GlasAudioLibraries.java:26)
+       org.securemail.client.voice.GlasNativeAudio.<init>(GlasNativeAudio.java:54)
+       org.securemail.client.voice.GlasAudioSession.<init>(GlasAudioSession.java:63)
+       org.securemail.client.voice.GlasAudioTest.backpressureReducesRealOpusBitrateWithoutGrowingAQueue(GlasAudioTest.java:104)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+  JUnit Jupiter:GlasAudioTest:boundedReceiveQueueAndMalformedFramesFailClosed()
+    MethodSource [className = 'org.securemail.client.voice.GlasAudioTest', methodName = 'boundedReceiveQueueAndMalformedFramesFailClosed', methodParameterTypes = '']
+    => java.io.IOException: Не найдена комплектная аудиобиблиотека: libopus.so
+       org.securemail.client.voice.GlasAudioLibraries.load(GlasAudioLibraries.java:26)
+       org.securemail.client.voice.GlasNativeAudio.<init>(GlasNativeAudio.java:54)
+       org.securemail.client.voice.GlasAudioSession.<init>(GlasAudioSession.java:63)
+       org.securemail.client.voice.GlasAudioTest.boundedReceiveQueueAndMalformedFramesFailClosed(GlasAudioTest.java:92)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+  JUnit Jupiter:GlasAudioTest:realOpusRoundTripAndPacketBounds()
+    MethodSource [className = 'org.securemail.client.voice.GlasAudioTest', methodName = 'realOpusRoundTripAndPacketBounds', methodParameterTypes = '']
+    => java.io.IOException: Не найдена комплектная аудиобиблиотека: libopus.so
+       org.securemail.client.voice.GlasAudioLibraries.load(GlasAudioLibraries.java:26)
+       org.securemail.client.voice.GlasNativeAudio.<init>(GlasNativeAudio.java:54)
+       org.securemail.client.voice.GlasAudioTest.realOpusRoundTripAndPacketBounds(GlasAudioTest.java:12)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+  JUnit Jupiter:GlasAudioTest:realSpeexCancelsSyntheticAcousticEcho()
+    MethodSource [className = 'org.securemail.client.voice.GlasAudioTest', methodName = 'realSpeexCancelsSyntheticAcousticEcho', methodParameterTypes = '']
+    => java.io.IOException: Не найдена комплектная аудиобиблиотека: libspeexdsp.so
+       org.securemail.client.voice.GlasAudioLibraries.load(GlasAudioLibraries.java:26)
+       org.securemail.client.voice.GlasAudioTest.realSpeexCancelsSyntheticAcousticEcho(GlasAudioTest.java:57)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+  JUnit Jupiter:GlasAudioTest:realSpeexNoiseSuppressionProcessesBoundedPcm()
+    MethodSource [className = 'org.securemail.client.voice.GlasAudioTest', methodName = 'realSpeexNoiseSuppressionProcessesBoundedPcm', methodParameterTypes = '']
+    => java.io.IOException: Не найдена комплектная аудиобиблиотека: libopus.so
+       org.securemail.client.voice.GlasAudioLibraries.load(GlasAudioLibraries.java:26)
+       org.securemail.client.voice.GlasNativeAudio.<init>(GlasNativeAudio.java:54)
+       org.securemail.client.voice.GlasAudioTest.realSpeexNoiseSuppressionProcessesBoundedPcm(GlasAudioTest.java:31)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+  JUnit Jupiter:UpdateSecurityTest:cancellationCannotReachReadyOrModifyInstallation()
+    MethodSource [className = 'org.securemail.client.update.UpdateSecurityTest', methodName = 'cancellationCannotReachReadyOrModifyInstallation', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Expected FAILED, got UP_TO_DATE
+       org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:38)
+       org.junit.jupiter.api.Assertions.fail(Assertions.java:138)
+       org.securemail.client.update.UpdateSecurityTest.await(UpdateSecurityTest.java:45)
+       org.securemail.client.update.UpdateSecurityTest.cancellationCannotReachReadyOrModifyInstallation(UpdateSecurityTest.java:48)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+  JUnit Jupiter:UpdateSecurityTest:downgradeAndSignedSameVersionReplacementRejected()
+    MethodSource [className = 'org.securemail.client.update.UpdateSecurityTest', methodName = 'downgradeAndSignedSameVersionReplacementRejected', methodParameterTypes = '']
+    => java.io.IOException: Release rollback
+       org.securemail.client.update.UpdateStateStore.remember(UpdateStateStore.java:18)
+       org.securemail.client.update.UpdateSecurityTest.downgradeAndSignedSameVersionReplacementRejected(UpdateSecurityTest.java:38)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+  JUnit Jupiter:UpdateSecurityTest:newlyAvailableFeedBelowRememberedFloorIsPolicyFailure()
+    MethodSource [className = 'org.securemail.client.update.UpdateSecurityTest', methodName = 'newlyAvailableFeedBelowRememberedFloorIsPolicyFailure', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Expected FAILED, got UP_TO_DATE
+       org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:38)
+       org.junit.jupiter.api.Assertions.fail(Assertions.java:138)
+       org.securemail.client.update.UpdateSecurityTest.await(UpdateSecurityTest.java:45)
+       org.securemail.client.update.UpdateSecurityTest.newlyAvailableFeedBelowRememberedFloorIsPolicyFailure(UpdateSecurityTest.java:59)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+  JUnit Jupiter:UpdateSecurityTest:interruptedDownloadLeavesOldBinaryAndRemovesPartial()
+    MethodSource [className = 'org.securemail.client.update.UpdateSecurityTest', methodName = 'interruptedDownloadLeavesOldBinaryAndRemovesPartial', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Expected FAILED, got UP_TO_DATE
+       org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:38)
+       org.junit.jupiter.api.Assertions.fail(Assertions.java:138)
+       org.securemail.client.update.UpdateSecurityTest.await(UpdateSecurityTest.java:45)
+       org.securemail.client.update.UpdateSecurityTest.interruptedDownloadLeavesOldBinaryAndRemovesPartial(UpdateSecurityTest.java:47)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+  JUnit Jupiter:UpdateSecurityTest:announcementDeduplicatesAndTamperingNeverEntersTrustedHistory()
+    MethodSource [className = 'org.securemail.client.update.UpdateSecurityTest', methodName = 'announcementDeduplicatesAndTamperingNeverEntersTrustedHistory', methodParameterTypes = '']
+    => java.io.IOException: Release rollback
+       org.securemail.client.update.UpdateStateStore.remember(UpdateStateStore.java:18)
+       org.securemail.client.update.UpdateSecurityTest.announcementDeduplicatesAndTamperingNeverEntersTrustedHistory(UpdateSecurityTest.java:40)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+  JUnit Jupiter:UpdateSecurityTest:manualCheckDownloadStatesRealProgressAndInstallFailure()
+    MethodSource [className = 'org.securemail.client.update.UpdateSecurityTest', methodName = 'manualCheckDownloadStatesRealProgressAndInstallFailure', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Expected AVAILABLE, got UP_TO_DATE
+       org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:38)
+       org.junit.jupiter.api.Assertions.fail(Assertions.java:138)
+       org.securemail.client.update.UpdateSecurityTest.await(UpdateSecurityTest.java:45)
+       org.securemail.client.update.UpdateSecurityTest.manualCheckDownloadStatesRealProgressAndInstallFailure(UpdateSecurityTest.java:46)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+  JUnit Jupiter:NavigationMigration200Test:beforeVersionOpenSnapshotsRealKeysMailArchiveAndAppearanceWithoutRewritingSources(String):[1] 2.0.0
+    MethodSource [className = 'org.securemail.client.storage.NavigationMigration200Test', methodName = 'beforeVersionOpenSnapshotsRealKeysMailArchiveAndAppearanceWithoutRewritingSources', methodParameterTypes = 'java.lang.String']
+    => java.lang.NoClassDefFoundError: Could not initialize class org.securemail.client.crypto.SodiumBox$Holder
+       org.securemail.client.crypto.SodiumBox.seal(SodiumBox.java:30)
+       org.securemail.client.crypto.AutomaticEncryption.encrypt(AutomaticEncryption.java:21)
+       org.securemail.client.storage.NavigationMigration200Test.beforeVersionOpenSnapshotsRealKeysMailArchiveAndAppearanceWithoutRewritingSources(NavigationMigration200Test.java:92)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.Optional.ifPresent(Optional.java:178)
+       [...]
+     Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.IllegalStateException: Bundled libsodium is missing [in thread "main"]
+       org.securemail.client.crypto.SodiumBox.load(SodiumBox.java:22)
+       org.securemail.client.crypto.SodiumBox$Holder.<clinit>(SodiumBox.java:25)
+       org.securemail.client.crypto.SodiumBox.seal(SodiumBox.java:30)
+       org.securemail.client.crypto.AutomaticEncryption.encrypt(AutomaticEncryption.java:21)
+       org.securemail.client.MigrationTest.distinctVaultKeyAndVerifiedFullRekey(MigrationTest.java:18)
+       [...]
+  JUnit Jupiter:NavigationMigration200Test:beforeVersionOpenSnapshotsRealKeysMailArchiveAndAppearanceWithoutRewritingSources(String):[2] 2.5.0
+    MethodSource [className = 'org.securemail.client.storage.NavigationMigration200Test', methodName = 'beforeVersionOpenSnapshotsRealKeysMailArchiveAndAppearanceWithoutRewritingSources', methodParameterTypes = 'java.lang.String']
+    => java.lang.NoClassDefFoundError: Could not initialize class org.securemail.client.crypto.SodiumBox$Holder
+       org.securemail.client.crypto.SodiumBox.seal(SodiumBox.java:30)
+       org.securemail.client.crypto.AutomaticEncryption.encrypt(AutomaticEncryption.java:21)
+       org.securemail.client.storage.NavigationMigration200Test.beforeVersionOpenSnapshotsRealKeysMailArchiveAndAppearanceWithoutRewritingSources(NavigationMigration200Test.java:92)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.Optional.ifPresent(Optional.java:178)
+       [...]
+     Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.IllegalStateException: Bundled libsodium is missing [in thread "main"]
+       org.securemail.client.crypto.SodiumBox.load(SodiumBox.java:22)
+       org.securemail.client.crypto.SodiumBox$Holder.<clinit>(SodiumBox.java:25)
+       org.securemail.client.crypto.SodiumBox.seal(SodiumBox.java:30)
+       org.securemail.client.crypto.AutomaticEncryption.encrypt(AutomaticEncryption.java:21)
+       org.securemail.client.MigrationTest.distinctVaultKeyAndVerifiedFullRekey(MigrationTest.java:18)
+       [...]
+  JUnit Jupiter:NavigationMigration200Test:beforeVersionOpenSnapshotsRealKeysMailArchiveAndAppearanceWithoutRewritingSources(String):[3] 5.0.0
+    MethodSource [className = 'org.securemail.client.storage.NavigationMigration200Test', methodName = 'beforeVersionOpenSnapshotsRealKeysMailArchiveAndAppearanceWithoutRewritingSources', methodParameterTypes = 'java.lang.String']
+    => java.lang.NoClassDefFoundError: Could not initialize class org.securemail.client.crypto.SodiumBox$Holder
+       org.securemail.client.crypto.SodiumBox.seal(SodiumBox.java:30)
+       org.securemail.client.crypto.AutomaticEncryption.encrypt(AutomaticEncryption.java:21)
+       org.securemail.client.storage.NavigationMigration200Test.beforeVersionOpenSnapshotsRealKeysMailArchiveAndAppearanceWithoutRewritingSources(NavigationMigration200Test.java:92)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.Optional.ifPresent(Optional.java:178)
+       [...]
+     Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.IllegalStateException: Bundled libsodium is missing [in thread "main"]
+       org.securemail.client.crypto.SodiumBox.load(SodiumBox.java:22)
+       org.securemail.client.crypto.SodiumBox$Holder.<clinit>(SodiumBox.java:25)
+       org.securemail.client.crypto.SodiumBox.seal(SodiumBox.java:30)
+       org.securemail.client.crypto.AutomaticEncryption.encrypt(AutomaticEncryption.java:21)
+       org.securemail.client.MigrationTest.distinctVaultKeyAndVerifiedFullRekey(MigrationTest.java:18)
+       [...]
+  JUnit Jupiter:SafeWebTest:migrationPreservesCustomNavigationAndIsIdempotent()
+    MethodSource [className = 'org.securemail.client.safeweb.SafeWebTest', methodName = 'migrationPreservesCustomNavigationAndIsIdempotent', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: expected: <[settings, archive, safeweb, glas, contacts, profile, search, letters]> but was: <[archive, contacts, profile, search, letters, safeweb, glas, organizations, news, library, settings]>
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+       org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+       org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+       org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+       org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+       org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1145)
+       org.securemail.client.safeweb.SafeWebTest.migrationPreservesCustomNavigationAndIsIdempotent(SafeWebTest.java:13)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+  JUnit Jupiter:VoiceCallServiceTest:mutualTlsConsentGatesDevicesAndMediaWhileMailStillDelivers()
+    MethodSource [className = 'org.securemail.client.voice.VoiceCallServiceTest', methodName = 'mutualTlsConsentGatesDevicesAndMediaWhileMailStillDelivers', methodParameterTypes = '']
+    => java.lang.NoClassDefFoundError: Could not initialize class org.securemail.client.crypto.SodiumBox$Holder
+       org.securemail.client.crypto.SodiumBox.seal(SodiumBox.java:30)
+       org.securemail.client.crypto.AutomaticEncryption.encrypt(AutomaticEncryption.java:21)
+       org.securemail.client.voice.VoiceCallServiceTest.mutualTlsConsentGatesDevicesAndMediaWhileMailStillDelivers(VoiceCallServiceTest.java:69)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       [...]
+     Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.IllegalStateException: Bundled libsodium is missing [in thread "main"]
+       org.securemail.client.crypto.SodiumBox.load(SodiumBox.java:22)
+       org.securemail.client.crypto.SodiumBox$Holder.<clinit>(SodiumBox.java:25)
+       org.securemail.client.crypto.SodiumBox.seal(SodiumBox.java:30)
+       org.securemail.client.crypto.AutomaticEncryption.encrypt(AutomaticEncryption.java:21)
+       org.securemail.client.MigrationTest.distinctVaultKeyAndVerifiedFullRekey(MigrationTest.java:18)
+       [...]
+  JUnit Jupiter:VoiceCallServiceTest:legacyPeerRejectsVoiceAndRemainsAvailableForMail()
+    MethodSource [className = 'org.securemail.client.voice.VoiceCallServiceTest', methodName = 'legacyPeerRejectsVoiceAndRemainsAvailableForMail', methodParameterTypes = '']
+    => java.lang.NoClassDefFoundError: Could not initialize class org.securemail.client.crypto.SodiumBox$Holder
+       org.securemail.client.crypto.SodiumBox.seal(SodiumBox.java:30)
+       org.securemail.client.crypto.AutomaticEncryption.encrypt(AutomaticEncryption.java:21)
+       org.securemail.client.voice.VoiceCallServiceTest.legacyPeerRejectsVoiceAndRemainsAvailableForMail(VoiceCallServiceTest.java:171)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       [...]
+     Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.IllegalStateException: Bundled libsodium is missing [in thread "main"]
+       org.securemail.client.crypto.SodiumBox.load(SodiumBox.java:22)
+       org.securemail.client.crypto.SodiumBox$Holder.<clinit>(SodiumBox.java:25)
+       org.securemail.client.crypto.SodiumBox.seal(SodiumBox.java:30)
+       org.securemail.client.crypto.AutomaticEncryption.encrypt(AutomaticEncryption.java:21)
+       org.securemail.client.MigrationTest.distinctVaultKeyAndVerifiedFullRekey(MigrationTest.java:18)
+       [...]
+  JUnit Jupiter:VoiceCallServiceTest:damagedOptionalVoiceMetadataPreservesMailIdentityAndRequiresExplicitVoiceReset()
+    MethodSource [className = 'org.securemail.client.voice.VoiceCallServiceTest', methodName = 'damagedOptionalVoiceMetadataPreservesMailIdentityAndRequiresExplicitVoiceReset', methodParameterTypes = '']
+    => java.lang.NoClassDefFoundError: Could not initialize class org.securemail.client.crypto.SodiumBox$Holder
+       org.securemail.client.crypto.SodiumBox.seal(SodiumBox.java:30)
+       org.securemail.client.crypto.AutomaticEncryption.encrypt(AutomaticEncryption.java:21)
+       org.securemail.client.voice.VoiceCallServiceTest.damagedOptionalVoiceMetadataPreservesMailIdentityAndRequiresExplicitVoiceReset(VoiceCallServiceTest.java:188)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       [...]
+     Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.IllegalStateException: Bundled libsodium is missing [in thread "main"]
+       org.securemail.client.crypto.SodiumBox.load(SodiumBox.java:22)
+       org.securemail.client.crypto.SodiumBox$Holder.<clinit>(SodiumBox.java:25)
+       org.securemail.client.crypto.SodiumBox.seal(SodiumBox.java:30)
+       org.securemail.client.crypto.AutomaticEncryption.encrypt(AutomaticEncryption.java:21)
+       org.securemail.client.MigrationTest.distinctVaultKeyAndVerifiedFullRekey(MigrationTest.java:18)
+       [...]
+  JUnit Jupiter:UnknownSenderTest:signedButDamagedUnknownCiphertextDoesNotSuppressOtherInboxResults()
+    MethodSource [className = 'org.securemail.client.UnknownSenderTest', methodName = 'signedButDamagedUnknownCiphertextDoesNotSuppressOtherInboxResults', methodParameterTypes = '']
+    => java.lang.NoClassDefFoundError: Could not initialize class org.securemail.client.crypto.SodiumBox$Holder
+       org.securemail.client.crypto.SodiumBox.seal(SodiumBox.java:30)
+       org.securemail.client.crypto.AutomaticEncryption.encrypt(AutomaticEncryption.java:21)
+       org.securemail.client.UnknownSenderTest.signedButDamagedUnknownCiphertextDoesNotSuppressOtherInboxResults(UnknownSenderTest.java:49)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       [...]
+     Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.IllegalStateException: Bundled libsodium is missing [in thread "main"]
+       org.securemail.client.crypto.SodiumBox.load(SodiumBox.java:22)
+       org.securemail.client.crypto.SodiumBox$Holder.<clinit>(SodiumBox.java:25)
+       org.securemail.client.crypto.SodiumBox.seal(SodiumBox.java:30)
+       org.securemail.client.crypto.AutomaticEncryption.encrypt(AutomaticEncryption.java:21)
+       org.securemail.client.MigrationTest.distinctVaultKeyAndVerifiedFullRekey(MigrationTest.java:18)
+       [...]
+  JUnit Jupiter:UnknownSenderTest:unknownValidSenderIsDurableAndNeverAutomaticallyTrusted()
+    MethodSource [className = 'org.securemail.client.UnknownSenderTest', methodName = 'unknownValidSenderIsDurableAndNeverAutomaticallyTrusted', methodParameterTypes = '']
+    => java.lang.NoClassDefFoundError: Could not initialize class org.securemail.client.crypto.SodiumBox$Holder
+       org.securemail.client.crypto.SodiumBox.seal(SodiumBox.java:30)
+       org.securemail.client.crypto.AutomaticEncryption.encrypt(AutomaticEncryption.java:21)
+       org.securemail.client.UnknownSenderTest.unknownValidSenderIsDurableAndNeverAutomaticallyTrusted(UnknownSenderTest.java:19)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       [...]
+     Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.IllegalStateException: Bundled libsodium is missing [in thread "main"]
+       org.securemail.client.crypto.SodiumBox.load(SodiumBox.java:22)
+       org.securemail.client.crypto.SodiumBox$Holder.<clinit>(SodiumBox.java:25)
+       org.securemail.client.crypto.SodiumBox.seal(SodiumBox.java:30)
+       org.securemail.client.crypto.AutomaticEncryption.encrypt(AutomaticEncryption.java:21)
+       org.securemail.client.MigrationTest.distinctVaultKeyAndVerifiedFullRekey(MigrationTest.java:18)
+       [...]
+  JUnit Jupiter:UnknownSenderTest:contactsRemainPinnedAndForeignAvatarWriteIsRejected()
+    MethodSource [className = 'org.securemail.client.UnknownSenderTest', methodName = 'contactsRemainPinnedAndForeignAvatarWriteIsRejected', methodParameterTypes = '']
+    => java.lang.NoClassDefFoundError: Could not initialize class org.securemail.client.crypto.SodiumBox$Holder
+       org.securemail.client.crypto.SodiumBox.seal(SodiumBox.java:30)
+       org.securemail.client.crypto.AutomaticEncryption.encrypt(AutomaticEncryption.java:21)
+       org.securemail.client.UnknownSenderTest.contactsRemainPinnedAndForeignAvatarWriteIsRejected(UnknownSenderTest.java:37)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       [...]
+     Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.IllegalStateException: Bundled libsodium is missing [in thread "main"]
+       org.securemail.client.crypto.SodiumBox.load(SodiumBox.java:22)
+       org.securemail.client.crypto.SodiumBox$Holder.<clinit>(SodiumBox.java:25)
+       org.securemail.client.crypto.SodiumBox.seal(SodiumBox.java:30)
+       org.securemail.client.crypto.AutomaticEncryption.encrypt(AutomaticEncryption.java:21)
+       org.securemail.client.MigrationTest.distinctVaultKeyAndVerifiedFullRekey(MigrationTest.java:18)
+       [...]
+  JUnit Jupiter:AutomaticEncryptionTest:encryptedHistoryBackupRestoresOriginalIdentityAndPassword()
+    MethodSource [className = 'org.securemail.client.AutomaticEncryptionTest', methodName = 'encryptedHistoryBackupRestoresOriginalIdentityAndPassword', methodParameterTypes = '']
+    => java.lang.NoClassDefFoundError: Could not initialize class org.securemail.client.crypto.SodiumBox$Holder
+       org.securemail.client.crypto.SodiumBox.seal(SodiumBox.java:30)
+       org.securemail.client.crypto.AutomaticEncryption.encrypt(AutomaticEncryption.java:21)
+       org.securemail.client.AutomaticEncryptionTest.encryptedHistoryBackupRestoresOriginalIdentityAndPassword(AutomaticEncryptionTest.java:30)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       [...]
+     Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.IllegalStateException: Bundled libsodium is missing [in thread "main"]
+       org.securemail.client.crypto.SodiumBox.load(SodiumBox.java:22)
+       org.securemail.client.crypto.SodiumBox$Holder.<clinit>(SodiumBox.java:25)
+       org.securemail.client.crypto.SodiumBox.seal(SodiumBox.java:30)
+       org.securemail.client.crypto.AutomaticEncryption.encrypt(AutomaticEncryption.java:21)
+       org.securemail.client.MigrationTest.distinctVaultKeyAndVerifiedFullRekey(MigrationTest.java:18)
+       [...]
+  JUnit Jupiter:AutomaticEncryptionTest:recipientSenderWrongIdentityTamperAndNonce()
+    MethodSource [className = 'org.securemail.client.AutomaticEncryptionTest', methodName = 'recipientSenderWrongIdentityTamperAndNonce', methodParameterTypes = '']
+    => java.lang.NoClassDefFoundError: Could not initialize class org.securemail.client.crypto.SodiumBox$Holder
+       org.securemail.client.crypto.SodiumBox.seal(SodiumBox.java:30)
+       org.securemail.client.crypto.AutomaticEncryption.encrypt(AutomaticEncryption.java:21)
+       org.securemail.client.AutomaticEncryptionTest.recipientSenderWrongIdentityTamperAndNonce(AutomaticEncryptionTest.java:17)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       [...]
+     Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.IllegalStateException: Bundled libsodium is missing [in thread "main"]
+       org.securemail.client.crypto.SodiumBox.load(SodiumBox.java:22)
+       org.securemail.client.crypto.SodiumBox$Holder.<clinit>(SodiumBox.java:25)
+       org.securemail.client.crypto.SodiumBox.seal(SodiumBox.java:30)
+       org.securemail.client.crypto.AutomaticEncryption.encrypt(AutomaticEncryption.java:21)
+       org.securemail.client.MigrationTest.distinctVaultKeyAndVerifiedFullRekey(MigrationTest.java:18)
+       [...]
+  JUnit Jupiter:LifecycleSecurityTest:durableEventRemainsVerifiableAfterItsOuterRetryWasRewrapped()
+    MethodSource [className = 'org.securemail.client.LifecycleSecurityTest', methodName = 'durableEventRemainsVerifiableAfterItsOuterRetryWasRewrapped', methodParameterTypes = '']
+    => java.lang.NoClassDefFoundError: Could not initialize class org.securemail.client.crypto.SodiumBox$Holder
+       org.securemail.client.crypto.SodiumBox.seal(SodiumBox.java:30)
+       org.securemail.client.crypto.AutomaticEncryption.encrypt(AutomaticEncryption.java:21)
+       org.securemail.client.LifecycleSecurityTest.durableEventRemainsVerifiableAfterItsOuterRetryWasRewrapped(LifecycleSecurityTest.java:29)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       [...]
+     Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.IllegalStateException: Bundled libsodium is missing [in thread "main"]
+       org.securemail.client.crypto.SodiumBox.load(SodiumBox.java:22)
+       org.securemail.client.crypto.SodiumBox$Holder.<clinit>(SodiumBox.java:25)
+       org.securemail.client.crypto.SodiumBox.seal(SodiumBox.java:30)
+       org.securemail.client.crypto.AutomaticEncryption.encrypt(AutomaticEncryption.java:21)
+       org.securemail.client.MigrationTest.distinctVaultKeyAndVerifiedFullRekey(MigrationTest.java:18)
+       [...]
+  JUnit Jupiter:LifecycleSecurityTest:expiredEnvelopeNeverExposesBodyToLegacyAccountKey()
+    MethodSource [className = 'org.securemail.client.LifecycleSecurityTest', methodName = 'expiredEnvelopeNeverExposesBodyToLegacyAccountKey', methodParameterTypes = '']
+    => java.lang.NoClassDefFoundError: Could not initialize class org.securemail.client.crypto.SodiumBox$Holder
+       org.securemail.client.crypto.SodiumBox.seal(SodiumBox.java:30)
+       org.securemail.client.crypto.AutomaticEncryption.encrypt(AutomaticEncryption.java:21)
+       org.securemail.client.LifecycleSecurityTest.expiredEnvelopeNeverExposesBodyToLegacyAccountKey(LifecycleSecurityTest.java:60)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       [...]
+     Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.IllegalStateException: Bundled libsodium is missing [in thread "main"]
+       org.securemail.client.crypto.SodiumBox.load(SodiumBox.java:22)
+       org.securemail.client.crypto.SodiumBox$Holder.<clinit>(SodiumBox.java:25)
+       org.securemail.client.crypto.SodiumBox.seal(SodiumBox.java:30)
+       org.securemail.client.crypto.AutomaticEncryption.encrypt(AutomaticEncryption.java:21)
+       org.securemail.client.MigrationTest.distinctVaultKeyAndVerifiedFullRekey(MigrationTest.java:18)
+       [...]
+  JUnit Jupiter:AttachmentsTest:arbitraryTypesMultipleFilesEndToEndAndAesZip()
+    MethodSource [className = 'org.securemail.client.AttachmentsTest', methodName = 'arbitraryTypesMultipleFilesEndToEndAndAesZip', methodParameterTypes = '']
+    => java.lang.NoClassDefFoundError: Could not initialize class org.securemail.client.crypto.SodiumBox$Holder
+       org.securemail.client.crypto.SodiumBox.seal(SodiumBox.java:30)
+       org.securemail.client.crypto.AutomaticEncryption.encrypt(AutomaticEncryption.java:21)
+       org.securemail.client.AttachmentsTest.arbitraryTypesMultipleFilesEndToEndAndAesZip(AttachmentsTest.java:19)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       [...]
+     Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.IllegalStateException: Bundled libsodium is missing [in thread "main"]
+       org.securemail.client.crypto.SodiumBox.load(SodiumBox.java:22)
+       org.securemail.client.crypto.SodiumBox$Holder.<clinit>(SodiumBox.java:25)
+       org.securemail.client.crypto.SodiumBox.seal(SodiumBox.java:30)
+       org.securemail.client.crypto.AutomaticEncryption.encrypt(AutomaticEncryption.java:21)
+       org.securemail.client.MigrationTest.distinctVaultKeyAndVerifiedFullRekey(MigrationTest.java:18)
+       [...]
+  JUnit Jupiter:NavigationMigration250Test:snapshotBeforeEightSectionMigrationRetainsIdentityMailAndIndependentEncryptedArchive()
+    MethodSource [className = 'org.securemail.client.storage.NavigationMigration250Test', methodName = 'snapshotBeforeEightSectionMigrationRetainsIdentityMailAndIndependentEncryptedArchive', methodParameterTypes = '']
+    => java.lang.NoClassDefFoundError: Could not initialize class org.securemail.client.crypto.SodiumBox$Holder
+       org.securemail.client.crypto.SodiumBox.seal(SodiumBox.java:30)
+       org.securemail.client.crypto.AutomaticEncryption.encrypt(AutomaticEncryption.java:21)
+       org.securemail.client.storage.NavigationMigration250Test.snapshotBeforeEightSectionMigrationRetainsIdentityMailAndIndependentEncryptedArchive(NavigationMigration250Test.java:72)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       [...]
+     Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.IllegalStateException: Bundled libsodium is missing [in thread "main"]
+       org.securemail.client.crypto.SodiumBox.load(SodiumBox.java:22)
+       org.securemail.client.crypto.SodiumBox$Holder.<clinit>(SodiumBox.java:25)
+       org.securemail.client.crypto.SodiumBox.seal(SodiumBox.java:30)
+       org.securemail.client.crypto.AutomaticEncryption.encrypt(AutomaticEncryption.java:21)
+       org.securemail.client.MigrationTest.distinctVaultKeyAndVerifiedFullRekey(MigrationTest.java:18)
+       [...]
+  JUnit Jupiter:CommunityClientTest:clockRollbackDoesNotExtendOfflineLifetime()
+    MethodSource [className = 'org.securemail.client.community.CommunityClientTest', methodName = 'clockRollbackDoesNotExtendOfflineLifetime', methodParameterTypes = '']
+    => java.io.IOException: Некорректная привязка ответа
+       org.securemail.client.community.CommunityClient.stringField(CommunityClient.java:69)
+       org.securemail.client.community.CommunityClient.rpc(CommunityClient.java:63)
+       org.securemail.client.community.CommunityClientTest.clockRollbackDoesNotExtendOfflineLifetime(CommunityClientTest.java:41)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+  JUnit Jupiter:CommunityClientTest:profileIdentityAndEncryptedOfflineCacheSurviveUncleanClientRestart()
+    MethodSource [className = 'org.securemail.client.community.CommunityClientTest', methodName = 'profileIdentityAndEncryptedOfflineCacheSurviveUncleanClientRestart', methodParameterTypes = '']
+    => java.io.IOException: Некорректная привязка ответа
+       org.securemail.client.community.CommunityClient.stringField(CommunityClient.java:69)
+       org.securemail.client.community.CommunityClient.rpc(CommunityClient.java:63)
+       org.securemail.client.community.CommunityClientTest.profileIdentityAndEncryptedOfflineCacheSurviveUncleanClientRestart(CommunityClientTest.java:38)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+  JUnit Jupiter:CommunityClientTest:serverEpochChangeInvalidatesPreviousAuthorizedCache()
+    MethodSource [className = 'org.securemail.client.community.CommunityClientTest', methodName = 'serverEpochChangeInvalidatesPreviousAuthorizedCache', methodParameterTypes = '']
+    => java.io.IOException: Некорректная привязка ответа
+       org.securemail.client.community.CommunityClient.stringField(CommunityClient.java:69)
+       org.securemail.client.community.CommunityClient.rpc(CommunityClient.java:63)
+       org.securemail.client.community.CommunityClientTest.serverEpochChangeInvalidatesPreviousAuthorizedCache(CommunityClientTest.java:32)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+  JUnit Jupiter:CommunityClientTest:damagedOptionalCacheCannotBreakAccountIdentity()
+    MethodSource [className = 'org.securemail.client.community.CommunityClientTest', methodName = 'damagedOptionalCacheCannotBreakAccountIdentity', methodParameterTypes = '']
+    => java.io.IOException: Некорректная привязка ответа
+       org.securemail.client.community.CommunityClient.stringField(CommunityClient.java:69)
+       org.securemail.client.community.CommunityClient.rpc(CommunityClient.java:63)
+       org.securemail.client.community.CommunityClientTest.damagedOptionalCacheCannotBreakAccountIdentity(CommunityClientTest.java:39)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+  JUnit Jupiter:CommunityClientTest:authenticatedRequestAndPinnedResponseCacheRemainEncrypted()
+    MethodSource [className = 'org.securemail.client.community.CommunityClientTest', methodName = 'authenticatedRequestAndPinnedResponseCacheRemainEncrypted', methodParameterTypes = '']
+    => java.io.IOException: Некорректная привязка ответа
+       org.securemail.client.community.CommunityClient.stringField(CommunityClient.java:69)
+       org.securemail.client.community.CommunityClient.rpc(CommunityClient.java:63)
+       org.securemail.client.community.CommunityClientTest.authenticatedRequestAndPinnedResponseCacheRemainEncrypted(CommunityClientTest.java:30)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+  JUnit Jupiter:CommunityClientTest:offlineDeniedWithoutExplicitPolicyAndExpires()
+    MethodSource [className = 'org.securemail.client.community.CommunityClientTest', methodName = 'offlineDeniedWithoutExplicitPolicyAndExpires', methodParameterTypes = '']
+    => java.io.IOException: Некорректная привязка ответа
+       org.securemail.client.community.CommunityClient.stringField(CommunityClient.java:69)
+       org.securemail.client.community.CommunityClient.rpc(CommunityClient.java:63)
+       org.securemail.client.community.CommunityClientTest.offlineDeniedWithoutExplicitPolicyAndExpires(CommunityClientTest.java:31)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+  JUnit Jupiter:CommunityClientTest:closingClientClearsOfflineCopyAndRejectsNewRequests()
+    MethodSource [className = 'org.securemail.client.community.CommunityClientTest', methodName = 'closingClientClearsOfflineCopyAndRejectsNewRequests', methodParameterTypes = '']
+    => java.io.IOException: Некорректная привязка ответа
+       org.securemail.client.community.CommunityClient.stringField(CommunityClient.java:69)
+       org.securemail.client.community.CommunityClient.rpc(CommunityClient.java:63)
+       org.securemail.client.community.CommunityClientTest.closingClientClearsOfflineCopyAndRejectsNewRequests(CommunityClientTest.java:40)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+  JUnit Jupiter:CommunityClientTest:signedDenialClearsCacheAndSafeErrorIsBounded()
+    MethodSource [className = 'org.securemail.client.community.CommunityClientTest', methodName = 'signedDenialClearsCacheAndSafeErrorIsBounded', methodParameterTypes = '']
+    => java.io.IOException: Некорректная привязка ответа
+       org.securemail.client.community.CommunityClient.stringField(CommunityClient.java:69)
+       org.securemail.client.community.CommunityClient.rpc(CommunityClient.java:63)
+       org.securemail.client.community.CommunityClientTest.signedDenialClearsCacheAndSafeErrorIsBounded(CommunityClientTest.java:33)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+Test run finished after 121712 ms
+[        67 containers found      ]
+[         0 containers skipped    ]
+[        67 containers started    ]
+[         0 containers aborted    ]
+[        67 containers successful ]
+[         0 containers failed     ]
+[       406 tests found           ]
+[         1 tests skipped         ]
+[       405 tests started         ]
+[         1 tests aborted         ]
+[       363 tests successful      ]
+[        41 tests failed          ]
+
+Traceback (most recent call last):
+  File "/workspace/scratch/aa629f360927/aegis/aegis/tools/build-local.py", line 58, in <module>
+    subprocess.run([str(jdk/'bin/java'),'-Xmx768m','-Daegis.native.root='+str(native),
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/workspace/scratch/aa629f360927/inputs500/jdk-21.0.12.1+1/bin/java', '-Xmx768m', '-Daegis.native.root=/workspace/scratch/aa629f360927/inputs250/squashfs-root/native', '-jar', '/workspace/scratch/aa629f360927/inputs500/deps/junit-platform-console-standalone-1.13.4.jar', 'execute', '--class-path', '/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/fontbox-3.0.8.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/commons-logging-1.3.5.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/jna-platform-5.19.1.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/common-lang-3.14.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/tink-1.23.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/imageio-metadata-3.14.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/commons-codec-1.19.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/pdfbox-io-3.0.8.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/bcprov-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/commons-lang3-3.18.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/imageio-webp-3.14.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/common-io-3.14.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/pdfbox-3.0.8.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/commons-io-2.20.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/bcutil-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/javafx-controls-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/javafx-base-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/xz-1.12.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/jna-5.19.1.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/bcpg-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/commons-compress-1.28.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/protobuf-java-4.33.6.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/zip4j-2.11.6.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/gson-2.14.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/jsr305-3.0.2.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/imageio-core-3.14.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/error_prone_annotations-2.48.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/common-image-3.14.0.jar:/workspace/scratch/aa629f360927/inputs250/squashfs-root/app/javafx-graphics-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs500/deps/slf4j-api-2.0.17.jar:/workspace/scratch/aa629f360927/inputs500/deps/junit-platform-console-standalone-1.13.4.jar:/workspace/scratch/aa629f360927/inputs500/deps/sqlite-jdbc-3.53.4.0.jar:/workspace/scratch/aa629f360927/inputs500/deps/openjfx-monocle-21.0.2.jar:/workspace/scratch/aa629f360927/inputs500/deps/password4j-1.8.4.jar:/workspace/scratch/aa629f360927/inputs500/deps/slf4j-nop-2.0.17.jar:/workspace/scratch/aa629f360927/aegis/aegis/build/local-java21/common-protocol.jar:/workspace/scratch/aa629f360927/aegis/aegis/build/local-java21/client-core.jar:/workspace/scratch/aa629f360927/aegis/aegis/build/local-java21/tests', '--select-package', 'org.securemail.client', '--reports-dir', '/workspace/scratch/aa629f360927/aegis/aegis/build/local-java21/junit/client-core', '--details=summary']' returned non-zero exit status 1.

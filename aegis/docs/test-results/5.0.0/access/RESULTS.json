@@ -1,0 +1,78 @@
+{
+  "version": "5.0.0",
+  "scope": "Actual Java21 JUnit with SQLite/JCA on Linux container; no native Windows/CachyOS/Tor claim",
+  "status": "PASS",
+  "junit": {
+    "tests": 46,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "junitReportedTimestamp": "2026-10-15T17:17:52",
+  "environment": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "java": "openjdk version \"21.0.12.1\" 2026-08-18 LTS\nOpenJDK Runtime Environment Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS, mixed mode, sharing)",
+  "pythonPackagingSecurityTests": {
+    "passed": 4,
+    "scope": "Synthetic JAR/dependency rejection fixtures; actual final server ZIP packaging separate"
+  },
+  "launcherShellSyntax": "PASS (sh -n only; not systemd/native deployment)",
+  "sourceSnapshotCommitBound": false,
+  "sourceSha256": {
+    "common-protocol/src/main/java/org/securemail/protocol/Limits.java": "e9b6929ad4a9229bfa826f73d29965b239b2e2c1764a7eef4ee3224102b46659",
+    "community-server/src/main/java/org/securemail/community/access/AccessControl.java": "a81238dc7c2def001e6c8c51e4b32c62fc6ebfc644a120a850eb081fbb166aad",
+    "community-server/src/main/java/org/securemail/community/access/ResourcePolicy.java": "6d08c80a3d0e1d038ddfc0f1d4baca4fe09047c5382cd404c865fe2329f6b3f4",
+    "community-server/src/main/java/org/securemail/community/admin/AdminService.java": "77e2e7af11f18c92f7f605513e008a8778a4cb01cfa18d871c41f33e2be5c442",
+    "community-server/src/main/java/org/securemail/community/core/CanonicalJson.java": "7fd469601834526db7055990864edadf023b51141f28918db7d36c51b6cb5d13",
+    "community-server/src/main/java/org/securemail/community/core/CommunityException.java": "632772ef1bbcb044184bea183727a3eaaaa7aac501bf16e8764795cff1a0825e",
+    "community-server/src/main/java/org/securemail/community/core/CommunityStore.java": "f9719a2af5f71f49d5e08e92fcaf80f04c2a13b5fbfced709861daf3518321b6",
+    "community-server/src/main/java/org/securemail/community/core/ImageSanitizer.java": "ed4be2bdca27cbc94ce74820b94c8cb22324173c2a7bfbb3d49a44ece7d767e1",
+    "community-server/src/main/java/org/securemail/community/core/Totp.java": "53caa4fa0b3c8d4870341780430b6946f8533b69f475e4cf80afddbf5163676d",
+    "community-server/src/main/java/org/securemail/community/core/Values.java": "8f602c779f20a1b772ced14b38480a8c85b95fab85272ed99118770246caae54",
+    "community-server/src/main/java/org/securemail/community/org/OrgAdminService.java": "4841a1c16022e75265f10da0cdd017aee7df582e9e85a6a7a54a05fb3a6f63cc",
+    "community-server/src/main/java/org/securemail/community/org/OrganizationService.java": "5f902b50bef95684335c967293c9fafb359316c5318c10b3b6083bb366676587",
+    "community-server/src/test/java/org/securemail/community/access/AccessControlTest.java": "34ae842633381a297f8e3557ee6c5a70a60a57391f245a26fce70fb470ac575d",
+    "community-server/src/test/java/org/securemail/community/access/CoreInputTest.java": "9854dac921f600dd265b5310aa4eb18c7ede21f3a745b6d91d4017081e2c9d91",
+    "community-server/src/test/java/org/securemail/community/access/TotpTest.java": "5da30db0a7328ce6e72c26ddcce9923286f1239471bc17ea351348727b201a19",
+    "community-server/src/main/java/org/securemail/community/http/StrictJson.java": "2d6b6a42eb69dacff4dc9a44e3c4d5e864db2680e793359628e56d5dd0f81e0a"
+  },
+  "notRun": [
+    "Windows11 server/native client",
+    "CachyOS KDE Wayland/X11",
+    "physical devices and independent networks",
+    "production deployment",
+    "final frozen server package creation"
+  ],
+  "evidenceSha256": {
+    "TEST-junit-jupiter.xml": "355fb72aaee399a71a36ec88ed2b27cff777a7edcdf827464dd9318151d52640",
+    "TEST-junit-platform-suite.xml": "0065beda432bf1f47a28020d4589df1ca8a876501c19cfb735b2aa6bcf0a4388",
+    "TEST-junit-vintage.xml": "05f0293fc9d553970b3e9e815e0f684c24e55956332f3e1f48b1b445ab8a471f",
+    "TRANSPORT-CROSS-REVIEW.md": "10f0266113401c2d3e67233b38d51f82afeed798197a266b3812843463fd473e",
+    "launcher-shell-syntax.log": "8785cd8439467604e725179e579f9f15f87818b64c7985a85838c75ea9dda5ef",
+    "python-packaging-security.log": "a43683fbdd6cfc861ee3c2e70ceb757884dd619bb6f95cfd3fa6582b046470b0",
+    "regression-role-escalation-before-fix/README.md": "b5ac3115fe5d1a117e6e69ff5fa09bcd2b0033334939223467ea41bde797cc87",
+    "regression-role-escalation-before-fix/TEST-junit-jupiter.xml": "4f0af24e06976884968a062a83742e1950986e05844fbb2de29db86545945077",
+    "regression-role-escalation-before-fix/TEST-junit-platform-suite.xml": "16e607e75ba5c921571467feef28c0609d9273009a4ecfdb9b9479bbbbb7dcb0",
+    "regression-role-escalation-before-fix/TEST-junit-vintage.xml": "b024a719857fcd18b82f6b755db7b55fe732fd4dcb5264f3813d2f2fd8f007f6",
+    "regression-role-escalation-before-fix/run.log": "b7fe12fb8a3e184dfe0ded362cf4b90c397d68cadb69cac19d69dfa37027922f",
+    "run.log": "6b2526d6d2c570b4018f8b2804df1ec5b0d5bd54cda4d47b755a8c775c8d1a46"
+  },
+  "regressionBeforeFix": {
+    "scope": "self-assigned role and assigned-descendant ancestor; real local SQLite fixtures",
+    "tests": 2,
+    "expectedFailures": 2,
+    "directory": "regression-role-escalation-before-fix",
+    "finalStatus": "FIXED; both regressions PASS in final 46-test run"
+  },
+  "boundedResponseRegression": {
+    "rows": 100,
+    "maximumPayloadUtf16Characters": 65536,
+    "unicode": "CJK",
+    "pageLimit": 10,
+    "pages": 10,
+    "aliases": [
+      "items",
+      "requests"
+    ],
+    "scope": "Real SQLite bulk fixture; production admin authorization, pagination, full envelope serialization and StrictJson parsing within 8MiB/8192nodes; no missing or duplicate rows"
+  }
+}

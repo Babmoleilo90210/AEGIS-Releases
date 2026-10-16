@@ -17,7 +17,8 @@ import org.securemail.client.storage.AtomicFiles;
 /** Official Windows Sandbox VM around a dedicated, verified stock Tor Browser.
  * The guest receives exactly one writable browser bundle and no AEGIS data.
  * Windows Home is unsupported by Microsoft Windows Sandbox; there is no silent
- * unsandboxed/AppContainer fallback and this code never enables OS features.
+ * unsandboxed/AppContainer fallback. Separate narrow OS preparation can enable
+ * the official feature through UAC; this launcher never runs elevated.
  * Guest network connectivity is needed by Tor. Tor-only web traffic relies on
  * stock Tor Browser, not on a kernel rule distinguishing a compromised broker.
  */
@@ -183,7 +184,7 @@ public final class WindowsSafeWebSandbox {
       return id;
     }
   }
-  private static Path windowsDirectory()throws IOException {
+  static Path windowsDirectory()throws IOException {
     char[] path=new char[32768];int n=Native.load("kernel32",WindowsDirectoryApi.class).GetWindowsDirectoryW(path,path.length);
     if(n<=0||n>=path.length)throw new IOException("Не найден системный каталог Windows");
     Path directory=Path.of(new String(path,0,n)).toRealPath();

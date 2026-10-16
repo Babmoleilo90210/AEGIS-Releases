@@ -1,0 +1,2573 @@
+{
+  "schema": 1,
+  "version": "5.0.0",
+  "policy": "Exact named automated tests support only their stated local scope. Unmapped, partial, native, physical and full-updater scenarios remain NOT_RUN. No previous owner 2.5.0 acceptance is inherited.",
+  "requirements": [
+    {
+      "id": "MIGRATION-01",
+      "group": "MIGRATION",
+      "title": "Обновление с 2.5.0",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "MIGRATION-02",
+      "group": "MIGRATION",
+      "title": "Обновление с последней поддерживаемой Stable",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "MIGRATION-03",
+      "group": "MIGRATION",
+      "title": "Сохранение аккаунта",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "client-core",
+          "classname": "org.securemail.client.storage.ProfileSnapshotTest",
+          "name": "allControlledStateSurvivesRestoreAndTamperingStopsIt()"
+        }
+      ]
+    },
+    {
+      "id": "MIGRATION-04",
+      "group": "MIGRATION",
+      "title": "Сохранение identity keys",
+      "scope": "Настоящие тестовые encrypted vault/cache/archive и beforeVersionOpen(5.0.0)/snapshot restore; не установка предыдущего бинарника",
+      "tests": [
+        {
+          "module": "integration-tests",
+          "classname": "org.securemail.integration.CommunityIntegration500Test",
+          "name": "cacheLargerThanMailQuotaSurvivesRekeyAndVerifiedProfileRestoreWithoutChangingIdentityOrArchive()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "MIGRATION-05",
+      "group": "MIGRATION",
+      "title": "Сохранение контактов",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "client-core",
+          "classname": "org.securemail.client.storage.ProfileSnapshotTest",
+          "name": "allControlledStateSurvivesRestoreAndTamperingStopsIt()"
+        }
+      ]
+    },
+    {
+      "id": "MIGRATION-06",
+      "group": "MIGRATION",
+      "title": "Сохранение писем",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "client-core",
+          "classname": "org.securemail.client.storage.ProfileSnapshotTest",
+          "name": "allControlledStateSurvivesRestoreAndTamperingStopsIt()"
+        }
+      ]
+    },
+    {
+      "id": "MIGRATION-07",
+      "group": "MIGRATION",
+      "title": "Сохранение вложений",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "client-core",
+          "classname": "org.securemail.client.storage.ProfileSnapshotTest",
+          "name": "allControlledStateSurvivesRestoreAndTamperingStopsIt()"
+        }
+      ]
+    },
+    {
+      "id": "MIGRATION-08",
+      "group": "MIGRATION",
+      "title": "Сохранение личного архива",
+      "scope": "Настоящие тестовые encrypted vault/cache/archive и beforeVersionOpen(5.0.0)/snapshot restore; не установка предыдущего бинарника",
+      "tests": [
+        {
+          "module": "integration-tests",
+          "classname": "org.securemail.integration.CommunityIntegration500Test",
+          "name": "cacheLargerThanMailQuotaSurvivesRekeyAndVerifiedProfileRestoreWithoutChangingIdentityOrArchive()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "MIGRATION-09",
+      "group": "MIGRATION",
+      "title": "Сохранение recovery key",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "client-core",
+          "classname": "org.securemail.client.storage.ProfileSnapshotTest",
+          "name": "allControlledStateSurvivesRestoreAndTamperingStopsIt()"
+        }
+      ]
+    },
+    {
+      "id": "MIGRATION-10",
+      "group": "MIGRATION",
+      "title": "Сохранение настроек Взора",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "client-core",
+          "classname": "org.securemail.client.storage.ProfileSnapshotTest",
+          "name": "allControlledStateSurvivesRestoreAndTamperingStopsIt()"
+        }
+      ]
+    },
+    {
+      "id": "MIGRATION-11",
+      "group": "MIGRATION",
+      "title": "Сохранение настроек Гласа",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "client-core",
+          "classname": "org.securemail.client.storage.ProfileSnapshotTest",
+          "name": "allControlledStateSurvivesRestoreAndTamperingStopsIt()"
+        }
+      ]
+    },
+    {
+      "id": "MIGRATION-12",
+      "group": "MIGRATION",
+      "title": "Сохранение тем и пресетов",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "client-core",
+          "classname": "org.securemail.client.storage.ProfileSnapshotTest",
+          "name": "allControlledStateSurvivesRestoreAndTamperingStopsIt()"
+        }
+      ]
+    },
+    {
+      "id": "MIGRATION-13",
+      "group": "MIGRATION",
+      "title": "Сохранение пользовательских макетов",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "client-core",
+          "classname": "org.securemail.client.storage.ProfileSnapshotTest",
+          "name": "allControlledStateSurvivesRestoreAndTamperingStopsIt()"
+        }
+      ]
+    },
+    {
+      "id": "MIGRATION-14",
+      "group": "MIGRATION",
+      "title": "Сохранение порядка навигации",
+      "scope": "Локальный roundtrip сохранённого пользовательского порядка по трём блокам; не installer E2E",
+      "tests": [
+        {
+          "module": "client-core",
+          "classname": "org.securemail.client.storage.NavigationMigration500Test",
+          "name": "customized250LayoutGroupsWithoutLosingWithinBlockOrderAndIsIdempotent()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "MIGRATION-15",
+      "group": "MIGRATION",
+      "title": "Повторный запуск миграции",
+      "scope": "Настоящие тестовые encrypted vault/cache/archive и beforeVersionOpen(5.0.0)/snapshot restore; не установка предыдущего бинарника",
+      "tests": [
+        {
+          "module": "integration-tests",
+          "classname": "org.securemail.integration.CommunityIntegration500Test",
+          "name": "cacheLargerThanMailQuotaSurvivesRekeyAndVerifiedProfileRestoreWithoutChangingIdentityOrArchive()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "MIGRATION-16",
+      "group": "MIGRATION",
+      "title": "Искусственное прерывание миграции",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "client-core",
+          "classname": "org.securemail.client.storage.ProfileSnapshotTest",
+          "name": "allControlledStateSurvivesRestoreAndTamperingStopsIt()"
+        }
+      ]
+    },
+    {
+      "id": "MIGRATION-17",
+      "group": "MIGRATION",
+      "title": "Восстановление после ошибки",
+      "scope": "Настоящие тестовые encrypted vault/cache/archive и beforeVersionOpen(5.0.0)/snapshot restore; не установка предыдущего бинарника",
+      "tests": [
+        {
+          "module": "integration-tests",
+          "classname": "org.securemail.integration.CommunityIntegration500Test",
+          "name": "cacheLargerThanMailQuotaSurvivesRekeyAndVerifiedProfileRestoreWithoutChangingIdentityOrArchive()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "MIGRATION-18",
+      "group": "MIGRATION",
+      "title": "Откат приложения",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "client-core",
+          "classname": "org.securemail.client.storage.ProfileSnapshotTest",
+          "name": "allControlledStateSurvivesRestoreAndTamperingStopsIt()"
+        }
+      ]
+    },
+    {
+      "id": "MIGRATION-19",
+      "group": "MIGRATION",
+      "title": "Совместимость старых данных",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "client-core",
+          "classname": "org.securemail.client.storage.ProfileSnapshotTest",
+          "name": "allControlledStateSurvivesRestoreAndTamperingStopsIt()"
+        }
+      ]
+    },
+    {
+      "id": "MIGRATION-20",
+      "group": "MIGRATION",
+      "title": "Отсутствие потери пользовательских секретов",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "client-core",
+          "classname": "org.securemail.client.storage.ProfileSnapshotTest",
+          "name": "allControlledStateSurvivesRestoreAndTamperingStopsIt()"
+        }
+      ]
+    },
+    {
+      "id": "ACCESS-01",
+      "group": "ACCESS",
+      "title": "Пользователь без роли",
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "name": "noRoleHasNoMutationAndClearanceDoesNotGrantPermission()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "ACCESS-02",
+      "group": "ACCESS",
+      "title": "Глобальная роль",
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "name": "realGlobalRoleNeedsIndependentApprovalAndAppliesAfterAssignment()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "ACCESS-03",
+      "group": "ACCESS",
+      "title": "Роль организации",
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "name": "inheritedPermissionsAndCycleAndCrossScopeAreEnforcedInDatabaseTransaction()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "ACCESS-04",
+      "group": "ACCESS",
+      "title": "Наследование разрешений",
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "name": "inheritedPermissionsAndCycleAndCrossScopeAreEnforcedInDatabaseTransaction()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "ACCESS-05",
+      "group": "ACCESS",
+      "title": "Запрет повышения полномочий",
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "name": "scopedDelegationRejectsGlobalPowerAndUnheldPermissions()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "ACCESS-06",
+      "group": "ACCESS",
+      "title": "Минимальный уровень документа",
+      "scope": "Локальный серверный отказ при недостаточном уровне; синтетические SQL identities/policy, не production/native",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "name": "resourceConstraintsAreConjoinedAndClosedResourceConcealed()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "ACCESS-07",
+      "group": "ACCESS",
+      "title": "Дополнительное разрешение",
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "additionalPermissionsAndClearanceAreConjunctive()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "ACCESS-08",
+      "group": "ACCESS",
+      "title": "Разрешённый конкретный пользователь",
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "explicitUserPolicyRecheckedOnEveryRequest()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "ACCESS-09",
+      "group": "ACCESS",
+      "title": "Разрешённая конкретная организация",
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "name": "resourceConstraintsAreConjoinedAndClosedResourceConcealed()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "ACCESS-10",
+      "group": "ACCESS",
+      "title": "Отзыв разрешений",
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "name": "memberRemovalRevokesRolePermissionAndAdvancesEpoch()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "ACCESS-11",
+      "group": "ACCESS",
+      "title": "Запрет чтения закрытого материала",
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "draftHiddenIncludingSearchGraphAndUniformGet()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "ACCESS-12",
+      "group": "ACCESS",
+      "title": "Запрет изменения без полномочий",
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "clearanceDoesNotGiveEditing()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "ACCESS-13",
+      "group": "ACCESS",
+      "title": "Запрет публикации без полномочий",
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "attachmentCannotBypassPublicationPermission()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "ACCESS-14",
+      "group": "ACCESS",
+      "title": "Запрет удаления без полномочий",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "clearanceDoesNotGiveEditing()"
+        }
+      ]
+    },
+    {
+      "id": "ACCESS-15",
+      "group": "ACCESS",
+      "title": "Защита от IDOR",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "explicitUserPolicyRecheckedOnEveryRequest()"
+        }
+      ]
+    },
+    {
+      "id": "ACCESS-16",
+      "group": "ACCESS",
+      "title": "Защита поискового индекса",
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "draftHiddenIncludingSearchGraphAndUniformGet()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "ACCESS-17",
+      "group": "ACCESS",
+      "title": "Защита графа библиотеки",
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "graphNeverContainsHiddenEndpointsAndProposalsNeedEditor()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "ACCESS-18",
+      "group": "ACCESS",
+      "title": "Защита экспорта",
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "exportRequiresSeparateRightAndCurrentRead()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "ACCESS-19",
+      "group": "ACCESS",
+      "title": "Проверка при изменении роли",
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "name": "roleDeletionRemovesInheritedPermissionAndInvalidatesOnlyAffectedCaches()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "ACCESS-20",
+      "group": "ACCESS",
+      "title": "Конкурентные административные операции",
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "name": "optimisticRoleUpdateAllowsOnlyOneConcurrentRevision()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "AI-01",
+      "group": "AI",
+      "title": "Запуск рабочего узла",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "AI-02",
+      "group": "AI",
+      "title": "Получение задания",
+      "scope": "Локальная реальная SQL-очередь/правила coordinator с явно синтетическими source/model fixtures; не live news/model/production run",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.agent.AgentServiceTest",
+          "name": "leaseIsBoundToWorkerAndCannotBeTakenTwice()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "AI-03",
+      "group": "AI",
+      "title": "Поиск новостей",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.agent.CentralEvidenceVerifierTest",
+          "name": "independentlyFetchedMatchingEvidenceCanPassAndHasReceipts()"
+        }
+      ]
+    },
+    {
+      "id": "AI-04",
+      "group": "AI",
+      "title": "Обработка RSS",
+      "scope": "Синтетический allowlisted RSS проходит настоящий collector/parser; модель тестовая, публичная сеть не проверялась",
+      "tests": [
+        {
+          "module": "news-worker",
+          "classname": "org.securemail.worker.NewsWorkerTest",
+          "name": "actualCollectorPipelineParsesAllowlistedRssAndPassesOnlyPublicDataToModel()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "AI-05",
+      "group": "AI",
+      "title": "Обработка официального сайта",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.agent.CentralEvidenceVerifierTest",
+          "name": "independentlyFetchedMatchingEvidenceCanPassAndHasReceipts()"
+        }
+      ]
+    },
+    {
+      "id": "AI-06",
+      "group": "AI",
+      "title": "Разрешённый публичный источник",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.agent.CentralEvidenceVerifierTest",
+          "name": "independentlyFetchedMatchingEvidenceCanPassAndHasReceipts()"
+        }
+      ]
+    },
+    {
+      "id": "AI-07",
+      "group": "AI",
+      "title": "Определение города",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.agent.CentralEvidenceVerifierTest",
+          "name": "independentlyFetchedMatchingEvidenceCanPassAndHasReceipts()"
+        }
+      ]
+    },
+    {
+      "id": "AI-08",
+      "group": "AI",
+      "title": "Различение одноимённых городов",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.agent.CentralEvidenceVerifierTest",
+          "name": "independentlyFetchedMatchingEvidenceCanPassAndHasReceipts()"
+        }
+      ]
+    },
+    {
+      "id": "AI-09",
+      "group": "AI",
+      "title": "Определение даты события",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.agent.CentralEvidenceVerifierTest",
+          "name": "independentlyFetchedMatchingEvidenceCanPassAndHasReceipts()"
+        }
+      ]
+    },
+    {
+      "id": "AI-10",
+      "group": "AI",
+      "title": "Дедупликация",
+      "scope": "Локальная реальная SQL-очередь/правила coordinator с явно синтетическими source/model fixtures; не live news/model/production run",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.agent.AgentServiceTest",
+          "name": "changedTitleCannotRepublishSameSourceEvidence()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "AI-11",
+      "group": "AI",
+      "title": "Независимость источников",
+      "scope": "Локальное сравнение независимо загруженных fixture-доказательств; не реальные независимые СМИ",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.agent.CentralEvidenceVerifierTest",
+          "name": "identicalSyndicatedTextIsNotIndependentConfirmation()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "AI-12",
+      "group": "AI",
+      "title": "Оценка достоверности",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.agent.CentralEvidenceVerifierTest",
+          "name": "independentlyFetchedMatchingEvidenceCanPassAndHasReceipts()"
+        }
+      ]
+    },
+    {
+      "id": "AI-13",
+      "group": "AI",
+      "title": "Классификация значимости",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.agent.CentralEvidenceVerifierTest",
+          "name": "independentlyFetchedMatchingEvidenceCanPassAndHasReceipts()"
+        }
+      ]
+    },
+    {
+      "id": "AI-14",
+      "group": "AI",
+      "title": "Автоматическая публикация проверенной новости",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.agent.CentralEvidenceVerifierTest",
+          "name": "independentlyFetchedMatchingEvidenceCanPassAndHasReceipts()"
+        }
+      ]
+    },
+    {
+      "id": "AI-15",
+      "group": "AI",
+      "title": "Направление сомнительной новости на проверку",
+      "scope": "Локальная реальная SQL-очередь/правила coordinator с явно синтетическими source/model fixtures; не live news/model/production run",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.agent.AgentServiceTest",
+          "name": "rejectedIndependentCentralProofCannotAutoPublish()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "AI-16",
+      "group": "AI",
+      "title": "Направление особо важной новости на проверку",
+      "scope": "Локальный серверный ingest синтетического HIGH материала направляет его на проверку; не реальная оценка моделью",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "aiIngestDeduplicatesAndReviewsUncertainOrCritical()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "AI-17",
+      "group": "AI",
+      "title": "Исправление публикации",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "AI-18",
+      "group": "AI",
+      "title": "Отзыв публикации",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "AI-19",
+      "group": "AI",
+      "title": "Защита от prompt injection",
+      "scope": "Локальная реальная SQL-очередь/правила coordinator с явно синтетическими source/model fixtures; не live news/model/production run",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.agent.AgentServiceTest",
+          "name": "unknownModelToolInstructionsCannotBecomePublicationCommands()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "AI-20",
+      "group": "AI",
+      "title": "Запрет доступа к личным данным",
+      "scope": "Локальная реальная SQL-очередь/правила coordinator с явно синтетическими source/model fixtures; не live news/model/production run",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.agent.AgentServiceTest",
+          "name": "workerBoundaryRejectsPrivateAndAdminRpcEvenIfMaterialAclWouldAllow()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "AI-21",
+      "group": "AI",
+      "title": "Запрет доступа к приватным ключам",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.agent.AgentServiceTest",
+          "name": "workerCannotReadAdministrationOrPrivateLibrary()"
+        }
+      ]
+    },
+    {
+      "id": "AI-22",
+      "group": "AI",
+      "title": "Ограничения внешнего API",
+      "scope": "Локальная реальная SQL-очередь/правила coordinator с явно синтетическими source/model fixtures; не live news/model/production run",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.agent.AgentServiceTest",
+          "name": "budgetReservedBeforeWorkAndRequestLimitsStopFurtherCalls()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "AI-23",
+      "group": "AI",
+      "title": "Ограничение расходов",
+      "scope": "Локальная реальная SQL-очередь/правила coordinator с явно синтетическими source/model fixtures; не live news/model/production run",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.agent.AgentServiceTest",
+          "name": "monetaryBudgetStopsBeforeAnyExternalRequest()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "AI-24",
+      "group": "AI",
+      "title": "Переключение модели",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "news-worker",
+          "classname": "org.securemail.worker.ModelHttpFixtureTest",
+          "name": "realOllamaJsonRequestAndResponseUsesNoToolsOrCommands()"
+        }
+      ]
+    },
+    {
+      "id": "AI-25",
+      "group": "AI",
+      "title": "Восстановление после сбоя",
+      "scope": "Локальная реальная SQL-очередь/правила coordinator с явно синтетическими source/model fixtures; не live news/model/production run",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.agent.AgentServiceTest",
+          "name": "expiredLeaseCannotCompleteAndRecoveryChargesNewReservation()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "AI-26",
+      "group": "AI",
+      "title": "Отсутствие повторной публикации после перезапуска",
+      "scope": "Локальная реальная SQL-очередь/правила coordinator с явно синтетическими source/model fixtures; не live news/model/production run",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.agent.AgentServiceTest",
+          "name": "completeAndRestartCannotDuplicatePublicationOrRefund()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "AI-27",
+      "group": "AI",
+      "title": "Расписание 15–30 минут",
+      "scope": "Локальная реальная SQL-очередь/правила coordinator с явно синтетическими source/model fixtures; не live news/model/production run",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.agent.AgentServiceTest",
+          "name": "scheduleTwentyMinutesAndDistinctSameNamedCities()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "AI-28",
+      "group": "AI",
+      "title": "Недоступный источник",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.agent.CentralEvidenceVerifierTest",
+          "name": "independentlyFetchedMatchingEvidenceCanPassAndHasReceipts()"
+        }
+      ]
+    },
+    {
+      "id": "AI-29",
+      "group": "AI",
+      "title": "Географическая лента",
+      "scope": "Нормализованные city IDs и серверная региональная выборка синтетических публикаций; не live geographic inference",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "cityIsExplicitNormalizedAndNoIpInference()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "AI-30",
+      "group": "AI",
+      "title": "Обозначение ИИ-публикации",
+      "scope": "Серверный ai-флаг публикации при ingest тестового публичного материала; не нативное отображение",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "aiIngestDeduplicatesAndReviewsUncertainOrCritical()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "LIB-01",
+      "group": "LIB",
+      "title": "Открытие графа",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "graphNeverContainsHiddenEndpointsAndProposalsNeedEditor()"
+        }
+      ]
+    },
+    {
+      "id": "LIB-02",
+      "group": "LIB",
+      "title": "Загрузка разрешённых узлов",
+      "scope": "Production клиент + настоящий HTTP/SQLite через фиксированный loopback SOCKS fixture; не Tor/native GUI",
+      "tests": [
+        {
+          "module": "integration-tests",
+          "classname": "org.securemail.integration.CommunityIntegration500Test",
+          "name": "graphReturnsOnlyAuthorizedDocumentsAndCacheNeverComesFromPrivateArchive()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "LIB-03",
+      "group": "LIB",
+      "title": "Скрытие недоступных узлов",
+      "scope": "Production клиент + настоящий HTTP/SQLite через фиксированный loopback SOCKS fixture; не Tor/native GUI",
+      "tests": [
+        {
+          "module": "integration-tests",
+          "classname": "org.securemail.integration.CommunityIntegration500Test",
+          "name": "graphReturnsOnlyAuthorizedDocumentsAndCacheNeverComesFromPrivateArchive()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "LIB-04",
+      "group": "LIB",
+      "title": "Скрытие закрытых связей",
+      "scope": "Production клиент + настоящий HTTP/SQLite через фиксированный loopback SOCKS fixture; не Tor/native GUI",
+      "tests": [
+        {
+          "module": "integration-tests",
+          "classname": "org.securemail.integration.CommunityIntegration500Test",
+          "name": "graphReturnsOnlyAuthorizedDocumentsAndCacheNeverComesFromPrivateArchive()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "LIB-05",
+      "group": "LIB",
+      "title": "Поиск",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "graphNeverContainsHiddenEndpointsAndProposalsNeedEditor()"
+        }
+      ]
+    },
+    {
+      "id": "LIB-06",
+      "group": "LIB",
+      "title": "Фильтрация",
+      "scope": "Локальный реальный серверный API/SQLite, синтетические документы; не нативное действие пользователя",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "libraryTypeFilterAndPaginationAreServerSide()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "LIB-07",
+      "group": "LIB",
+      "title": "Масштабирование",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "graphNeverContainsHiddenEndpointsAndProposalsNeedEditor()"
+        }
+      ]
+    },
+    {
+      "id": "LIB-08",
+      "group": "LIB",
+      "title": "Перемещение графа",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "graphNeverContainsHiddenEndpointsAndProposalsNeedEditor()"
+        }
+      ]
+    },
+    {
+      "id": "LIB-09",
+      "group": "LIB",
+      "title": "Выбор узла",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "graphNeverContainsHiddenEndpointsAndProposalsNeedEditor()"
+        }
+      ]
+    },
+    {
+      "id": "LIB-10",
+      "group": "LIB",
+      "title": "Предпросмотр документа",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "graphNeverContainsHiddenEndpointsAndProposalsNeedEditor()"
+        }
+      ]
+    },
+    {
+      "id": "LIB-11",
+      "group": "LIB",
+      "title": "Открытие Markdown",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "graphNeverContainsHiddenEndpointsAndProposalsNeedEditor()"
+        }
+      ]
+    },
+    {
+      "id": "LIB-12",
+      "group": "LIB",
+      "title": "Визуальное редактирование",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "graphNeverContainsHiddenEndpointsAndProposalsNeedEditor()"
+        }
+      ]
+    },
+    {
+      "id": "LIB-13",
+      "group": "LIB",
+      "title": "Сохранение форматирования",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "graphNeverContainsHiddenEndpointsAndProposalsNeedEditor()"
+        }
+      ]
+    },
+    {
+      "id": "LIB-14",
+      "group": "LIB",
+      "title": "Создание материала",
+      "scope": "Локальный реальный серверный API/SQLite, синтетические документы; не нативное действие пользователя",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "noRoleCanReadPublicButCannotCreate()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "LIB-15",
+      "group": "LIB",
+      "title": "Изменение материала",
+      "scope": "Локальный реальный серверный API/SQLite, синтетические документы; не нативное действие пользователя",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "optimisticRevisionRejectsLostUpdate()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "LIB-16",
+      "group": "LIB",
+      "title": "История версий",
+      "scope": "Локальный реальный серверный API/SQLite, синтетические документы; не нативное действие пользователя",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "revisionsRestoreWithoutSilentOverwrite()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "LIB-17",
+      "group": "LIB",
+      "title": "Восстановление версии",
+      "scope": "Локальный реальный серверный API/SQLite, синтетические документы; не нативное действие пользователя",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "revisionsRestoreWithoutSilentOverwrite()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "LIB-18",
+      "group": "LIB",
+      "title": "Предложение ИИ-связи",
+      "scope": "Настоящие серверные async jobs/ACL с ограниченными тестовыми model fixtures; не семантическое качество реальной модели",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.agent.LocalLibraryLinksTest",
+          "name": "proposalsUseOnlyCallerAuthorizedMaterialAndNeverAutoApprove()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "LIB-19",
+      "group": "LIB",
+      "title": "Подтверждение связи",
+      "scope": "Локальный реальный серверный API/SQLite, синтетические документы; не нативное действие пользователя",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "graphNeverContainsHiddenEndpointsAndProposalsNeedEditor()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "LIB-20",
+      "group": "LIB",
+      "title": "Отклонение связи",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "graphNeverContainsHiddenEndpointsAndProposalsNeedEditor()"
+        }
+      ]
+    },
+    {
+      "id": "LIB-21",
+      "group": "LIB",
+      "title": "Запрет подтверждения без полномочий",
+      "scope": "Локальный реальный серверный API/SQLite, синтетические документы; не нативное действие пользователя",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "graphNeverContainsHiddenEndpointsAndProposalsNeedEditor()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "LIB-22",
+      "group": "LIB",
+      "title": "Экспорт разрешённого материала",
+      "scope": "Локальный реальный серверный API/SQLite, синтетические документы; не нативное действие пользователя",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "exportRequiresSeparateRightAndCurrentRead()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "LIB-23",
+      "group": "LIB",
+      "title": "Запрет экспорта закрытого материала",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "graphNeverContainsHiddenEndpointsAndProposalsNeedEditor()"
+        }
+      ]
+    },
+    {
+      "id": "LIB-24",
+      "group": "LIB",
+      "title": "Зашифрованный кэш",
+      "scope": "Настоящий AES-GCM vault/cache и production HTTP клиент на loopback SOCKS fixture",
+      "tests": [
+        {
+          "module": "integration-tests",
+          "classname": "org.securemail.integration.CommunityIntegration500Test",
+          "name": "exactSignedRpcPublicReadEncryptedCacheAndRevocationAcrossActualVaults()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "LIB-25",
+      "group": "LIB",
+      "title": "Отзыв доступа",
+      "scope": "Реальное изменение ACL/epoch очищает ранее выданный cache и запрещает новый get",
+      "tests": [
+        {
+          "module": "integration-tests",
+          "classname": "org.securemail.integration.CommunityIntegration500Test",
+          "name": "exactSignedRpcPublicReadEncryptedCacheAndRevocationAcrossActualVaults()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "LIB-26",
+      "group": "LIB",
+      "title": "Офлайн-доступ в разрешённых пределах",
+      "scope": "Локальная явная offline policy/TTL на подписанном fixture-ответе; отключённое устройство/production не проверены",
+      "tests": [
+        {
+          "module": "client-core",
+          "classname": "org.securemail.client.community.CommunityClientTest",
+          "name": "offlineDeniedWithoutExplicitPolicyAndExpires()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "LIB-27",
+      "group": "LIB",
+      "title": "Большие графы",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "graphNeverContainsHiddenEndpointsAndProposalsNeedEditor()"
+        }
+      ]
+    },
+    {
+      "id": "LIB-28",
+      "group": "LIB",
+      "title": "Отсутствие утечек памяти",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "graphNeverContainsHiddenEndpointsAndProposalsNeedEditor()"
+        }
+      ]
+    },
+    {
+      "id": "LIB-29",
+      "group": "LIB",
+      "title": "Отсутствие активного вредоносного содержимого",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "graphNeverContainsHiddenEndpointsAndProposalsNeedEditor()"
+        }
+      ]
+    },
+    {
+      "id": "LIB-30",
+      "group": "LIB",
+      "title": "Личный архив отдельно от библиотеки",
+      "scope": "Отдельный настоящий зашифрованный архив не меняется при cache/rekey/restore",
+      "tests": [
+        {
+          "module": "integration-tests",
+          "classname": "org.securemail.integration.CommunityIntegration500Test",
+          "name": "cacheLargerThanMailQuotaSurvivesRekeyAndVerifiedProfileRestoreWithoutChangingIdentityOrArchive()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "ORG-01",
+      "group": "ORG",
+      "title": "Создание заявки",
+      "scope": "Production клиент + HTTP/SQLite одобрение/вступление с TOTP через loopback SOCKS fixture; не production Tor",
+      "tests": [
+        {
+          "module": "integration-tests",
+          "classname": "org.securemail.integration.CommunityIntegration500Test",
+          "name": "organizationApplicationApprovalMembershipAndVoiceBatchUseServerAuthority()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "ORG-02",
+      "group": "ORG",
+      "title": "Одобрение заявки",
+      "scope": "Production клиент + HTTP/SQLite одобрение/вступление с TOTP через loopback SOCKS fixture; не production Tor",
+      "tests": [
+        {
+          "module": "integration-tests",
+          "classname": "org.securemail.integration.CommunityIntegration500Test",
+          "name": "organizationApplicationApprovalMembershipAndVoiceBatchUseServerAuthority()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "ORG-03",
+      "group": "ORG",
+      "title": "Отклонение заявки",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "name": "applicationsCannotSelfApproveAndNoCityDoesNotBecomeRegional()"
+        }
+      ]
+    },
+    {
+      "id": "ORG-04",
+      "group": "ORG",
+      "title": "Организация без города",
+      "scope": "Production клиент + HTTP/SQLite одобрение/вступление с TOTP через loopback SOCKS fixture; не production Tor",
+      "tests": [
+        {
+          "module": "integration-tests",
+          "classname": "org.securemail.integration.CommunityIntegration500Test",
+          "name": "organizationApplicationApprovalMembershipAndVoiceBatchUseServerAuthority()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "ORG-05",
+      "group": "ORG",
+      "title": "Организация с городом",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "name": "applicationsCannotSelfApproveAndNoCityDoesNotBecomeRegional()"
+        }
+      ]
+    },
+    {
+      "id": "ORG-06",
+      "group": "ORG",
+      "title": "Свободное вступление",
+      "scope": "Production клиент + HTTP/SQLite одобрение/вступление с TOTP через loopback SOCKS fixture; не production Tor",
+      "tests": [
+        {
+          "module": "integration-tests",
+          "classname": "org.securemail.integration.CommunityIntegration500Test",
+          "name": "organizationApplicationApprovalMembershipAndVoiceBatchUseServerAuthority()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "ORG-07",
+      "group": "ORG",
+      "title": "Вступление по заявке",
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "name": "requestAndInvitationJoiningAreNotClientFlags()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "ORG-08",
+      "group": "ORG",
+      "title": "Вступление по приглашению",
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "name": "requestAndInvitationJoiningAreNotClientFlags()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "ORG-09",
+      "group": "ORG",
+      "title": "Создание роли",
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "name": "scopedDelegationRejectsGlobalPowerAndUnheldPermissions()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "ORG-10",
+      "group": "ORG",
+      "title": "Назначение полномочий",
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "name": "inheritedPermissionsAndCycleAndCrossScopeAreEnforcedInDatabaseTransaction()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "ORG-11",
+      "group": "ORG",
+      "title": "Наследование разрешений",
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "name": "inheritedPermissionsAndCycleAndCrossScopeAreEnforcedInDatabaseTransaction()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "ORG-12",
+      "group": "ORG",
+      "title": "Запрет превышения делегированных полномочий",
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "name": "scopedDelegationRejectsGlobalPowerAndUnheldPermissions()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "ORG-13",
+      "group": "ORG",
+      "title": "Публикация новости",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "orgWithoutCityCannotForgeCityAndScopeRequiresMembership()"
+        }
+      ]
+    },
+    {
+      "id": "ORG-14",
+      "group": "ORG",
+      "title": "Модерация новости",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "orgWithoutCityCannotForgeCityAndScopeRequiresMembership()"
+        }
+      ]
+    },
+    {
+      "id": "ORG-15",
+      "group": "ORG",
+      "title": "Создание мероприятия",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "orgWithoutCityCannotForgeCityAndScopeRequiresMembership()"
+        }
+      ]
+    },
+    {
+      "id": "ORG-16",
+      "group": "ORG",
+      "title": "Регистрация на мероприятие",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "orgWithoutCityCannotForgeCityAndScopeRequiresMembership()"
+        }
+      ]
+    },
+    {
+      "id": "ORG-17",
+      "group": "ORG",
+      "title": "Доступ к составу",
+      "scope": "NOT_RUN: частичная проверка отказа после удаления/глобальной роли не заменяет полный организационный сценарий",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "name": "memberRemovalRevokesRolePermissionAndAdvancesEpoch()"
+        }
+      ]
+    },
+    {
+      "id": "ORG-18",
+      "group": "ORG",
+      "title": "Библиотека организации",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "orgWithoutCityCannotForgeCityAndScopeRequiresMembership()"
+        }
+      ]
+    },
+    {
+      "id": "ORG-19",
+      "group": "ORG",
+      "title": "Удаление участника",
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "name": "memberRemovalRevokesRolePermissionAndAdvancesEpoch()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "ORG-20",
+      "group": "ORG",
+      "title": "Отзыв роли",
+      "scope": "NOT_RUN: частичная проверка отказа после удаления/глобальной роли не заменяет полный организационный сценарий",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "name": "realGlobalRoleNeedsIndependentApprovalAndAppliesAfterAssignment()"
+        }
+      ]
+    },
+    {
+      "id": "ORG-21",
+      "group": "ORG",
+      "title": "Подтверждённая должность",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "orgWithoutCityCannotForgeCityAndScopeRequiresMembership()"
+        }
+      ]
+    },
+    {
+      "id": "ORG-22",
+      "group": "ORG",
+      "title": "Запрет самовольной галочки",
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "name": "officialIdentityAndPositionAreIndependentFromClearanceAndRevokeHasHistory()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "ORG-23",
+      "group": "ORG",
+      "title": "Закрытые материалы",
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "tests": [],
+      "relatedTests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "name": "orgWithoutCityCannotForgeCityAndScopeRequiresMembership()"
+        }
+      ]
+    },
+    {
+      "id": "ORG-24",
+      "group": "ORG",
+      "title": "Административные журналы",
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "tests": [
+        {
+          "module": "community-server",
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "name": "wholeAuditRewriteWithoutMacAndWrongServerKekAreRejected()"
+        }
+      ],
+      "relatedTests": []
+    },
+    {
+      "id": "NATIVE-WINDOWS11-01",
+      "group": "NATIVE",
+      "title": "Запуск установленного приложения",
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "Windows 11 x64"
+    },
+    {
+      "id": "NATIVE-CACHYOS-WAYLAND-01",
+      "group": "NATIVE",
+      "title": "Запуск установленного приложения",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE Wayland"
+    },
+    {
+      "id": "NATIVE-CACHYOS-X11-01",
+      "group": "NATIVE",
+      "title": "Запуск установленного приложения",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE X11"
+    },
+    {
+      "id": "NATIVE-WINDOWS11-02",
+      "group": "NATIVE",
+      "title": "Авторизация существующего пользователя",
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "Windows 11 x64"
+    },
+    {
+      "id": "NATIVE-CACHYOS-WAYLAND-02",
+      "group": "NATIVE",
+      "title": "Авторизация существующего пользователя",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE Wayland"
+    },
+    {
+      "id": "NATIVE-CACHYOS-X11-02",
+      "group": "NATIVE",
+      "title": "Авторизация существующего пользователя",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE X11"
+    },
+    {
+      "id": "NATIVE-WINDOWS11-03",
+      "group": "NATIVE",
+      "title": "Подключение к Tor",
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "Windows 11 x64"
+    },
+    {
+      "id": "NATIVE-CACHYOS-WAYLAND-03",
+      "group": "NATIVE",
+      "title": "Подключение к Tor",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE Wayland"
+    },
+    {
+      "id": "NATIVE-CACHYOS-X11-03",
+      "group": "NATIVE",
+      "title": "Подключение к Tor",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE X11"
+    },
+    {
+      "id": "NATIVE-WINDOWS11-04",
+      "group": "NATIVE",
+      "title": "Отправка и получение писем",
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "Windows 11 x64"
+    },
+    {
+      "id": "NATIVE-CACHYOS-WAYLAND-04",
+      "group": "NATIVE",
+      "title": "Отправка и получение писем",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE Wayland"
+    },
+    {
+      "id": "NATIVE-CACHYOS-X11-04",
+      "group": "NATIVE",
+      "title": "Отправка и получение писем",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE X11"
+    },
+    {
+      "id": "NATIVE-WINDOWS11-05",
+      "group": "NATIVE",
+      "title": "Контакты",
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "Windows 11 x64"
+    },
+    {
+      "id": "NATIVE-CACHYOS-WAYLAND-05",
+      "group": "NATIVE",
+      "title": "Контакты",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE Wayland"
+    },
+    {
+      "id": "NATIVE-CACHYOS-X11-05",
+      "group": "NATIVE",
+      "title": "Контакты",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE X11"
+    },
+    {
+      "id": "NATIVE-WINDOWS11-06",
+      "group": "NATIVE",
+      "title": "Публичные профили и аватары",
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "Windows 11 x64"
+    },
+    {
+      "id": "NATIVE-CACHYOS-WAYLAND-06",
+      "group": "NATIVE",
+      "title": "Публичные профили и аватары",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE Wayland"
+    },
+    {
+      "id": "NATIVE-CACHYOS-X11-06",
+      "group": "NATIVE",
+      "title": "Публичные профили и аватары",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE X11"
+    },
+    {
+      "id": "NATIVE-WINDOWS11-07",
+      "group": "NATIVE",
+      "title": "Личный зашифрованный архив",
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "Windows 11 x64"
+    },
+    {
+      "id": "NATIVE-CACHYOS-WAYLAND-07",
+      "group": "NATIVE",
+      "title": "Личный зашифрованный архив",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE Wayland"
+    },
+    {
+      "id": "NATIVE-CACHYOS-X11-07",
+      "group": "NATIVE",
+      "title": "Личный зашифрованный архив",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE X11"
+    },
+    {
+      "id": "NATIVE-WINDOWS11-08",
+      "group": "NATIVE",
+      "title": "Автоматическая подготовка и запуск Взора",
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "Windows 11 x64"
+    },
+    {
+      "id": "NATIVE-CACHYOS-WAYLAND-08",
+      "group": "NATIVE",
+      "title": "Автоматическая подготовка и запуск Взора",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE Wayland"
+    },
+    {
+      "id": "NATIVE-CACHYOS-X11-08",
+      "group": "NATIVE",
+      "title": "Автоматическая подготовка и запуск Взора",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE X11"
+    },
+    {
+      "id": "NATIVE-WINDOWS11-09",
+      "group": "NATIVE",
+      "title": "Защищённые звонки Глас",
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "Windows 11 x64"
+    },
+    {
+      "id": "NATIVE-CACHYOS-WAYLAND-09",
+      "group": "NATIVE",
+      "title": "Защищённые звонки Глас",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE Wayland"
+    },
+    {
+      "id": "NATIVE-CACHYOS-X11-09",
+      "group": "NATIVE",
+      "title": "Защищённые звонки Глас",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE X11"
+    },
+    {
+      "id": "NATIVE-WINDOWS11-10",
+      "group": "NATIVE",
+      "title": "Разрешения звонков",
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "Windows 11 x64"
+    },
+    {
+      "id": "NATIVE-CACHYOS-WAYLAND-10",
+      "group": "NATIVE",
+      "title": "Разрешения звонков",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE Wayland"
+    },
+    {
+      "id": "NATIVE-CACHYOS-X11-10",
+      "group": "NATIVE",
+      "title": "Разрешения звонков",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE X11"
+    },
+    {
+      "id": "NATIVE-WINDOWS11-11",
+      "group": "NATIVE",
+      "title": "Создание и управление организациями",
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "Windows 11 x64"
+    },
+    {
+      "id": "NATIVE-CACHYOS-WAYLAND-11",
+      "group": "NATIVE",
+      "title": "Создание и управление организациями",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE Wayland"
+    },
+    {
+      "id": "NATIVE-CACHYOS-X11-11",
+      "group": "NATIVE",
+      "title": "Создание и управление организациями",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE X11"
+    },
+    {
+      "id": "NATIVE-WINDOWS11-12",
+      "group": "NATIVE",
+      "title": "Роли и уровни доступа",
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "Windows 11 x64"
+    },
+    {
+      "id": "NATIVE-CACHYOS-WAYLAND-12",
+      "group": "NATIVE",
+      "title": "Роли и уровни доступа",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE Wayland"
+    },
+    {
+      "id": "NATIVE-CACHYOS-X11-12",
+      "group": "NATIVE",
+      "title": "Роли и уровни доступа",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE X11"
+    },
+    {
+      "id": "NATIVE-WINDOWS11-13",
+      "group": "NATIVE",
+      "title": "Публикация новостей",
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "Windows 11 x64"
+    },
+    {
+      "id": "NATIVE-CACHYOS-WAYLAND-13",
+      "group": "NATIVE",
+      "title": "Публикация новостей",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE Wayland"
+    },
+    {
+      "id": "NATIVE-CACHYOS-X11-13",
+      "group": "NATIVE",
+      "title": "Публикация новостей",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE X11"
+    },
+    {
+      "id": "NATIVE-WINDOWS11-14",
+      "group": "NATIVE",
+      "title": "Региональные ленты",
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "Windows 11 x64"
+    },
+    {
+      "id": "NATIVE-CACHYOS-WAYLAND-14",
+      "group": "NATIVE",
+      "title": "Региональные ленты",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE Wayland"
+    },
+    {
+      "id": "NATIVE-CACHYOS-X11-14",
+      "group": "NATIVE",
+      "title": "Региональные ленты",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE X11"
+    },
+    {
+      "id": "NATIVE-WINDOWS11-15",
+      "group": "NATIVE",
+      "title": "Мероприятия",
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "Windows 11 x64"
+    },
+    {
+      "id": "NATIVE-CACHYOS-WAYLAND-15",
+      "group": "NATIVE",
+      "title": "Мероприятия",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE Wayland"
+    },
+    {
+      "id": "NATIVE-CACHYOS-X11-15",
+      "group": "NATIVE",
+      "title": "Мероприятия",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE X11"
+    },
+    {
+      "id": "NATIVE-WINDOWS11-16",
+      "group": "NATIVE",
+      "title": "Библиотека-паутина",
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "Windows 11 x64"
+    },
+    {
+      "id": "NATIVE-CACHYOS-WAYLAND-16",
+      "group": "NATIVE",
+      "title": "Библиотека-паутина",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE Wayland"
+    },
+    {
+      "id": "NATIVE-CACHYOS-X11-16",
+      "group": "NATIVE",
+      "title": "Библиотека-паутина",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE X11"
+    },
+    {
+      "id": "NATIVE-WINDOWS11-17",
+      "group": "NATIVE",
+      "title": "Markdown и визуальное редактирование",
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "Windows 11 x64"
+    },
+    {
+      "id": "NATIVE-CACHYOS-WAYLAND-17",
+      "group": "NATIVE",
+      "title": "Markdown и визуальное редактирование",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE Wayland"
+    },
+    {
+      "id": "NATIVE-CACHYOS-X11-17",
+      "group": "NATIVE",
+      "title": "Markdown и визуальное редактирование",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE X11"
+    },
+    {
+      "id": "NATIVE-WINDOWS11-18",
+      "group": "NATIVE",
+      "title": "ИИ-предложения связей",
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "Windows 11 x64"
+    },
+    {
+      "id": "NATIVE-CACHYOS-WAYLAND-18",
+      "group": "NATIVE",
+      "title": "ИИ-предложения связей",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE Wayland"
+    },
+    {
+      "id": "NATIVE-CACHYOS-X11-18",
+      "group": "NATIVE",
+      "title": "ИИ-предложения связей",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE X11"
+    },
+    {
+      "id": "NATIVE-WINDOWS11-19",
+      "group": "NATIVE",
+      "title": "Административная панель",
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "Windows 11 x64"
+    },
+    {
+      "id": "NATIVE-CACHYOS-WAYLAND-19",
+      "group": "NATIVE",
+      "title": "Административная панель",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE Wayland"
+    },
+    {
+      "id": "NATIVE-CACHYOS-X11-19",
+      "group": "NATIVE",
+      "title": "Административная панель",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE X11"
+    },
+    {
+      "id": "NATIVE-WINDOWS11-20",
+      "group": "NATIVE",
+      "title": "Подписанный updater",
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "Windows 11 x64"
+    },
+    {
+      "id": "NATIVE-CACHYOS-WAYLAND-20",
+      "group": "NATIVE",
+      "title": "Подписанный updater",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE Wayland"
+    },
+    {
+      "id": "NATIVE-CACHYOS-X11-20",
+      "group": "NATIVE",
+      "title": "Подписанный updater",
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "tests": [],
+      "relatedTests": [],
+      "platform": "CachyOS KDE X11"
+    },
+    {
+      "id": "PHYSICAL-01",
+      "group": "PHYSICAL",
+      "title": "Обмен письмами",
+      "scope": "Два физических устройства в двух независимых сетях, точные бинарники 5.0.0",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "PHYSICAL-02",
+      "group": "PHYSICAL",
+      "title": "Синхронизация профилей",
+      "scope": "Два физических устройства в двух независимых сетях, точные бинарники 5.0.0",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "PHYSICAL-03",
+      "group": "PHYSICAL",
+      "title": "Синхронизация аватаров",
+      "scope": "Два физических устройства в двух независимых сетях, точные бинарники 5.0.0",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "PHYSICAL-04",
+      "group": "PHYSICAL",
+      "title": "Голосовые вызовы Глас",
+      "scope": "Два физических устройства в двух независимых сетях, точные бинарники 5.0.0",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "PHYSICAL-05",
+      "group": "PHYSICAL",
+      "title": "Проверка identity",
+      "scope": "Два физических устройства в двух независимых сетях, точные бинарники 5.0.0",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "PHYSICAL-06",
+      "group": "PHYSICAL",
+      "title": "Отсутствие прямого обхода Tor",
+      "scope": "Два физических устройства в двух независимых сетях, точные бинарники 5.0.0",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "PHYSICAL-07",
+      "group": "PHYSICAL",
+      "title": "Изменение ролей",
+      "scope": "Два физических устройства в двух независимых сетях, точные бинарники 5.0.0",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "PHYSICAL-08",
+      "group": "PHYSICAL",
+      "title": "Отзыв полномочий",
+      "scope": "Два физических устройства в двух независимых сетях, точные бинарники 5.0.0",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "PHYSICAL-09",
+      "group": "PHYSICAL",
+      "title": "Публикация и получение новостей",
+      "scope": "Два физических устройства в двух независимых сетях, точные бинарники 5.0.0",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "PHYSICAL-10",
+      "group": "PHYSICAL",
+      "title": "Региональные публикации",
+      "scope": "Два физических устройства в двух независимых сетях, точные бинарники 5.0.0",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "PHYSICAL-11",
+      "group": "PHYSICAL",
+      "title": "Общая библиотека",
+      "scope": "Два физических устройства в двух независимых сетях, точные бинарники 5.0.0",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "PHYSICAL-12",
+      "group": "PHYSICAL",
+      "title": "Скрытие закрытых материалов",
+      "scope": "Два физических устройства в двух независимых сетях, точные бинарники 5.0.0",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "PHYSICAL-13",
+      "group": "PHYSICAL",
+      "title": "Зашифрованный клиентский кэш",
+      "scope": "Два физических устройства в двух независимых сетях, точные бинарники 5.0.0",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "PHYSICAL-14",
+      "group": "PHYSICAL",
+      "title": "Потеря соединения",
+      "scope": "Два физических устройства в двух независимых сетях, точные бинарники 5.0.0",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "PHYSICAL-15",
+      "group": "PHYSICAL",
+      "title": "Восстановление после сетевого сбоя",
+      "scope": "Два физических устройства в двух независимых сетях, точные бинарники 5.0.0",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "UPDATER-01",
+      "group": "UPDATER",
+      "title": "Обнаружение 5.0.0",
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "UPDATER-02",
+      "group": "UPDATER",
+      "title": "Получение подписанного manifest",
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "UPDATER-03",
+      "group": "UPDATER",
+      "title": "Ed25519",
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "UPDATER-04",
+      "group": "UPDATER",
+      "title": "SHA-256",
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "UPDATER-05",
+      "group": "UPDATER",
+      "title": "Схема manifest",
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "UPDATER-06",
+      "group": "UPDATER",
+      "title": "Версия",
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "UPDATER-07",
+      "group": "UPDATER",
+      "title": "Anti-rollback",
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "UPDATER-08",
+      "group": "UPDATER",
+      "title": "Совместимость Relay",
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "UPDATER-09",
+      "group": "UPDATER",
+      "title": "Загрузка через Tor",
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "UPDATER-10",
+      "group": "UPDATER",
+      "title": "Прерывание загрузки",
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "UPDATER-11",
+      "group": "UPDATER",
+      "title": "Возобновление загрузки",
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "UPDATER-12",
+      "group": "UPDATER",
+      "title": "Точный размер файла",
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "UPDATER-13",
+      "group": "UPDATER",
+      "title": "Контрольная сумма",
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "UPDATER-14",
+      "group": "UPDATER",
+      "title": "Подтверждение установки",
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "UPDATER-15",
+      "group": "UPDATER",
+      "title": "Завершение приложения",
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "UPDATER-16",
+      "group": "UPDATER",
+      "title": "Установка новой версии",
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "UPDATER-17",
+      "group": "UPDATER",
+      "title": "Перезапуск",
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "UPDATER-18",
+      "group": "UPDATER",
+      "title": "Сохранность данных",
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "UPDATER-19",
+      "group": "UPDATER",
+      "title": "Новые разделы",
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "UPDATER-20",
+      "group": "UPDATER",
+      "title": "Откат при ошибке",
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "UPDATER-21",
+      "group": "UPDATER",
+      "title": "Восстановление после неудачного перезапуска",
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "UPDATER-22",
+      "group": "UPDATER",
+      "title": "Повторная проверка подписи после загрузки",
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "UPDATER-23",
+      "group": "UPDATER",
+      "title": "Запрет неподписанного файла",
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "UPDATER-24",
+      "group": "UPDATER",
+      "title": "Запрет изменённого файла",
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "tests": [],
+      "relatedTests": []
+    },
+    {
+      "id": "UPDATER-25",
+      "group": "UPDATER",
+      "title": "Запрет понижения версии",
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "tests": [],
+      "relatedTests": []
+    }
+  ]
+}

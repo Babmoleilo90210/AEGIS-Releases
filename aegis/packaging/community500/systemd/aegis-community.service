@@ -1,0 +1,33 @@
+[Unit]
+Description=AEGIS isolated community origin (operator deployment proposal)
+After=network-online.target tor.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=aegis-community
+Group=aegis-community
+ExecStart=/opt/aegis-community/bin/community-server --serve /var/lib/aegis-community --port 38150
+Restart=on-failure
+RestartSec=30
+UMask=0077
+NoNewPrivileges=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/var/lib/aegis-community
+InaccessiblePaths=-/etc/aegis/worker-identity -/root
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+LockPersonality=yes
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+CapabilityBoundingSet=
+SystemCallArchitectures=native
+TasksMax=64
+LimitNOFILE=512
+MemoryMax=768M
+
+[Install]
+WantedBy=multi-user.target

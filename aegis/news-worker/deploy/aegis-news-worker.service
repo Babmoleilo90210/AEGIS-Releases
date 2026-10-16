@@ -1,0 +1,34 @@
+[Unit]
+Description=AEGIS public news worker (dedicated restricted service identity)
+After=network-online.target tor.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=aegis-news
+Group=aegis-news
+EnvironmentFile=/etc/aegis/news-worker.env
+ExecStart=/opt/aegis-news/bin/news-worker --server ${AEGIS_COMMUNITY_ONION} --server-key ${AEGIS_COMMUNITY_PUBLIC_KEY} --worker-key /etc/aegis/worker-identity/worker.pk8 --tor-socks ${AEGIS_TOR_SOCKS_PORT}
+Restart=on-failure
+RestartSec=30
+UMask=0077
+NoNewPrivileges=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadOnlyPaths=/opt/aegis-news /etc/aegis/worker-identity
+InaccessiblePaths=-/var/lib/aegis-community -/root
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+LockPersonality=yes
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+CapabilityBoundingSet=
+SystemCallArchitectures=native
+TasksMax=64
+LimitNOFILE=256
+MemoryMax=512M
+
+[Install]
+WantedBy=multi-user.target

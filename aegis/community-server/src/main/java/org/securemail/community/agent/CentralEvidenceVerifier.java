@@ -1,0 +1,33 @@
+package org.securemail.community.agent;
+
+import java.net.URI;
+import java.time.Instant;
+import java.util.*;
+import java.util.concurrent.*;
+
+/** Independent server fetch. A restricted worker's assertions can never authorize publication. */
+public class CentralEvidenceVerifier implements AgentService.EvidenceVerifier,AutoCloseable {
+  private final PublicSourceHttp http;private final ExecutorService fetchers;private final Map<String,Cached>cache=new LinkedHashMap<>();
+  private record Cached(long expires,Fetched value,long bytes){}
+  public CentralEvidenceVerifier(){this(new PublicSourceHttp());}
+  public CentralEvidenceVerifier(PublicSourceHttp http){this.http=http;fetchers=new ThreadPoolExecutor(4,4,0,TimeUnit.SECONDS,new ArrayBlockingQueue<>(20),r->{Thread t=new Thread(r,"aegis-central-evidence");t.setDaemon(true);return t;},new ThreadPoolExecutor.AbortPolicy());}
+  public boolean hasFreshSources(Map<String,Object>payload,List<Map<String,Object>>observations,Map<String,Object>draft)throws Exception{Set<String>urls=new HashSet<>();for(Object u:(List<?>)draft.get("sources"))urls.add(u.toString());Set<String>ids=new HashSet<>();for(Map<String,Object>o:observations)if(urls.contains(o.get("url")))ids.add(o.get("sourceId").toString());for(Map<String,Object>source:maps(payload.get("sources")))if(ids.contains(source.get("id"))&&cached(source)==null)return false;return !ids.isEmpty();}
+  private String cacheKey(Map<String,Object>source){return source.get("id")+"\n"+source.get("url")+"\n"+source.get("independenceGroup")+"\n"+source.get("cityId")+"\n"+source.get("official");}
+  private Fetched cached(Map<String,Object>source){synchronized(cache){Cached c=cache.get(cacheKey(source));return c==null||c.expires<System.nanoTime()?null:c.value;}}
+  @Override public AgentService.EvidenceProof verify(Map<String,Object>payload,List<Map<String,Object>>observations,Map<String,Object>draft)throws Exception{
+    Set<String> cited=new HashSet<>();if(!(draft.get("sources") instanceof List<?> urls))return new AgentService.EvidenceProof(false,"NO_SOURCE",List.of());for(Object url:urls)cited.add(Objects.toString(url));
+    Map<String,Map<String,Object>>policies=new HashMap<>();for(Map<String,Object>s:maps(payload.get("sources")))policies.put(AgentJson.text(s,"id",36),s);
+    List<Map<String,Object>> relevant=new ArrayList<>();for(Map<String,Object>o:observations)if(cited.contains(o.get("url")))relevant.add(o);
+    if(relevant.size()<2||relevant.size()>20)return new AgentService.EvidenceProof(false,"INSUFFICIENT_SOURCE",List.of());
+    Map<String,Future<Fetched>>futures=new HashMap<>();List<Map<String,Object>>receipts=new ArrayList<>();long deadline=System.nanoTime()+TimeUnit.SECONDS.toNanos(90);
+    try{for(Map<String,Object>observation:relevant){String source=AgentJson.text(observation,"sourceId",36);if(futures.containsKey(source))continue;Map<String,Object>policy=policies.get(source);if(policy==null)return new AgentService.EvidenceProof(false,"SOURCE_NOT_ALLOWED",receipts);futures.put(source,fetchers.submit(()->fetch(policy)));}
+      Map<String,Fetched>actual=new HashMap<>();for(var e:futures.entrySet()){long left=deadline-System.nanoTime();if(left<=0)return new AgentService.EvidenceProof(false,"SOURCE_TIMEOUT",receipts);Fetched fetched=e.getValue().get(left,TimeUnit.NANOSECONDS);actual.put(e.getKey(),fetched);receipts.add(fetched.receipt);}
+      Set<String> actualGroups=new HashSet<>(),actualTexts=new HashSet<>();for(Map<String,Object>reported:relevant){Fetched real=actual.get(AgentJson.text(reported,"sourceId",36));Map<String,Object>withoutFlag=new HashMap<>(reported);withoutFlag.remove("publicSource");boolean matches=false;for(var item:real.items)if(item.map().equals(withoutFlag)){matches=true;String text=item.text().toLowerCase(Locale.ROOT).replaceAll("[^\\p{L}\\p{N}]+"," ").strip();if(actualTexts.add(text))actualGroups.add(item.sourceGroup());break;}if(!matches)return new AgentService.EvidenceProof(false,"SOURCE_CONTENT_MISMATCH",receipts);}
+      return new AgentService.EvidenceProof(actualGroups.size()>=2,actualGroups.size()>=2?"CENTRAL_SOURCE_MATCH":"SYNDICATED_OR_SINGLE_SOURCE",receipts);
+    }catch(InterruptedException e){Thread.currentThread().interrupt();return new AgentService.EvidenceProof(false,"CANCELLED",receipts);}catch(Exception e){return new AgentService.EvidenceProof(false,"SOURCE_UNAVAILABLE",receipts);}finally{for(Future<Fetched> f:futures.values())if(!f.isDone())f.cancel(true);}
+  }
+  private record Fetched(List<SourceParser.Observation>items,Map<String,Object>receipt){}
+  private Fetched fetch(Map<String,Object>source)throws Exception{Fetched available=cached(source);if(available!=null)return available;URI uri=URI.create(AgentJson.text(source,"url",2048));Set<String>hosts=Set.of(uri.getHost().toLowerCase(Locale.ROOT));RobotsPolicy.check(http,uri,hosts,AgentJson.number(source,"minIntervalMinutes",15,10080)*60);PublicSourceHttp.Response response=http.get(uri,hosts,1000000);if(response.status()!=200)throw new java.io.IOException("Источник недоступен");byte[]bytes=response.body();var items=new SourceParser().parse(AgentJson.text(source,"id",36),AgentJson.text(source,"independenceGroup",120),AgentJson.bool(source,"official"),AgentJson.text(source,"cityId",160),response.uri(),response.headers().getOrDefault("content-type",""),bytes);String digest=org.securemail.community.core.CommunityStore.hex(org.securemail.community.core.CommunityStore.hash(bytes));Fetched fetched=new Fetched(items,Map.of("sourceId",source.get("id"),"url",response.uri().toString(),"sha256",digest,"fetchedAt",Instant.now().toString(),"bytes",bytes.length));synchronized(cache){cache.entrySet().removeIf(e->e.getValue().expires<System.nanoTime());long size=4096;for(var item:items)size+=2L*(item.title().length()+item.text().length()+item.url().length()+200);while(!cache.isEmpty()&&(cache.size()>=32||cache.values().stream().mapToLong(Cached::bytes).sum()+size>16L*1024*1024)){var iterator=cache.keySet().iterator();iterator.next();iterator.remove();}if(size<=16L*1024*1024)cache.put(cacheKey(source),new Cached(System.nanoTime()+TimeUnit.MINUTES.toNanos(5),fetched,size));}return fetched;}
+  @SuppressWarnings("unchecked")private static List<Map<String,Object>>maps(Object v)throws Exception{if(!(v instanceof List<?>l)||l.size()>20)throw new java.io.IOException("Некорректный набор источников");List<Map<String,Object>>out=new ArrayList<>();for(Object item:l){if(!(item instanceof Map<?,?>))throw new java.io.IOException("Некорректный источник");out.add((Map<String,Object>)item);}return out;}
+  @Override public void close(){fetchers.shutdownNow();synchronized(cache){cache.clear();}}
+}

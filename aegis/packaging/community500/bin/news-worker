@@ -1,0 +1,13 @@
+#!/bin/sh
+# Dedicated worker; only its own service identity may be supplied, never a user/admin key.
+set -eu
+if [ "${1:-}" = '--generate-key' ]; then
+ [ "$#" -eq 2 ] || { echo 'Нужны --generate-key DIR.' >&2; exit 2; }
+elif [ "$#" -ne 8 ] && [ "$#" -ne 9 ]; then
+ echo 'Нужны --server URL --server-key BASE64 --worker-key FILE --tor-socks PORT [--once]. Требуется Java 21.' >&2
+ exit 2
+fi
+aegis_program_dir=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd -P)
+aegis_java=java
+if [ -n "${JAVA_HOME:-}" ]; then aegis_java="$JAVA_HOME/bin/java"; fi
+exec "$aegis_java" -Xms32m -Xmx384m -XX:+DisableAttachMechanism -XX:-HeapDumpOnOutOfMemoryError -cp "$aegis_program_dir/lib/*" org.securemail.worker.NewsWorkerMain "$@"

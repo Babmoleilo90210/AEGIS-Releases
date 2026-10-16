@@ -1,0 +1,49 @@
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+╷
+├─ JUnit Platform Suite ✔
+├─ JUnit Jupiter ✔
+│  └─ AccessControlTest ✔
+│     ├─ assignedRoleManagerCannotAuthorizeOwnNewPermissionsOrClearanceAfterWriting() ✘ Expected org.securemail.community.core.CommunityException to be thrown, but nothing was thrown.
+│     └─ inheritedRoleManagerCannotAuthorizeNewAncestorRightsThroughOwnAssignedDescendant... ✘ Expected org.securemail.community.core.CommunityException to be thrown, but nothing was thrown.
+└─ JUnit Vintage ✔
+
+Failures (2):
+  JUnit Jupiter:AccessControlTest:assignedRoleManagerCannotAuthorizeOwnNewPermissionsOrClearanceAfterWriting()
+    MethodSource [className = 'org.securemail.community.access.AccessControlTest', methodName = 'assignedRoleManagerCannotAuthorizeOwnNewPermissionsOrClearanceAfterWriting', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Expected org.securemail.community.core.CommunityException to be thrown, but nothing was thrown.
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:73)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       org.securemail.community.access.AccessControlTest.assignedRoleManagerCannotAuthorizeOwnNewPermissionsOrClearanceAfterWriting(AccessControlTest.java:177)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+  JUnit Jupiter:AccessControlTest:inheritedRoleManagerCannotAuthorizeNewAncestorRightsThroughOwnAssignedDescendant()
+    MethodSource [className = 'org.securemail.community.access.AccessControlTest', methodName = 'inheritedRoleManagerCannotAuthorizeNewAncestorRightsThroughOwnAssignedDescendant', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Expected org.securemail.community.core.CommunityException to be thrown, but nothing was thrown.
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:73)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       org.securemail.community.access.AccessControlTest.inheritedRoleManagerCannotAuthorizeNewAncestorRightsThroughOwnAssignedDescendant(AccessControlTest.java:183)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+Test run finished after 699 ms
+[         4 containers found      ]
+[         0 containers skipped    ]
+[         4 containers started    ]
+[         0 containers aborted    ]
+[         4 containers successful ]
+[         0 containers failed     ]
+[         2 tests found           ]
+[         0 tests skipped         ]
+[         2 tests started         ]
+[         0 tests aborted         ]
+[         0 tests successful      ]
+[         2 tests failed          ]
+

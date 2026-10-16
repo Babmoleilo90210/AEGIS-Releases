@@ -1,0 +1,29 @@
+{
+  "startedUtc": "2026-10-15T14:18:42.952684+00:00",
+  "finishedUtc": "2026-10-15T14:18:55.277768+00:00",
+  "javaCompileExitCode": 0,
+  "junitExitCode": 0,
+  "junit": {
+    "tests": 129,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 1
+  },
+  "scope": "Local policy/fixture tests only, current source Appearance, clean classes; no privileged installation and no Tor Browser launch",
+  "environment": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "realNamespaceProbe": {
+    "exitCode": 0,
+    "status": "BLOCKED",
+    "evidence": "namespace-probe.log",
+    "checkedAtUtc": "2026-10-15T14:19:27.007577+00:00"
+  },
+  "native": {
+    "Windows11": "NOT_RUN",
+    "CachyKDEWayland": "NOT_RUN",
+    "CachyKDEX11": "NOT_RUN",
+    "PolkitInstallation": "NOT_RUN",
+    "UacDismInstallation": "NOT_RUN",
+    "TorBrowserVendorLaunch": "NOT_RUN"
+  },
+  "productionReady": false
+}

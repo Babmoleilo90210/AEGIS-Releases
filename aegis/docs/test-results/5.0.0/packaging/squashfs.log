@@ -1,0 +1,30 @@
+Parallel mksquashfs: Using 2 processors
+Creating 4.0 filesystem on /workspace/scratch/aa629f360927/aegis/aegis/build/packaging500-helper-smoke/permissions-fixture.squashfs, block size 131072.
+
+[===================================================================|] 1/1 100%
+
+Exportable Squashfs 4.0 filesystem, gzip compressed, data block size 131072
+	compressed data, compressed metadata, compressed fragments,
+	no xattrs, compressed ids
+	duplicates are removed
+Filesystem size 0.29 Kbytes (0.00 Mbytes)
+	82.74% of uncompressed filesystem size (0.36 Kbytes)
+Inode table size 53 bytes (0.05 Kbytes)
+	54.08% of uncompressed inode table size (98 bytes)
+Directory table size 35 bytes (0.03 Kbytes)
+	71.43% of uncompressed directory table size (49 bytes)
+Number of duplicate files found 0
+Number of inodes 3
+Number of files 1
+Number of fragments 1
+Number of symbolic links 0
+Number of device nodes 0
+Number of fifo nodes 0
+Number of socket nodes 0
+Number of directories 2
+Number of hard-links 0
+Number of ids (unique uids + gids) 1
+Number of uids 1
+	root (0)
+Number of gids 1
+	root (0)

@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "version": "5.0.0",
+  "timestampUtc": "2026-10-15T14:29:03.666916+00:00",
+  "scope": "CONTROL ONLY: known-vulnerable log4j-core 2.14.1 is not an AEGIS dependency and is never downloaded or executed",
+  "query": {
+    "package": {
+      "ecosystem": "Maven",
+      "name": "org.apache.logging.log4j:log4j-core"
+    },
+    "version": "2.14.1"
+  },
+  "endpoint": "https://api.osv.dev/v1/query",
+  "expectedAlias": "CVE-2021-44228",
+  "status": "PASS_CONTROL",
+  "productionReady": false,
+  "responseSha256": "9b14e32a5857e02aa5b8b80db9184a8759f80cd50c5c8a836f59aeb21954b1e7",
+  "responseBytes": 52898,
+  "advisoryIds": [
+    "GHSA-3pxv-7cmr-fjr4",
+    "GHSA-6hg6-v5c8-fphq",
+    "GHSA-7rjr-3q55-vv33",
+    "GHSA-8489-44mv-ggj8",
+    "GHSA-jfh8-c2jp-5v3q",
+    "GHSA-p6xc-xr62-6r2g",
+    "GHSA-vc5p-v9hr-52mj"
+  ],
+  "expectedAdvisoryObserved": true,
+  "pagination": ""
+}

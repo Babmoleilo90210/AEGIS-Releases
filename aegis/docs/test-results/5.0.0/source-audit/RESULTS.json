@@ -1,0 +1,156 @@
+{
+  "version": "5.0.0",
+  "baseVersion": "2.5.0",
+  "baseCommit": "699a3260fa456a40d4d16d3b711c957b088f9ab3",
+  "baseTree": "481e1206cac5a1b4a844f23db0e1157cf6ccc327",
+  "sourceArchiveComparedFiles": 1210,
+  "mismatches": [],
+  "sourceZipSha256": "c2664af51e5e074a3d447c75faa8a5ba20c53627139b1fea17a373141aed5645",
+  "sharedChatFetch": [
+    {
+      "name": "chat-history",
+      "http": 200,
+      "bytes": 6053553,
+      "sha256": "2f94948a8478dd4236f6ccc3515597d226383d1426eb9f80179c551fed66a2d6",
+      "containsConversation": true
+    },
+    {
+      "name": "chat-interface",
+      "http": 200,
+      "bytes": 7912615,
+      "sha256": "141487be2ce16fd01831ea25b368d01804090d4cbb89760fa9c43026beacdc00",
+      "containsConversation": true
+    }
+  ],
+  "resolvedUserMessages": {
+    "chat-history": 135,
+    "chat-interface": 48
+  },
+  "visualReferenceInspected": [
+    "изображение(20261015-123418).png",
+    "изображение(20261015-122922).png",
+    "изображение(20261015-043913).png",
+    "изображение(20261015-044148).png",
+    "изображение(20261015-043719).png",
+    "изображение(20261015-043823).png",
+    "изображение(20261015-043801).png"
+  ],
+  "sourceHTMLPublishedInPackage": false,
+  "productionRelayChanged": false,
+  "stableFeedChanged": false,
+  "publishedBaseRelease": {
+    "tag_name": "v2.5.0",
+    "target_commitish": "development/aegis-2.5.0",
+    "name": "АЕГИС 2.5.0 — Взор и Глас (тестирование)",
+    "draft": false,
+    "prerelease": true,
+    "published_at": "2026-10-15T12:14:08Z",
+    "html_url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/tag/v2.5.0"
+  },
+  "publishedAssets": [
+    {
+      "name": "AEGIS-2.5.0-CachyOS-x86_64.AppImage",
+      "size": 95586808,
+      "digest": "sha256:2b1c241dd37443c55ff592750bd14ab945adba642c07037b10fe67cde7f5474f"
+    },
+    {
+      "name": "AEGIS-2.5.0-client-source.zip",
+      "size": 19057095,
+      "digest": "sha256:c2664af51e5e074a3d447c75faa8a5ba20c53627139b1fea17a373141aed5645"
+    },
+    {
+      "name": "AEGIS-2.5.0-evidence.zip",
+      "size": 15969520,
+      "digest": "sha256:bc8f4cdd155ecbaa48b46e9afb93902069e39e37ea1aa973d8e3ed219fd2dec6"
+    },
+    {
+      "name": "AEGIS-2.5.0-native-acceptance.zip",
+      "size": 12394011,
+      "digest": "sha256:1dd3d4807188658f0a2fdc9bb1ce389721b1b5db96db8b19bdafe83983f4aae7"
+    },
+    {
+      "name": "AEGIS-2.5.0-source.zip",
+      "size": 19057095,
+      "digest": "sha256:c2664af51e5e074a3d447c75faa8a5ba20c53627139b1fea17a373141aed5645"
+    },
+    {
+      "name": "AEGIS-2.5.0-Windows-x64.zip",
+      "size": 114802498,
+      "digest": "sha256:a888d5a5546225edfba0846d4a53215b4227391e62923b70dd98798af3d17b4f"
+    },
+    {
+      "name": "AEGIS-Setup-2.5.0-x64.exe",
+      "size": 83957703,
+      "digest": "sha256:23f58c149bfd8e62d14fe585a05bcb67aaf23e17c283b925e1521d930ebb6b1a"
+    },
+    {
+      "name": "CHANGELOG-2.5.0.md",
+      "size": 3202,
+      "digest": "sha256:5e844eee7b40ee737cce96d5fdfc6f24797426211622ef706071ca679b4fc6e7"
+    },
+    {
+      "name": "FINAL-VERIFICATION-2.5.0.json",
+      "size": 134776,
+      "digest": "sha256:77ed04c16ca6f6a04e595690ff0caa13500a6b285db73fd44e93178b4e9b20b9"
+    },
+    {
+      "name": "IMPLEMENTATION-REPORT-2.5.0-RU.md",
+      "size": 24106,
+      "digest": "sha256:0ef114c6c03937655b7b1302028fb5f9cbcd2c05489b3a5298cd051fb6ae68cc"
+    },
+    {
+      "name": "RELEASE-GATES-2.5.0.json",
+      "size": 107854,
+      "digest": "sha256:d6ec80247fa7627f7fabda22b13a86a431ab88ebe94c50741f8c9ffa575a963e"
+    },
+    {
+      "name": "SHA256SUMS",
+      "size": 3407,
+      "digest": "sha256:187fa70d9f3bc57ffcb20a8d8ae4e8f8116309d71446b80aaf0154336b0d7a25"
+    },
+    {
+      "name": "stable-2.5.0.UNSIGNED.json",
+      "size": 5768,
+      "digest": "sha256:8cd096c8cd6611d7e4f50eb403324a17e298730874a7e5be46b7294e718f242f"
+    },
+    {
+      "name": "stable-2.5.0.UNSIGNED.json.sig",
+      "size": 64,
+      "digest": "sha256:e492159778396774abd57de447e86cf439c53a4d85f323614dc3f35df571d0f0"
+    }
+  ],
+  "baseManifestSignature": {
+    "status": "PASS",
+    "algorithm": "Ed25519",
+    "pinnedPublicKeyUnchanged": true,
+    "manifestSha256": "8cd096c8cd6611d7e4f50eb403324a17e298730874a7e5be46b7294e718f242f",
+    "signatureSha256": "e492159778396774abd57de447e86cf439c53a4d85f323614dc3f35df571d0f0",
+    "privateKeyUsed": false
+  },
+  "baseArtifactsAgainstSignedManifest": [
+    {
+      "fileName": "AEGIS-Setup-2.5.0-x64.exe",
+      "sha256": "23f58c149bfd8e62d14fe585a05bcb67aaf23e17c283b925e1521d930ebb6b1a",
+      "bytes": 83957703,
+      "matchesSignedManifest": true
+    },
+    {
+      "fileName": "AEGIS-2.5.0-Windows-x64.zip",
+      "sha256": "a888d5a5546225edfba0846d4a53215b4227391e62923b70dd98798af3d17b4f",
+      "bytes": 114802498,
+      "matchesSignedManifest": true
+    },
+    {
+      "fileName": "AEGIS-2.5.0-CachyOS-x86_64.AppImage",
+      "sha256": "2b1c241dd37443c55ff592750bd14ab945adba642c07037b10fe67cde7f5474f",
+      "bytes": 95586808,
+      "matchesSignedManifest": true
+    },
+    {
+      "fileName": "AEGIS-2.5.0-client-source.zip",
+      "sha256": "c2664af51e5e074a3d447c75faa8a5ba20c53627139b1fea17a373141aed5645",
+      "bytes": 19057095,
+      "matchesSignedManifest": true
+    }
+  ]
+}

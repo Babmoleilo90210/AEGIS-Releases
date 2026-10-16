@@ -1,0 +1,38 @@
+{
+  "scope": "Isolated current community classes + exact published 2.5 dependency/runtime jars; productionLocalStore AEAD and local signed HTTP sockets; NOT Tor/native acceptance",
+  "sourceSha256": {
+    "common-protocol/src/main/java/org/securemail/community/protocol/CommunityAuth.java": "2724980d86643d7cf34cac7419a6a9fac0f37c93813be316578aa3df527b6a96",
+    "client-core/src/main/java/org/securemail/client/net/TorTransport.java": "5f5c00a028769bdfaa1ac75fca94e329842c60d209af7a51dada6d70f714c3ad",
+    "client-core/src/main/java/org/securemail/client/storage/LocalStore.java": "a4048f56dd3b46da7d1e9088665fab7cf7b203b3c7e0edb2cc07755f3d594794",
+    "client-core/src/main/java/org/securemail/client/community/CommunityJson.java": "acc7528ae555fb0234f7302c3898578c9f07565bfd236762c850d61320447467",
+    "client-core/src/main/java/org/securemail/client/community/CommunityClient.java": "b9287a2eb75553ff883f42be4d98a25879e22ddec0d64276d1604974e05077e1",
+    "client-core/src/test/java/org/securemail/client/community/CommunityClientTest.java": "1a08775060011b597560707c2a3ff7e4bc255f3f98d40224098b52dcb116dc4e",
+    "client-core/src/test/java/org/securemail/client/community/CommunityJsonTest.java": "122783b747b3685512f294f16abeaee0a0f13ec82d7816b5f3f21e933238679e"
+  },
+  "suites": [
+    {
+      "name": "JUnit Platform Suite",
+      "tests": "0",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.002"
+    },
+    {
+      "name": "JUnit Jupiter",
+      "tests": "30",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "6.418"
+    },
+    {
+      "name": "JUnit Vintage",
+      "tests": "0",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.001"
+    }
+  ]
+}

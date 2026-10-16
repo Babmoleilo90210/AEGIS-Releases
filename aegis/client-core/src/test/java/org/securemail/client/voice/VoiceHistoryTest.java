@@ -20,19 +20,30 @@ class VoiceHistoryTest {
     Path profile=root.resolve("profile"),rekey=root.resolve("rekey");String peer=Identity.create().userId(),id=UUID.randomUUID().toString();
     try(var local=store(profile)){
       var state=new VoiceHistory(local);assertFalse(state.enabled());state.add(new VoiceCallService.HistoryEntry(id,peer,true,60_000,4,"ended"));assertTrue(state.entries().isEmpty());assertFalse(Files.exists(profile.resolve("voice-v1.vault")));
-      state.enabled(true);state.incomingEnabled(false);state.notificationsEnabled(false);state.config(new GlasAudioSession.Config("microphone-id","speaker-id",0.8,0.6,false,true));
+      state.enabled(true);state.incomingEnabled(false);state.notificationsEnabled(false);state.policy(new VoiceCallPolicy(new VoiceCallPolicy.Rule(VoiceCallPolicy.Mode.SELECTED_CONTACTS,Set.of(peer),Set.of(),true),VoiceCallPolicy.Rule.nobody()));state.config(new GlasAudioSession.Config("microphone-id","speaker-id",0.8,0.6,false,true));
       state.add(new VoiceCallService.HistoryEntry(id,peer,true,60_000,4,"ended"));byte[] sealed=Files.readAllBytes(profile.resolve("voice-v1.vault"));assertFalse(new String(sealed,StandardCharsets.ISO_8859_1).contains(peer));assertFalse(new String(sealed,StandardCharsets.ISO_8859_1).contains("microphone-id"));
       local.rekeyCopy(rekey,PASSWORD);
     }
     for(Path path:List.of(profile,rekey))try(var local=store(path)){
-      var state=new VoiceHistory(local);assertTrue(state.enabled());assertFalse(state.incomingEnabled());assertFalse(state.notificationsEnabled());assertEquals(id,state.entries().getFirst().callId());assertEquals("microphone-id",state.config().inputDeviceId());state.enabled(false);state.add(new VoiceCallService.HistoryEntry(UUID.randomUUID().toString(),peer,false,120_000,7,"ended"));assertEquals(1,state.entries().size());state.clear();assertTrue(new VoiceHistory(local).entries().isEmpty());
+      var state=new VoiceHistory(local);assertTrue(state.enabled());assertFalse(state.incomingEnabled());assertFalse(state.notificationsEnabled());assertTrue(state.policy().incoming().allowsLocally(peer));assertTrue(state.policy().incoming().organizationGrantsAllowed());assertEquals(VoiceCallPolicy.Mode.NONE,state.policy().outgoing().mode());assertEquals(id,state.entries().getFirst().callId());assertEquals("microphone-id",state.config().inputDeviceId());state.enabled(false);state.add(new VoiceCallService.HistoryEntry(UUID.randomUUID().toString(),peer,false,120_000,7,"ended"));assertEquals(1,state.entries().size());state.clear();assertTrue(new VoiceHistory(local).entries().isEmpty());
     }
   }
   @Test void versionOneGetsSafeIncomingAndNotificationDefaults()throws Exception{
     try(var local=store(root)){
       byte[] old=Binary.encode(out->{out.writeInt(1);out.writeBoolean(false);Binary.text(out,"");Binary.text(out,"");out.writeDouble(1);out.writeDouble(1);out.writeBoolean(true);out.writeBoolean(true);out.writeInt(0);});local.writeVoiceState(old);
-      var state=new VoiceHistory(local);assertTrue(state.incomingEnabled());assertTrue(state.notificationsEnabled());assertFalse(state.enabled());state.notificationsEnabled(false);byte[] upgraded=local.readVoiceState();try(var in=new DataInputStream(new ByteArrayInputStream(upgraded))){assertEquals(2,in.readInt());}finally{Arrays.fill(upgraded,(byte)0);}
+      var state=new VoiceHistory(local);assertTrue(state.incomingEnabled());assertTrue(state.notificationsEnabled());assertFalse(state.enabled());state.notificationsEnabled(false);byte[] upgraded=local.readVoiceState();try(var in=new DataInputStream(new ByteArrayInputStream(upgraded))){assertEquals(3,in.readInt());}finally{Arrays.fill(upgraded,(byte)0);}
     }
+  }
+  @Test void versionTwoMigratesConsentWithoutRewritingIdentityAndNewPolicyPersistsEncrypted()throws Exception {
+    String peer=Identity.create().userId();byte[] publicKey,privateKey;
+    try(var local=store(root)){
+      publicKey=local.identity().publicKey();privateKey=local.identity().privateKey();
+      byte[] old=Binary.encode(out->{out.writeInt(2);out.writeBoolean(false);Binary.text(out,"");Binary.text(out,"");out.writeDouble(1);out.writeDouble(1);out.writeBoolean(true);out.writeBoolean(true);out.writeBoolean(false);out.writeBoolean(true);out.writeInt(0);});
+      local.writeVoiceState(old);var loaded=new VoiceHistory(local);assertFalse(loaded.incomingEnabled());assertEquals(VoiceCallPolicy.defaults(),loaded.policy());assertArrayEquals(old,local.readVoiceState(),"Read-only opening must not mutate an older state");
+      var rule=new VoiceCallPolicy.Rule(VoiceCallPolicy.Mode.SELECTED_CONTACTS,Set.of(peer),Set.of(),true);loaded.policy(new VoiceCallPolicy(rule,VoiceCallPolicy.Rule.nobody()));
+      assertFalse(new String(Files.readAllBytes(root.resolve("voice-v1.vault")),StandardCharsets.ISO_8859_1).contains(peer));
+    }
+    try(var local=store(root)){var state=new VoiceHistory(local);assertFalse(state.incomingEnabled());assertTrue(state.policy().incoming().allowsLocally(peer));assertTrue(state.policy().incoming().organizationGrantsAllowed());assertEquals(VoiceCallPolicy.Mode.NONE,state.policy().outgoing().mode());assertArrayEquals(publicKey,local.identity().publicKey());assertArrayEquals(privateKey,local.identity().privateKey());}
   }
   @Test void damagedOrOversizedVoiceStateFailsClosed()throws Exception{
     try(var local=store(root)){

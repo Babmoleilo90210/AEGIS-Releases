@@ -1,0 +1,30 @@
+{
+  "scope": "Packaging policy, guarded base reuse and cross-compiled helper PE verification; no final 5.0 payload assembly and no native Windows/Cachy acceptance",
+  "generatedAtUtc": "2026-10-15T15:43:08.268579+00:00",
+  "files": {
+    "packaging/client_runtime.py": "23f909e7efae95187af5bcf56f57c6aad9ea1de306ece7408e6955ee6f5b8a80",
+    "packaging/client_runtime500.py": "7ac0e7bff4f4507d0e4a930ff9a22f4a7a608b20ae2056ea145a1b945198e4b0",
+    "packaging/linux/aegis500.desktop": "b9756378e890675ff0149ecb0be949a4fe2a8cd6a0fe8bf79caf41bb14aa3d17",
+    "packaging/native-kit500/snowflake-bridges.txt": "fc30cb710a52544c4cb17a62e3a4c774f2a87c7c4c1b96a3c13b643aa18e7351",
+    "packaging/native-kit500/tor-runtime-provenance-5.0.0.json": "4de451e9d7e697aa43e9dfaf102667b08c8a9ad11b0f01558e38957857963594",
+    "packaging/package-clients500.py": "dd0abb7bd79714dc2375f987bb0b4f5fd654f10756a7e8c9594863d30f56d133",
+    "packaging/tor_runtime500.py": "149b8c8ded4cff93821b065ba94948effc34d99b2e6ba2a5a6984014651e39f0",
+    "packaging/verify_appimage500.py": "3b321ef1e96f39ece3e229bf7fcc2d9030ec62b58798dd552ee1cf5b1b2c06cc",
+    "packaging/verify_client_release.py": "429393f82b0d14405ff72ce38211076025fecba65345ee19dfb5bad4051007bc",
+    "packaging/verify_client_release500.py": "cd58c99cff2309e9154e74fe35cb01faf70f1774a960ed141de31b14ef9d196d",
+    "packaging/windows/installer500.nsi": "a5dafb3d8fd5308022a647280e1772d3dcb4ce18fb150a2681fd366172318d6a",
+    "packaging/windows/launcher500.rc": "f6b67cf3ec5bc2fb449988ede73db62eb0d34e1b60b43dda9af846033c05f9c5",
+    "packaging/windows/maintenance500.c": "2443fb4fb75ab43bcf09b10949ad859c4037f3e728805268e39afe00bd0a4d67",
+    "tools/stage-candidate500.py": "36ce3ef5611d8ae997eec283949f65ce1db0edd59b1387149c3533bcf503d1c8",
+    "tools/test_packaging500.py": "6d211b973fef120c5617791e733ae54e360b5c69ecc27a80e70c00ee14bdb256",
+    "tools/test_tor_runtime500.py": "04da1f19886982ef0464f50068539002f793efda4078ecee4c2c32b0f48659b1"
+  },
+  "pinned5RuntimeInput": {
+    "commons-logging-1.4.0.jar": "d175dbd751dd782a63bde28c7a039520e971f25e84b79c19b8435edc3603e0dc"
+  },
+  "pythonTests": {
+    "count": 36,
+    "exitCode": 0,
+    "scope": "Policy and actual synthetic ZIP directory records; full separately assembled9367binary structural verification also completed in candidate500"
+  }
+}

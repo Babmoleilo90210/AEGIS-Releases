@@ -53,8 +53,9 @@ final class VzorView implements AutoCloseable {
     // FlowPane measures children at preferred width. Bound the selector itself so
     // a long session name cannot force the whole controls column wider at 200%.
     mode.maxWidthProperty().bind(sessions.widthProperty());
+    Label preparation=wrapped("При необходимости система предложит установить компоненты изоляции: bubblewrap, slirp4netns и Xephyr в CachyOS либо Windows Sandbox. Подтверждение выполняется штатным Polkit или UAC.");TitledPane systemComponents=new TitledPane("Системные компоненты",preparation);systemComponents.setExpanded(false);
     VBox controls=new VBox(10,title,status,new FlowPane(8,8,open,fresh,stop,cancel),address,
-        sessions,progress);
+        sessions,progress,systemComponents);
     controls.setId("vzor-controls");controls.setMinWidth(0);
     ListView<Path> downloads=new ListView<>();downloads.setPrefHeight(130);downloads.setMinHeight(70);
     downloads.setCellFactory(v->new ListCell<>(){protected void updateItem(Path file,boolean empty){super.updateItem(file,empty);setText(empty||file==null?null:file.getFileName().toString());}});
@@ -96,6 +97,8 @@ final class VzorView implements AutoCloseable {
     final List<Path> guarded=List.copyOf(privatePaths.get());final SafeWebSessions.Mode selected=mode.getValue();
     var token=new TorBrowserDownloadService.Cancellation();cancellation=token;
     operation(()->{
+      SandboxPreparation.Result system=SandboxPreparation.prepare(p->{update(p.message(),-1);Platform.runLater(()->{if(!closed&&busy)cancel.setDisable(!p.cancellable());});},token::cancelled);
+      if(!system.ready())throw new RebootRequiredException();
       SandboxPrerequisites.check();browser.initialize();browser.privatePaths(guarded);if(browser.running())browser.close();
       if(!browser.authenticatedPreflight()){
         if(!torReady.getAsBoolean())Platform.runLater(()->{if(!closed&&!token.cancelled())connect.run();});
@@ -138,7 +141,9 @@ final class VzorView implements AutoCloseable {
       catch(Exception|LinkageError failure){Platform.runLater(()->{if(!closed)status.setText(browser.snapshot().running()?"Взор ещё работает. Повторите закрытие браузера.":failure instanceof InterruptedIOException?"Подготовка Взора отменена":safeError(failure));});}
       finally{Platform.runLater(()->{busy=false;cancellation=null;if(!closed)setBusy(false);});}});
   }
+  private static final class RebootRequiredException extends IOException {}
   private static String safeError(Throwable error){
+    if(error instanceof RebootRequiredException)return "Компоненты установлены. Перезагрузите Windows и повторите открытие Взора.";
     if(error instanceof SandboxPrerequisites.Failure prerequisite)return prerequisite.getMessage();
     if(error instanceof LinkageError)return "Системный компонент изоляции недоступен или несовместим. Проверьте установку компонентов Взора.";
     if(error instanceof TorBrowserDownloadService.TorRequiredException)return "Для подготовки Взора требуется подключение Tor";
@@ -146,7 +151,7 @@ final class VzorView implements AutoCloseable {
     return "Не удалось подготовить Взор. Предыдущая установка сохранена. Проверьте Tor и доступность изоляции, затем повторите.";
   }
   private void setBusy(boolean value){
-    open.setDisable(value);fresh.setDisable(value);stop.setDisable(value);mode.setDisable(value);
+    open.setDisable(value);fresh.setDisable(value);stop.setDisable(value);mode.setDisable(value);if(!value)cancel.setDisable(false);
     progress.setManaged(value);progress.setVisible(value);cancel.setManaged(value&&cancellation!=null);cancel.setVisible(value&&cancellation!=null);
     if(!value)progress.setProgress(-1);
   }

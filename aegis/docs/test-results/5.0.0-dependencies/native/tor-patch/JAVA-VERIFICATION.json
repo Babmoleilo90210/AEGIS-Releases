@@ -1,0 +1,16 @@
+[
+  {
+    "platform": "linux",
+    "verificationExit": 0,
+    "verification": "Verified[sha256=19cf18726eecb362e0f21d27afa9ea9efe5da928bfdfbb1ceb5fe54519e87f4a, primaryFingerprint=EF6E286DDA85EA2A4BA7DE684E2C6E8793298290, signingFingerprint=022DA248432D2A0E0F54E65E316C1FACD62D07D9, signatureCreated=2026-10-12T23:16:27Z, size=32448097]\n",
+    "stderr": "",
+    "memberCount": 25
+  },
+  {
+    "platform": "windows",
+    "verificationExit": 0,
+    "verification": "Verified[sha256=c1988c701de2f24f7d098d1d6d7f507b58f27740d097f29c246e0524d639b252, primaryFingerprint=EF6E286DDA85EA2A4BA7DE684E2C6E8793298290, signingFingerprint=022DA248432D2A0E0F54E65E316C1FACD62D07D9, signatureCreated=2026-10-12T23:16:32Z, size=22507599]\n",
+    "stderr": "",
+    "memberCount": 19
+  }
+]

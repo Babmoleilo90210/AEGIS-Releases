@@ -1,0 +1,2 @@
+# Preserve exact captured test output and its recorded SHA, including terminal blank lines.
+docs/test-results/**/*.log whitespace=-blank-at-eof

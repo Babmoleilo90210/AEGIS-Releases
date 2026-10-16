@@ -1,0 +1,18 @@
+test_failed_exact_test_and_failed_automated_gate_remain_failed (test_report_release500.Report500Test.test_failed_exact_test_and_failed_automated_gate_remain_failed) ... ok
+test_final_generation_binds_source_and_keeps_false_with_pass_or_skip (test_report_release500.Report500Test.test_final_generation_binds_source_and_keeps_false_with_pass_or_skip) ... ok
+test_future_timestamp_cannot_make_an_unrun_suite_fresh (test_report_release500.Report500Test.test_future_timestamp_cannot_make_an_unrun_suite_fresh) ... ok
+test_inventory_counts_actual_cases_and_does_not_count_historical_duplicates (test_report_release500.Report500Test.test_inventory_counts_actual_cases_and_does_not_count_historical_duplicates) ... ok
+test_malformed_counts_duplicate_cases_dtd_and_symlinks_are_rejected (test_report_release500.Report500Test.test_malformed_counts_duplicate_cases_dtd_and_symlinks_are_rejected) ... ok
+test_mapping_has_every_required_scenario_and_no_native_auto_binding (test_report_release500.Report500Test.test_mapping_has_every_required_scenario_and_no_native_auto_binding) ... ok
+test_missing_required_module_is_not_a_success (test_report_release500.Report500Test.test_missing_required_module_is_not_a_success) ... ok
+test_only_exact_named_mapping_can_pass_and_manual_groups_never_pass (test_report_release500.Report500Test.test_only_exact_named_mapping_can_pass_and_manual_groups_never_pass) ... ok
+test_report_generation_rejects_xml_changed_after_inventory (test_report_release500.Report500Test.test_report_generation_rejects_xml_changed_after_inventory) ... ok
+test_source_capture_requires_clean_commit_outside_repo_and_new_receipt (test_report_release500.Report500Test.test_source_capture_requires_clean_commit_outside_repo_and_new_receipt) ... ok
+test_source_modified_even_under_assume_unchanged_cannot_bind_commit (test_report_release500.Report500Test.test_source_modified_even_under_assume_unchanged_cannot_bind_commit) ... ok
+test_stale_xml_cannot_be_promoted_by_current_commit_or_mtime_touch (test_report_release500.Report500Test.test_stale_xml_cannot_be_promoted_by_current_commit_or_mtime_touch) ... ok
+test_wrong_commit_receipt_or_changed_source_rejected (test_report_release500.Report500Test.test_wrong_commit_receipt_or_changed_source_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.559s
+
+OK

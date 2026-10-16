@@ -1,2 +1,4 @@
 rootProject.name='secure-mail'
 include 'common-protocol','client-core','client-ui','relay-server','integration-tests'
+
+include 'community-server','news-worker'

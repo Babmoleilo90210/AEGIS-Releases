@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=АЕГИС
+Comment=Защищённая переписка, организации и библиотека знаний
+Exec=AppRun
+Icon=aegis
+Categories=Network;InstantMessaging;
+Terminal=false
+StartupWMClass=org.securemail.ui.Launcher
+X-AppImage-Version=5.0.0

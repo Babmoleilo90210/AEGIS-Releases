@@ -1,0 +1,1 @@
+import java.nio.file.*;import org.securemail.client.safeweb.TorBrowserSignature;public class VerifyTorPatch {public static void main(String[] a)throws Exception{System.out.println(TorBrowserSignature.verify(Path.of(a[0]),Path.of(a[1])));}}

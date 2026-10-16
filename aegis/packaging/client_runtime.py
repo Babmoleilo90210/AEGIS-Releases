@@ -52,7 +52,7 @@ def sha256(file):
         return hashlib.file_digest(stream, 'sha256').hexdigest()
 
 
-def verify_safe_web_runtime(app, *, verify_core=True):
+def verify_safe_web_runtime(app, *, verify_core=True, core_jar_name=CORE_JAR):
     """Fail closed on missing/transitively incomplete or changed installer inputs."""
     app = Path(app)
     inventory = {}
@@ -68,7 +68,9 @@ def verify_safe_web_runtime(app, *, verify_core=True):
                 raise ValueError('Runtime JAR CRC failure: ' + name)
         inventory[name] = expected
     if verify_core:
-        core = app / CORE_JAR
+        if Path(core_jar_name).name != core_jar_name or not re.fullmatch(r'client-core-[0-9]+\.[0-9]+\.[0-9]+\.jar', core_jar_name):
+            raise ValueError('Unsafe explicit client core JAR name')
+        core = app / core_jar_name
         if core.is_symlink() or not core.is_file():
             raise ValueError('Missing or unsafe client core JAR')
         with zipfile.ZipFile(core) as archive:

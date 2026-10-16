@@ -1,0 +1,14 @@
+{
+  "scope": "Six frozen-main production Gradle JARs; final source binding verified again after commit",
+  "jarSha256": {
+    "client-ui.jar": "239b95b732d74aebc2a0faebac655e2c59ccf1442bf08dc112b05f5ccc682367",
+    "relay-server.jar": "d77fe2cf1e6f1a51432bbd2d1849448c2987d68daca20fe72dabcb45c72495b4",
+    "community-server.jar": "8013130dd4f8fa14682a14588cb17f1c2fc7dc240fb68fa97a388f3672b1bfaa",
+    "common-protocol.jar": "10a5888b5af0253ff053c6d59d0993bc6c7637d0123af69046fe20affab6e937",
+    "client-core.jar": "6d263ef70f5b159aa4458125ffc75bf55c71346baf52b01db3b7db00e155ebe2",
+    "news-worker.jar": "b2a3358603f730aa851a0029b63d206942f9f26e2fa7d554ff9303f7a7323181"
+  },
+  "jdk": "21.0.12.1+1",
+  "gradle": "9.8.0",
+  "nativeAcceptance": "NOT_RUN"
+}

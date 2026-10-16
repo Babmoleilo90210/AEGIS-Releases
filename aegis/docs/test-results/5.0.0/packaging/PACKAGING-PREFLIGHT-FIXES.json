@@ -1,0 +1,33 @@
+{
+  "scope": "Actually observed packaging/preflight failures and corrections before final candidate assembly",
+  "attemptCommit": "74b8bfc81ed3b2990ffc9d3dad1817ae3e0f7be2",
+  "failures": [
+    {
+      "stage": "server frozen source check",
+      "result": "FAIL",
+      "reason": "git ls-tree called from nested project returned paths relative to project but validator expected repository-root paths",
+      "fix": "Use --full-tree; actual nested Git regression added and passed"
+    },
+    {
+      "stage": "evidence archive",
+      "result": "FAIL",
+      "reason": "Two metadata files under evidence/build/ matched existing **/build/ ignore rule and were untracked",
+      "fix": "Move metadata to evidence/build-toolchain/ and commit exact files"
+    }
+  ],
+  "nativeKitPreflight": {
+    "result": "PASS_COMPILE",
+    "actualJavaSources": 26,
+    "jdk": "21.0.12.1+1",
+    "reason": "Compile separate server staging runtime before UI fixtures which import real community services",
+    "nativeAcceptanceExecuted": false
+  },
+  "oldPartialPackagesAccepted": false,
+  "ownerKeyUsed": false,
+  "stableFeedChanged": false,
+  "capturedEmptyProcessLogs": {
+    "count": 11,
+    "policy": "Preserve exact zero-byte .log captures and their hashes; required reports/documents must remain nonempty",
+    "regression": "test_empty_actual_process_log_is_preserved_but_empty_report_is_rejected"
+  }
+}

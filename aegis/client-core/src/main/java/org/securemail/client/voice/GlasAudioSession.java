@@ -178,9 +178,10 @@ public final class GlasAudioSession implements AutoCloseable {
                     playedRemote = true; missing = 0;
                 } else if (playedRemote && missing++ < 3) { pcm = codec.decode(null); concealed.incrementAndGet(); }
                 else pcm = new short[FRAME_SAMPLES];
-                scale(pcm, volume); outputLevel = level(pcm); toBytes(pcm, bytes);
+                try { scale(pcm, volume); outputLevel = level(pcm); toBytes(pcm, bytes);
+                    if (microphoneEnabled) codec.played(pcm);
+                } finally { Arrays.fill(pcm, (short) 0); }
                 GlasAudioDevices.Output owned = output;
-                if (microphoneEnabled) codec.played(pcm); Arrays.fill(pcm, (short) 0);
                 int offset = 0;
                 while (offset < bytes.length && !closed.get()) {
                     int n;

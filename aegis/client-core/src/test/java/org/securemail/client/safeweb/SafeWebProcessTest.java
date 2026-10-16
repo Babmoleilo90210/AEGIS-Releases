@@ -99,4 +99,16 @@ class SafeWebProcessTest {
       manager.privatePaths(List.of(temporary.resolve("private-messenger/not-created")));
     }
   }
+  @Test void nativeFailureReasonSurvivesCleanupAndIsNotReplacedByNeutralStoppedStatus()throws Exception{
+    Child child=new Child();String reason=SandboxPrerequisites.Code.LINUX_NETWORK_START_FAILED.message();
+    try(SafeWebProcess manager=new SafeWebProcess(fixture(),(s,u,p)->new SafeWebProcess.Browser(){
+      public Process process(){return child.process();}public boolean running(){return child.running();}
+      public String status(){return child.status();}public String failureReason(){return reason;}
+      public void close()throws IOException{child.close();}
+    })){
+      manager.open(SafeWebSessions.Mode.TEMPORARY,"https://example.org/");child.terminate();
+      until(()->!manager.running()&&manager.snapshot().mode()==null);
+      assertEquals(reason,manager.snapshot().status());assertFalse(manager.busy());
+    }finally{if(child.process.isAlive())child.close();}
+  }
 }

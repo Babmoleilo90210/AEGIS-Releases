@@ -197,7 +197,7 @@ public final class LocalStore implements AutoCloseable {
     AtomicFiles.write(path,seal(data,extensionAad(name)));changeCounter++;
   }
   public synchronized void deleteExtension(String name)throws IOException {ensureOpen();extensionName(name);Path folder=root.resolve("lifecycle");if(Files.deleteIfExists(folder.resolve(name+".enc"))){AtomicFiles.syncDirectory(folder);changeCounter++;}}
-  private static void extensionName(String name){if(!name.matches("(?:state-v1|mail-[a-f0-9-]{36}|out-[a-f0-9-]{36})"))throw new IllegalArgumentException("Extension name");}
+  private static void extensionName(String name){if(!name.matches("(?:state-v1|community-v1|mail-[a-f0-9-]{36}|out-[a-f0-9-]{36})"))throw new IllegalArgumentException("Extension name");}
   private static byte[] extensionAad(String name){return ("AEGIS-lifecycle/v1/"+name).getBytes(java.nio.charset.StandardCharsets.US_ASCII);}
   public synchronized Path root(){return root;}
   /** UI-only archive location/mode; encrypted with the existing vault, never the archive DEK. */
@@ -524,7 +524,7 @@ public final class LocalStore implements AutoCloseable {
       byte[] voice=readVoiceState();if(voice!=null)try{AtomicFiles.write(target.resolve("voice-v1.vault"),sealWith(next,voice,"voice/v1".getBytes(java.nio.charset.StandardCharsets.US_ASCII)));}finally{Arrays.fill(voice,(byte)0);}
       for(String name:List.of("archive-ui-v1","delivery-routes-v1")){Path old=root.resolve(name+".vault");if(Files.isRegularFile(old,LinkOption.NOFOLLOW_LINKS)){byte[] aad=(name.equals("archive-ui-v1")?"archive-ui/v1":"delivery-routes/v1").getBytes(java.nio.charset.StandardCharsets.US_ASCII),clear=open(AtomicFiles.read(old,512*1024),aad);try{AtomicFiles.write(target.resolve(old.getFileName()),sealWith(next,clear,aad));}finally{Arrays.fill(clear,(byte)0);}}}
       Path lifecycle=root.resolve("lifecycle");if(Files.isDirectory(lifecycle,LinkOption.NOFOLLOW_LINKS)){
-        AtomicFiles.directory(target.resolve("lifecycle"));try(var files=Files.newDirectoryStream(lifecycle,"*.enc")){for(Path file:files){String name=file.getFileName().toString().replaceFirst("\\.enc$","");extensionName(name);byte[] data=readExtension(name,name.equals("state-v1")?8*1024*1024:maxCipher+8192);try{AtomicFiles.write(target.resolve("lifecycle").resolve(file.getFileName()),sealWith(next,data,extensionAad(name)));}finally{Arrays.fill(data,(byte)0);}}}
+        AtomicFiles.directory(target.resolve("lifecycle"));try(var files=Files.newDirectoryStream(lifecycle,"*.enc")){for(Path file:files){String name=file.getFileName().toString().replaceFirst("\\.enc$","");extensionName(name);byte[] data=readExtension(name,name.equals("state-v1")?8*1024*1024:name.equals("community-v1")?4*1024*1024:maxCipher+8192);try{AtomicFiles.write(target.resolve("lifecycle").resolve(file.getFileName()),sealWith(next,data,extensionAad(name)));}finally{Arrays.fill(data,(byte)0);}}}
       }
       Path profiles=root.resolve("profiles");if(Files.isDirectory(profiles,LinkOption.NOFOLLOW_LINKS)){
         AtomicFiles.directory(target.resolve("profiles"));try(var files=Files.list(profiles)){

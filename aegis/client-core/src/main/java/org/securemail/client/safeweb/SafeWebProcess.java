@@ -18,6 +18,7 @@ public final class SafeWebProcess implements AutoCloseable {
   public record Snapshot(boolean installed,boolean running,SafeWebSessions.Mode mode,String status){}
   interface Browser extends AutoCloseable {
     Process process();boolean running();String status();void close()throws IOException;
+    default String failureReason(){return null;}
   }
   /** Package-private fixture seam. Production constructors always choose native
    * containment; no runtime flag or test implementation enters release routing.
@@ -154,7 +155,7 @@ public final class SafeWebProcess implements AutoCloseable {
     }
     if(System.getProperty("os.name","").equals("Linux")){
       var owned=LinuxSafeWebSandbox.start(prepared.bundle(),prepared.control(),url,privatePaths);
-      return new Browser(){public Process process(){return owned.process();}public boolean running(){return owned.running();}public String status(){return owned.status();}public void close()throws IOException{owned.close();}};
+      return new Browser(){public Process process(){return owned.process();}public boolean running(){return owned.running();}public String status(){return owned.status();}public String failureReason(){return owned.failureReason();}public void close()throws IOException{owned.close();}};
     }
     throw new IOException("Взор поддерживает Windows 11 x64 и Linux x86_64");
   }
@@ -183,7 +184,8 @@ public final class SafeWebProcess implements AutoCloseable {
       owned.close(); // Must succeed before the profile or management lock is released.
       if(ownedRunning(owned))throw new IOException("Процесс Взор ещё завершается; сессия и блокировка сохранены");
       if(session!=null){storage().complete(session);if(session.mode()==SafeWebSessions.Mode.PERSISTENT)lastPersistent=session;}
-      release();browser=null;session=null;status="Браузер остановлен · соединение почты сохранено";changed();
+      String reason=owned.failureReason();
+      release();browser=null;session=null;status=reason==null?"Браузер остановлен · соединение почты сохранено":reason;changed();
     }catch(IOException failure){status="Остановка или очистка Взор не завершена; сессия и блокировка сохранены";changed();throw failure;}
   }
   private void finishPrepared()throws IOException{

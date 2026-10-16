@@ -32,8 +32,8 @@ import org.securemail.protocol.UserInfo;
 class NavigationMigration250Test {
   @TempDir Path root;
   static Stream<Arguments> previousOrders(){return Stream.of(
-      Arguments.of(List.of("settings","letters","archive","contacts","profile","search"),List.of("settings","letters","archive","safeweb","glas","contacts","profile","search")),
-      Arguments.of(List.of("settings","safeweb","contacts","archive","letters","profile","search"),List.of("settings","safeweb","glas","contacts","archive","letters","profile","search")));
+      Arguments.of(List.of("settings","letters","archive","contacts","profile","search"),List.of("letters","archive","contacts","profile","search","safeweb","glas","organizations","news","library","settings")),
+      Arguments.of(List.of("settings","safeweb","contacts","archive","letters","profile","search"),List.of("contacts","archive","letters","profile","search","safeweb","glas","organizations","news","library","settings")));
   }
   private static void oldNavigation(Path settings,List<String> order)throws Exception {
     JsonObject document=JsonData.object(Files.readAllBytes(settings),MAX_JSON);JsonArray values=new JsonArray();order.forEach(values::add);
@@ -47,8 +47,8 @@ class NavigationMigration250Test {
     AppearanceStore initial=new AppearanceStore(root.resolve("profile"));initial.apply(initial.current().manual("forest-green"));initial.saveLayout("Мой макет",initial.current().layout().panels(18,35).below(true));
     Path settings=initial.root().resolve("settings.json");oldNavigation(settings,before);byte[] exactOld=Files.readAllBytes(settings);
     AppearanceStore migrated=new AppearanceStore(root.resolve("profile"));assertEquals("",migrated.recovery());assertEquals(expected,migrated.current().layout().order());assertEquals(expected,migrated.layouts().get("Мой макет").order());
-    assertEquals(before,expected.stream().filter(before::contains).toList());assertEquals(expected.indexOf("safeweb")+1,expected.indexOf("glas"));
-    assertEquals(8,expected.size());assertEquals(1,expected.stream().filter("safeweb"::equals).count());assertFalse(expected.contains("vzor"),"The Vzor label keeps the persisted safeweb ID");
+    for(var block:NAVIGATION_BLOCKS)assertEquals(before.stream().filter(block::contains).toList(),expected.stream().filter(before::contains).filter(block::contains).toList());assertEquals(expected.indexOf("safeweb")+1,expected.indexOf("glas"));
+    assertEquals(11,expected.size());assertEquals(1,expected.stream().filter("safeweb"::equals).count());assertFalse(expected.contains("vzor"),"The Vzor label keeps the persisted safeweb ID");
     assertEquals("forest-green",migrated.current().theme());assertTrue(migrated.layouts().get("Мой макет").previewBelow());assertEquals(18,migrated.layouts().get("Мой макет").foldersPercent());assertArrayEquals(exactOld,Files.readAllBytes(settings));
     migrated.apply(migrated.current());AppearanceStore reopened=new AppearanceStore(root.resolve("profile"));assertEquals(migrated.current(),reopened.current());assertEquals(migrated.layouts(),reopened.layouts());
     Path exchange=root.resolve("layout.json");reopened.exportLayout("Мой макет",exchange);AppearanceStore receiver=new AppearanceStore(root.resolve("receiver"));receiver.importLayout(exchange);receiver.importLayout(exchange);
@@ -57,8 +57,8 @@ class NavigationMigration250Test {
 
   @Test void anAlreadyCustomizedEightSectionOrderIsNotResetOnReopen()throws Exception {
     List<String> custom=List.of("glas","settings","letters","profile","archive","search","contacts","safeweb");AppearanceStore initial=new AppearanceStore(root);
-    Path settings=initial.root().resolve("settings.json");oldNavigation(settings,custom);AppearanceStore reopened=new AppearanceStore(root);assertEquals(custom,reopened.current().layout().order());
-    reopened.apply(reopened.current());assertEquals(custom,new AppearanceStore(root).current().layout().order());
+    Path settings=initial.root().resolve("settings.json");oldNavigation(settings,custom);AppearanceStore reopened=new AppearanceStore(root);List<String> grouped=List.of("letters","profile","archive","search","contacts","glas","safeweb","organizations","news","library","settings");assertEquals(grouped,reopened.current().layout().order());
+    reopened.apply(reopened.current());assertEquals(grouped,new AppearanceStore(root).current().layout().order());
   }
 
   @Test void snapshotBeforeEightSectionMigrationRetainsIdentityMailAndIndependentEncryptedArchive()throws Exception {
@@ -80,7 +80,7 @@ class NavigationMigration250Test {
       }
       Map<String,byte[]> vaultBefore=files(config.storagePath()),archiveBefore=files(archive);
       Path snapshot=ClientUpgrade.beforeVersionOpen("2.5.0",config,root.resolve("backups"));ProfileSnapshot.verify(snapshot,config);assertArrayEquals(oldSettings,Files.readAllBytes(snapshot.resolve("app/appearance/settings.json")));
-      AppearanceStore migrated=new AppearanceStore(root);assertEquals(List.of("settings","archive","contacts","safeweb","glas","letters","profile","search"),migrated.current().layout().order());migrated.apply(migrated.current());
+      AppearanceStore migrated=new AppearanceStore(root);assertEquals(List.of("archive","contacts","letters","profile","search","safeweb","glas","organizations","news","library","settings"),migrated.current().layout().order());migrated.apply(migrated.current());
       assertEquals(snapshot,ClientUpgrade.beforeVersionOpen("2.5.0",config,root.resolve("backups")));ProfileSnapshot.verify(snapshot,config);assertFiles(vaultBefore,files(config.storagePath()));assertFiles(archiveBefore,files(archive));assertArrayEquals(oldSettings,Files.readAllBytes(snapshot.resolve("app/appearance/settings.json")));
       try(LocalStore local=new LocalStore(config.storagePath(),password,Clock.systemUTC(),1_000_000,8_000_000)){
         assertEquals(identityId,local.identity().userId());assertArrayEquals(publicKey,local.identity().publicKey());assertArrayEquals(privateKey,local.identity().privateKey());assertEquals(1,local.inbox().size());assertNotNull(local.contact("bob"));assertArrayEquals(packetDigest,Identity.digest(local.load(messageId)));

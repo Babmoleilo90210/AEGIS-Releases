@@ -14,6 +14,8 @@ public final class ClientSession implements AutoCloseable {
   private final LocalFeatures features;
   private final org.securemail.client.lifecycle.LifecycleService lifecycle;
   private final org.securemail.client.voice.VoiceCallService calls;
+  private final org.securemail.client.community.CommunityClient community;
+  private final org.securemail.client.community.VoiceGrantCache voiceGrants;
   private int contactCursor;
   private int revocationCursor;
   private volatile int relayCapabilities=-1;
@@ -49,6 +51,9 @@ public final class ClientSession implements AutoCloseable {
                 config.maxCiphertext());
     if(network!=null){network.packetAcceptor(lifecycle::accept);lifecycle.network(network);}
     try{calls=new org.securemail.client.voice.VoiceCallService(local,features,network);}catch(IOException|java.security.GeneralSecurityException failure){lifecycle.close();local.close();throw failure;}
+    community=new org.securemail.client.community.CommunityClient(config,local);
+    voiceGrants=new org.securemail.client.community.VoiceGrantCache(community,local,calls);
+    calls.setOrganizationAuthorizer(voiceGrants);
     cleanup.scheduleAtFixedRate(
         () -> {
           try {
@@ -96,7 +101,7 @@ public final class ClientSession implements AutoCloseable {
     if(peer!=null)try{peer.close();}catch(IOException ignored){}peer=null;
   }
   /** Called before stopping our Tor; a stale onion is never republished. */
-  public void torUnavailable(){synchronized(routingLock){closeRouting();}status="Нет соединения через Tor";}
+  public void torUnavailable(){voiceGrants.invalidate();synchronized(routingLock){closeRouting();}status="Нет соединения через Tor";}
   /** New SAFECOOKIE, new ephemeral onion, existing identity and account session. */
   public void torRestarted(){if(!closed&&polling)poll.execute(()->{if(!closed){rebuildPeerRoute();sync();}});}
   public void reauthenticate(char[] password)throws Exception {if(network==null)throw new IOException("Relay missing");network.authenticate(local.nickname(),password,false);if(deliverySuspended)return;if(polling)sync();else beginPolling();}
@@ -169,6 +174,25 @@ public final class ClientSession implements AutoCloseable {
     }
     publicStatus=(relayCapabilities&1)==0?"Сервер не поддерживает публичные профили · изменения сохранены на устройстве":profileSynced?"Публичные данные синхронизированы":"Профиль пока не синхронизирован";
   }
+  public org.securemail.client.community.CommunityClient community(){return community;}
+  public void prepareVoiceCall(org.securemail.protocol.UserInfo contact,org.securemail.client.voice.VoiceCallService.Direction direction)throws IOException{voiceGrants.prepare(contact,direction);}
+  /** Password stays on the existing account channel; the community server independently verifies TOTP. */
+  public String adminStepUp(char[] password,String otp)throws Exception {
+    if(otp==null||!otp.matches("[0-9]{8}"))throw new IOException("Введите восьмизначный одноразовый код второго фактора");
+    reauthenticate(password);
+    var trustedService=community.settings();
+    var challenge=community.rpc("admin.stepup.begin",new com.google.gson.JsonObject());
+    if(!trustedService.equals(community.settings()))throw new IOException("Доверенный сервер изменён. Повторите подтверждение личности");
+    String nonce=challenge.get("challenge").getAsString();long expires=challenge.get("expires").getAsLong();
+    if(!nonce.matches("[A-Za-z0-9_-]{22,86}")||expires<=local.now()||expires>local.now()+65_000)throw new IOException("Подтверждение личности истекло");
+    byte[] expected=("AEGIS-COMMUNITY-STEPUP-v2\n"+org.securemail.community.protocol.CommunityAuth.id(java.util.Base64.getDecoder().decode(trustedService.serverPublicKey()))+"\n"+local.identity().userId()+"\n"+nonce+"\n"+expires).getBytes(java.nio.charset.StandardCharsets.UTF_8);
+    // Never sign arbitrary bytes supplied by a remote service.
+    byte[] supplied=java.util.Base64.getDecoder().decode(challenge.get("signingBytesBase64").getAsString());
+    if(!java.security.MessageDigest.isEqual(expected,supplied))throw new IOException("Некорректный запрос подтверждения личности");
+    var args=new com.google.gson.JsonObject();args.addProperty("challenge",nonce);args.addProperty("signatureBase64",java.util.Base64.getEncoder().encodeToString(local.identity().sign(expected)));args.addProperty("code",otp);
+    if(!trustedService.equals(community.settings()))throw new IOException("Доверенный сервер изменён. Повторите подтверждение личности");
+    var result=community.rpc("admin.stepup.finish",args);String token=result.get("token").getAsString();if(!token.matches("[A-Za-z0-9_-]{22,86}"))throw new IOException("Некорректное подтверждение личности");return token;
+  }
   public LocalFeatures features(){return features;}
   public org.securemail.client.voice.VoiceCallService calls(){return calls;}
   public org.securemail.client.lifecycle.LifecycleService lifecycle(){return lifecycle;}
@@ -203,6 +227,8 @@ public final class ClientSession implements AutoCloseable {
   public void close() throws IOException {
     if (closed) return;
     closed = true;
+    voiceGrants.close();
+    community.close();
     calls.close();
     poll.shutdownNow();
     cleanup.shutdownNow();

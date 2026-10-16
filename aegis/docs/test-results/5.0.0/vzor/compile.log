@@ -1,0 +1,10 @@
+/workspace/scratch/aa629f360927/aegis/aegis/client-core/src/main/java/org/securemail/client/safeweb/TorBrowserSignature.java:265: warning: [deprecation] RSA_SIGN in PublicKeyAlgorithmTags has been deprecated
+                && key.getAlgorithm() != PublicKeyAlgorithmTags.RSA_SIGN) || key.getBitStrength() < 3072)
+                                                               ^
+/workspace/scratch/aa629f360927/aegis/aegis/client-core/src/main/java/org/securemail/client/safeweb/WindowsSafeWebSandbox.java:167: warning: [try] auto-closeable resource sessionGuard is never referenced in body of corresponding try statement
+          try(Closeable sessionGuard=SafeWebDownload.guardDirectory(receipt.getParent())) {
+                        ^
+/workspace/scratch/aa629f360927/aegis/aegis/client-core/src/main/java/org/securemail/client/safeweb/WindowsSafeWebSandbox.java:164: warning: [try] auto-closeable resource guard is never referenced in body of corresponding try statement
+      try(lock;Closeable guard=SafeWebDownload.guardDirectory(control)) {
+                         ^
+3 warnings

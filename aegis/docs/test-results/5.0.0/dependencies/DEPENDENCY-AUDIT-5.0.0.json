@@ -1,0 +1,1641 @@
+{
+  "schema": 1,
+  "version": "5.0.0",
+  "timestampUtc": "2026-10-15T14:14:47.298075+00:00",
+  "queryService": "https://api.osv.dev/v1/query",
+  "documentation": "https://google.github.io/osv.dev/post-v1-query/",
+  "scope": "Exact product Maven versions from actual supplied JAR bytes and runtime Gradle pins; no test-only JUnit/Monocle or application own JARs",
+  "status": "QUERIES_COMPLETE",
+  "productionReady": false,
+  "packageCount": 34,
+  "notRunCount": 0,
+  "blockingAdvisories": [],
+  "pinInputs": [
+    {
+      "path": "build.gradle",
+      "sha256": "f6d550ee4a6a263b8a883f9573869325c46631f49c0d6b7d5e8aafa5d5741f2a"
+    },
+    {
+      "path": "client-core/build.gradle",
+      "sha256": "cac0bb7a07eb6a1cf150e8476be99690c6e0e3c97b24ff62d6088e7bcf182197"
+    },
+    {
+      "path": "client-ui/build.gradle",
+      "sha256": "65dc51fcba276595e39ae9e64ad222a873bafb67f5c335a4b1c3c66975781f38"
+    },
+    {
+      "path": "common-protocol/build.gradle",
+      "sha256": "4f0fd3547b118b79f02b1e9a001e8fe08de1513af29f979c9b0a649db47d058e"
+    },
+    {
+      "path": "community-server/build.gradle",
+      "sha256": "e65f0939b54b3738b7362602c9d6b843904634c22e27b4f150b17fa47399ea21"
+    },
+    {
+      "path": "integration-tests/build.gradle",
+      "sha256": "c00aff0c9a89dc6d10aaed56aee75ef33bc40c5041d1333920c577820f611a45"
+    },
+    {
+      "path": "news-worker/build.gradle",
+      "sha256": "d22ded7205642bf34f6237bfd2cff4f667baa2e74244b8b9c031b31b4055e22a"
+    },
+    {
+      "path": "relay-server/build.gradle",
+      "sha256": "066384a080291828cf67d286f6032d23b06b8e4d4cd8e3b354b34f8ae505edb4"
+    },
+    {
+      "path": "settings.gradle",
+      "sha256": "4a5844a5bb6b0d743a782ba12567641279680c812c75c57bea05b7dab94d083d"
+    },
+    {
+      "path": "client-core/gradle.lockfile",
+      "sha256": "f9c3fb6d241efa674ca326509d7f7a15d1b919375b92c0da25dbd093e697f3fa"
+    },
+    {
+      "path": "client-ui/gradle.lockfile",
+      "sha256": "25aa3214af04ca0d692137255396e550bf75d46847f617204aaa38bcca276101"
+    },
+    {
+      "path": "common-protocol/gradle.lockfile",
+      "sha256": "bf9ee25c7cf20529fcf8d3b2ed07a35c462bc9d71f69933ccf2babcb20792440"
+    },
+    {
+      "path": "community-server/gradle.lockfile",
+      "sha256": "fb7d77c2b29fd18c8f79b902c0260a3aa180ffb7dcc03445d3e8010ec34ed404"
+    },
+    {
+      "path": "integration-tests/gradle.lockfile",
+      "sha256": "d65df8d30a95014ec7b19b0bfb001f4889021217506371a7f2e5692bc1adf727"
+    },
+    {
+      "path": "news-worker/gradle.lockfile",
+      "sha256": "9d50ef4b1bcaaab13c01565c9fe7a745bf9fd8b90f6f7ba69c6900c74990a6f6"
+    },
+    {
+      "path": "relay-server/gradle.lockfile",
+      "sha256": "f29fafd9973ec8f2fe9009a609547d07ff4bd2deb0e704774fdd1682c2b73497"
+    }
+  ],
+  "runtimeJars": [
+    {
+      "filename": "bcpg-jdk18on-1.86.jar",
+      "sha256": "8a52ea45b2063f6d41b8ca94409f255a1f4604922f7451c18a7cfd3a3c5b85ab",
+      "bytes": 729938,
+      "coordinateSource": "known-artifact-filename",
+      "coordinate": "org.bouncycastle:bcpg-jdk18on:1.86"
+    },
+    {
+      "filename": "bcprov-jdk18on-1.86.jar",
+      "sha256": "2af190b300cbb0b35e248ccf5f4a06b6072030aeb3da7a98ec73abe5b4cb371f",
+      "bytes": 7224011,
+      "coordinateSource": "known-artifact-filename",
+      "coordinate": "org.bouncycastle:bcprov-jdk18on:1.86"
+    },
+    {
+      "filename": "bcutil-jdk18on-1.86.jar",
+      "sha256": "1c268e15f785aafb1e4670d8d6e5f856f69475e96c162dadcd1ff9b350e9139f",
+      "bytes": 789287,
+      "coordinateSource": "known-artifact-filename",
+      "coordinate": "org.bouncycastle:bcutil-jdk18on:1.86"
+    },
+    {
+      "filename": "common-image-3.14.0.jar",
+      "sha256": "9edb1afd32278d20ad660869bfa5b0a27cf9b3553b6eb3f8fc51a2fc13109b66",
+      "bytes": 79630,
+      "coordinateSource": "pom.properties",
+      "coordinate": "com.twelvemonkeys.common:common-image:3.14.0"
+    },
+    {
+      "filename": "common-io-3.14.0.jar",
+      "sha256": "ae01308bd48c68e76f6a1f76880cf7f4a3a004aa83d78e5448de358a4d957e8f",
+      "bytes": 92356,
+      "coordinateSource": "pom.properties",
+      "coordinate": "com.twelvemonkeys.common:common-io:3.14.0"
+    },
+    {
+      "filename": "common-lang-3.14.0.jar",
+      "sha256": "8d4529d6f56a010bc7e130ebfcdaf14bc11586e9d9ae66f6dca66f91da7eafef",
+      "bytes": 121885,
+      "coordinateSource": "pom.properties",
+      "coordinate": "com.twelvemonkeys.common:common-lang:3.14.0"
+    },
+    {
+      "filename": "commons-codec-1.19.0.jar",
+      "sha256": "5c3881e4f556855e9c532927ee0c9dfde94cc66760d5805c031a59887070af5f",
+      "bytes": 374716,
+      "coordinateSource": "pom.properties",
+      "coordinate": "commons-codec:commons-codec:1.19.0"
+    },
+    {
+      "filename": "commons-compress-1.28.0.jar",
+      "sha256": "e1522945218456f3649a39bc4afd70ce4bd466221519dba7d378f2141a4642ca",
+      "bytes": 1117221,
+      "coordinateSource": "pom.properties",
+      "coordinate": "org.apache.commons:commons-compress:1.28.0"
+    },
+    {
+      "filename": "commons-io-2.20.0.jar",
+      "sha256": "df90bba0fe3cb586b7f164e78fe8f8f4da3f2dd5c27fa645f888100ccc25dd72",
+      "bytes": 563971,
+      "coordinateSource": "pom.properties",
+      "coordinate": "commons-io:commons-io:2.20.0"
+    },
+    {
+      "filename": "commons-lang3-3.18.0.jar",
+      "sha256": "4eeeae8d20c078abb64b015ec158add383ac581571cddc45c68f0c9ae0230720",
+      "bytes": 702952,
+      "coordinateSource": "pom.properties",
+      "coordinate": "org.apache.commons:commons-lang3:3.18.0"
+    },
+    {
+      "filename": "commons-logging-1.3.5.jar",
+      "sha256": "6d7a744e4027649fbb50895df9497d109f98c766a637062fe8d2eabbb3140ba4",
+      "bytes": 73737,
+      "coordinateSource": "pom.properties",
+      "coordinate": "commons-logging:commons-logging:1.3.5"
+    },
+    {
+      "filename": "error_prone_annotations-2.48.0.jar",
+      "sha256": "b49c5c958316ed67a09c699dda9aa749caf434d51d863dea599ef36a49b9c855",
+      "bytes": 20255,
+      "coordinateSource": "pom.properties",
+      "coordinate": "com.google.errorprone:error_prone_annotations:2.48.0"
+    },
+    {
+      "filename": "fontbox-3.0.8.jar",
+      "sha256": "a1915c24e3edbe0ecec93896dfbf6d41427810b663ade97bd4e8bae86ec3fdab",
+      "bytes": 1647000,
+      "coordinateSource": "pom.properties",
+      "coordinate": "org.apache.pdfbox:fontbox:3.0.8"
+    },
+    {
+      "filename": "gson-2.14.0.jar",
+      "sha256": "2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f",
+      "bytes": 313604,
+      "coordinateSource": "pom.properties",
+      "coordinate": "com.google.code.gson:gson:2.14.0"
+    },
+    {
+      "filename": "imageio-core-3.14.0.jar",
+      "sha256": "a1b832b5090bd4677696f999b5ccb8954e987eb9674632a6286a6de2bb1c3c78",
+      "bytes": 122975,
+      "coordinateSource": "pom.properties",
+      "coordinate": "com.twelvemonkeys.imageio:imageio-core:3.14.0"
+    },
+    {
+      "filename": "imageio-metadata-3.14.0.jar",
+      "sha256": "03768fc012bd2573236da803099aba6961dfb29c190103f9790fc49ac27f84c1",
+      "bytes": 83630,
+      "coordinateSource": "pom.properties",
+      "coordinate": "com.twelvemonkeys.imageio:imageio-metadata:3.14.0"
+    },
+    {
+      "filename": "imageio-webp-3.14.0.jar",
+      "sha256": "40e5b82b99bde56889f810349615f9403aae6a0d39cdc27c6899754770bb3752",
+      "bytes": 81195,
+      "coordinateSource": "pom.properties",
+      "coordinate": "com.twelvemonkeys.imageio:imageio-webp:3.14.0"
+    },
+    {
+      "filename": "javafx-base-21.0.12-linux.jar",
+      "sha256": "ac83213e343d734d7d315b4a850b309d8de4a4950c6e46497d8bc68e744b245d",
+      "bytes": 753227,
+      "coordinateSource": "known-artifact-filename",
+      "coordinate": "org.openjfx:javafx-base:21.0.12"
+    },
+    {
+      "filename": "javafx-controls-21.0.12-linux.jar",
+      "sha256": "de5417dbb39920d19376073dbbe896b97cbd5a4e88d56cc6627ff0a32666dc04",
+      "bytes": 2582535,
+      "coordinateSource": "known-artifact-filename",
+      "coordinate": "org.openjfx:javafx-controls:21.0.12"
+    },
+    {
+      "filename": "javafx-graphics-21.0.12-linux.jar",
+      "sha256": "200ee46c819d03811c736900cdfacb2047921313b261d93e52cdeef1eaf1ebb7",
+      "bytes": 4682157,
+      "coordinateSource": "known-artifact-filename",
+      "coordinate": "org.openjfx:javafx-graphics:21.0.12"
+    },
+    {
+      "filename": "jna-5.19.1.jar",
+      "sha256": "4fb141dd8ef6b0585ffceea4bc49602fbc6312fa977e2c488794ea3e6aafecae",
+      "bytes": 1950853,
+      "coordinateSource": "known-artifact-filename",
+      "coordinate": "net.java.dev.jna:jna:5.19.1"
+    },
+    {
+      "filename": "jna-platform-5.19.1.jar",
+      "sha256": "3b3864f5b449e9c3c24b16861524b622b086563f44e0cd8384c8efc5a6052f82",
+      "bytes": 1416385,
+      "coordinateSource": "known-artifact-filename",
+      "coordinate": "net.java.dev.jna:jna-platform:5.19.1"
+    },
+    {
+      "filename": "jsr305-3.0.2.jar",
+      "sha256": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7",
+      "bytes": 19936,
+      "coordinateSource": "pom.properties",
+      "coordinate": "com.google.code.findbugs:jsr305:3.0.2"
+    },
+    {
+      "filename": "pdfbox-3.0.8.jar",
+      "sha256": "97647cfbde61ebcfc06b4cf8c9b0ffcaaee073396eceb4a7f6836a9b9128903c",
+      "bytes": 2070583,
+      "coordinateSource": "pom.properties",
+      "coordinate": "org.apache.pdfbox:pdfbox:3.0.8"
+    },
+    {
+      "filename": "pdfbox-io-3.0.8.jar",
+      "sha256": "36a0e04001010b4c764857817412b96339930b19755e728959805cc0352061b2",
+      "bytes": 51906,
+      "coordinateSource": "pom.properties",
+      "coordinate": "org.apache.pdfbox:pdfbox-io:3.0.8"
+    },
+    {
+      "filename": "protobuf-java-4.33.6.jar",
+      "sha256": "c24b2464ecfe9ac1d44e3a8fe281fca09e6ad2ca73dbd689dd7d6d719df987b5",
+      "bytes": 1886534,
+      "coordinateSource": "known-artifact-filename",
+      "coordinate": "com.google.protobuf:protobuf-java:4.33.6"
+    },
+    {
+      "filename": "tink-1.23.0.jar",
+      "sha256": "5bcdc8798ce106f5145acb4a0e993c5e5861337b1e75ca88ceb6ab9da10fa512",
+      "bytes": 2775464,
+      "coordinateSource": "known-artifact-filename",
+      "coordinate": "com.google.crypto.tink:tink:1.23.0"
+    },
+    {
+      "filename": "xz-1.12.jar",
+      "sha256": "3e158a87bd73d8afb4b6e8239c013b7d049c48563f45860ce99cd2e448cf4a6b",
+      "bytes": 168792,
+      "coordinateSource": "known-artifact-filename",
+      "coordinate": "org.tukaani:xz:1.12"
+    },
+    {
+      "filename": "zip4j-2.11.6.jar",
+      "sha256": "5f1eb1e9d67cfee200a695e4079751b49e73a226b154193e13f7c602efbe72fb",
+      "bytes": 213881,
+      "coordinateSource": "pom.properties",
+      "coordinate": "net.lingala.zip4j:zip4j:2.11.6"
+    },
+    {
+      "filename": "password4j-1.8.4.jar",
+      "sha256": "d1406a158533b65bda7c20cebf7bf2a9a0626f8931fd1dc3d39243af5849edf5",
+      "bytes": 89997,
+      "coordinateSource": "pom.properties",
+      "coordinate": "com.password4j:password4j:1.8.4"
+    },
+    {
+      "filename": "slf4j-api-2.0.17.jar",
+      "sha256": "7b751d952061954d5abfed7181c1f645d336091b679891591d63329c622eb832",
+      "bytes": 69908,
+      "coordinateSource": "pom.properties",
+      "coordinate": "org.slf4j:slf4j-api:2.0.17"
+    },
+    {
+      "filename": "slf4j-nop-2.0.17.jar",
+      "sha256": "3716f83649ec66161a2edefd4f49df34d1dd1c51cdcf941996c6987260f0a829",
+      "bytes": 4982,
+      "coordinateSource": "pom.properties",
+      "coordinate": "org.slf4j:slf4j-nop:2.0.17"
+    },
+    {
+      "filename": "sqlite-jdbc-3.53.4.0.jar",
+      "sha256": "bcb1f51e36f940867e83342f9efbf5968ac44a6bef4d397bb4af7b17b45cd2fb",
+      "bytes": 12002370,
+      "coordinateSource": "pom.properties",
+      "coordinate": "org.xerial:sqlite-jdbc:3.53.4.0"
+    },
+    {
+      "filename": "commons-logging-1.4.0.jar",
+      "sha256": "d175dbd751dd782a63bde28c7a039520e971f25e84b79c19b8435edc3603e0dc",
+      "bytes": 75828,
+      "coordinateSource": "pom.properties",
+      "coordinate": "commons-logging:commons-logging:1.4.0"
+    }
+  ],
+  "excluded": [
+    "client-core-2.5.0.jar",
+    "client-ui-2.5.0.jar",
+    "common-protocol-0.2.0.jar",
+    "junit-platform-console-standalone-1.13.4.jar",
+    "openjfx-monocle-21.0.2.jar"
+  ],
+  "unmapped": [],
+  "missingRuntimeJars": [],
+  "queries": [
+    {
+      "queriedAtUtc": "2026-10-15T14:06:12.387823+00:00",
+      "coordinate": "com.google.code.findbugs:jsr305:3.0.2",
+      "purl": "pkg:maven/com.google.code.findbugs/jsr305@3.0.2",
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "com.google.code.findbugs:jsr305"
+        },
+        "version": "3.0.2"
+      },
+      "files": [
+        {
+          "filename": "jsr305-3.0.2.jar",
+          "sha256": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7",
+          "bytes": 19936,
+          "coordinateSource": "pom.properties",
+          "coordinate": "com.google.code.findbugs:jsr305:3.0.2"
+        }
+      ],
+      "declaredRuntimePin": true,
+      "status": "PASS_QUERY",
+      "vulnerabilities": [],
+      "evidence": [
+        {
+          "path": "osv-raw/reused-44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a.json",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "request": {
+            "package": {
+              "ecosystem": "Maven",
+              "name": "com.google.code.findbugs:jsr305"
+            },
+            "version": "3.0.2"
+          }
+        }
+      ],
+      "reusedSnapshotSha256": "750782af4b85f6c5ac7fb1d00a341e9698f41a5eaee8d759097c2b90b77513fe"
+    },
+    {
+      "queriedAtUtc": "2026-10-15T14:06:12.387823+00:00",
+      "coordinate": "com.google.code.gson:gson:2.14.0",
+      "purl": "pkg:maven/com.google.code.gson/gson@2.14.0",
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "com.google.code.gson:gson"
+        },
+        "version": "2.14.0"
+      },
+      "files": [
+        {
+          "filename": "gson-2.14.0.jar",
+          "sha256": "2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f",
+          "bytes": 313604,
+          "coordinateSource": "pom.properties",
+          "coordinate": "com.google.code.gson:gson:2.14.0"
+        }
+      ],
+      "declaredRuntimePin": true,
+      "status": "PASS_QUERY",
+      "vulnerabilities": [],
+      "evidence": [
+        {
+          "path": "osv-raw/reused-44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a.json",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "request": {
+            "package": {
+              "ecosystem": "Maven",
+              "name": "com.google.code.gson:gson"
+            },
+            "version": "2.14.0"
+          }
+        }
+      ],
+      "reusedSnapshotSha256": "750782af4b85f6c5ac7fb1d00a341e9698f41a5eaee8d759097c2b90b77513fe"
+    },
+    {
+      "queriedAtUtc": "2026-10-15T14:06:12.387823+00:00",
+      "coordinate": "com.google.crypto.tink:tink:1.23.0",
+      "purl": "pkg:maven/com.google.crypto.tink/tink@1.23.0",
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "com.google.crypto.tink:tink"
+        },
+        "version": "1.23.0"
+      },
+      "files": [
+        {
+          "filename": "tink-1.23.0.jar",
+          "sha256": "5bcdc8798ce106f5145acb4a0e993c5e5861337b1e75ca88ceb6ab9da10fa512",
+          "bytes": 2775464,
+          "coordinateSource": "known-artifact-filename",
+          "coordinate": "com.google.crypto.tink:tink:1.23.0"
+        }
+      ],
+      "declaredRuntimePin": true,
+      "status": "PASS_QUERY",
+      "vulnerabilities": [],
+      "evidence": [
+        {
+          "path": "osv-raw/reused-44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a.json",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "request": {
+            "package": {
+              "ecosystem": "Maven",
+              "name": "com.google.crypto.tink:tink"
+            },
+            "version": "1.23.0"
+          }
+        }
+      ],
+      "reusedSnapshotSha256": "750782af4b85f6c5ac7fb1d00a341e9698f41a5eaee8d759097c2b90b77513fe"
+    },
+    {
+      "queriedAtUtc": "2026-10-15T14:06:12.387823+00:00",
+      "coordinate": "com.google.errorprone:error_prone_annotations:2.48.0",
+      "purl": "pkg:maven/com.google.errorprone/error_prone_annotations@2.48.0",
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "com.google.errorprone:error_prone_annotations"
+        },
+        "version": "2.48.0"
+      },
+      "files": [
+        {
+          "filename": "error_prone_annotations-2.48.0.jar",
+          "sha256": "b49c5c958316ed67a09c699dda9aa749caf434d51d863dea599ef36a49b9c855",
+          "bytes": 20255,
+          "coordinateSource": "pom.properties",
+          "coordinate": "com.google.errorprone:error_prone_annotations:2.48.0"
+        }
+      ],
+      "declaredRuntimePin": true,
+      "status": "PASS_QUERY",
+      "vulnerabilities": [],
+      "evidence": [
+        {
+          "path": "osv-raw/reused-44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a.json",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "request": {
+            "package": {
+              "ecosystem": "Maven",
+              "name": "com.google.errorprone:error_prone_annotations"
+            },
+            "version": "2.48.0"
+          }
+        }
+      ],
+      "reusedSnapshotSha256": "750782af4b85f6c5ac7fb1d00a341e9698f41a5eaee8d759097c2b90b77513fe"
+    },
+    {
+      "queriedAtUtc": "2026-10-15T14:06:12.387823+00:00",
+      "coordinate": "com.google.protobuf:protobuf-java:4.33.6",
+      "purl": "pkg:maven/com.google.protobuf/protobuf-java@4.33.6",
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "com.google.protobuf:protobuf-java"
+        },
+        "version": "4.33.6"
+      },
+      "files": [
+        {
+          "filename": "protobuf-java-4.33.6.jar",
+          "sha256": "c24b2464ecfe9ac1d44e3a8fe281fca09e6ad2ca73dbd689dd7d6d719df987b5",
+          "bytes": 1886534,
+          "coordinateSource": "known-artifact-filename",
+          "coordinate": "com.google.protobuf:protobuf-java:4.33.6"
+        }
+      ],
+      "declaredRuntimePin": true,
+      "status": "PASS_QUERY",
+      "vulnerabilities": [],
+      "evidence": [
+        {
+          "path": "osv-raw/reused-44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a.json",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "request": {
+            "package": {
+              "ecosystem": "Maven",
+              "name": "com.google.protobuf:protobuf-java"
+            },
+            "version": "4.33.6"
+          }
+        }
+      ],
+      "reusedSnapshotSha256": "750782af4b85f6c5ac7fb1d00a341e9698f41a5eaee8d759097c2b90b77513fe"
+    },
+    {
+      "queriedAtUtc": "2026-10-15T14:06:12.387823+00:00",
+      "coordinate": "com.password4j:password4j:1.8.4",
+      "purl": "pkg:maven/com.password4j/password4j@1.8.4",
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "com.password4j:password4j"
+        },
+        "version": "1.8.4"
+      },
+      "files": [
+        {
+          "filename": "password4j-1.8.4.jar",
+          "sha256": "d1406a158533b65bda7c20cebf7bf2a9a0626f8931fd1dc3d39243af5849edf5",
+          "bytes": 89997,
+          "coordinateSource": "pom.properties",
+          "coordinate": "com.password4j:password4j:1.8.4"
+        }
+      ],
+      "declaredRuntimePin": true,
+      "status": "PASS_QUERY",
+      "vulnerabilities": [],
+      "evidence": [
+        {
+          "path": "osv-raw/reused-44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a.json",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "request": {
+            "package": {
+              "ecosystem": "Maven",
+              "name": "com.password4j:password4j"
+            },
+            "version": "1.8.4"
+          }
+        }
+      ],
+      "reusedSnapshotSha256": "750782af4b85f6c5ac7fb1d00a341e9698f41a5eaee8d759097c2b90b77513fe"
+    },
+    {
+      "queriedAtUtc": "2026-10-15T14:06:12.387823+00:00",
+      "coordinate": "com.twelvemonkeys.common:common-image:3.14.0",
+      "purl": "pkg:maven/com.twelvemonkeys.common/common-image@3.14.0",
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "com.twelvemonkeys.common:common-image"
+        },
+        "version": "3.14.0"
+      },
+      "files": [
+        {
+          "filename": "common-image-3.14.0.jar",
+          "sha256": "9edb1afd32278d20ad660869bfa5b0a27cf9b3553b6eb3f8fc51a2fc13109b66",
+          "bytes": 79630,
+          "coordinateSource": "pom.properties",
+          "coordinate": "com.twelvemonkeys.common:common-image:3.14.0"
+        }
+      ],
+      "declaredRuntimePin": true,
+      "status": "PASS_QUERY",
+      "vulnerabilities": [],
+      "evidence": [
+        {
+          "path": "osv-raw/reused-44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a.json",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "request": {
+            "package": {
+              "ecosystem": "Maven",
+              "name": "com.twelvemonkeys.common:common-image"
+            },
+            "version": "3.14.0"
+          }
+        }
+      ],
+      "reusedSnapshotSha256": "750782af4b85f6c5ac7fb1d00a341e9698f41a5eaee8d759097c2b90b77513fe"
+    },
+    {
+      "queriedAtUtc": "2026-10-15T14:06:12.387823+00:00",
+      "coordinate": "com.twelvemonkeys.common:common-io:3.14.0",
+      "purl": "pkg:maven/com.twelvemonkeys.common/common-io@3.14.0",
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "com.twelvemonkeys.common:common-io"
+        },
+        "version": "3.14.0"
+      },
+      "files": [
+        {
+          "filename": "common-io-3.14.0.jar",
+          "sha256": "ae01308bd48c68e76f6a1f76880cf7f4a3a004aa83d78e5448de358a4d957e8f",
+          "bytes": 92356,
+          "coordinateSource": "pom.properties",
+          "coordinate": "com.twelvemonkeys.common:common-io:3.14.0"
+        }
+      ],
+      "declaredRuntimePin": true,
+      "status": "PASS_QUERY",
+      "vulnerabilities": [],
+      "evidence": [
+        {
+          "path": "osv-raw/reused-44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a.json",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "request": {
+            "package": {
+              "ecosystem": "Maven",
+              "name": "com.twelvemonkeys.common:common-io"
+            },
+            "version": "3.14.0"
+          }
+        }
+      ],
+      "reusedSnapshotSha256": "750782af4b85f6c5ac7fb1d00a341e9698f41a5eaee8d759097c2b90b77513fe"
+    },
+    {
+      "queriedAtUtc": "2026-10-15T14:06:12.387823+00:00",
+      "coordinate": "com.twelvemonkeys.common:common-lang:3.14.0",
+      "purl": "pkg:maven/com.twelvemonkeys.common/common-lang@3.14.0",
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "com.twelvemonkeys.common:common-lang"
+        },
+        "version": "3.14.0"
+      },
+      "files": [
+        {
+          "filename": "common-lang-3.14.0.jar",
+          "sha256": "8d4529d6f56a010bc7e130ebfcdaf14bc11586e9d9ae66f6dca66f91da7eafef",
+          "bytes": 121885,
+          "coordinateSource": "pom.properties",
+          "coordinate": "com.twelvemonkeys.common:common-lang:3.14.0"
+        }
+      ],
+      "declaredRuntimePin": true,
+      "status": "PASS_QUERY",
+      "vulnerabilities": [],
+      "evidence": [
+        {
+          "path": "osv-raw/reused-44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a.json",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "request": {
+            "package": {
+              "ecosystem": "Maven",
+              "name": "com.twelvemonkeys.common:common-lang"
+            },
+            "version": "3.14.0"
+          }
+        }
+      ],
+      "reusedSnapshotSha256": "750782af4b85f6c5ac7fb1d00a341e9698f41a5eaee8d759097c2b90b77513fe"
+    },
+    {
+      "queriedAtUtc": "2026-10-15T14:06:12.387823+00:00",
+      "coordinate": "com.twelvemonkeys.imageio:imageio-core:3.14.0",
+      "purl": "pkg:maven/com.twelvemonkeys.imageio/imageio-core@3.14.0",
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "com.twelvemonkeys.imageio:imageio-core"
+        },
+        "version": "3.14.0"
+      },
+      "files": [
+        {
+          "filename": "imageio-core-3.14.0.jar",
+          "sha256": "a1b832b5090bd4677696f999b5ccb8954e987eb9674632a6286a6de2bb1c3c78",
+          "bytes": 122975,
+          "coordinateSource": "pom.properties",
+          "coordinate": "com.twelvemonkeys.imageio:imageio-core:3.14.0"
+        }
+      ],
+      "declaredRuntimePin": true,
+      "status": "PASS_QUERY",
+      "vulnerabilities": [],
+      "evidence": [
+        {
+          "path": "osv-raw/reused-44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a.json",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "request": {
+            "package": {
+              "ecosystem": "Maven",
+              "name": "com.twelvemonkeys.imageio:imageio-core"
+            },
+            "version": "3.14.0"
+          }
+        }
+      ],
+      "reusedSnapshotSha256": "750782af4b85f6c5ac7fb1d00a341e9698f41a5eaee8d759097c2b90b77513fe"
+    },
+    {
+      "queriedAtUtc": "2026-10-15T14:06:12.387823+00:00",
+      "coordinate": "com.twelvemonkeys.imageio:imageio-metadata:3.14.0",
+      "purl": "pkg:maven/com.twelvemonkeys.imageio/imageio-metadata@3.14.0",
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "com.twelvemonkeys.imageio:imageio-metadata"
+        },
+        "version": "3.14.0"
+      },
+      "files": [
+        {
+          "filename": "imageio-metadata-3.14.0.jar",
+          "sha256": "03768fc012bd2573236da803099aba6961dfb29c190103f9790fc49ac27f84c1",
+          "bytes": 83630,
+          "coordinateSource": "pom.properties",
+          "coordinate": "com.twelvemonkeys.imageio:imageio-metadata:3.14.0"
+        }
+      ],
+      "declaredRuntimePin": true,
+      "status": "PASS_QUERY",
+      "vulnerabilities": [],
+      "evidence": [
+        {
+          "path": "osv-raw/reused-44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a.json",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "request": {
+            "package": {
+              "ecosystem": "Maven",
+              "name": "com.twelvemonkeys.imageio:imageio-metadata"
+            },
+            "version": "3.14.0"
+          }
+        }
+      ],
+      "reusedSnapshotSha256": "750782af4b85f6c5ac7fb1d00a341e9698f41a5eaee8d759097c2b90b77513fe"
+    },
+    {
+      "queriedAtUtc": "2026-10-15T14:06:12.387823+00:00",
+      "coordinate": "com.twelvemonkeys.imageio:imageio-webp:3.14.0",
+      "purl": "pkg:maven/com.twelvemonkeys.imageio/imageio-webp@3.14.0",
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "com.twelvemonkeys.imageio:imageio-webp"
+        },
+        "version": "3.14.0"
+      },
+      "files": [
+        {
+          "filename": "imageio-webp-3.14.0.jar",
+          "sha256": "40e5b82b99bde56889f810349615f9403aae6a0d39cdc27c6899754770bb3752",
+          "bytes": 81195,
+          "coordinateSource": "pom.properties",
+          "coordinate": "com.twelvemonkeys.imageio:imageio-webp:3.14.0"
+        }
+      ],
+      "declaredRuntimePin": true,
+      "status": "PASS_QUERY",
+      "vulnerabilities": [],
+      "evidence": [
+        {
+          "path": "osv-raw/reused-44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a.json",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "request": {
+            "package": {
+              "ecosystem": "Maven",
+              "name": "com.twelvemonkeys.imageio:imageio-webp"
+            },
+            "version": "3.14.0"
+          }
+        }
+      ],
+      "reusedSnapshotSha256": "750782af4b85f6c5ac7fb1d00a341e9698f41a5eaee8d759097c2b90b77513fe"
+    },
+    {
+      "queriedAtUtc": "2026-10-15T14:06:12.387823+00:00",
+      "coordinate": "commons-codec:commons-codec:1.19.0",
+      "purl": "pkg:maven/commons-codec/commons-codec@1.19.0",
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "commons-codec:commons-codec"
+        },
+        "version": "1.19.0"
+      },
+      "files": [
+        {
+          "filename": "commons-codec-1.19.0.jar",
+          "sha256": "5c3881e4f556855e9c532927ee0c9dfde94cc66760d5805c031a59887070af5f",
+          "bytes": 374716,
+          "coordinateSource": "pom.properties",
+          "coordinate": "commons-codec:commons-codec:1.19.0"
+        }
+      ],
+      "declaredRuntimePin": true,
+      "status": "PASS_QUERY",
+      "vulnerabilities": [],
+      "evidence": [
+        {
+          "path": "osv-raw/reused-44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a.json",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "request": {
+            "package": {
+              "ecosystem": "Maven",
+              "name": "commons-codec:commons-codec"
+            },
+            "version": "1.19.0"
+          }
+        }
+      ],
+      "reusedSnapshotSha256": "750782af4b85f6c5ac7fb1d00a341e9698f41a5eaee8d759097c2b90b77513fe"
+    },
+    {
+      "queriedAtUtc": "2026-10-15T14:06:12.387823+00:00",
+      "coordinate": "commons-io:commons-io:2.20.0",
+      "purl": "pkg:maven/commons-io/commons-io@2.20.0",
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "commons-io:commons-io"
+        },
+        "version": "2.20.0"
+      },
+      "files": [
+        {
+          "filename": "commons-io-2.20.0.jar",
+          "sha256": "df90bba0fe3cb586b7f164e78fe8f8f4da3f2dd5c27fa645f888100ccc25dd72",
+          "bytes": 563971,
+          "coordinateSource": "pom.properties",
+          "coordinate": "commons-io:commons-io:2.20.0"
+        }
+      ],
+      "declaredRuntimePin": true,
+      "status": "PASS_QUERY",
+      "vulnerabilities": [],
+      "evidence": [
+        {
+          "path": "osv-raw/reused-44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a.json",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "request": {
+            "package": {
+              "ecosystem": "Maven",
+              "name": "commons-io:commons-io"
+            },
+            "version": "2.20.0"
+          }
+        }
+      ],
+      "reusedSnapshotSha256": "750782af4b85f6c5ac7fb1d00a341e9698f41a5eaee8d759097c2b90b77513fe"
+    },
+    {
+      "queriedAtUtc": "2026-10-15T14:06:12.387823+00:00",
+      "coordinate": "commons-logging:commons-logging:1.3.5",
+      "purl": "pkg:maven/commons-logging/commons-logging@1.3.5",
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "commons-logging:commons-logging"
+        },
+        "version": "1.3.5"
+      },
+      "files": [
+        {
+          "filename": "commons-logging-1.3.5.jar",
+          "sha256": "6d7a744e4027649fbb50895df9497d109f98c766a637062fe8d2eabbb3140ba4",
+          "bytes": 73737,
+          "coordinateSource": "pom.properties",
+          "coordinate": "commons-logging:commons-logging:1.3.5"
+        }
+      ],
+      "declaredRuntimePin": false,
+      "status": "PASS_QUERY",
+      "vulnerabilities": [],
+      "evidence": [
+        {
+          "path": "osv-raw/reused-44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a.json",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "request": {
+            "package": {
+              "ecosystem": "Maven",
+              "name": "commons-logging:commons-logging"
+            },
+            "version": "1.3.5"
+          }
+        }
+      ],
+      "reusedSnapshotSha256": "750782af4b85f6c5ac7fb1d00a341e9698f41a5eaee8d759097c2b90b77513fe"
+    },
+    {
+      "queriedAtUtc": "2026-10-15T14:14:39.861494+00:00",
+      "coordinate": "commons-logging:commons-logging:1.4.0",
+      "purl": "pkg:maven/commons-logging/commons-logging@1.4.0",
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "commons-logging:commons-logging"
+        },
+        "version": "1.4.0"
+      },
+      "files": [
+        {
+          "filename": "commons-logging-1.4.0.jar",
+          "sha256": "d175dbd751dd782a63bde28c7a039520e971f25e84b79c19b8435edc3603e0dc",
+          "bytes": 75828,
+          "coordinateSource": "pom.properties",
+          "coordinate": "commons-logging:commons-logging:1.4.0"
+        }
+      ],
+      "declaredRuntimePin": true,
+      "status": "PASS_QUERY",
+      "vulnerabilities": [],
+      "evidence": [
+        {
+          "path": "osv-raw/015-00.json",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "request": {
+            "package": {
+              "ecosystem": "Maven",
+              "name": "commons-logging:commons-logging"
+            },
+            "version": "1.4.0"
+          }
+        }
+      ]
+    },
+    {
+      "queriedAtUtc": "2026-10-15T14:06:12.387823+00:00",
+      "coordinate": "net.java.dev.jna:jna:5.19.1",
+      "purl": "pkg:maven/net.java.dev.jna/jna@5.19.1",
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "net.java.dev.jna:jna"
+        },
+        "version": "5.19.1"
+      },
+      "files": [
+        {
+          "filename": "jna-5.19.1.jar",
+          "sha256": "4fb141dd8ef6b0585ffceea4bc49602fbc6312fa977e2c488794ea3e6aafecae",
+          "bytes": 1950853,
+          "coordinateSource": "known-artifact-filename",
+          "coordinate": "net.java.dev.jna:jna:5.19.1"
+        }
+      ],
+      "declaredRuntimePin": true,
+      "status": "PASS_QUERY",
+      "vulnerabilities": [],
+      "evidence": [
+        {
+          "path": "osv-raw/reused-44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a.json",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "request": {
+            "package": {
+              "ecosystem": "Maven",
+              "name": "net.java.dev.jna:jna"
+            },
+            "version": "5.19.1"
+          }
+        }
+      ],
+      "reusedSnapshotSha256": "750782af4b85f6c5ac7fb1d00a341e9698f41a5eaee8d759097c2b90b77513fe"
+    },
+    {
+      "queriedAtUtc": "2026-10-15T14:06:12.387823+00:00",
+      "coordinate": "net.java.dev.jna:jna-platform:5.19.1",
+      "purl": "pkg:maven/net.java.dev.jna/jna-platform@5.19.1",
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "net.java.dev.jna:jna-platform"
+        },
+        "version": "5.19.1"
+      },
+      "files": [
+        {
+          "filename": "jna-platform-5.19.1.jar",
+          "sha256": "3b3864f5b449e9c3c24b16861524b622b086563f44e0cd8384c8efc5a6052f82",
+          "bytes": 1416385,
+          "coordinateSource": "known-artifact-filename",
+          "coordinate": "net.java.dev.jna:jna-platform:5.19.1"
+        }
+      ],
+      "declaredRuntimePin": true,
+      "status": "PASS_QUERY",
+      "vulnerabilities": [],
+      "evidence": [
+        {
+          "path": "osv-raw/reused-44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a.json",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "request": {
+            "package": {
+              "ecosystem": "Maven",
+              "name": "net.java.dev.jna:jna-platform"
+            },
+            "version": "5.19.1"
+          }
+        }
+      ],
+      "reusedSnapshotSha256": "750782af4b85f6c5ac7fb1d00a341e9698f41a5eaee8d759097c2b90b77513fe"
+    },
+    {
+      "queriedAtUtc": "2026-10-15T14:06:12.387823+00:00",
+      "coordinate": "net.lingala.zip4j:zip4j:2.11.6",
+      "purl": "pkg:maven/net.lingala.zip4j/zip4j@2.11.6",
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "net.lingala.zip4j:zip4j"
+        },
+        "version": "2.11.6"
+      },
+      "files": [
+        {
+          "filename": "zip4j-2.11.6.jar",
+          "sha256": "5f1eb1e9d67cfee200a695e4079751b49e73a226b154193e13f7c602efbe72fb",
+          "bytes": 213881,
+          "coordinateSource": "pom.properties",
+          "coordinate": "net.lingala.zip4j:zip4j:2.11.6"
+        }
+      ],
+      "declaredRuntimePin": true,
+      "status": "PASS_QUERY",
+      "vulnerabilities": [],
+      "evidence": [
+        {
+          "path": "osv-raw/reused-44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a.json",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "request": {
+            "package": {
+              "ecosystem": "Maven",
+              "name": "net.lingala.zip4j:zip4j"
+            },
+            "version": "2.11.6"
+          }
+        }
+      ],
+      "reusedSnapshotSha256": "750782af4b85f6c5ac7fb1d00a341e9698f41a5eaee8d759097c2b90b77513fe"
+    },
+    {
+      "queriedAtUtc": "2026-10-15T14:06:12.387823+00:00",
+      "coordinate": "org.apache.commons:commons-compress:1.28.0",
+      "purl": "pkg:maven/org.apache.commons/commons-compress@1.28.0",
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.apache.commons:commons-compress"
+        },
+        "version": "1.28.0"
+      },
+      "files": [
+        {
+          "filename": "commons-compress-1.28.0.jar",
+          "sha256": "e1522945218456f3649a39bc4afd70ce4bd466221519dba7d378f2141a4642ca",
+          "bytes": 1117221,
+          "coordinateSource": "pom.properties",
+          "coordinate": "org.apache.commons:commons-compress:1.28.0"
+        }
+      ],
+      "declaredRuntimePin": true,
+      "status": "PASS_QUERY",
+      "vulnerabilities": [],
+      "evidence": [
+        {
+          "path": "osv-raw/reused-44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a.json",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "request": {
+            "package": {
+              "ecosystem": "Maven",
+              "name": "org.apache.commons:commons-compress"
+            },
+            "version": "1.28.0"
+          }
+        }
+      ],
+      "reusedSnapshotSha256": "750782af4b85f6c5ac7fb1d00a341e9698f41a5eaee8d759097c2b90b77513fe"
+    },
+    {
+      "queriedAtUtc": "2026-10-15T14:06:12.387823+00:00",
+      "coordinate": "org.apache.commons:commons-lang3:3.18.0",
+      "purl": "pkg:maven/org.apache.commons/commons-lang3@3.18.0",
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.apache.commons:commons-lang3"
+        },
+        "version": "3.18.0"
+      },
+      "files": [
+        {
+          "filename": "commons-lang3-3.18.0.jar",
+          "sha256": "4eeeae8d20c078abb64b015ec158add383ac581571cddc45c68f0c9ae0230720",
+          "bytes": 702952,
+          "coordinateSource": "pom.properties",
+          "coordinate": "org.apache.commons:commons-lang3:3.18.0"
+        }
+      ],
+      "declaredRuntimePin": true,
+      "status": "PASS_QUERY",
+      "vulnerabilities": [],
+      "evidence": [
+        {
+          "path": "osv-raw/reused-44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a.json",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "request": {
+            "package": {
+              "ecosystem": "Maven",
+              "name": "org.apache.commons:commons-lang3"
+            },
+            "version": "3.18.0"
+          }
+        }
+      ],
+      "reusedSnapshotSha256": "750782af4b85f6c5ac7fb1d00a341e9698f41a5eaee8d759097c2b90b77513fe"
+    },
+    {
+      "queriedAtUtc": "2026-10-15T14:06:12.387823+00:00",
+      "coordinate": "org.apache.pdfbox:fontbox:3.0.8",
+      "purl": "pkg:maven/org.apache.pdfbox/fontbox@3.0.8",
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.apache.pdfbox:fontbox"
+        },
+        "version": "3.0.8"
+      },
+      "files": [
+        {
+          "filename": "fontbox-3.0.8.jar",
+          "sha256": "a1915c24e3edbe0ecec93896dfbf6d41427810b663ade97bd4e8bae86ec3fdab",
+          "bytes": 1647000,
+          "coordinateSource": "pom.properties",
+          "coordinate": "org.apache.pdfbox:fontbox:3.0.8"
+        }
+      ],
+      "declaredRuntimePin": true,
+      "status": "PASS_QUERY",
+      "vulnerabilities": [],
+      "evidence": [
+        {
+          "path": "osv-raw/reused-44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a.json",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "request": {
+            "package": {
+              "ecosystem": "Maven",
+              "name": "org.apache.pdfbox:fontbox"
+            },
+            "version": "3.0.8"
+          }
+        }
+      ],
+      "reusedSnapshotSha256": "750782af4b85f6c5ac7fb1d00a341e9698f41a5eaee8d759097c2b90b77513fe"
+    },
+    {
+      "queriedAtUtc": "2026-10-15T14:06:12.387823+00:00",
+      "coordinate": "org.apache.pdfbox:pdfbox:3.0.8",
+      "purl": "pkg:maven/org.apache.pdfbox/pdfbox@3.0.8",
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.apache.pdfbox:pdfbox"
+        },
+        "version": "3.0.8"
+      },
+      "files": [
+        {
+          "filename": "pdfbox-3.0.8.jar",
+          "sha256": "97647cfbde61ebcfc06b4cf8c9b0ffcaaee073396eceb4a7f6836a9b9128903c",
+          "bytes": 2070583,
+          "coordinateSource": "pom.properties",
+          "coordinate": "org.apache.pdfbox:pdfbox:3.0.8"
+        }
+      ],
+      "declaredRuntimePin": true,
+      "status": "PASS_QUERY",
+      "vulnerabilities": [],
+      "evidence": [
+        {
+          "path": "osv-raw/reused-44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a.json",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "request": {
+            "package": {
+              "ecosystem": "Maven",
+              "name": "org.apache.pdfbox:pdfbox"
+            },
+            "version": "3.0.8"
+          }
+        }
+      ],
+      "reusedSnapshotSha256": "750782af4b85f6c5ac7fb1d00a341e9698f41a5eaee8d759097c2b90b77513fe"
+    },
+    {
+      "queriedAtUtc": "2026-10-15T14:06:12.387823+00:00",
+      "coordinate": "org.apache.pdfbox:pdfbox-io:3.0.8",
+      "purl": "pkg:maven/org.apache.pdfbox/pdfbox-io@3.0.8",
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.apache.pdfbox:pdfbox-io"
+        },
+        "version": "3.0.8"
+      },
+      "files": [
+        {
+          "filename": "pdfbox-io-3.0.8.jar",
+          "sha256": "36a0e04001010b4c764857817412b96339930b19755e728959805cc0352061b2",
+          "bytes": 51906,
+          "coordinateSource": "pom.properties",
+          "coordinate": "org.apache.pdfbox:pdfbox-io:3.0.8"
+        }
+      ],
+      "declaredRuntimePin": true,
+      "status": "PASS_QUERY",
+      "vulnerabilities": [],
+      "evidence": [
+        {
+          "path": "osv-raw/reused-44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a.json",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "request": {
+            "package": {
+              "ecosystem": "Maven",
+              "name": "org.apache.pdfbox:pdfbox-io"
+            },
+            "version": "3.0.8"
+          }
+        }
+      ],
+      "reusedSnapshotSha256": "750782af4b85f6c5ac7fb1d00a341e9698f41a5eaee8d759097c2b90b77513fe"
+    },
+    {
+      "queriedAtUtc": "2026-10-15T14:06:12.387823+00:00",
+      "coordinate": "org.bouncycastle:bcpg-jdk18on:1.86",
+      "purl": "pkg:maven/org.bouncycastle/bcpg-jdk18on@1.86",
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.bouncycastle:bcpg-jdk18on"
+        },
+        "version": "1.86"
+      },
+      "files": [
+        {
+          "filename": "bcpg-jdk18on-1.86.jar",
+          "sha256": "8a52ea45b2063f6d41b8ca94409f255a1f4604922f7451c18a7cfd3a3c5b85ab",
+          "bytes": 729938,
+          "coordinateSource": "known-artifact-filename",
+          "coordinate": "org.bouncycastle:bcpg-jdk18on:1.86"
+        }
+      ],
+      "declaredRuntimePin": true,
+      "status": "PASS_QUERY",
+      "vulnerabilities": [],
+      "evidence": [
+        {
+          "path": "osv-raw/reused-44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a.json",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "request": {
+            "package": {
+              "ecosystem": "Maven",
+              "name": "org.bouncycastle:bcpg-jdk18on"
+            },
+            "version": "1.86"
+          }
+        }
+      ],
+      "reusedSnapshotSha256": "750782af4b85f6c5ac7fb1d00a341e9698f41a5eaee8d759097c2b90b77513fe"
+    },
+    {
+      "queriedAtUtc": "2026-10-15T14:06:12.387823+00:00",
+      "coordinate": "org.bouncycastle:bcprov-jdk18on:1.86",
+      "purl": "pkg:maven/org.bouncycastle/bcprov-jdk18on@1.86",
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.bouncycastle:bcprov-jdk18on"
+        },
+        "version": "1.86"
+      },
+      "files": [
+        {
+          "filename": "bcprov-jdk18on-1.86.jar",
+          "sha256": "2af190b300cbb0b35e248ccf5f4a06b6072030aeb3da7a98ec73abe5b4cb371f",
+          "bytes": 7224011,
+          "coordinateSource": "known-artifact-filename",
+          "coordinate": "org.bouncycastle:bcprov-jdk18on:1.86"
+        }
+      ],
+      "declaredRuntimePin": true,
+      "status": "PASS_QUERY",
+      "vulnerabilities": [],
+      "evidence": [
+        {
+          "path": "osv-raw/reused-44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a.json",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "request": {
+            "package": {
+              "ecosystem": "Maven",
+              "name": "org.bouncycastle:bcprov-jdk18on"
+            },
+            "version": "1.86"
+          }
+        }
+      ],
+      "reusedSnapshotSha256": "750782af4b85f6c5ac7fb1d00a341e9698f41a5eaee8d759097c2b90b77513fe"
+    },
+    {
+      "queriedAtUtc": "2026-10-15T14:06:12.387823+00:00",
+      "coordinate": "org.bouncycastle:bcutil-jdk18on:1.86",
+      "purl": "pkg:maven/org.bouncycastle/bcutil-jdk18on@1.86",
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.bouncycastle:bcutil-jdk18on"
+        },
+        "version": "1.86"
+      },
+      "files": [
+        {
+          "filename": "bcutil-jdk18on-1.86.jar",
+          "sha256": "1c268e15f785aafb1e4670d8d6e5f856f69475e96c162dadcd1ff9b350e9139f",
+          "bytes": 789287,
+          "coordinateSource": "known-artifact-filename",
+          "coordinate": "org.bouncycastle:bcutil-jdk18on:1.86"
+        }
+      ],
+      "declaredRuntimePin": true,
+      "status": "PASS_QUERY",
+      "vulnerabilities": [],
+      "evidence": [
+        {
+          "path": "osv-raw/reused-44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a.json",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "request": {
+            "package": {
+              "ecosystem": "Maven",
+              "name": "org.bouncycastle:bcutil-jdk18on"
+            },
+            "version": "1.86"
+          }
+        }
+      ],
+      "reusedSnapshotSha256": "750782af4b85f6c5ac7fb1d00a341e9698f41a5eaee8d759097c2b90b77513fe"
+    },
+    {
+      "queriedAtUtc": "2026-10-15T14:06:12.387823+00:00",
+      "coordinate": "org.openjfx:javafx-base:21.0.12",
+      "purl": "pkg:maven/org.openjfx/javafx-base@21.0.12",
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.openjfx:javafx-base"
+        },
+        "version": "21.0.12"
+      },
+      "files": [
+        {
+          "filename": "javafx-base-21.0.12-linux.jar",
+          "sha256": "ac83213e343d734d7d315b4a850b309d8de4a4950c6e46497d8bc68e744b245d",
+          "bytes": 753227,
+          "coordinateSource": "known-artifact-filename",
+          "coordinate": "org.openjfx:javafx-base:21.0.12"
+        }
+      ],
+      "declaredRuntimePin": true,
+      "status": "PASS_QUERY",
+      "vulnerabilities": [],
+      "evidence": [
+        {
+          "path": "osv-raw/reused-44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a.json",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "request": {
+            "package": {
+              "ecosystem": "Maven",
+              "name": "org.openjfx:javafx-base"
+            },
+            "version": "21.0.12"
+          }
+        }
+      ],
+      "reusedSnapshotSha256": "750782af4b85f6c5ac7fb1d00a341e9698f41a5eaee8d759097c2b90b77513fe"
+    },
+    {
+      "queriedAtUtc": "2026-10-15T14:06:12.387823+00:00",
+      "coordinate": "org.openjfx:javafx-controls:21.0.12",
+      "purl": "pkg:maven/org.openjfx/javafx-controls@21.0.12",
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.openjfx:javafx-controls"
+        },
+        "version": "21.0.12"
+      },
+      "files": [
+        {
+          "filename": "javafx-controls-21.0.12-linux.jar",
+          "sha256": "de5417dbb39920d19376073dbbe896b97cbd5a4e88d56cc6627ff0a32666dc04",
+          "bytes": 2582535,
+          "coordinateSource": "known-artifact-filename",
+          "coordinate": "org.openjfx:javafx-controls:21.0.12"
+        }
+      ],
+      "declaredRuntimePin": true,
+      "status": "PASS_QUERY",
+      "vulnerabilities": [],
+      "evidence": [
+        {
+          "path": "osv-raw/reused-44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a.json",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "request": {
+            "package": {
+              "ecosystem": "Maven",
+              "name": "org.openjfx:javafx-controls"
+            },
+            "version": "21.0.12"
+          }
+        }
+      ],
+      "reusedSnapshotSha256": "750782af4b85f6c5ac7fb1d00a341e9698f41a5eaee8d759097c2b90b77513fe"
+    },
+    {
+      "queriedAtUtc": "2026-10-15T14:06:12.387823+00:00",
+      "coordinate": "org.openjfx:javafx-graphics:21.0.12",
+      "purl": "pkg:maven/org.openjfx/javafx-graphics@21.0.12",
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.openjfx:javafx-graphics"
+        },
+        "version": "21.0.12"
+      },
+      "files": [
+        {
+          "filename": "javafx-graphics-21.0.12-linux.jar",
+          "sha256": "200ee46c819d03811c736900cdfacb2047921313b261d93e52cdeef1eaf1ebb7",
+          "bytes": 4682157,
+          "coordinateSource": "known-artifact-filename",
+          "coordinate": "org.openjfx:javafx-graphics:21.0.12"
+        }
+      ],
+      "declaredRuntimePin": true,
+      "status": "PASS_QUERY",
+      "vulnerabilities": [],
+      "evidence": [
+        {
+          "path": "osv-raw/reused-44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a.json",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "request": {
+            "package": {
+              "ecosystem": "Maven",
+              "name": "org.openjfx:javafx-graphics"
+            },
+            "version": "21.0.12"
+          }
+        }
+      ],
+      "reusedSnapshotSha256": "750782af4b85f6c5ac7fb1d00a341e9698f41a5eaee8d759097c2b90b77513fe"
+    },
+    {
+      "queriedAtUtc": "2026-10-15T14:06:12.387823+00:00",
+      "coordinate": "org.slf4j:slf4j-api:2.0.17",
+      "purl": "pkg:maven/org.slf4j/slf4j-api@2.0.17",
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.slf4j:slf4j-api"
+        },
+        "version": "2.0.17"
+      },
+      "files": [
+        {
+          "filename": "slf4j-api-2.0.17.jar",
+          "sha256": "7b751d952061954d5abfed7181c1f645d336091b679891591d63329c622eb832",
+          "bytes": 69908,
+          "coordinateSource": "pom.properties",
+          "coordinate": "org.slf4j:slf4j-api:2.0.17"
+        }
+      ],
+      "declaredRuntimePin": true,
+      "status": "PASS_QUERY",
+      "vulnerabilities": [],
+      "evidence": [
+        {
+          "path": "osv-raw/reused-44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a.json",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "request": {
+            "package": {
+              "ecosystem": "Maven",
+              "name": "org.slf4j:slf4j-api"
+            },
+            "version": "2.0.17"
+          }
+        }
+      ],
+      "reusedSnapshotSha256": "750782af4b85f6c5ac7fb1d00a341e9698f41a5eaee8d759097c2b90b77513fe"
+    },
+    {
+      "queriedAtUtc": "2026-10-15T14:06:12.387823+00:00",
+      "coordinate": "org.slf4j:slf4j-nop:2.0.17",
+      "purl": "pkg:maven/org.slf4j/slf4j-nop@2.0.17",
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.slf4j:slf4j-nop"
+        },
+        "version": "2.0.17"
+      },
+      "files": [
+        {
+          "filename": "slf4j-nop-2.0.17.jar",
+          "sha256": "3716f83649ec66161a2edefd4f49df34d1dd1c51cdcf941996c6987260f0a829",
+          "bytes": 4982,
+          "coordinateSource": "pom.properties",
+          "coordinate": "org.slf4j:slf4j-nop:2.0.17"
+        }
+      ],
+      "declaredRuntimePin": true,
+      "status": "PASS_QUERY",
+      "vulnerabilities": [],
+      "evidence": [
+        {
+          "path": "osv-raw/reused-44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a.json",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "request": {
+            "package": {
+              "ecosystem": "Maven",
+              "name": "org.slf4j:slf4j-nop"
+            },
+            "version": "2.0.17"
+          }
+        }
+      ],
+      "reusedSnapshotSha256": "750782af4b85f6c5ac7fb1d00a341e9698f41a5eaee8d759097c2b90b77513fe"
+    },
+    {
+      "queriedAtUtc": "2026-10-15T14:06:12.387823+00:00",
+      "coordinate": "org.tukaani:xz:1.12",
+      "purl": "pkg:maven/org.tukaani/xz@1.12",
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.tukaani:xz"
+        },
+        "version": "1.12"
+      },
+      "files": [
+        {
+          "filename": "xz-1.12.jar",
+          "sha256": "3e158a87bd73d8afb4b6e8239c013b7d049c48563f45860ce99cd2e448cf4a6b",
+          "bytes": 168792,
+          "coordinateSource": "known-artifact-filename",
+          "coordinate": "org.tukaani:xz:1.12"
+        }
+      ],
+      "declaredRuntimePin": true,
+      "status": "PASS_QUERY",
+      "vulnerabilities": [],
+      "evidence": [
+        {
+          "path": "osv-raw/reused-44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a.json",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "request": {
+            "package": {
+              "ecosystem": "Maven",
+              "name": "org.tukaani:xz"
+            },
+            "version": "1.12"
+          }
+        }
+      ],
+      "reusedSnapshotSha256": "750782af4b85f6c5ac7fb1d00a341e9698f41a5eaee8d759097c2b90b77513fe"
+    },
+    {
+      "queriedAtUtc": "2026-10-15T14:06:12.387823+00:00",
+      "coordinate": "org.xerial:sqlite-jdbc:3.53.4.0",
+      "purl": "pkg:maven/org.xerial/sqlite-jdbc@3.53.4.0",
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.xerial:sqlite-jdbc"
+        },
+        "version": "3.53.4.0"
+      },
+      "files": [
+        {
+          "filename": "sqlite-jdbc-3.53.4.0.jar",
+          "sha256": "bcb1f51e36f940867e83342f9efbf5968ac44a6bef4d397bb4af7b17b45cd2fb",
+          "bytes": 12002370,
+          "coordinateSource": "pom.properties",
+          "coordinate": "org.xerial:sqlite-jdbc:3.53.4.0"
+        }
+      ],
+      "declaredRuntimePin": true,
+      "status": "PASS_QUERY",
+      "vulnerabilities": [],
+      "evidence": [
+        {
+          "path": "osv-raw/reused-44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a.json",
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "request": {
+            "package": {
+              "ecosystem": "Maven",
+              "name": "org.xerial:sqlite-jdbc"
+            },
+            "version": "3.53.4.0"
+          }
+        }
+      ],
+      "reusedSnapshotSha256": "750782af4b85f6c5ac7fb1d00a341e9698f41a5eaee8d759097c2b90b77513fe"
+    }
+  ],
+  "advisories": [],
+  "separateNativeReview": [
+    {
+      "path": "packaging/native-kit/java-runtime-provenance-2.5.0.json",
+      "sha256": "7fa3dfb5bfbb86cf1c4da4d6b2f073f087b503ef1729e71ab68fec8b88c2ae27",
+      "status": "NOT_RUN",
+      "scope": "Native/JRE/Tor upstream advisory review is separate from Maven OSV queries"
+    },
+    {
+      "path": "packaging/native-kit/voice-runtime-provenance.json",
+      "sha256": "e2c0a24e4589155a71c6a02d569a52f90ec3ffd4019c922b2e6fc6b6771f8917",
+      "status": "NOT_RUN",
+      "scope": "Native/JRE/Tor upstream advisory review is separate from Maven OSV queries"
+    }
+  ],
+  "limitations": [
+    "No result proves absence of unknown vulnerabilities.",
+    "Native codecs, Tor Browser, Tor, bundled Java and operating-system components require their own advisory/provenance review.",
+    "Reachability/exploitability is not inferred from an OSV version match; high/critical matches block acceptance pending remediation or documented evidence."
+  ]
+}

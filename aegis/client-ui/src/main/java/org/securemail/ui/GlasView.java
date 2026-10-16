@@ -26,7 +26,7 @@ final class GlasView implements AutoCloseable {
   private final Label status=new Label(),peer=new Label(),identity=new Label(),duration=new Label();
   private final ListView<UserInfo> contacts=new ListView<>();
   private final Button call=new Button("Позвонить"),accept=new Button("Принять"),decline=new Button("Отклонить"),hangup=new Button("Завершить"),microphone=new Button("Включить микрофон");
-  private Boolean pendingMicrophone;
+  private Boolean pendingMicrophone;private final java.util.concurrent.atomic.AtomicBoolean preparingCall=new java.util.concurrent.atomic.AtomicBoolean();
   private final ListView<String> history=new ListView<>();
   private final AutoCloseable listener;private volatile boolean closed;private final java.util.concurrent.atomic.AtomicBoolean refreshQueued=new java.util.concurrent.atomic.AtomicBoolean();private final Set<AudioControls> audioControls=Collections.newSetFromMap(new WeakHashMap<>());
   private final java.util.concurrent.ThreadPoolExecutor audioWorker=new java.util.concurrent.ThreadPoolExecutor(2,2,30,java.util.concurrent.TimeUnit.SECONDS,new java.util.concurrent.ArrayBlockingQueue<>(8),task->{Thread t=new Thread(task,"glas-audio-controls");t.setDaemon(true);return t;},new java.util.concurrent.ThreadPoolExecutor.AbortPolicy());
@@ -41,7 +41,7 @@ final class GlasView implements AutoCloseable {
     Label heading=new Label("Глас");heading.getStyleClass().add("heading");
     status.setWrapText(true);status.setId("glas-status");identity.setWrapText(true);identity.setMinWidth(0);identity.getStyleClass().add("muted");
     peer.getStyleClass().add("heading");HBox participant=new HBox(12,activeAvatar,new VBox(4,peer,duration));participant.setAlignment(Pos.CENTER_LEFT);
-    call.getStyleClass().add("primary");call.setOnAction(e->{UserInfo selected=contacts.getSelectionModel().getSelectedItem();if(selected!=null)try{stopMicrophoneTests();calls.start(selected);}catch(Exception failure){notice.accept("Не удалось начать звонок. Проверьте Tor и ключ контакта.");}});
+    call.getStyleClass().add("primary");call.setOnAction(e->{UserInfo selected=contacts.getSelectionModel().getSelectedItem();if(selected==null||!preparingCall.compareAndSet(false,true))return;stopMicrophoneTests();call.setDisable(true);worker.execute(()->{try{session.prepareVoiceCall(selected,VoiceCallService.Direction.OUTGOING);calls.start(selected);}catch(Exception failure){Platform.runLater(()->notice.accept("Собеседник недоступен или звонок не разрешён. Проверьте Tor, разрешения и ключ контакта."));}finally{preparingCall.set(false);Platform.runLater(()->{if(!closed)refresh();});}});});
     accept.getStyleClass().add("primary");accept.setOnAction(e->{stopMicrophoneTests();calls.accept(calls.snapshot().callId());});decline.setOnAction(e->calls.decline(calls.snapshot().callId()));
     hangup.setOnAction(e->calls.hangup());microphone.setOnAction(e->{if(pendingMicrophone!=null)return;pendingMicrophone=!calls.snapshot().microphoneEnabled();microphone.setDisable(true);microphone.setText(pendingMicrophone?"Включение микрофона…":"Выключение микрофона…");calls.setMicrophoneEnabled(pendingMicrophone);});
     FlowPane actions=new FlowPane(8,8,accept,decline,microphone,hangup);actions.setId("glas-call-actions");
@@ -66,7 +66,7 @@ final class GlasView implements AutoCloseable {
     visible(accept,incoming);visible(decline,incoming);visible(microphone,secure);visible(hangup,snapshot.busy()&&!incoming);
     if(!secure||pendingMicrophone!=null&&snapshot.microphoneEnabled()==pendingMicrophone)pendingMicrophone=null;
     microphone.setDisable(pendingMicrophone!=null);microphone.setText(pendingMicrophone!=null?(pendingMicrophone?"Включение микрофона…":"Выключение микрофона…"):snapshot.microphoneEnabled()?"Выключить микрофон":"Включить микрофон");microphone.setAccessibleText(microphone.getText());
-    call.setDisable(snapshot.busy()||contacts.getSelectionModel().getSelectedItem()==null);
+    call.setDisable(preparingCall.get()||snapshot.busy()||contacts.getSelectionModel().getSelectedItem()==null);
     peer.setText(snapshot.contact()==null?"Выберите контакт":snapshot.contact().nickname());
     String id=snapshot.contact()==null?"":snapshot.contact().userId();
     if(!Objects.equals(activeAvatar.getUserData(),id)){activeAvatar.setUserData(id);activeAvatar.getChildren().clear();if(snapshot.contact()!=null)activeAvatar.getChildren().add(avatar.apply(snapshot.contact().nickname()));}
@@ -82,7 +82,10 @@ final class GlasView implements AutoCloseable {
     }history.getItems().setAll(entries);
   }
   static void visible(Node node,boolean value){node.setVisible(value);node.setManaged(value);}
-  Node settingsNode(){var controls=new AudioControls();audioControls.add(controls);return controls.content;}
+  Node settingsNode(){var controls=new AudioControls();audioControls.add(controls);return new VBox(10,controls.content,callPermissions());}
+  private Node callPermissions(){VoiceCallPolicy original=calls.callPolicy();VBox form=new VBox(10);List<Selector<VoiceCallPolicy.Mode>> modes=new ArrayList<>();List<Map<String,CheckBox>> selected=new ArrayList<>(),denied=new ArrayList<>();List<CheckBox> organization=new ArrayList<>();
+    for(boolean inbound:List.of(true,false)){VoiceCallPolicy.Rule rule=inbound?original.incoming():original.outgoing();Selector<VoiceCallPolicy.Mode> mode=new Selector<>(themes,List.of(VoiceCallPolicy.Mode.values()),rule.mode());modes.add(mode);CheckBox grant=new CheckBox("Учитывать действующие организационные полномочия");grant.setWrapText(true);grant.setSelected(rule.organizationGrantsAllowed());organization.add(grant);VBox choices=new VBox(6);Map<String,CheckBox> allowedMap=new LinkedHashMap<>(),deniedMap=new LinkedHashMap<>();for(UserInfo contact:session.local().contacts()){CheckBox allow=new CheckBox("Разрешить: "+contact.nickname()),block=new CheckBox("Запретить: "+contact.nickname());allow.setWrapText(true);block.setWrapText(true);allow.setMaxWidth(300);block.setMaxWidth(300);allow.setSelected(rule.selectedContactIds().contains(contact.userId()));block.setSelected(rule.deniedContactIds().contains(contact.userId()));allowedMap.put(contact.userId(),allow);deniedMap.put(contact.userId(),block);choices.getChildren().add(new FlowPane(8,6,allow,block));}selected.add(allowedMap);denied.add(deniedMap);form.getChildren().add(CommunityUi.fold(inbound?"Входящие вызовы":"Исходящие вызовы",new VBox(8,mode,grant,choices)));}
+    form.getChildren().addAll(CommunityUi.label("Неизвестные пользователи запрещены. Явный запрет контакта имеет приоритет. Организационное разрешение проверяет сервер до подключения."),CommunityUi.button("Сохранить разрешения",()->{List<VoiceCallPolicy.Rule> rules=new ArrayList<>();for(int i=0;i<2;i++){Set<String> allow=new HashSet<>(),block=new HashSet<>();for(var entry:selected.get(i).entrySet())if(entry.getValue().isSelected())allow.add(entry.getKey());for(var entry:denied.get(i).entrySet())if(entry.getValue().isSelected())block.add(entry.getKey());rules.add(new VoiceCallPolicy.Rule(modes.get(i).getValue(),allow,block,organization.get(i).isSelected()));}worker.execute(()->{try{calls.setCallPolicy(new VoiceCallPolicy(rules.get(0),rules.get(1)));Platform.runLater(()->notice.accept("Разрешения звонков сохранены"));}catch(Exception failure){Platform.runLater(()->notice.accept("Не удалось сохранить разрешения звонков"));}});}));return CommunityUi.fold("Разрешения звонков",form);}
   private final class AudioControls {
     final VBox content=new VBox(10);final Selector<Choice> inputs=new Selector<>(themes),outputs=new Selector<>(themes);
     final Slider gain=new Slider(0,2,1),volume=new Slider(0,1,1);final ProgressBar meter=new ProgressBar(0);

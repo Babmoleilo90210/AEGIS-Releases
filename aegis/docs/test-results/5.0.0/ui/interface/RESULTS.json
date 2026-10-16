@@ -1,0 +1,169 @@
+{
+  "additionalActualLayoutCases": 36,
+  "actualPresetsRendered": 16,
+  "status": "PASS_HEADLESS",
+  "checks": [
+    "eleven navigation actions in three rounded blocks",
+    "six settings categories with content below",
+    "monthly calendar day captions at 800x600 and 100–200% on dark/light themes",
+    "actual archive menu label height and full caption bounds",
+    "lossless visual/Markdown switch",
+    "unsafe-link rejection",
+    "actual configured-offline views without synthetic server success",
+    "bounded synthetic graph layout",
+    "strictly decoded synthetic pages: persistent 500-node/2000-edge fragment warning and E: edge continuation",
+    "one application Stage"
+  ],
+  "runtimeEvidence": {
+    "note": "Production classes must resolve from frozen application JARs; isolated smoke classes are separate. This record is not native or network acceptance.",
+    "smokeCodeSource": "file:/workspace/scratch/aa629f360927/ui500-build/frozen-smoke-classes-pagination-final/",
+    "actualClasses": {
+      "org.securemail.ui.MessengerApp": {
+        "codeSource": "file:/workspace/scratch/aa629f360927/ui500-build/pinned-runtime-pagination-final/client-ui.jar",
+        "classSha256": "8e044f7837e9f39edcc75a9932733cbfe6c4116e3231a8899102b39e9d8b82e9",
+        "containerSha256": "239b95b732d74aebc2a0faebac655e2c59ccf1442bf08dc112b05f5ccc682367"
+      },
+      "org.securemail.ui.ArchiveView": {
+        "codeSource": "file:/workspace/scratch/aa629f360927/ui500-build/pinned-runtime-pagination-final/client-ui.jar",
+        "classSha256": "62315ab9c364cccf930ddb7268708019c97e0dba0cae7c95088ed3cd3ce88277",
+        "containerSha256": "239b95b732d74aebc2a0faebac655e2c59ccf1442bf08dc112b05f5ccc682367"
+      },
+      "org.securemail.ui.CommunityUi": {
+        "codeSource": "file:/workspace/scratch/aa629f360927/ui500-build/pinned-runtime-pagination-final/client-ui.jar",
+        "classSha256": "29e1f7e5d0a612c65928fce0564157c79492c3763d346efad475bbdf806a139b",
+        "containerSha256": "239b95b732d74aebc2a0faebac655e2c59ccf1442bf08dc112b05f5ccc682367"
+      },
+      "org.securemail.ui.DocumentEditor": {
+        "codeSource": "file:/workspace/scratch/aa629f360927/ui500-build/pinned-runtime-pagination-final/client-ui.jar",
+        "classSha256": "2f4f687f51740ad16bbb33035daa8b423c925836788608b1d688d0c4cf93815f",
+        "containerSha256": "239b95b732d74aebc2a0faebac655e2c59ccf1442bf08dc112b05f5ccc682367"
+      },
+      "org.securemail.ui.EventsCalendar": {
+        "codeSource": "file:/workspace/scratch/aa629f360927/ui500-build/pinned-runtime-pagination-final/client-ui.jar",
+        "classSha256": "3d9197f8fc965088d274aa2767fd841edabcbf421da69bc0c6559a351419434a",
+        "containerSha256": "239b95b732d74aebc2a0faebac655e2c59ccf1442bf08dc112b05f5ccc682367"
+      },
+      "org.securemail.ui.KnowledgeLibraryView": {
+        "codeSource": "file:/workspace/scratch/aa629f360927/ui500-build/pinned-runtime-pagination-final/client-ui.jar",
+        "classSha256": "8f0b363430a1ac531d534ab79480a9f4279841ac2624fa989b9baea6ef1b55cd",
+        "containerSha256": "239b95b732d74aebc2a0faebac655e2c59ccf1442bf08dc112b05f5ccc682367"
+      },
+      "org.securemail.ui.GlasView": {
+        "codeSource": "file:/workspace/scratch/aa629f360927/ui500-build/pinned-runtime-pagination-final/client-ui.jar",
+        "classSha256": "c1bc862fcf57751f81282beff3810d68fbbe66251ec72acbe55ac159e2e1690c",
+        "containerSha256": "239b95b732d74aebc2a0faebac655e2c59ccf1442bf08dc112b05f5ccc682367"
+      },
+      "org.securemail.client.ClientSession": {
+        "codeSource": "file:/workspace/scratch/aa629f360927/ui500-build/pinned-runtime-pagination-final/client-core.jar",
+        "classSha256": "0d14535de3cca45e762daae3be59c0efd03e7c974115c9e7c930280188925e91",
+        "containerSha256": "6d263ef70f5b159aa4458125ffc75bf55c71346baf52b01db3b7db00e155ebe2"
+      },
+      "org.securemail.client.community.CommunityClient": {
+        "codeSource": "file:/workspace/scratch/aa629f360927/ui500-build/pinned-runtime-pagination-final/client-core.jar",
+        "classSha256": "08e65483833b837956c9c1e7d24d8b48d0842ea5cace54c03905c229a2eea32d",
+        "containerSha256": "6d263ef70f5b159aa4458125ffc75bf55c71346baf52b01db3b7db00e155ebe2"
+      },
+      "org.securemail.client.community.CommunityJson": {
+        "codeSource": "file:/workspace/scratch/aa629f360927/ui500-build/pinned-runtime-pagination-final/client-core.jar",
+        "classSha256": "5bdb51c32b12e5637f52b2802ee405ef15db378178e3a7e5cb85480ded7c8765",
+        "containerSha256": "6d263ef70f5b159aa4458125ffc75bf55c71346baf52b01db3b7db00e155ebe2"
+      },
+      "org.securemail.client.appearance.Appearance": {
+        "codeSource": "file:/workspace/scratch/aa629f360927/ui500-build/pinned-runtime-pagination-final/client-core.jar",
+        "classSha256": "13291f88713ba755dd9631b2233a5765ca290c1216ae3c78fffd37b213fea8d0",
+        "containerSha256": "6d263ef70f5b159aa4458125ffc75bf55c71346baf52b01db3b7db00e155ebe2"
+      },
+      "org.securemail.protocol.UserInfo": {
+        "codeSource": "file:/workspace/scratch/aa629f360927/ui500-build/pinned-runtime-pagination-final/common-protocol.jar",
+        "classSha256": "17d9d75bb649a09c690d5988079e4f926a18dcedbff21f6fa711e0e7d2be20ad",
+        "containerSha256": "10a5888b5af0253ff053c6d59d0993bc6c7637d0123af69046fe20affab6e937"
+      },
+      "org.securemail.community.content.ContentService": {
+        "codeSource": "file:/workspace/scratch/aa629f360927/ui500-build/pinned-runtime-pagination-final/community-server.jar",
+        "classSha256": "0b9113674999610601e028b499a13afb016863860efb98a9d281edf96ec6e79a",
+        "containerSha256": "8013130dd4f8fa14682a14588cb17f1c2fc7dc240fb68fa97a388f3672b1bfaa"
+      },
+      "org.securemail.community.admin.AdminService": {
+        "codeSource": "file:/workspace/scratch/aa629f360927/ui500-build/pinned-runtime-pagination-final/community-server.jar",
+        "classSha256": "32ee3b4636177d90a259590dc92b6360f661b27f5bf21fa84d0878c1eec83cd4",
+        "containerSha256": "8013130dd4f8fa14682a14588cb17f1c2fc7dc240fb68fa97a388f3672b1bfaa"
+      },
+      "org.securemail.community.http.StrictJson": {
+        "codeSource": "file:/workspace/scratch/aa629f360927/ui500-build/pinned-runtime-pagination-final/community-server.jar",
+        "classSha256": "be287eba02777a336e6e6fc0a4188a03cc84c6682d04fca5819d4f3657f58193",
+        "containerSha256": "8013130dd4f8fa14682a14588cb17f1c2fc7dc240fb68fa97a388f3672b1bfaa"
+      }
+    },
+    "productionClassCollocatedWithSmokeOutput": false
+  },
+  "scope": "Actual JavaFX controls and disposable encrypted vault; no Tor, external server, mic or native OS acceptance claim",
+  "nativeAcceptance": "NOT_RUN",
+  "screenshots": [
+    "organizations-800x600-minimal-dark-100.png",
+    "news-800x600-minimal-dark-100.png",
+    "library-800x600-minimal-dark-100.png",
+    "settings-800x600-minimal-dark-100.png",
+    "organizations-800x600-minimal-dark-125.png",
+    "news-800x600-minimal-dark-125.png",
+    "library-800x600-minimal-dark-125.png",
+    "settings-800x600-minimal-dark-125.png",
+    "organizations-800x600-minimal-dark-150.png",
+    "news-800x600-minimal-dark-150.png",
+    "library-800x600-minimal-dark-150.png",
+    "settings-800x600-minimal-dark-150.png",
+    "organizations-800x600-minimal-dark-200.png",
+    "news-800x600-minimal-dark-200.png",
+    "library-800x600-minimal-dark-200.png",
+    "settings-800x600-minimal-dark-200.png",
+    "organizations-800x600-classic-light-100.png",
+    "news-800x600-classic-light-100.png",
+    "library-800x600-classic-light-100.png",
+    "settings-800x600-classic-light-100.png",
+    "organizations-800x600-classic-light-125.png",
+    "news-800x600-classic-light-125.png",
+    "library-800x600-classic-light-125.png",
+    "settings-800x600-classic-light-125.png",
+    "organizations-800x600-classic-light-150.png",
+    "news-800x600-classic-light-150.png",
+    "library-800x600-classic-light-150.png",
+    "settings-800x600-classic-light-150.png",
+    "organizations-800x600-classic-light-200.png",
+    "news-800x600-classic-light-200.png",
+    "library-800x600-classic-light-200.png",
+    "settings-800x600-classic-light-200.png",
+    "events-calendar-800x600-minimal-dark-100.png",
+    "events-calendar-800x600-minimal-dark-125.png",
+    "events-calendar-800x600-minimal-dark-150.png",
+    "events-calendar-800x600-minimal-dark-200.png",
+    "events-calendar-800x600-classic-light-100.png",
+    "events-calendar-800x600-classic-light-125.png",
+    "events-calendar-800x600-classic-light-150.png",
+    "events-calendar-800x600-classic-light-200.png",
+    "news-preset-minimal-dark.png",
+    "news-preset-minimal-light.png",
+    "news-preset-minimal-graphite.png",
+    "news-preset-minimal-pastel.png",
+    "news-preset-deep-blue.png",
+    "news-preset-soft-violet.png",
+    "news-preset-forest-green.png",
+    "news-preset-warm-sand.png",
+    "news-preset-frost-blue.png",
+    "news-preset-glass-graphite.png",
+    "news-preset-mist-green.png",
+    "news-preset-soft-lavender.png",
+    "news-preset-classic-light.png",
+    "news-preset-classic-dark.png",
+    "news-preset-classic-blue.png",
+    "news-preset-classic-sepia.png",
+    "archive-menu-legibility-100.png",
+    "archive-menu-legibility-125.png",
+    "archive-menu-legibility-150.png",
+    "archive-menu-legibility-200.png",
+    "graph-synthetic-bounded-layout.png"
+  ],
+  "environment": {
+    "os": "Linux",
+    "java": "21.0.12.1",
+    "glass": "Monocle"
+  }
+}

@@ -1,0 +1,375 @@
+{
+  "timestampUtc": "2026-10-15T14:41:46.608528+00:00",
+  "scope": "READ-ONLY verified candidate input; no runtime/package registry changed",
+  "archives": [
+    {
+      "platform": "linux",
+      "verifiedDirectory": "/workspace/scratch/aa629f360927/tor-patch500/linux-verified",
+      "archiveFiles": [
+        {
+          "archivePath": "data/geoip",
+          "suggestedRuntimePath": "tor/data/geoip",
+          "sha256": "3099e91a4c8c87a1e6ab8a0b1e7407aea0314a2d8d048d654b4087b9ae103d9f",
+          "bytes": 9775942,
+          "previousSha256": "e55526d2991de956cbc403e7bfab372f633b8472fb3926592826e2db5cf3418e",
+          "change": "CHANGED"
+        },
+        {
+          "archivePath": "data/geoip6",
+          "suggestedRuntimePath": "tor/data/geoip6",
+          "sha256": "10f50daba4156a5b1ae782c0db0478b4584901b1ed72cd619cddd4b9f2b03d6a",
+          "bytes": 16599769,
+          "previousSha256": "2e3af25ccfcd2b317539f5cd61260302dbd11331ce31b6e1bfe91ebe102e38a9",
+          "change": "CHANGED"
+        },
+        {
+          "archivePath": "data/torrc-defaults",
+          "suggestedRuntimePath": "tor/data/torrc-defaults",
+          "sha256": "58cae4250134fb842582933c1348ce2b1068c3f2edccda77f3e376648a34d83d",
+          "bytes": 922,
+          "previousSha256": "58cae4250134fb842582933c1348ce2b1068c3f2edccda77f3e376648a34d83d",
+          "change": "SAME"
+        },
+        {
+          "archivePath": "debug/libcrypto.so.3",
+          "suggestedRuntimePath": null,
+          "sha256": "211500668217734495ac6f2c408327c73b447cb9fb203000b92c034abbc61997",
+          "bytes": 22323488,
+          "previousSha256": null,
+          "change": "NEW_OR_DIFFERENT_LAYOUT"
+        },
+        {
+          "archivePath": "debug/libevent-2.1.so.7",
+          "suggestedRuntimePath": null,
+          "sha256": "30cedd36d860bc8c2721516a9805533560a7dfabce6401da3e330ee13f84804a",
+          "bytes": 1159344,
+          "previousSha256": null,
+          "change": "NEW_OR_DIFFERENT_LAYOUT"
+        },
+        {
+          "archivePath": "debug/libssl.so.3",
+          "suggestedRuntimePath": null,
+          "sha256": "abff1f54f703dd5a994cc4e4564822aab40f56b67f790d30f8f00715913d2c12",
+          "bytes": 4765592,
+          "previousSha256": null,
+          "change": "NEW_OR_DIFFERENT_LAYOUT"
+        },
+        {
+          "archivePath": "debug/tor",
+          "suggestedRuntimePath": null,
+          "sha256": "90f11f901b25b79c4ad49af86d21cf4792baaa21a9ce4f3463138fee12b86f77",
+          "bytes": 12624840,
+          "previousSha256": null,
+          "change": "NEW_OR_DIFFERENT_LAYOUT"
+        },
+        {
+          "archivePath": "docs/conjure.txt",
+          "suggestedRuntimePath": "tor/licenses/conjure.txt",
+          "sha256": "0522541e3505d6669334f6eb488d4fde9c4af2234daec13170a0cf4d46d99e92",
+          "bytes": 127227,
+          "previousSha256": "0522541e3505d6669334f6eb488d4fde9c4af2234daec13170a0cf4d46d99e92",
+          "change": "SAME"
+        },
+        {
+          "archivePath": "docs/libevent.txt",
+          "suggestedRuntimePath": "tor/licenses/libevent.txt",
+          "sha256": "ff02effc9b331edcdac387d198691bfa3e575e7d244ad10cb826aa51ef085670",
+          "bytes": 4528,
+          "previousSha256": "ff02effc9b331edcdac387d198691bfa3e575e7d244ad10cb826aa51ef085670",
+          "change": "SAME"
+        },
+        {
+          "archivePath": "docs/lyrebird.txt",
+          "suggestedRuntimePath": "tor/licenses/lyrebird.txt",
+          "sha256": "2331e6517a15ce87e2a1d2838c314ca1b8f3c7a347ac28d370a7fccdb5964f40",
+          "bytes": 282585,
+          "previousSha256": "2331e6517a15ce87e2a1d2838c314ca1b8f3c7a347ac28d370a7fccdb5964f40",
+          "change": "SAME"
+        },
+        {
+          "archivePath": "docs/openssl.txt",
+          "suggestedRuntimePath": "tor/licenses/openssl.txt",
+          "sha256": "7d5450cb2d142651b8afa315b5f238efc805dad827d91ba367d8516bc9d49e7a",
+          "bytes": 10175,
+          "previousSha256": "7d5450cb2d142651b8afa315b5f238efc805dad827d91ba367d8516bc9d49e7a",
+          "change": "SAME"
+        },
+        {
+          "archivePath": "docs/tor.txt",
+          "suggestedRuntimePath": "tor/licenses/tor.txt",
+          "sha256": "5dc29ea302cc75db6db4a7c88d7b5d4638b4e0f5f1d2e6d21ce71f707470b766",
+          "bytes": 21086,
+          "previousSha256": "5dc29ea302cc75db6db4a7c88d7b5d4638b4e0f5f1d2e6d21ce71f707470b766",
+          "change": "SAME"
+        },
+        {
+          "archivePath": "tor/libcrypto.so.3",
+          "suggestedRuntimePath": "tor/libcrypto.so.3",
+          "sha256": "418208c5c738864cb5653f3eeab650debcc71afbe50d08b0bd5a04b20f1d3c05",
+          "bytes": 5493040,
+          "previousSha256": "6ed9fc77689324da28567478e0ed226f4f450f71b47852088e9b0b9220eb0404",
+          "change": "CHANGED"
+        },
+        {
+          "archivePath": "tor/libevent-2.1.so.7",
+          "suggestedRuntimePath": "tor/libevent-2.1.so.7",
+          "sha256": "b51ca562ec232785856c454ce4f3621d957f39d0db87919e237590b0331544ff",
+          "bytes": 346424,
+          "previousSha256": "b51ca562ec232785856c454ce4f3621d957f39d0db87919e237590b0331544ff",
+          "change": "SAME"
+        },
+        {
+          "archivePath": "tor/libssl.so.3",
+          "suggestedRuntimePath": "tor/libssl.so.3",
+          "sha256": "9c2438d086d6c299db04b0bc337bbc8c0acd26c19c71eada2173a5b2ef7cecac",
+          "bytes": 1056448,
+          "previousSha256": "e95f55c73b63a4e25db7b9c74abdd35c42829ca1dc68f2fb17ae71c4d841381c",
+          "change": "CHANGED"
+        },
+        {
+          "archivePath": "tor/pluggable_transports/README.CONJURE.md",
+          "suggestedRuntimePath": "tor/pluggable_transports/README.CONJURE.md",
+          "sha256": "f7e9211dd0e0089c93a0a84329fed41b2ac7b988531475b5eb2c86d38ad64d6c",
+          "bytes": 2750,
+          "previousSha256": null,
+          "change": "NEW_OR_DIFFERENT_LAYOUT"
+        },
+        {
+          "archivePath": "tor/pluggable_transports/conjure-client",
+          "suggestedRuntimePath": "tor/pluggable_transports/conjure-client",
+          "sha256": "8308b51e99db80774983b916035c2eab6db9e37c930916d92babc6daf9494e54",
+          "bytes": 12792100,
+          "previousSha256": null,
+          "change": "NEW_OR_DIFFERENT_LAYOUT"
+        },
+        {
+          "archivePath": "tor/pluggable_transports/lyrebird",
+          "suggestedRuntimePath": "tor/pluggable_transports/lyrebird",
+          "sha256": "ee13ec155cf9b131a3e1b87bd6d697a10c42d04f2eaaeab6b1590c9971d41421",
+          "bytes": 17621284,
+          "previousSha256": "ee13ec155cf9b131a3e1b87bd6d697a10c42d04f2eaaeab6b1590c9971d41421",
+          "change": "SAME"
+        },
+        {
+          "archivePath": "tor/pluggable_transports/pt_config.json",
+          "suggestedRuntimePath": "tor/pluggable_transports/pt_config.json",
+          "sha256": "2f7cf039710e96b70ea7d45473b905f9a6ce9a8b65e9f03e2507135ae8c75407",
+          "bytes": 2656,
+          "previousSha256": "2f7cf039710e96b70ea7d45473b905f9a6ce9a8b65e9f03e2507135ae8c75407",
+          "change": "SAME"
+        },
+        {
+          "archivePath": "tor/tor",
+          "suggestedRuntimePath": "tor/tor",
+          "sha256": "39c9db0654d2ec218892bd00f75eccb5b641a7222754436c2e4a8d2f764a57d3",
+          "bytes": 3614616,
+          "previousSha256": "74f5a47bfe0fc7f7c3ec2fe6c772ec6e52d4a9e9e9c95c7f274f5330e02a8813",
+          "change": "CHANGED"
+        }
+      ],
+      "windowsNativeAcceptance": "NOT_APPLICABLE"
+    },
+    {
+      "platform": "windows",
+      "verifiedDirectory": "/workspace/scratch/aa629f360927/tor-patch500/windows-verified",
+      "archiveFiles": [
+        {
+          "archivePath": "data/geoip",
+          "suggestedRuntimePath": "tor/data/geoip",
+          "sha256": "3099e91a4c8c87a1e6ab8a0b1e7407aea0314a2d8d048d654b4087b9ae103d9f",
+          "bytes": 9775942,
+          "previousSha256": "e55526d2991de956cbc403e7bfab372f633b8472fb3926592826e2db5cf3418e",
+          "change": "CHANGED"
+        },
+        {
+          "archivePath": "data/geoip6",
+          "suggestedRuntimePath": "tor/data/geoip6",
+          "sha256": "10f50daba4156a5b1ae782c0db0478b4584901b1ed72cd619cddd4b9f2b03d6a",
+          "bytes": 16599769,
+          "previousSha256": "2e3af25ccfcd2b317539f5cd61260302dbd11331ce31b6e1bfe91ebe102e38a9",
+          "change": "CHANGED"
+        },
+        {
+          "archivePath": "data/torrc-defaults",
+          "suggestedRuntimePath": "tor/data/torrc-defaults",
+          "sha256": "0f5205266ccb37da3d8d6a4f5c52862e42dac9f1dc2650be60cad523fa6ee964",
+          "bytes": 928,
+          "previousSha256": "0f5205266ccb37da3d8d6a4f5c52862e42dac9f1dc2650be60cad523fa6ee964",
+          "change": "SAME"
+        },
+        {
+          "archivePath": "docs/conjure.txt",
+          "suggestedRuntimePath": "tor/licenses/conjure.txt",
+          "sha256": "0522541e3505d6669334f6eb488d4fde9c4af2234daec13170a0cf4d46d99e92",
+          "bytes": 127227,
+          "previousSha256": "0522541e3505d6669334f6eb488d4fde9c4af2234daec13170a0cf4d46d99e92",
+          "change": "SAME"
+        },
+        {
+          "archivePath": "docs/libevent.txt",
+          "suggestedRuntimePath": "tor/licenses/libevent.txt",
+          "sha256": "ff02effc9b331edcdac387d198691bfa3e575e7d244ad10cb826aa51ef085670",
+          "bytes": 4528,
+          "previousSha256": "ff02effc9b331edcdac387d198691bfa3e575e7d244ad10cb826aa51ef085670",
+          "change": "SAME"
+        },
+        {
+          "archivePath": "docs/lyrebird.txt",
+          "suggestedRuntimePath": "tor/licenses/lyrebird.txt",
+          "sha256": "2331e6517a15ce87e2a1d2838c314ca1b8f3c7a347ac28d370a7fccdb5964f40",
+          "bytes": 282585,
+          "previousSha256": "2331e6517a15ce87e2a1d2838c314ca1b8f3c7a347ac28d370a7fccdb5964f40",
+          "change": "SAME"
+        },
+        {
+          "archivePath": "docs/openssl.txt",
+          "suggestedRuntimePath": "tor/licenses/openssl.txt",
+          "sha256": "7d5450cb2d142651b8afa315b5f238efc805dad827d91ba367d8516bc9d49e7a",
+          "bytes": 10175,
+          "previousSha256": "7d5450cb2d142651b8afa315b5f238efc805dad827d91ba367d8516bc9d49e7a",
+          "change": "SAME"
+        },
+        {
+          "archivePath": "docs/tor.txt",
+          "suggestedRuntimePath": "tor/licenses/tor.txt",
+          "sha256": "5dc29ea302cc75db6db4a7c88d7b5d4638b4e0f5f1d2e6d21ce71f707470b766",
+          "bytes": 21086,
+          "previousSha256": "5dc29ea302cc75db6db4a7c88d7b5d4638b4e0f5f1d2e6d21ce71f707470b766",
+          "change": "SAME"
+        },
+        {
+          "archivePath": "docs/zlib.txt",
+          "suggestedRuntimePath": "tor/licenses/zlib.txt",
+          "sha256": "e32ff4e00d9d94930537635291da39e7e612703334bf6fde8c7f1686fe8a45a2",
+          "bytes": 1002,
+          "previousSha256": "e32ff4e00d9d94930537635291da39e7e612703334bf6fde8c7f1686fe8a45a2",
+          "change": "SAME"
+        },
+        {
+          "archivePath": "tor/pluggable_transports/README.CONJURE.md",
+          "suggestedRuntimePath": "tor/pluggable_transports/README.CONJURE.md",
+          "sha256": "f7e9211dd0e0089c93a0a84329fed41b2ac7b988531475b5eb2c86d38ad64d6c",
+          "bytes": 2750,
+          "previousSha256": null,
+          "change": "NEW_OR_DIFFERENT_LAYOUT"
+        },
+        {
+          "archivePath": "tor/pluggable_transports/conjure-client.exe",
+          "suggestedRuntimePath": "tor/pluggable_transports/conjure-client.exe",
+          "sha256": "6d3bca367226caf0cd065ced8b031b482b5cd5c3889bce886f2e903197b9b43b",
+          "bytes": 13140480,
+          "previousSha256": null,
+          "change": "NEW_OR_DIFFERENT_LAYOUT"
+        },
+        {
+          "archivePath": "tor/pluggable_transports/lyrebird.exe",
+          "suggestedRuntimePath": "tor/pluggable_transports/lyrebird.exe",
+          "sha256": "6e218e85f9a7ae2481f5402ded822471a9a9d0c7e66b05db3842b93fa5c1f02e",
+          "bytes": 17957376,
+          "previousSha256": "6e218e85f9a7ae2481f5402ded822471a9a9d0c7e66b05db3842b93fa5c1f02e",
+          "change": "SAME"
+        },
+        {
+          "archivePath": "tor/pluggable_transports/pt_config.json",
+          "suggestedRuntimePath": "tor/pluggable_transports/pt_config.json",
+          "sha256": "3f11d303c30191b3b1d382b9badd882d87fd87550d061f7d25a1b31226fc9b75",
+          "bytes": 2668,
+          "previousSha256": "3f11d303c30191b3b1d382b9badd882d87fd87550d061f7d25a1b31226fc9b75",
+          "change": "SAME"
+        },
+        {
+          "archivePath": "tor/tor-gencert.exe",
+          "suggestedRuntimePath": "tor/tor-gencert.exe",
+          "sha256": "2baade3f1f0ca149cf01ed09eb26320eeb9678bdd75ecb5577d09c64347ee901",
+          "bytes": 6203904,
+          "previousSha256": null,
+          "change": "NEW_OR_DIFFERENT_LAYOUT"
+        },
+        {
+          "archivePath": "tor/tor.exe",
+          "suggestedRuntimePath": "tor/tor.exe",
+          "sha256": "8c38513b3c4584154158e7c584f4144849dc679a64cd679553d72dad28230c54",
+          "bytes": 10237952,
+          "previousSha256": "90bbdcafd586feea608a5e9b7d3959f4ee194f7770755cfde8fab240e9773ad1",
+          "change": "CHANGED"
+        }
+      ],
+      "windowsNativeAcceptance": "NOT_RUN"
+    }
+  ],
+  "linuxVersion": {
+    "exitCode": 0,
+    "stdout": "Tor version 0.4.9.14 (git-8fe2745aee2c3511).\nThis build of Tor is covered by the GNU General Public License (https://www.gnu.org/licenses/gpl-3.0.en.html)\nTor is running on Linux with Libevent 2.1.13-stable, OpenSSL 3.5.9, Zlib 1.3, Liblzma N/A, Libzstd N/A and Glibc 2.39 as libc.\nTor compiled with GCC version 10.3.0\n",
+    "stderr": ""
+  },
+  "linuxConfig": {
+    "exitCode": 0,
+    "stdout": "Oct 15 16:42:01.840 [notice] Tor 0.4.9.14 (git-8fe2745aee2c3511) running on Linux with Libevent 2.1.13-stable, OpenSSL 3.5.9, Zlib 1.3, Liblzma N/A, Libzstd N/A and Glibc 2.39 as libc.\nOct 15 16:42:01.840 [notice] Tor can't help you if you use it wrong! Learn how to be safe at https://support.torproject.org/faq/staying-anonymous/\nOct 15 16:42:01.840 [notice] Read configuration file \"/workspace/scratch/aa629f360927/tor-patch500/tor-patched-smoke500-7vlu8h_b/torrc\".\nOct 15 16:42:01.841 [warn] SocksPort, TransPort, NATDPort, DNSPort, and ORPort are all undefined, and there aren't any hidden services configured.  Tor will still run, but probably won't do anything.\nOct 15 16:42:01.842 [warn] You are running Tor as root. You don't need to, and you probably shouldn't.\nConfiguration was valid\n",
+    "stderr": "",
+    "status": "PASS_CONFIG"
+  },
+  "linuxLifecycle": {
+    "arguments": [
+      "/workspace/scratch/aa629f360927/tor-patch500/linux-verified/tor/tor",
+      "-f",
+      "/workspace/scratch/aa629f360927/tor-patch500/tor-patched-smoke500-7vlu8h_b/torrc"
+    ],
+    "configuration": "SocksPort 0\nControlPort 0\nDisableNetwork 1\nRunAsDaemon 0\nLog notice stdout\nDataDirectory /workspace/scratch/aa629f360927/tor-patch500/tor-patched-smoke500-7vlu8h_b/data\n",
+    "earlyExit": false,
+    "finalExitCode": 0,
+    "stdout": "Oct 15 16:42:01.846 [notice] Tor 0.4.9.14 (git-8fe2745aee2c3511) running on Linux with Libevent 2.1.13-stable, OpenSSL 3.5.9, Zlib 1.3, Liblzma N/A, Libzstd N/A and Glibc 2.39 as libc.\nOct 15 16:42:01.846 [notice] Tor can't help you if you use it wrong! Learn how to be safe at https://support.torproject.org/faq/staying-anonymous/\nOct 15 16:42:01.846 [notice] Read configuration file \"/workspace/scratch/aa629f360927/tor-patch500/tor-patched-smoke500-7vlu8h_b/torrc\".\nOct 15 16:42:01.847 [warn] SocksPort, TransPort, NATDPort, DNSPort, and ORPort are all undefined, and there aren't any hidden services configured.  Tor will still run, but probably won't do anything.\nOct 15 16:42:01.847 [notice] DisableNetwork is set. Tor will not make or accept non-control network connections. Shutting down all existing connections.\nOct 15 16:42:01.000 [warn] You are running Tor as root. You don't need to, and you probably shouldn't.\nOct 15 16:42:01.000 [notice] Set list of supported TLS groups to: ?*X25519MLKEM768 / ?SecP256r1MLKEM768 / *P-256:?X25519:P-224\nOct 15 16:42:01.000 [notice] Bootstrapped 0% (starting): Starting\nOct 15 16:42:01.000 [notice] Starting with guard context \"default\"\nOct 15 16:42:01.000 [notice] Delaying directory fetches: DisableNetwork is set.\nOct 15 16:42:03.000 [notice] Catching signal TERM, exiting cleanly.\n",
+    "disableNetwork": true,
+    "socksDisabled": true,
+    "controlDisabled": true,
+    "status": "PASS_PROCESS_LIFECYCLE"
+  },
+  "windowsStaticVersionStrings": [
+    "0.4.9.14",
+    "0.4.9.14",
+    "0.4.9.14",
+    "0.4.9.14",
+    "OpenSSL 3.5.9 29 Sep 2026",
+    "OpenSSL 3.5.9 29 Sep 2026",
+    "0.4.9.14",
+    "0.4.9.14"
+  ],
+  "windowsNativeExecution": "NOT_RUN",
+  "torVersion": "0.4.9.14",
+  "opensslVersion": "3.5.9",
+  "highVersionFinding": "PATCHED_IN_VERIFIED_CANDIDATE_NOT_YET_STAGED",
+  "productionReady": false,
+  "initialProbeFailure": {
+    "linuxConfig": {
+      "exitCode": 1,
+      "stdout": "Oct 15 16:41:46.464 [notice] Tor 0.4.9.14 (git-8fe2745aee2c3511) running on Linux with Libevent 2.1.13-stable, OpenSSL 3.5.9, Zlib 1.3, Liblzma N/A, Libzstd N/A and Glibc 2.39 as libc.\nOct 15 16:41:46.464 [notice] Tor can't help you if you use it wrong! Learn how to be safe at https://support.torproject.org/faq/staying-anonymous/\nOct 15 16:41:46.464 [warn] Unable to open configuration file \"/dev/null\".\nOct 15 16:41:46.464 [err] Reading config failed--see warnings above.\n",
+      "stderr": ""
+    },
+    "linuxLifecycle": {
+      "arguments": [
+        "/workspace/scratch/aa629f360927/tor-patch500/linux-verified/tor/tor",
+        "-f",
+        "/dev/null",
+        "--DataDirectory",
+        "/workspace/scratch/aa629f360927/tor-patch500/tor-patched-smoke500-qqqv1m9d",
+        "--SocksPort",
+        "0",
+        "--ControlPort",
+        "0",
+        "--DisableNetwork",
+        "1",
+        "--Log",
+        "notice stdout",
+        "--RunAsDaemon",
+        "0"
+      ],
+      "earlyExit": true,
+      "finalExitCode": 1,
+      "stdout": "Oct 15 16:41:46.468 [notice] Tor 0.4.9.14 (git-8fe2745aee2c3511) running on Linux with Libevent 2.1.13-stable, OpenSSL 3.5.9, Zlib 1.3, Liblzma N/A, Libzstd N/A and Glibc 2.39 as libc.\nOct 15 16:41:46.468 [notice] Tor can't help you if you use it wrong! Learn how to be safe at https://support.torproject.org/faq/staying-anonymous/\nOct 15 16:41:46.468 [warn] Unable to open configuration file \"/dev/null\".\nOct 15 16:41:46.468 [err] Reading config failed--see warnings above.\n",
+      "disableNetwork": true,
+      "socksDisabled": true,
+      "controlDisabled": true,
+      "status": "FAIL"
+    },
+    "reason": "Tor rejects /dev/null as its configuration path; repeated using an owner-only regular file"
+  }
+}

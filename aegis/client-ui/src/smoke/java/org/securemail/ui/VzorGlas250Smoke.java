@@ -48,8 +48,8 @@ public final class VzorGlas250Smoke {
     try{for(int y=0;y<bitmap.getHeight();y++)for(int x=0;x<bitmap.getWidth();x++)bitmap.setRGB(x,y,image.getPixelReader().getArgb(x,y));check(javax.imageio.ImageIO.write(bitmap,"png",output.resolve(name+".png").toFile()),"PNG encoder unavailable");images.add(name+".png");}finally{bitmap.flush();}
   }
   private static void navigation(Stage stage){
-    Set<String> expected=Set.of("Поиск","Профиль","Контакты","Письма","Архив","Взор","Глас","Настройки");Set<String> actual=new HashSet<>();
-    for(Node item:stage.getScene().getRoot().lookupAll(".nav-item"))actual.add(item.getAccessibleText());check(actual.equals(expected),"Eight current navigation sections missing: "+actual);oneStage();
+    Set<String> expected=Set.of("Поиск","Профиль","Контакты","Письма","Архив","Взор","Глас","Организации","Новости","Библиотека","Настройки");Set<String> actual=new HashSet<>();
+    for(Node item:stage.getScene().getRoot().lookupAll(".nav-item"))actual.add(item.getAccessibleText());check(actual.equals(expected),"Eleven current navigation sections missing: "+actual);oneStage();
   }
   private static void geometry(Stage stage,ScrollPane page,VBox card,int scale){
     layout(stage);check(Math.abs(stage.getScene().getWidth()-800)<1&&Math.abs(stage.getScene().getHeight()-600)<1,"Test scene is not actually 800x600");

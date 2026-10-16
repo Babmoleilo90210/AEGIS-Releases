@@ -1,0 +1,5 @@
+PASS: first production signed worker.claim rejected; identity committed and visible from independent SQLite connection; permissions empty
+PASS: actual independent-admin critical ROLE_CREATE, ROLE_ASSIGN and AGENT_CONFIG grant minimal worker; second production signed worker.claim accepted
+Claim response keys: [job, pausedReason]
+PASS: committed worker identity persists after store reopen
+Scope: temporary SQLite + production HTTP/JCA/worker client; connector seam is loopback, NOT native Tor or deployed service

@@ -1,0 +1,68 @@
+{
+  "version": "5.0.0",
+  "timestampUtc": "2026-10-15T15:20:07.548721+00:00",
+  "status": "PASS_FOCUSED_LOCAL_FIXTURES",
+  "javaTests": {
+    "found": 69,
+    "passed": 69,
+    "failed": 0,
+    "skipped": 0
+  },
+  "scope": "Actual SQLite, bounded parsing, real loopback HTTP and signed-RPC fixtures; not production news, actual LLM, Tor or native acceptance",
+  "productionReady": false,
+  "command": [
+    "/workspace/scratch/aa629f360927/inputs500/jdk-21.0.12.1+1/bin/java",
+    "-jar",
+    "/workspace/scratch/aa629f360927/inputs500/deps/junit-platform-console-standalone-1.13.4.jar",
+    "execute",
+    "--class-path",
+    "/workspace/scratch/aa629f360927/agent500-pagination/classes:/workspace/scratch/aa629f360927/inputs500/deps/slf4j-api-2.0.17.jar:/workspace/scratch/aa629f360927/inputs500/deps/junit-platform-console-standalone-1.13.4.jar:/workspace/scratch/aa629f360927/inputs500/deps/sqlite-jdbc-3.53.4.0.jar:/workspace/scratch/aa629f360927/inputs500/deps/openjfx-monocle-21.0.2.jar:/workspace/scratch/aa629f360927/inputs500/deps/password4j-1.8.4.jar:/workspace/scratch/aa629f360927/inputs500/deps/slf4j-nop-2.0.17.jar",
+    "--select-package",
+    "org.securemail.community.agent",
+    "--select-package",
+    "org.securemail.worker",
+    "--fail-if-no-tests",
+    "--reports-dir",
+    "/workspace/scratch/aa629f360927/agent500-pagination/junit",
+    "--details",
+    "summary"
+  ],
+  "sourceInputs": {
+    "community-server/src/main/java/org/securemail/community/agent/AgentJson.java": "84c5181384112c1e858df438610409c21e35bc62eb0df81b19b5e5579b000ddb",
+    "community-server/src/main/java/org/securemail/community/agent/AgentPageCursor.java": "d98ca5de4c2c96724fe2053a53a30a66fe7397b306d69e7f3278aa31332487e4",
+    "community-server/src/main/java/org/securemail/community/agent/AgentService.java": "6fed4af40d4d9ff1f6ef4c9ba9e40a12bb1eb99deafbbc9d783acacd7f7c5b0c",
+    "community-server/src/main/java/org/securemail/community/agent/CentralEvidenceVerifier.java": "0f555f531542638083f0f26bf52d91162e87f497accef14a5cb1ed58059fe258",
+    "community-server/src/main/java/org/securemail/community/agent/HttpNewsModel.java": "b042ece05c8eb6b53763145eb687fcfd78bb50a1a0616521436f33e301c7cb18",
+    "community-server/src/main/java/org/securemail/community/agent/LocalLibraryLinks.java": "4e4a085774251de467ca129135a92b61af4659256448b90cc224726515b74b16",
+    "community-server/src/main/java/org/securemail/community/agent/NewsModel.java": "abb559ac542b99faf75590fe7850ed9eb8125d40e1431a3cc1f972362aa7e421",
+    "community-server/src/main/java/org/securemail/community/agent/PublicSourceHttp.java": "242c37c89d8dc368bd3641e5265d33f413153fb0dfee5d38b5660ef117a0c25d",
+    "community-server/src/main/java/org/securemail/community/agent/RobotsPolicy.java": "6f5f4a229d9c28a44e6190f11d7d084ffdfc9bab1efc23fd983b745313f2e3f1",
+    "community-server/src/main/java/org/securemail/community/agent/SourceParser.java": "2532f6b6e1119336aa4a5cad22db5dac0cbc0e27ad37062068d36fd96e0bba09",
+    "community-server/src/main/java/org/securemail/community/agent/TrustedEditorialVerifier.java": "06e83854772980500df84fb9f0eddb9ab837fccffc00febf3440c285059badbd",
+    "community-server/src/test/java/org/securemail/community/agent/AgentJsonTest.java": "b175d5506756f9eef8a85527920e2d8646a7db3c2129ba040c71259dfac55e7f",
+    "community-server/src/test/java/org/securemail/community/agent/AgentServiceTest.java": "e0f3207b803d2bb696488a0a7a14b103d04af8e156f184df0901c06d6b6cce00",
+    "community-server/src/test/java/org/securemail/community/agent/CentralEvidenceVerifierTest.java": "772db483eaf5eaf73b1e15d9a38afc6c3a087a86e603b9607531d712b9b9438b",
+    "community-server/src/test/java/org/securemail/community/agent/LocalLibraryLinksTest.java": "d567353ab1aaf6b6b8825059b75d23e23ef6e524effdbe6d584e2dac6d5b1ac9",
+    "news-worker/src/main/java/org/securemail/worker/NewsWorker.java": "dbcaf6ae4243220e753b41a46c7c40afb6f29a8620665b60d3e4940ce0cb5008",
+    "news-worker/src/main/java/org/securemail/worker/NewsWorkerMain.java": "cb70aef0174986fbba3bf96a76bf108d1636fb31efcc591f3c3837a0db3e1cbb",
+    "news-worker/src/main/java/org/securemail/worker/WorkerCoordinatorClient.java": "17f20f14e06e25339a99d34f34623d9449c6020024f1871590f7560a8ac89840",
+    "news-worker/src/test/java/org/securemail/worker/ModelHttpFixtureTest.java": "c892671c7d91ee0b3f0e3ad2ad88810754460368d1a21bf6ae5ba6cf1c649613",
+    "news-worker/src/test/java/org/securemail/worker/NewsWorkerTest.java": "ee49607e9e84096fe11a0ba4dfce8a30d10ca0f321da90e384742e4b6031478e",
+    "news-worker/src/test/java/org/securemail/worker/SourceSecurityTest.java": "b0d128e194a3721b2901b2b7237766e69502e024f574515eb5bfed74ea94da37",
+    "news-worker/src/test/java/org/securemail/worker/WorkerCoordinatorClientTest.java": "ed47f8ab6f9b60f4aa66a0aa562240225643839b54f84a00ebe2a3023c099e32"
+  },
+  "pagination": {
+    "status": "PASS_LOCAL_SQLITE_AND_PRODUCTION_JSON",
+    "cases": [
+      "1000 sources",
+      "1000 cities",
+      "127 registered workers",
+      "1000 jobs with tied dates",
+      "1000 full review drafts",
+      "actor/action/epoch/expiry/tamper/revoked-authority cursor rejection"
+    ],
+    "serverResponseNodeBudget": 6000,
+    "sharedParserNodeLimit": 8192,
+    "maxRequestedLimit": 100
+  }
+}

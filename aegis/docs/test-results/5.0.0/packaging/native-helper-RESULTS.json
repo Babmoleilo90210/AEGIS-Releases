@@ -1,0 +1,123 @@
+{
+  "scope": "Cross-compiled helper PE/resource structure only, no Windows execution and no release payload",
+  "checkedAtUtc": "2026-10-15T14:19:30.368764+00:00",
+  "checks": {
+    "AEGIS.exe": {
+      "machine": "AMD64",
+      "PE32_plus": true,
+      "GUI": true,
+      "ASLR": true,
+      "NX": true,
+      "asInvoker": true,
+      "icon_sizes": [
+        16,
+        24,
+        32,
+        48,
+        64,
+        128,
+        256
+      ],
+      "icon_payload_matches_ICO": true,
+      "file_product_version": "5.0.0.0",
+      "PE_timeDateStamp": 0,
+      "sha256": "287583705377f586d96c2d7070f859d19ab3f82abc641469136fc2ddd1cb6687"
+    },
+    "AEGIS-Maintenance.exe": {
+      "machine": "AMD64",
+      "PE32_plus": true,
+      "GUI": true,
+      "ASLR": true,
+      "NX": true,
+      "asInvoker": true,
+      "icon_sizes": [
+        16,
+        24,
+        32,
+        48,
+        64,
+        128,
+        256
+      ],
+      "icon_payload_matches_ICO": true,
+      "file_product_version": "5.0.0.0",
+      "PE_timeDateStamp": 0,
+      "sha256": "5f15e38b9174b56243a00c4f1feb3d5a72f9aedc16765df54366d528732c35d5"
+    },
+    "AEGIS-Updater.exe": {
+      "machine": "AMD64",
+      "PE32_plus": true,
+      "GUI": true,
+      "ASLR": true,
+      "NX": true,
+      "asInvoker": true,
+      "icon_sizes": [
+        16,
+        24,
+        32,
+        48,
+        64,
+        128,
+        256
+      ],
+      "icon_payload_matches_ICO": true,
+      "file_product_version": "5.0.0.0",
+      "PE_timeDateStamp": 0,
+      "sha256": "18714f730dd2e1870ef9d0e0afe9e09f508d80e2f4c94958f7a53b577cc54777"
+    }
+  },
+  "commands": [
+    [
+      "/workspace/scratch/aa629f360927/packaging-tools500/usr/bin/x86_64-w64-mingw32-windres",
+      "--codepage=65001",
+      "launcher500.rc",
+      "-O",
+      "coff",
+      "-o",
+      "/workspace/scratch/aa629f360927/aegis/aegis/build/packaging500-helper-smoke/launcher500.res"
+    ],
+    [
+      "/workspace/scratch/aa629f360927/packaging-tools500/usr/bin/x86_64-w64-mingw32-gcc",
+      "-Os",
+      "-municode",
+      "-mwindows",
+      "-finput-charset=UTF-8",
+      "/workspace/scratch/aa629f360927/aegis/aegis/packaging/windows/launcher.c",
+      "/workspace/scratch/aa629f360927/aegis/aegis/build/packaging500-helper-smoke/launcher500.res",
+      "-Wl,--dynamicbase,--nxcompat,--high-entropy-va,--no-insert-timestamp",
+      "-luser32",
+      "-o",
+      "/workspace/scratch/aa629f360927/aegis/aegis/build/packaging500-helper-smoke/AEGIS.exe"
+    ],
+    [
+      "/workspace/scratch/aa629f360927/packaging-tools500/usr/bin/x86_64-w64-mingw32-gcc",
+      "-Os",
+      "-municode",
+      "-mwindows",
+      "-finput-charset=UTF-8",
+      "/workspace/scratch/aa629f360927/aegis/aegis/packaging/windows/maintenance500.c",
+      "/workspace/scratch/aa629f360927/aegis/aegis/build/packaging500-helper-smoke/launcher500.res",
+      "-Wl,--dynamicbase,--nxcompat,--high-entropy-va,--no-insert-timestamp",
+      "-luser32",
+      "-lshell32",
+      "-ladvapi32",
+      "-o",
+      "/workspace/scratch/aa629f360927/aegis/aegis/build/packaging500-helper-smoke/AEGIS-Maintenance.exe"
+    ],
+    [
+      "/workspace/scratch/aa629f360927/packaging-tools500/usr/bin/x86_64-w64-mingw32-gcc",
+      "-Os",
+      "-municode",
+      "-mwindows",
+      "-finput-charset=UTF-8",
+      "/workspace/scratch/aa629f360927/aegis/aegis/packaging/windows/updater.c",
+      "/workspace/scratch/aa629f360927/aegis/aegis/build/packaging500-helper-smoke/launcher500.res",
+      "-Wl,--dynamicbase,--nxcompat,--high-entropy-va,--no-insert-timestamp",
+      "-luser32",
+      "-lshell32",
+      "-o",
+      "/workspace/scratch/aa629f360927/aegis/aegis/build/packaging500-helper-smoke/AEGIS-Updater.exe"
+    ]
+  ],
+  "nativeWindows": "NOT_RUN"
+}

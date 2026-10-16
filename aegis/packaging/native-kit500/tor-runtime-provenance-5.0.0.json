@@ -1,0 +1,240 @@
+{
+  "schema": 1,
+  "clientVersion": "5.0.0",
+  "expertVersion": "15.0.25",
+  "torVersion": "0.4.9.14",
+  "opensslVersion": "3.5.9",
+  "primaryFingerprint": "EF6E286DDA85EA2A4BA7DE684E2C6E8793298290",
+  "signingFingerprint": "022DA248432D2A0E0F54E65E316C1FACD62D07D9",
+  "verification": "Each exact archive independently verified by GnuPG and production Bouncy Castle TorBrowserSignature using unchanged pinned developer key; signed checksum list matches. Offline packaging rechecks these reviewed byte pins, not a caller-supplied success flag.",
+  "verificationEvidence": {
+    "DOWNLOADS.json": "8e804256b319b460e1c31c2977f994421cb45c4fbf425f8b25f2319ffbcf5698",
+    "SIGNATURES.json": "bcf9e61110d606bc65de96b0ed9d8c1928ca150f41979926afc3417f355b8755",
+    "JAVA-VERIFICATION.json": "173ef348605669ea0a2ef054b58e5d6e7d46487868643d3ee7dfbea9487d1542",
+    "VERIFIED-PATCH-INPUTS.json": "68da416e0f42c8a8f55f709df01dcacdbc153508a6e4ccd2ee388f01fb24b9aa",
+    "sha256sums-signed-build.txt": "539e778fa5ae4e9e061e5721a4d15108b085fd5f26e45629ba587264f021f564",
+    "sha256sums-signed-build.txt.asc": "fc049cd8279d35d7616e21598c2933d2d0f4e2624cfb03037fa599d153c57a5e"
+  },
+  "aegisConfiguration": {
+    "sourcePath": "packaging/native-kit500/snowflake-bridges.txt",
+    "runtimePath": "snowflake-bridges.txt",
+    "sha256": "fc30cb710a52544c4cb17a62e3a4c774f2a87c7c4c1b96a3c13b643aa18e7351",
+    "bytes": 904,
+    "origin": "Unchanged AEGIS 2.5.0 client configuration; not claimed as a new upstream archive member"
+  },
+  "platforms": {
+    "linux": {
+      "archive": {
+        "file": "tor-expert-bundle-linux-x86_64-15.0.25.tar.gz",
+        "officialUrl": "https://dist.torproject.org/torbrowser/15.0.25/tor-expert-bundle-linux-x86_64-15.0.25.tar.gz",
+        "mirror": "https://ftp.acc.umu.se/mirror/torproject.org/dist/torbrowser/15.0.25/tor-expert-bundle-linux-x86_64-15.0.25.tar.gz",
+        "sha256": "19cf18726eecb362e0f21d27afa9ea9efe5da928bfdfbb1ceb5fe54519e87f4a",
+        "bytes": 32448097
+      },
+      "signature": {
+        "file": "tor-expert-bundle-linux-x86_64-15.0.25.tar.gz.asc",
+        "officialUrl": "https://dist.torproject.org/torbrowser/15.0.25/tor-expert-bundle-linux-x86_64-15.0.25.tar.gz.asc",
+        "mirror": "https://ftp.acc.umu.se/mirror/torproject.org/dist/torbrowser/15.0.25/tor-expert-bundle-linux-x86_64-15.0.25.tar.gz.asc",
+        "sha256": "1ae7917f8abd120f2fedca1ef5173296bcc322d800f38f8abebbe18d9da8eb26",
+        "bytes": 833
+      },
+      "members": {
+        "data/geoip": {
+          "sha256": "3099e91a4c8c87a1e6ab8a0b1e7407aea0314a2d8d048d654b4087b9ae103d9f",
+          "bytes": 9775942,
+          "runtimePath": "data/geoip"
+        },
+        "data/geoip6": {
+          "sha256": "10f50daba4156a5b1ae782c0db0478b4584901b1ed72cd619cddd4b9f2b03d6a",
+          "bytes": 16599769,
+          "runtimePath": "data/geoip6"
+        },
+        "data/torrc-defaults": {
+          "sha256": "58cae4250134fb842582933c1348ce2b1068c3f2edccda77f3e376648a34d83d",
+          "bytes": 922,
+          "runtimePath": "data/torrc-defaults"
+        },
+        "debug/libcrypto.so.3": {
+          "sha256": "211500668217734495ac6f2c408327c73b447cb9fb203000b92c034abbc61997",
+          "bytes": 22323488,
+          "runtimePath": null
+        },
+        "debug/libevent-2.1.so.7": {
+          "sha256": "30cedd36d860bc8c2721516a9805533560a7dfabce6401da3e330ee13f84804a",
+          "bytes": 1159344,
+          "runtimePath": null
+        },
+        "debug/libssl.so.3": {
+          "sha256": "abff1f54f703dd5a994cc4e4564822aab40f56b67f790d30f8f00715913d2c12",
+          "bytes": 4765592,
+          "runtimePath": null
+        },
+        "debug/tor": {
+          "sha256": "90f11f901b25b79c4ad49af86d21cf4792baaa21a9ce4f3463138fee12b86f77",
+          "bytes": 12624840,
+          "runtimePath": null
+        },
+        "docs/conjure.txt": {
+          "sha256": "0522541e3505d6669334f6eb488d4fde9c4af2234daec13170a0cf4d46d99e92",
+          "bytes": 127227,
+          "runtimePath": "licenses/conjure.txt"
+        },
+        "docs/libevent.txt": {
+          "sha256": "ff02effc9b331edcdac387d198691bfa3e575e7d244ad10cb826aa51ef085670",
+          "bytes": 4528,
+          "runtimePath": "licenses/libevent.txt"
+        },
+        "docs/lyrebird.txt": {
+          "sha256": "2331e6517a15ce87e2a1d2838c314ca1b8f3c7a347ac28d370a7fccdb5964f40",
+          "bytes": 282585,
+          "runtimePath": "licenses/lyrebird.txt"
+        },
+        "docs/openssl.txt": {
+          "sha256": "7d5450cb2d142651b8afa315b5f238efc805dad827d91ba367d8516bc9d49e7a",
+          "bytes": 10175,
+          "runtimePath": "licenses/openssl.txt"
+        },
+        "docs/tor.txt": {
+          "sha256": "5dc29ea302cc75db6db4a7c88d7b5d4638b4e0f5f1d2e6d21ce71f707470b766",
+          "bytes": 21086,
+          "runtimePath": "licenses/tor.txt"
+        },
+        "tor/libcrypto.so.3": {
+          "sha256": "418208c5c738864cb5653f3eeab650debcc71afbe50d08b0bd5a04b20f1d3c05",
+          "bytes": 5493040,
+          "runtimePath": "libcrypto.so.3"
+        },
+        "tor/libevent-2.1.so.7": {
+          "sha256": "b51ca562ec232785856c454ce4f3621d957f39d0db87919e237590b0331544ff",
+          "bytes": 346424,
+          "runtimePath": "libevent-2.1.so.7"
+        },
+        "tor/libssl.so.3": {
+          "sha256": "9c2438d086d6c299db04b0bc337bbc8c0acd26c19c71eada2173a5b2ef7cecac",
+          "bytes": 1056448,
+          "runtimePath": "libssl.so.3"
+        },
+        "tor/pluggable_transports/README.CONJURE.md": {
+          "sha256": "f7e9211dd0e0089c93a0a84329fed41b2ac7b988531475b5eb2c86d38ad64d6c",
+          "bytes": 2750,
+          "runtimePath": "pluggable_transports/README.CONJURE.md"
+        },
+        "tor/pluggable_transports/conjure-client": {
+          "sha256": "8308b51e99db80774983b916035c2eab6db9e37c930916d92babc6daf9494e54",
+          "bytes": 12792100,
+          "runtimePath": "pluggable_transports/conjure-client"
+        },
+        "tor/pluggable_transports/lyrebird": {
+          "sha256": "ee13ec155cf9b131a3e1b87bd6d697a10c42d04f2eaaeab6b1590c9971d41421",
+          "bytes": 17621284,
+          "runtimePath": "pluggable_transports/lyrebird"
+        },
+        "tor/pluggable_transports/pt_config.json": {
+          "sha256": "2f7cf039710e96b70ea7d45473b905f9a6ce9a8b65e9f03e2507135ae8c75407",
+          "bytes": 2656,
+          "runtimePath": "pluggable_transports/pt_config.json"
+        },
+        "tor/tor": {
+          "sha256": "39c9db0654d2ec218892bd00f75eccb5b641a7222754436c2e4a8d2f764a57d3",
+          "bytes": 3614616,
+          "runtimePath": "tor"
+        }
+      },
+      "nativeTargetAcceptance": "NOT_RUN"
+    },
+    "win": {
+      "archive": {
+        "file": "tor-expert-bundle-windows-x86_64-15.0.25.tar.gz",
+        "officialUrl": "https://dist.torproject.org/torbrowser/15.0.25/tor-expert-bundle-windows-x86_64-15.0.25.tar.gz",
+        "mirror": "https://ftp.acc.umu.se/mirror/torproject.org/dist/torbrowser/15.0.25/tor-expert-bundle-windows-x86_64-15.0.25.tar.gz",
+        "sha256": "c1988c701de2f24f7d098d1d6d7f507b58f27740d097f29c246e0524d639b252",
+        "bytes": 22507599
+      },
+      "signature": {
+        "file": "tor-expert-bundle-windows-x86_64-15.0.25.tar.gz.asc",
+        "officialUrl": "https://dist.torproject.org/torbrowser/15.0.25/tor-expert-bundle-windows-x86_64-15.0.25.tar.gz.asc",
+        "mirror": "https://ftp.acc.umu.se/mirror/torproject.org/dist/torbrowser/15.0.25/tor-expert-bundle-windows-x86_64-15.0.25.tar.gz.asc",
+        "sha256": "4ecb546445aaffff1f5a95b7544af968aff276361968b4cb03c612c010bf30ca",
+        "bytes": 833
+      },
+      "members": {
+        "data/geoip": {
+          "sha256": "3099e91a4c8c87a1e6ab8a0b1e7407aea0314a2d8d048d654b4087b9ae103d9f",
+          "bytes": 9775942,
+          "runtimePath": "data/geoip"
+        },
+        "data/geoip6": {
+          "sha256": "10f50daba4156a5b1ae782c0db0478b4584901b1ed72cd619cddd4b9f2b03d6a",
+          "bytes": 16599769,
+          "runtimePath": "data/geoip6"
+        },
+        "data/torrc-defaults": {
+          "sha256": "0f5205266ccb37da3d8d6a4f5c52862e42dac9f1dc2650be60cad523fa6ee964",
+          "bytes": 928,
+          "runtimePath": "data/torrc-defaults"
+        },
+        "docs/conjure.txt": {
+          "sha256": "0522541e3505d6669334f6eb488d4fde9c4af2234daec13170a0cf4d46d99e92",
+          "bytes": 127227,
+          "runtimePath": "licenses/conjure.txt"
+        },
+        "docs/libevent.txt": {
+          "sha256": "ff02effc9b331edcdac387d198691bfa3e575e7d244ad10cb826aa51ef085670",
+          "bytes": 4528,
+          "runtimePath": "licenses/libevent.txt"
+        },
+        "docs/lyrebird.txt": {
+          "sha256": "2331e6517a15ce87e2a1d2838c314ca1b8f3c7a347ac28d370a7fccdb5964f40",
+          "bytes": 282585,
+          "runtimePath": "licenses/lyrebird.txt"
+        },
+        "docs/openssl.txt": {
+          "sha256": "7d5450cb2d142651b8afa315b5f238efc805dad827d91ba367d8516bc9d49e7a",
+          "bytes": 10175,
+          "runtimePath": "licenses/openssl.txt"
+        },
+        "docs/tor.txt": {
+          "sha256": "5dc29ea302cc75db6db4a7c88d7b5d4638b4e0f5f1d2e6d21ce71f707470b766",
+          "bytes": 21086,
+          "runtimePath": "licenses/tor.txt"
+        },
+        "docs/zlib.txt": {
+          "sha256": "e32ff4e00d9d94930537635291da39e7e612703334bf6fde8c7f1686fe8a45a2",
+          "bytes": 1002,
+          "runtimePath": "licenses/zlib.txt"
+        },
+        "tor/pluggable_transports/README.CONJURE.md": {
+          "sha256": "f7e9211dd0e0089c93a0a84329fed41b2ac7b988531475b5eb2c86d38ad64d6c",
+          "bytes": 2750,
+          "runtimePath": "pluggable_transports/README.CONJURE.md"
+        },
+        "tor/pluggable_transports/conjure-client.exe": {
+          "sha256": "6d3bca367226caf0cd065ced8b031b482b5cd5c3889bce886f2e903197b9b43b",
+          "bytes": 13140480,
+          "runtimePath": "pluggable_transports/conjure-client.exe"
+        },
+        "tor/pluggable_transports/lyrebird.exe": {
+          "sha256": "6e218e85f9a7ae2481f5402ded822471a9a9d0c7e66b05db3842b93fa5c1f02e",
+          "bytes": 17957376,
+          "runtimePath": "pluggable_transports/lyrebird.exe"
+        },
+        "tor/pluggable_transports/pt_config.json": {
+          "sha256": "3f11d303c30191b3b1d382b9badd882d87fd87550d061f7d25a1b31226fc9b75",
+          "bytes": 2668,
+          "runtimePath": "pluggable_transports/pt_config.json"
+        },
+        "tor/tor-gencert.exe": {
+          "sha256": "2baade3f1f0ca149cf01ed09eb26320eeb9678bdd75ecb5577d09c64347ee901",
+          "bytes": 6203904,
+          "runtimePath": "tor-gencert.exe"
+        },
+        "tor/tor.exe": {
+          "sha256": "8c38513b3c4584154158e7c584f4144849dc679a64cd679553d72dad28230c54",
+          "bytes": 10237952,
+          "runtimePath": "tor.exe"
+        }
+      },
+      "nativeTargetAcceptance": "NOT_RUN"
+    }
+  }
+}

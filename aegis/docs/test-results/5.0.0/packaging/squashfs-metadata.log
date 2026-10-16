@@ -1,0 +1,3 @@
+drwxr-xr-x 0/0                      26 2026-10-15 16:08 squashfs-root
+drwxr-xr-x 0/0                      27 2026-10-15 16:08 squashfs-root/dir
+-rw-r--r-- 0/0                      54 2026-10-15 16:08 squashfs-root/dir/file

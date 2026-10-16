@@ -48,3 +48,20 @@
 .context-menu{-fx-background-color:-aegis-panel;-fx-background-radius:7}
 .menu-item>.label{-fx-text-fill:-aegis-text}
 .menu-item:focused{-fx-background-color:-aegis-control}
+
+/* 5.0: three independent token-coloured navigation surfaces and untruncated action labels. */
+.navigation-shell{-fx-background-color:transparent;}
+.navigation-block{-fx-background-radius:12;-fx-border-radius:12;-fx-border-color:-aegis-control;-fx-border-width:1;}
+.navigation-block .button.nav-item{-fx-padding:6 4;-fx-background-radius:7;}
+.navigation-block .nav-icon{-fx-alignment:center;}
+.archive-toolbar .menu-button{-fx-min-width:-1;-fx-pref-width:-1;-fx-max-width:10000;-fx-min-height:2.6em;-fx-pref-height:-1;-fx-padding:6 12;}
+.archive-toolbar .menu-button>.label{-fx-wrap-text:false;-fx-text-overrun:clip;-fx-padding:0;-fx-min-height:-1;-fx-pref-height:-1;-fx-max-height:10000;}
+.archive-toolbar .menu-button>.arrow-button{-fx-padding:0 0 0 8;}
+#library-knowledge-graph{-fx-background-color:-aegis-panel;-fx-background-radius:10;}
+.text-flow .text{-fx-fill:-aegis-text;}
+
+/* Calendar uses only the current Appearance Engine palette. */
+.calendar-day { -fx-background-color: -aegis-panel; -fx-background-radius: 6; }
+.calendar-today { -fx-border-color: -aegis-accent; -fx-border-radius: 6; -fx-border-width: 1; }
+
+.calendar-day .button { -fx-padding: 6 2; -fx-wrap-text: false; }

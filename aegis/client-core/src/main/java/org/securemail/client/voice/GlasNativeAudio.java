@@ -97,9 +97,11 @@ final class GlasNativeAudio implements AutoCloseable {
         if (pcm.length != SAMPLES) throw new IllegalArgumentException("frame");
         synchronized (encodeLock) {
             check(); byte[] packet = new byte[PACKET_MAX];
-            int n = opus.opus_encode(encoder, pcm, SAMPLES, packet, packet.length);
-            if (n <= 0 || n > packet.length) throw new IOException("Ошибка кодирования звука");
-            byte[] result = Arrays.copyOf(packet, n); Arrays.fill(packet, (byte) 0); return result;
+            try {
+                int n = opus.opus_encode(encoder, pcm, SAMPLES, packet, packet.length);
+                if (n <= 0 || n > packet.length) throw new IOException("Ошибка кодирования звука");
+                return Arrays.copyOf(packet, n);
+            } finally { Arrays.fill(packet, (byte) 0); }
         }
     }
     short[] decode(byte[] packet) throws IOException {
@@ -109,9 +111,12 @@ final class GlasNativeAudio implements AutoCloseable {
                     opus.opus_packet_get_nb_samples(packet, packet.length, RATE) != SAMPLES ||
                     opus.opus_packet_get_nb_channels(packet) != 1)) throw new IOException("Неверный аудиокадр");
             short[] pcm = new short[SAMPLES];
-            if (opus.opus_decode(decoder, packet, packet == null ? 0 : packet.length, pcm, SAMPLES, 0) != SAMPLES)
-                throw new IOException("Ошибка декодирования звука");
-            return pcm;
+            boolean success=false;
+            try {
+                if (opus.opus_decode(decoder, packet, packet == null ? 0 : packet.length, pcm, SAMPLES, 0) != SAMPLES)
+                    throw new IOException("Ошибка декодирования звука");
+                success=true;return pcm;
+            } finally { if(!success)Arrays.fill(pcm, (short) 0); }
         }
     }
     void process(short[] pcm) throws IOException {
@@ -119,8 +124,9 @@ final class GlasNativeAudio implements AutoCloseable {
             check();
             if (echo != null) {
                 short[] clean = new short[SAMPLES];
-                speex.speex_echo_capture(echo, pcm, clean); echoCaptureStarted = true;
-                System.arraycopy(clean, 0, pcm, 0, SAMPLES); Arrays.fill(clean, (short) 0);
+                try { speex.speex_echo_capture(echo, pcm, clean); echoCaptureStarted = true;
+                    System.arraycopy(clean, 0, pcm, 0, SAMPLES);
+                } finally { Arrays.fill(clean, (short) 0); }
             }
             speex.speex_preprocess_run(preprocessor, pcm);
         }

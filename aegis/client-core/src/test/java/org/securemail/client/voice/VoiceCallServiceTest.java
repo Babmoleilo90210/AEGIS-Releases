@@ -80,8 +80,79 @@ class VoiceCallServiceTest {
   @Test void declineAndDisabledIncomingDoNotOpenDevicesAndNextCallStillWorks()throws Exception{
     try(var pair=new Pair()){
       pair.ring();pair.bc.decline(pair.bc.snapshot().callId());await(()->pair.ac.snapshot().state()==VoiceCallService.State.DECLINED);await(()->!pair.ac.busy()&&!pair.bc.busy());assertTrue(pair.am.sessions.isEmpty());assertTrue(pair.bm.sessions.isEmpty());
-      pair.bc.setIncomingEnabled(false);pair.ac.start(pair.bi);await(()->pair.ac.snapshot().state()==VoiceCallService.State.DECLINED);await(()->!pair.ac.busy());assertTrue(pair.am.sessions.isEmpty());assertTrue(pair.bm.sessions.isEmpty());
+      pair.bc.setIncomingEnabled(false);pair.ac.start(pair.bi);await(()->pair.ac.snapshot().state()==VoiceCallService.State.UNAVAILABLE);await(()->!pair.ac.busy());assertTrue(pair.am.sessions.isEmpty());assertTrue(pair.bm.sessions.isEmpty());
       pair.bc.setIncomingEnabled(true);pair.secure();assertEquals(1,pair.am.sessions.size());assertEquals(1,pair.bm.sessions.size());
+    }
+  }
+  @Test void outgoingDeniedBeforeDialAndIncomingDeniedBeforeTlsResponse()throws Exception {
+    try(var pair=new Pair()){
+      pair.ac.setCallPolicy(new VoiceCallPolicy(VoiceCallPolicy.Rule.allContacts(),VoiceCallPolicy.Rule.nobody()));
+      assertThrows(IOException.class,()->pair.ac.start(pair.bi));assertEquals(0,pair.connections.get());assertTrue(pair.am.sessions.isEmpty());
+      pair.ac.setCallPolicy(VoiceCallPolicy.defaults());pair.bc.setCallPolicy(new VoiceCallPolicy(VoiceCallPolicy.Rule.nobody(),VoiceCallPolicy.Rule.allContacts()));
+      try(var socket=new Socket(InetAddress.getLoopbackAddress(),pair.server.port());var offer=VoiceTls.create(pair.a.identity(),UUID.randomUUID(),VoiceTls.Role.CALLER,pair.bi.publicKey())){
+        socket.setSoTimeout(3000);var out=new DataOutputStream(socket.getOutputStream());Binary.header(out);out.writeByte(VoiceFrames.OPERATION);Binary.text(out,"");offer.offer().write(out);out.flush();assertEquals(-1,socket.getInputStream().read(),"Rejected callers receive no signed offer, TLS, or denial detail");
+      }
+      assertEquals(VoiceCallService.State.IDLE,pair.bc.snapshot().state());assertTrue(pair.bm.sessions.isEmpty());
+    }
+  }
+  @Test void incomingOrganizationRefreshRunsBeforeTlsAndConsentAndNeverOnAudioOrTimer()throws Exception {
+    try(var pair=new Pair()){
+      var organization=new VoiceCallPolicy.Rule(VoiceCallPolicy.Mode.SELECTED_CONTACTS,Set.of(),Set.of(),true);
+      pair.bc.setCallPolicy(new VoiceCallPolicy(organization,VoiceCallPolicy.Rule.allContacts()));
+      var entered=new CountDownLatch(1);var release=new CountDownLatch(1);var prepared=new AtomicInteger();var grant=new AtomicReference<VoiceOrganizationAuthorizer.Decision>();Thread testThread=Thread.currentThread();
+      pair.bc.setOrganizationAuthorizer(new VoiceOrganizationAuthorizer(){
+        public void prepare(String self,String peer,VoiceCallService.Direction direction)throws IOException {
+          assertNotSame(testThread,Thread.currentThread());assertEquals(pair.bi.userId(),self);assertEquals(pair.ai.userId(),peer);assertEquals(VoiceCallService.Direction.INCOMING,direction);prepared.incrementAndGet();entered.countDown();
+          try{if(!release.await(3,TimeUnit.SECONDS))throw new IOException("Test preparation deadline");}catch(InterruptedException stopped){Thread.currentThread().interrupt();throw new IOException(stopped);}
+          grant.set(new Decision(self,peer,direction,pair.clock.millis()-1000,pair.clock.millis()+20_000,true));
+        }
+        public Decision authorize(String self,String peer,VoiceCallService.Direction direction){return grant.get();}
+      });
+      try {
+        pair.ac.start(pair.bi);assertTrue(entered.await(3,TimeUnit.SECONDS));assertEquals(VoiceCallService.State.PREPARING,pair.ac.snapshot().state(),"No callee offer/TLS is returned before the fresh decision");assertEquals(VoiceCallService.State.IDLE,pair.bc.snapshot().state());assertTrue(pair.am.sessions.isEmpty());assertTrue(pair.bm.sessions.isEmpty());
+      }finally{release.countDown();}
+      await(()->pair.bc.snapshot().state()==VoiceCallService.State.INCOMING&&pair.ac.snapshot().state()==VoiceCallService.State.RINGING);assertTrue(pair.am.sessions.isEmpty());assertTrue(pair.bm.sessions.isEmpty());
+      pair.bc.accept(pair.bc.snapshot().callId());await(()->pair.ac.snapshot().state()==VoiceCallService.State.SECURE&&pair.bc.snapshot().state()==VoiceCallService.State.SECURE);pair.ac.setMicrophoneEnabled(true);await(()->pair.ac.snapshot().microphoneEnabled());assertTrue(pair.am.last().emit(new byte[]{7,8}));assertArrayEquals(new byte[]{7,8},pair.bm.last().received.poll(3,TimeUnit.SECONDS));assertEquals(1,prepared.get(),"Media and permission ticks never perform RPC refreshes");
+    }
+  }
+  @Test void deniedUnknownBlockedOrDisabledIncomingNeverPrepareOrganizationOrActivateMedia()throws Exception {
+    try(var pair=new Pair()){
+      var organization=new VoiceCallPolicy.Rule(VoiceCallPolicy.Mode.SELECTED_CONTACTS,Set.of(),Set.of(),true);var prepared=new AtomicInteger();
+      pair.bc.setOrganizationAuthorizer(new VoiceOrganizationAuthorizer(){public void prepare(String self,String peer,VoiceCallService.Direction direction){prepared.incrementAndGet();}public Decision authorize(String self,String peer,VoiceCallService.Direction direction){return new Decision(self,peer,direction,pair.clock.millis()-1000,pair.clock.millis()+10_000,true);}});
+      pair.bc.setCallPolicy(new VoiceCallPolicy(organization,VoiceCallPolicy.Rule.allContacts()));
+      pair.b.removeContact(pair.ai.nickname());pair.ac.start(pair.bi);await(()->pair.ac.snapshot().state()==VoiceCallService.State.UNAVAILABLE);await(()->!pair.ac.busy());assertEquals(0,prepared.get());
+      pair.b.trust(pair.ai);pair.bf.blockSender(pair.ai.userId(),true);pair.ac.start(pair.bi);await(()->pair.ac.snapshot().state()==VoiceCallService.State.UNAVAILABLE);await(()->!pair.ac.busy());assertEquals(0,prepared.get());pair.bf.blockSender(pair.ai.userId(),false);
+      pair.bc.setCallPolicy(new VoiceCallPolicy(new VoiceCallPolicy.Rule(VoiceCallPolicy.Mode.SELECTED_CONTACTS,Set.of(),Set.of(pair.ai.userId()),true),VoiceCallPolicy.Rule.allContacts()));pair.ac.start(pair.bi);await(()->pair.ac.snapshot().state()==VoiceCallService.State.UNAVAILABLE);await(()->!pair.ac.busy());assertEquals(0,prepared.get());
+      pair.bc.setCallPolicy(new VoiceCallPolicy(organization,VoiceCallPolicy.Rule.allContacts()));pair.bc.setIncomingEnabled(false);pair.ac.start(pair.bi);await(()->pair.ac.snapshot().state()==VoiceCallService.State.UNAVAILABLE);await(()->!pair.ac.busy());assertEquals(0,prepared.get());assertEquals(VoiceCallService.State.IDLE,pair.bc.snapshot().state());assertTrue(pair.am.sessions.isEmpty());assertTrue(pair.bm.sessions.isEmpty());
+    }
+  }
+  @Test void incomingOrganizationPreparationFailureReturnsNoOfferAndNeverActivatesMedia()throws Exception {
+    try(var pair=new Pair()){
+      var organization=new VoiceCallPolicy.Rule(VoiceCallPolicy.Mode.SELECTED_CONTACTS,Set.of(),Set.of(),true);var prepared=new AtomicInteger();pair.bc.setCallPolicy(new VoiceCallPolicy(organization,VoiceCallPolicy.Rule.allContacts()));
+      pair.bc.setOrganizationAuthorizer(new VoiceOrganizationAuthorizer(){public void prepare(String self,String peer,VoiceCallService.Direction direction)throws IOException{prepared.incrementAndGet();throw new IOException("private organizational failure must not be sent to the caller");}public Decision authorize(String self,String peer,VoiceCallService.Direction direction){return null;}});
+      try(var socket=new Socket(InetAddress.getLoopbackAddress(),pair.server.port());var offer=VoiceTls.create(pair.a.identity(),UUID.randomUUID(),VoiceTls.Role.CALLER,pair.bi.publicKey())){
+        socket.setSoTimeout(3000);var out=new DataOutputStream(socket.getOutputStream());Binary.header(out);out.writeByte(VoiceFrames.OPERATION);Binary.text(out,"");offer.offer().write(out);out.flush();assertEquals(-1,socket.getInputStream().read());
+      }
+      assertEquals(1,prepared.get());assertEquals(VoiceCallService.State.IDLE,pair.bc.snapshot().state());assertTrue(pair.am.sessions.isEmpty());assertTrue(pair.bm.sessions.isEmpty());
+    }
+  }
+  @Test void selectedContactPolicyPersistsAndRevocationClosesDevices()throws Exception {
+    try(var pair=new Pair()){
+      var selected=new VoiceCallPolicy.Rule(VoiceCallPolicy.Mode.SELECTED_CONTACTS,Set.of(pair.ai.userId()),Set.of(),false);
+      pair.bc.setCallPolicy(new VoiceCallPolicy(selected,VoiceCallPolicy.Rule.allContacts()));pair.secure();pair.ac.setMicrophoneEnabled(true);await(()->pair.ac.snapshot().microphoneEnabled());
+      pair.bc.setCallPolicy(new VoiceCallPolicy(new VoiceCallPolicy.Rule(VoiceCallPolicy.Mode.ALL_CONTACTS,Set.of(),Set.of(pair.ai.userId()),true),VoiceCallPolicy.Rule.allContacts()));
+      await(()->pair.bc.snapshot().state()==VoiceCallService.State.UNAVAILABLE);await(()->pair.bm.last().closed.get()&&!pair.ac.snapshot().microphoneEnabled());assertFalse(pair.bc.snapshot().microphoneEnabled());assertFalse(pair.ac.snapshot().microphoneEnabled());
+      assertTrue(new VoiceHistory(pair.b).policy().incoming().deniedContactIds().contains(pair.ai.userId()));
+    }
+  }
+  @Test void organizationDecisionMissingExpiredOrRevokedFailsClosedWithoutTrustingUnknownUsers()throws Exception {
+    try(var pair=new Pair()){
+      var organization=new VoiceCallPolicy.Rule(VoiceCallPolicy.Mode.SELECTED_CONTACTS,Set.of(),Set.of(),true);
+      pair.ac.setCallPolicy(new VoiceCallPolicy(VoiceCallPolicy.Rule.allContacts(),organization));assertThrows(IOException.class,()->pair.ac.start(pair.bi));assertEquals(0,pair.connections.get());
+      AtomicBoolean grant=new AtomicBoolean(true);pair.ac.setOrganizationAuthorizer((self,peer,direction)->new VoiceOrganizationAuthorizer.Decision(self,peer,direction,pair.clock.millis()-1000,pair.clock.millis()+10_000,grant.get()));
+      pair.secure();grant.set(false);await(()->pair.ac.snapshot().state()==VoiceCallService.State.UNAVAILABLE);await(()->pair.am.last().closed.get());
+      pair.ac.setOrganizationAuthorizer((self,peer,direction)->new VoiceOrganizationAuthorizer.Decision(self,peer,direction,pair.clock.millis()-30_000,pair.clock.millis()-1,true));assertThrows(IOException.class,()->pair.ac.start(pair.bi));
+      pair.a.removeContact(pair.bi.nickname());pair.ac.setOrganizationAuthorizer((self,peer,direction)->new VoiceOrganizationAuthorizer.Decision(self,peer,direction,pair.clock.millis()-1000,pair.clock.millis()+10_000,true));assertThrows(IOException.class,()->pair.ac.start(pair.bi));
     }
   }
   @Test void unknownAndBlockedIdentitiesNeverRingOrBecomeTrusted()throws Exception{

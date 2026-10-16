@@ -31,7 +31,7 @@ class NavigationMigration200Test {
 
   @Test void sixSectionCustomOrderSurvivesLoadSaveExportAndRepeatedImport() throws Exception {
     List<String> oldOrder = List.of("settings", "letters", "archive", "contacts", "search", "profile");
-    List<String> expected = List.of("settings", "letters", "archive", "safeweb", "glas", "contacts", "search", "profile");
+    List<String> expected = List.of("letters", "archive", "contacts", "search", "profile", "safeweb", "glas", "organizations", "news", "library", "settings");
     Path profile = root.resolve("profile");
     AppearanceStore initial = new AppearanceStore(profile);
     initial.saveLayout("Рабочий макет", initial.current().layout().panels(18, 35).below(true));
@@ -63,11 +63,11 @@ class NavigationMigration200Test {
     assertEquals(1, receiver.layouts().size());
     assertEquals(reopened.layouts().get("Рабочий макет"), receiver.layouts().get("Рабочий макет"));
     assertEquals(expected, Layout.parse(receiver.layouts().get("Рабочий макет").json()).order());
-    assertEquals(oldOrder, expected.stream().filter(section -> !section.equals("safeweb")&&!section.equals("glas")).toList());
+    for(var block:NAVIGATION_BLOCKS)assertEquals(oldOrder.stream().filter(block::contains).toList(),expected.stream().filter(oldOrder::contains).filter(block::contains).toList());
   }
 
   @org.junit.jupiter.params.ParameterizedTest
-  @org.junit.jupiter.params.provider.ValueSource(strings={"2.0.0","2.5.0"})
+  @org.junit.jupiter.params.provider.ValueSource(strings={"2.0.0","2.5.0","5.0.0"})
   void beforeVersionOpenSnapshotsRealKeysMailArchiveAndAppearanceWithoutRewritingSources(String nextVersion) throws Exception {
     String previous = System.getProperty("aegis.profile");
     System.setProperty("aegis.profile", root.toString());

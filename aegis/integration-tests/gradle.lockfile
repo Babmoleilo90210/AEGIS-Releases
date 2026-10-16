@@ -3,9 +3,9 @@
 # This file is expected to be part of source control.
 # To regenerate this file, run: ./gradlew :integration-tests:dependencies --write-locks
 com.google.code.findbugs:jsr305:3.0.2=testRuntimeClasspath
-com.google.code.gson:gson:2.14.0=testRuntimeClasspath
+com.google.code.gson:gson:2.14.0=testCompileClasspath,testRuntimeClasspath
 com.google.crypto.tink:tink:1.23.0=testRuntimeClasspath
-com.google.errorprone:error_prone_annotations:2.48.0=testRuntimeClasspath
+com.google.errorprone:error_prone_annotations:2.48.0=testCompileClasspath,testRuntimeClasspath
 com.google.protobuf:protobuf-java:4.33.6=testRuntimeClasspath
 com.password4j:password4j:1.8.4=testRuntimeClasspath
 com.twelvemonkeys.common:common-image:3.14.0=testRuntimeClasspath

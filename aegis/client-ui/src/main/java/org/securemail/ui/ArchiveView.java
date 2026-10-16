@@ -93,9 +93,9 @@ final class ArchiveView implements AutoCloseable {
   private void showBrowser(){
     if(browserInitialized){root.setCenter(browser);tree.setRoot(null);refresh();return;}browserInitialized=true;
     search.setPromptText("Поиск по архиву");HBox.setHgrow(search,Priority.ALWAYS);type.getItems().setAll("Все типы","letter","text","image","pdf","file","folder");type.setValue("Все типы");type.setConverter(new javafx.util.StringConverter<>(){public String toString(String id){return ArchiveDisplayTypes.label(id);}public String fromString(String value){return value;}});type.setCellFactory(v->new ListCell<>(){protected void updateItem(String value,boolean empty){super.updateItem(value,empty);setText(empty?null:ArchiveDisplayTypes.label(value));}});themes.stylePopup(type);themes.stylePopup(mode);themes.stylePopup(sort);mode.getItems().setAll(Mode.values());mode.setValue(storedMode);sort.getItems().setAll(Sort.values());sort.setValue(storedSort);since.setPromptText("С даты");until.setPromptText("По дату");since.setPrefWidth(145);until.setPrefWidth(145);
-    MenuButton display=new MenuButton("Вид и сортировка");display.setId("archive-display-menu");display.getItems().setAll(displayItems());
-    MenuButton manage=new MenuButton("Управление");manage.setId("archive-management-menu");manage.getItems().setAll(managementItems());
-    MenuButton more=new MenuButton("Ещё");more.setId("archive-more-menu");
+    MenuButton display=new MenuButton("Вид и сортировка");display.setId("archive-display-menu");display.setMinWidth(Region.USE_PREF_SIZE);display.getItems().setAll(displayItems());
+    MenuButton manage=new MenuButton("Управление");manage.setId("archive-management-menu");manage.setMinWidth(Region.USE_PREF_SIZE);manage.getItems().setAll(managementItems());
+    MenuButton more=new MenuButton("Ещё");more.setId("archive-more-menu");more.setMinWidth(Region.USE_PREF_SIZE);
     CheckMenuItem starred=new CheckMenuItem("Избранное"),deleted=new CheckMenuItem("Корзина");starred.selectedProperty().bindBidirectional(favorites.selectedProperty());deleted.selectedProperty().bindBidirectional(trash.selectedProperty());starred.setOnAction(e->refresh());deleted.setOnAction(e->refresh());
     Menu displayNested=new Menu("Вид и сортировка"),manageNested=new Menu("Управление");displayNested.getItems().setAll(displayItems());manageNested.getItems().setAll(managementItems());
     MenuItem lockItem=new MenuItem("Заблокировать");lockItem.setOnAction(e->lock());more.getItems().addAll(starred,deleted,displayNested,manageNested,new SeparatorMenuItem(),lockItem);

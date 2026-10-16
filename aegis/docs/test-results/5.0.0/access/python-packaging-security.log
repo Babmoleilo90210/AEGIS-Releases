@@ -1,0 +1,9 @@
+test_dependencies_fail_closed_on_wrong_hash (test_package_community500.CommunityPackagingTests.test_dependencies_fail_closed_on_wrong_hash) ... ok
+test_manifest_cannot_add_external_classpath_agent_or_native_privilege (test_package_community500.CommunityPackagingTests.test_manifest_cannot_add_external_classpath_agent_or_native_privilege) ... ok
+test_payload_compares_every_class_resource_and_rejects_added_class (test_package_community500.CommunityPackagingTests.test_payload_compares_every_class_resource_and_rejects_added_class) ... ok
+test_unsafe_duplicate_and_symlink_payloads_rejected (test_package_community500.CommunityPackagingTests.test_unsafe_duplicate_and_symlink_payloads_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.008s
+
+OK

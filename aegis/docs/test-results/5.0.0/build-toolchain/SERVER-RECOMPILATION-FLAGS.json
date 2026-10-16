@@ -1,0 +1,16 @@
+{
+  "scope": "Actual Java21 recompilation of all13 common-protocol classes compared byte-for-byte to Gradle output",
+  "compiler": "javac21.0.12.1",
+  "gradleJarSha256": "10a5888b5af0253ff053c6d59d0993bc6c7637d0123af69046fe20affab6e937",
+  "withoutExplicitDebugOption": {
+    "classFiles": 13,
+    "mismatches": 12
+  },
+  "withExplicitFullDebugOption": {
+    "flag": "-g",
+    "classFiles": 13,
+    "mismatches": 0
+  },
+  "fix": "Server packager uses -g to match Gradle JavaCompile debug=true; final packaging compares every class and resource again",
+  "nativeAcceptance": "NOT_RUN"
+}

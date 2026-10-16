@@ -1,0 +1,1 @@
+import org.securemail.client.safeweb.*; public class NamespaceProbe500 { public static void main(String[] a) throws Exception { try { LinuxSafeWebSandbox.probeNamespaces(); System.out.println("PASS_NAMESPACE_PRIMITIVE_ONLY"); } catch (SandboxPrerequisites.Failure f) { System.out.println("BLOCKED:"+f.code()); System.out.println(f.getMessage()); } } }

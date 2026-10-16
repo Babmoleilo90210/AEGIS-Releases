@@ -1,0 +1,4098 @@
+{
+  "policy": "Exact named automated tests support only their stated local scope. Unmapped, partial, native, physical and full-updater scenarios remain NOT_RUN. No previous owner 2.5.0 acceptance is inherited.",
+  "previousOwner250AcceptanceInherited": false,
+  "productionReady": false,
+  "requirements": [
+    {
+      "automatedEvidence": [],
+      "group": "MIGRATION",
+      "id": "MIGRATION-01",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Обновление с 2.5.0"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "MIGRATION",
+      "id": "MIGRATION-02",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Обновление с последней поддерживаемой Stable"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "MIGRATION",
+      "id": "MIGRATION-03",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.client.storage.ProfileSnapshotTest",
+          "evidence": "client-core/build/test-results/test/TEST-org.securemail.client.storage.ProfileSnapshotTest.xml",
+          "module": "client-core",
+          "name": "allControlledStateSurvivesRestoreAndTamperingStopsIt()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "c7842645d0633c78a1ebcf50bace81b38dd5aaf37fab5c110c4a8d160835f25c"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Сохранение аккаунта"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.integration.CommunityIntegration500Test",
+          "evidence": "integration-tests/build/test-results/test/TEST-org.securemail.integration.CommunityIntegration500Test.xml",
+          "module": "integration-tests",
+          "name": "cacheLargerThanMailQuotaSurvivesRekeyAndVerifiedProfileRestoreWithoutChangingIdentityOrArchive()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "63715217adc30e52ecafe03698dcf45ada3ff913bf2ce71fc02c1a67d4874438"
+        }
+      ],
+      "group": "MIGRATION",
+      "id": "MIGRATION-04",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Настоящие тестовые encrypted vault/cache/archive и beforeVersionOpen(5.0.0)/snapshot restore; не установка предыдущего бинарника",
+      "status": "PASS",
+      "title": "Сохранение identity keys"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "MIGRATION",
+      "id": "MIGRATION-05",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.client.storage.ProfileSnapshotTest",
+          "evidence": "client-core/build/test-results/test/TEST-org.securemail.client.storage.ProfileSnapshotTest.xml",
+          "module": "client-core",
+          "name": "allControlledStateSurvivesRestoreAndTamperingStopsIt()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "c7842645d0633c78a1ebcf50bace81b38dd5aaf37fab5c110c4a8d160835f25c"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Сохранение контактов"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "MIGRATION",
+      "id": "MIGRATION-06",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.client.storage.ProfileSnapshotTest",
+          "evidence": "client-core/build/test-results/test/TEST-org.securemail.client.storage.ProfileSnapshotTest.xml",
+          "module": "client-core",
+          "name": "allControlledStateSurvivesRestoreAndTamperingStopsIt()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "c7842645d0633c78a1ebcf50bace81b38dd5aaf37fab5c110c4a8d160835f25c"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Сохранение писем"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "MIGRATION",
+      "id": "MIGRATION-07",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.client.storage.ProfileSnapshotTest",
+          "evidence": "client-core/build/test-results/test/TEST-org.securemail.client.storage.ProfileSnapshotTest.xml",
+          "module": "client-core",
+          "name": "allControlledStateSurvivesRestoreAndTamperingStopsIt()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "c7842645d0633c78a1ebcf50bace81b38dd5aaf37fab5c110c4a8d160835f25c"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Сохранение вложений"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.integration.CommunityIntegration500Test",
+          "evidence": "integration-tests/build/test-results/test/TEST-org.securemail.integration.CommunityIntegration500Test.xml",
+          "module": "integration-tests",
+          "name": "cacheLargerThanMailQuotaSurvivesRekeyAndVerifiedProfileRestoreWithoutChangingIdentityOrArchive()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "63715217adc30e52ecafe03698dcf45ada3ff913bf2ce71fc02c1a67d4874438"
+        }
+      ],
+      "group": "MIGRATION",
+      "id": "MIGRATION-08",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Настоящие тестовые encrypted vault/cache/archive и beforeVersionOpen(5.0.0)/snapshot restore; не установка предыдущего бинарника",
+      "status": "PASS",
+      "title": "Сохранение личного архива"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "MIGRATION",
+      "id": "MIGRATION-09",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.client.storage.ProfileSnapshotTest",
+          "evidence": "client-core/build/test-results/test/TEST-org.securemail.client.storage.ProfileSnapshotTest.xml",
+          "module": "client-core",
+          "name": "allControlledStateSurvivesRestoreAndTamperingStopsIt()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "c7842645d0633c78a1ebcf50bace81b38dd5aaf37fab5c110c4a8d160835f25c"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Сохранение recovery key"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "MIGRATION",
+      "id": "MIGRATION-10",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.client.storage.ProfileSnapshotTest",
+          "evidence": "client-core/build/test-results/test/TEST-org.securemail.client.storage.ProfileSnapshotTest.xml",
+          "module": "client-core",
+          "name": "allControlledStateSurvivesRestoreAndTamperingStopsIt()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "c7842645d0633c78a1ebcf50bace81b38dd5aaf37fab5c110c4a8d160835f25c"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Сохранение настроек Взора"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "MIGRATION",
+      "id": "MIGRATION-11",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.client.storage.ProfileSnapshotTest",
+          "evidence": "client-core/build/test-results/test/TEST-org.securemail.client.storage.ProfileSnapshotTest.xml",
+          "module": "client-core",
+          "name": "allControlledStateSurvivesRestoreAndTamperingStopsIt()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "c7842645d0633c78a1ebcf50bace81b38dd5aaf37fab5c110c4a8d160835f25c"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Сохранение настроек Гласа"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "MIGRATION",
+      "id": "MIGRATION-12",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.client.storage.ProfileSnapshotTest",
+          "evidence": "client-core/build/test-results/test/TEST-org.securemail.client.storage.ProfileSnapshotTest.xml",
+          "module": "client-core",
+          "name": "allControlledStateSurvivesRestoreAndTamperingStopsIt()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "c7842645d0633c78a1ebcf50bace81b38dd5aaf37fab5c110c4a8d160835f25c"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Сохранение тем и пресетов"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "MIGRATION",
+      "id": "MIGRATION-13",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.client.storage.ProfileSnapshotTest",
+          "evidence": "client-core/build/test-results/test/TEST-org.securemail.client.storage.ProfileSnapshotTest.xml",
+          "module": "client-core",
+          "name": "allControlledStateSurvivesRestoreAndTamperingStopsIt()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "c7842645d0633c78a1ebcf50bace81b38dd5aaf37fab5c110c4a8d160835f25c"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Сохранение пользовательских макетов"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.client.storage.NavigationMigration500Test",
+          "evidence": "client-core/build/test-results/test/TEST-org.securemail.client.storage.NavigationMigration500Test.xml",
+          "module": "client-core",
+          "name": "customized250LayoutGroupsWithoutLosingWithinBlockOrderAndIsIdempotent()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "d54e287046070ff1b7160f12a36a1c8a8dbed6532a93786502fa1e2ee8e550b4"
+        }
+      ],
+      "group": "MIGRATION",
+      "id": "MIGRATION-14",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальный roundtrip сохранённого пользовательского порядка по трём блокам; не installer E2E",
+      "status": "PASS",
+      "title": "Сохранение порядка навигации"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.integration.CommunityIntegration500Test",
+          "evidence": "integration-tests/build/test-results/test/TEST-org.securemail.integration.CommunityIntegration500Test.xml",
+          "module": "integration-tests",
+          "name": "cacheLargerThanMailQuotaSurvivesRekeyAndVerifiedProfileRestoreWithoutChangingIdentityOrArchive()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "63715217adc30e52ecafe03698dcf45ada3ff913bf2ce71fc02c1a67d4874438"
+        }
+      ],
+      "group": "MIGRATION",
+      "id": "MIGRATION-15",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Настоящие тестовые encrypted vault/cache/archive и beforeVersionOpen(5.0.0)/snapshot restore; не установка предыдущего бинарника",
+      "status": "PASS",
+      "title": "Повторный запуск миграции"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "MIGRATION",
+      "id": "MIGRATION-16",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.client.storage.ProfileSnapshotTest",
+          "evidence": "client-core/build/test-results/test/TEST-org.securemail.client.storage.ProfileSnapshotTest.xml",
+          "module": "client-core",
+          "name": "allControlledStateSurvivesRestoreAndTamperingStopsIt()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "c7842645d0633c78a1ebcf50bace81b38dd5aaf37fab5c110c4a8d160835f25c"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Искусственное прерывание миграции"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.integration.CommunityIntegration500Test",
+          "evidence": "integration-tests/build/test-results/test/TEST-org.securemail.integration.CommunityIntegration500Test.xml",
+          "module": "integration-tests",
+          "name": "cacheLargerThanMailQuotaSurvivesRekeyAndVerifiedProfileRestoreWithoutChangingIdentityOrArchive()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "63715217adc30e52ecafe03698dcf45ada3ff913bf2ce71fc02c1a67d4874438"
+        }
+      ],
+      "group": "MIGRATION",
+      "id": "MIGRATION-17",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Настоящие тестовые encrypted vault/cache/archive и beforeVersionOpen(5.0.0)/snapshot restore; не установка предыдущего бинарника",
+      "status": "PASS",
+      "title": "Восстановление после ошибки"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "MIGRATION",
+      "id": "MIGRATION-18",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.client.storage.ProfileSnapshotTest",
+          "evidence": "client-core/build/test-results/test/TEST-org.securemail.client.storage.ProfileSnapshotTest.xml",
+          "module": "client-core",
+          "name": "allControlledStateSurvivesRestoreAndTamperingStopsIt()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "c7842645d0633c78a1ebcf50bace81b38dd5aaf37fab5c110c4a8d160835f25c"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Откат приложения"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "MIGRATION",
+      "id": "MIGRATION-19",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.client.storage.ProfileSnapshotTest",
+          "evidence": "client-core/build/test-results/test/TEST-org.securemail.client.storage.ProfileSnapshotTest.xml",
+          "module": "client-core",
+          "name": "allControlledStateSurvivesRestoreAndTamperingStopsIt()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "c7842645d0633c78a1ebcf50bace81b38dd5aaf37fab5c110c4a8d160835f25c"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Совместимость старых данных"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "MIGRATION",
+      "id": "MIGRATION-20",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.client.storage.ProfileSnapshotTest",
+          "evidence": "client-core/build/test-results/test/TEST-org.securemail.client.storage.ProfileSnapshotTest.xml",
+          "module": "client-core",
+          "name": "allControlledStateSurvivesRestoreAndTamperingStopsIt()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "c7842645d0633c78a1ebcf50bace81b38dd5aaf37fab5c110c4a8d160835f25c"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Отсутствие потери пользовательских секретов"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.access.AccessControlTest.xml",
+          "module": "community-server",
+          "name": "noRoleHasNoMutationAndClearanceDoesNotGrantPermission()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "20c4e79e2e23510425f0ade18186014f9f9e198b8466ebd5489fea3f1e074c7f"
+        }
+      ],
+      "group": "ACCESS",
+      "id": "ACCESS-01",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "status": "PASS",
+      "title": "Пользователь без роли"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.access.AccessControlTest.xml",
+          "module": "community-server",
+          "name": "realGlobalRoleNeedsIndependentApprovalAndAppliesAfterAssignment()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "20c4e79e2e23510425f0ade18186014f9f9e198b8466ebd5489fea3f1e074c7f"
+        }
+      ],
+      "group": "ACCESS",
+      "id": "ACCESS-02",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "status": "PASS",
+      "title": "Глобальная роль"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.access.AccessControlTest.xml",
+          "module": "community-server",
+          "name": "inheritedPermissionsAndCycleAndCrossScopeAreEnforcedInDatabaseTransaction()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "20c4e79e2e23510425f0ade18186014f9f9e198b8466ebd5489fea3f1e074c7f"
+        }
+      ],
+      "group": "ACCESS",
+      "id": "ACCESS-03",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "status": "PASS",
+      "title": "Роль организации"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.access.AccessControlTest.xml",
+          "module": "community-server",
+          "name": "inheritedPermissionsAndCycleAndCrossScopeAreEnforcedInDatabaseTransaction()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "20c4e79e2e23510425f0ade18186014f9f9e198b8466ebd5489fea3f1e074c7f"
+        }
+      ],
+      "group": "ACCESS",
+      "id": "ACCESS-04",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "status": "PASS",
+      "title": "Наследование разрешений"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.access.AccessControlTest.xml",
+          "module": "community-server",
+          "name": "scopedDelegationRejectsGlobalPowerAndUnheldPermissions()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "20c4e79e2e23510425f0ade18186014f9f9e198b8466ebd5489fea3f1e074c7f"
+        }
+      ],
+      "group": "ACCESS",
+      "id": "ACCESS-05",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "status": "PASS",
+      "title": "Запрет повышения полномочий"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.access.AccessControlTest.xml",
+          "module": "community-server",
+          "name": "resourceConstraintsAreConjoinedAndClosedResourceConcealed()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "20c4e79e2e23510425f0ade18186014f9f9e198b8466ebd5489fea3f1e074c7f"
+        }
+      ],
+      "group": "ACCESS",
+      "id": "ACCESS-06",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальный серверный отказ при недостаточном уровне; синтетические SQL identities/policy, не production/native",
+      "status": "PASS",
+      "title": "Минимальный уровень документа"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "additionalPermissionsAndClearanceAreConjunctive()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "group": "ACCESS",
+      "id": "ACCESS-07",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "status": "PASS",
+      "title": "Дополнительное разрешение"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "explicitUserPolicyRecheckedOnEveryRequest()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "group": "ACCESS",
+      "id": "ACCESS-08",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "status": "PASS",
+      "title": "Разрешённый конкретный пользователь"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.access.AccessControlTest.xml",
+          "module": "community-server",
+          "name": "resourceConstraintsAreConjoinedAndClosedResourceConcealed()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "20c4e79e2e23510425f0ade18186014f9f9e198b8466ebd5489fea3f1e074c7f"
+        }
+      ],
+      "group": "ACCESS",
+      "id": "ACCESS-09",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "status": "PASS",
+      "title": "Разрешённая конкретная организация"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.access.AccessControlTest.xml",
+          "module": "community-server",
+          "name": "memberRemovalRevokesRolePermissionAndAdvancesEpoch()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "20c4e79e2e23510425f0ade18186014f9f9e198b8466ebd5489fea3f1e074c7f"
+        }
+      ],
+      "group": "ACCESS",
+      "id": "ACCESS-10",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "status": "PASS",
+      "title": "Отзыв разрешений"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "draftHiddenIncludingSearchGraphAndUniformGet()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "group": "ACCESS",
+      "id": "ACCESS-11",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "status": "PASS",
+      "title": "Запрет чтения закрытого материала"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "clearanceDoesNotGiveEditing()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "group": "ACCESS",
+      "id": "ACCESS-12",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "status": "PASS",
+      "title": "Запрет изменения без полномочий"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "attachmentCannotBypassPublicationPermission()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "group": "ACCESS",
+      "id": "ACCESS-13",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "status": "PASS",
+      "title": "Запрет публикации без полномочий"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "ACCESS",
+      "id": "ACCESS-14",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "clearanceDoesNotGiveEditing()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Запрет удаления без полномочий"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "ACCESS",
+      "id": "ACCESS-15",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "explicitUserPolicyRecheckedOnEveryRequest()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Защита от IDOR"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "draftHiddenIncludingSearchGraphAndUniformGet()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "group": "ACCESS",
+      "id": "ACCESS-16",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "status": "PASS",
+      "title": "Защита поискового индекса"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "graphNeverContainsHiddenEndpointsAndProposalsNeedEditor()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "group": "ACCESS",
+      "id": "ACCESS-17",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "status": "PASS",
+      "title": "Защита графа библиотеки"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "exportRequiresSeparateRightAndCurrentRead()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "group": "ACCESS",
+      "id": "ACCESS-18",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "status": "PASS",
+      "title": "Защита экспорта"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.access.AccessControlTest.xml",
+          "module": "community-server",
+          "name": "roleDeletionRemovesInheritedPermissionAndInvalidatesOnlyAffectedCaches()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "20c4e79e2e23510425f0ade18186014f9f9e198b8466ebd5489fea3f1e074c7f"
+        }
+      ],
+      "group": "ACCESS",
+      "id": "ACCESS-19",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "status": "PASS",
+      "title": "Проверка при изменении роли"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.access.AccessControlTest.xml",
+          "module": "community-server",
+          "name": "optimisticRoleUpdateAllowsOnlyOneConcurrentRevision()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "20c4e79e2e23510425f0ade18186014f9f9e198b8466ebd5489fea3f1e074c7f"
+        }
+      ],
+      "group": "ACCESS",
+      "id": "ACCESS-20",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "status": "PASS",
+      "title": "Конкурентные административные операции"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "AI",
+      "id": "AI-01",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Запуск рабочего узла"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.agent.AgentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.agent.AgentServiceTest.xml",
+          "module": "community-server",
+          "name": "leaseIsBoundToWorkerAndCannotBeTakenTwice()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "c47b3ae2d546f1100c1996976aece49257e7b8e0be7914aca4364a31641aaf79"
+        }
+      ],
+      "group": "AI",
+      "id": "AI-02",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная реальная SQL-очередь/правила coordinator с явно синтетическими source/model fixtures; не live news/model/production run",
+      "status": "PASS",
+      "title": "Получение задания"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "AI",
+      "id": "AI-03",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.agent.CentralEvidenceVerifierTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.agent.CentralEvidenceVerifierTest.xml",
+          "module": "community-server",
+          "name": "independentlyFetchedMatchingEvidenceCanPassAndHasReceipts()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "0be7743a6a28c048d450d4c291e1b8bcef79308ef8fb716feae0fe0021fd2024"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Поиск новостей"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.worker.NewsWorkerTest",
+          "evidence": "news-worker/build/test-results/test/TEST-org.securemail.worker.NewsWorkerTest.xml",
+          "module": "news-worker",
+          "name": "actualCollectorPipelineParsesAllowlistedRssAndPassesOnlyPublicDataToModel()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "b00faf51bfba600c61bc3175417e0ea27d502e116868a5beef2b0539159803af"
+        }
+      ],
+      "group": "AI",
+      "id": "AI-04",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Синтетический allowlisted RSS проходит настоящий collector/parser; модель тестовая, публичная сеть не проверялась",
+      "status": "PASS",
+      "title": "Обработка RSS"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "AI",
+      "id": "AI-05",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.agent.CentralEvidenceVerifierTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.agent.CentralEvidenceVerifierTest.xml",
+          "module": "community-server",
+          "name": "independentlyFetchedMatchingEvidenceCanPassAndHasReceipts()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "0be7743a6a28c048d450d4c291e1b8bcef79308ef8fb716feae0fe0021fd2024"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Обработка официального сайта"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "AI",
+      "id": "AI-06",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.agent.CentralEvidenceVerifierTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.agent.CentralEvidenceVerifierTest.xml",
+          "module": "community-server",
+          "name": "independentlyFetchedMatchingEvidenceCanPassAndHasReceipts()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "0be7743a6a28c048d450d4c291e1b8bcef79308ef8fb716feae0fe0021fd2024"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Разрешённый публичный источник"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "AI",
+      "id": "AI-07",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.agent.CentralEvidenceVerifierTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.agent.CentralEvidenceVerifierTest.xml",
+          "module": "community-server",
+          "name": "independentlyFetchedMatchingEvidenceCanPassAndHasReceipts()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "0be7743a6a28c048d450d4c291e1b8bcef79308ef8fb716feae0fe0021fd2024"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Определение города"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "AI",
+      "id": "AI-08",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.agent.CentralEvidenceVerifierTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.agent.CentralEvidenceVerifierTest.xml",
+          "module": "community-server",
+          "name": "independentlyFetchedMatchingEvidenceCanPassAndHasReceipts()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "0be7743a6a28c048d450d4c291e1b8bcef79308ef8fb716feae0fe0021fd2024"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Различение одноимённых городов"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "AI",
+      "id": "AI-09",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.agent.CentralEvidenceVerifierTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.agent.CentralEvidenceVerifierTest.xml",
+          "module": "community-server",
+          "name": "independentlyFetchedMatchingEvidenceCanPassAndHasReceipts()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "0be7743a6a28c048d450d4c291e1b8bcef79308ef8fb716feae0fe0021fd2024"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Определение даты события"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.agent.AgentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.agent.AgentServiceTest.xml",
+          "module": "community-server",
+          "name": "changedTitleCannotRepublishSameSourceEvidence()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "c47b3ae2d546f1100c1996976aece49257e7b8e0be7914aca4364a31641aaf79"
+        }
+      ],
+      "group": "AI",
+      "id": "AI-10",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная реальная SQL-очередь/правила coordinator с явно синтетическими source/model fixtures; не live news/model/production run",
+      "status": "PASS",
+      "title": "Дедупликация"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.agent.CentralEvidenceVerifierTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.agent.CentralEvidenceVerifierTest.xml",
+          "module": "community-server",
+          "name": "identicalSyndicatedTextIsNotIndependentConfirmation()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "0be7743a6a28c048d450d4c291e1b8bcef79308ef8fb716feae0fe0021fd2024"
+        }
+      ],
+      "group": "AI",
+      "id": "AI-11",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальное сравнение независимо загруженных fixture-доказательств; не реальные независимые СМИ",
+      "status": "PASS",
+      "title": "Независимость источников"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "AI",
+      "id": "AI-12",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.agent.CentralEvidenceVerifierTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.agent.CentralEvidenceVerifierTest.xml",
+          "module": "community-server",
+          "name": "independentlyFetchedMatchingEvidenceCanPassAndHasReceipts()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "0be7743a6a28c048d450d4c291e1b8bcef79308ef8fb716feae0fe0021fd2024"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Оценка достоверности"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "AI",
+      "id": "AI-13",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.agent.CentralEvidenceVerifierTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.agent.CentralEvidenceVerifierTest.xml",
+          "module": "community-server",
+          "name": "independentlyFetchedMatchingEvidenceCanPassAndHasReceipts()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "0be7743a6a28c048d450d4c291e1b8bcef79308ef8fb716feae0fe0021fd2024"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Классификация значимости"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "AI",
+      "id": "AI-14",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.agent.CentralEvidenceVerifierTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.agent.CentralEvidenceVerifierTest.xml",
+          "module": "community-server",
+          "name": "independentlyFetchedMatchingEvidenceCanPassAndHasReceipts()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "0be7743a6a28c048d450d4c291e1b8bcef79308ef8fb716feae0fe0021fd2024"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Автоматическая публикация проверенной новости"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.agent.AgentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.agent.AgentServiceTest.xml",
+          "module": "community-server",
+          "name": "rejectedIndependentCentralProofCannotAutoPublish()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "c47b3ae2d546f1100c1996976aece49257e7b8e0be7914aca4364a31641aaf79"
+        }
+      ],
+      "group": "AI",
+      "id": "AI-15",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная реальная SQL-очередь/правила coordinator с явно синтетическими source/model fixtures; не live news/model/production run",
+      "status": "PASS",
+      "title": "Направление сомнительной новости на проверку"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "aiIngestDeduplicatesAndReviewsUncertainOrCritical()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "group": "AI",
+      "id": "AI-16",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальный серверный ingest синтетического HIGH материала направляет его на проверку; не реальная оценка моделью",
+      "status": "PASS",
+      "title": "Направление особо важной новости на проверку"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "AI",
+      "id": "AI-17",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Исправление публикации"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "AI",
+      "id": "AI-18",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Отзыв публикации"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.agent.AgentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.agent.AgentServiceTest.xml",
+          "module": "community-server",
+          "name": "unknownModelToolInstructionsCannotBecomePublicationCommands()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "c47b3ae2d546f1100c1996976aece49257e7b8e0be7914aca4364a31641aaf79"
+        }
+      ],
+      "group": "AI",
+      "id": "AI-19",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная реальная SQL-очередь/правила coordinator с явно синтетическими source/model fixtures; не live news/model/production run",
+      "status": "PASS",
+      "title": "Защита от prompt injection"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.agent.AgentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.agent.AgentServiceTest.xml",
+          "module": "community-server",
+          "name": "workerBoundaryRejectsPrivateAndAdminRpcEvenIfMaterialAclWouldAllow()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "c47b3ae2d546f1100c1996976aece49257e7b8e0be7914aca4364a31641aaf79"
+        }
+      ],
+      "group": "AI",
+      "id": "AI-20",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная реальная SQL-очередь/правила coordinator с явно синтетическими source/model fixtures; не live news/model/production run",
+      "status": "PASS",
+      "title": "Запрет доступа к личным данным"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "AI",
+      "id": "AI-21",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.agent.AgentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.agent.AgentServiceTest.xml",
+          "module": "community-server",
+          "name": "workerCannotReadAdministrationOrPrivateLibrary()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "c47b3ae2d546f1100c1996976aece49257e7b8e0be7914aca4364a31641aaf79"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Запрет доступа к приватным ключам"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.agent.AgentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.agent.AgentServiceTest.xml",
+          "module": "community-server",
+          "name": "budgetReservedBeforeWorkAndRequestLimitsStopFurtherCalls()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "c47b3ae2d546f1100c1996976aece49257e7b8e0be7914aca4364a31641aaf79"
+        }
+      ],
+      "group": "AI",
+      "id": "AI-22",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная реальная SQL-очередь/правила coordinator с явно синтетическими source/model fixtures; не live news/model/production run",
+      "status": "PASS",
+      "title": "Ограничения внешнего API"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.agent.AgentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.agent.AgentServiceTest.xml",
+          "module": "community-server",
+          "name": "monetaryBudgetStopsBeforeAnyExternalRequest()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "c47b3ae2d546f1100c1996976aece49257e7b8e0be7914aca4364a31641aaf79"
+        }
+      ],
+      "group": "AI",
+      "id": "AI-23",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная реальная SQL-очередь/правила coordinator с явно синтетическими source/model fixtures; не live news/model/production run",
+      "status": "PASS",
+      "title": "Ограничение расходов"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "AI",
+      "id": "AI-24",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.worker.ModelHttpFixtureTest",
+          "evidence": "news-worker/build/test-results/test/TEST-org.securemail.worker.ModelHttpFixtureTest.xml",
+          "module": "news-worker",
+          "name": "realOllamaJsonRequestAndResponseUsesNoToolsOrCommands()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "9dfc81306e0358dd79ed909c1f52eab35c26c97ff50bc7e12ba380b612a31740"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Переключение модели"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.agent.AgentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.agent.AgentServiceTest.xml",
+          "module": "community-server",
+          "name": "expiredLeaseCannotCompleteAndRecoveryChargesNewReservation()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "c47b3ae2d546f1100c1996976aece49257e7b8e0be7914aca4364a31641aaf79"
+        }
+      ],
+      "group": "AI",
+      "id": "AI-25",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная реальная SQL-очередь/правила coordinator с явно синтетическими source/model fixtures; не live news/model/production run",
+      "status": "PASS",
+      "title": "Восстановление после сбоя"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.agent.AgentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.agent.AgentServiceTest.xml",
+          "module": "community-server",
+          "name": "completeAndRestartCannotDuplicatePublicationOrRefund()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "c47b3ae2d546f1100c1996976aece49257e7b8e0be7914aca4364a31641aaf79"
+        }
+      ],
+      "group": "AI",
+      "id": "AI-26",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная реальная SQL-очередь/правила coordinator с явно синтетическими source/model fixtures; не live news/model/production run",
+      "status": "PASS",
+      "title": "Отсутствие повторной публикации после перезапуска"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.agent.AgentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.agent.AgentServiceTest.xml",
+          "module": "community-server",
+          "name": "scheduleTwentyMinutesAndDistinctSameNamedCities()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "c47b3ae2d546f1100c1996976aece49257e7b8e0be7914aca4364a31641aaf79"
+        }
+      ],
+      "group": "AI",
+      "id": "AI-27",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная реальная SQL-очередь/правила coordinator с явно синтетическими source/model fixtures; не live news/model/production run",
+      "status": "PASS",
+      "title": "Расписание 15–30 минут"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "AI",
+      "id": "AI-28",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.agent.CentralEvidenceVerifierTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.agent.CentralEvidenceVerifierTest.xml",
+          "module": "community-server",
+          "name": "independentlyFetchedMatchingEvidenceCanPassAndHasReceipts()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "0be7743a6a28c048d450d4c291e1b8bcef79308ef8fb716feae0fe0021fd2024"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Недоступный источник"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "cityIsExplicitNormalizedAndNoIpInference()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "group": "AI",
+      "id": "AI-29",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Нормализованные city IDs и серверная региональная выборка синтетических публикаций; не live geographic inference",
+      "status": "PASS",
+      "title": "Географическая лента"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "aiIngestDeduplicatesAndReviewsUncertainOrCritical()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "group": "AI",
+      "id": "AI-30",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Серверный ai-флаг публикации при ingest тестового публичного материала; не нативное отображение",
+      "status": "PASS",
+      "title": "Обозначение ИИ-публикации"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "LIB",
+      "id": "LIB-01",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "graphNeverContainsHiddenEndpointsAndProposalsNeedEditor()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Открытие графа"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.integration.CommunityIntegration500Test",
+          "evidence": "integration-tests/build/test-results/test/TEST-org.securemail.integration.CommunityIntegration500Test.xml",
+          "module": "integration-tests",
+          "name": "graphReturnsOnlyAuthorizedDocumentsAndCacheNeverComesFromPrivateArchive()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "63715217adc30e52ecafe03698dcf45ada3ff913bf2ce71fc02c1a67d4874438"
+        }
+      ],
+      "group": "LIB",
+      "id": "LIB-02",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Production клиент + настоящий HTTP/SQLite через фиксированный loopback SOCKS fixture; не Tor/native GUI",
+      "status": "PASS",
+      "title": "Загрузка разрешённых узлов"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.integration.CommunityIntegration500Test",
+          "evidence": "integration-tests/build/test-results/test/TEST-org.securemail.integration.CommunityIntegration500Test.xml",
+          "module": "integration-tests",
+          "name": "graphReturnsOnlyAuthorizedDocumentsAndCacheNeverComesFromPrivateArchive()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "63715217adc30e52ecafe03698dcf45ada3ff913bf2ce71fc02c1a67d4874438"
+        }
+      ],
+      "group": "LIB",
+      "id": "LIB-03",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Production клиент + настоящий HTTP/SQLite через фиксированный loopback SOCKS fixture; не Tor/native GUI",
+      "status": "PASS",
+      "title": "Скрытие недоступных узлов"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.integration.CommunityIntegration500Test",
+          "evidence": "integration-tests/build/test-results/test/TEST-org.securemail.integration.CommunityIntegration500Test.xml",
+          "module": "integration-tests",
+          "name": "graphReturnsOnlyAuthorizedDocumentsAndCacheNeverComesFromPrivateArchive()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "63715217adc30e52ecafe03698dcf45ada3ff913bf2ce71fc02c1a67d4874438"
+        }
+      ],
+      "group": "LIB",
+      "id": "LIB-04",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Production клиент + настоящий HTTP/SQLite через фиксированный loopback SOCKS fixture; не Tor/native GUI",
+      "status": "PASS",
+      "title": "Скрытие закрытых связей"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "LIB",
+      "id": "LIB-05",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "graphNeverContainsHiddenEndpointsAndProposalsNeedEditor()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Поиск"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "libraryTypeFilterAndPaginationAreServerSide()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "group": "LIB",
+      "id": "LIB-06",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальный реальный серверный API/SQLite, синтетические документы; не нативное действие пользователя",
+      "status": "PASS",
+      "title": "Фильтрация"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "LIB",
+      "id": "LIB-07",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "graphNeverContainsHiddenEndpointsAndProposalsNeedEditor()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Масштабирование"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "LIB",
+      "id": "LIB-08",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "graphNeverContainsHiddenEndpointsAndProposalsNeedEditor()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Перемещение графа"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "LIB",
+      "id": "LIB-09",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "graphNeverContainsHiddenEndpointsAndProposalsNeedEditor()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Выбор узла"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "LIB",
+      "id": "LIB-10",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "graphNeverContainsHiddenEndpointsAndProposalsNeedEditor()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Предпросмотр документа"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "LIB",
+      "id": "LIB-11",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "graphNeverContainsHiddenEndpointsAndProposalsNeedEditor()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Открытие Markdown"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "LIB",
+      "id": "LIB-12",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "graphNeverContainsHiddenEndpointsAndProposalsNeedEditor()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Визуальное редактирование"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "LIB",
+      "id": "LIB-13",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "graphNeverContainsHiddenEndpointsAndProposalsNeedEditor()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Сохранение форматирования"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "noRoleCanReadPublicButCannotCreate()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "group": "LIB",
+      "id": "LIB-14",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальный реальный серверный API/SQLite, синтетические документы; не нативное действие пользователя",
+      "status": "PASS",
+      "title": "Создание материала"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "optimisticRevisionRejectsLostUpdate()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "group": "LIB",
+      "id": "LIB-15",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальный реальный серверный API/SQLite, синтетические документы; не нативное действие пользователя",
+      "status": "PASS",
+      "title": "Изменение материала"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "revisionsRestoreWithoutSilentOverwrite()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "group": "LIB",
+      "id": "LIB-16",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальный реальный серверный API/SQLite, синтетические документы; не нативное действие пользователя",
+      "status": "PASS",
+      "title": "История версий"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "revisionsRestoreWithoutSilentOverwrite()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "group": "LIB",
+      "id": "LIB-17",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальный реальный серверный API/SQLite, синтетические документы; не нативное действие пользователя",
+      "status": "PASS",
+      "title": "Восстановление версии"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.agent.LocalLibraryLinksTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.agent.LocalLibraryLinksTest.xml",
+          "module": "community-server",
+          "name": "proposalsUseOnlyCallerAuthorizedMaterialAndNeverAutoApprove()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "af2601ef127d42390af8aad48743b8ee19852b0657e8c3b3f4c22627dfb06daa"
+        }
+      ],
+      "group": "LIB",
+      "id": "LIB-18",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Настоящие серверные async jobs/ACL с ограниченными тестовыми model fixtures; не семантическое качество реальной модели",
+      "status": "PASS",
+      "title": "Предложение ИИ-связи"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "graphNeverContainsHiddenEndpointsAndProposalsNeedEditor()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "group": "LIB",
+      "id": "LIB-19",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальный реальный серверный API/SQLite, синтетические документы; не нативное действие пользователя",
+      "status": "PASS",
+      "title": "Подтверждение связи"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "LIB",
+      "id": "LIB-20",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "graphNeverContainsHiddenEndpointsAndProposalsNeedEditor()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Отклонение связи"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "graphNeverContainsHiddenEndpointsAndProposalsNeedEditor()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "group": "LIB",
+      "id": "LIB-21",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальный реальный серверный API/SQLite, синтетические документы; не нативное действие пользователя",
+      "status": "PASS",
+      "title": "Запрет подтверждения без полномочий"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "exportRequiresSeparateRightAndCurrentRead()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "group": "LIB",
+      "id": "LIB-22",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальный реальный серверный API/SQLite, синтетические документы; не нативное действие пользователя",
+      "status": "PASS",
+      "title": "Экспорт разрешённого материала"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "LIB",
+      "id": "LIB-23",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "graphNeverContainsHiddenEndpointsAndProposalsNeedEditor()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Запрет экспорта закрытого материала"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.integration.CommunityIntegration500Test",
+          "evidence": "integration-tests/build/test-results/test/TEST-org.securemail.integration.CommunityIntegration500Test.xml",
+          "module": "integration-tests",
+          "name": "exactSignedRpcPublicReadEncryptedCacheAndRevocationAcrossActualVaults()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "63715217adc30e52ecafe03698dcf45ada3ff913bf2ce71fc02c1a67d4874438"
+        }
+      ],
+      "group": "LIB",
+      "id": "LIB-24",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Настоящий AES-GCM vault/cache и production HTTP клиент на loopback SOCKS fixture",
+      "status": "PASS",
+      "title": "Зашифрованный кэш"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.integration.CommunityIntegration500Test",
+          "evidence": "integration-tests/build/test-results/test/TEST-org.securemail.integration.CommunityIntegration500Test.xml",
+          "module": "integration-tests",
+          "name": "exactSignedRpcPublicReadEncryptedCacheAndRevocationAcrossActualVaults()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "63715217adc30e52ecafe03698dcf45ada3ff913bf2ce71fc02c1a67d4874438"
+        }
+      ],
+      "group": "LIB",
+      "id": "LIB-25",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальное изменение ACL/epoch очищает ранее выданный cache и запрещает новый get",
+      "status": "PASS",
+      "title": "Отзыв доступа"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.client.community.CommunityClientTest",
+          "evidence": "client-core/build/test-results/test/TEST-org.securemail.client.community.CommunityClientTest.xml",
+          "module": "client-core",
+          "name": "offlineDeniedWithoutExplicitPolicyAndExpires()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "52308652697f2c39f4c9bb415440b90bf2ab833b4a55330bbbe889388892c871"
+        }
+      ],
+      "group": "LIB",
+      "id": "LIB-26",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная явная offline policy/TTL на подписанном fixture-ответе; отключённое устройство/production не проверены",
+      "status": "PASS",
+      "title": "Офлайн-доступ в разрешённых пределах"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "LIB",
+      "id": "LIB-27",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "graphNeverContainsHiddenEndpointsAndProposalsNeedEditor()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Большие графы"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "LIB",
+      "id": "LIB-28",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "graphNeverContainsHiddenEndpointsAndProposalsNeedEditor()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Отсутствие утечек памяти"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "LIB",
+      "id": "LIB-29",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "graphNeverContainsHiddenEndpointsAndProposalsNeedEditor()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Отсутствие активного вредоносного содержимого"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.integration.CommunityIntegration500Test",
+          "evidence": "integration-tests/build/test-results/test/TEST-org.securemail.integration.CommunityIntegration500Test.xml",
+          "module": "integration-tests",
+          "name": "cacheLargerThanMailQuotaSurvivesRekeyAndVerifiedProfileRestoreWithoutChangingIdentityOrArchive()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "63715217adc30e52ecafe03698dcf45ada3ff913bf2ce71fc02c1a67d4874438"
+        }
+      ],
+      "group": "LIB",
+      "id": "LIB-30",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Отдельный настоящий зашифрованный архив не меняется при cache/rekey/restore",
+      "status": "PASS",
+      "title": "Личный архив отдельно от библиотеки"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.integration.CommunityIntegration500Test",
+          "evidence": "integration-tests/build/test-results/test/TEST-org.securemail.integration.CommunityIntegration500Test.xml",
+          "module": "integration-tests",
+          "name": "organizationApplicationApprovalMembershipAndVoiceBatchUseServerAuthority()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "63715217adc30e52ecafe03698dcf45ada3ff913bf2ce71fc02c1a67d4874438"
+        }
+      ],
+      "group": "ORG",
+      "id": "ORG-01",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Production клиент + HTTP/SQLite одобрение/вступление с TOTP через loopback SOCKS fixture; не production Tor",
+      "status": "PASS",
+      "title": "Создание заявки"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.integration.CommunityIntegration500Test",
+          "evidence": "integration-tests/build/test-results/test/TEST-org.securemail.integration.CommunityIntegration500Test.xml",
+          "module": "integration-tests",
+          "name": "organizationApplicationApprovalMembershipAndVoiceBatchUseServerAuthority()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "63715217adc30e52ecafe03698dcf45ada3ff913bf2ce71fc02c1a67d4874438"
+        }
+      ],
+      "group": "ORG",
+      "id": "ORG-02",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Production клиент + HTTP/SQLite одобрение/вступление с TOTP через loopback SOCKS fixture; не production Tor",
+      "status": "PASS",
+      "title": "Одобрение заявки"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "ORG",
+      "id": "ORG-03",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.access.AccessControlTest.xml",
+          "module": "community-server",
+          "name": "applicationsCannotSelfApproveAndNoCityDoesNotBecomeRegional()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "20c4e79e2e23510425f0ade18186014f9f9e198b8466ebd5489fea3f1e074c7f"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Отклонение заявки"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.integration.CommunityIntegration500Test",
+          "evidence": "integration-tests/build/test-results/test/TEST-org.securemail.integration.CommunityIntegration500Test.xml",
+          "module": "integration-tests",
+          "name": "organizationApplicationApprovalMembershipAndVoiceBatchUseServerAuthority()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "63715217adc30e52ecafe03698dcf45ada3ff913bf2ce71fc02c1a67d4874438"
+        }
+      ],
+      "group": "ORG",
+      "id": "ORG-04",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Production клиент + HTTP/SQLite одобрение/вступление с TOTP через loopback SOCKS fixture; не production Tor",
+      "status": "PASS",
+      "title": "Организация без города"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "ORG",
+      "id": "ORG-05",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.access.AccessControlTest.xml",
+          "module": "community-server",
+          "name": "applicationsCannotSelfApproveAndNoCityDoesNotBecomeRegional()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "20c4e79e2e23510425f0ade18186014f9f9e198b8466ebd5489fea3f1e074c7f"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Организация с городом"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.integration.CommunityIntegration500Test",
+          "evidence": "integration-tests/build/test-results/test/TEST-org.securemail.integration.CommunityIntegration500Test.xml",
+          "module": "integration-tests",
+          "name": "organizationApplicationApprovalMembershipAndVoiceBatchUseServerAuthority()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "63715217adc30e52ecafe03698dcf45ada3ff913bf2ce71fc02c1a67d4874438"
+        }
+      ],
+      "group": "ORG",
+      "id": "ORG-06",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Production клиент + HTTP/SQLite одобрение/вступление с TOTP через loopback SOCKS fixture; не production Tor",
+      "status": "PASS",
+      "title": "Свободное вступление"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.access.AccessControlTest.xml",
+          "module": "community-server",
+          "name": "requestAndInvitationJoiningAreNotClientFlags()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "20c4e79e2e23510425f0ade18186014f9f9e198b8466ebd5489fea3f1e074c7f"
+        }
+      ],
+      "group": "ORG",
+      "id": "ORG-07",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "status": "PASS",
+      "title": "Вступление по заявке"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.access.AccessControlTest.xml",
+          "module": "community-server",
+          "name": "requestAndInvitationJoiningAreNotClientFlags()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "20c4e79e2e23510425f0ade18186014f9f9e198b8466ebd5489fea3f1e074c7f"
+        }
+      ],
+      "group": "ORG",
+      "id": "ORG-08",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "status": "PASS",
+      "title": "Вступление по приглашению"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.access.AccessControlTest.xml",
+          "module": "community-server",
+          "name": "scopedDelegationRejectsGlobalPowerAndUnheldPermissions()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "20c4e79e2e23510425f0ade18186014f9f9e198b8466ebd5489fea3f1e074c7f"
+        }
+      ],
+      "group": "ORG",
+      "id": "ORG-09",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "status": "PASS",
+      "title": "Создание роли"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.access.AccessControlTest.xml",
+          "module": "community-server",
+          "name": "inheritedPermissionsAndCycleAndCrossScopeAreEnforcedInDatabaseTransaction()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "20c4e79e2e23510425f0ade18186014f9f9e198b8466ebd5489fea3f1e074c7f"
+        }
+      ],
+      "group": "ORG",
+      "id": "ORG-10",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "status": "PASS",
+      "title": "Назначение полномочий"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.access.AccessControlTest.xml",
+          "module": "community-server",
+          "name": "inheritedPermissionsAndCycleAndCrossScopeAreEnforcedInDatabaseTransaction()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "20c4e79e2e23510425f0ade18186014f9f9e198b8466ebd5489fea3f1e074c7f"
+        }
+      ],
+      "group": "ORG",
+      "id": "ORG-11",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "status": "PASS",
+      "title": "Наследование разрешений"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.access.AccessControlTest.xml",
+          "module": "community-server",
+          "name": "scopedDelegationRejectsGlobalPowerAndUnheldPermissions()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "20c4e79e2e23510425f0ade18186014f9f9e198b8466ebd5489fea3f1e074c7f"
+        }
+      ],
+      "group": "ORG",
+      "id": "ORG-12",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "status": "PASS",
+      "title": "Запрет превышения делегированных полномочий"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "ORG",
+      "id": "ORG-13",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "orgWithoutCityCannotForgeCityAndScopeRequiresMembership()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Публикация новости"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "ORG",
+      "id": "ORG-14",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "orgWithoutCityCannotForgeCityAndScopeRequiresMembership()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Модерация новости"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "ORG",
+      "id": "ORG-15",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "orgWithoutCityCannotForgeCityAndScopeRequiresMembership()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Создание мероприятия"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "ORG",
+      "id": "ORG-16",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "orgWithoutCityCannotForgeCityAndScopeRequiresMembership()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Регистрация на мероприятие"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "ORG",
+      "id": "ORG-17",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.access.AccessControlTest.xml",
+          "module": "community-server",
+          "name": "memberRemovalRevokesRolePermissionAndAdvancesEpoch()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "20c4e79e2e23510425f0ade18186014f9f9e198b8466ebd5489fea3f1e074c7f"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: частичная проверка отказа после удаления/глобальной роли не заменяет полный организационный сценарий",
+      "status": "NOT_RUN",
+      "title": "Доступ к составу"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "ORG",
+      "id": "ORG-18",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "orgWithoutCityCannotForgeCityAndScopeRequiresMembership()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Библиотека организации"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.access.AccessControlTest.xml",
+          "module": "community-server",
+          "name": "memberRemovalRevokesRolePermissionAndAdvancesEpoch()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "20c4e79e2e23510425f0ade18186014f9f9e198b8466ebd5489fea3f1e074c7f"
+        }
+      ],
+      "group": "ORG",
+      "id": "ORG-19",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "status": "PASS",
+      "title": "Удаление участника"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "ORG",
+      "id": "ORG-20",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.access.AccessControlTest.xml",
+          "module": "community-server",
+          "name": "realGlobalRoleNeedsIndependentApprovalAndAppliesAfterAssignment()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "20c4e79e2e23510425f0ade18186014f9f9e198b8466ebd5489fea3f1e074c7f"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: частичная проверка отказа после удаления/глобальной роли не заменяет полный организационный сценарий",
+      "status": "NOT_RUN",
+      "title": "Отзыв роли"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "ORG",
+      "id": "ORG-21",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "orgWithoutCityCannotForgeCityAndScopeRequiresMembership()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Подтверждённая должность"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.access.AccessControlTest.xml",
+          "module": "community-server",
+          "name": "officialIdentityAndPositionAreIndependentFromClearanceAndRevokeHasHistory()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "20c4e79e2e23510425f0ade18186014f9f9e198b8466ebd5489fea3f1e074c7f"
+        }
+      ],
+      "group": "ORG",
+      "id": "ORG-22",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "status": "PASS",
+      "title": "Запрет самовольной галочки"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "ORG",
+      "id": "ORG-23",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет полного точного сопоставления; связанные тесты показываются только как частичное доказательство",
+      "relatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.content.ContentServiceTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.content.ContentServiceTest.xml",
+          "module": "community-server",
+          "name": "orgWithoutCityCannotForgeCityAndScopeRequiresMembership()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "5b00e8670586434c922191ae2a1f730ae8cfe65d2867f5607713ef258fdc906d"
+        }
+      ],
+      "releaseWideAcceptance": false,
+      "scope": "NOT_RUN: требуется отдельная проверка этого требования; близкий unit-тест не подменяет её",
+      "status": "NOT_RUN",
+      "title": "Закрытые материалы"
+    },
+    {
+      "automatedEvidence": [
+        {
+          "ambiguousDisplayName": false,
+          "classname": "org.securemail.community.access.AccessControlTest",
+          "evidence": "community-server/build/test-results/test/TEST-org.securemail.community.access.AccessControlTest.xml",
+          "module": "community-server",
+          "name": "wholeAuditRewriteWithoutMacAndWrongServerKekAreRejected()",
+          "occurrence": 1,
+          "status": "PASS",
+          "xmlSha256": "20c4e79e2e23510425f0ade18186014f9f9e198b8466ebd5489fea3f1e074c7f"
+        }
+      ],
+      "group": "ORG",
+      "id": "ORG-24",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Только явно указанная локальная автоматическая область; не production/native acceptance",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Локальная проверка принудительного серверного ACL/SQLite на синтетических аккаунтах; не production/native acceptance",
+      "status": "PASS",
+      "title": "Административные журналы"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-WINDOWS11-01",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "Windows 11 x64",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "status": "NOT_RUN",
+      "title": "Запуск установленного приложения"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-WAYLAND-01",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE Wayland",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "status": "NOT_RUN",
+      "title": "Запуск установленного приложения"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-X11-01",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE X11",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "status": "NOT_RUN",
+      "title": "Запуск установленного приложения"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-WINDOWS11-02",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "Windows 11 x64",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "status": "NOT_RUN",
+      "title": "Авторизация существующего пользователя"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-WAYLAND-02",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE Wayland",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "status": "NOT_RUN",
+      "title": "Авторизация существующего пользователя"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-X11-02",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE X11",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "status": "NOT_RUN",
+      "title": "Авторизация существующего пользователя"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-WINDOWS11-03",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "Windows 11 x64",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "status": "NOT_RUN",
+      "title": "Подключение к Tor"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-WAYLAND-03",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE Wayland",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "status": "NOT_RUN",
+      "title": "Подключение к Tor"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-X11-03",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE X11",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "status": "NOT_RUN",
+      "title": "Подключение к Tor"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-WINDOWS11-04",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "Windows 11 x64",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "status": "NOT_RUN",
+      "title": "Отправка и получение писем"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-WAYLAND-04",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE Wayland",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "status": "NOT_RUN",
+      "title": "Отправка и получение писем"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-X11-04",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE X11",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "status": "NOT_RUN",
+      "title": "Отправка и получение писем"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-WINDOWS11-05",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "Windows 11 x64",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "status": "NOT_RUN",
+      "title": "Контакты"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-WAYLAND-05",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE Wayland",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "status": "NOT_RUN",
+      "title": "Контакты"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-X11-05",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE X11",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "status": "NOT_RUN",
+      "title": "Контакты"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-WINDOWS11-06",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "Windows 11 x64",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "status": "NOT_RUN",
+      "title": "Публичные профили и аватары"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-WAYLAND-06",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE Wayland",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "status": "NOT_RUN",
+      "title": "Публичные профили и аватары"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-X11-06",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE X11",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "status": "NOT_RUN",
+      "title": "Публичные профили и аватары"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-WINDOWS11-07",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "Windows 11 x64",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "status": "NOT_RUN",
+      "title": "Личный зашифрованный архив"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-WAYLAND-07",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE Wayland",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "status": "NOT_RUN",
+      "title": "Личный зашифрованный архив"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-X11-07",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE X11",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "status": "NOT_RUN",
+      "title": "Личный зашифрованный архив"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-WINDOWS11-08",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "Windows 11 x64",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "status": "NOT_RUN",
+      "title": "Автоматическая подготовка и запуск Взора"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-WAYLAND-08",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE Wayland",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "status": "NOT_RUN",
+      "title": "Автоматическая подготовка и запуск Взора"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-X11-08",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE X11",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "status": "NOT_RUN",
+      "title": "Автоматическая подготовка и запуск Взора"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-WINDOWS11-09",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "Windows 11 x64",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "status": "NOT_RUN",
+      "title": "Защищённые звонки Глас"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-WAYLAND-09",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE Wayland",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "status": "NOT_RUN",
+      "title": "Защищённые звонки Глас"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-X11-09",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE X11",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "status": "NOT_RUN",
+      "title": "Защищённые звонки Глас"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-WINDOWS11-10",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "Windows 11 x64",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "status": "NOT_RUN",
+      "title": "Разрешения звонков"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-WAYLAND-10",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE Wayland",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "status": "NOT_RUN",
+      "title": "Разрешения звонков"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-X11-10",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE X11",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "status": "NOT_RUN",
+      "title": "Разрешения звонков"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-WINDOWS11-11",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "Windows 11 x64",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "status": "NOT_RUN",
+      "title": "Создание и управление организациями"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-WAYLAND-11",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE Wayland",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "status": "NOT_RUN",
+      "title": "Создание и управление организациями"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-X11-11",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE X11",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "status": "NOT_RUN",
+      "title": "Создание и управление организациями"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-WINDOWS11-12",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "Windows 11 x64",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "status": "NOT_RUN",
+      "title": "Роли и уровни доступа"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-WAYLAND-12",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE Wayland",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "status": "NOT_RUN",
+      "title": "Роли и уровни доступа"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-X11-12",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE X11",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "status": "NOT_RUN",
+      "title": "Роли и уровни доступа"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-WINDOWS11-13",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "Windows 11 x64",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "status": "NOT_RUN",
+      "title": "Публикация новостей"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-WAYLAND-13",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE Wayland",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "status": "NOT_RUN",
+      "title": "Публикация новостей"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-X11-13",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE X11",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "status": "NOT_RUN",
+      "title": "Публикация новостей"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-WINDOWS11-14",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "Windows 11 x64",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "status": "NOT_RUN",
+      "title": "Региональные ленты"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-WAYLAND-14",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE Wayland",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "status": "NOT_RUN",
+      "title": "Региональные ленты"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-X11-14",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE X11",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "status": "NOT_RUN",
+      "title": "Региональные ленты"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-WINDOWS11-15",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "Windows 11 x64",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "status": "NOT_RUN",
+      "title": "Мероприятия"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-WAYLAND-15",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE Wayland",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "status": "NOT_RUN",
+      "title": "Мероприятия"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-X11-15",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE X11",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "status": "NOT_RUN",
+      "title": "Мероприятия"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-WINDOWS11-16",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "Windows 11 x64",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "status": "NOT_RUN",
+      "title": "Библиотека-паутина"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-WAYLAND-16",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE Wayland",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "status": "NOT_RUN",
+      "title": "Библиотека-паутина"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-X11-16",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE X11",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "status": "NOT_RUN",
+      "title": "Библиотека-паутина"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-WINDOWS11-17",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "Windows 11 x64",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "status": "NOT_RUN",
+      "title": "Markdown и визуальное редактирование"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-WAYLAND-17",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE Wayland",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "status": "NOT_RUN",
+      "title": "Markdown и визуальное редактирование"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-X11-17",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE X11",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "status": "NOT_RUN",
+      "title": "Markdown и визуальное редактирование"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-WINDOWS11-18",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "Windows 11 x64",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "status": "NOT_RUN",
+      "title": "ИИ-предложения связей"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-WAYLAND-18",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE Wayland",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "status": "NOT_RUN",
+      "title": "ИИ-предложения связей"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-X11-18",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE X11",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "status": "NOT_RUN",
+      "title": "ИИ-предложения связей"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-WINDOWS11-19",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "Windows 11 x64",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "status": "NOT_RUN",
+      "title": "Административная панель"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-WAYLAND-19",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE Wayland",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "status": "NOT_RUN",
+      "title": "Административная панель"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-X11-19",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE X11",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "status": "NOT_RUN",
+      "title": "Административная панель"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-WINDOWS11-20",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "Windows 11 x64",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников Windows 11 x64",
+      "status": "NOT_RUN",
+      "title": "Подписанный updater"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-WAYLAND-20",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE Wayland",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE Wayland",
+      "status": "NOT_RUN",
+      "title": "Подписанный updater"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "NATIVE",
+      "id": "NATIVE-CACHYOS-X11-20",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "platform": "CachyOS KDE X11",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Реальная нативная приёмка точных бинарников CachyOS KDE X11",
+      "status": "NOT_RUN",
+      "title": "Подписанный updater"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "PHYSICAL",
+      "id": "PHYSICAL-01",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Два физических устройства в двух независимых сетях, точные бинарники 5.0.0",
+      "status": "NOT_RUN",
+      "title": "Обмен письмами"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "PHYSICAL",
+      "id": "PHYSICAL-02",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Два физических устройства в двух независимых сетях, точные бинарники 5.0.0",
+      "status": "NOT_RUN",
+      "title": "Синхронизация профилей"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "PHYSICAL",
+      "id": "PHYSICAL-03",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Два физических устройства в двух независимых сетях, точные бинарники 5.0.0",
+      "status": "NOT_RUN",
+      "title": "Синхронизация аватаров"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "PHYSICAL",
+      "id": "PHYSICAL-04",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Два физических устройства в двух независимых сетях, точные бинарники 5.0.0",
+      "status": "NOT_RUN",
+      "title": "Голосовые вызовы Глас"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "PHYSICAL",
+      "id": "PHYSICAL-05",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Два физических устройства в двух независимых сетях, точные бинарники 5.0.0",
+      "status": "NOT_RUN",
+      "title": "Проверка identity"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "PHYSICAL",
+      "id": "PHYSICAL-06",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Два физических устройства в двух независимых сетях, точные бинарники 5.0.0",
+      "status": "NOT_RUN",
+      "title": "Отсутствие прямого обхода Tor"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "PHYSICAL",
+      "id": "PHYSICAL-07",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Два физических устройства в двух независимых сетях, точные бинарники 5.0.0",
+      "status": "NOT_RUN",
+      "title": "Изменение ролей"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "PHYSICAL",
+      "id": "PHYSICAL-08",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Два физических устройства в двух независимых сетях, точные бинарники 5.0.0",
+      "status": "NOT_RUN",
+      "title": "Отзыв полномочий"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "PHYSICAL",
+      "id": "PHYSICAL-09",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Два физических устройства в двух независимых сетях, точные бинарники 5.0.0",
+      "status": "NOT_RUN",
+      "title": "Публикация и получение новостей"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "PHYSICAL",
+      "id": "PHYSICAL-10",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Два физических устройства в двух независимых сетях, точные бинарники 5.0.0",
+      "status": "NOT_RUN",
+      "title": "Региональные публикации"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "PHYSICAL",
+      "id": "PHYSICAL-11",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Два физических устройства в двух независимых сетях, точные бинарники 5.0.0",
+      "status": "NOT_RUN",
+      "title": "Общая библиотека"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "PHYSICAL",
+      "id": "PHYSICAL-12",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Два физических устройства в двух независимых сетях, точные бинарники 5.0.0",
+      "status": "NOT_RUN",
+      "title": "Скрытие закрытых материалов"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "PHYSICAL",
+      "id": "PHYSICAL-13",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Два физических устройства в двух независимых сетях, точные бинарники 5.0.0",
+      "status": "NOT_RUN",
+      "title": "Зашифрованный клиентский кэш"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "PHYSICAL",
+      "id": "PHYSICAL-14",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Два физических устройства в двух независимых сетях, точные бинарники 5.0.0",
+      "status": "NOT_RUN",
+      "title": "Потеря соединения"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "PHYSICAL",
+      "id": "PHYSICAL-15",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Два физических устройства в двух независимых сетях, точные бинарники 5.0.0",
+      "status": "NOT_RUN",
+      "title": "Восстановление после сетевого сбоя"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "UPDATER",
+      "id": "UPDATER-01",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "status": "NOT_RUN",
+      "title": "Обнаружение 5.0.0"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "UPDATER",
+      "id": "UPDATER-02",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "status": "NOT_RUN",
+      "title": "Получение подписанного manifest"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "UPDATER",
+      "id": "UPDATER-03",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "status": "NOT_RUN",
+      "title": "Ed25519"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "UPDATER",
+      "id": "UPDATER-04",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "status": "NOT_RUN",
+      "title": "SHA-256"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "UPDATER",
+      "id": "UPDATER-05",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "status": "NOT_RUN",
+      "title": "Схема manifest"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "UPDATER",
+      "id": "UPDATER-06",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "status": "NOT_RUN",
+      "title": "Версия"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "UPDATER",
+      "id": "UPDATER-07",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "status": "NOT_RUN",
+      "title": "Anti-rollback"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "UPDATER",
+      "id": "UPDATER-08",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "status": "NOT_RUN",
+      "title": "Совместимость Relay"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "UPDATER",
+      "id": "UPDATER-09",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "status": "NOT_RUN",
+      "title": "Загрузка через Tor"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "UPDATER",
+      "id": "UPDATER-10",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "status": "NOT_RUN",
+      "title": "Прерывание загрузки"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "UPDATER",
+      "id": "UPDATER-11",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "status": "NOT_RUN",
+      "title": "Возобновление загрузки"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "UPDATER",
+      "id": "UPDATER-12",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "status": "NOT_RUN",
+      "title": "Точный размер файла"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "UPDATER",
+      "id": "UPDATER-13",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "status": "NOT_RUN",
+      "title": "Контрольная сумма"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "UPDATER",
+      "id": "UPDATER-14",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "status": "NOT_RUN",
+      "title": "Подтверждение установки"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "UPDATER",
+      "id": "UPDATER-15",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "status": "NOT_RUN",
+      "title": "Завершение приложения"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "UPDATER",
+      "id": "UPDATER-16",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "status": "NOT_RUN",
+      "title": "Установка новой версии"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "UPDATER",
+      "id": "UPDATER-17",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "status": "NOT_RUN",
+      "title": "Перезапуск"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "UPDATER",
+      "id": "UPDATER-18",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "status": "NOT_RUN",
+      "title": "Сохранность данных"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "UPDATER",
+      "id": "UPDATER-19",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "status": "NOT_RUN",
+      "title": "Новые разделы"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "UPDATER",
+      "id": "UPDATER-20",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "status": "NOT_RUN",
+      "title": "Откат при ошибке"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "UPDATER",
+      "id": "UPDATER-21",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "status": "NOT_RUN",
+      "title": "Восстановление после неудачного перезапуска"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "UPDATER",
+      "id": "UPDATER-22",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "status": "NOT_RUN",
+      "title": "Повторная проверка подписи после загрузки"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "UPDATER",
+      "id": "UPDATER-23",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "status": "NOT_RUN",
+      "title": "Запрет неподписанного файла"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "UPDATER",
+      "id": "UPDATER-24",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "status": "NOT_RUN",
+      "title": "Запрет изменённого файла"
+    },
+    {
+      "automatedEvidence": [],
+      "group": "UPDATER",
+      "id": "UPDATER-25",
+      "matching": "EXACT_MODULE_CLASS_TESTCASE",
+      "reason": "Нет фактической приёмки 5.0.0 в обязательной среде; старое сообщение владельца о 2.5.0 не переносится",
+      "relatedEvidence": [],
+      "releaseWideAcceptance": false,
+      "scope": "Полная установка/перезапуск/rollback точных 5.0.0 через отдельный подписанный тестовый канал",
+      "status": "NOT_RUN",
+      "title": "Запрет понижения версии"
+    }
+  ],
+  "schema": 1,
+  "sourceCommit": null,
+  "summary": {
+    "ACCESS": {
+      "NOT_RUN": 2,
+      "PASS": 18
+    },
+    "AI": {
+      "NOT_RUN": 15,
+      "PASS": 15
+    },
+    "LIB": {
+      "NOT_RUN": 14,
+      "PASS": 16
+    },
+    "MIGRATION": {
+      "NOT_RUN": 15,
+      "PASS": 5
+    },
+    "NATIVE": {
+      "NOT_RUN": 60
+    },
+    "ORG": {
+      "NOT_RUN": 11,
+      "PASS": 13
+    },
+    "PHYSICAL": {
+      "NOT_RUN": 15
+    },
+    "UPDATER": {
+      "NOT_RUN": 25
+    }
+  },
+  "version": "5.0.0"
+}
