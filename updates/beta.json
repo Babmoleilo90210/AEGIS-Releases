@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "application": "AEGIS",
   "channel": "beta",
-  "version": "2.5.0",
-  "tag": "v2.5.0",
+  "version": "5.0.0",
+  "tag": "v5.0.0",
   "repository": "Babmoleilo90210/AEGIS-Releases",
   "protocolVersion": 1,
   "relayCompatibility": [
@@ -11,60 +11,60 @@
   ],
   "artifacts": [
     {
-      "fileName": "AEGIS-Setup-2.5.0-x64.exe",
-      "size": 83957703,
-      "sha256": "23f58c149bfd8e62d14fe585a05bcb67aaf23e17c283b925e1521d930ebb6b1a",
-      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v2.5.0/AEGIS-Setup-2.5.0-x64.exe",
+      "fileName": "AEGIS-Setup-5.0.0-x64.exe",
+      "size": 80745648,
+      "sha256": "ebc47479510ccf2b1fd3d7c894f6354323bc978672b06294f214f1b2924314e1",
+      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v5.0.0/AEGIS-Setup-5.0.0-x64.exe",
       "platform": "windows-x64",
       "kind": "installer"
     },
     {
-      "fileName": "AEGIS-2.5.0-Windows-x64.zip",
-      "size": 114802498,
-      "sha256": "a888d5a5546225edfba0846d4a53215b4227391e62923b70dd98798af3d17b4f",
-      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v2.5.0/AEGIS-2.5.0-Windows-x64.zip",
+      "fileName": "AEGIS-5.0.0-Windows-x64.zip",
+      "size": 108339566,
+      "sha256": "17b2ffa567ffe4fd9aef149ccaf39a3dc56ad0312db931dda3ae727cf7a31523",
+      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v5.0.0/AEGIS-5.0.0-Windows-x64.zip",
       "platform": "windows-x64",
       "kind": "portable"
     },
     {
-      "fileName": "AEGIS-2.5.0-CachyOS-x86_64.AppImage",
-      "size": 95586808,
-      "sha256": "2b1c241dd37443c55ff592750bd14ab945adba642c07037b10fe67cde7f5474f",
-      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v2.5.0/AEGIS-2.5.0-CachyOS-x86_64.AppImage",
+      "fileName": "AEGIS-5.0.0-CachyOS-x86_64.AppImage",
+      "size": 90962424,
+      "sha256": "d27209621b936ff9445d5263c9c3bbf9366b00f9fc200704d00d9682d5bbc270",
+      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v5.0.0/AEGIS-5.0.0-CachyOS-x86_64.AppImage",
       "platform": "cachyos-x86_64",
       "kind": "appimage"
     },
     {
-      "fileName": "AEGIS-2.5.0-client-source.zip",
-      "size": 19057095,
-      "sha256": "c2664af51e5e074a3d447c75faa8a5ba20c53627139b1fea17a373141aed5645",
-      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v2.5.0/AEGIS-2.5.0-client-source.zip",
+      "fileName": "AEGIS-5.0.0-client-source.zip",
+      "size": 24882383,
+      "sha256": "eeb9e59d772c220eba833553c5faaa88d26883cd0698960f38eaacd900ebd5a2",
+      "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v5.0.0/AEGIS-5.0.0-client-source.zip",
       "platform": "source",
       "kind": "source"
     }
   ],
   "checksums": {
     "fileName": "SHA256SUMS",
-    "size": 3407,
-    "sha256": "187fa70d9f3bc57ffcb20a8d8ae4e8f8116309d71446b80aaf0154336b0d7a25",
-    "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v2.5.0/SHA256SUMS"
+    "size": 3955,
+    "sha256": "7a11d343242b43d4c0a29062bb4663d36ab1f7bc6fe40a193882e01129060016",
+    "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v5.0.0/SHA256SUMS"
   },
   "changelog": {
-    "fileName": "CHANGELOG-2.5.0.md",
-    "size": 3202,
-    "sha256": "5e844eee7b40ee737cce96d5fdfc6f24797426211622ef706071ca679b4fc6e7",
-    "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v2.5.0/CHANGELOG-2.5.0.md"
+    "fileName": "CHANGELOG-5.0.0.md",
+    "size": 4688,
+    "sha256": "d79a4b79bacdf52530f588fbd11173769dbbd1150e4dcda1947696acb05b5786",
+    "url": "https://github.com/Babmoleilo90210/AEGIS-Releases/releases/download/v5.0.0/CHANGELOG-5.0.0.md"
   },
   "minimumSupported": "1.5.0",
   "updatePolicy": "optional",
   "announcement": {
-    "title": "АЕГИС 2.5.0 — «Взор и Глас»",
-    "summary": "АЕГИС 2.5.0: подробности в журнале изменений.",
+    "title": "АЕГИС 5.0.0 — Организации, Новости, Библиотека и Безопасность",
+    "summary": "АЕГИС 5.0.0: подробности в журнале изменений.",
     "showAsLetter": true
   },
   "releaseNotes": {
-    "publishedAt": "2026-10-15T11:07:19Z",
+    "publishedAt": "2026-10-15T15:58:37Z",
     "type": "Feature",
-    "text": "# АЕГИС 2.5.0 — «Взор и Глас»\n\nКандидат для приёмки, `productionReady=false`. Stable и подписной feed не опубликованы.\n\n- «Взор»: автоматическое получение официального Tor Browser и OpenPGP-подписи через Tor, проверка закреплённого ключа, версии и архитектуры, отмена, атомарная установка, восстановление и повторное удостоверение изменённой установки. Ручной импорт сохранён как резервный путь.\n- «Глас»: настоящая реализация личных звонков с onion P2P, взаимно аутентифицированным TLS 1.3, существующими Ed25519 identity, Opus, SpeexDSP AEC/NS, ограниченными очередями, восстановлением и добровольной зашифрованной историей. Микрофон включается явно после принятия и аутентификации.\n- Единые контурные значки, русские названия, восемь переставляемых разделов. Safe Web переименован во «Взор» с сохранением внутреннего ID и параметров.\n- Исправлена комплектная Java: добавлены русские данные локали для дат, календаря и чисел, проверены vendorSHA и все файлы runtime.\n- Исправлены пересечения избранного в галерее всех 16 пресетов, русские типы архива, компактное управление архивом с вложенными панелями и отображение меню при масштабе.\n- Сохранены компактный поиск, пять категорий настроек с содержимым ниже, контакты, письма и утверждённая верхняя панель.\n- Исправлены crash-safe публикация аватара, dirty-generation acknowledgement и очистка кэша контактов.\n- Добавлены миграция навигации 6/7→8 без сброса порядка, предварительный полный снимок профиля, проверки idempotency и прерванного снимка.\n- Генератор manifest обеспечивает `tag == \"v\" + version` и совпадающие release URL; старые парсеры проверяются автоматически. Ed25519, SHA-256, anti-rollback и pinned public key сохранены.\n\nОбязательная нативная приёмка Windows 11/CachyOS KDE, официальный браузер, DNS/IP/WebRTC-измерения, разговор двух физических устройств и updater E2E остаются незавершёнными. Подробности в TEST-REPORT-2.5.0.md и RELEASE-GATES-2.5.0.json.\n"
+    "text": "# АЕГИС 5.0.0\n\n«Организации, Новости, Библиотека и Безопасность». Единое обновление на базе 2.5.0; отдельные 3.0.0 и 4.0.0 не выпускаются.\n\n## Новые функции\n\nДобавлен отдельный сервер общей системы с подписанным onion-RPC, SQLite, административной первоначальной настройкой двух криптографических идентичностей и серверным вторым фактором. Организации проходят одобрение администрации. Глобальные и организационные роли создаются операторами, поддерживают наследование и ограниченное делегирование. Уровень допуска, подтверждение личности, должность и полномочия независимы.\n\nРеализованы ленты новостей, модерация, исправления/отзыв, реакции, опросы, мероприятия и регистрация с ограничением мест. Общая библиотека поддерживает ACL, файлы, историю, конфликты редакций, экспорт, граф и подтверждаемые предложения связей. Личный архив остаётся отдельным.\n\nИИ-координатор и рабочий узел получают расписание, очереди, аренды, ограничения расходов и восстановление. Автопубликация требует независимого центрального получения источников и центрального анализа. Текст и уверенность рабочего узла не являются полномочиями публикации. Закрытые библиотечные материалы доступны только разрешённой локальной модели после проверки доступа.\n\n## Исправления 2.5.0\n\nИсправлены вертикально обрезанные подписи меню архива, компоновка навигации, повторяющиеся действия контактов и организация настроек. Сохранены шестнадцать пресетов. Взор проверяет GTK/dbus-glib/Xwayland и показывает фактическую причину отказа; фиксированные зависимости устанавливаются системными средствами. Для Гласа добавлены независимые правила входящих/исходящих вызовов и организационные разрешения.\n\nИсправлены каталог отката нового Windows maintenance helper и копирование большого зашифрованного кэша при смене ключа локального хранилища. Согласована версия commons-logging с закреплённым Gradle lockfile.\n\n## Усиление безопасности\n\nОтветы RPC связаны с сервисом, пользователем, точным запросом и nonce. Добавлены ограниченные HTTP/JSON-парсеры, сроки запросов, ограничения параллелизма, защита кэша при выходе и откате epoch. Доступ проверяется на сервере; закрытые материалы исключаются из поиска, графа и файловых запросов. Второй фактор защищён от replay, перебора и сброса через первоначальную регистрацию. Критические операции требуют двух независимых действующих администраторов.\n\n## Приёмка\n\nСтатус конкретных артефактов определяют TEST-REPORT-5.0.0.md, FINAL-VERIFICATION-5.0.0.json и RELEASE-GATES-5.0.0.json. Компиляция и локальные стенды не заменяют Windows 11, CachyOS KDE, публичный Tor, две физические машины и полный updater E2E. До закрытия обязательных проверок productionReady остаётся false.\n"
   }
 }
