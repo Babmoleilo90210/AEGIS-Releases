@@ -1,0 +1,40 @@
+package org.securemail.ui;
+
+import java.lang.reflect.*;
+import java.nio.file.*;
+import java.security.*;
+import java.time.Clock;
+import java.util.*;
+import java.util.concurrent.*;
+import javafx.application.Platform;
+import javafx.scene.*;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.stage.Stage;
+import org.securemail.client.*;
+import org.securemail.client.ecosystem.*;
+import org.securemail.client.ecosystemauth.CorePublicConfig600;
+import org.securemail.client.storage.LocalStore;
+import org.securemail.ecosystem.protocol.IdentityProtocol;
+
+/** Actual Mail recovery UI/private vault copy. Only the unavailable live Identity inspection is a typed local fixture. */
+public final class MailRecoveryFormSmoke600 {
+  private static <T>T fx(Callable<T> task)throws Exception{var f=new CompletableFuture<T>();Platform.runLater(()->{try{f.complete(task.call());}catch(Throwable error){f.completeExceptionally(error);}});return f.get(20,TimeUnit.SECONDS);}
+  private static Object field(Object object,String name)throws Exception{Field f=object.getClass().getDeclaredField(name);f.setAccessible(true);return f.get(object);}
+  private static void set(Object object,String name,Object value)throws Exception{Field f=object.getClass().getDeclaredField(name);f.setAccessible(true);f.set(object,value);}
+  private static Object invoke(Object object,String name)throws Exception{Method m=object.getClass().getDeclaredMethod(name);m.setAccessible(true);return m.invoke(object);}
+  private static List<Node> nodes(Node root){var all=new ArrayList<Node>();all.add(root);if(root instanceof Parent p)for(Node child:p.getChildrenUnmodifiable())all.addAll(nodes(child));return all;}
+  private static void check(boolean ok,String why){if(!ok)throw new AssertionError(why);}
+  private static void screenshot(Stage stage,Path path)throws Exception{stage.getScene().getRoot().applyCss();stage.getScene().getRoot().layout();var shot=stage.getScene().snapshot(null);var image=new java.awt.image.BufferedImage((int)shot.getWidth(),(int)shot.getHeight(),java.awt.image.BufferedImage.TYPE_INT_ARGB);for(int y=0;y<image.getHeight();y++)for(int x=0;x<image.getWidth();x++)image.setRGB(x,y,shot.getPixelReader().getArgb(x,y));javax.imageio.ImageIO.write(image,"png",path.toFile());image.flush();}
+  public static void main(String[]args)throws Exception {
+    Path output=Path.of(args[0]).toAbsolutePath(),profile=Files.createTempDirectory("aegis-recovery-form600-");Files.createDirectories(output);System.setProperty("aegis.profile",profile.toString());ClientConfig config=ClientConfig.load(AppPaths.config());config.save(AppPaths.config());char[] password="synthetic recovery UI Mail password".toCharArray();String account;try(var local=new LocalStore(config.storagePath(),password,Clock.systemUTC(),config.maxCiphertext(),config.maxLocalStorage());var key=MailRecoveryKey600.loadOrCreate(local)){local.bindNickname("raven");account=local.identity().userId();}
+    byte[] original=Files.readAllBytes(config.storagePath().resolve("state.vault"));var keys=KeyPairGenerator.getInstance("Ed25519");var service=keys.generateKeyPair();var device=keys.generateKeyPair();var recovery=new IdentityProtocol.DeviceRecovery(IdentityProtocol.id(service.getPublic().getEncoded()),account,device.getPublic().getEncoded(),IdentityProtocol.nonce(),System.currentTimeMillis()+240000);long time=System.currentTimeMillis();String nonce=IdentityProtocol.nonce();var request=new MailPairing600.DeviceRecoveryRequest(recovery,time,nonce,IdentityProtocol.sign(device.getPrivate(),IdentityProtocol.deviceRecoveryInspection(recovery,time,nonce)));var publicConfig=new CorePublicConfig600("a".repeat(56)+".onion",80,service.getPublic().getEncoded(),19350);
+    Platform.startup(()->Platform.setImplicitExit(false));Object[] window={null};Stage[] stage={null};ThemeManager[] themes={null};int[] checks={0};
+    try {
+      fx(()->{window[0]=new MailPairingEntrypoint600.PairingWindow();themes[0]=(ThemeManager)field(window[0],"themes");themes[0].initialize();stage[0]=new Stage();VBox content=new VBox(12);content.setMaxWidth(700);ScrollPane scroll=new ScrollPane(content);scroll.setFitToWidth(true);stage[0].setScene(new Scene(new BorderPane(scroll),800,600));themes[0].apply(stage[0].getScene().getRoot());stage[0].show();Class<?> prepared=Class.forName("org.securemail.ui.MailPairingEntrypoint600$Prepared");var ctor=prepared.getDeclaredConstructors()[0];ctor.setAccessible(true);set(window[0],"stage",stage[0]);set(window[0],"content",content);set(window[0],"state",new Label());set(window[0],"context",ctor.newInstance(null,request,publicConfig,null));invoke(window[0],"deviceRecoveryForm");String text=nodes(content).stream().filter(n->n instanceof Labeled).map(n->((Labeled)n).getText()).reduce("",(a,b)->a+"\n"+b);check(text.contains(account)&&text.contains(IdentityProtocol.id(device.getPublic().getEncoded())),"Recovery form omitted exact account/new-device fingerprint");checks[0]++;check(nodes(content).stream().anyMatch(n->n instanceof Button b&&b.getText().equals("Восстановить из зашифрованной копии")),"Existing format backup restore not available");checks[0]++;screenshot(stage[0],output.resolve("recovery-identity.png"));((PasswordField)field(window[0],"password")).setText(new String(password));Button existing=nodes(content).stream().filter(n->n instanceof Button b&&b.getText().equals("Открыть имеющуюся идентичность")).map(n->(Button)n).findFirst().orElseThrow();existing.fire();return null;});
+      long deadline=System.nanoTime()+TimeUnit.SECONDS.toNanos(20);while(System.nanoTime()<deadline&&!fx(()->nodes((Node)field(window[0],"content")).stream().anyMatch(n->n instanceof Button b&&b.getText().equals("Проверить и подтвердить"))))Thread.sleep(30);
+      fx(()->{LocalStore opened=(LocalStore)field(window[0],"mail");check(opened!=null&&opened.identity().userId().equals(account),"Actual encrypted Mail identity did not open");checks[0]++;check(!opened.root().equals(config.storagePath()),"Recovery UI opened original profile writable");checks[0]++;check(((PasswordField)field(window[0],"password")).getLength()==0,"Mail password retained in UI");checks[0]++;screenshot(stage[0],output.resolve("recovery-independent-key.png"));invoke(window[0],"consent");Node content=(Node)field(window[0],"content");CheckBox consent=nodes(content).stream().filter(n->n instanceof CheckBox).map(n->(CheckBox)n).findFirst().orElseThrow();Button confirm=nodes(content).stream().filter(n->n instanceof Button b&&b.getText().equals("Подтвердить")).map(n->(Button)n).findFirst().orElseThrow();check(!consent.isSelected()&&confirm.isDisabled(),"Recovery consent was automatic");checks[0]++;consent.setSelected(true);check(!confirm.isDisabled(),"Explicit recovery consent not accepted");checks[0]++;consent.setSelected(false);check(confirm.isDisabled(),"Revoked recovery consent remained enabled");checks[0]++;screenshot(stage[0],output.resolve("recovery-fixed-consent.png"));return null;});
+      check(Arrays.equals(original,Files.readAllBytes(config.storagePath().resolve("state.vault"))),"Original Mail identity modified by recovery UI");checks[0]++;Files.writeString(output.resolve("RESULTS.json"),new com.google.gson.GsonBuilder().setPrettyPrinting().create().toJson(Map.of("status","PASS_HEADLESS","checks",checks[0],"screenshots",3,"nativeAcceptance","NOT_RUN","scope","Actual Mail recovery form, private encrypted LocalStore copy and independent recovery key, exact account/device fields, explicit reversible fixed-purpose consent. Live Identity setup, final remote proof enrollment, physical UI and Tor NOT_RUN in this harness.")));System.out.println("PASS_HEADLESS: "+checks[0]+" actual Mail recovery UI checks and three real JavaFX PNGs");
+    }finally{fx(()->{if(window[0]!=null){invoke(window[0],"closeMailChecked");((ExecutorService)field(window[0],"worker")).shutdownNow();}if(themes[0]!=null)themes[0].close();if(stage[0]!=null)stage[0].close();Platform.exit();return null;});Arrays.fill(password,'\0');Arrays.fill(original,(byte)0);}
+  }
+}

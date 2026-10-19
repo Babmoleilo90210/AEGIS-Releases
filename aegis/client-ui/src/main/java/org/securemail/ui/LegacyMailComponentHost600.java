@@ -51,7 +51,7 @@ public final class LegacyMailComponentHost600 implements ComponentHost {
     finally{Arrays.fill(encoded,(byte)0);}
   }
   @Override public void run(ComponentLease candidate)throws Exception {
-    lease=candidate;MailComponentGate600 gate=new MailComponentGate600(candidate,this::verifyLive);
+    MailFilesystemBoundary600.require(org.securemail.client.ClientConfig.load(org.securemail.client.AppPaths.config()));lease=candidate;MailComponentGate600 gate=new MailComponentGate600(candidate,this::verifyLive);
     java.nio.file.Path relayConfig=org.securemail.client.AppPaths.root().resolve("core600/relay600.properties");
     for(java.nio.file.Path parent=relayConfig.toAbsolutePath();parent!=null;parent=parent.getParent())if(java.nio.file.Files.isSymbolicLink(parent))throw new IOException("Ссылка в настройке доверия Relay запрещена");
     if(!java.nio.file.Files.isRegularFile(relayConfig)||java.nio.file.Files.size(relayConfig)>4096)throw new IOException("Не настроен доверенный сервер Relay 6.0.0");

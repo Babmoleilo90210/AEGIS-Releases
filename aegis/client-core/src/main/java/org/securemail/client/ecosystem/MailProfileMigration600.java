@@ -23,7 +23,7 @@ public final class MailProfileMigration600 {
   public static boolean needsArchivePassword(ClientConfig config){return required(config)&&Files.isDirectory(mainArchive(config),LinkOption.NOFOLLOW_LINKS);}
   /** The caller holds the Mail app lock; all other old writers are closed. Old storage is never opened writable. */
   public static ClientConfig beforeOpen(ClientConfig config,char[] mailPassword,char[] archivePassword,BooleanSupplier cancelled)throws IOException {
-    if(!required(config))return config;Objects.requireNonNull(cancelled);byte[] key=null;Path auth=null;
+    MailFilesystemBoundary600.require(config);if(!required(config))return config;Objects.requireNonNull(cancelled);MailFilesystemBoundary600.require(config.withStorage(destination().resolve("mail/profile")));byte[] key=null;Path auth=null;
     try{
       for(Path p=config.storagePath().toAbsolutePath();p!=null;p=p.getParent())if(Files.isSymbolicLink(p))throw new IOException("Ссылка в старом профиле запрещена");
       byte[] salt=AtomicFiles.read(config.storagePath().resolve("salt"),16);try{key=LocalStore.modernVault(config.storagePath())?Secrets.deriveVault(mailPassword,salt):Secrets.derive(mailPassword,salt);}finally{Arrays.fill(salt,(byte)0);}
@@ -49,7 +49,7 @@ public final class MailProfileMigration600 {
       try(var opened=new LocalStore(target,mailPassword,Clock.fixed(Instant.EPOCH,ZoneOffset.UTC),config.maxCiphertext(),config.maxLocalStorage())){
         byte[] previous=opened.readArchivePreferences();if(previous!=null)try(var input=new DataInputStream(new ByteArrayInputStream(previous))){int schema=input.readInt();Binary.text(input,4096);byte[] remaining=input.readAllBytes();byte[] next=Binary.encode(out->{out.writeInt(schema);Binary.text(out,newArchive.toString());out.write(remaining);});try{opened.writeArchivePreferences(next);}finally{Arrays.fill(next,(byte)0);Arrays.fill(remaining,(byte)0);}}finally{Arrays.fill(previous,(byte)0);}
       }
-      if(cancelled.getAsBoolean())throw new InterruptedIOException("Миграция отменена до переключения профиля");ClientConfig migrated=config.withStorage(target);migrated.save(AppPaths.config());return migrated;
+      if(cancelled.getAsBoolean())throw new InterruptedIOException("Миграция отменена до переключения профиля");ClientConfig migrated=config.withStorage(target);MailFilesystemBoundary600.require(migrated);migrated.save(AppPaths.config());return migrated;
     }catch(GeneralSecurityException|IllegalArgumentException invalid){throw new IOException("Не удалось проверить пароль и перенести профиль Почты",invalid);}
     finally{if(key!=null)Arrays.fill(key,(byte)0);if(auth!=null&&Files.exists(auth))try(var paths=Files.walk(auth)){for(Path file:paths.sorted(Comparator.reverseOrder()).toList())Files.deleteIfExists(file);}}
   }

@@ -1,0 +1,3 @@
+Oct 19, 2026 11:58:41 AM com.sun.javafx.application.PlatformImpl startup
+WARNING: Unsupported JavaFX configuration: classes were loaded from 'unnamed module @7cd84586'
+PASS_HEADLESS: Core 6 administrator controls route to typed Identity callback; legacy administrator grant/revoke controls and RPC absent. Scope=actual JavaFX with UI data fixture, not authorization/native acceptance.

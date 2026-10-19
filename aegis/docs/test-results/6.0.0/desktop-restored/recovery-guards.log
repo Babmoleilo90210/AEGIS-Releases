@@ -1,0 +1,1 @@
+PASS: 16 actual Mail Device Recovery guards: fixed purpose/component, new-device PoP, pin, request freshness, 5-minute challenge bound and exact canonical account/device/challenge inspection. Scope=local signed fixtures; live server enrollment/native consent NOT_RUN here.

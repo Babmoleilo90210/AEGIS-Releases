@@ -1,0 +1,7 @@
+{
+  "status": "PASS_HEADLESS",
+  "checks": 21,
+  "scope": "Actual encrypted LocalStore archive preferences and JavaFX blocked page: exposed saved path retained without opening, password UI, fallback, creation or preference overwrite.",
+  "nativeAcceptance": "NOT_RUN",
+  "screenshots": 4
+}

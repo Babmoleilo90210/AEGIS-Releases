@@ -1,0 +1,3 @@
+Oct 19, 2026 11:58:37 AM com.sun.javafx.application.PlatformImpl startup
+WARNING: Unsupported JavaFX configuration: classes were loaded from 'unnamed module @46ee7fe8'
+PASS_HEADLESS: 21 actual archive saved-path guards; four actual JavaFX screenshots; malformed cross-platform prefs preserved

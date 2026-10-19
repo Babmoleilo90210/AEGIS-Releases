@@ -1,0 +1,3 @@
+Oct 19, 2026 11:58:44 AM com.sun.javafx.application.PlatformImpl startup
+WARNING: Unsupported JavaFX configuration: classes were loaded from 'unnamed module @731a74c'
+PASS_HEADLESS: 9 actual Mail recovery UI checks and three real JavaFX PNGs

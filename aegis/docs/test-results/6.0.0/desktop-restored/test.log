@@ -1,0 +1,42 @@
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+Oct 19, 2026 11:58:26 AM org.junit.jupiter.engine.extension.TempDirectory$CloseablePath$1 warnAboutLinkWithTargetOutsideTempDir
+WARNING: Deleting symbolic link from location inside of temp dir (/tmp/junit-1290691074111621333/alias) to location outside of temp dir (/usr) but not the target file/directory
+╷
+├─ JUnit Jupiter ✔
+│  ├─ MailFilesystemBoundary600Test ✔
+│  │  ├─ symlinkAliasIntoBrowserVisibleSystemBindIsRejected() ✔
+│  │  ├─ recoveryRejectsExposedStorageBeforeReadingBackup() ✔
+│  │  ├─ coreProfileInsideBrowserIsRejectedBeforeFilesAreCreated() ✔
+│  │  ├─ systemBindCannotBecomeMailStorageEvenWhenDestinationDoesNotExist() ✔
+│  │  ├─ ordinaryMissingPrivateStorageIsAcceptedWithoutCreatingAnything() ✔
+│  │  ├─ browserProfileOrDownloadsCannotContainMailArchive() ✔
+│  │  ├─ managerStateAndParentOfBrowserCannotContainPrivateData() ✔
+│  │  └─ migrationRejectsExposedStorageBeforeBackupOrMutation() ✔
+│  ├─ MailRecoveryIdentity600Test ✔
+│  │  ├─ symlinkInputsAreRejectedWithoutFollowingOrPublishing() ✔
+│  │  ├─ wrongPasswordWrongAccountAndCancellationCannotChangeConfigOrOriginal() ✔
+│  │  ├─ realEncryptedIdentityRestoreVerifiesBeforeConfigSwitchAndKeepsOldProfile() ✔
+│  │  ├─ importedRecoveryProducesOnlyTwoFixedPublicProofsAndRejectsWrongFiles() ✔
+│  │  └─ existingIdentityPrivateCopyAndIndependentKeyLeaveOriginalBytesUntouched() ✔
+│  └─ MailProfileMigration600Test ✔
+│     ├─ externalArchivePathBlocksSwitchExplicitlyAndLeavesOriginalData() ✔
+│     └─ wrongPasswordOrCancellationCannotSwitchConfigOrChangeOldCiphertexts() ✔
+├─ JUnit Platform Suite ✔
+└─ JUnit Vintage ✔
+
+Test run finished after 9776 ms
+[         6 containers found      ]
+[         0 containers skipped    ]
+[         6 containers started    ]
+[         0 containers aborted    ]
+[         6 containers successful ]
+[         0 containers failed     ]
+[        15 tests found           ]
+[         0 tests skipped         ]
+[        15 tests started         ]
+[         0 tests aborted         ]
+[        15 tests successful      ]
+[         0 tests failed          ]
+

@@ -1,0 +1,7 @@
+{
+  "scope": "Actual Mail recovery form, private encrypted LocalStore copy and independent recovery key, exact account/device fields, explicit reversible fixed-purpose consent. Live Identity setup, final remote proof enrollment, physical UI and Tor NOT_RUN in this harness.",
+  "checks": 9,
+  "status": "PASS_HEADLESS",
+  "screenshots": 3,
+  "nativeAcceptance": "NOT_RUN"
+}

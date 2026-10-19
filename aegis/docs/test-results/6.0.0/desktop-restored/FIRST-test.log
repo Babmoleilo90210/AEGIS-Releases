@@ -1,0 +1,77 @@
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+Oct 19, 2026 11:54:41 AM org.junit.jupiter.engine.extension.TempDirectory$CloseablePath$1 warnAboutLinkWithTargetOutsideTempDir
+WARNING: Deleting symbolic link from location inside of temp dir (/tmp/junit-4711087203868681270/alias) to location outside of temp dir (/usr) but not the target file/directory
+╷
+├─ JUnit Jupiter ✔
+│  ├─ MailFilesystemBoundary600Test ✔
+│  │  ├─ symlinkAliasIntoBrowserVisibleSystemBindIsRejected() ✔
+│  │  ├─ recoveryRejectsExposedStorageBeforeReadingBackup() ✔
+│  │  ├─ coreProfileInsideBrowserIsRejectedBeforeFilesAreCreated() ✘ Expected java.io.IOException to be thrown, but nothing was thrown.
+│  │  ├─ systemBindCannotBecomeMailStorageEvenWhenDestinationDoesNotExist() ✔
+│  │  ├─ ordinaryMissingPrivateStorageIsAcceptedWithoutCreatingAnything() ✔
+│  │  ├─ browserProfileOrDownloadsCannotContainMailArchive() ✘ Expected java.io.IOException to be thrown, but nothing was thrown.
+│  │  ├─ managerStateAndParentOfBrowserCannotContainPrivateData() ✘ Expected java.io.IOException to be thrown, but nothing was thrown.
+│  │  └─ migrationRejectsExposedStorageBeforeBackupOrMutation() ✔
+│  ├─ MailRecoveryIdentity600Test ✔
+│  │  ├─ symlinkInputsAreRejectedWithoutFollowingOrPublishing() ✔
+│  │  ├─ wrongPasswordWrongAccountAndCancellationCannotChangeConfigOrOriginal() ✔
+│  │  ├─ realEncryptedIdentityRestoreVerifiesBeforeConfigSwitchAndKeepsOldProfile() ✔
+│  │  ├─ importedRecoveryProducesOnlyTwoFixedPublicProofsAndRejectsWrongFiles() ✔
+│  │  └─ existingIdentityPrivateCopyAndIndependentKeyLeaveOriginalBytesUntouched() ✔
+│  └─ MailProfileMigration600Test ✔
+│     ├─ externalArchivePathBlocksSwitchExplicitlyAndLeavesOriginalData() ✔
+│     └─ wrongPasswordOrCancellationCannotSwitchConfigOrChangeOldCiphertexts() ✔
+├─ JUnit Platform Suite ✔
+└─ JUnit Vintage ✔
+
+Failures (3):
+  JUnit Jupiter:MailFilesystemBoundary600Test:coreProfileInsideBrowserIsRejectedBeforeFilesAreCreated()
+    MethodSource [className = 'org.securemail.client.ecosystem.MailFilesystemBoundary600Test', methodName = 'coreProfileInsideBrowserIsRejectedBeforeFilesAreCreated', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Expected java.io.IOException to be thrown, but nothing was thrown.
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:73)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       org.securemail.client.ecosystem.MailFilesystemBoundary600Test.coreProfileInsideBrowserIsRejectedBeforeFilesAreCreated(MailFilesystemBoundary600Test.java:41)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+  JUnit Jupiter:MailFilesystemBoundary600Test:browserProfileOrDownloadsCannotContainMailArchive()
+    MethodSource [className = 'org.securemail.client.ecosystem.MailFilesystemBoundary600Test', methodName = 'browserProfileOrDownloadsCannotContainMailArchive', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Expected java.io.IOException to be thrown, but nothing was thrown.
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:73)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       org.securemail.client.ecosystem.MailFilesystemBoundary600Test.browserProfileOrDownloadsCannotContainMailArchive(MailFilesystemBoundary600Test.java:29)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+  JUnit Jupiter:MailFilesystemBoundary600Test:managerStateAndParentOfBrowserCannotContainPrivateData()
+    MethodSource [className = 'org.securemail.client.ecosystem.MailFilesystemBoundary600Test', methodName = 'managerStateAndParentOfBrowserCannotContainPrivateData', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: Expected java.io.IOException to be thrown, but nothing was thrown.
+       org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:73)
+       org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+       org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)
+       org.securemail.client.ecosystem.MailFilesystemBoundary600Test.managerStateAndParentOfBrowserCannotContainPrivateData(MailFilesystemBoundary600Test.java:32)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+Test run finished after 7670 ms
+[         6 containers found      ]
+[         0 containers skipped    ]
+[         6 containers started    ]
+[         0 containers aborted    ]
+[         6 containers successful ]
+[         0 containers failed     ]
+[        15 tests found           ]
+[         0 tests skipped         ]
+[        15 tests started         ]
+[         0 tests aborted         ]
+[        12 tests successful      ]
+[         3 tests failed          ]
+
