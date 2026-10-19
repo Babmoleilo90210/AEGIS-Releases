@@ -1,0 +1,10 @@
+{
+  "sourceSha256": "c44f62b9919e4cce5963e74c67a43b8818ed523bd2eded506266d8797d103baf",
+  "signatureSha256": "6e2b1afdc9d03eefb60e21a578611565cc26c67825f2ef7d9779060f0d55dcba",
+  "keyDocumentation": "https://doc.libsodium.org/installation",
+  "officialPublicKey": "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3",
+  "payloadSignatureVerified": true,
+  "commentSignatureVerified": true,
+  "trustedComment": "trusted comment: timestamp:1792366769\tfile:libsodium-stable.tar.gz\thashed",
+  "scope": "Source authentication only. No Android/native execution or vulnerability-free assertion."
+}

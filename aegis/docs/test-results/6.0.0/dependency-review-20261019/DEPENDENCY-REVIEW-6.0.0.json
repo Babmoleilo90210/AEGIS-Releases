@@ -1,0 +1,1406 @@
+{
+  "schemaVersion": 1,
+  "reviewedAtUtc": "2026-10-19T06:28:48.303757+00:00",
+  "version": "6.0.0",
+  "productionReady": false,
+  "scope": "Fresh input SCA, not final package or native acceptance",
+  "inputSourceHashesBefore": {
+    "gradle/verification-metadata.xml": "4110835bdad1de95b61c085842971b2b29f6307ef8d339b072dbbd1e6911738a",
+    "android/third-party/DEPENDENCIES.json": "31e0dd86041cedb25ff1bf6c879e40cc64d261b821b2725972b5e3196524972e",
+    "android/build-native.py": "85463d21a2a871671663cb1a8816bc849404a9bb9f14f0a2b15b4545e144b36d",
+    "docs/test-results/6.0.0/android-tor-dependency-review/upstream/SUBMODULE-PINS.json": "8cb96ebcbbafea1dd79a414c4927f503b530b50ee0c2e2748059c9198ca09340"
+  },
+  "inputSourceHashesAfter": {
+    "gradle/verification-metadata.xml": "4110835bdad1de95b61c085842971b2b29f6307ef8d339b072dbbd1e6911738a",
+    "android/third-party/DEPENDENCIES.json": "31e0dd86041cedb25ff1bf6c879e40cc64d261b821b2725972b5e3196524972e",
+    "android/build-native.py": "85463d21a2a871671663cb1a8816bc849404a9bb9f14f0a2b15b4545e144b36d",
+    "docs/test-results/6.0.0/android-tor-dependency-review/upstream/SUBMODULE-PINS.json": "8cb96ebcbbafea1dd79a414c4927f503b530b50ee0c2e2748059c9198ca09340"
+  },
+  "inputSourceUnchanged": true,
+  "mavenJarInventory": [
+    {
+      "file": "jsr305-3.0.2.jar",
+      "bytes": 19936,
+      "sha256": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7",
+      "coordinate": "com.google.code.findbugs:jsr305:3.0.2",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "gson-2.13.2.jar",
+      "bytes": 289901,
+      "sha256": "dd0ce1b55a3ed2080cb70f9c655850cda86c206862310009dcb5e5c95265a5e0",
+      "coordinate": "com.google.code.gson:gson:2.13.2",
+      "declaredRuntimePin": false
+    },
+    {
+      "file": "gson-2.14.0.jar",
+      "bytes": 313604,
+      "sha256": "2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f",
+      "coordinate": "com.google.code.gson:gson:2.14.0",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "tink-1.23.0.jar",
+      "bytes": 2775464,
+      "sha256": "5bcdc8798ce106f5145acb4a0e993c5e5861337b1e75ca88ceb6ab9da10fa512",
+      "coordinate": "com.google.crypto.tink:tink:1.23.0",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "error_prone_annotations-2.41.0.jar",
+      "bytes": 20389,
+      "sha256": "a56e782b5b50811ac204073a355a21d915a2107fce13ec711331ad036f660fcc",
+      "coordinate": "com.google.errorprone:error_prone_annotations:2.41.0",
+      "declaredRuntimePin": false
+    },
+    {
+      "file": "error_prone_annotations-2.48.0.jar",
+      "bytes": 20255,
+      "sha256": "b49c5c958316ed67a09c699dda9aa749caf434d51d863dea599ef36a49b9c855",
+      "coordinate": "com.google.errorprone:error_prone_annotations:2.48.0",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "protobuf-java-4.33.6.jar",
+      "bytes": 1886534,
+      "sha256": "c24b2464ecfe9ac1d44e3a8fe281fca09e6ad2ca73dbd689dd7d6d719df987b5",
+      "coordinate": "com.google.protobuf:protobuf-java:4.33.6",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "password4j-1.8.4.jar",
+      "bytes": 89997,
+      "sha256": "d1406a158533b65bda7c20cebf7bf2a9a0626f8931fd1dc3d39243af5849edf5",
+      "coordinate": "com.password4j:password4j:1.8.4",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "common-image-3.14.0.jar",
+      "bytes": 79630,
+      "sha256": "9edb1afd32278d20ad660869bfa5b0a27cf9b3553b6eb3f8fc51a2fc13109b66",
+      "coordinate": "com.twelvemonkeys.common:common-image:3.14.0",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "common-io-3.14.0.jar",
+      "bytes": 92356,
+      "sha256": "ae01308bd48c68e76f6a1f76880cf7f4a3a004aa83d78e5448de358a4d957e8f",
+      "coordinate": "com.twelvemonkeys.common:common-io:3.14.0",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "common-lang-3.14.0.jar",
+      "bytes": 121885,
+      "sha256": "8d4529d6f56a010bc7e130ebfcdaf14bc11586e9d9ae66f6dca66f91da7eafef",
+      "coordinate": "com.twelvemonkeys.common:common-lang:3.14.0",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "imageio-core-3.14.0.jar",
+      "bytes": 122975,
+      "sha256": "a1b832b5090bd4677696f999b5ccb8954e987eb9674632a6286a6de2bb1c3c78",
+      "coordinate": "com.twelvemonkeys.imageio:imageio-core:3.14.0",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "imageio-metadata-3.14.0.jar",
+      "bytes": 83630,
+      "sha256": "03768fc012bd2573236da803099aba6961dfb29c190103f9790fc49ac27f84c1",
+      "coordinate": "com.twelvemonkeys.imageio:imageio-metadata:3.14.0",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "imageio-webp-3.14.0.jar",
+      "bytes": 81195,
+      "sha256": "40e5b82b99bde56889f810349615f9403aae6a0d39cdc27c6899754770bb3752",
+      "coordinate": "com.twelvemonkeys.imageio:imageio-webp:3.14.0",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "commons-logging-1.4.0.jar",
+      "bytes": 75828,
+      "sha256": "d175dbd751dd782a63bde28c7a039520e971f25e84b79c19b8435edc3603e0dc",
+      "coordinate": "commons-logging:commons-logging:1.4.0",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "jna-5.19.1.jar",
+      "bytes": 1950853,
+      "sha256": "4fb141dd8ef6b0585ffceea4bc49602fbc6312fa977e2c488794ea3e6aafecae",
+      "coordinate": "net.java.dev.jna:jna:5.19.1",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "jna-platform-5.19.1.jar",
+      "bytes": 1416385,
+      "sha256": "3b3864f5b449e9c3c24b16861524b622b086563f44e0cd8384c8efc5a6052f82",
+      "coordinate": "net.java.dev.jna:jna-platform:5.19.1",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "zip4j-2.11.6.jar",
+      "bytes": 213881,
+      "sha256": "5f1eb1e9d67cfee200a695e4079751b49e73a226b154193e13f7c602efbe72fb",
+      "coordinate": "net.lingala.zip4j:zip4j:2.11.6",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "fontbox-3.0.8.jar",
+      "bytes": 1647000,
+      "sha256": "a1915c24e3edbe0ecec93896dfbf6d41427810b663ade97bd4e8bae86ec3fdab",
+      "coordinate": "org.apache.pdfbox:fontbox:3.0.8",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "pdfbox-3.0.8.jar",
+      "bytes": 2070583,
+      "sha256": "97647cfbde61ebcfc06b4cf8c9b0ffcaaee073396eceb4a7f6836a9b9128903c",
+      "coordinate": "org.apache.pdfbox:pdfbox:3.0.8",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "pdfbox-io-3.0.8.jar",
+      "bytes": 51906,
+      "sha256": "36a0e04001010b4c764857817412b96339930b19755e728959805cc0352061b2",
+      "coordinate": "org.apache.pdfbox:pdfbox-io:3.0.8",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "apiguardian-api-1.1.2.jar",
+      "bytes": 6806,
+      "sha256": "b509448ac506d607319f182537f0b35d71007582ec741832a1f111e5b5b70b38",
+      "coordinate": "org.apiguardian:apiguardian-api:1.1.2",
+      "declaredRuntimePin": false
+    },
+    {
+      "file": "bcpg-jdk18on-1.86.jar",
+      "bytes": 729938,
+      "sha256": "8a52ea45b2063f6d41b8ca94409f255a1f4604922f7451c18a7cfd3a3c5b85ab",
+      "coordinate": "org.bouncycastle:bcpg-jdk18on:1.86",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "bcutil-jdk18on-1.86.jar",
+      "bytes": 789287,
+      "sha256": "1c268e15f785aafb1e4670d8d6e5f856f69475e96c162dadcd1ff9b350e9139f",
+      "coordinate": "org.bouncycastle:bcutil-jdk18on:1.86",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "bcprov-jdk18on-1.86.jar",
+      "bytes": 7224011,
+      "sha256": "2af190b300cbb0b35e248ccf5f4a06b6072030aeb3da7a98ec73abe5b4cb371f",
+      "coordinate": "org.bouncycastle:bcprov-jdk18on:1.86",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "junit-jupiter-5.13.4.jar",
+      "bytes": 6366,
+      "sha256": "b960f79217dd01c863031b678f07df4730bbf1eac650c74ad6b0c61faad78379",
+      "coordinate": "org.junit.jupiter:junit-jupiter:5.13.4",
+      "declaredRuntimePin": false
+    },
+    {
+      "file": "junit-jupiter-api-5.13.4.jar",
+      "bytes": 240237,
+      "sha256": "d1bb81abfd9e03418306b4e6a3390c8db52c58372e749c2980ac29f0c08278f1",
+      "coordinate": "org.junit.jupiter:junit-jupiter-api:5.13.4",
+      "declaredRuntimePin": false
+    },
+    {
+      "file": "junit-jupiter-engine-5.13.4.jar",
+      "bytes": 341150,
+      "sha256": "027404a92fe618b72465792a257951495c503a7d5751e2791e0f51c87f67f5bc",
+      "coordinate": "org.junit.jupiter:junit-jupiter-engine:5.13.4",
+      "declaredRuntimePin": false
+    },
+    {
+      "file": "junit-jupiter-params-5.13.4.jar",
+      "bytes": 660823,
+      "sha256": "3a8c6365716dbb698c0d49a05456c1e1ad05c406613c550f9dd50037872efc41",
+      "coordinate": "org.junit.jupiter:junit-jupiter-params:5.13.4",
+      "declaredRuntimePin": false
+    },
+    {
+      "file": "junit-platform-commons-1.13.4.jar",
+      "bytes": 158512,
+      "sha256": "1c25ca641ebaae44ff3ad21ca1b2ef68d0dd84bfeb07c4805ba7840899b77408",
+      "coordinate": "org.junit.platform:junit-platform-commons:1.13.4",
+      "declaredRuntimePin": false
+    },
+    {
+      "file": "junit-platform-engine-1.13.4.jar",
+      "bytes": 268584,
+      "sha256": "390c5f77b84283a64b644f88251b397e0b0debb80bdcc50f899881aecff43a5a",
+      "coordinate": "org.junit.platform:junit-platform-engine:1.13.4",
+      "declaredRuntimePin": false
+    },
+    {
+      "file": "junit-platform-launcher-1.13.4.jar",
+      "bytes": 223100,
+      "sha256": "0b0beaeb6880a31149641d2d848b863712885469670c12099586d7f798522564",
+      "coordinate": "org.junit.platform:junit-platform-launcher:1.13.4",
+      "declaredRuntimePin": false
+    },
+    {
+      "file": "javafx-base-21.0.12-linux.jar",
+      "bytes": 753227,
+      "sha256": "ac83213e343d734d7d315b4a850b309d8de4a4950c6e46497d8bc68e744b245d",
+      "coordinate": "org.openjfx:javafx-base:21.0.12",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "javafx-base-21.0.12-win.jar",
+      "bytes": 753228,
+      "sha256": "110c32b2034d1ca4c644b919f9f28370d312cd192a26e2df1a83ec1df4cd6a6b",
+      "coordinate": "org.openjfx:javafx-base:21.0.12",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "javafx-base-21.0.12.jar",
+      "bytes": 302,
+      "sha256": "0ea83fe69a406acf8b7d12713ce7626f7a3c673bb04fd319f7d9561167dfdcf4",
+      "coordinate": "org.openjfx:javafx-base:21.0.12",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "javafx-controls-21.0.12-linux.jar",
+      "bytes": 2582535,
+      "sha256": "de5417dbb39920d19376073dbbe896b97cbd5a4e88d56cc6627ff0a32666dc04",
+      "coordinate": "org.openjfx:javafx-controls:21.0.12",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "javafx-controls-21.0.12-win.jar",
+      "bytes": 2582535,
+      "sha256": "fe32329525908377b3a34580f37fa4dafc0574943521ac2244a56380ac6f7770",
+      "coordinate": "org.openjfx:javafx-controls:21.0.12",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "javafx-graphics-21.0.12-linux.jar",
+      "bytes": 4682157,
+      "sha256": "200ee46c819d03811c736900cdfacb2047921313b261d93e52cdeef1eaf1ebb7",
+      "coordinate": "org.openjfx:javafx-graphics:21.0.12",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "javafx-graphics-21.0.12-win.jar",
+      "bytes": 5909041,
+      "sha256": "af380b5afede1f13fbe0a8ebdb5b2855a97b1e22c60dcefb5a90a498fd679722",
+      "coordinate": "org.openjfx:javafx-graphics:21.0.12",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "javafx-graphics-21.0.12.jar",
+      "bytes": 306,
+      "sha256": "22bae6397dfdde5744d09d3e47c03efc80788d9b41c1dd140f05f67dddbcd7ff",
+      "coordinate": "org.openjfx:javafx-graphics:21.0.12",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "opentest4j-1.3.0.jar",
+      "bytes": 14304,
+      "sha256": "48e2df636cab6563ced64dcdff8abb2355627cb236ef0bf37598682ddf742f1b",
+      "coordinate": "org.opentest4j:opentest4j:1.3.0",
+      "declaredRuntimePin": false
+    },
+    {
+      "file": "slf4j-api-2.0.12.jar",
+      "bytes": 68115,
+      "sha256": "a79502b8abdfbd722846a27691226a4088682d6d35654f9b80e2a9ccacf7ed47",
+      "coordinate": "org.slf4j:slf4j-api:2.0.12",
+      "declaredRuntimePin": false
+    },
+    {
+      "file": "slf4j-api-2.0.17.jar",
+      "bytes": 69908,
+      "sha256": "7b751d952061954d5abfed7181c1f645d336091b679891591d63329c622eb832",
+      "coordinate": "org.slf4j:slf4j-api:2.0.17",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "slf4j-nop-2.0.17.jar",
+      "bytes": 4982,
+      "sha256": "3716f83649ec66161a2edefd4f49df34d1dd1c51cdcf941996c6987260f0a829",
+      "coordinate": "org.slf4j:slf4j-nop:2.0.17",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "openjfx-monocle-21.0.2.jar",
+      "bytes": 257923,
+      "sha256": "3d0b0c186a9f495aa4e3d058c612b2a9cf44a97ffbcecd75d441aed8263fac50",
+      "coordinate": "org.testfx:openjfx-monocle:21.0.2",
+      "declaredRuntimePin": false
+    },
+    {
+      "file": "sqlite-jdbc-3.53.4.0.jar",
+      "bytes": 12002370,
+      "sha256": "bcb1f51e36f940867e83342f9efbf5968ac44a6bef4d397bb4af7b17b45cd2fb",
+      "coordinate": "org.xerial:sqlite-jdbc:3.53.4.0",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "commons-codec-1.19.0.jar",
+      "bytes": 374716,
+      "sha256": "5c3881e4f556855e9c532927ee0c9dfde94cc66760d5805c031a59887070af5f",
+      "coordinate": "commons-codec:commons-codec:1.19.0",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "commons-io-2.20.0.jar",
+      "bytes": 563971,
+      "sha256": "df90bba0fe3cb586b7f164e78fe8f8f4da3f2dd5c27fa645f888100ccc25dd72",
+      "coordinate": "commons-io:commons-io:2.20.0",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "commons-compress-1.28.0.jar",
+      "bytes": 1117221,
+      "sha256": "e1522945218456f3649a39bc4afd70ce4bd466221519dba7d378f2141a4642ca",
+      "coordinate": "org.apache.commons:commons-compress:1.28.0",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "commons-lang3-3.18.0.jar",
+      "bytes": 702952,
+      "sha256": "4eeeae8d20c078abb64b015ec158add383ac581571cddc45c68f0c9ae0230720",
+      "coordinate": "org.apache.commons:commons-lang3:3.18.0",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "xz-1.12.jar",
+      "bytes": 168792,
+      "sha256": "3e158a87bd73d8afb4b6e8239c013b7d049c48563f45860ce99cd2e448cf4a6b",
+      "coordinate": "org.tukaani:xz:1.12",
+      "declaredRuntimePin": true
+    },
+    {
+      "file": "junit-platform-console-standalone-1.13.4.jar",
+      "bytes": 3159930,
+      "sha256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+      "coordinate": "org.junit.platform:junit-platform-console-standalone:1.13.4",
+      "declaredRuntimePin": false,
+      "scope": "test-tool"
+    }
+  ],
+  "androidInputInventory": [
+    {
+      "file": "apksig-9.4.1.jar",
+      "bytes": 506609,
+      "sha256": "7ae2e5980c77d853e3513074ee7c822bbdcdcde1668889d17faa7fe8bc8aa821",
+      "coordinate": "com.android.tools.build:apksig:9.4.1"
+    },
+    {
+      "file": "bctls-jdk18on-1.86.jar",
+      "bytes": 846838,
+      "sha256": "418e46d6ffd27c3226268533b6321daec899129b1ec8ede35331c7d78e11e535",
+      "coordinate": "org.bouncycastle:bctls-jdk18on:1.86"
+    },
+    {
+      "file": "tor-android-0.4.9.14.aar",
+      "bytes": 12976254,
+      "sha256": "28ff2bb6d4d42eabe57183dedd7a97fce77e8ce4b6f5af6fa03993b3ca054edd",
+      "coordinate": "info.guardianproject:tor-android:0.4.9.14"
+    },
+    {
+      "file": "jtorctl-0.4.5.7.jar",
+      "bytes": 32371,
+      "sha256": "51bbed22de9fe0028095223ceeb4694d8731eda2fc01edee07b8c0c8a46681c3",
+      "coordinate": "info.guardianproject:jtorctl:0.4.5.7"
+    },
+    {
+      "file": "localbroadcastmanager-1.1.0.aar",
+      "bytes": 7607,
+      "sha256": "a22b94a77789f3b34becd24082231300524011ccc83f026142c49ad60131379b",
+      "coordinate": "androidx.localbroadcastmanager:localbroadcastmanager:1.1.0"
+    },
+    {
+      "file": "annotation-1.1.0.jar",
+      "bytes": 28478,
+      "sha256": "d38d63edb30f1467818d50aaf05f8a692dea8b31392a049bfa991b159ad5b692",
+      "coordinate": "androidx.annotation:annotation:1.1.0"
+    }
+  ],
+  "nativeVersions": {
+    "tor": "0.4.9.14",
+    "openssl": "3.5.9",
+    "libevent": "2.1.13-stable",
+    "zlib": "1.3.2",
+    "zstd": "1.5.7",
+    "libsodium": "1.0.22",
+    "opus": "1.6.1",
+    "speex": "1.2.1"
+  },
+  "gradleRuntimePinFiles": [
+    {
+      "path": "attachment-service/build.gradle",
+      "sha256": "a9c39bd38c0289940599876fb07e07c3131a0b2042466567631023142d364871"
+    },
+    {
+      "path": "build.gradle",
+      "sha256": "f3fe49b81eaf4722737210a0f83edc5f49832e6d573f70845a7de0a35364087b"
+    },
+    {
+      "path": "client-core/build.gradle",
+      "sha256": "e4e0d68ea623ab4fb9e55c16e8a99e2716b63d0a834b4735ba65178d777d4e40"
+    },
+    {
+      "path": "client-ui/build.gradle",
+      "sha256": "8cc4d0858e192a1ff389da108f37839019445ec575cb6d7d1f56738b1157a97c"
+    },
+    {
+      "path": "common-protocol/build.gradle",
+      "sha256": "4f0fd3547b118b79f02b1e9a001e8fe08de1513af29f979c9b0a649db47d058e"
+    },
+    {
+      "path": "community-server/build.gradle",
+      "sha256": "c455b0c543838a47a560f5c0b865d936396403a57d38e6328a6f0c992bac9d72"
+    },
+    {
+      "path": "glas-signaling/build.gradle",
+      "sha256": "e9973eedb07c4875df353ef19f1391d6e6556c5a07456e4dcaf93bcf172340d8"
+    },
+    {
+      "path": "identity-server/build.gradle",
+      "sha256": "8de5e629b392c434b6d972e45b594311ab77c56871ad08cc7910bb277ec3da64"
+    },
+    {
+      "path": "integration-tests/build.gradle",
+      "sha256": "06e41e72391ccdc51b1e2b7fec1528e6aed86274227b1dbafd651f090b6da6db"
+    },
+    {
+      "path": "management-agent/build.gradle",
+      "sha256": "681f665ffd186860917611790775beff58b9a455b0fcb6ccf752674db057d081"
+    },
+    {
+      "path": "news-worker/build.gradle",
+      "sha256": "cae10772a048e207ef02ee199193aacb151671aed61a00384eb806d04a1ec79a"
+    },
+    {
+      "path": "packaging/verification600.gradle",
+      "sha256": "5408bb415fb4f8d29f376fe8600a76b67e44dcacf3211360e09fe6b787c2da01"
+    },
+    {
+      "path": "relay-server/build.gradle",
+      "sha256": "49bd309cc8a3d9511f54a25fec94c657cd1df20f86a7e5bf2cdc83c3d5eb6509"
+    },
+    {
+      "path": "settings.gradle",
+      "sha256": "c9cba5613a0d433bce59f0aed79568467d9efb71e95664f0b7fc1e2484598780"
+    },
+    {
+      "path": "attachment-service/gradle.lockfile",
+      "sha256": "1ce2e96089e2e2f1c84793782cf96564bad9f6f1244c351286103e4aa58a3666"
+    },
+    {
+      "path": "client-core/gradle.lockfile",
+      "sha256": "99e28683b4ade75468a079ba9c241dd0cfb9942f9b550ee8c66e9a908e4eb09f"
+    },
+    {
+      "path": "client-ui/gradle.lockfile",
+      "sha256": "f514d22a912fa819aa603767c5ab4e255a1e142d14c909799ea4f062cb82968b"
+    },
+    {
+      "path": "common-protocol/gradle.lockfile",
+      "sha256": "bf9ee25c7cf20529fcf8d3b2ed07a35c462bc9d71f69933ccf2babcb20792440"
+    },
+    {
+      "path": "community-server/gradle.lockfile",
+      "sha256": "71be3fed9918e31d91cd8dc591a07a285ad5de7e4d8ba1cddc66e97f16af8bc7"
+    },
+    {
+      "path": "glas-signaling/gradle.lockfile",
+      "sha256": "a89248d8682644a79b89a900c5635d93e09d87a8e75ba3c4905573e23e17a5eb"
+    },
+    {
+      "path": "identity-server/gradle.lockfile",
+      "sha256": "f0e3922ae2cf45e5cbd6dec36a34db96da4f6c5f8a6d749edd81222854b2492d"
+    },
+    {
+      "path": "integration-tests/gradle.lockfile",
+      "sha256": "d65df8d30a95014ec7b19b0bfb001f4889021217506371a7f2e5692bc1adf727"
+    },
+    {
+      "path": "management-agent/gradle.lockfile",
+      "sha256": "f1dfe1beff4ad68ef3528ffb3bb3e0d6e77b7de527fd605145f44fc476b522d5"
+    },
+    {
+      "path": "news-worker/gradle.lockfile",
+      "sha256": "9d50ef4b1bcaaab13c01565c9fe7a745bf9fd8b90f6f7ba69c6900c74990a6f6"
+    },
+    {
+      "path": "relay-server/gradle.lockfile",
+      "sha256": "e32cf599cb62e98de1e7e7e31a6089d08e7486463af371c1ef8965e690dc2df9"
+    }
+  ],
+  "queryResults": [
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "com.google.code.findbugs:jsr305"
+        },
+        "version": "3.0.2"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "com.google.code.gson:gson"
+        },
+        "version": "2.13.2"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "com.google.code.gson:gson"
+        },
+        "version": "2.14.0"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "com.google.crypto.tink:tink"
+        },
+        "version": "1.23.0"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "com.google.errorprone:error_prone_annotations"
+        },
+        "version": "2.41.0"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "com.google.errorprone:error_prone_annotations"
+        },
+        "version": "2.48.0"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "com.google.protobuf:protobuf-java"
+        },
+        "version": "4.33.6"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "com.password4j:password4j"
+        },
+        "version": "1.8.4"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "com.twelvemonkeys.common:common-image"
+        },
+        "version": "3.14.0"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "com.twelvemonkeys.common:common-io"
+        },
+        "version": "3.14.0"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "com.twelvemonkeys.common:common-lang"
+        },
+        "version": "3.14.0"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "com.twelvemonkeys.imageio:imageio-core"
+        },
+        "version": "3.14.0"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "com.twelvemonkeys.imageio:imageio-metadata"
+        },
+        "version": "3.14.0"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "com.twelvemonkeys.imageio:imageio-webp"
+        },
+        "version": "3.14.0"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "commons-logging:commons-logging"
+        },
+        "version": "1.4.0"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "net.java.dev.jna:jna"
+        },
+        "version": "5.19.1"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "net.java.dev.jna:jna-platform"
+        },
+        "version": "5.19.1"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "net.lingala.zip4j:zip4j"
+        },
+        "version": "2.11.6"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.apache.pdfbox:fontbox"
+        },
+        "version": "3.0.8"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.apache.pdfbox:pdfbox"
+        },
+        "version": "3.0.8"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.apache.pdfbox:pdfbox-io"
+        },
+        "version": "3.0.8"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.apiguardian:apiguardian-api"
+        },
+        "version": "1.1.2"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.bouncycastle:bcpg-jdk18on"
+        },
+        "version": "1.86"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.bouncycastle:bcutil-jdk18on"
+        },
+        "version": "1.86"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.bouncycastle:bcprov-jdk18on"
+        },
+        "version": "1.86"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.junit.jupiter:junit-jupiter"
+        },
+        "version": "5.13.4"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.junit.jupiter:junit-jupiter-api"
+        },
+        "version": "5.13.4"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.junit.jupiter:junit-jupiter-engine"
+        },
+        "version": "5.13.4"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.junit.jupiter:junit-jupiter-params"
+        },
+        "version": "5.13.4"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.junit.platform:junit-platform-commons"
+        },
+        "version": "1.13.4"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.junit.platform:junit-platform-engine"
+        },
+        "version": "1.13.4"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.junit.platform:junit-platform-launcher"
+        },
+        "version": "1.13.4"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.openjfx:javafx-base"
+        },
+        "version": "21.0.12"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.openjfx:javafx-controls"
+        },
+        "version": "21.0.12"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.openjfx:javafx-graphics"
+        },
+        "version": "21.0.12"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.opentest4j:opentest4j"
+        },
+        "version": "1.3.0"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.slf4j:slf4j-api"
+        },
+        "version": "2.0.12"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.slf4j:slf4j-api"
+        },
+        "version": "2.0.17"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.slf4j:slf4j-nop"
+        },
+        "version": "2.0.17"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.testfx:openjfx-monocle"
+        },
+        "version": "21.0.2"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.xerial:sqlite-jdbc"
+        },
+        "version": "3.53.4.0"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "commons-codec:commons-codec"
+        },
+        "version": "1.19.0"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "commons-io:commons-io"
+        },
+        "version": "2.20.0"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.apache.commons:commons-compress"
+        },
+        "version": "1.28.0"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.apache.commons:commons-lang3"
+        },
+        "version": "3.18.0"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.tukaani:xz"
+        },
+        "version": "1.12"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.junit.platform:junit-platform-console-standalone"
+        },
+        "version": "1.13.4"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "com.android.tools.build:apksig"
+        },
+        "version": "9.4.1"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.bouncycastle:bctls-jdk18on"
+        },
+        "version": "1.86"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "info.guardianproject:tor-android"
+        },
+        "version": "0.4.9.14"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "info.guardianproject:jtorctl"
+        },
+        "version": "0.4.5.7"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "androidx.localbroadcastmanager:localbroadcastmanager"
+        },
+        "version": "1.1.0"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "androidx.annotation:annotation"
+        },
+        "version": "1.1.0"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "OSS-Fuzz",
+          "name": "tor"
+        },
+        "version": "0.4.9.14"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "OSS-Fuzz",
+          "name": "openssl"
+        },
+        "version": "3.5.9"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "OSS-Fuzz",
+          "name": "libevent"
+        },
+        "version": "2.1.13"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "OSS-Fuzz",
+          "name": "zlib"
+        },
+        "version": "1.3.2"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "OSS-Fuzz",
+          "name": "zstd"
+        },
+        "version": "1.5.7"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "OSS-Fuzz",
+          "name": "libsodium"
+        },
+        "version": "1.0.22"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "OSS-Fuzz",
+          "name": "opus"
+        },
+        "version": "1.6.1"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "package": {
+          "ecosystem": "OSS-Fuzz",
+          "name": "speex"
+        },
+        "version": "1.2.1"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "commit": "45e844fa2a14ec92d146bd8f5778ac130b6625fb"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "commit": "4a522a3ca491c6c04d4a44cb006b92101c42efc1"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "commit": "780b396b0fc3d0355fc0614e221e3446933669c4"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "commit": "79ddfb460847999b807cba76d04e73891f29c6ee"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "commit": "7f51e51c72d088481af972c3a115cec41c043d49"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "commit": "94441ec8777eb319936735a58b376963d09c73d4"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "commit": "9f1cf0bfca0c003dd0cf0fbdcf6912a2b46a8d05"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "commit": "b2f2250371c1bd436a42f3c380ee46d4ac3bada8"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "commit": "da607da739fa6047df13e66a2af6b8bec7c2a498"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    },
+    {
+      "query": {
+        "commit": "f8745da6ff1ad1e7bab384bd1f9d742439278e99"
+      },
+      "status": "NO_INDEXED_HITS",
+      "advisoryIds": []
+    }
+  ],
+  "apiPositiveControl": {
+    "query": {
+      "package": {
+        "ecosystem": "Maven",
+        "name": "org.apache.logging.log4j:log4j-core"
+      },
+      "version": "2.14.1"
+    },
+    "status": "FINDINGS",
+    "advisoryIds": [
+      "GHSA-3pxv-7cmr-fjr4",
+      "GHSA-6hg6-v5c8-fphq",
+      "GHSA-7rjr-3q55-vv33",
+      "GHSA-8489-44mv-ggj8",
+      "GHSA-jfh8-c2jp-5v3q",
+      "GHSA-p6xc-xr62-6r2g",
+      "GHSA-vc5p-v9hr-52mj"
+    ]
+  },
+  "osvReceipts": [
+    {
+      "requestedAtUtc": "2026-10-19T06:28:22.328112+00:00",
+      "url": "https://api.osv.dev/v1/querybatch",
+      "method": "POST",
+      "tlsVerification": true,
+      "httpStatus": 200,
+      "status": "FETCHED",
+      "bytes": 728,
+      "sha256": "797082b4cdf398403c58eb42da9612e56c0bcdad373eb57dd4234b2f4763c262",
+      "file": "OSV-RESPONSE.json",
+      "requestSha256": "546d71119f12d7bb4d30564fa35dcbb3e0df2dc958cfcf258532d9ef4e03295c"
+    }
+  ],
+  "advisoryReceipts": [],
+  "primarySourceReceipts": [
+    {
+      "requestedAtUtc": "2026-10-19T06:28:28.255317+00:00",
+      "url": "https://openssl-library.org/news/vulnerabilities/",
+      "method": "GET",
+      "tlsVerification": true,
+      "httpStatus": 200,
+      "status": "FETCHED",
+      "bytes": 759579,
+      "sha256": "df5b2fd3e82718c85b806e93a716f13336dd0f20e37a8799c9e0f4afb827bb8d",
+      "file": "openssl-vulnerabilities.source"
+    },
+    {
+      "requestedAtUtc": "2026-10-19T06:28:28.256431+00:00",
+      "url": "https://openssl-library.org/news/openssl-3.5-notes/",
+      "method": "GET",
+      "tlsVerification": true,
+      "httpStatus": 200,
+      "status": "FETCHED",
+      "bytes": 54560,
+      "sha256": "4d8de0c3b21f9b3a08ef6352dc342afe280d9f5a250d4f64988f196c97771fa7",
+      "file": "openssl-35-release-notes.source"
+    },
+    {
+      "requestedAtUtc": "2026-10-19T06:28:28.258098+00:00",
+      "url": "https://api.github.com/repos/jedisct1/libsodium/security-advisories?per_page=100",
+      "method": "GET",
+      "tlsVerification": true,
+      "httpStatus": 200,
+      "status": "FETCHED",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "file": "libsodium-security-advisories.source"
+    },
+    {
+      "requestedAtUtc": "2026-10-19T06:28:33.034048+00:00",
+      "url": "https://pdfbox.apache.org/security.html",
+      "method": "GET",
+      "tlsVerification": true,
+      "httpStatus": 200,
+      "status": "FETCHED",
+      "bytes": 20699,
+      "sha256": "b6146fdfec48ba41bdfa3cd07e486bec7ad4509b8b35e01318d3494924ce7a64",
+      "file": "pdfbox-security.source"
+    },
+    {
+      "requestedAtUtc": "2026-10-19T06:28:35.211156+00:00",
+      "url": "https://commons.apache.org/proper/commons-compress/security.html",
+      "method": "GET",
+      "tlsVerification": true,
+      "httpStatus": 200,
+      "status": "FETCHED",
+      "bytes": 30098,
+      "sha256": "2ec5e06a3dd89e4c84648b4d4906d9296a76bd0a8e1c4c493c2cdb4bc3a46a7d",
+      "file": "commons-compress-security.source"
+    },
+    {
+      "requestedAtUtc": "2026-10-19T06:28:35.268396+00:00",
+      "url": "https://www.sqlite.org/security.html",
+      "method": "GET",
+      "tlsVerification": true,
+      "httpStatus": 200,
+      "status": "FETCHED",
+      "bytes": 15359,
+      "sha256": "b9034bba326f3984cf9e8d018445d9b2551c2f19141e1ae807cb56d1da881ebd",
+      "file": "sqlite-security.source"
+    },
+    {
+      "requestedAtUtc": "2026-10-19T06:28:38.467967+00:00",
+      "url": "https://opus-codec.org/security/",
+      "method": "GET",
+      "tlsVerification": true,
+      "status": "BLOCKED",
+      "errorType": "HTTPError",
+      "httpStatus": 404
+    },
+    {
+      "requestedAtUtc": "2026-10-19T06:28:41.486401+00:00",
+      "url": "https://api.github.com/repos/google/gson/security-advisories?per_page=100",
+      "method": "GET",
+      "tlsVerification": true,
+      "httpStatus": 200,
+      "status": "FETCHED",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "file": "gson-security-advisories.source"
+    }
+  ],
+  "advisoryLimitExceeded": false,
+  "interpretation": "NO_INDEXED_HITS_FOR_SUBMITTED_IDENTIFIERS is not proof of package recognition, absence of vulnerabilities or complete dependency closure.",
+  "primaryResponseBodies": "Raw fetched primary HTML retained only in execution evidence area; public report preserves exact URL/status/length/SHA and own observations, not a republished webpage.",
+  "toolSourceSha256": "1194f41c78e742c7bd127fc71c6a42c7e4b6625184e451aeab0f6d711c927988"
+}

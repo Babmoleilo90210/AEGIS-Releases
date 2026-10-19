@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "reviewedAtUtc": "2026-10-19T06:30:59.105607+00:00",
+  "scope": "Primary-source review conclusions, limited to retrieved pages and current input pins. No final binary or native acceptance.",
+  "observations": [
+    {
+      "component": "OpenSSL",
+      "inputVersion": "3.5.9",
+      "source": "https://openssl-library.org/news/openssl-3.5-notes/",
+      "observation": "Official release notes identify 3.5.9 as the security patch dated 2026-09-29. Input Tor AAR review already matched native strings and source gitlink to 3.5.9; upstream README 3.5.7 is not used as the inventory version.",
+      "conclusion": "Reviewed version/source association; no assertion that all possible vulnerabilities are absent."
+    },
+    {
+      "component": "OpenSSL",
+      "inputVersion": "3.5.9",
+      "source": "https://openssl-library.org/news/vulnerabilities/",
+      "observation": "Retrieved published 3.5-branch affected ranges end before fixed releases up to 3.5.9. Build flags, feature exposure, later advisories and fork coverage remain separate checks.",
+      "parsed35BranchRanges": [
+        [
+          "3.5.0",
+          "3.5.1"
+        ],
+        [
+          "3.5.0",
+          "3.5.4"
+        ],
+        [
+          "3.5.0",
+          "3.5.5"
+        ],
+        [
+          "3.5.0",
+          "3.5.6"
+        ],
+        [
+          "3.5.0",
+          "3.5.7"
+        ],
+        [
+          "3.5.0",
+          "3.5.8"
+        ],
+        [
+          "3.5.0",
+          "3.5.9"
+        ]
+      ]
+    },
+    {
+      "component": "PDFBox",
+      "inputVersion": "3.0.8",
+      "source": "https://pdfbox.apache.org/security.html",
+      "observation": "The current table identifies CVE-2026-33929 in the ExtractEmbeddedFiles example through 3.0.7 and fixed in 3.0.8; the table distinguishes the example from the core library. This does not remove parser resource-limit and isolation requirements."
+    },
+    {
+      "component": "Commons Compress",
+      "inputVersion": "1.28.0",
+      "source": "https://commons.apache.org/proper/commons-compress/security.html",
+      "observation": "The page lists older affected ranges including CVE-2024-25710 through 1.25.0, CVE-2024-26308 before 1.26.0 and CVE-2023-42503 before 1.24.0. The pinned version is beyond these stated fixed versions; archive traversal and size/ratio quotas still need production checks."
+    },
+    {
+      "component": "SQLite JDBC/native SQLite",
+      "inputVersion": "3.53.4.0 JDBC input",
+      "source": "https://www.sqlite.org/security.html",
+      "observation": "The official security guidance is available; it is not a complete exact JDBC/native build vulnerability range inventory. Quiesced backups and isolated validation of untrusted restored databases remain necessary."
+    },
+    {
+      "component": "libsodium",
+      "inputVersion": "1.0.22 signed stable source c44f62b9919e4cce5963e74c67a43b8818ed523bd2eded506266d8797d103baf",
+      "source": "https://api.github.com/repos/jedisct1/libsodium/security-advisories?per_page=100",
+      "observation": "The public advisory API returned an empty array. Separately verified both official minisign payload and trusted-comment signatures of the current source. An empty public list and a valid signature do not prove absence of vulnerabilities."
+    },
+    {
+      "component": "Gson",
+      "inputVersion": "2.14.0 runtime plus historical 2.13.2 verification input",
+      "source": "https://api.github.com/repos/google/gson/security-advisories?per_page=100",
+      "observation": "The public advisory API returned an empty array; this only states the observed repository advisory response, not universal safety."
+    },
+    {
+      "component": "Opus",
+      "inputVersion": "1.6.1",
+      "source": "https://opus-codec.org/security/",
+      "observation": "The requested primary security page returned HTTP404. Primary advisory coverage for this endpoint is BLOCKED; no repeated guessed requests or successful advisory-review claim."
+    }
+  ],
+  "productionReady": false
+}

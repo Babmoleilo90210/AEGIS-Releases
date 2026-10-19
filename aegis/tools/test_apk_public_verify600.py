@@ -32,11 +32,14 @@ class ParserFixtures(unittest.TestCase):
 class ActualOfficialApksigner(unittest.TestCase):
     @unittest.skipUnless(os.environ.get('AEGIS_TEST_APKSIGNER')and os.environ.get('AEGIS_TEST_SIGNED_APK'),'Real SDK/APK paths not supplied; parser fixtures do not replace this test')
     def test_actual_apk_and_actual_tamper(self):
-        apk=pathlib.Path(os.environ['AEGIS_TEST_SIGNED_APK']);tool=pathlib.Path(os.environ['AEGIS_TEST_APKSIGNER']);result=public.verify(tool,apk,PIN);self.assertTrue(result['schemes']['v3'])
+        # Recovered builds use a fresh explicitly TEST-only key; the old private
+        # test key is not restored. Parser fixtures retain their fixed PIN.
+        expected_test_certificate=os.environ.get('AEGIS_TEST_CERT_SHA256',PIN)
+        apk=pathlib.Path(os.environ['AEGIS_TEST_SIGNED_APK']);tool=pathlib.Path(os.environ['AEGIS_TEST_APKSIGNER']);result=public.verify(tool,apk,expected_test_certificate);self.assertTrue(result['schemes']['v3'])
         with tempfile.TemporaryDirectory()as directory:
             changed=pathlib.Path(directory)/'actual-tampered.apk';data=bytearray(apk.read_bytes())
             with zipfile.ZipFile(apk)as z:
                 item=z.getinfo('classes.dex');offset=item.header_offset+30+len(item.filename.encode())+len(item.extra);data[offset+10]^=1
             changed.write_bytes(data)
-            with self.assertRaises(ValueError):public.verify(tool,changed,PIN)
+            with self.assertRaises(ValueError):public.verify(tool,changed,expected_test_certificate)
 if __name__=='__main__':unittest.main(verbosity=2)

@@ -1,0 +1,520 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-10-19T06:28:48.303757+00:00",
+    "component": {
+      "type": "application",
+      "name": "AEGIS-input-review",
+      "version": "6.0.0"
+    },
+    "properties": [
+      {
+        "name": "aegis:scope",
+        "value": "Reviewed build inputs; reconcile against final package SBOM"
+      }
+    ]
+  },
+  "components": [
+    {
+      "type": "library",
+      "name": "annotation",
+      "group": "androidx.annotation",
+      "version": "1.1.0",
+      "purl": "pkg:maven/androidx.annotation/annotation@1.1.0"
+    },
+    {
+      "type": "library",
+      "name": "localbroadcastmanager",
+      "group": "androidx.localbroadcastmanager",
+      "version": "1.1.0",
+      "purl": "pkg:maven/androidx.localbroadcastmanager/localbroadcastmanager@1.1.0"
+    },
+    {
+      "type": "library",
+      "name": "apksig",
+      "group": "com.android.tools.build",
+      "version": "9.4.1",
+      "purl": "pkg:maven/com.android.tools.build/apksig@9.4.1"
+    },
+    {
+      "type": "library",
+      "name": "jsr305",
+      "group": "com.google.code.findbugs",
+      "version": "3.0.2",
+      "purl": "pkg:maven/com.google.code.findbugs/jsr305@3.0.2"
+    },
+    {
+      "type": "library",
+      "name": "gson",
+      "group": "com.google.code.gson",
+      "version": "2.13.2",
+      "purl": "pkg:maven/com.google.code.gson/gson@2.13.2"
+    },
+    {
+      "type": "library",
+      "name": "gson",
+      "group": "com.google.code.gson",
+      "version": "2.14.0",
+      "purl": "pkg:maven/com.google.code.gson/gson@2.14.0"
+    },
+    {
+      "type": "library",
+      "name": "tink",
+      "group": "com.google.crypto.tink",
+      "version": "1.23.0",
+      "purl": "pkg:maven/com.google.crypto.tink/tink@1.23.0"
+    },
+    {
+      "type": "library",
+      "name": "error_prone_annotations",
+      "group": "com.google.errorprone",
+      "version": "2.41.0",
+      "purl": "pkg:maven/com.google.errorprone/error_prone_annotations@2.41.0"
+    },
+    {
+      "type": "library",
+      "name": "error_prone_annotations",
+      "group": "com.google.errorprone",
+      "version": "2.48.0",
+      "purl": "pkg:maven/com.google.errorprone/error_prone_annotations@2.48.0"
+    },
+    {
+      "type": "library",
+      "name": "protobuf-java",
+      "group": "com.google.protobuf",
+      "version": "4.33.6",
+      "purl": "pkg:maven/com.google.protobuf/protobuf-java@4.33.6"
+    },
+    {
+      "type": "library",
+      "name": "password4j",
+      "group": "com.password4j",
+      "version": "1.8.4",
+      "purl": "pkg:maven/com.password4j/password4j@1.8.4"
+    },
+    {
+      "type": "library",
+      "name": "common-image",
+      "group": "com.twelvemonkeys.common",
+      "version": "3.14.0",
+      "purl": "pkg:maven/com.twelvemonkeys.common/common-image@3.14.0"
+    },
+    {
+      "type": "library",
+      "name": "common-io",
+      "group": "com.twelvemonkeys.common",
+      "version": "3.14.0",
+      "purl": "pkg:maven/com.twelvemonkeys.common/common-io@3.14.0"
+    },
+    {
+      "type": "library",
+      "name": "common-lang",
+      "group": "com.twelvemonkeys.common",
+      "version": "3.14.0",
+      "purl": "pkg:maven/com.twelvemonkeys.common/common-lang@3.14.0"
+    },
+    {
+      "type": "library",
+      "name": "imageio-core",
+      "group": "com.twelvemonkeys.imageio",
+      "version": "3.14.0",
+      "purl": "pkg:maven/com.twelvemonkeys.imageio/imageio-core@3.14.0"
+    },
+    {
+      "type": "library",
+      "name": "imageio-metadata",
+      "group": "com.twelvemonkeys.imageio",
+      "version": "3.14.0",
+      "purl": "pkg:maven/com.twelvemonkeys.imageio/imageio-metadata@3.14.0"
+    },
+    {
+      "type": "library",
+      "name": "imageio-webp",
+      "group": "com.twelvemonkeys.imageio",
+      "version": "3.14.0",
+      "purl": "pkg:maven/com.twelvemonkeys.imageio/imageio-webp@3.14.0"
+    },
+    {
+      "type": "library",
+      "name": "commons-codec",
+      "group": "commons-codec",
+      "version": "1.19.0",
+      "purl": "pkg:maven/commons-codec/commons-codec@1.19.0"
+    },
+    {
+      "type": "library",
+      "name": "commons-io",
+      "group": "commons-io",
+      "version": "2.20.0",
+      "purl": "pkg:maven/commons-io/commons-io@2.20.0"
+    },
+    {
+      "type": "library",
+      "name": "commons-logging",
+      "group": "commons-logging",
+      "version": "1.4.0",
+      "purl": "pkg:maven/commons-logging/commons-logging@1.4.0"
+    },
+    {
+      "type": "library",
+      "name": "jtorctl",
+      "group": "info.guardianproject",
+      "version": "0.4.5.7",
+      "purl": "pkg:maven/info.guardianproject/jtorctl@0.4.5.7"
+    },
+    {
+      "type": "library",
+      "name": "tor-android",
+      "group": "info.guardianproject",
+      "version": "0.4.9.14",
+      "purl": "pkg:maven/info.guardianproject/tor-android@0.4.9.14"
+    },
+    {
+      "type": "library",
+      "name": "jna",
+      "group": "net.java.dev.jna",
+      "version": "5.19.1",
+      "purl": "pkg:maven/net.java.dev.jna/jna@5.19.1"
+    },
+    {
+      "type": "library",
+      "name": "jna-platform",
+      "group": "net.java.dev.jna",
+      "version": "5.19.1",
+      "purl": "pkg:maven/net.java.dev.jna/jna-platform@5.19.1"
+    },
+    {
+      "type": "library",
+      "name": "zip4j",
+      "group": "net.lingala.zip4j",
+      "version": "2.11.6",
+      "purl": "pkg:maven/net.lingala.zip4j/zip4j@2.11.6"
+    },
+    {
+      "type": "library",
+      "name": "commons-compress",
+      "group": "org.apache.commons",
+      "version": "1.28.0",
+      "purl": "pkg:maven/org.apache.commons/commons-compress@1.28.0"
+    },
+    {
+      "type": "library",
+      "name": "commons-lang3",
+      "group": "org.apache.commons",
+      "version": "3.18.0",
+      "purl": "pkg:maven/org.apache.commons/commons-lang3@3.18.0"
+    },
+    {
+      "type": "library",
+      "name": "fontbox",
+      "group": "org.apache.pdfbox",
+      "version": "3.0.8",
+      "purl": "pkg:maven/org.apache.pdfbox/fontbox@3.0.8"
+    },
+    {
+      "type": "library",
+      "name": "pdfbox",
+      "group": "org.apache.pdfbox",
+      "version": "3.0.8",
+      "purl": "pkg:maven/org.apache.pdfbox/pdfbox@3.0.8"
+    },
+    {
+      "type": "library",
+      "name": "pdfbox-io",
+      "group": "org.apache.pdfbox",
+      "version": "3.0.8",
+      "purl": "pkg:maven/org.apache.pdfbox/pdfbox-io@3.0.8"
+    },
+    {
+      "type": "library",
+      "name": "apiguardian-api",
+      "group": "org.apiguardian",
+      "version": "1.1.2",
+      "purl": "pkg:maven/org.apiguardian/apiguardian-api@1.1.2"
+    },
+    {
+      "type": "library",
+      "name": "bcpg-jdk18on",
+      "group": "org.bouncycastle",
+      "version": "1.86",
+      "purl": "pkg:maven/org.bouncycastle/bcpg-jdk18on@1.86"
+    },
+    {
+      "type": "library",
+      "name": "bcprov-jdk18on",
+      "group": "org.bouncycastle",
+      "version": "1.86",
+      "purl": "pkg:maven/org.bouncycastle/bcprov-jdk18on@1.86"
+    },
+    {
+      "type": "library",
+      "name": "bctls-jdk18on",
+      "group": "org.bouncycastle",
+      "version": "1.86",
+      "purl": "pkg:maven/org.bouncycastle/bctls-jdk18on@1.86"
+    },
+    {
+      "type": "library",
+      "name": "bcutil-jdk18on",
+      "group": "org.bouncycastle",
+      "version": "1.86",
+      "purl": "pkg:maven/org.bouncycastle/bcutil-jdk18on@1.86"
+    },
+    {
+      "type": "library",
+      "name": "junit-jupiter",
+      "group": "org.junit.jupiter",
+      "version": "5.13.4",
+      "purl": "pkg:maven/org.junit.jupiter/junit-jupiter@5.13.4"
+    },
+    {
+      "type": "library",
+      "name": "junit-jupiter-api",
+      "group": "org.junit.jupiter",
+      "version": "5.13.4",
+      "purl": "pkg:maven/org.junit.jupiter/junit-jupiter-api@5.13.4"
+    },
+    {
+      "type": "library",
+      "name": "junit-jupiter-engine",
+      "group": "org.junit.jupiter",
+      "version": "5.13.4",
+      "purl": "pkg:maven/org.junit.jupiter/junit-jupiter-engine@5.13.4"
+    },
+    {
+      "type": "library",
+      "name": "junit-jupiter-params",
+      "group": "org.junit.jupiter",
+      "version": "5.13.4",
+      "purl": "pkg:maven/org.junit.jupiter/junit-jupiter-params@5.13.4"
+    },
+    {
+      "type": "library",
+      "name": "junit-platform-commons",
+      "group": "org.junit.platform",
+      "version": "1.13.4",
+      "purl": "pkg:maven/org.junit.platform/junit-platform-commons@1.13.4"
+    },
+    {
+      "type": "library",
+      "name": "junit-platform-console-standalone",
+      "group": "org.junit.platform",
+      "version": "1.13.4",
+      "purl": "pkg:maven/org.junit.platform/junit-platform-console-standalone@1.13.4"
+    },
+    {
+      "type": "library",
+      "name": "junit-platform-engine",
+      "group": "org.junit.platform",
+      "version": "1.13.4",
+      "purl": "pkg:maven/org.junit.platform/junit-platform-engine@1.13.4"
+    },
+    {
+      "type": "library",
+      "name": "junit-platform-launcher",
+      "group": "org.junit.platform",
+      "version": "1.13.4",
+      "purl": "pkg:maven/org.junit.platform/junit-platform-launcher@1.13.4"
+    },
+    {
+      "type": "library",
+      "name": "javafx-base",
+      "group": "org.openjfx",
+      "version": "21.0.12",
+      "purl": "pkg:maven/org.openjfx/javafx-base@21.0.12"
+    },
+    {
+      "type": "library",
+      "name": "javafx-controls",
+      "group": "org.openjfx",
+      "version": "21.0.12",
+      "purl": "pkg:maven/org.openjfx/javafx-controls@21.0.12"
+    },
+    {
+      "type": "library",
+      "name": "javafx-graphics",
+      "group": "org.openjfx",
+      "version": "21.0.12",
+      "purl": "pkg:maven/org.openjfx/javafx-graphics@21.0.12"
+    },
+    {
+      "type": "library",
+      "name": "opentest4j",
+      "group": "org.opentest4j",
+      "version": "1.3.0",
+      "purl": "pkg:maven/org.opentest4j/opentest4j@1.3.0"
+    },
+    {
+      "type": "library",
+      "name": "slf4j-api",
+      "group": "org.slf4j",
+      "version": "2.0.12",
+      "purl": "pkg:maven/org.slf4j/slf4j-api@2.0.12"
+    },
+    {
+      "type": "library",
+      "name": "slf4j-api",
+      "group": "org.slf4j",
+      "version": "2.0.17",
+      "purl": "pkg:maven/org.slf4j/slf4j-api@2.0.17"
+    },
+    {
+      "type": "library",
+      "name": "slf4j-nop",
+      "group": "org.slf4j",
+      "version": "2.0.17",
+      "purl": "pkg:maven/org.slf4j/slf4j-nop@2.0.17"
+    },
+    {
+      "type": "library",
+      "name": "openjfx-monocle",
+      "group": "org.testfx",
+      "version": "21.0.2",
+      "purl": "pkg:maven/org.testfx/openjfx-monocle@21.0.2"
+    },
+    {
+      "type": "library",
+      "name": "xz",
+      "group": "org.tukaani",
+      "version": "1.12",
+      "purl": "pkg:maven/org.tukaani/xz@1.12"
+    },
+    {
+      "type": "library",
+      "name": "sqlite-jdbc",
+      "group": "org.xerial",
+      "version": "3.53.4.0",
+      "purl": "pkg:maven/org.xerial/sqlite-jdbc@3.53.4.0"
+    },
+    {
+      "type": "library",
+      "name": "libevent",
+      "version": "2.1.13-stable",
+      "bom-ref": "native:libevent@2.1.13-stable",
+      "properties": [
+        {
+          "name": "aegis:inventory-scope",
+          "value": "Reviewed native source/AAR metadata; not final shipped ELF identity"
+        },
+        {
+          "name": "aegis:container-aar-sha256",
+          "value": "28ff2bb6d4d42eabe57183dedd7a97fce77e8ce4b6f5af6fa03993b3ca054edd"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "libsodium",
+      "version": "1.0.22",
+      "bom-ref": "native:libsodium@1.0.22",
+      "properties": [
+        {
+          "name": "aegis:inventory-scope",
+          "value": "Reviewed native source/AAR metadata; not final shipped ELF identity"
+        },
+        {
+          "name": "aegis:source-archive-sha256",
+          "value": "c44f62b9919e4cce5963e74c67a43b8818ed523bd2eded506266d8797d103baf"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "openssl",
+      "version": "3.5.9",
+      "bom-ref": "native:openssl@3.5.9",
+      "properties": [
+        {
+          "name": "aegis:inventory-scope",
+          "value": "Reviewed native source/AAR metadata; not final shipped ELF identity"
+        },
+        {
+          "name": "aegis:container-aar-sha256",
+          "value": "28ff2bb6d4d42eabe57183dedd7a97fce77e8ce4b6f5af6fa03993b3ca054edd"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "opus",
+      "version": "1.6.1",
+      "bom-ref": "native:opus@1.6.1",
+      "properties": [
+        {
+          "name": "aegis:inventory-scope",
+          "value": "Reviewed native source/AAR metadata; not final shipped ELF identity"
+        },
+        {
+          "name": "aegis:source-archive-sha256",
+          "value": "6ffcb593207be92584df15b32466ed64bbec99109f007c82205f0194572411a1"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "speex",
+      "version": "1.2.1",
+      "bom-ref": "native:speex@1.2.1",
+      "properties": [
+        {
+          "name": "aegis:inventory-scope",
+          "value": "Reviewed native source/AAR metadata; not final shipped ELF identity"
+        },
+        {
+          "name": "aegis:source-archive-sha256",
+          "value": "8c777343e4a6399569c72abc38a95b24db56882c83dbdb6c6424a5f4aeb54d3d"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "tor",
+      "version": "0.4.9.14",
+      "bom-ref": "native:tor@0.4.9.14",
+      "properties": [
+        {
+          "name": "aegis:inventory-scope",
+          "value": "Reviewed native source/AAR metadata; not final shipped ELF identity"
+        },
+        {
+          "name": "aegis:container-aar-sha256",
+          "value": "28ff2bb6d4d42eabe57183dedd7a97fce77e8ce4b6f5af6fa03993b3ca054edd"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "zlib",
+      "version": "1.3.2",
+      "bom-ref": "native:zlib@1.3.2",
+      "properties": [
+        {
+          "name": "aegis:inventory-scope",
+          "value": "Reviewed native source/AAR metadata; not final shipped ELF identity"
+        },
+        {
+          "name": "aegis:container-aar-sha256",
+          "value": "28ff2bb6d4d42eabe57183dedd7a97fce77e8ce4b6f5af6fa03993b3ca054edd"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "zstd",
+      "version": "1.5.7",
+      "bom-ref": "native:zstd@1.5.7",
+      "properties": [
+        {
+          "name": "aegis:inventory-scope",
+          "value": "Reviewed native source/AAR metadata; not final shipped ELF identity"
+        },
+        {
+          "name": "aegis:container-aar-sha256",
+          "value": "28ff2bb6d4d42eabe57183dedd7a97fce77e8ce4b6f5af6fa03993b3ca054edd"
+        }
+      ]
+    }
+  ]
+}
