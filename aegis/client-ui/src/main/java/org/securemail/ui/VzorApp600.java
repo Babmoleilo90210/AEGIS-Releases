@@ -16,15 +16,20 @@ import org.securemail.client.maintenance600.RuntimeLease600;
 /** Standalone Взор manager: no ClientSession, LocalStore, account capability, or Core death subscription. */
 public final class VzorApp600 {
   private static final AtomicReference<VzorBootstrap600> BOOT=new AtomicReference<>();
+  // Held until kernel process exit, including cleanup after JavaFX returns.
+  private static RuntimeLease600.Lease runtimeLease;
   private VzorApp600(){}
   public static void main(String[] args){
     if(args.length!=0)return;
-    try(var runtime=RuntimeLease600.running()){
-      VzorBootstrap600 bootstrap=VzorBootstrap600.read(System.in,Duration.ofSeconds(5));BOOT.set(bootstrap);
+    RuntimeLease600.Lease startup=null;
+    try{
+      startup=RuntimeLease600.running();
+      VzorBootstrap600 bootstrap=VzorBootstrap600.read(System.in,Duration.ofSeconds(5));BOOT.set(bootstrap);runtimeLease=startup;startup=null;
       try{Application.launch(Window.class);}
       catch(RuntimeException|LinkageError unavailable){VzorBootstrap600 pending=BOOT.getAndSet(null);if(pending!=null)try{pending.acknowledge(System.out,VzorBootstrap600.Reply.UI_UNAVAILABLE);}catch(IOException ignored){} }
       finally{VzorBootstrap600 pending=BOOT.getAndSet(null);if(pending!=null)pending.close();}
     }catch(IOException invalid){/* Direct/unauthorized entry does not create any browser state or UI. */}
+    finally{if(startup!=null)try{startup.close();}catch(IOException ignored){/* Kernel releases the rejected startup lease on exit. */}}
   }
   public static final class Window extends Application {
     private VzorManager600 manager;private VzorView view;private ThemeManager themes;
@@ -69,6 +74,15 @@ public final class VzorApp600 {
         catch(IOException error){shutdown.set(false);Platform.runLater(()->{stage.getScene().getRoot().setDisable(false);status.setText(VzorFailure600.safeMessage(error));});}
       });
     }
-    @Override public void stop(){if(view!=null)view.close();if(themes!=null)themes.close();if(hook!=null)try{Runtime.getRuntime().removeShutdownHook(hook);}catch(IllegalStateException ending){/* JVM already runs its owned cleanup. */}}
+    @Override public void stop(){
+      if(view!=null)view.close();
+      // stop() can also follow Platform.exit outside the normal Close button path.
+      // Never drop the runtime lease or hook while an owned browser may still use JARs.
+      if(manager!=null){Thread cleanup=new Thread(()->{
+        try{manager.close();if(hook!=null)try{Runtime.getRuntime().removeShutdownHook(hook);}catch(IllegalStateException ending){/* JVM hook already owns final cleanup. */}}
+        catch(IOException incomplete){System.err.println("АЕГИС: завершение собственных процессов Взора не подтверждено.");}
+      },"aegis-vzor-final-cleanup");cleanup.setDaemon(false);cleanup.start();}
+      if(themes!=null)themes.close();
+    }
   }
 }

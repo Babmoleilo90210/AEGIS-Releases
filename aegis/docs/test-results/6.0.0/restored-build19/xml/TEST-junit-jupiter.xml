@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="JUnit Jupiter" tests="75" skipped="1" failures="0" errors="0" time="8.714" hostname="86667f55c355" timestamp="2026-10-19T11:54:22">
+<properties>
+<property name="aegis.legacy500.bundle" value="/workspace/scratch/aa629f360927/inputs600/linux500/squashfs-root/app"/>
+<property name="aegis.native.root" value="/workspace/scratch/aa629f360927/aegis600/aegis/.native-test"/>
+<property name="file.encoding" value="UTF-8"/>
+<property name="file.separator" value="/"/>
+<property name="java.class.path" value="/workspace/scratch/aa629f360927/aegis600/aegis/common-protocol/build/classes/java/main:/workspace/scratch/aa629f360927/aegis600/aegis/client-core/build/classes/java/main:/workspace/scratch/aa629f360927/aegis600/aegis/identity-server/build/classes/java/main:/workspace/scratch/aa629f360927/aegis600/aegis/management-agent/build/classes/java/main:/workspace/scratch/aa629f360927/aegis600/aegis/attachment-service/build/classes/java/main:/workspace/scratch/aa629f360927/aegis600/aegis/client-core/build/classes/java/test:/workspace/scratch/aa629f360927/aegis600/aegis/common-protocol/build/resources/main:/workspace/scratch/aa629f360927/aegis600/aegis/client-core/build/resources/main:/workspace/scratch/aa629f360927/aegis600/aegis/identity-server/build/resources/main:/workspace/scratch/aa629f360927/aegis600/aegis/management-agent/build/resources/main:/workspace/scratch/aa629f360927/aegis600/aegis/attachment-service/build/resources/main:/workspace/scratch/aa629f360927/inputs600/maven-deps/apiguardian-api-1.1.2.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/bcpg-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/bcprov-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/bcutil-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/common-image-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/common-io-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/common-lang-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/commons-codec-1.19.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/commons-compress-1.28.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/commons-io-2.20.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/commons-lang3-3.18.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/commons-logging-1.4.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/error_prone_annotations-2.41.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/error_prone_annotations-2.48.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/fontbox-3.0.8.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/gson-2.13.2.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/gson-2.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/imageio-core-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/imageio-metadata-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/imageio-webp-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/javafx-base-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/javafx-base-21.0.12.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/javafx-controls-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/javafx-graphics-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/javafx-graphics-21.0.12.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/jna-5.19.1.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/jna-platform-5.19.1.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/jsr305-3.0.2.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-jupiter-5.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-jupiter-api-5.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-jupiter-engine-5.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-jupiter-params-5.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-platform-commons-1.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-platform-console-standalone-1.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-platform-engine-1.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-platform-launcher-1.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/openjfx-monocle-21.0.2.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/opentest4j-1.3.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/password4j-1.8.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/pdfbox-3.0.8.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/pdfbox-io-3.0.8.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/protobuf-java-4.33.6.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/slf4j-api-2.0.17.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/slf4j-nop-2.0.17.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/sqlite-jdbc-3.53.4.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/tink-1.23.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/xz-1.12.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/zip4j-2.11.6.jar"/>
+<property name="java.class.version" value="65.0"/>
+<property name="java.home" value="/workspace/scratch/aa629f360927/inputs600/toolchain/jdk-21.0.12.1+1"/>
+<property name="java.io.tmpdir" value="/tmp"/>
+<property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/>
+<property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+<property name="java.runtime.version" value="21.0.12.1+1-LTS"/>
+<property name="java.specification.name" value="Java Platform API Specification"/>
+<property name="java.specification.vendor" value="Oracle Corporation"/>
+<property name="java.specification.version" value="21"/>
+<property name="java.vendor" value="Eclipse Adoptium"/>
+<property name="java.vendor.url" value="https://adoptium.net/"/>
+<property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
+<property name="java.vendor.version" value="Temurin-21.0.12.1+1"/>
+<property name="java.version" value="21.0.12.1"/>
+<property name="java.version.date" value="2026-08-18"/>
+<property name="java.vm.compressedOopsMode" value="32-bit"/>
+<property name="java.vm.info" value="mixed mode, sharing"/>
+<property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+<property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+<property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+<property name="java.vm.specification.version" value="21"/>
+<property name="java.vm.vendor" value="Eclipse Adoptium"/>
+<property name="java.vm.version" value="21.0.12.1+1-LTS"/>
+<property name="jdk.debug" value="release"/>
+<property name="jna.loaded" value="true"/>
+<property name="jnidispatch.path" value="/root/.cache/JNA/temp/jna3620757102465600842.tmp"/>
+<property name="junit.docs.version" value="1.13.4"/>
+<property name="line.separator" value="&#10;"/>
+<property name="native.encoding" value="UTF-8"/>
+<property name="os.arch" value="amd64"/>
+<property name="os.name" value="Linux"/>
+<property name="os.version" value="6.18.55"/>
+<property name="path.separator" value=":"/>
+<property name="stderr.encoding" value="UTF-8"/>
+<property name="stdout.encoding" value="UTF-8"/>
+<property name="sun.arch.data.model" value="64"/>
+<property name="sun.boot.library.path" value="/workspace/scratch/aa629f360927/inputs600/toolchain/jdk-21.0.12.1+1/lib"/>
+<property name="sun.cpu.endian" value="little"/>
+<property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+<property name="sun.java.command" value="org.junit.platform.console.ConsoleLauncher execute --details=summary --reports-dir=/workspace/scratch/aa629f360927/audit600/restored-build-focused/xml --select-class org.securemail.client.safeweb600.VzorIndependent600Test --select-class org.securemail.client.safeweb600.VzorStoragePaths600Test --select-class org.securemail.client.maintenance600.RuntimeLease600Test --select-class org.securemail.client.security600.OperatingSystemLock600Test --select-class org.securemail.client.ecosystemauth.CoreNotificationArrivals600Test --select-class org.securemail.client.ecosystemauth.CoreNotificationPreferences600Test --select-class org.securemail.client.storage.UpdateSupportWindows600Test --select-class org.securemail.client.ecosystem.Legacy500Rollback600Test"/>
+<property name="sun.java.launcher" value="SUN_STANDARD"/>
+<property name="sun.jnu.encoding" value="UTF-8"/>
+<property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+<property name="user.dir" value="/workspace/scratch/aa629f360927/aegis600/aegis"/>
+<property name="user.home" value="/root"/>
+<property name="user.language" value="en"/>
+<property name="user.name" value="root"/>
+<property name="user.timezone" value="Asia/Kolkata"/>
+</properties>
+<testcase name="symlinkedBrowserRootCannotHideOverlapWithPrivateDirectory()" classname="org.securemail.client.safeweb600.VzorStoragePaths600Test" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb600.VzorStoragePaths600Test]/[method:symlinkedBrowserRootCannotHideOverlapWithPrivateDirectory()]
+display-name: symlinkedBrowserRootCannotHideOverlapWithPrivateDirectory()
+]]></system-out>
+</testcase>
+<testcase name="linuxParsersAcceptOnlyBoundedCanonicalScalarReplies()" classname="org.securemail.client.security600.OperatingSystemLock600Test" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.security600.OperatingSystemLock600Test]/[method:linuxParsersAcceptOnlyBoundedCanonicalScalarReplies()]
+display-name: linuxParsersAcceptOnlyBoundedCanonicalScalarReplies()
+]]></system-out>
+</testcase>
+<testcase name="defaultRootsAreSeparateAndRetainBrowserOnlyFiveProfile()" classname="org.securemail.client.safeweb600.VzorIndependent600Test" time="0.04">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb600.VzorIndependent600Test]/[method:defaultRootsAreSeparateAndRetainBrowserOnlyFiveProfile()]
+display-name: defaultRootsAreSeparateAndRetainBrowserOnlyFiveProfile()
+]]></system-out>
+</testcase>
+<testcase name="browserRootChildrenAndAncestorsAreNeverAllowedForSensitiveState()" classname="org.securemail.client.safeweb600.VzorStoragePaths600Test" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb600.VzorStoragePaths600Test]/[method:browserRootChildrenAndAncestorsAreNeverAllowedForSensitiveState()]
+display-name: browserRootChildrenAndAncestorsAreNeverAllowedForSensitiveState()
+]]></system-out>
+</testcase>
+<testcase name="commandBoundsAreEnforcedBeforeStartingAnyProcess()" classname="org.securemail.client.security600.OperatingSystemLock600Test" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.security600.OperatingSystemLock600Test]/[method:commandBoundsAreEnforcedBeforeStartingAnyProcess()]
+display-name: commandBoundsAreEnforcedBeforeStartingAnyProcess()
+]]></system-out>
+</testcase>
+<testcase name="missingOwnedTorHasConcreteSafeCauseAndCloseReleasesOwnState()" classname="org.securemail.client.safeweb600.VzorIndependent600Test" time="0.011">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb600.VzorIndependent600Test]/[method:missingOwnedTorHasConcreteSafeCauseAndCloseReleasesOwnState()]
+display-name: missingOwnedTorHasConcreteSafeCauseAndCloseReleasesOwnState()
+]]></system-out>
+</testcase>
+<testcase name="bootstrapTimeoutDoesNotCreateManagerState()" classname="org.securemail.client.safeweb600.VzorIndependent600Test" time="0.102">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb600.VzorIndependent600Test]/[method:bootstrapTimeoutDoesNotCreateManagerState()]
+display-name: bootstrapTimeoutDoesNotCreateManagerState()
+]]></system-out>
+</testcase>
+<testcase name="logindLockDoesNotWaitForSecondProbeAndMissingBackendIsUnknown()" classname="org.securemail.client.security600.OperatingSystemLock600Test" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.security600.OperatingSystemLock600Test]/[method:logindLockDoesNotWaitForSecondProbeAndMissingBackendIsUnknown()]
+display-name: logindLockDoesNotWaitForSecondProbeAndMissingBackendIsUnknown()
+]]></system-out>
+</testcase>
+<testcase name="actualIndependentProcessesShareAndPreventReplacement()" classname="org.securemail.client.maintenance600.RuntimeLease600Test" time="0.148">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.maintenance600.RuntimeLease600Test]/[method:actualIndependentProcessesShareAndPreventReplacement()]
+display-name: actualIndependentProcessesShareAndPreventReplacement()
+]]></system-out>
+</testcase>
+<testcase name="failedStartupStopsOnlyItsOwnJvmAndLeavesUnrelatedJvmAlive()" classname="org.securemail.client.safeweb600.VzorIndependent600Test" time="0.66">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb600.VzorIndependent600Test]/[method:failedStartupStopsOnlyItsOwnJvmAndLeavesUnrelatedJvmAlive()]
+display-name: failedStartupStopsOnlyItsOwnJvmAndLeavesUnrelatedJvmAlive()
+]]></system-out>
+</testcase>
+<testcase name="rejectsExcessivePagesAndMalformedEventIds()" classname="org.securemail.client.ecosystemauth.CoreNotificationArrivals600Test" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.CoreNotificationArrivals600Test]/[method:rejectsExcessivePagesAndMalformedEventIds()]
+display-name: rejectsExcessivePagesAndMalformedEventIds()
+]]></system-out>
+</testcase>
+<testcase name="userBusNeverAcceptsTcpAutolaunchAdditionalAddressesOrUserShell()" classname="org.securemail.client.security600.OperatingSystemLock600Test" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.security600.OperatingSystemLock600Test]/[method:userBusNeverAcceptsTcpAutolaunchAdditionalAddressesOrUserShell()]
+display-name: userBusNeverAcceptsTcpAutolaunchAdditionalAddressesOrUserShell()
+]]></system-out>
+</testcase>
+<testcase name="rejectsLinkedStateAndPreservesExistingBrowserProfile()" classname="org.securemail.client.safeweb600.VzorIndependent600Test" time="0.015">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb600.VzorIndependent600Test]/[method:rejectsLinkedStateAndPreservesExistingBrowserProfile()]
+display-name: rejectsLinkedStateAndPreservesExistingBrowserProfile()
+]]></system-out>
+</testcase>
+<testcase name="windowsUnknownDisconnectedAndFlagsFailClosed()" classname="org.securemail.client.security600.OperatingSystemLock600Test" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.security600.OperatingSystemLock600Test]/[method:windowsUnknownDisconnectedAndFlagsFailClosed()]
+display-name: windowsUnknownDisconnectedAndFlagsFailClosed()
+]]></system-out>
+</testcase>
+<testcase name="environmentNeverPassesAccountSecretsProxiesOrJavaInjection()" classname="org.securemail.client.safeweb600.VzorIndependent600Test" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb600.VzorIndependent600Test]/[method:environmentNeverPassesAccountSecretsProxiesOrJavaInjection()]
+display-name: environmentNeverPassesAccountSecretsProxiesOrJavaInjection()
+]]></system-out>
+</testcase>
+<testcase name="tempDirectoryInsideProgramOrPreviousCopyFailsClosed()" classname="org.securemail.client.storage.UpdateSupportWindows600Test" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.UpdateSupportWindows600Test]/[method:tempDirectoryInsideProgramOrPreviousCopyFailsClosed()]
+display-name: tempDirectoryInsideProgramOrPreviousCopyFailsClosed()
+]]></system-out>
+</testcase>
+<testcase name="sourceMutationAfterPreflightCannotReachLaunch()" classname="org.securemail.client.storage.UpdateSupportWindows600Test" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.UpdateSupportWindows600Test]/[method:sourceMutationAfterPreflightCannotReachLaunch()]
+display-name: sourceMutationAfterPreflightCannotReachLaunch()
+]]></system-out>
+</testcase>
+<testcase name="changedOrUnpinnedHelperCannotRun()" classname="org.securemail.client.storage.UpdateSupportWindows600Test" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.UpdateSupportWindows600Test]/[method:changedOrUnpinnedHelperCannotRun()]
+display-name: changedOrUnpinnedHelperCannotRun()
+]]></system-out>
+</testcase>
+<testcase name="closeStopsOnlyActiveOwnedCommandAndDoesNotWaitForStall()" classname="org.securemail.client.security600.OperatingSystemLock600Test" time="0.015">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.security600.OperatingSystemLock600Test]/[method:closeStopsOnlyActiveOwnedCommandAndDoesNotWaitForStall()]
+display-name: closeStopsOnlyActiveOwnedCommandAndDoesNotWaitForStall()
+]]></system-out>
+</testcase>
+<testcase name="rejectsAmbiguousTypesUnknownFieldsDuplicateKeysAndOversizeWithoutOverwriting()" classname="org.securemail.client.ecosystemauth.CoreNotificationPreferences600Test" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.CoreNotificationPreferences600Test]/[method:rejectsAmbiguousTypesUnknownFieldsDuplicateKeysAndOversizeWithoutOverwriting()]
+display-name: rejectsAmbiguousTypesUnknownFieldsDuplicateKeysAndOversizeWithoutOverwriting()
+]]></system-out>
+</testcase>
+<testcase name="missingPreviousLauncherDoesNotFallBackToLegacySuffix()" classname="org.securemail.client.storage.UpdateSupportWindows600Test" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.UpdateSupportWindows600Test]/[method:missingPreviousLauncherDoesNotFallBackToLegacySuffix()]
+display-name: missingPreviousLauncherDoesNotFallBackToLegacySuffix()
+]]></system-out>
+</testcase>
+<testcase name="initialUnreadIsBaselineAndOnlyNewUnreadRefreshPresents()" classname="org.securemail.client.ecosystemauth.CoreNotificationArrivals600Test" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.CoreNotificationArrivals600Test]/[method:initialUnreadIsBaselineAndOnlyNewUnreadRefreshPresents()]
+display-name: initialUnreadIsBaselineAndOnlyNewUnreadRefreshPresents()
+]]></system-out>
+</testcase>
+<testcase name="repeatedManagerLaunchDoesNotAdoptOrStopTheExistingManager()" classname="org.securemail.client.safeweb600.VzorIndependent600Test" time="0.246">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb600.VzorIndependent600Test]/[method:repeatedManagerLaunchDoesNotAdoptOrStopTheExistingManager()]
+display-name: repeatedManagerLaunchDoesNotAdoptOrStopTheExistingManager()
+]]></system-out>
+</testcase>
+<testcase name="readItemsAndDisabledPresentationStillDeduplicate()" classname="org.securemail.client.ecosystemauth.CoreNotificationArrivals600Test" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.CoreNotificationArrivals600Test]/[method:readItemsAndDisabledPresentationStillDeduplicate()]
+display-name: readItemsAndDisabledPresentationStillDeduplicate()
+]]></system-out>
+</testcase>
+<testcase name="atomicRoundTripContainsOnlyThreePresentationBooleans()" classname="org.securemail.client.ecosystemauth.CoreNotificationPreferences600Test" time="0.031">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.CoreNotificationPreferences600Test]/[method:atomicRoundTripContainsOnlyThreePresentationBooleans()]
+display-name: atomicRoundTripContainsOnlyThreePresentationBooleans()
+]]></system-out>
+</testcase>
+<testcase name="reservesDistinctLoopbackPortsAndCreatesNoMailConfiguration()" classname="org.securemail.client.safeweb600.VzorIndependent600Test" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb600.VzorIndependent600Test]/[method:reservesDistinctLoopbackPortsAndCreatesNoMailConfiguration()]
+display-name: reservesDistinctLoopbackPortsAndCreatesNoMailConfiguration()
+]]></system-out>
+</testcase>
+<testcase name="sameJvmProbesCannotReleaseKernelLeaseOwnedByAnotherDescriptor()" classname="org.securemail.client.safeweb600.VzorIndependent600Test" time="0.141">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb600.VzorIndependent600Test]/[method:sameJvmProbesCannotReleaseKernelLeaseOwnedByAnotherDescriptor()]
+display-name: sameJvmProbesCannotReleaseKernelLeaseOwnedByAnotherDescriptor()
+]]></system-out>
+</testcase>
+<testcase name="stateLockIsExclusiveAndReopensOnlyAfterOwnedClose()" classname="org.securemail.client.safeweb600.VzorIndependent600Test" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb600.VzorIndependent600Test]/[method:stateLockIsExclusiveAndReopensOnlyAfterOwnedClose()]
+display-name: stateLockIsExclusiveAndReopensOnlyAfterOwnedClose()
+]]></system-out>
+</testcase>
+<testcase name="untrustedExecutableInUserWritableTreeIsRejected()" classname="org.securemail.client.security600.OperatingSystemLock600Test" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.security600.OperatingSystemLock600Test]/[method:untrustedExecutableInUserWritableTreeIsRejected()]
+display-name: untrustedExecutableInUserWritableTreeIsRejected()
+]]></system-out>
+</testcase>
+<testcase name="actualOwnedCommandRejectsOversizedNonzeroAndStalledProcesses()" classname="org.securemail.client.security600.OperatingSystemLock600Test" time="0.236">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.security600.OperatingSystemLock600Test]/[method:actualOwnedCommandRejectsOversizedNonzeroAndStalledProcesses()]
+display-name: actualOwnedCommandRejectsOversizedNonzeroAndStalledProcesses()
+]]></system-out>
+</testcase>
+<testcase name="linuxSystemBindRootsAreRejectedWithoutReadingOrCreatingSecrets()" classname="org.securemail.client.safeweb600.VzorStoragePaths600Test" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb600.VzorStoragePaths600Test]/[method:linuxSystemBindRootsAreRejectedWithoutReadingOrCreatingSecrets()]
+display-name: linuxSystemBindRootsAreRejectedWithoutReadingOrCreatingSecrets()
+]]></system-out>
+</testcase>
+<testcase name="explicitDetailsArePlainBoundedAndControlCharactersAreRemoved()" classname="org.securemail.client.ecosystemauth.CoreNotificationArrivals600Test" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.CoreNotificationArrivals600Test]/[method:explicitDetailsArePlainBoundedAndControlCharactersAreRemoved()]
+display-name: explicitDetailsArePlainBoundedAndControlCharactersAreRemoved()
+]]></system-out>
+</testcase>
+<testcase name="acknowledgementRejectsWrongPidChangedStatusAndReplayedNonce()" classname="org.securemail.client.safeweb600.VzorIndependent600Test" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb600.VzorIndependent600Test]/[method:acknowledgementRejectsWrongPidChangedStatusAndReplayedNonce()]
+display-name: acknowledgementRejectsWrongPidChangedStatusAndReplayedNonce()
+]]></system-out>
+</testcase>
+<testcase name="rejectsCommandsLocalAddressesAndAccountBearingUrls()" classname="org.securemail.client.safeweb600.VzorIndependent600Test" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb600.VzorIndependent600Test]/[method:rejectsCommandsLocalAddressesAndAccountBearingUrls()]
+display-name: rejectsCommandsLocalAddressesAndAccountBearingUrls()
+]]></system-out>
+</testcase>
+<testcase name="publicLauncherRejectsIncompleteBundleWithoutAnyChildProcess()" classname="org.securemail.client.safeweb600.VzorIndependent600Test" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb600.VzorIndependent600Test]/[method:publicLauncherRejectsIncompleteBundleWithoutAnyChildProcess()]
+display-name: publicLauncherRejectsIncompleteBundleWithoutAnyChildProcess()
+]]></system-out>
+</testcase>
+<testcase name="safeDiagnosticsNeverRenderRawPrivatePathsHeadersOrSecrets()" classname="org.securemail.client.safeweb600.VzorIndependent600Test" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb600.VzorIndependent600Test]/[method:safeDiagnosticsNeverRenderRawPrivatePathsHeadersOrSecrets()]
+display-name: safeDiagnosticsNeverRenderRawPrivatePathsHeadersOrSecrets()
+]]></system-out>
+</testcase>
+<testcase name="actualDefaultRunnerDoesNotInheritProxySecretsOrJvmInjection()" classname="org.securemail.client.security600.OperatingSystemLock600Test" time="0.032">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.security600.OperatingSystemLock600Test]/[method:actualDefaultRunnerDoesNotInheritProxySecretsOrJvmInjection()]
+display-name: actualDefaultRunnerDoesNotInheritProxySecretsOrJvmInjection()
+]]></system-out>
+</testcase>
+<testcase name="unsupportedHostNeverAttemptsNativeRollback()" classname="org.securemail.client.storage.UpdateSupportWindows600Test" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.UpdateSupportWindows600Test]/[method:unsupportedHostNeverAttemptsNativeRollback()]
+display-name: unsupportedHostNeverAttemptsNativeRollback()
+]]></system-out>
+</testcase>
+<testcase name="callbackExceptionIsRetriedInsteadOfSilentlyDisablingProtection()" classname="org.securemail.client.security600.OperatingSystemLock600Test" time="0.023">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.security600.OperatingSystemLock600Test]/[method:callbackExceptionIsRetriedInsteadOfSilentlyDisablingProtection()]
+display-name: callbackExceptionIsRetriedInsteadOfSilentlyDisablingProtection()
+]]></system-out>
+</testcase>
+<testcase name="bootstrapCarriesOnlyValidatedUrlAndSingleUseNonce()" classname="org.securemail.client.safeweb600.VzorIndependent600Test" time="0.022">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb600.VzorIndependent600Test]/[method:bootstrapCarriesOnlyValidatedUrlAndSingleUseNonce()]
+display-name: bootstrapCarriesOnlyValidatedUrlAndSingleUseNonce()
+]]></system-out>
+</testcase>
+<testcase name="neverAdoptsUnknownOrOverlappingProfileDirectory()" classname="org.securemail.client.safeweb600.VzorIndependent600Test" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb600.VzorIndependent600Test]/[method:neverAdoptsUnknownOrOverlappingProfileDirectory()]
+display-name: neverAdoptsUnknownOrOverlappingProfileDirectory()
+]]></system-out>
+</testcase>
+<testcase name="ambiguousOrOversizedInventoryCannotConferTrust()" classname="org.securemail.client.storage.UpdateSupportWindows600Test" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.UpdateSupportWindows600Test]/[method:ambiguousOrOversizedInventoryCannotConferTrust()]
+display-name: ambiguousOrOversizedInventoryCannotConferTrust()
+]]></system-out>
+</testcase>
+<testcase name="legacyWindowsWithInvertedLockFlagsIsNotInterpretedAsSupported()" classname="org.securemail.client.security600.OperatingSystemLock600Test" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.security600.OperatingSystemLock600Test]/[method:legacyWindowsWithInvertedLockFlagsIsNotInterpretedAsSupported()]
+display-name: legacyWindowsWithInvertedLockFlagsIsNotInterpretedAsSupported()
+]]></system-out>
+</testcase>
+<testcase name="detachedManagerSurvivesItsLaunchingCoreJvmExit()" classname="org.securemail.client.safeweb600.VzorIndependent600Test" time="0.567">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb600.VzorIndependent600Test]/[method:detachedManagerSurvivesItsLaunchingCoreJvmExit()]
+display-name: detachedManagerSurvivesItsLaunchingCoreJvmExit()
+]]></system-out>
+</testcase>
+<testcase name="linuxProbeUsesOnlyFixedLocalReadOnlyCommandsAndNoInteractiveAuthorization()" classname="org.securemail.client.security600.OperatingSystemLock600Test" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.security600.OperatingSystemLock600Test]/[method:linuxProbeUsesOnlyFixedLocalReadOnlyCommandsAndNoInteractiveAuthorization()]
+display-name: linuxProbeUsesOnlyFixedLocalReadOnlyCommandsAndNoInteractiveAuthorization()
+]]></system-out>
+</testcase>
+<testcase name="existingSymlinkAndMissingSuffixAreResolvedBeforeComparison()" classname="org.securemail.client.safeweb600.VzorStoragePaths600Test" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb600.VzorStoragePaths600Test]/[method:existingSymlinkAndMissingSuffixAreResolvedBeforeComparison()]
+display-name: existingSymlinkAndMissingSuffixAreResolvedBeforeComparison()
+]]></system-out>
+</testcase>
+<testcase name="actualExclusiveProcessBlocksBothRuntimeAndOtherInstaller()" classname="org.securemail.client.maintenance600.RuntimeLease600Test" time="0.05">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.maintenance600.RuntimeLease600Test]/[method:actualExclusiveProcessBlocksBothRuntimeAndOtherInstaller()]
+display-name: actualExclusiveProcessBlocksBothRuntimeAndOtherInstaller()
+]]></system-out>
+</testcase>
+<testcase name="memoryIsBoundedAndEvictedOldHistoryCannotRealert()" classname="org.securemail.client.ecosystemauth.CoreNotificationArrivals600Test" time="0.018">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.CoreNotificationArrivals600Test]/[method:memoryIsBoundedAndEvictedOldHistoryCannotRealert()]
+display-name: memoryIsBoundedAndEvictedOldHistoryCannotRealert()
+]]></system-out>
+</testcase>
+<testcase name="linkedSettingsCannotReadOrReplaceAnotherFile()" classname="org.securemail.client.ecosystemauth.CoreNotificationPreferences600Test" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.CoreNotificationPreferences600Test]/[method:linkedSettingsCannotReadOrReplaceAnotherFile()]
+display-name: linkedSettingsCannotReadOrReplaceAnotherFile()
+]]></system-out>
+</testcase>
+<testcase name="managerRejectsInheritedCoreProfileInsteadOfReadingIt()" classname="org.securemail.client.safeweb600.VzorIndependent600Test" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb600.VzorIndependent600Test]/[method:managerRejectsInheritedCoreProfileInsteadOfReadingIt()]
+display-name: managerRejectsInheritedCoreProfileInsteadOfReadingIt()
+]]></system-out>
+</testcase>
+<testcase name="actualUnixBusRequiresPrivateRuntimeOwnerAndSocketWithoutLinks()" classname="org.securemail.client.security600.OperatingSystemLock600Test" time="0.006">
+<skipped><![CDATA[org.opentest4j.TestAbortedException: Host sandbox forbids AF_UNIX: actual private user-bus socket acceptance NOT_RUN
+	at org.junit.jupiter.api.Assumptions.abort(Assumptions.java:300)
+	at org.securemail.client.security600.OperatingSystemLock600Test.actualUnixBusRequiresPrivateRuntimeOwnerAndSocketWithoutLinks(OperatingSystemLock600Test.java:42)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+]]></skipped>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.security600.OperatingSystemLock600Test]/[method:actualUnixBusRequiresPrivateRuntimeOwnerAndSocketWithoutLinks()]
+display-name: actualUnixBusRequiresPrivateRuntimeOwnerAndSocketWithoutLinks()
+]]></system-out>
+</testcase>
+<testcase name="readOnlyPreflightAcceptsSeparateMissingPrivateDirectoriesWithoutCreatingThem()" classname="org.securemail.client.safeweb600.VzorStoragePaths600Test" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb600.VzorStoragePaths600Test]/[method:readOnlyPreflightAcceptsSeparateMissingPrivateDirectoriesWithoutCreatingThem()]
+display-name: readOnlyPreflightAcceptsSeparateMissingPrivateDirectoriesWithoutCreatingThem()
+]]></system-out>
+</testcase>
+<testcase name="sharedReferencesReleaseOnlyAfterLastClose()" classname="org.securemail.client.maintenance600.RuntimeLease600Test" time="0.121">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.maintenance600.RuntimeLease600Test]/[method:sharedReferencesReleaseOnlyAfterLastClose()]
+display-name: sharedReferencesReleaseOnlyAfterLastClose()
+]]></system-out>
+</testcase>
+<testcase name="ambiguousRelativeNullAndOversizedInputFailClosed()" classname="org.securemail.client.safeweb600.VzorStoragePaths600Test" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb600.VzorStoragePaths600Test]/[method:ambiguousRelativeNullAndOversizedInputFailClosed()]
+display-name: ambiguousRelativeNullAndOversizedInputFailClosed()
+]]></system-out>
+</testcase>
+<testcase name="blockedNativeStyleQueryTimesOutFailClosedWithoutCreatingMoreWorkers()" classname="org.securemail.client.security600.OperatingSystemLock600Test" time="0.163">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.security600.OperatingSystemLock600Test]/[method:blockedNativeStyleQueryTimesOutFailClosedWithoutCreatingMoreWorkers()]
+display-name: blockedNativeStyleQueryTimesOutFailClosedWithoutCreatingMoreWorkers()
+]]></system-out>
+</testcase>
+<testcase name="childMailParentOrOtherJvmCannotScheduleProgramReplacement()" classname="org.securemail.client.storage.UpdateSupportWindows600Test" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.UpdateSupportWindows600Test]/[method:childMailParentOrOtherJvmCannotScheduleProgramReplacement()]
+display-name: childMailParentOrOtherJvmCannotScheduleProgramReplacement()
+]]></system-out>
+</testcase>
+<testcase name="failedPersistenceCanKeepOnlyMoreRestrictiveInMemoryChoices()" classname="org.securemail.client.ecosystemauth.CoreNotificationPreferences600Test" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.CoreNotificationPreferences600Test]/[method:failedPersistenceCanKeepOnlyMoreRestrictiveInMemoryChoices()]
+display-name: failedPersistenceCanKeepOnlyMoreRestrictiveInMemoryChoices()
+]]></system-out>
+</testcase>
+<testcase name="actualOwnedCommandReadsScalarAndDropsInheritedSensitiveEnvironment()" classname="org.securemail.client.security600.OperatingSystemLock600Test" time="0.039">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.security600.OperatingSystemLock600Test]/[method:actualOwnedCommandReadsScalarAndDropsInheritedSensitiveEnvironment()]
+display-name: actualOwnedCommandReadsScalarAndDropsInheritedSensitiveEnvironment()
+]]></system-out>
+</testcase>
+<testcase name="missingFileUsesNeutralPrivateDefaultsWithoutCreatingAnything()" classname="org.securemail.client.ecosystemauth.CoreNotificationPreferences600Test" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.CoreNotificationPreferences600Test]/[method:missingFileUsesNeutralPrivateDefaultsWithoutCreatingAnything()]
+display-name: missingFileUsesNeutralPrivateDefaultsWithoutCreatingAnything()
+]]></system-out>
+</testcase>
+<testcase name="oneLockedSourceWinsAndAnUnknownSourceCannotAuthorizeUnlocked()" classname="org.securemail.client.security600.OperatingSystemLock600Test" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.security600.OperatingSystemLock600Test]/[method:oneLockedSourceWinsAndAnUnknownSourceCannotAuthorizeUnlocked()]
+display-name: oneLockedSourceWinsAndAnUnknownSourceCannotAuthorizeUnlocked()
+]]></system-out>
+</testcase>
+<testcase name="windowsWin64AbiLayoutMatchesDocumentedWtsInfoExHeader()" classname="org.securemail.client.security600.OperatingSystemLock600Test" time="0.035">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.security600.OperatingSystemLock600Test]/[method:windowsWin64AbiLayoutMatchesDocumentedWtsInfoExHeader()]
+display-name: windowsWin64AbiLayoutMatchesDocumentedWtsInfoExHeader()
+]]></system-out>
+</testcase>
+<testcase name="backgroundPollingCoalescesNotificationsAndNeverUnlocksCore()" classname="org.securemail.client.security600.OperatingSystemLock600Test" time="0.068">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.security600.OperatingSystemLock600Test]/[method:backgroundPollingCoalescesNotificationsAndNeverUnlocksCore()]
+display-name: backgroundPollingCoalescesNotificationsAndNeverUnlocksCore()
+]]></system-out>
+</testcase>
+<testcase name="pathsDoNotDependOnPrivateProfileOrInstallation()" classname="org.securemail.client.maintenance600.RuntimeLease600Test" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.maintenance600.RuntimeLease600Test]/[method:pathsDoNotDependOnPrivateProfileOrInstallation()]
+display-name: pathsDoNotDependOnPrivateProfileOrInstallation()
+]]></system-out>
+</testcase>
+<testcase name="closeImmediatelySuppressesQueuedOrFuturePresentationAndClearsIds()" classname="org.securemail.client.ecosystemauth.CoreNotificationArrivals600Test" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.CoreNotificationArrivals600Test]/[method:closeImmediatelySuppressesQueuedOrFuturePresentationAndClearsIds()]
+display-name: closeImmediatelySuppressesQueuedOrFuturePresentationAndClearsIds()
+]]></system-out>
+</testcase>
+<testcase name="helperAndPreviousLinksAreRejectedBeforeCopy()" classname="org.securemail.client.storage.UpdateSupportWindows600Test" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.UpdateSupportWindows600Test]/[method:helperAndPreviousLinksAreRejectedBeforeCopy()]
+display-name: helperAndPreviousLinksAreRejectedBeforeCopy()
+]]></system-out>
+</testcase>
+<testcase name="helperStagingOutsideProgramPreservesBytesAndUsesFiveFixedArguments()" classname="org.securemail.client.storage.UpdateSupportWindows600Test" time="0.015">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.UpdateSupportWindows600Test]/[method:helperStagingOutsideProgramPreservesBytesAndUsesFiveFixedArguments()]
+display-name: helperStagingOutsideProgramPreservesBytesAndUsesFiveFixedArguments()
+]]></system-out>
+</testcase>
+<testcase name="rejectsLinkedAncestorAndLinkedLockWithoutChangingTarget()" classname="org.securemail.client.maintenance600.RuntimeLease600Test" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.maintenance600.RuntimeLease600Test]/[method:rejectsLinkedAncestorAndLinkedLockWithoutChangingTarget()]
+display-name: rejectsLinkedAncestorAndLinkedLockWithoutChangingTarget()
+]]></system-out>
+</testcase>
+<testcase name="rejectsUnexpectedExistingContentAndHardlinks()" classname="org.securemail.client.maintenance600.RuntimeLease600Test" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.maintenance600.RuntimeLease600Test]/[method:rejectsUnexpectedExistingContentAndHardlinks()]
+display-name: rejectsUnexpectedExistingContentAndHardlinks()
+]]></system-out>
+</testcase>
+<testcase name="portableOrUserSelectedProgramFolderCannotBeRolledBack()" classname="org.securemail.client.storage.UpdateSupportWindows600Test" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.UpdateSupportWindows600Test]/[method:portableOrUserSelectedProgramFolderCannotBeRolledBack()]
+display-name: portableOrUserSelectedProgramFolderCannotBeRolledBack()
+]]></system-out>
+</testcase>
+<testcase name="loadingHistoryAndOldUnseenBackfillNeverAlert()" classname="org.securemail.client.ecosystemauth.CoreNotificationArrivals600Test" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.CoreNotificationArrivals600Test]/[method:loadingHistoryAndOldUnseenBackfillNeverAlert()]
+display-name: loadingHistoryAndOldUnseenBackfillNeverAlert()
+]]></system-out>
+</testcase>
+<testcase name="sameJvmDeniedProbesDoNotReleaseKernelLock()" classname="org.securemail.client.maintenance600.RuntimeLease600Test" time="0.055">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.maintenance600.RuntimeLease600Test]/[method:sameJvmDeniedProbesDoNotReleaseKernelLock()]
+display-name: sameJvmDeniedProbesDoNotReleaseKernelLock()
+]]></system-out>
+</testcase>
+<testcase name="exactCoreImagesAndSixSuffixProduceReadOnlyPlan()" classname="org.securemail.client.storage.UpdateSupportWindows600Test" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.storage.UpdateSupportWindows600Test]/[method:exactCoreImagesAndSixSuffixProduceReadOnlyPlan()]
+display-name: exactCoreImagesAndSixSuffixProduceReadOnlyPlan()
+]]></system-out>
+</testcase>
+<testcase name="exactReleased500CreatesRealIdentityLetterArchiveAndReadsVerifiedRestoredSnapshot()" classname="org.securemail.client.ecosystem.Legacy500Rollback600Test" time="5.666">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystem.Legacy500Rollback600Test]/[method:exactReleased500CreatesRealIdentityLetterArchiveAndReadsVerifiedRestoredSnapshot()]
+display-name: exactReleased500CreatesRealIdentityLetterArchiveAndReadsVerifiedRestoredSnapshot()
+]]></system-out>
+</testcase>
+<testcase name="rejectsTruncationExtraBytesInvalidUtf8AndBadMagic()" classname="org.securemail.client.safeweb600.VzorIndependent600Test" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb600.VzorIndependent600Test]/[method:rejectsTruncationExtraBytesInvalidUtf8AndBadMagic()]
+display-name: rejectsTruncationExtraBytesInvalidUtf8AndBadMagic()
+]]></system-out>
+</testcase>
+<testcase name="diagnosticsNeverContainPrivatePathOrAccountText()" classname="org.securemail.client.safeweb600.VzorStoragePaths600Test" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb600.VzorStoragePaths600Test]/[method:diagnosticsNeverContainPrivatePathOrAccountText()]
+display-name: diagnosticsNeverContainPrivatePathOrAccountText()
+]]></system-out>
+</testcase>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]
+display-name: JUnit Jupiter
+]]></system-out>
+</testsuite>

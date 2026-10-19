@@ -1,0 +1,23 @@
+{
+  "name": "gradle",
+  "source": "https://services.gradle.org/distributions/gradle-9.8.0-bin.zip",
+  "checksumSource": "https://services.gradle.org/distributions/gradle-9.8.0-bin.zip.sha256",
+  "expectedSHA256": "bafd5ce9cfaea0fbccfdc8439a1ac42fbd4cd9c89dc9a988228d8a2639a58e6c",
+  "TLSVerification": true,
+  "checksumDownload": {
+    "origin": "https://downloads.gradle.org",
+    "path": "/distributions/gradle-9.8.0-bin.zip.sha256",
+    "status": 200,
+    "bytes": 64
+  },
+  "publishedSHA256": "bafd5ce9cfaea0fbccfdc8439a1ac42fbd4cd9c89dc9a988228d8a2639a58e6c",
+  "archiveDownload": {
+    "origin": "https://release-assets.githubusercontent.com",
+    "path": "/github-production-release-asset/696192900/d8367dd0-8da2-4262-a803-89e227e5c37b",
+    "status": 200,
+    "bytes": 151611662
+  },
+  "actualSHA256": "bafd5ce9cfaea0fbccfdc8439a1ac42fbd4cd9c89dc9a988228d8a2639a58e6c",
+  "result": "VERIFIED",
+  "seconds": 30.108
+}

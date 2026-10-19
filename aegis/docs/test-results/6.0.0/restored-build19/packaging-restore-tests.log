@@ -1,0 +1,13 @@
+test_clean_exact_build_proof_preserves_project_hash (test_package600.Package600Test.test_clean_exact_build_proof_preserves_project_hash) ... ok
+test_crc_failed_jar_is_never_accepted_as_built (test_package600.Package600Test.test_crc_failed_jar_is_never_accepted_as_built) ... ok
+test_dirty_changed_failed_and_other_commit_proofs_rejected (test_package600.Package600Test.test_dirty_changed_failed_and_other_commit_proofs_rejected) ... ok
+test_extra_classpath_file_is_rejected_before_contents_execute (test_package600.Package600Test.test_extra_classpath_file_is_rejected_before_contents_execute) ... ok
+test_partial_or_filtered_build_cannot_qualify_as_full_verification (test_package600.Package600Test.test_partial_or_filtered_build_cannot_qualify_as_full_verification) ... ok
+test_runtime_target_classifier_and_no_test_or_server_jars (test_package600.Package600Test.test_runtime_target_classifier_and_no_test_or_server_jars) ... ok
+test_tool_inventory_tracks_executable_permission_and_link_target (test_package600.Package600Test.test_tool_inventory_tracks_executable_permission_and_link_target) ... ok
+test_windows_extraction_rejects_escaping_entry_before_writing (test_package600.Package600Test.test_windows_extraction_rejects_escaping_entry_before_writing) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.010s
+
+OK

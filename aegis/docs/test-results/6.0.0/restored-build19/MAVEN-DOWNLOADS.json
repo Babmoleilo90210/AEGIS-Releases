@@ -1,0 +1,526 @@
+{
+  "metadataSHA256": "4110835bdad1de95b61c085842971b2b29f6307ef8d339b072dbbd1e6911738a",
+  "artifacts": [
+    {
+      "file": "apiguardian-api-1.1.2.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar",
+      "expectedSHA256": [
+        "b509448ac506d607319f182537f0b35d71007582ec741832a1f111e5b5b70b38"
+      ],
+      "actualSHA256": "b509448ac506d607319f182537f0b35d71007582ec741832a1f111e5b5b70b38",
+      "bytes": 6806,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "bcpg-jdk18on-1.86.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/bouncycastle/bcpg-jdk18on/1.86/bcpg-jdk18on-1.86.jar",
+      "expectedSHA256": [
+        "8a52ea45b2063f6d41b8ca94409f255a1f4604922f7451c18a7cfd3a3c5b85ab"
+      ],
+      "actualSHA256": "8a52ea45b2063f6d41b8ca94409f255a1f4604922f7451c18a7cfd3a3c5b85ab",
+      "bytes": 729938,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "bcprov-jdk18on-1.86.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/bouncycastle/bcprov-jdk18on/1.86/bcprov-jdk18on-1.86.jar",
+      "expectedSHA256": [
+        "2af190b300cbb0b35e248ccf5f4a06b6072030aeb3da7a98ec73abe5b4cb371f"
+      ],
+      "actualSHA256": "2af190b300cbb0b35e248ccf5f4a06b6072030aeb3da7a98ec73abe5b4cb371f",
+      "bytes": 7224011,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "bcutil-jdk18on-1.86.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/bouncycastle/bcutil-jdk18on/1.86/bcutil-jdk18on-1.86.jar",
+      "expectedSHA256": [
+        "1c268e15f785aafb1e4670d8d6e5f856f69475e96c162dadcd1ff9b350e9139f"
+      ],
+      "actualSHA256": "1c268e15f785aafb1e4670d8d6e5f856f69475e96c162dadcd1ff9b350e9139f",
+      "bytes": 789287,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "common-image-3.14.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/com/twelvemonkeys/common/common-image/3.14.0/common-image-3.14.0.jar",
+      "expectedSHA256": [
+        "9edb1afd32278d20ad660869bfa5b0a27cf9b3553b6eb3f8fc51a2fc13109b66"
+      ],
+      "actualSHA256": "9edb1afd32278d20ad660869bfa5b0a27cf9b3553b6eb3f8fc51a2fc13109b66",
+      "bytes": 79630,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "common-io-3.14.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/com/twelvemonkeys/common/common-io/3.14.0/common-io-3.14.0.jar",
+      "expectedSHA256": [
+        "ae01308bd48c68e76f6a1f76880cf7f4a3a004aa83d78e5448de358a4d957e8f"
+      ],
+      "actualSHA256": "ae01308bd48c68e76f6a1f76880cf7f4a3a004aa83d78e5448de358a4d957e8f",
+      "bytes": 92356,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "common-lang-3.14.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/com/twelvemonkeys/common/common-lang/3.14.0/common-lang-3.14.0.jar",
+      "expectedSHA256": [
+        "8d4529d6f56a010bc7e130ebfcdaf14bc11586e9d9ae66f6dca66f91da7eafef"
+      ],
+      "actualSHA256": "8d4529d6f56a010bc7e130ebfcdaf14bc11586e9d9ae66f6dca66f91da7eafef",
+      "bytes": 121885,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "commons-codec-1.19.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/commons-codec/commons-codec/1.19.0/commons-codec-1.19.0.jar",
+      "expectedSHA256": [
+        "5c3881e4f556855e9c532927ee0c9dfde94cc66760d5805c031a59887070af5f"
+      ],
+      "actualSHA256": "5c3881e4f556855e9c532927ee0c9dfde94cc66760d5805c031a59887070af5f",
+      "bytes": 374716,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "commons-compress-1.28.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.28.0/commons-compress-1.28.0.jar",
+      "expectedSHA256": [
+        "e1522945218456f3649a39bc4afd70ce4bd466221519dba7d378f2141a4642ca"
+      ],
+      "actualSHA256": "e1522945218456f3649a39bc4afd70ce4bd466221519dba7d378f2141a4642ca",
+      "bytes": 1117221,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "commons-io-2.20.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/commons-io/commons-io/2.20.0/commons-io-2.20.0.jar",
+      "expectedSHA256": [
+        "df90bba0fe3cb586b7f164e78fe8f8f4da3f2dd5c27fa645f888100ccc25dd72"
+      ],
+      "actualSHA256": "df90bba0fe3cb586b7f164e78fe8f8f4da3f2dd5c27fa645f888100ccc25dd72",
+      "bytes": 563971,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "commons-lang3-3.18.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.18.0/commons-lang3-3.18.0.jar",
+      "expectedSHA256": [
+        "4eeeae8d20c078abb64b015ec158add383ac581571cddc45c68f0c9ae0230720"
+      ],
+      "actualSHA256": "4eeeae8d20c078abb64b015ec158add383ac581571cddc45c68f0c9ae0230720",
+      "bytes": 702952,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "commons-logging-1.4.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/commons-logging/commons-logging/1.4.0/commons-logging-1.4.0.jar",
+      "expectedSHA256": [
+        "d175dbd751dd782a63bde28c7a039520e971f25e84b79c19b8435edc3603e0dc"
+      ],
+      "actualSHA256": "d175dbd751dd782a63bde28c7a039520e971f25e84b79c19b8435edc3603e0dc",
+      "bytes": 75828,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "error_prone_annotations-2.41.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.41.0/error_prone_annotations-2.41.0.jar",
+      "expectedSHA256": [
+        "a56e782b5b50811ac204073a355a21d915a2107fce13ec711331ad036f660fcc"
+      ],
+      "actualSHA256": "a56e782b5b50811ac204073a355a21d915a2107fce13ec711331ad036f660fcc",
+      "bytes": 20389,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "error_prone_annotations-2.48.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.48.0/error_prone_annotations-2.48.0.jar",
+      "expectedSHA256": [
+        "b49c5c958316ed67a09c699dda9aa749caf434d51d863dea599ef36a49b9c855"
+      ],
+      "actualSHA256": "b49c5c958316ed67a09c699dda9aa749caf434d51d863dea599ef36a49b9c855",
+      "bytes": 20255,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "fontbox-3.0.8.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/apache/pdfbox/fontbox/3.0.8/fontbox-3.0.8.jar",
+      "expectedSHA256": [
+        "a1915c24e3edbe0ecec93896dfbf6d41427810b663ade97bd4e8bae86ec3fdab"
+      ],
+      "actualSHA256": "a1915c24e3edbe0ecec93896dfbf6d41427810b663ade97bd4e8bae86ec3fdab",
+      "bytes": 1647000,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "gson-2.13.2.jar",
+      "source": "https://repo.maven.apache.org/maven2/com/google/code/gson/gson/2.13.2/gson-2.13.2.jar",
+      "expectedSHA256": [
+        "dd0ce1b55a3ed2080cb70f9c655850cda86c206862310009dcb5e5c95265a5e0"
+      ],
+      "actualSHA256": "dd0ce1b55a3ed2080cb70f9c655850cda86c206862310009dcb5e5c95265a5e0",
+      "bytes": 289901,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "gson-2.14.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar",
+      "expectedSHA256": [
+        "2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f"
+      ],
+      "actualSHA256": "2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f",
+      "bytes": 313604,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "imageio-core-3.14.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/com/twelvemonkeys/imageio/imageio-core/3.14.0/imageio-core-3.14.0.jar",
+      "expectedSHA256": [
+        "a1b832b5090bd4677696f999b5ccb8954e987eb9674632a6286a6de2bb1c3c78"
+      ],
+      "actualSHA256": "a1b832b5090bd4677696f999b5ccb8954e987eb9674632a6286a6de2bb1c3c78",
+      "bytes": 122975,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "imageio-metadata-3.14.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/com/twelvemonkeys/imageio/imageio-metadata/3.14.0/imageio-metadata-3.14.0.jar",
+      "expectedSHA256": [
+        "03768fc012bd2573236da803099aba6961dfb29c190103f9790fc49ac27f84c1"
+      ],
+      "actualSHA256": "03768fc012bd2573236da803099aba6961dfb29c190103f9790fc49ac27f84c1",
+      "bytes": 83630,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "imageio-webp-3.14.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/com/twelvemonkeys/imageio/imageio-webp/3.14.0/imageio-webp-3.14.0.jar",
+      "expectedSHA256": [
+        "40e5b82b99bde56889f810349615f9403aae6a0d39cdc27c6899754770bb3752"
+      ],
+      "actualSHA256": "40e5b82b99bde56889f810349615f9403aae6a0d39cdc27c6899754770bb3752",
+      "bytes": 81195,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "javafx-base-21.0.12-linux.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/openjfx/javafx-base/21.0.12/javafx-base-21.0.12-linux.jar",
+      "expectedSHA256": [
+        "ac83213e343d734d7d315b4a850b309d8de4a4950c6e46497d8bc68e744b245d"
+      ],
+      "actualSHA256": "ac83213e343d734d7d315b4a850b309d8de4a4950c6e46497d8bc68e744b245d",
+      "bytes": 753227,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "javafx-base-21.0.12-win.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/openjfx/javafx-base/21.0.12/javafx-base-21.0.12-win.jar",
+      "expectedSHA256": [
+        "110c32b2034d1ca4c644b919f9f28370d312cd192a26e2df1a83ec1df4cd6a6b"
+      ],
+      "actualSHA256": "110c32b2034d1ca4c644b919f9f28370d312cd192a26e2df1a83ec1df4cd6a6b",
+      "bytes": 753228,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "javafx-base-21.0.12.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/openjfx/javafx-base/21.0.12/javafx-base-21.0.12.jar",
+      "expectedSHA256": [
+        "0ea83fe69a406acf8b7d12713ce7626f7a3c673bb04fd319f7d9561167dfdcf4"
+      ],
+      "actualSHA256": "0ea83fe69a406acf8b7d12713ce7626f7a3c673bb04fd319f7d9561167dfdcf4",
+      "bytes": 302,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "javafx-controls-21.0.12-linux.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/openjfx/javafx-controls/21.0.12/javafx-controls-21.0.12-linux.jar",
+      "expectedSHA256": [
+        "de5417dbb39920d19376073dbbe896b97cbd5a4e88d56cc6627ff0a32666dc04"
+      ],
+      "actualSHA256": "de5417dbb39920d19376073dbbe896b97cbd5a4e88d56cc6627ff0a32666dc04",
+      "bytes": 2582535,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "javafx-controls-21.0.12-win.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/openjfx/javafx-controls/21.0.12/javafx-controls-21.0.12-win.jar",
+      "expectedSHA256": [
+        "fe32329525908377b3a34580f37fa4dafc0574943521ac2244a56380ac6f7770"
+      ],
+      "actualSHA256": "fe32329525908377b3a34580f37fa4dafc0574943521ac2244a56380ac6f7770",
+      "bytes": 2582535,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "javafx-graphics-21.0.12-linux.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/openjfx/javafx-graphics/21.0.12/javafx-graphics-21.0.12-linux.jar",
+      "expectedSHA256": [
+        "200ee46c819d03811c736900cdfacb2047921313b261d93e52cdeef1eaf1ebb7"
+      ],
+      "actualSHA256": "200ee46c819d03811c736900cdfacb2047921313b261d93e52cdeef1eaf1ebb7",
+      "bytes": 4682157,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "javafx-graphics-21.0.12-win.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/openjfx/javafx-graphics/21.0.12/javafx-graphics-21.0.12-win.jar",
+      "expectedSHA256": [
+        "af380b5afede1f13fbe0a8ebdb5b2855a97b1e22c60dcefb5a90a498fd679722"
+      ],
+      "actualSHA256": "af380b5afede1f13fbe0a8ebdb5b2855a97b1e22c60dcefb5a90a498fd679722",
+      "bytes": 5909041,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "javafx-graphics-21.0.12.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/openjfx/javafx-graphics/21.0.12/javafx-graphics-21.0.12.jar",
+      "expectedSHA256": [
+        "22bae6397dfdde5744d09d3e47c03efc80788d9b41c1dd140f05f67dddbcd7ff"
+      ],
+      "actualSHA256": "22bae6397dfdde5744d09d3e47c03efc80788d9b41c1dd140f05f67dddbcd7ff",
+      "bytes": 306,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "jna-5.19.1.jar",
+      "source": "https://repo.maven.apache.org/maven2/net/java/dev/jna/jna/5.19.1/jna-5.19.1.jar",
+      "expectedSHA256": [
+        "4fb141dd8ef6b0585ffceea4bc49602fbc6312fa977e2c488794ea3e6aafecae"
+      ],
+      "actualSHA256": "4fb141dd8ef6b0585ffceea4bc49602fbc6312fa977e2c488794ea3e6aafecae",
+      "bytes": 1950853,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "jna-platform-5.19.1.jar",
+      "source": "https://repo.maven.apache.org/maven2/net/java/dev/jna/jna-platform/5.19.1/jna-platform-5.19.1.jar",
+      "expectedSHA256": [
+        "3b3864f5b449e9c3c24b16861524b622b086563f44e0cd8384c8efc5a6052f82"
+      ],
+      "actualSHA256": "3b3864f5b449e9c3c24b16861524b622b086563f44e0cd8384c8efc5a6052f82",
+      "bytes": 1416385,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "jsr305-3.0.2.jar",
+      "source": "https://repo.maven.apache.org/maven2/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+      "expectedSHA256": [
+        "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+      ],
+      "actualSHA256": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7",
+      "bytes": 19936,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "junit-jupiter-5.13.4.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter/5.13.4/junit-jupiter-5.13.4.jar",
+      "expectedSHA256": [
+        "b960f79217dd01c863031b678f07df4730bbf1eac650c74ad6b0c61faad78379"
+      ],
+      "actualSHA256": "b960f79217dd01c863031b678f07df4730bbf1eac650c74ad6b0c61faad78379",
+      "bytes": 6366,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "junit-jupiter-api-5.13.4.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-api/5.13.4/junit-jupiter-api-5.13.4.jar",
+      "expectedSHA256": [
+        "d1bb81abfd9e03418306b4e6a3390c8db52c58372e749c2980ac29f0c08278f1"
+      ],
+      "actualSHA256": "d1bb81abfd9e03418306b4e6a3390c8db52c58372e749c2980ac29f0c08278f1",
+      "bytes": 240237,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "junit-jupiter-engine-5.13.4.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-engine/5.13.4/junit-jupiter-engine-5.13.4.jar",
+      "expectedSHA256": [
+        "027404a92fe618b72465792a257951495c503a7d5751e2791e0f51c87f67f5bc"
+      ],
+      "actualSHA256": "027404a92fe618b72465792a257951495c503a7d5751e2791e0f51c87f67f5bc",
+      "bytes": 341150,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "junit-jupiter-params-5.13.4.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-params/5.13.4/junit-jupiter-params-5.13.4.jar",
+      "expectedSHA256": [
+        "3a8c6365716dbb698c0d49a05456c1e1ad05c406613c550f9dd50037872efc41"
+      ],
+      "actualSHA256": "3a8c6365716dbb698c0d49a05456c1e1ad05c406613c550f9dd50037872efc41",
+      "bytes": 660823,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "junit-platform-commons-1.13.4.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-commons/1.13.4/junit-platform-commons-1.13.4.jar",
+      "expectedSHA256": [
+        "1c25ca641ebaae44ff3ad21ca1b2ef68d0dd84bfeb07c4805ba7840899b77408"
+      ],
+      "actualSHA256": "1c25ca641ebaae44ff3ad21ca1b2ef68d0dd84bfeb07c4805ba7840899b77408",
+      "bytes": 158512,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "junit-platform-console-standalone-1.13.4.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-console-standalone/1.13.4/junit-platform-console-standalone-1.13.4.jar",
+      "expectedSHA256": [
+        "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892"
+      ],
+      "actualSHA256": "3fdfc37e29744a9a67dd5365e81467e26fbde0b7aa204e6f8bbe79eeaa7ae892",
+      "bytes": 3159930,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "junit-platform-engine-1.13.4.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-engine/1.13.4/junit-platform-engine-1.13.4.jar",
+      "expectedSHA256": [
+        "390c5f77b84283a64b644f88251b397e0b0debb80bdcc50f899881aecff43a5a"
+      ],
+      "actualSHA256": "390c5f77b84283a64b644f88251b397e0b0debb80bdcc50f899881aecff43a5a",
+      "bytes": 268584,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "junit-platform-launcher-1.13.4.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-launcher/1.13.4/junit-platform-launcher-1.13.4.jar",
+      "expectedSHA256": [
+        "0b0beaeb6880a31149641d2d848b863712885469670c12099586d7f798522564"
+      ],
+      "actualSHA256": "0b0beaeb6880a31149641d2d848b863712885469670c12099586d7f798522564",
+      "bytes": 223100,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "openjfx-monocle-21.0.2.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/testfx/openjfx-monocle/21.0.2/openjfx-monocle-21.0.2.jar",
+      "expectedSHA256": [
+        "3d0b0c186a9f495aa4e3d058c612b2a9cf44a97ffbcecd75d441aed8263fac50"
+      ],
+      "actualSHA256": "3d0b0c186a9f495aa4e3d058c612b2a9cf44a97ffbcecd75d441aed8263fac50",
+      "bytes": 257923,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "opentest4j-1.3.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar",
+      "expectedSHA256": [
+        "48e2df636cab6563ced64dcdff8abb2355627cb236ef0bf37598682ddf742f1b"
+      ],
+      "actualSHA256": "48e2df636cab6563ced64dcdff8abb2355627cb236ef0bf37598682ddf742f1b",
+      "bytes": 14304,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "password4j-1.8.4.jar",
+      "source": "https://repo.maven.apache.org/maven2/com/password4j/password4j/1.8.4/password4j-1.8.4.jar",
+      "expectedSHA256": [
+        "d1406a158533b65bda7c20cebf7bf2a9a0626f8931fd1dc3d39243af5849edf5"
+      ],
+      "actualSHA256": "d1406a158533b65bda7c20cebf7bf2a9a0626f8931fd1dc3d39243af5849edf5",
+      "bytes": 89997,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "pdfbox-3.0.8.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/apache/pdfbox/pdfbox/3.0.8/pdfbox-3.0.8.jar",
+      "expectedSHA256": [
+        "97647cfbde61ebcfc06b4cf8c9b0ffcaaee073396eceb4a7f6836a9b9128903c"
+      ],
+      "actualSHA256": "97647cfbde61ebcfc06b4cf8c9b0ffcaaee073396eceb4a7f6836a9b9128903c",
+      "bytes": 2070583,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "pdfbox-io-3.0.8.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/apache/pdfbox/pdfbox-io/3.0.8/pdfbox-io-3.0.8.jar",
+      "expectedSHA256": [
+        "36a0e04001010b4c764857817412b96339930b19755e728959805cc0352061b2"
+      ],
+      "actualSHA256": "36a0e04001010b4c764857817412b96339930b19755e728959805cc0352061b2",
+      "bytes": 51906,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "protobuf-java-4.33.6.jar",
+      "source": "https://repo.maven.apache.org/maven2/com/google/protobuf/protobuf-java/4.33.6/protobuf-java-4.33.6.jar",
+      "expectedSHA256": [
+        "c24b2464ecfe9ac1d44e3a8fe281fca09e6ad2ca73dbd689dd7d6d719df987b5"
+      ],
+      "actualSHA256": "c24b2464ecfe9ac1d44e3a8fe281fca09e6ad2ca73dbd689dd7d6d719df987b5",
+      "bytes": 1886534,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "slf4j-api-2.0.12.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/2.0.12/slf4j-api-2.0.12.jar",
+      "expectedSHA256": [
+        "a79502b8abdfbd722846a27691226a4088682d6d35654f9b80e2a9ccacf7ed47"
+      ],
+      "actualSHA256": "a79502b8abdfbd722846a27691226a4088682d6d35654f9b80e2a9ccacf7ed47",
+      "bytes": 68115,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "slf4j-api-2.0.17.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/2.0.17/slf4j-api-2.0.17.jar",
+      "expectedSHA256": [
+        "7b751d952061954d5abfed7181c1f645d336091b679891591d63329c622eb832"
+      ],
+      "actualSHA256": "7b751d952061954d5abfed7181c1f645d336091b679891591d63329c622eb832",
+      "bytes": 69908,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "slf4j-nop-2.0.17.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-nop/2.0.17/slf4j-nop-2.0.17.jar",
+      "expectedSHA256": [
+        "3716f83649ec66161a2edefd4f49df34d1dd1c51cdcf941996c6987260f0a829"
+      ],
+      "actualSHA256": "3716f83649ec66161a2edefd4f49df34d1dd1c51cdcf941996c6987260f0a829",
+      "bytes": 4982,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "sqlite-jdbc-3.53.4.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/xerial/sqlite-jdbc/3.53.4.0/sqlite-jdbc-3.53.4.0.jar",
+      "expectedSHA256": [
+        "bcb1f51e36f940867e83342f9efbf5968ac44a6bef4d397bb4af7b17b45cd2fb"
+      ],
+      "actualSHA256": "bcb1f51e36f940867e83342f9efbf5968ac44a6bef4d397bb4af7b17b45cd2fb",
+      "bytes": 12002370,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "tink-1.23.0.jar",
+      "source": "https://repo.maven.apache.org/maven2/com/google/crypto/tink/tink/1.23.0/tink-1.23.0.jar",
+      "expectedSHA256": [
+        "5bcdc8798ce106f5145acb4a0e993c5e5861337b1e75ca88ceb6ab9da10fa512"
+      ],
+      "actualSHA256": "5bcdc8798ce106f5145acb4a0e993c5e5861337b1e75ca88ceb6ab9da10fa512",
+      "bytes": 2775464,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "xz-1.12.jar",
+      "source": "https://repo.maven.apache.org/maven2/org/tukaani/xz/1.12/xz-1.12.jar",
+      "expectedSHA256": [
+        "3e158a87bd73d8afb4b6e8239c013b7d049c48563f45860ce99cd2e448cf4a6b"
+      ],
+      "actualSHA256": "3e158a87bd73d8afb4b6e8239c013b7d049c48563f45860ce99cd2e448cf4a6b",
+      "bytes": 168792,
+      "result": "VERIFIED"
+    },
+    {
+      "file": "zip4j-2.11.6.jar",
+      "source": "https://repo.maven.apache.org/maven2/net/lingala/zip4j/zip4j/2.11.6/zip4j-2.11.6.jar",
+      "expectedSHA256": [
+        "5f1eb1e9d67cfee200a695e4079751b49e73a226b154193e13f7c602efbe72fb"
+      ],
+      "actualSHA256": "5f1eb1e9d67cfee200a695e4079751b49e73a226b154193e13f7c602efbe72fb",
+      "bytes": 213881,
+      "result": "VERIFIED"
+    }
+  ],
+  "TLSVerification": true
+}

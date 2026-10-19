@@ -1,0 +1,14 @@
+// Release-verification init script. No network/trust/cryptography checks are disabled.
+allprojects {
+    tasks.withType(JavaCompile).configureEach { options.incremental = false }
+    tasks.withType(Test).configureEach {
+        if (project.name == 'client-core') {
+            doFirst {
+                def bundle = rootProject.providers.gradleProperty('legacy500Bundle').orNull
+                if (bundle == null || !new File(bundle, 'client-core-5.0.0.jar').isFile())
+                    throw new GradleException('Supply -Plegacy500Bundle=/verified/published5/app; exact old-binary acceptance must not be skipped in release verification.')
+                systemProperty 'aegis.legacy500.bundle', bundle
+            }
+        }
+    }
+}

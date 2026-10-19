@@ -40,6 +40,8 @@ def verify_tools(root):
  return registry
 def checked_proof(path,commit):
  proof=json.loads(path.read_text());
+ command=proof.get('command',[])
+ if not isinstance(command,list) or not all(isinstance(x,str) for x in command) or not {'clean','test','assemble'}.issubset(command) or any(x in ('-x','-m') or x.startswith(('--tests','--exclude-task','--dry-run','-x')) for x in command):raise ValueError('Require unfiltered full root clean test assemble proof, not partial tasks')
  if proof.get('gradleExitCode')!=0 or proof.get('sourceUnchanged') is not True or proof.get('sourceDirtyAtStart') is not False or proof.get('sourceCommit')!=commit:raise ValueError('Require successful clean frozen-source build proof, not a diagnostic run')
  return {Path(row['file']).name:row['sha256'] for row in proof['jars'] if row.get('zipCRC')=='PASS'}
 def dependency_pins():
@@ -144,6 +146,7 @@ def package(a):
  resource=stage/'launcher600.res';run([tools/'usr/bin/x86_64-w64-mingw32-windres','--preprocessor='+str(tools/'usr/bin/x86_64-w64-mingw32-gcc-posix'),'--preprocessor-arg=-E','--preprocessor-arg=-xc','--preprocessor-arg=-DRC_INVOKED','--codepage=65001','launcher600.rc','-O','coff','-o',resource],cwd=ROOT/'packaging/windows',env=env)
  for source,name,libraries in [('launcher600.c','AEGIS.exe',['-luser32','-lshell32','-ladvapi32']),('maintenance600.c','AEGIS-Maintenance.exe',['-luser32','-lshell32','-ladvapi32']),('updater.c','AEGIS-Updater.exe',['-lshell32'])]:
   run([tools/'usr/bin/x86_64-w64-mingw32-gcc-posix','-Os','-static','-static-libgcc','-municode','-mwindows','-finput-charset=UTF-8',ROOT/'packaging/windows'/source,resource,'-Wl,--dynamicbase,--nxcompat,--high-entropy-va,--no-insert-timestamp',*libraries,'-o',win/name],env=env)
+ write(win/'maintenance600.json',{'schema':1,'sha256':sha(win/'AEGIS-Maintenance.exe'),'sourceCommit':commit})
  # NSIS itself is x86 Unicode; its guard DLL must be x86, even for x64 payload.
  run([tools/'usr/bin/i686-w64-mingw32-gcc-posix','-Os','-static','-static-libgcc','-shared',ROOT/'packaging/windows/runtimeguard600.c','-Wl,--dynamicbase,--nxcompat,--no-insert-timestamp','-ladvapi32','-o',win/'AEGIS-RuntimeGuard.dll'],env=env)
  run([a.linux_cc,'-std=c11','-Os','-Wall','-Wextra','-Werror','-Wl,--build-id=none','-ffile-prefix-map='+str(ROOT)+'=.',ROOT/'packaging/linux/launcher600.c','-o',linux/'AEGIS-RuntimeLauncher'],env=env)

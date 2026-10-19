@@ -7,6 +7,7 @@ import java.util.*;
 import java.util.concurrent.*;
 import org.securemail.client.AppPaths;
 import org.securemail.client.safeweb.SafeWebUrl;
+import org.securemail.client.safeweb.LinuxSafeWebSandbox;
 
 /** Explicit user-action entry into a detached browser-manager JVM. No account IPC or close-on-Core-exit ownership. */
 public final class VzorLaunch600 {
@@ -22,6 +23,28 @@ public final class VzorLaunch600 {
     public boolean managerAlive(){return owned!=null&&owned.isAlive();}
   }
   private VzorLaunch600(){}
+  private static final String UNSAFE_STORAGE="Небезопасное расположение данных АЕГИС. Выберите личный каталог вне системных папок и каталогов Взора.";
+  /** Core/Mail-side path-only preflight. These paths never enter the detached manager, browser, URL or diagnostics.
+   * Call again before opening/migrating a changed Mail configuration, including while independent Vzor is open. */
+  public static void requireHiddenData(Collection<Path> protectedPaths)throws IOException {
+    try{String os=System.getProperty("os.name","");if(!os.equals("Linux")&&!os.startsWith("Windows"))throw new IOException(UNSAFE_STORAGE);
+      checkHiddenData(protectedPaths,VzorState600.roots(os,System.getProperty("user.home",""),System.getenv()),os.equals("Linux"));
+    }catch(IOException|RuntimeException invalid){throw new IOException(UNSAFE_STORAGE,invalid);}
+  }
+  // Compile-time filesystem fixture seam: no paths or OS flags can be supplied by a URL/IPC command.
+  static void checkHiddenData(Collection<Path> protectedPaths,List<Path> browserRoots,boolean linux)throws IOException {
+    try{
+      if(protectedPaths==null||protectedPaths.isEmpty()||protectedPaths.size()>64||browserRoots==null||browserRoots.size()!=2)throw new IOException(UNSAFE_STORAGE);
+      List<Path> checked=List.copyOf(protectedPaths);List<Path> exposed=new ArrayList<>();for(Path root:browserRoots)exposed.add(canonical(root));
+      for(Path path:checked){Path secret=canonical(path);for(Path root:exposed)if(secret.startsWith(root)||root.startsWith(secret))throw new IOException(UNSAFE_STORAGE);}
+      if(linux)LinuxSafeWebSandbox.checkHiddenPaths(checked);
+    }catch(IOException|RuntimeException invalid){throw new IOException(UNSAFE_STORAGE,invalid);}
+  }
+  private static Path canonical(Path path)throws IOException {
+    if(path==null||!path.isAbsolute())throw new IOException(UNSAFE_STORAGE);Path cursor=path.normalize();Deque<Path> missing=new ArrayDeque<>();
+    while(!Files.exists(cursor,LinkOption.NOFOLLOW_LINKS)){if(cursor.getParent()==null)throw new IOException(UNSAFE_STORAGE);missing.addFirst(cursor.getFileName());cursor=cursor.getParent();}
+    Path result=cursor.toRealPath();for(Path name:missing)result=result.resolve(name);return result.normalize();
+  }
   public static boolean managerBusy()throws IOException{return STARTING.availablePermits()==0||VzorState600.managerRunning();}
   public static Detached openAuthorized(Path bundle,String address)throws IOException{
     Objects.requireNonNull(bundle);SafeWebUrl.parse(address);Path home=bundle.toAbsolutePath().normalize();

@@ -1,0 +1,23 @@
+{
+  "name": "jdk",
+  "source": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jdk_x64_linux_hotspot_21.0.12.1_1.tar.gz",
+  "checksumSource": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jdk_x64_linux_hotspot_21.0.12.1_1.tar.gz.sha256.txt",
+  "expectedSHA256": "ce79869e1307ed8ee1e2baa86a412b1eb5b75d10a01006d788a6f968bcfaee94",
+  "TLSVerification": true,
+  "checksumDownload": {
+    "origin": "https://release-assets.githubusercontent.com",
+    "path": "/github-production-release-asset/602574963/b8de8fec-7ffe-4cea-89e4-96be2e58aa7d",
+    "status": 200,
+    "bytes": 118
+  },
+  "publishedSHA256": "ce79869e1307ed8ee1e2baa86a412b1eb5b75d10a01006d788a6f968bcfaee94",
+  "archiveDownload": {
+    "origin": "https://release-assets.githubusercontent.com",
+    "path": "/github-production-release-asset/602574963/be5ef440-7bad-40e3-9188-9e7648842040",
+    "status": 200,
+    "bytes": 207473347
+  },
+  "actualSHA256": "ce79869e1307ed8ee1e2baa86a412b1eb5b75d10a01006d788a6f968bcfaee94",
+  "result": "VERIFIED",
+  "seconds": 24.632
+}

@@ -4,6 +4,21 @@
 
 Перед упаковкой нужны успешный полный clean/nonincremental Gradle-прогон и неизменность исходников, зафиксированная в `GRADLE-VERIFICATION.json`: `gradleExitCode=0`, `sourceUnchanged=true`, `sourceDirtyAtStart=false`, тот же `sourceCommit`. Сборка с текущими незакоммиченными изменениями не подходит для релизной упаковки. Project JAR сверяются с доказательством сборки; все остальные JAR — с SHA-256 из `gradle/verification-metadata.xml`. Серверные JAR запрещены в клиентском classpath. Windows и Linux stageApp должны быть подготовлены из того же commit с JavaFX соответствующей платформы.
 
+Сначала восстановите все dependency locks командой `dependencies --write-locks`, проверьте их и зафиксируйте исходники. Затем полный прогон выполняется без фильтров и исключений:
+
+```sh
+python packaging/build-tools600/run-gradle-verified600.py /evidence/gradle.log /evidence/full \
+  --project-dir /source/aegis \
+  -I /source/aegis/packaging/verification600.gradle \
+  -Plegacy500Bundle=/verified/linux500/squashfs-root/app \
+  --no-build-cache --no-configuration-cache \
+  clean test assemble :client-ui:stageApp --console=plain --stacktrace
+```
+
+Init script отключает incremental JavaCompile и требует точный опубликованный комплект 5.0.0 для реального теста миграции/отката. Wrapper немедленно проверяет CRC и SHA JAR в том же процессе, записывает commit/tree и хеши исходников до и после сборки. Код выхода Gradle сам по себе не заменяет этот receipt. `packaging/test-inventory600.py --out /evidence/TEST-INVENTORY.json` формирует отдельный перечень исходников тестов и GUI-smoke; он не присваивает им PASS. Пакетировщик отклоняет proof без `clean test assemble`, с `--tests`, `-x`, `--exclude-task` или dry-run. После полного Linux-прогона Windows `stageApp -PtargetPlatform=win` собирается из того же commit; JAR проекта должны иметь те же SHA.
+
+Runner использует уже проверенные JDK `21.0.12.1+1` и Gradle `9.8.0` из `AEGIS_TOOLCHAIN_ROOT` (по умолчанию `AEGIS_BUILD_WORKSPACE/inputs600/toolchain`). SHA архивов: JDK `ce79869e1307ed8ee1e2baa86a412b1eb5b75d10a01006d788a6f968bcfaee94`, Gradle `bafd5ce9cfaea0fbccfdc8439a1ac42fbd4cd9c89dc9a988228d8a2639a58e6c`; перед использованием сравните их с официальными sidecar-файлами. Восстановление инструментов не является нативной приёмкой приложения. `AEGIS_GRADLE_USER_HOME` задаёт приватный cache вне исходного проекта. HTTPS proxy берётся только из окружения; его учётные данные не записываются в лог или репозиторий. TLS использует системные CA и не отключается.
+
 Нативная основа — точные опубликованные файлы владельца 5.0.0. Опубликованные BUILD/SOURCE-PROVENANCE указывают source commit `37779c113553bf5e1a42642e7ca7a010db9bdd4e`; локальный импорт того же проверенного дерева для разработки 6.0.0 — `38a3e6469a40e6edcb1b0448f906a488c73feb5d`. Эти идентификаторы записываются отдельно:
 
 - Windows ZIP: `17b2ffa567ffe4fd9aef149ccaf39a3dc56ad0312db931dda3ae727cf7a31523`.
