@@ -1,38 +1,26 @@
-# Android 6.0.0: испытания текущего checkpoint
+# Android 6.0.0: восстановление и проверки 19.10.2026
 
-Дата: 18.10.2026. Linux x86-64, JDK 21, SDK 36/build-tools 36.1.0, NDK r29; это не Android-устройство. `productionReady=false`.
+`productionReady=false`. Тестовая среда: Linux x86-64, JDK21.0.12.1+1, официальный SDK36/build-tools36.1, NDKr29. Это не Android-устройство.
 
-| Проверка | Статус | Реальное доказательство |
-|---|---|---|
-| UID/пакет/сертификат, поколения, время, ZIP-квоты/CRC | PASS | 31 production-policy JVM-тест |
-| Типизированное делегирование, чужой app key/authority, replay/time/TTL, duplicate JSON/scope, generic signing | PASS | 13 production AppGrantProposal тестов |
-| Onion-domain в реальном SOCKS handshake, отказ без fallback, внешние SOCKS/clearnet denied | PASS | 4 socket-теста существующего TorTransport; loopback fixture, не Tor |
-| Настоящее JNI/libsodium и исходное E2EE, неправильные ключи/подпись, AEB1/AEB2/пароль/account | PASS | 18 host-тестов; ARM64 не выполнялся |
-| Credentialed gateway, запрет UDP/закрытых IP/домена, двусторонние TCP bytes | PASS | 13 настоящих host socket-тестов |
-| Нативный hev/lwIP, raw IP, DNS NXDOMAIN/virtual mapping, non-DNS UDP drop, TCP/SOCKS/echo, protect hook, stop | PASS | 6 actual native-engine host-тестов через AF_UNIX socketpair; это не Android TUN/protect |
-| Opus/SpeexDSP encode/decode/PLC/битрейт/DSP, packet bounds, native handle limits, существующий media lifecycle/jitter/mute/switch/close | PASS | 29 actual host JNI/pipeline проверок; синтетические PCM-устройства явно обозначены |
-| Android-only BCJSSE 1.86 ↔ неизменённый desktop SunJSSE, TLS1.3/ALPN v2 в обеих ролях, duplex, KeyUpdate, exact comparison code, wrong root/key/context/expiry, tamper/replay/cert substitution/downgrade | PASS | 31 настоящий loopback interop тест; global Security provider registry не изменён |
-| Android MailRelay REGISTER6/LOGIN6/E2EE/FETCH/ACK с действительными Identity HTTP + SQLite Relay | PASS_LOCAL | 7 integration-сценариев; локальная SOCKS fixture, не реальный Tor |
-| Официальная libsodium 1.0.22 host suite | PASS | 101/101 upstream, x86-64 |
-| ARM64 sodium/audio/hev native build, ABI/LOAD 16384 | PASS | NDK compile/link + llvm-readelf; только структурная проверка ELF |
-| Java→DEX→APK четырёх приложений | PASS | Официальные javac, D8, aapt2, zipalign, apksigner |
-| Одинаковый тестовый сертификат и actual APK verify | PASS | Четыре SDK apksigner + четыре точной встроенной Google apksig 9.4.1 |
-| Реально изменённый APK | PASS | SDK apksigner и встроенная apksig отклонили |
-| Owner public APK verifier | PASS | 11 Python tests: actual SDK signed/tampered APK + 10 помеченных adversarial parser fixtures; ключи не читаются |
-| Android install/PackageInstaller, Binder spoof/cert lineage, FLAG_SECURE/overlays/биометрия | NOT_RUN | Нет устройства, USB, KVM или эмулятора |
-| OS VPN/protect(fd), DNS/WebRTC/IPv6 leaks, kill switch, смена сети | NOT_RUN | Нужна Android-приёмка; host forwarding не доказывает свойства ОС |
-| Полный per-app Tor VPN, Always-on/lockdown | BLOCKED | Реализован только ограниченный локальный TCP/DNS mode; manifest не заявляет Always-on |
-| Реальная Mail доставка через Tor/staging Relay на двух устройствах | NOT_RUN | Local integration не заменяет испытание |
-| Android голосовой звонок/сигнализация/onion listener/защищённый входящий экран | BLOCKED | Codec и TLS адаптеры реализованы; сквозная Android сессия не подключена |
-| AudioRecord/AudioTrack, hardware AEC, маршруты устройств | NOT_RUN | Код собран; физического аудиоустройства нет |
-| Doze/App Standby/уведомления/батарея | NOT_RUN | Нужны Android-устройства |
-| Полная Mail миграция/архив/старые letter password/FF1 GUI/P2P/background/500МБ вложения | BLOCKED | Реализованы узкий защищённый импорт identity/контактов и текстовая Mail; пакет максимум 192 КиБ |
-| Owner APK signing/rotation/updater E2E | NOT_RUN | Ключ владельца не получался/не использовался |
+| Проверка | Фактический результат |
+|---|---|
+| Production policy / AppGrantProposal / SOCKS | 31 + 13 + 4 PASS_LOCAL |
+| JNI/libsodium/E2EE/AEB1/AEB2/password/FF1 | 22 PASS_LOCAL |
+| Gateway / native raw-IP hev-lwIP | 13 + 6 PASS_LOCAL |
+| Voice handoff / Tor policy / lifecycle | 21 + 14 + 16 PASS_LOCAL |
+| Opus/SpeexDSP pipeline / BCJSSE-desktop TLS1.3 | 29 + 31 PASS_LOCAL |
+| Android Mail adapter + настоящие Identity HTTP/SQLite Relay | 7 PASS_LOCAL |
+| Android Glas controller + реальные Identity/signaling HTTP/SQL/TLS/JNI Opus | 12 PASS_LOCAL |
+| Upstream libsodium / Opus host suites | 101/101 + 16/16 PASS_LOCAL |
+| ARM64 sodium/audio/hev | Собраны ELF с 16-КиБ LOAD alignment; ARM64 execution NOT_RUN |
+| Четыре unsigned + четыре TEST APK | Реально собраны, SDK и embedded apksig проверили; изменённый APK отклонён |
+| Android install/Binder/биометрия/FLAG_SECURE/overlays/VPN leaks/mic/Doze | NOT_RUN |
+| Два физических устройства, разные сети, публичный Tor | NOT_RUN |
 
-145 host-тестов включены в ANDROID-JVM-TESTS-6.0.0.log; 7 actual-service integration и upstream suites учитываются отдельно. Тесты не выданы за нативную Android приёмку. Реальные логи и source/artifact SHA находятся в evidence-checkpoint. Тестовые сертификаты не являются доверенными production сертификатами.
+В основных 200 host-проверках повторные прогоны не суммируются. Mail и Glas используют явно синтетические loopback SOCKS/onion и PCM fixtures; фактические HTTP/SQL/криптографические компоненты не заменены mock. Аудио-warning playback-frame/xrun в синтетическом прогоне сохранён в полном логе; пригодность физической аудиосистемы не заявляется.
 
-Во время разработки raw-IP тест выявил double-free pbuf при слишком раннем освобождении UDP-пакета. Drop исправлен установкой штатного одноразового lwIP receive callback; весь native-engine/gateway прогон повторён. Первая libsodium upstream suite обнаружила недостающий execute bit скомпилированного тестового ELF; восстановлен только режим compiled ELF и повторена вся suite, итог 101 PASS/0 FAIL.
+Изменения после восстановления: обязательный выход и отзыв исполняются отдельной ограниченной очередью независимо от Activity pause/destroy; блокировка/выход инвалидируют поздний Identity login; data callback не восстанавливает старую страницу; очередь удалённых password tasks очищает массивы при отмене/закрытии. Добавлены реальная отправка и чтение поддерживаемых letter-password/FF1 писем существующим LetterEnvelope, без нового шифра и без oracle правильности FF1.
 
-BCJSSE источник 1.86 проверен: публичный JSSE startHandshake после установки канала отклоняет повторную renegotiation. Адаптер не использует reflection/собственный rekey. Проверен standard peer-initiated KeyUpdate и ответ BCJSSE. Периодический ручной Android rekey не объявляется реализованным; это отдельный gate интеграции звонка. Предупреждения BCJSSE о неподдерживаемых SHA1 disabledAlgorithms из JDK не отменяют ограничения адаптера: только TLS1.3 AEAD suites и exact Ed25519 certificate/delegation pin.
+Доказательства — `evidence-restored19`. DIAGNOSTIC provenance описывает промежуточную сборку с неизменными непосредственными inputs. Итоговые APK требуют повторного `build.py --expected-commit` после общего frozen commit.
 
-Источник official SDK/JAR/NDK/Opus/Speex/hev и лицензии закреплены в third-party и native provenance. Источник libsodium — отдельно аутентифицированный signed snapshot 18.10.2026; desktop pin не менялся. Ни один секрет владельца не использован.
+Полные блокеры перечислены в RELEASE-GATES-ANDROID-6.0.0.json: архив/P2P/500МиБ UI/полная миграция Android, защищённый фоновый входящий вызов, фоновая Tor-доставка уведомлений, Communities/News/Library UI, автоматический установщик сторонних приложений, подписанные базы угроз и полный per-app Tor/Always-on/lockdown ещё не завершены. Эти функции не объявлены реализованными.

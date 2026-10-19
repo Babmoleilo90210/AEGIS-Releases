@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 1,
+  "productionReady": false,
+  "sources": {
+    "opus": {
+      "version": "1.6.1",
+      "sourceSha256": "6ffcb593207be92584df15b32466ed64bbec99109f007c82205f0194572411a1",
+      "sourceUrl": "https://downloads.xiph.org/releases/opus/opus-1.6.1.tar.gz",
+      "license": "BSD-3-Clause",
+      "authentication": "Official HTTPS archive + exact existing project SHA256; no upstream signature claimed"
+    },
+    "speexdsp": {
+      "version": "1.2.1",
+      "sourceSha256": "8c777343e4a6399569c72abc38a95b24db56882c83dbdb6c6424a5f4aeb54d3d",
+      "sourceUrl": "https://downloads.xiph.org/releases/speex/speexdsp-1.2.1.tar.gz",
+      "license": "BSD-3-Clause",
+      "authentication": "Official HTTPS archive + exact existing project SHA256; no upstream signature claimed"
+    }
+  },
+  "ndkRevision": "29.0.14206865",
+  "ndkArchiveSha256": "4abbbcdc842f3d4879206e9695d52709603e52dd68d3c1fff04b3b5e7a308ecf",
+  "jniSourceSha256": "e8d7f07c47ab3dda1cfdff0878a582dc5c4d65ebea03d76c8be22e19e394e143",
+  "arm64LibrarySha256": "5774e3924f94a9668913b03c065c2056f069145f96b9b5be970fb5fc19dac26f",
+  "hostLibrarySha256": "cb47bcd8f757faa09db20b44ad161723f46e602480b05e98195ac6a847aa554e",
+  "minimumApi": 33,
+  "loadSegmentAlignment": 16384,
+  "hostUpstreamSuites": {
+    "opus": "See copied actual nonzero upstream test-suite.log",
+    "speexdsp": "make check exits zero but no automated test suite provided; not counted as tests"
+  },
+  "androidAudioRecordTrack": "NOT_RUN",
+  "nativeARM64Execution": "NOT_RUN",
+  "commands": [
+    [
+      "./configure",
+      "--disable-shared",
+      "--enable-static",
+      "--with-pic",
+      "--prefix=/workspace/scratch/aa629f360927/aegis600/aegis/android/build/audio-work-iikp9nnn/arm64-install",
+      "--host=aarch64-linux-android",
+      "--disable-extra-programs",
+      "--disable-doc",
+      "--disable-deep-plc",
+      "--disable-dred",
+      "--disable-osce"
+    ],
+    [
+      "make",
+      "-j4"
+    ],
+    [
+      "make",
+      "install"
+    ],
+    [
+      "./configure",
+      "--disable-shared",
+      "--enable-static",
+      "--with-pic",
+      "--prefix=/workspace/scratch/aa629f360927/aegis600/aegis/android/build/audio-work-iikp9nnn/arm64-install",
+      "--host=aarch64-linux-android",
+      "--disable-examples"
+    ],
+    [
+      "make",
+      "-j4"
+    ],
+    [
+      "make",
+      "install"
+    ],
+    [
+      "/workspace/scratch/aa629f360927/inputs600/android-sdk/android-ndk-r29/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android33-clang",
+      "-shared",
+      "-O2",
+      "-fPIC",
+      "-fstack-protector-strong",
+      "-D_FORTIFY_SOURCE=2",
+      "-fvisibility=hidden",
+      "-Werror",
+      "-Wall",
+      "-Wextra",
+      "-I/workspace/scratch/aa629f360927/aegis600/aegis/android/build/audio-work-iikp9nnn/arm64-install/include",
+      "/workspace/scratch/aa629f360927/aegis600/aegis/android/native/aegis_audio.c",
+      "/workspace/scratch/aa629f360927/aegis600/aegis/android/build/audio-work-iikp9nnn/arm64-install/lib/libopus.a",
+      "/workspace/scratch/aa629f360927/aegis600/aegis/android/build/audio-work-iikp9nnn/arm64-install/lib/libspeexdsp.a",
+      "-lm",
+      "-pthread",
+      "-Wl,--exclude-libs,ALL",
+      "-Wl,-z,relro,-z,now",
+      "-Wl,-z,max-page-size=16384",
+      "-Wl,-soname,libaegis_audio.so",
+      "-o",
+      "/workspace/scratch/aa629f360927/outputs600/android-audio19/lib/arm64-v8a/libaegis_audio.so"
+    ],
+    [
+      "/workspace/scratch/aa629f360927/inputs600/android-sdk/android-ndk-r29/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip",
+      "--strip-unneeded",
+      "/workspace/scratch/aa629f360927/outputs600/android-audio19/lib/arm64-v8a/libaegis_audio.so"
+    ],
+    [
+      "./configure",
+      "--disable-shared",
+      "--enable-static",
+      "--with-pic",
+      "--prefix=/workspace/scratch/aa629f360927/aegis600/aegis/android/build/audio-work-iikp9nnn/host-install",
+      "--enable-extra-programs",
+      "--disable-doc",
+      "--disable-deep-plc",
+      "--disable-dred",
+      "--disable-osce"
+    ],
+    [
+      "make",
+      "-j4"
+    ],
+    [
+      "make",
+      "install"
+    ],
+    [
+      "make",
+      "check",
+      "-j2"
+    ],
+    [
+      "./configure",
+      "--disable-shared",
+      "--enable-static",
+      "--with-pic",
+      "--prefix=/workspace/scratch/aa629f360927/aegis600/aegis/android/build/audio-work-iikp9nnn/host-install",
+      "--disable-examples"
+    ],
+    [
+      "make",
+      "-j4"
+    ],
+    [
+      "make",
+      "install"
+    ],
+    [
+      "make",
+      "check",
+      "-j2"
+    ],
+    [
+      "gcc",
+      "-shared",
+      "-O2",
+      "-fPIC",
+      "-fstack-protector-strong",
+      "-D_FORTIFY_SOURCE=2",
+      "-fvisibility=hidden",
+      "-Werror",
+      "-Wall",
+      "-Wextra",
+      "-I/workspace/scratch/aa629f360927/aegis600/aegis/android/build/audio-work-iikp9nnn/host-install/include",
+      "-I/workspace/scratch/aa629f360927/inputs600/toolchain/jdk-21.0.12.1+1/include",
+      "-I/workspace/scratch/aa629f360927/inputs600/toolchain/jdk-21.0.12.1+1/include/linux",
+      "/workspace/scratch/aa629f360927/aegis600/aegis/android/native/aegis_audio.c",
+      "/workspace/scratch/aa629f360927/aegis600/aegis/android/build/audio-work-iikp9nnn/host-install/lib/libopus.a",
+      "/workspace/scratch/aa629f360927/aegis600/aegis/android/build/audio-work-iikp9nnn/host-install/lib/libspeexdsp.a",
+      "-lm",
+      "-pthread",
+      "-Wl,--exclude-libs,ALL",
+      "-Wl,-z,relro,-z,now",
+      "-o",
+      "/workspace/scratch/aa629f360927/outputs600/android-audio19/host/libaegis_audio.so"
+    ]
+  ]
+}

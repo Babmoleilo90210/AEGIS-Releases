@@ -1,0 +1,8 @@
+PASS actual Android REGISTER6 accepted by Identity-gated SQL Relay for two identities
+PASS actual Android LOGIN6 capability/app proof accepted by real services
+PASS actual protocol FIND returns pinned recipient identity
+PASS actual JNI E2EE STORE/FETCH through Android adapter and SQL Relay preserves ciphertext and decrypts only at recipient
+PASS actual signed recipient ACK removes actual queued packet
+PASS wrong Relay service audience rejected with no legacy LOGIN fallback
+PASS actual Identity generation revocation invalidates Android Relay bearer server-side
+AndroidMailRelay6Integration: 7 PASS_LOCAL; actual services/SQL/TCP/crypto + synthetic SOCKS onion fixture; Android device/live Tor NOT_RUN

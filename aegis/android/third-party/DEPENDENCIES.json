@@ -26,8 +26,8 @@
     "license": "ZIP4J-LICENSE.txt"
   },
   "libsodium": {
-    "version": "1.0.22 separately verified stable snapshot 2026-10-18",
-    "sourceSha256": "0a7f69b065b82afdb1470375ffa1cee4ecb066180cca05a71e44e3268cd8470d",
+    "version": "1.0.22 separately verified stable snapshot 2026-10-19",
+    "sourceSha256": "c44f62b9919e4cce5963e74c67a43b8818ed523bd2eded506266d8797d103baf",
     "sourceUrl": "https://download.libsodium.org/libsodium/releases/libsodium-1.0.22-stable.tar.gz",
     "officialMinisignPublicKey": "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3",
     "officialKeySource": "https://doc.libsodium.org/installation",

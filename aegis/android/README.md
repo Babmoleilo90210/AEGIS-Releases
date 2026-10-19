@@ -17,7 +17,7 @@
 
 ## Сборка
 
-Нужны официальный SDK platform 36_r02, build-tools 36.1.0, NDK r29, JDK 21, Python 3 с `cryptography`, gcc/make только для host-тестов. Точные URL, SHA и лицензии перечислены в скриптах и `third-party/DEPENDENCIES.json`. Нативная сборка дополнительно проверяет обе официальные minisign-подписи источника libsodium. Старый mutable-URL SHA не был молча принят: Android использует отдельно аутентифицированный и закреплённый снимок 1.0.22 от 18.10.2026; desktop-артефакты и их pin не менялись.
+Нужны официальный SDK platform 36_r02, build-tools 36.1.0, NDK r29, JDK 21, Python 3 с `cryptography`, gcc/make только для host-тестов. Точные URL, SHA и лицензии перечислены в скриптах и `third-party/DEPENDENCIES.json`. Нативная сборка дополнительно проверяет обе официальные minisign-подписи источника libsodium. Старый mutable-URL SHA не был молча принят: Android использует отдельно аутентифицированный и закреплённый снимок 1.0.22 от 19.10.2026; desktop-артефакты и их pin не менялись.
 
 ```bash
 python3 android/build-native.py --sdk /path/android-sdk --jdk /path/jdk21 \
@@ -38,6 +38,12 @@ python3 android/build.py --sdk /path/android-sdk --jdk /path/jdk21 \
 
 ## Проверки и ограничения
 
-На текущем checkpoint: 31 JVM policy/ZIP, 13 делегирования, 4 реальные loopback SOCKS-handshake проверки, 18 настоящих host JNI/крипто/backup, 13 реальных gateway socket, 6 raw-IP native hev/lwIP и 29 actual Opus/существующего media pipeline с явно синтетическими PCM-устройствами; 31 настоящая BCJSSE↔desktop TLS interop проверка. Итого 145 host-проверок. Отдельно: 7 сценариев с настоящим Identity HTTP + SQLite Relay + Android MailRelay/LOGIN6/REGISTER6/E2EE через локальную SOCKS fixture и 101/101 официальных libsodium host-тестов. Эти сценарии не являются испытанием Tor-сети или двух физических устройств. Все четыре APK проверены SDK apksigner и встроенной apksig 9.4.1; реально изменённый APK отклонён обоими. Три ARM64 ELF (sodium/audio/hev) собраны с LOAD alignment 16384, но на ARM64 не выполнялись. Подробности и точные результаты каждого текущего прогона — в `docs/TEST-REPORT-ANDROID-6.0.0.md` и evidence-checkpoint.
+Текущий восстановленный прогон 19.10.2026: 200 host-проверок policy/socket/JNI/TUN/media/TLS, отдельно 7 actual Mail и 12 actual Glas integration. Все непосредственные исходники проверяются до/после сборки; `--expected-commit` дополнительно требует один чистый общий commit до и после работы. Подробности и реальные логи: `docs/TEST-REPORT-ANDROID-6.0.0.md`, `docs/evidence-restored19`.
 
-Всегда используйте отдельные тестовые данные. Не заменяйте production-приложение APK с тестовым сертификатом и не удаляйте реальный профиль ради смены сертификата. Production APK signing — отдельный ключ Android, который создаёт и хранит владелец; manifest Ed25519 key для APK не используется. Порядок офлайн-подписи — `docs/OWNER-OFFLINE-SIGNING-ANDROID-6.0.0.md`.
+Почта теперь отправляет и открывает поддерживаемые защищённые letter-password/FF1 письма через существующие LetterEnvelope и E2EE. Неправильный FF1 не получает отдельного признака правильности. Восстановлены обязательный выход/отзыв независимо от Activity pause, инвалидирование позднего входа, прекращение принадлежащих Гласу маршрутов, очистка очереди секретов при отмене. API33 форматирование не меняет алгоритмы/пакеты.
+
+Официальный mutable stable-архив libsodium изменился со времени checkpoint. Старый SHA отклонён; новый архив версии1.0.22 отдельно проверен закреплённым official minisign public key по payload и trusted comment, затем обновлён только Android pin. Receipt содержит SHA, upstream stable commit/tag diff и побайтное сравнение537 crypto/test-файлов; прежний desktop pin сохранён. Нельзя считать исторический архив доступным: его точное дерево после очистки среды восстановить не удалось.
+
+Реальные Android ARM64/Binder/FLAG_SECURE/Doze/VPN/mic испытания, публичный Tor и два физических устройства — NOT_RUN. Архив/P2P/500МиБ UI, полный перенос профиля Android, background/locked incoming звонки и уведомления, Android Communities/News/Library UI, автоустановка стороннего Tor Browser/Obsidian, signed threat database и per-app Tor/Always-on/lockdown остаются BLOCKED. Полный список в `docs/RELEASE-GATES-ANDROID-6.0.0.json`. `productionReady=false`.
+
+Используйте отдельные тестовые данные. Не заменяйте production-приложение APK с тестовым сертификатом и не удаляйте реальный профиль ради смены сертификата. Production APK signing — отдельный ключ Android владельца; manifest Ed25519 key для APK не используется. Порядок офлайн-подписи — `docs/OWNER-OFFLINE-SIGNING-ANDROID-6.0.0.md`.

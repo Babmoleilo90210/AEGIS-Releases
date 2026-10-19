@@ -1,0 +1,256 @@
+PASS package-to-app-fixed
+PASS unknown-package-denied
+PASS caller-all-checks-positive
+PASS caller-uid-mismatch
+PASS caller-package-mismatch
+PASS caller-certificate-mismatch
+PASS shared-uid-denied
+PASS badge-bounds
+PASS monotonic-valid
+PASS expiry-denied
+PASS clock-rollback-denied
+PASS reboot-denied
+PASS elapsed-rollback-denied
+PASS future-clock-jump-denied
+PASS offline-over-24-hours-denied
+PASS generation-forward-accepted
+PASS generation-rollback-rejected
+PASS logout-generation-reimport-rejected
+PASS actual-shared-server-capability-verifies
+PASS cross-app-capability-denied
+PASS wrong-proof-key-denied
+PASS wrong-authority-denied
+PASS expired-offline-grant-denied
+PASS binder-proof-domain-and-package-bound
+PASS valid-structural-fixture-only
+PASS zip-traversal-denied
+PASS backslash-path-denied
+PASS zip-bomb-ratio-denied
+PASS missing-dex-denied
+PASS copy-stream-limit-and-partial-removal
+PASS arm64-detected-without-claiming-elf-validation
+RESULT 31 PASS; Android device/IPC/window/VPN/audio tests NOT_RUN
+PASS typed-canonical-capability-request
+PASS other-app-proposal-denied
+PASS other-authority-denied
+PASS other-app-key-denied
+PASS stale-proposal-denied
+PASS future-proposal-denied
+PASS invalid-ttl-denied
+PASS invalid-generation-denied
+PASS administrative-escalation-denied
+PASS duplicate-permission-denied
+PASS generic-signature-payload-denied
+PASS duplicate-json-field-denied
+PASS ambiguous-number-denied
+RESULT 13 PASS; platform Binder tests NOT_RUN
+PASS onion-domain-sent-to-loopback-SOCKS
+PASS SOCKS-refusal-no-fallback
+PASS remote-SOCKS-host-denied
+PASS clearnet-identity-host-denied-before-connect
+RESULT 4 PASS; real Tor/DNS/native tests NOT_RUN
+PASS actual JNI/libsodium recipient decrypt
+PASS actual JNI/libsodium sender copy decrypt
+PASS unrelated identity cannot decrypt
+PASS existing packet codec wire roundtrip
+PASS AEGIS02A marker retained
+PASS ciphertext mutation signature rejected
+PASS authenticated invalid sealed box fails closed
+PASS invalid Ed25519 recipient point rejected by libsodium
+PASS fresh keys and nonce for independent messages
+PASS PlainMessage v1 unchanged wire body
+PASS existing password and FF1 protected envelope roundtrip
+PASS wrong letter password fails authenticated outer layer
+PASS wrong FF1 code computes candidate without validation oracle
+PASS protected letter remains inside unchanged signed E2EE packet
+PASS AEB2 exact protected identity and contact import
+PASS AEB1 existing legacy KDF import
+PASS AEB2 wrong password rejected
+PASS cross-account root import forbidden
+PASS modified encrypted backup rejected
+PASS backup trailing data rejected
+PASS backup stream bound enforced
+PASS hex API33 formatting matches existing SHA256 identity
+MailCryptoTest: 22 actual host tests PASS; Android ARM64/device/Tor NOT_RUN
+PASS domain rules canonical bounded and deduplicated
+PASS DNS exact block
+PASS DNS subdomain and case block
+PASS domain suffix boundary no overblock
+PASS invalid Unicode and local domain refused
+PASS oversized DNS label refused
+PASS rule count quota
+PASS private IPv4 blocked
+PASS private IPv6 blocked
+PASS loopback gateway requires random credentials
+PASS blocked domain never reaches connector
+PASS UDP associate never reaches connector
+PASS real bidirectional TCP payload forwarding
+NetworkGatewayTest: 13 PASS; actual host sockets only, Android VPN/protect/native/DNS leak NOT_RUN
+PASS actual native mapped DNS deny without upstream lookup
+PASS actual native bounded mapped DNS allocates virtual IP
+PASS actual native non-DNS UDP drops before socket creation
+PASS actual lwIP TCP to authenticated SOCKS gateway and echo returns raw IP payload
+PASS native protect(fd) hook called before outbound socket connect (host fixture)
+PASS actual native engine stops and returns success
+TunEngineHostTest: 6 PASS; actual raw-IP native engine/socket fixture; Android VpnService/protect enforcement/leak acceptance NOT_RUN
+PASS typed pending cap exposed only under matching Mail session
+PASS Glas cannot approve its own account delegation
+PASS bounded carrier rejects overlapping pending request
+PASS new generation cannot consume old pending grant
+PASS different request nonce denied
+PASS duplicate Mail grant delivery rejected
+PASS Mail cannot retrieve delegated Glas response
+PASS replacement Glas token cannot consume earlier token request
+PASS exact bounded public grant delivered to original Glas token once
+PASS retrieval clears carrier and cannot be replayed
+PASS modified public contact/root signature rejected
+PASS public carrier enforces 64KiB limit
+PASS old delegation cannot be replayed into new request nonce
+PASS explicit lock/revoke clears pending public data
+PASS monotonic timeout clears carrier
+PASS elapsed-time rollback clears carrier
+PASS Mail cap cannot be substituted for voice cap
+PASS root grant is generation bound
+PASS wrong Identity authority fails capability verification
+PASS expired voice grant denied
+PASS new Binder operations remain package and operation bound
+RESULT 21 PASS; actual Binder UID/certificate/platform races NOT_RUN
+PASS_LOCAL Tor-three-loopback-contexts
+PASS_LOCAL Tor-incomplete-bootstrap-never-ready
+PASS_LOCAL Tor-prefix-progress-not-ready
+PASS_LOCAL Tor-nonloopback-denied
+PASS_LOCAL Tor-duplicate-port-denied
+PASS_LOCAL Tor-extra-listener-denied
+PASS_LOCAL Tor-control-injection-denied
+PASS_LOCAL Tor-listener-quota
+PASS_LOCAL Tor-fixed-no-DNS-HTTP-control-listener
+PASS_LOCAL endpoint-proof-real-Ed25519
+PASS_LOCAL endpoint-proof-port-bound
+PASS_LOCAL endpoint-proof-nonce-bound
+PASS_LOCAL endpoint-proof-invalid-port
+PASS_LOCAL endpoint-proof-other-app-denied
+TorRuntimePolicyTest: 14 PASS_LOCAL; native Tor/Binder/ARM64 NOT_RUN
+PASS_LOCAL late-granted-after-lock-never-becomes-mic-test
+PASS_LOCAL unsolicited-permission-callback-no-capture
+PASS_LOCAL old-callback-cannot-consume-new-purpose
+PASS_LOCAL fresh-explicit-purpose-only-once
+PASS_LOCAL denial-cancels-capture-purpose
+PASS_LOCAL concurrent-purpose-denied
+PASS_LOCAL cross-thread-blocking-publish-can-sign-listener-proof
+PASS_LOCAL revoke-immediate-during-unrelated-ipc-monitor
+PASS_LOCAL late-response-cannot-restore-revoked-lease
+PASS_LOCAL fresh-refresh-after-revoke-can-install-current-lease
+PASS_LOCAL lease-expiry-denies-capability-and-clears-once
+PASS_LOCAL queued-stale-data-skipped-but-mandatory-logout-clears-lease-and-owned-socket
+PASS_LOCAL stale-secret-worker-erases-captured-password-without-running-operation
+PASS_LOCAL shutdownNow-erases-secret-of-never-started-optional-task
+PASS_LOCAL current-data-work-runs-on-owned-worker
+PASS_LOCAL closed-current-data-denied-security-still-executed
+AndroidLifecyclePolicyTest: 16 PASS_LOCAL; real Android permission/Binder acceptance NOT_RUN
+PASS actual Opus encode/decode nonzero 200-frame PCM signal
+PASS real encoded packet sizes within 1275-byte bound
+PASS actual Opus packet loss concealment returns fixed frame
+PASS real codec bitrate change to 12000
+PASS real codec bitrate change to 32000
+PASS reject bitrate below bound
+PASS reject short PCM frame
+PASS reject oversized DSP frame
+PASS reject oversized Opus packet
+PASS reject empty Opus packet
+PASS reject 60ms Opus frame
+PASS reject stereo Opus frame
+PASS actual DSP toggle/reset and continued encoding
+PASS idempotent close rejects further encoding
+PASS native bounded context registry rejects fifth instance
+PASS released native slot safely reused with new generation
+PASS existing session never opens capture before explicit enable
+PASS real codec frames traverse existing bounded capture/jitter/playback pipeline
+PASS existing adaptive jitter has bounded queue and target
+PASS mute immediately releases fixture capture device
+PASS no more audio frames sent after mute
+PASS input switching reopens selected fixture device
+PASS output switching releases previous fixture device
+PASS device removal fails closed without alternative microphone
+PASS failed input switch leaves microphone disabled
+PASS session rejects bad counters and oversized ingress
+PASS no unexpected media worker failure in host fixture
+PASS close releases every opened fixture audio device
+PASS closed session rejects late ingress
+MEASURE hostFrames=200 encodedBytes=11014 elapsedMs=435
+RESULT 29 PASS; AudioRecord/Track, native ARM64 and real network call NOT_RUN
+Oct 19, 2026 11:53:52 AM org.bouncycastle.jsse.provider.DisabledAlgorithmConstraints create
+WARNING: Ignoring unsupported entry in 'jdk.tls.disabledAlgorithms': rsa_pkcs1_sha1 usage HandshakeSignature
+Oct 19, 2026 11:53:52 AM org.bouncycastle.jsse.provider.DisabledAlgorithmConstraints create
+WARNING: Ignoring unsupported entry in 'jdk.tls.disabledAlgorithms': ecdsa_sha1 usage HandshakeSignature
+Oct 19, 2026 11:53:52 AM org.bouncycastle.jsse.provider.DisabledAlgorithmConstraints create
+WARNING: Ignoring unsupported entry in 'jdk.tls.disabledAlgorithms': dsa_sha1 usage HandshakeSignature
+Oct 19, 2026 11:53:52 AM org.bouncycastle.jsse.provider.DisabledAlgorithmConstraints create
+WARNING: Ignoring unsupported entry in 'jdk.certpath.disabledAlgorithms': SHA1 jdkCA & usage TLSServer
+Oct 19, 2026 11:53:52 AM org.bouncycastle.jsse.provider.DisabledAlgorithmConstraints create
+WARNING: Ignoring unsupported entry in 'jdk.certpath.disabledAlgorithms': SHA1 usage SignedJAR & denyAfter 2019-01-01
+PASS actual BCJSSE TLS1.3 and exact v2 ALPN as caller
+PASS actual Android adapter → desktop authenticated encrypted payload
+PASS actual desktop → Android adapter authenticated encrypted payload
+PASS Android BCJSSE receives standard desktop TLS1.3 KeyUpdate
+PASS duplex data survives standard peer KeyUpdate response
+PASS security comparison code matches exact desktop offer context
+PASS unsupported manual BC KeyUpdate explicitly refused
+PASS used Android TLS attempt cannot be replayed
+PASS replayed attempt closes supplied transport
+PASS actual BCJSSE TLS1.3 and exact v2 ALPN as callee
+PASS actual Android adapter → desktop authenticated encrypted payload
+PASS actual desktop → Android adapter authenticated encrypted payload
+PASS Android BCJSSE receives standard desktop TLS1.3 KeyUpdate
+PASS duplex data survives standard peer KeyUpdate response
+PASS security comparison code matches exact desktop offer context
+PASS unsupported manual BC KeyUpdate explicitly refused
+PASS used Android TLS attempt cannot be replayed
+PASS replayed attempt closes supplied transport
+PASS wrong app private key rejected before TLS
+PASS wrong Identity audience rejected before TLS
+PASS wrong pinned account root rejected
+PASS different recipient root rejected
+PASS call-context replay rejected
+PASS expired delegated offer rejected
+PASS actual modified offer app signature rejected
+PASS modified ephemeral certificate rejected
+PASS legacy TLS offer never downgrades Android v2 delegation
+PASS downgrade rejection closes transport
+Oct 19, 2026 11:54:23 AM org.bouncycastle.jsse.provider.ProvTlsClient notifyAlertRaised
+INFO: [client #3 @70f59913] raised fatal(2) certificate_unknown(46) alert: Failed to read record
+org.bouncycastle.tls.TlsFatalAlert: certificate_unknown(46)
+	at org.bouncycastle.jsse.provider.ProvSSLSocketWrap.checkServerTrusted(Unknown Source)
+	at org.bouncycastle.jsse.provider.ProvTlsClient$1.notifyServerCertificate(Unknown Source)
+	at org.bouncycastle.tls.TlsUtils.processServerCertificate(Unknown Source)
+	at org.bouncycastle.tls.TlsClientProtocol.handleServerCertificate(Unknown Source)
+	at org.bouncycastle.tls.TlsClientProtocol.receive13ServerCertificate(Unknown Source)
+	at org.bouncycastle.tls.TlsClientProtocol.handle13HandshakeMessage(Unknown Source)
+	at org.bouncycastle.tls.TlsClientProtocol.handleHandshakeMessage(Unknown Source)
+	at org.bouncycastle.jsse.provider.ProvTlsClientProtocol.handleHandshakeMessage(Unknown Source)
+	at org.bouncycastle.tls.TlsProtocol.processHandshakeQueue(Unknown Source)
+	at org.bouncycastle.tls.TlsProtocol.processRecord(Unknown Source)
+	at org.bouncycastle.tls.RecordStream.readRecord(Unknown Source)
+	at org.bouncycastle.tls.TlsProtocol.safeReadRecord(Unknown Source)
+	at org.bouncycastle.tls.TlsProtocol.blockForHandshake(Unknown Source)
+	at org.bouncycastle.tls.TlsClientProtocol.connect(Unknown Source)
+	at org.bouncycastle.jsse.provider.ProvSSLSocketWrap.startHandshake(Unknown Source)
+	at org.bouncycastle.jsse.provider.ProvSSLSocketWrap.startHandshake(Unknown Source)
+	at org.securemail.client.voice.AndroidVoiceTls$Pending.handshake(AndroidVoiceTls.java:193)
+	at org.securemail.client.voice.AndroidTlsInteropHostTest.lambda$certificateSubstitution$15(AndroidTlsInteropHostTest.java:75)
+	at org.securemail.client.voice.AndroidTlsInteropHostTest.denied(AndroidTlsInteropHostTest.java:21)
+	at org.securemail.client.voice.AndroidTlsInteropHostTest.certificateSubstitution(AndroidTlsInteropHostTest.java:75)
+	at org.securemail.client.voice.AndroidTlsInteropHostTest.negative(AndroidTlsInteropHostTest.java:70)
+	at org.securemail.client.voice.AndroidTlsInteropHostTest.main(AndroidTlsInteropHostTest.java:28)
+Caused by: java.security.cert.CertificateException: Invalid pinned voice TLS certificate
+	at org.securemail.client.voice.AndroidVoiceTls$PinnedTrust.check(AndroidVoiceTls.java:315)
+	at org.securemail.client.voice.AndroidVoiceTls$PinnedTrust.checkServerTrusted(AndroidVoiceTls.java:321)
+	at org.bouncycastle.jsse.provider.ImportX509TrustManager_7.checkServerTrusted(Unknown Source)
+	... 22 more
+Caused by: java.security.cert.CertificateException: Unpinned voice TLS certificate
+	at org.securemail.client.voice.AndroidVoiceTls$PinnedTrust.check(AndroidVoiceTls.java:313)
+	... 24 more
+
+PASS actual TLS certificate substitution fails exact advertised pin
+PASS substituted desktop TLS endpoint receives fatal failure
+PASS explicit BC providers never alter global Security provider registry
+RESULT 31 PASS; physical Android provider, Tor and actual voice devices NOT_RUN

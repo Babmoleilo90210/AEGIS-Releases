@@ -1,0 +1,97 @@
+[
+  {
+    "name": "annotation-1.1.0.jar",
+    "sha256": "d38d63edb30f1467818d50aaf05f8a692dea8b31392a049bfa991b159ad5b692",
+    "cached": true
+  },
+  {
+    "name": "tor-android-0.4.9.14-sources.jar",
+    "sha256": "095118a41782a91b9002038461c4c6a65f5c41bc6f5a37323362eceaf0088a2b",
+    "cached": true
+  },
+  {
+    "name": "tor-android-0.4.9.14.aar",
+    "sha256": "28ff2bb6d4d42eabe57183dedd7a97fce77e8ce4b6f5af6fa03993b3ca054edd",
+    "cached": true
+  },
+  {
+    "name": "jtorctl-0.4.5.7.jar",
+    "sha256": "51bbed22de9fe0028095223ceeb4694d8731eda2fc01edee07b8c0c8a46681c3",
+    "cached": true
+  },
+  {
+    "name": "localbroadcastmanager-1.1.0.aar",
+    "sha256": "a22b94a77789f3b34becd24082231300524011ccc83f026142c49ad60131379b",
+    "cached": true
+  },
+  {
+    "name": "platform-36_r02.zip",
+    "sha256": "37607369a28c5b640b3a7998868d45898ebcb777565a0e85f9acf36f29631d2e",
+    "cached": true
+  },
+  {
+    "name": "build-tools_r36.1_linux.zip",
+    "sha256": "a7b5889e4a79fcf3b0976bef40d401f4240fb1eed891d9d91169da1111e11d78",
+    "cached": true
+  },
+  {
+    "name": "apksig-9.4.1.jar",
+    "sha256": "7ae2e5980c77d853e3513074ee7c822bbdcdcde1668889d17faa7fe8bc8aa821",
+    "cached": true
+  },
+  {
+    "name": "gson-2.14.0.jar",
+    "sha256": "2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f",
+    "cached": true
+  },
+  {
+    "name": "bcprov-jdk18on-1.86.jar",
+    "sha256": "2af190b300cbb0b35e248ccf5f4a06b6072030aeb3da7a98ec73abe5b4cb371f",
+    "cached": true
+  },
+  {
+    "name": "tink-1.23.0.jar",
+    "sha256": "5bcdc8798ce106f5145acb4a0e993c5e5861337b1e75ca88ceb6ab9da10fa512",
+    "cached": true
+  },
+  {
+    "name": "protobuf-java-4.33.6.jar",
+    "sha256": "c24b2464ecfe9ac1d44e3a8fe281fca09e6ad2ca73dbd689dd7d6d719df987b5",
+    "cached": true
+  },
+  {
+    "name": "bctls-jdk18on-1.86.jar",
+    "sha256": "418e46d6ffd27c3226268533b6321daec899129b1ec8ede35331c7d78e11e535",
+    "cached": true
+  },
+  {
+    "name": "bcutil-jdk18on-1.86.jar",
+    "sha256": "1c268e15f785aafb1e4670d8d6e5f856f69475e96c162dadcd1ff9b350e9139f",
+    "cached": true
+  },
+  {
+    "name": "zip4j-2.11.6.jar",
+    "sha256": "5f1eb1e9d67cfee200a695e4079751b49e73a226b154193e13f7c602efbe72fb",
+    "cached": true
+  },
+  {
+    "name": "libsodium-1.0.22-stable.tar.gz",
+    "sha256": "c44f62b9919e4cce5963e74c67a43b8818ed523bd2eded506266d8797d103baf",
+    "cached": true
+  },
+  {
+    "name": "android-ndk-r29-linux.zip",
+    "sha256": "4abbbcdc842f3d4879206e9695d52709603e52dd68d3c1fff04b3b5e7a308ecf",
+    "cached": true
+  },
+  {
+    "name": "opus-1.6.1.tar.gz",
+    "sha256": "6ffcb593207be92584df15b32466ed64bbec99109f007c82205f0194572411a1",
+    "cached": true
+  },
+  {
+    "name": "speexdsp-1.2.1.tar.gz",
+    "sha256": "8c777343e4a6399569c72abc38a95b24db56882c83dbdb6c6424a5f4aeb54d3d",
+    "cached": true
+  }
+]

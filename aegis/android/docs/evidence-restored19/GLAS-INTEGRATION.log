@@ -1,0 +1,29 @@
+PASS actual owned loopback listener produces only port/session/nonce-bound public app proof before publication
+PASS actual Android signaling registration accepted by real Identity-gated SQL service
+PASS actual signed signaling lookup retains pinned desktop identity
+PASS actual call rings with no media or microphone before explicit acceptance
+PASS real delegated TLS desktop/mobile call reaches secure state with both captures closed
+PASS real call safety codes agree across BCJSSE and SunJSSE
+PASS actual native Opus frames cross Android controller → SOCKS fixture → desktop TLS/media decode
+PASS actual native Opus frames cross desktop controller → Android BCJSSE/media decode
+PASS real Android mute closes capture and clears queued audio
+PASS production transport sent both signaling and peer onion domains through actual SOCKS handshake
+PASS real server generation revocation stops both actual call controllers and releases captures
+PASS Core/session exit guard closes owned publisher/route and cannot create another call
+MEASURE actualGlasFlowElapsedMs=4107
+AndroidGlasCallIntegration: 12 PASS_LOCAL; actual Identity/signaling SQL+HTTP, desktop TLS/state machine and JNI Opus, synthetic onion/SOCKS/PCM; physical Android/live Tor NOT_RUN
+Oct 19, 2026 11:54:55 AM org.bouncycastle.jsse.provider.DisabledAlgorithmConstraints create
+WARNING: Ignoring unsupported entry in 'jdk.tls.disabledAlgorithms': rsa_pkcs1_sha1 usage HandshakeSignature
+Oct 19, 2026 11:54:55 AM org.bouncycastle.jsse.provider.DisabledAlgorithmConstraints create
+WARNING: Ignoring unsupported entry in 'jdk.tls.disabledAlgorithms': ecdsa_sha1 usage HandshakeSignature
+Oct 19, 2026 11:54:55 AM org.bouncycastle.jsse.provider.DisabledAlgorithmConstraints create
+WARNING: Ignoring unsupported entry in 'jdk.tls.disabledAlgorithms': dsa_sha1 usage HandshakeSignature
+Oct 19, 2026 11:54:55 AM org.bouncycastle.jsse.provider.DisabledAlgorithmConstraints create
+WARNING: Ignoring unsupported entry in 'jdk.certpath.disabledAlgorithms': SHA1 jdkCA & usage TLSServer
+Oct 19, 2026 11:54:55 AM org.bouncycastle.jsse.provider.DisabledAlgorithmConstraints create
+WARNING: Ignoring unsupported entry in 'jdk.certpath.disabledAlgorithms': SHA1 usage SignedJAR & denyAfter 2019-01-01
+warning: Had to discard a playback frame (your application is buggy and/or got xruns)
+warning: Had to discard a playback frame (your application is buggy and/or got xruns)
+warning: Had to discard a playback frame (your application is buggy and/or got xruns)
+warning: Had to discard a playback frame (your application is buggy and/or got xruns)
+warning: Had to discard a playback frame (your application is buggy and/or got xruns)

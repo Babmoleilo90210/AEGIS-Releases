@@ -3,7 +3,7 @@
 import argparse,base64,hashlib,json,os,pathlib,re,shutil,subprocess,tarfile
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
 HERE=pathlib.Path(__file__).resolve().parent
-SODIUM_SHA='0a7f69b065b82afdb1470375ffa1cee4ecb066180cca05a71e44e3268cd8470d'
+SODIUM_SHA='c44f62b9919e4cce5963e74c67a43b8818ed523bd2eded506266d8797d103baf'
 NDK_SHA='4abbbcdc842f3d4879206e9695d52709603e52dd68d3c1fff04b3b5e7a308ecf'
 PUB='RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3'
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
@@ -60,6 +60,6 @@ def main():
  run(['make','install'],host)
  ht=a.out/'host/libaegis_sodium.so';ht.parent.mkdir(exist_ok=True);run(['gcc','-shared','-O2','-fPIC','-fstack-protector-strong','-D_FORTIFY_SOURCE=2','-Werror','-Wall','-Wextra','-I'+str(a.jdk/'include'),'-I'+str(a.jdk/'include/linux'),'-I'+str(hp/'include'),HERE/'native/aegis_sodium.c',hp/'lib/libsodium.a','-Wl,--exclude-libs,ALL','-Wl,-z,relro,-z,now','-o',ht])
  shutil.copy2(arm/'LICENSE',HERE/'third-party/LIBSODIUM-LICENSE.txt');shutil.copy2(a.signature,HERE/'third-party/libsodium-1.0.22-stable.minisig');shutil.copy2(host/'test/default/test-suite.log',a.out/'LIBSODIUM-HOST-TEST-SUITE.log')
- report={'schemaVersion':1,'productionReady':False,'libsodiumVersion':'1.0.22 stable 2026-10-18 signed snapshot','sourceSha256':SODIUM_SHA,'sourceUrl':'https://download.libsodium.org/libsodium/releases/libsodium-1.0.22-stable.tar.gz','officialSigningKey':PUB,'officialKeyDocumentation':'https://doc.libsodium.org/installation','minisignPayloadAndCommentVerified':True,'ndkRevision':'29.0.14206865','ndkArchiveSha256':NDK_SHA,'jniSourceSha256':sha(HERE/'native/aegis_sodium.c'),'arm64LibrarySha256':sha(target),'hostLibrarySha256':sha(ht),'androidMinApi':33,'elfLoadSegmentAlignment':16384,'hostLibsodiumTests':'PASS','arm64Execution':'NOT_RUN','androidDeviceAcceptance':'NOT_RUN','commands':commands}
+ report={'schemaVersion':1,'productionReady':False,'libsodiumVersion':'1.0.22 stable 2026-10-19 signed snapshot','sourceSha256':SODIUM_SHA,'sourceUrl':'https://download.libsodium.org/libsodium/releases/libsodium-1.0.22-stable.tar.gz','officialSigningKey':PUB,'officialKeyDocumentation':'https://doc.libsodium.org/installation','minisignPayloadAndCommentVerified':True,'ndkRevision':'29.0.14206865','ndkArchiveSha256':NDK_SHA,'jniSourceSha256':sha(HERE/'native/aegis_sodium.c'),'arm64LibrarySha256':sha(target),'hostLibrarySha256':sha(ht),'androidMinApi':33,'elfLoadSegmentAlignment':16384,'hostLibsodiumTests':'PASS','arm64Execution':'NOT_RUN','androidDeviceAcceptance':'NOT_RUN','commands':commands}
  (a.out/'NATIVE-PROVENANCE.json').write_text(json.dumps(report,indent=2)+'\n');log.close();print(json.dumps(report,indent=2))
 if __name__=='__main__':main()

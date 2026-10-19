@@ -2,99 +2,140 @@
   "schemaVersion": 1,
   "version": "6.0.0-test",
   "productionReady": false,
-  "date": "2026-10-18",
+  "date": "2026-10-19",
   "checks": [
     {
       "id": "ANDROID-JVM",
-      "status": "PASS",
-      "evidence": "145 host policy/socket/JNI/native-stack/media/TLS checks; no device claims"
+      "status": "PASS_LOCAL",
+      "evidence": "200 actual host checks; evidence-restored19/ANDROID-JVM-TESTS.log"
+    },
+    {
+      "id": "ANDROID-LOGOUT-LIFECYCLE",
+      "status": "PASS_LOCAL",
+      "evidence": "16 actual policy/socket/thread tests; stale data cannot suppress queued security cleanup; queued password buffers erased"
+    },
+    {
+      "id": "ANDROID-LETTER-PASSWORD-FF1",
+      "status": "PASS_LOCAL",
+      "evidence": "Existing LetterEnvelope seal/open/candidate + unchanged E2EE format; 4 new host crypto regressions, UI compiled into APK"
     },
     {
       "id": "LIBSODIUM-HOST",
-      "status": "PASS",
-      "evidence": "101 upstream tests on x86-64"
+      "status": "PASS_LOCAL",
+      "evidence": "101/101 official host tests, pinned signed stable source19Oct; ARM64 execution NOT_RUN"
+    },
+    {
+      "id": "OPUS-HOST",
+      "status": "PASS_LOCAL",
+      "evidence": "16/16 official upstream host tests; ARM64 execution NOT_RUN"
     },
     {
       "id": "ANDROID-ARM64-BUILD",
       "status": "PASS",
-      "evidence": "NDK r29 ARM64 ELF, 16 KiB alignment; execution NOT_RUN"
+      "evidence": "Three actual NDK r29 ARM64 ELF rebuilt; LOAD16384 structural validation only"
     },
     {
       "id": "FOUR-APKS",
       "status": "PASS",
-      "evidence": "Four TEST and four unsigned APKs; SDK + embedded apksig verifies actual files"
+      "evidence": "Four unsigned + four TEST APKs actually built; diagnostic dirty-tree build. Final common-commit build still required"
     },
     {
       "id": "APK-TAMPER",
       "status": "PASS",
-      "evidence": "Actually modified APK rejected by both verifiers"
-    },
-    {
-      "id": "ANDROID-NATIVE",
-      "status": "NOT_RUN",
-      "evidence": "No device/emulator/USB/KVM"
-    },
-    {
-      "id": "BINDER-NATIVE",
-      "status": "NOT_RUN",
-      "evidence": "Framework spoof tests require device"
-    },
-    {
-      "id": "TOR-MAIL-E2E",
-      "status": "NOT_RUN",
-      "evidence": "No live staging/Tor/device test"
-    },
-    {
-      "id": "FULL-MAIL",
-      "status": "BLOCKED",
-      "evidence": "Archive/full old protection UI/P2P/background/500MiB attachments incomplete"
-    },
-    {
-      "id": "VOICE",
-      "status": "BLOCKED",
-      "evidence": "Native network voice adapter/incoming screen not implemented"
-    },
-    {
-      "id": "DOZE",
-      "status": "NOT_RUN",
-      "evidence": "No Android device"
-    },
-    {
-      "id": "OWNER-SIGNING",
-      "status": "NOT_RUN",
-      "evidence": "Owner key never accessed"
+      "evidence": "Actually changed APK rejected by SDK apksigner and exact embedded apksig9.4.1"
     },
     {
       "id": "REAL-SERVICE-MAIL",
       "status": "PASS_LOCAL",
-      "evidence": "7 real Identity HTTP + SQLite Relay + Android MailRelay6/E2EE scenarios; loopback SOCKS fixture, not Tor"
+      "evidence": "7 actual local Identity HTTP/SQL Relay/JNI E2EE/ACK/generation revoke tests with synthetic SOCKS fixture"
+    },
+    {
+      "id": "REAL-SERVICE-GLAS",
+      "status": "PASS_LOCAL",
+      "evidence": "12 actual local Identity/signaling/controller/TLS/Opus flow tests; loopback SOCKS and synthetic PCM, no physical network claims"
     },
     {
       "id": "TCP-DNS-ENGINE",
-      "status": "PASS",
-      "evidence": "Actual native hev/lwIP raw-IP and gateway host forwarding; Android OS protect/leaks NOT_RUN"
+      "status": "PASS_LOCAL",
+      "evidence": "Native hev/lwIP raw-IP and real gateway sockets; actual Android protect/leaks NOT_RUN"
     },
     {
-      "id": "BCJSSE-DESKTOP-INTEROP",
-      "status": "PASS",
-      "evidence": "31 actual TLS1.3/v2 loopback checks in both roles; physical Android provider NOT_RUN"
+      "id": "ANDROID-NATIVE",
+      "status": "NOT_RUN",
+      "evidence": "No physical ARM64 device, emulator, USB or KVM"
+    },
+    {
+      "id": "BINDER-NATIVE",
+      "status": "NOT_RUN",
+      "evidence": "UID/cert/lifecycle platform spoof enforcement needs Android device"
+    },
+    {
+      "id": "FLAG-SECURE-OVERLAYS",
+      "status": "NOT_RUN",
+      "evidence": "API code and secure dialogs compiled; screen capture/overlays not tested on Android"
+    },
+    {
+      "id": "TOR-MAIL-E2E",
+      "status": "NOT_RUN",
+      "evidence": "No physical Android/live staging Tor acceptance"
+    },
+    {
+      "id": "TOR-VOICE-NATIVE",
+      "status": "NOT_RUN",
+      "evidence": "Real controller implemented and locally integrated; physical Android/Tor/hardware call remains untested"
+    },
+    {
+      "id": "GLAS-LOCKED-INCOMING",
+      "status": "BLOCKED",
+      "evidence": "Foreground Activity owns call; background/locked incoming mode not implemented. Pause safely stops capture/session"
+    },
+    {
+      "id": "FULL-MAIL",
+      "status": "BLOCKED",
+      "evidence": "Android archive, P2P, full migration and 500MiB UI transfer/export incomplete; protected password/FF1 UI now implemented for supported envelope"
+    },
+    {
+      "id": "ANDROID-COMMUNITY-NEWS-LIBRARY",
+      "status": "BLOCKED",
+      "evidence": "Android Core currently has identity/network/app controls; Communities/News/Library client UI is not wired"
+    },
+    {
+      "id": "THIRD-PARTY-INSTALLER",
+      "status": "BLOCKED",
+      "evidence": "Own APK certificate-verified PackageInstaller flow implemented; official Tor Browser/Obsidian automatic verified installer is not implemented"
+    },
+    {
+      "id": "THREAT-DATABASE-UPDATES",
+      "status": "BLOCKED",
+      "evidence": "Local bounded APK/root-indicator scanner implemented; signed private threat-database updates are not implemented"
     },
     {
       "id": "FULL-TOR-VPN",
       "status": "BLOCKED",
-      "evidence": "Constrained local TCP/DNS mode implemented; mixed per-app Tor, Always-on, lockdown unfinished"
+      "evidence": "Constrained local TCP/DNS mode works; mixed per-app Tor, Always-on and lockdown unfinished"
+    },
+    {
+      "id": "DOZE-NOTIFICATIONS",
+      "status": "NOT_RUN",
+      "evidence": "No Android device; no own Tor background event delivery service implemented"
+    },
+    {
+      "id": "OWNER-SIGNING",
+      "status": "NOT_RUN",
+      "evidence": "Separate owner APK key never accessed; only new TEST certificate used"
+    },
+    {
+      "id": "FINAL-COMMON-COMMIT-BUILD",
+      "status": "NOT_RUN",
+      "evidence": "Awaiting root frozen source commit; final output must pass --expected-commit"
     },
     {
       "id": "OWNER-PUBLIC-APK-VERIFY",
       "status": "PASS",
-      "evidence": "11 tests incl actual SDK signed/tampered APK and 10 explicit parser fixtures"
+      "evidence": "11 tests: one actual official SDK signed/tampered APK pair with exact new TEST certificate; 10 explicitly marked adversarial parser fixtures. Production verifier unchanged."
     }
   ],
-  "testCertificateSha256": "a520a96ed433a309757c8193a9f38a356459b55c4bbf81398da85e7c32c22d58",
+  "testCertificateSha256": "a8fd595f30b02a351bf401e6b4a162012b9628d298a54e022b42e65cfda77607",
   "nativeAcceptanceClaimed": false,
-  "externalArtifacts": "android600-artifacts",
-  "externalNative": "android600-native",
-  "externalTun": "android600-tun",
-  "externalAudio": "android600-audio",
-  "externalMailIntegration": "android600-mail-integration"
+  "evidenceDirectory": "evidence-restored19"
 }

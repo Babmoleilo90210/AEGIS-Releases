@@ -1,0 +1,16 @@
+test_actual_apk_and_actual_tamper (__main__.ActualOfficialApksigner.test_actual_apk_and_actual_tamper) ... ok
+test_duplicate_digest_fixture (__main__.ParserFixtures.test_duplicate_digest_fixture) ... ok
+test_duplicate_scheme_fixture (__main__.ParserFixtures.test_duplicate_scheme_fixture) ... ok
+test_duplicate_signer_fixture (__main__.ParserFixtures.test_duplicate_signer_fixture) ... ok
+test_invalid_pin_before_process (__main__.ParserFixtures.test_invalid_pin_before_process) ... ok
+test_output_bound_fixture (__main__.ParserFixtures.test_output_bound_fixture) ... ok
+test_positive_parser_fixture (__main__.ParserFixtures.test_positive_parser_fixture) ... ok
+test_process_rejection_fixture (__main__.ParserFixtures.test_process_rejection_fixture) ... ok
+test_timeout_fixture (__main__.ParserFixtures.test_timeout_fixture) ... ok
+test_v1_only_fixture (__main__.ParserFixtures.test_v1_only_fixture) ... ok
+test_wrong_pin_fixture (__main__.ParserFixtures.test_wrong_pin_fixture) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.838s
+
+OK

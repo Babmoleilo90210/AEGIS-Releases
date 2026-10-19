@@ -1,0 +1,48 @@
+{
+  "productionReady": false,
+  "source": {
+    "upstream": "https://github.com/heiher/hev-socks5-tunnel",
+    "commits": {
+      ".": "780b396b0fc3d0355fc0614e221e3446933669c4",
+      "src/core": "9f1cf0bfca0c003dd0cf0fbdcf6912a2b46a8d05",
+      "third-part/hev-task-system": "b2f2250371c1bd436a42f3c380ee46d4ac3bada8",
+      "third-part/lwip": "7f51e51c72d088481af972c3a115cec41c043d49",
+      "third-part/yaml": "94441ec8777eb319936735a58b376963d09c73d4"
+    },
+    "trackedSourceCompositeSha256": "19f96049d2882add6b5b713d85f5d297b8140243e5bd7d7db94dad8ee226339c",
+    "authentication": "Downloaded over HTTPS from official repositories; exact commit and composite SHA pinned; no upstream release signature claimed",
+    "licenses": {
+      "tunnel": "MIT",
+      "socks5-core": "MIT",
+      "hev-task-system": "MIT",
+      "lwip": "BSD-3-Clause",
+      "yaml": "MIT"
+    }
+  },
+  "sourcePatchesSha256": {
+    "src/hev-socks5-session.c": "d2b31cf05eaf3fd9ab39287b705fabe7fade742061d7ef44aeaa4d0daba6fe98",
+    "src/hev-socks5-tunnel.c": "168126c2666eb95ec8875c0478125db30d828e8c54afd379c718344ec6b6934d",
+    "src/hev-mapped-dns.c": "717b1ba348832172cac6867a125145d43564674ca602168dc9954f167524a23b",
+    "src/hev-jni.c": "23a89394a0ecf517c94c9ff719ba10b52aa244dd61a8922c9be21d51630be420",
+    "Android.mk": "95f67bb8464bc28943de796de4adf77eb1b351492eecacd719c6042300a54946",
+    "Application.mk": "4dbd361ba6873e316e58298a9218385622fcec4b7459175ca6ca06238ec16834"
+  },
+  "bridgeSha256": "e3fab1ffc7e0eded9f7b008b120165a6b9da80b17231964e23cc180afe7974b6",
+  "librarySha256": "e9101417ffe56044a1ab98384910f0661ebc237e27198eaa9267c8d0a47c3e27",
+  "minimumApi": 33,
+  "udp": "Only local mapped DNS; other UDP dropped before any relay",
+  "routing": "Local direct TCP forwarding gateway, not implemented Tor per-app mode",
+  "protectFdHookImplemented": true,
+  "loadSegmentAlignment": 16384,
+  "nativeExecution": "NOT_RUN",
+  "command": [
+    "/workspace/scratch/aa629f360927/inputs600/android-sdk/android-ndk-r29/ndk-build",
+    "NDK_PROJECT_PATH=/workspace/scratch/aa629f360927/aegis600/aegis/android/build/tun-work/source",
+    "APP_BUILD_SCRIPT=/workspace/scratch/aa629f360927/aegis600/aegis/android/build/tun-work/source/Android.mk",
+    "NDK_APPLICATION_MK=/workspace/scratch/aa629f360927/aegis600/aegis/android/build/tun-work/source/Application.mk",
+    "NDK_OUT=/workspace/scratch/aa629f360927/aegis600/aegis/android/build/tun-work/obj",
+    "NDK_LIBS_OUT=/workspace/scratch/aa629f360927/outputs600/android-tun19/lib",
+    "REV_ID=780b396b0fc3d0355fc0614e221e3446933669c4",
+    "-j4"
+  ]
+}
