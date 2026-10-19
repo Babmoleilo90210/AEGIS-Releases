@@ -24,12 +24,13 @@ Identity6 выдаёт проверяемые app capabilities с account/device
 python3 deployment/debian600/staging.py \
   --jar-dir build/local-java21 \
   --deps /absolute/verified-runtime-dependencies \
+  --build-proof /absolute/GRADLE-VERIFICATION.json \
   --root /absolute/new-server-staging \
   --source-commit FULL_COMMIT_SHA \
   --archive /absolute/AEGIS-6.0.0-Debian13-Server.tar.gz
 ```
 
-Приводятся реальные пути конкретной проверенной среды сборки. Нужны точные `common-protocol.jar`, `identity-server.jar`, `attachment-service.jar`, `glas-signaling.jar`, `management-agent.jar`, `community-server.jar`, `news-worker.jar`, `relay-server.jar`, а также закреплённые Gson2.14.0, его runtime dependency error_prone_annotations2.48.0, SQLiteJDBC3.53.4.0 и SLF4J2.0.17; только mail-relay дополнительно содержит Password4j1.8.4. Клиентские JAR, Tink, JavaFX и расшифрование писем в серверный runtime не включаются. Пакет содержит свой inventory размеров/режимов/SHA256 и source commit. `--allow-development` допустим только для локальной проверки; такой пакет явно отмечен dirty и deploy отказывается его устанавливать.
+Приводятся реальные пути конкретной проверенной среды сборки. Нужны точные `common-protocol.jar`, `identity-server.jar`, `attachment-service.jar`, `glas-signaling.jar`, `management-agent.jar`, `community-server.jar`, `news-worker.jar`, `relay-server.jar`, а также закреплённые Gson2.14.0, его runtime dependency error_prone_annotations2.48.0, SQLiteJDBC3.53.4.0 и SLF4J2.0.17; только mail-relay дополнительно содержит Password4j1.8.4. Клиентские JAR, Tink, JavaFX и расшифрование писем в серверный runtime не включаются. Упаковщик проверяет неизменность clean commit, успешный frozen-source build receipt, CRC и SHA-256 всех восьми project JAR и SHA-256 runtime из gradle/verification-metadata.xml. Пакет содержит inventory размеров/режимов/SHA256, source commit/tree и отдельный SERVER-BUILD-PROVENANCE-6.0.0.json, связывающий SHA-256 готового архива с этим commit. Диагностическая сборка с sourceUnchanged=false не принимается. `--allow-development` допустим только для локальной проверки; такой пакет явно отмечен dirty и deploy отказывается его устанавливать.
 
 ## Развёртывание новой staging-среды
 
@@ -124,7 +125,30 @@ Monitoring — непривилегированный Python-процесс с �
 
 `torrc.staging` запускается отдельной unit/UID/state и не подменяет существующий torrc. Origin ports 38250–38256 только loopback, отдельные onion services. Glas Signaling использует порт 38255 и собственный UID/state. Сверьте фактические `ss -ltnp`, onion identities и Tor-подключение каждого приложения. Наличие onion-конфига не доказывает отсутствия утечек.
 
-News Worker имеет самостоятельную identity и разрешённые публичные HTTPS-источники; пользовательские ключи/переписка ему не выдаются. Он требует существующего coordinator и собственного keyfile. До настройки рабочей конфигурации main завершается с понятным отказом. Пример не является действительным адресом. Внешние API по умолчанию не настроены; ключи не помещаются в шаблоны/argv/архив. Допустимые локальные модели не требуют платного сервиса.
+News Worker имеет свежий самостоятельный Ed25519 service key и разрешённые публичные HTTPS-источники; пользовательские ключи/переписка ему не выдаются. Новый coordinator — реальный отдельный endpoint `/agent-worker/v6` Community6. Он не использует user capabilities и не принимает административные либо библиотечные действия. До настройки main завершается с понятным отказом. Пример не является действительным адресом. Внешние API по умолчанию не настроены; ключи не помещаются в шаблоны/argv/архив. Допустимые локальные модели не требуют платного сервиса.
+
+Оператор создаёт keypair в новом собственном каталоге рабочего узла; команда выдаёт только публичный fingerprint:
+
+```sh
+sudo -u aegis600-news-worker /opt/aegis600/news-worker/bin/news-worker \
+  --generate-key /var/lib/aegis600/news-worker/state
+sudo -u aegis600-community /opt/aegis600/community/bin/community \
+  --worker-allow /var/lib/aegis600/community/state \
+  --public /absolute/operator-reviewed-worker.pub --fingerprint SHA256_OF_WORKER_PUBLIC_KEY
+```
+
+`worker.pub` копируется оператором как публичный файл в доступное Community расположение. Закрытый `worker.pk8` остаётся только у news-worker с 0600; запрет чтения home других служб не обходится. `--fingerprint` — обычный SHA-256 канонического X.509 public key, сверяемый оператором. В БД используется отдельный actor `SHA-256(ASCII("AEGIS-NEWS-WORKER-SERVICE/v6") || publicKey44)`, поэтому последующее создание пользовательского аккаунта с тем же public key не наследует служебную роль. Уже существующий пользователь не конвертируется в worker командой allow. Генерируйте новый keypair, не переиспользуйте account identity.
+
+`/etc/aegis600/news-worker.json` указывает `server=http://COMMUNITY_V3_ONION/agent-worker/v6`, закреплённый публичный ключ Community, отдельный SOCKS39250 и фиксированный worker-key path. Launcher всегда задаёт `--coordinator-mode service6`. Режим `legacy5` остаётся только при явном выборе для прежнего coordinator и не активируется fallback. Worker имеет только AGENT_WORK; allowlist, точные полномочия и отсутствие административных/организационных ролей проверяются в SQLite-транзакции каждой операции. Разрешены только claim, complete и fail; источник/аренда задания/повторная публикация дополнительно проверяются существующим AgentService.
+
+Подпись каждого запроса связывает audience сервиса, точные байты тела, nonce32 и время ±60 секунд; отдельный домен ответа связывает nonce, request/body SHA-256 и публичный actor. Replay хранится в SQLite и переживает перезапуск. Ограничения: 262144 байта, 30 секунд, общий raw budget600/мин, authenticated120/мин и worker30/мин. Даже подписанные запрещённые действия расходуют лимит. Отзыв выполняется оператором и действует на следующий запрос, в том числе после перезапуска:
+
+```sh
+sudo -u aegis600-community /opt/aegis600/community/bin/community \
+  --worker-revoke /var/lib/aegis600/community/state --fingerprint SHA256_OF_WORKER_PUBLIC_KEY
+```
+
+Эти операции подготавливают отдельный staging. Они не меняют production Relay и не дают оснований утверждать успешный внешний RSS/model/Tor прогон.
 
 Пример WireGuard не содержит private key и не активируется автоматически. Создавайте ключи локально на доверенных устройствах; admin peer имеет отдельный `/32`, host firewall допускает только ограниченные административные порты. Не включать forwarding/NAT или full tunnel просто ради управления. WireGuard AllowedIPs не заменяет firewall. Один VPS остаётся общей точкой отказа и root-компрометации.
 
@@ -136,7 +160,7 @@ Backup job останавливает только новые пишущие с�
 
 Каждая БД отдельно передаётся непривилегированному DynamicUser в ограниченный systemd unit: собственный RootDirectory, только эта БД и её WAL/journal, read-only вход и отдельный выход, без сети и доступа к служебным ключам, AppArmor, seccomp, NoNewPrivileges, пустой capability set, 192 MiB памяти, 15 секунд CPU и 20 секунд общего времени. Предел входа одной БД — 512 MiB. Валидатор проверяет фактический UID, NoNewPrivileges и запрет создания сетевых сокетов до разбора БД; при отсутствии изоляции операция прекращается. После изолированного SQLite backup/integrity_check root копирует результат как непрозрачный файл, затем проверяет SHA-256 inventory. Только после этого запускаются restic backup и `check --read-data`.
 
-В Work выполнены 20 переносимых Python-проверок, включая реальный seccomp-запрет AF_INET/AF_INET6/AF_UNIX и отказ настоящего worker вне sandbox. Четыре проверки полного UID/chroot sandbox отмечены NOT_RUN: у среды нет CAP_SYS_CHROOT/CAP_SETUID/CAP_SETGID. Проверки systemd DynamicUser, AppArmor enforce и точной Debian 13 SQLite-библиотеки также NOT_RUN; функциональный тест на синтетической WAL-БД их не заменяет. Публичный JSON `PASS_COMMAND` означает выполненную команду, а не внешний restore drill или завершённую нативную приёмку.
+В повторном прогоне восстановленной версии выполнены 22 переносимые Python-проверки, включая реальный seccomp-запрет AF_INET/AF_INET6/AF_UNIX и отказ настоящего worker вне sandbox. Четыре проверки полного UID/chroot sandbox отмечены NOT_RUN: у среды нет CAP_SYS_CHROOT/CAP_SETUID/CAP_SETGID. Проверки systemd DynamicUser, AppArmor enforce и точной Debian 13 SQLite-библиотеки также NOT_RUN; функциональный тест на синтетической WAL-БД их не заменяет. Публичный JSON `PASS_COMMAND` означает выполненную команду, а не внешний restore drill или завершённую нативную приёмку.
 
 Restore требует полный snapshot ID из 64 hex-символов и критическое одобрение. `restic restore --verify` пишет в новый приватный каталог root. Во время выполнения проверяются предел 32 GiB, 100000 объектов, минимум 256 MiB свободного места и срок 3600 секунд. При нарушении процесс и его дочерняя группа завершаются; затем root проверяет SHA-256 inventory и отдельный непривилегированный per-DB validator проверяет SQLite без изменения восстановленного inventory. Частичный результат не становится рабочим state. Работающая БД не перезаписывается, liveStateSwitched=false. Переключение, схемы, новые записи после snapshot, rollback и перезапуск проверяются отдельно. Старый state не удаляется. Полный внешний restore и аварийное восстановление VPS обязательны до Stable.
 

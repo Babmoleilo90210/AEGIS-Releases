@@ -1,0 +1,60 @@
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+╷
+├─ JUnit Platform Suite ✔
+├─ JUnit Jupiter ✔
+│  ├─ ServiceCoordinator600Test ✔
+│  │  ├─ serviceClientRejectsForgedResponseAndWrongPinnedService() ✔
+│  │  ├─ identityMirrorOfSamePublicKeyNeverInheritsServiceRights() ✔
+│  │  ├─ exactProofReplayAudienceTimeActionAndSizeAreEnforcedAcrossRestart() ✔
+│  │  ├─ authenticatedInvalidActionsConsumePersistentBudgetBeforeDispatch() ✔
+│  │  ├─ rawBudgetIncludesUnauthenticatedWorkerTraffic() ✔
+│  │  ├─ persistentAuthenticatedBudgetAndRoleRevocationApplyBeforeEveryOperation() ✔
+│  │  ├─ completeValidatesLeasedSourceAndLivePermissionsWithoutPretendModelPublication() ✔
+│  │  ├─ signedClaimFailAndRetryUseActualDurableCoordinator() ✔
+│  │  └─ explicitOperatorAllowlistNeverElevatesExistingUserAndLiveRevokeSurvivesRestart() ✔
+│  ├─ NewsWorkerTest ✔
+│  │  ├─ missingModelProducesExplicitRetryWithoutPretendPublication() ✔
+│  │  └─ actualCollectorPipelineParsesAllowlistedRssAndPassesOnlyPublicDataToModel() ✔
+│  ├─ WorkerCoordinatorClientTest ✔
+│  │  ├─ requestAndExactResponseAreAuthenticated() ✔
+│  │  ├─ coordinatorCannotBeSilentlyChangedToClearnetOrLocalhost() ✔
+│  │  ├─ unavailableTorNeverFallsBackToDirectNetwork() ✔
+│  │  ├─ unsignedTamperedOrWrongIdentityResponseIsRejected() ✔
+│  │  ├─ absoluteDeadlineClosesAStalledCoordinatorSocket() ✔
+│  │  └─ validServerSignatureForDifferentRequestOrActorCannotBeSubstituted() ✔
+│  ├─ SourceSecurityTest ✔
+│  │  ├─ dnsIsPinnedAndRebindingCannotReachPrivateTarget() ✔
+│  │  ├─ rejectsProtocolsCredentialsIpLiteralsAndNonallowlistedRedirects() ✔
+│  │  ├─ sourceSizeAndFeedEntryCountAreBounded() ✔
+│  │  ├─ robotRulesAndMaliciousRegexAreDataOnly() ✔
+│  │  ├─ htmlNeverExecutesScriptAndDangerousLinksAreDiscarded() ✔
+│  │  ├─ rssAndAtomAreParsedWithoutFetchingArticleLinks() ✔
+│  │  ├─ boundedHttpRejectsSmugglingAndCompressedBombs() ✔
+│  │  ├─ rejectsPrivateSpecialIpv4AndIpv6Ranges() ✔
+│  │  ├─ boundedChunkedHttpParsesRealWireFormat() ✔
+│  │  ├─ xmlExternalEntityAndExpansionBombRejected() ✔
+│  │  └─ mixedDnsAnswerOrRedirectCannotReachMetadataService() ✔
+│  └─ ModelHttpFixtureTest ✔
+│     ├─ privateInputCannotEnterPublicNewsModel() ✔
+│     ├─ realOllamaJsonRequestAndResponseUsesNoToolsOrCommands() ✔
+│     ├─ badModelJsonOrExcessTokenUsageIsRejected() ✔
+│     ├─ modelRedirectIsRejectedWithoutFollowingTarget() ✔
+│     └─ externalAndLocalEndpointsCannotDowngradeOrRedirectToPrivateHosts() ✔
+└─ JUnit Vintage ✔
+
+Test run finished after 5102 ms
+[         8 containers found      ]
+[         0 containers skipped    ]
+[         8 containers started    ]
+[         0 containers aborted    ]
+[         8 containers successful ]
+[         0 containers failed     ]
+[        33 tests found           ]
+[         0 tests skipped         ]
+[        33 tests started         ]
+[         0 tests aborted         ]
+[        33 tests successful      ]
+[         0 tests failed          ]
+

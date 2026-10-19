@@ -20,12 +20,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /** Actual fresh Community6 operator CLI / HTTP / SQLite, with loopback injected for Tor transport only. */
 final class ServiceCoordinator600Test {
-  @TempDir Path temp;Path home,pub;KeyPair worker,identity;byte[]communityPublic;String workerId;CommunityMain600.Running server;
+  @TempDir Path temp;Path home,pub;KeyPair worker,identity;byte[]communityPublic;String workerId,fingerprint;CommunityMain600.Running server;
   static final URI SERVICE=URI.create("http://"+"a".repeat(56)+".onion"+WorkerWire600.PATH);
   @BeforeEach void setup()throws Exception {
-    worker=key();identity=key();workerId=CommunityAuth.id(worker.getPublic().getEncoded());home=temp.resolve("community");pub=temp.resolve("worker.pub");Files.write(pub,worker.getPublic().getEncoded());Path idPub=temp.resolve("identity.pub");Files.write(idPub,identity.getPublic().getEncoded());
+    worker=key();identity=key();fingerprint=CommunityAuth.id(worker.getPublic().getEncoded());workerId=WorkerWire600.serviceActor(worker.getPublic().getEncoded());home=temp.resolve("community");pub=temp.resolve("worker.pub");Files.write(pub,worker.getPublic().getEncoded());Path idPub=temp.resolve("identity.pub");Files.write(idPub,identity.getPublic().getEncoded());
     CommunityMain600.initialize(home,Map.of("--identity-public",idPub.toString(),"--identity-fingerprint",CommunityAuth.id(identity.getPublic().getEncoded()),"--identity-port",Integer.toString(unused()),"--port",Integer.toString(unused())),new PrintStream(OutputStream.nullOutputStream()));
-    assertEquals(0,cli("--worker-allow",home.toString(),"--public",pub.toString(),"--fingerprint",workerId));communityPublic=Files.readAllBytes(home.resolve("service-public.x509"));
+    assertEquals(0,cli("--worker-allow",home.toString(),"--public",pub.toString(),"--fingerprint",fingerprint));communityPublic=Files.readAllBytes(home.resolve("service-public.x509"));
   }
   @AfterEach void close(){if(server!=null)server.close();}
   int cli(String...args){return CommunityMain600.run(args,new PrintStream(OutputStream.nullOutputStream()),new PrintStream(OutputStream.nullOutputStream()));}
@@ -40,9 +40,35 @@ final class ServiceCoordinator600Test {
       assertEquals(1,cli("--worker-allow",home.toString(),"--public",pub.toString(),"--fingerprint","0".repeat(64)));
     }
     start();assertEquals(Map.of(),client().call("agent.worker.claim",Map.of()).get("job"));assertThrows(IOException.class,()->client(key(),communityPublic).call("agent.worker.claim",Map.of()));
-    assertEquals(0,cli("--worker-revoke",home.toString(),"--fingerprint",workerId));assertThrows(IOException.class,()->client().call("agent.worker.claim",Map.of()));
+    assertEquals(0,cli("--worker-revoke",home.toString(),"--fingerprint",fingerprint));assertThrows(IOException.class,()->client().call("agent.worker.claim",Map.of()));
     server.close();server=null;start();assertThrows(IOException.class,()->client().call("agent.worker.claim",Map.of()));
-    assertEquals(0,cli("--worker-allow",home.toString(),"--public",pub.toString(),"--fingerprint",workerId));assertEquals(Map.of(),client().call("agent.worker.claim",Map.of()).get("job"));
+    assertEquals(0,cli("--worker-allow",home.toString(),"--public",pub.toString(),"--fingerprint",fingerprint));assertEquals(Map.of(),client().call("agent.worker.claim",Map.of()).get("job"));
+  }
+  @Test void identityMirrorOfSamePublicKeyNeverInheritsServiceRights()throws Exception {
+    assertNotEquals(fingerprint,workerId);
+    try(CommunityStore store=new CommunityStore(home.resolve("community.sqlite"));AccessControl access=new AccessControl(store,Files.readAllBytes(home.resolve("factor-kek.bin")))) {
+      String ordinaryAccount=store.ensureIdentity(worker.getPublic().getEncoded(),"Account created after service allowlist");
+      assertEquals(fingerprint,ordinaryAccount);assertEquals(Set.of(),access.permissions(ordinaryAccount,"GLOBAL"));
+      assertFalse(access.isServiceIdentity(ordinaryAccount));assertEquals(Set.of("AGENT_WORK"),access.permissions(workerId,"GLOBAL"));
+      assertFalse(access.isGlobalAdmin(workerId));assertFalse(access.isGlobalAdmin(ordinaryAccount));
+    }
+    start();assertEquals(Map.of(),client().call("agent.worker.claim",Map.of()).get("job"));
+  }
+  @Test void authenticatedInvalidActionsConsumePersistentBudgetBeforeDispatch()throws Exception {
+    start();byte[]body=AgentJson.bytes(Map.of("action","admin.roles.list","data",Map.of()));long time=System.currentTimeMillis();
+    for(int n=0;n<30;n++)assertEquals(403,request(body,body,nonce(),time,CommunityAuth.id(communityPublic),false));
+    byte[]valid=AgentJson.bytes(Map.of("action","agent.worker.claim","data",Map.of()));
+    assertEquals(429,request(valid,valid,nonce(),time,CommunityAuth.id(communityPublic),false));
+    server.close();server=null;start();assertEquals(429,request(valid,valid,nonce(),time,CommunityAuth.id(communityPublic),false));
+  }
+  @Test void rawBudgetIncludesUnauthenticatedWorkerTraffic()throws Exception {
+    start();for(int n=0;n<600;n++)try(Socket socket=new Socket("127.0.0.1",server.port())){
+      socket.setSoTimeout(5000);socket.getOutputStream().write(("GET "+WorkerWire600.PATH+" HTTP/1.1\r\nHost: fixture\r\nConnection: close\r\n\r\n").getBytes(StandardCharsets.US_ASCII));socket.getOutputStream().flush();
+      assertEquals(403,PublicSourceHttp.readResponse(socket.getInputStream(),SERVICE,WorkerWire600.MAX_BODY).status());
+    }
+    byte[]body=AgentJson.bytes(Map.of("action","agent.worker.claim","data",Map.of()));
+    assertEquals(403,request(body,body,nonce(),System.currentTimeMillis(),CommunityAuth.id(communityPublic),false));
+    try(CommunityStore store=new CommunityStore(home.resolve("community.sqlite"))){assertEquals(0L,count(store,"SELECT count(*) FROM request_nonces"));}
   }
   @Test void signedClaimFailAndRetryUseActualDurableCoordinator()throws Exception {
     seedJob();start();Map<String,Object>job=map(client().call("agent.worker.claim",Map.of()).get("job"));assertFalse(job.isEmpty());

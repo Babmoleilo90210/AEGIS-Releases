@@ -2,6 +2,7 @@
 """Build/read-only plan/materialize a NEW Debian staging tree. Never touches live Relay/feed."""
 from __future__ import annotations
 import argparse, hashlib, json, os, pathlib, shutil, stat, subprocess, tarfile, tempfile, gzip
+from xml.etree import ElementTree as ET
 
 PROJECT = pathlib.Path(__file__).resolve().parents[2]
 COMPONENTS = {
@@ -16,6 +17,7 @@ COMPONENTS = {
 }
 BASE_DEPENDENCIES = ("gson-2.14.0.jar", "error_prone_annotations-2.48.0.jar", "sqlite-jdbc-3.53.4.0.jar", "slf4j-api-2.0.17.jar", "slf4j-nop-2.0.17.jar")
 DEPENDENCIES = BASE_DEPENDENCIES + ("password4j-1.8.4.jar",)
+PROJECT_VERSIONS={name:("0.2.0" if name=="common-protocol" else "0.3.0" if name=="relay-server" else "6.0.0") for name in {j for spec in COMPONENTS.values() for j in spec["jars"]}}
 
 def sha(path: pathlib.Path) -> str:
     h = hashlib.sha256()
@@ -140,20 +142,49 @@ profile aegis600-staging-{component} flags=(attach_disconnected) {{
 }}
 '''
 
+def dependency_pins() -> dict[str,set[str]]:
+    pins={}
+    for node in ET.parse(PROJECT/"gradle/verification-metadata.xml").iter():
+        if node.tag.rsplit("}",1)[-1]!="artifact":continue
+        values={x.attrib["value"] for x in node if x.tag.rsplit("}",1)[-1]=="sha256"}
+        if values:pins.setdefault(node.attrib["name"],set()).update(values)
+    return pins
+
 def dependency_files(dirs: list[pathlib.Path]) -> dict[str, pathlib.Path]:
-    result = {}
+    result = {};pins=dependency_pins()
     for name in DEPENDENCIES:
-        matches = [d / name for d in dirs if (d / name).is_file()]
-        if not matches or any(sha(p) != sha(matches[0]) for p in matches): raise ValueError("Нет однозначной закреплённой зависимости: " + name)
+        matches = [d / name for d in dirs if (d / name).exists() or (d/name).is_symlink()]
+        if not matches or any(not p.is_file() or p.is_symlink() or p.resolve()!=p.absolute() for p in matches):raise ValueError("Нужна обычная закреплённая зависимость: "+name)
+        digests={sha(p) for p in matches}
+        if len(digests)!=1 or not digests.issubset(pins.get(name,set())): raise ValueError("Нет однозначной закреплённой зависимости: " + name)
         result[name] = matches[0]
     return result
 
-def materialize(root: pathlib.Path, jar_dir: pathlib.Path, deps: list[pathlib.Path], source_commit: str, development=False) -> dict:
+def checked_build_proof(path: pathlib.Path|None,source_commit: str, jar_dir: pathlib.Path) -> dict:
+    if path is None or path.is_symlink() or not path.is_file() or path.stat().st_size>4*1024**2:raise ValueError("Нужен полный frozen-source Gradle build receipt")
+    proof=json.loads(path.read_text())
+    if proof.get("gradleExitCode")!=0 or proof.get("sourceUnchanged") is not True or proof.get("sourceDirtyAtStart") is not False or proof.get("sourceCommit")!=source_commit:raise ValueError("Недостаточен диагностический или изменённый build receipt")
+    built={}
+    for row in proof.get("jars",[]):
+        name=pathlib.Path(row["file"]).name
+        if row.get("zipCRC")=="PASS":
+            if name in built and built[name]!=row["sha256"]:raise ValueError("Неоднозначный project JAR в build receipt")
+            built[name]=row["sha256"]
+    hashes={}
+    for name,version in PROJECT_VERSIONS.items():
+        expected=built.get(name+"-"+version+".jar")
+        if expected is None or expected!=sha(jar_dir/(name+".jar")):raise ValueError("Server JAR не совпадает с verified build: "+name)
+        hashes[name+".jar"]=expected
+    return hashes
+
+def materialize(root: pathlib.Path, jar_dir: pathlib.Path, deps: list[pathlib.Path], source_commit: str, development=False, build_proof: pathlib.Path|None=None) -> dict:
     root = safe_root(root)
     if root.exists(): raise ValueError("Staging-каталог уже существует")
     git = subprocess.run(["git", "rev-parse", "HEAD"], cwd=PROJECT, capture_output=True, text=True, check=True).stdout.strip()
     dirty = bool(subprocess.run(["git", "status", "--porcelain"], cwd=PROJECT, capture_output=True, text=True, check=True).stdout)
     if git != source_commit or dirty and not development: raise ValueError("Нужен точный зафиксированный source commit")
+    jar_hashes={} if development and build_proof is None else checked_build_proof(build_proof,source_commit,jar_dir)
+    source_tree=subprocess.run(["git","rev-parse","HEAD^{tree}"],cwd=PROJECT,capture_output=True,text=True,check=True).stdout.strip()
     dependencies = dependency_files(deps)
     required = {j for spec in COMPONENTS.values() for j in spec["jars"]}
     jar_entries={}
@@ -188,7 +219,7 @@ def materialize(root: pathlib.Path, jar_dir: pathlib.Path, deps: list[pathlib.Pa
     broker = launcher("management", COMPONENTS["management"]).replace('"$@"', 'broker-serve')
     write(root, "opt/aegis600/bin/aegis-management-broker", broker, True)
     write(root, "etc/aegis600/management-broker.properties", "identityEndpoint=http://127.0.0.1:38250/identity/v1\nidentityPublicKey=/etc/aegis600/identity-public.txt\nstateDirectory=/var/lib/aegis600/management-broker\n")
-    write(root, "etc/aegis600/news-worker.json.example", json.dumps({"server": "http://REPLACE_WITH_COMMUNITY_V3_ONION/api/v1", "serverKeyBase64": "REPLACE_WITH_PINNED_PUBLIC_KEY", "torSocksPort":39250, "workerKeyFile":"/var/lib/aegis600/news-worker/state/worker.pk8"}, indent=2)+"\n")
+    write(root, "etc/aegis600/news-worker.json.example", json.dumps({"server": "http://REPLACE_WITH_COMMUNITY_V3_ONION/agent-worker/v6", "serverKeyBase64": "REPLACE_WITH_PINNED_PUBLIC_KEY", "torSocksPort":39250, "workerKeyFile":"/var/lib/aegis600/news-worker/state/worker.pk8"}, indent=2)+"\n")
     write(root, "etc/aegis600/backup.json.example", json.dumps({"repositoryFile":"/etc/aegis600/backup-repository.txt", "passwordFile":"/etc/aegis600/backup-password", "offsiteConfirmed":False}, indent=2)+"\n")
     write(root,"etc/aegis600/mail-relay.properties.example","databasePath=/var/lib/aegis600/mail-relay/state/relay.sqlite\nlistenAddress=127.0.0.1\nlistenPort=38256\nmaxMessageAge=604800000\nmaxFileSize=104857600\nmaxPendingStoragePerUser=536870912\nmaxPendingPackets=256\nmaxUsers=32\nregistrationMode=closed\n")
     write(root, "etc/aegis600/torrc.staging", "DataDirectory /var/lib/aegis600/tor\nSocksPort 127.0.0.1:39250 IsolateSOCKSAuth\nControlPort 0\nSafeLogging 1\nAvoidDiskWrites 1\n" + "".join(f"HiddenServiceDir /var/lib/aegis600/tor/{name}\nHiddenServicePort 80 127.0.0.1:{port}\n" for name,port in [("identity",38250),("attachments",38251),("community",38252),("library",38253),("management",38254),("glas-signaling",38255),("mail-relay",38256)]))
@@ -446,8 +477,11 @@ profile aegis600-staging-sqlite-validator flags=(attach_disconnected) {
     for notice in sorted((scripts/"licenses").glob("*")):
         if not notice.is_file() or notice.is_symlink():raise ValueError("Недопустимый license notice")
         write(root,"opt/aegis600/licenses/"+notice.name,notice.read_text())
+    if subprocess.run(["git","rev-parse","HEAD"],cwd=PROJECT,capture_output=True,text=True,check=True).stdout.strip()!=git or (not development and subprocess.run(["git","status","--porcelain"],cwd=PROJECT,capture_output=True,text=True,check=True).stdout):raise ValueError("Исходники изменились при упаковке")
+    for name,digest in jar_hashes.items():
+        if sha(jar_dir/name)!=digest:raise ValueError("Server JAR изменён при упаковке")
     inventory = {p.relative_to(root).as_posix(): {"size":p.stat().st_size,"sha256":sha(p),"mode":oct(stat.S_IMODE(p.stat().st_mode))} for p in sorted(root.rglob("*")) if p.is_file()}
-    proof = {"version":"6.0.0","sourceCommit":git,"workingTreeDirty":dirty,"productionReady":False,"scope":"Actual packaged server JARs and staging configuration. No production deployment or native Debian acceptance.","legacyRelayReplaced":False,"isolatedMailRelay600Implemented":True,"isolatedMailRelay600NativeAcceptance":"NOT_RUN","nativeDebianAcceptance":"NOT_RUN","librarySharesCommunityTrustBoundary":True,"librarySyncDaemonImplemented":False,"glasSignalingSeparateServerImplemented":True,"glasSignalingNativeTorAcceptance":"NOT_RUN","monitoringNativeAcceptance":"NOT_RUN","backupRootParsesSqlite":False,"backupValidator":"unprivileged-per-database-systemd-sandbox","backupValidatorNativeAcceptance":"NOT_RUN","files":inventory}
+    proof = {"version":"6.0.0","sourceCommit":git,"sourceTree":source_tree,"verifiedFrozenBuild":bool(jar_hashes),"moduleJarSha256":jar_hashes,"workingTreeDirty":dirty,"productionReady":False,"scope":"Actual packaged server JARs and staging configuration. No production deployment or native Debian acceptance.","legacyRelayReplaced":False,"isolatedMailRelay600Implemented":True,"isolatedMailRelay600NativeAcceptance":"NOT_RUN","nativeDebianAcceptance":"NOT_RUN","librarySharesCommunityTrustBoundary":True,"librarySyncDaemonImplemented":False,"glasSignalingSeparateServerImplemented":True,"glasSignalingNativeTorAcceptance":"NOT_RUN","monitoringNativeAcceptance":"NOT_RUN","backupRootParsesSqlite":False,"backupValidator":"unprivileged-per-database-systemd-sandbox","backupValidatorNativeAcceptance":"NOT_RUN","files":inventory}
     write(root,"BUILD-PROVENANCE-6.0.0.json",json.dumps(proof,ensure_ascii=False,indent=2)+"\n")
     return proof
 
@@ -462,8 +496,12 @@ def archive(root: pathlib.Path, target: pathlib.Path):
             else:tar.addfile(info)
 
 def main():
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument("--jar-dir",type=pathlib.Path,required=True);p.add_argument("--deps",type=pathlib.Path,action="append",required=True);p.add_argument("--root",type=pathlib.Path,required=True);p.add_argument("--source-commit",required=True);p.add_argument("--archive",type=pathlib.Path);p.add_argument("--allow-development",action="store_true");a=p.parse_args()
-    result=materialize(a.root,a.jar_dir,a.deps,a.source_commit,a.allow_development)
-    if a.archive:archive(a.root,a.archive)
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument("--jar-dir",type=pathlib.Path,required=True);p.add_argument("--deps",type=pathlib.Path,action="append",required=True);p.add_argument("--root",type=pathlib.Path,required=True);p.add_argument("--source-commit",required=True);p.add_argument("--archive",type=pathlib.Path);p.add_argument("--build-proof",type=pathlib.Path);p.add_argument("--provenance",type=pathlib.Path);p.add_argument("--allow-development",action="store_true");a=p.parse_args()
+    result=materialize(a.root,a.jar_dir,a.deps,a.source_commit,a.allow_development,a.build_proof)
+    if a.archive:
+        archive(a.root,a.archive)
+        sidecar=a.provenance or a.archive.with_name("SERVER-BUILD-PROVENANCE-6.0.0.json")
+        if sidecar.exists():raise ValueError("Provenance уже существует")
+        sidecar.write_text(json.dumps({"sourceCommit":result["sourceCommit"],"sourceTree":result["sourceTree"],"verifiedFrozenBuild":result["verifiedFrozenBuild"],"productionReady":False,"binaryArtifactSha256":{a.archive.name:sha(a.archive)},"moduleJarSha256":result["moduleJarSha256"],"nativeDebianAcceptance":"NOT_RUN"},ensure_ascii=False,indent=2)+"\n")
     print(json.dumps({"files":len(result["files"]),"sourceCommit":result["sourceCommit"],"productionReady":False,"archive":str(a.archive) if a.archive else None,"archiveSha256":sha(a.archive) if a.archive else None},indent=2))
 if __name__=="__main__":main()

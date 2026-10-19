@@ -1,5 +1,5 @@
 plugins { id 'application' }
-dependencies { implementation project(':community-server'); implementation project(':common-protocol') }
+dependencies { implementation project(':community-server'); implementation project(':common-protocol'); testImplementation project(':identity-server') }
 application {
     mainClass='org.securemail.worker.NewsWorkerMain'
     applicationDefaultJvmArgs=['-Xms32m','-Xmx256m','-XX:+DisableAttachMechanism','-XX:-HeapDumpOnOutOfMemoryError']

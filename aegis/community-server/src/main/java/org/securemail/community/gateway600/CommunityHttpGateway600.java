@@ -38,11 +38,12 @@ public final class CommunityHttpGateway600 implements AutoCloseable {
     private void handle(HttpExchange x){
         byte[]body=new byte[0];String nonce=IdentityProtocol.nonce();ScheduledFuture<?>deadline=deadlines.schedule(x::close,30,TimeUnit.SECONDS);
         try {
+            if(!rate())throw new IOException("Raw request limit");
             if(x.getRequestURI().getRawPath().equals(org.securemail.community.agent.WorkerWire600.PATH)){serviceWorkers.handle(x);return;}
             if(!x.getRequestMethod().equals("POST")||!x.getRequestURI().getRawPath().equals("/community/v6")||x.getRequestURI().getRawQuery()!=null)throw new IOException("Endpoint");
             Headers h=x.getRequestHeaders();String length=one(h,"Content-Length"),type=one(h,"Content-Type");
             if(length==null||!length.matches("[0-9]{1,8}")||type==null||!type.matches("(?i)application/json(?:;\\s*charset=utf-8)?")||h.containsKey("Transfer-Encoding")||h.containsKey("Content-Encoding"))throw new IOException("Framing");
-            int n=Integer.parseInt(length);if(n<2||n>CommunityWire600.MAX_BODY||!rate())throw new IOException("Limit");body=x.getRequestBody().readNBytes(n+1);if(body.length!=n)throw new IOException("Incomplete");
+            int n=Integer.parseInt(length);if(n<2||n>CommunityWire600.MAX_BODY)throw new IOException("Limit");body=x.getRequestBody().readNBytes(n+1);if(body.length!=n)throw new IOException("Incomplete");
             Map<String,Object>request=StrictJson.object(body,CommunityWire600.MAX_BODY);
             if(!request.keySet().equals(Set.of("action","argsJson","authorization","criticalProof","nonce")))throw new IOException("Fields");
             nonce=IdentityProtocol.nonceValue(StrictJson.text(request,"nonce",43));String action=StrictJson.text(request,"action",96);CommunityWire600.identityAction(action);

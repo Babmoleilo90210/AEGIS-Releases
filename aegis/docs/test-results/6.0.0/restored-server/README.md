@@ -1,0 +1,13 @@
+# Восстановление серверной части 6.0.0 — 19 октября 2026
+
+Это новый выполненный прогон восстановленных исходников. Исторические доказательства 18 октября не подменяют эти результаты. `productionReady=false`.
+
+`RUN.json` фиксирует SHA-256 69 использованных Java-исходников, проверенных зависимостей, точные команды Java21/javac и неизменность исходников во время выполнения. `compile.log` и `run.log`, исходные JUnit XML и `SUMMARY.json` относятся к одному запуску: все 33 теста news-worker прошли, пропусков и ошибок нет. Число файлов определяется фактической картой sourceFiles, а не итоговым commit всего проекта. Это локальная интеграционная проверка; полный frozen-commit прогон проводится отдельно.
+
+Девять ServiceCoordinator600Test используют настоящие операторские команды CommunityMain600, HTTP endpoint `/agent-worker/v6`, SQLite, Ed25519 и реальный WorkerCoordinatorClient. Сетевое соединение в них намеренно подменено loopback-коннектором: тест не доказывает публичное Tor-соединение. Проверены allow/revoke/restart, подписи запроса/ответа, audience/time/replay/размер, фактические claim/fail/complete, отказ закрытым/административным маршрутам, независимость service actor от account identity, учёт подписанных запрещённых действий и лимит неподписанного потока. Синтетический источник и модель в transport fixture явно не являются реальным RSS/model прогоном.
+
+Остальные тесты worker проверяют разрешённые источники, robots, RSS/Atom, ограниченный HTTP, model fixture, дедупликацию и прежний явно выбранный coordinator5. Они не означают доказанную достоверность автоматически опубликованных реальных новостей.
+
+`DEBIAN-PORTABLE-RESULTS.json` и `debian-portable.log`: 26 Python-тестов, 22 PASS и 4 NOT_RUN. Выполнен настоящий переносимый seccomp-тест сетевых запретов и лимита памяти. Полный непривилегированный chroot/UID sandbox не запускался из-за отсутствия CAP_SYS_CHROOT/CAP_SETUID/CAP_SETGID. Debian13/systemd/AppArmor enforce, внешний restic restore, реальные onion-клиенты и нативное развёртывание NOT_RUN. В тесте receipt используются явно синтетические байты: он проверяет запрет неподтверждённой упаковки и tamper, не является готовым серверным бинарником.
+
+Воспроизведение: JDK21, закреплённые зависимости из gradle/verification-metadata.xml, JUnit Platform1.13.4; скомпилировать main common-protocol/community-server/news-worker и тесты news-worker; ConsoleLauncher `execute --select-package org.securemail.worker`. Для Python: `python3 -m unittest discover -s deployment/debian600 -p 'test_*.py' -v`. Точные использованные пути и команды сохранены в RUN.json; при переносе заменить только префикс рабочего каталога.

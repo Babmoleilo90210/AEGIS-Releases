@@ -8,6 +8,7 @@ import org.securemail.community.protocol.CommunityAuth;
 import java.io.*;
 import java.nio.file.*;
 import java.security.*;
+import java.security.spec.X509EncodedKeySpec;
 import java.sql.*;
 import java.util.*;
 
@@ -24,19 +25,36 @@ public final class WorkerServiceGateway600 {
   }return null;});}
   public static void allow(CommunityStore store,AccessControl access,byte[]publicKey,String fingerprint)throws Exception {
     initialize(store);if(publicKey.length!=44||!CommunityAuth.id(publicKey).equals(fingerprint))throw CommunityException.denied();
-    store.tx(db->{boolean existing=exists(db,"SELECT 1 FROM agent600_worker_key WHERE identity=?",fingerprint);
-      if(!existing&&exists(db,"SELECT 1 FROM identities WHERE identity=?",fingerprint))throw CommunityException.denied();
-      if(existing){checkScope(store,access,db,fingerprint);exec(db,"UPDATE agent600_worker_key SET enabled=1 WHERE identity=?",fingerprint);exec(db,"UPDATE agent_worker SET enabled=1 WHERE identity=?",fingerprint);}
-      else {try(var q=db.createStatement();var r=q.executeQuery("SELECT count(*) FROM agent600_worker_key")){r.next();if(r.getInt(1)>=64)throw CommunityException.denied();}
-        store.ensureIdentity(publicKey,"Служебный рабочий узел новостей");String role=UUID.randomUUID().toString();
-        exec(db,"INSERT INTO roles(id,scope,name,clearance) VALUES(?,'GLOBAL',?,0)",role,"Служебный сборщик новостей "+fingerprint.substring(0,12));
-        exec(db,"INSERT INTO role_permissions VALUES(?,'AGENT_WORK')",role);exec(db,"INSERT INTO assignments VALUES(?,?)",fingerprint,role);
-        exec(db,"INSERT INTO agent_worker(identity,enabled) VALUES(?,1)",fingerprint);exec(db,"INSERT INTO agent600_worker_key VALUES(?,1,?)",fingerprint,store.clock().millis());
+    PublicKey canonical=KeyFactory.getInstance("Ed25519").generatePublic(new X509EncodedKeySpec(publicKey));if(!MessageDigest.isEqual(canonical.getEncoded(),publicKey))throw CommunityException.denied();
+    String actor=WorkerWire600.serviceActor(publicKey);
+    store.tx(db->{boolean existing=exists(db,"SELECT 1 FROM agent600_worker_key WHERE identity=?",actor);
+      if(existing){
+        try(var q=db.prepareStatement("SELECT public_key FROM identities WHERE identity=?")){q.setString(1,actor);try(var r=q.executeQuery()){if(!r.next()||!MessageDigest.isEqual(publicKey,r.getBytes(1)))throw CommunityException.denied();}}
+        checkScope(store,access,db,actor);exec(db,"UPDATE agent600_worker_key SET enabled=1 WHERE identity=?",actor);exec(db,"UPDATE agent_worker SET enabled=1 WHERE identity=?",actor);
       }
-      checkScope(store,access,db,fingerprint);store.audit(db,"LOCAL_OPERATOR","AGENT600_WORKER_ALLOW",fingerprint,"Separate public service identity only");return null;
+      else {
+        // An existing account cannot be converted to a privileged service identity by an API call.
+        if(exists(db,"SELECT 1 FROM identities WHERE identity=?",fingerprint)||exists(db,"SELECT 1 FROM identities WHERE identity=?",actor))throw CommunityException.denied();
+        try(var q=db.createStatement();var r=q.executeQuery("SELECT count(*) FROM agent600_worker_key")){r.next();if(r.getInt(1)>=64)throw CommunityException.denied();}
+        try(var q=db.prepareStatement("INSERT INTO identities(identity,public_key,nickname) VALUES(?,?,?)")){q.setString(1,actor);q.setBytes(2,publicKey);q.setString(3,"Служебный рабочий узел новостей");q.executeUpdate();}
+        String role=UUID.randomUUID().toString();
+        exec(db,"INSERT INTO roles(id,scope,name,clearance) VALUES(?,'GLOBAL',?,0)",role,"Служебный сборщик новостей "+fingerprint.substring(0,12));
+        exec(db,"INSERT INTO role_permissions VALUES(?,'AGENT_WORK')",role);exec(db,"INSERT INTO assignments VALUES(?,?)",actor,role);
+        exec(db,"INSERT INTO agent_worker(identity,enabled) VALUES(?,1)",actor);exec(db,"INSERT INTO agent600_worker_key VALUES(?,1,?)",actor,store.clock().millis());
+      }
+      checkScope(store,access,db,actor);store.audit(db,"LOCAL_OPERATOR","AGENT600_WORKER_ALLOW",actor,"Separate public service identity only");return null;
     });
   }
-  public static void revoke(CommunityStore store,String fingerprint)throws Exception {initialize(store);Values.identity(fingerprint);store.tx(db->{exec(db,"UPDATE agent600_worker_key SET enabled=0 WHERE identity=?",fingerprint);exec(db,"UPDATE agent_worker SET enabled=0 WHERE identity=?",fingerprint);store.audit(db,"LOCAL_OPERATOR","AGENT600_WORKER_REVOKE",fingerprint,"Service allowlist revoked");return null;});}
+  public static void revoke(CommunityStore store,String fingerprint)throws Exception {
+    initialize(store);Values.identity(fingerprint);store.tx(db->{
+      // CLI accepts the ordinary public-key fingerprint, never a user-supplied actor alias.
+      List<String> actors=new ArrayList<>();try(var q=db.createStatement();var r=q.executeQuery("SELECT k.identity,i.public_key FROM agent600_worker_key k JOIN identities i ON i.identity=k.identity")){
+        while(r.next())if(CommunityAuth.id(r.getBytes(2)).equals(fingerprint))actors.add(r.getString(1));
+      }
+      for(String actor:actors){exec(db,"UPDATE agent600_worker_key SET enabled=0 WHERE identity=?",actor);exec(db,"UPDATE agent_worker SET enabled=0 WHERE identity=?",actor);store.audit(db,"LOCAL_OPERATOR","AGENT600_WORKER_REVOKE",actor,"Service allowlist revoked");}
+      return null;
+    });
+  }
   private static void checkScope(CommunityStore store,AccessControl access,Connection db,String actor)throws Exception {
     if(!access.permissions(actor,"GLOBAL").equals(Set.of("AGENT_WORK"))||access.isGlobalAdmin(actor)||exists(db,"SELECT 1 FROM memberships WHERE identity=?",actor)||exists(db,"SELECT 1 FROM assignments a JOIN roles r ON r.id=a.role WHERE a.identity=? AND r.scope<>'GLOBAL'",actor))throw CommunityException.denied();
   }
@@ -53,15 +71,15 @@ public final class WorkerServiceGateway600 {
       Headers h=x.getRequestHeaders();String length=one(h,"Content-Length"),type=one(h,"Content-Type");
       if(length==null||!length.matches("[0-9]{1,7}")||type==null||!type.matches("(?i)application/json(?:;\\s*charset=utf-8)?")||h.containsKey("Transfer-Encoding")||h.containsKey("Content-Encoding"))throw CommunityException.denied();
       int size=Integer.parseInt(length);if(size<2||size>WorkerWire600.MAX_BODY)throw CommunityException.denied();body=x.getRequestBody().readNBytes(size+1);if(body.length!=size)throw CommunityException.denied();
-      byte[]publicKey=decode(one(h,"AEGIS-Key"),44),signature=decode(one(h,"AEGIS-Signature"),64);actor=CommunityAuth.id(publicKey);
+      byte[]publicKey=decode(one(h,"AEGIS-Key"),44),signature=decode(one(h,"AEGIS-Signature"),64);actor=WorkerWire600.serviceActor(publicKey);
       nonce=one(h,"AEGIS-Nonce");String timeText=one(h,"AEGIS-Time");if(timeText==null||!timeText.matches("[0-9]{1,15}")||nonce==null||!nonce.matches("[A-Za-z0-9_-]{43}"))throw CommunityException.denied();
       long time=Long.parseLong(timeText),now=store.clock().millis();if(time<now-60000||time>now+60000)throw CommunityException.denied();
       requestProof=WorkerWire600.requestBytes(audience,time,nonce,body);if(!CommunityAuth.verify(publicKey,requestProof,signature))throw CommunityException.denied();
+      String authenticatedActor=actor,authenticatedNonce=nonce;
+      // Commit authenticated replay/rate guards even for signed malformed or unsupported operations.
+      store.tx(db->{active(db,authenticatedActor);rate(db,"*",now,120);rate(db,authenticatedActor,now,30);store.consumeNonce(authenticatedActor,authenticatedNonce,now+120000);return null;});
       Map<String,Object>request=StrictJson.object(body,WorkerWire600.MAX_BODY);if(!request.keySet().equals(Set.of("action","data"))||!(request.get("data") instanceof Map<?,?>raw))throw CommunityException.denied();
       String action=StrictJson.text(request,"action",64);if(!WorkerWire600.ACTIONS.contains(action))throw CommunityException.denied();@SuppressWarnings("unchecked")Map<String,Object>data=(Map<String,Object>)raw;
-      String authenticatedActor=actor,authenticatedNonce=nonce;
-      // Commit authenticated replay/rate guards even if the subsequent operation is invalid.
-      store.tx(db->{active(db,authenticatedActor);rate(db,"*",now,120);rate(db,authenticatedActor,now,30);store.consumeNonce(authenticatedActor,authenticatedNonce,now+120000);return null;});
       Map<String,Object>result=store.tx(db->{active(db,authenticatedActor);agent.enforceWorkerBoundary(authenticatedActor,action);return agent.handle(authenticatedActor,action,data);});
       respond(x,200,nonce,actor,requestProof,body,Map.of("ok",true,"data",result));
     }catch(CommunityException error){try{respond(x,error.code().equals("RATE_LIMIT")?429:403,nonce,actor,requestProof,body,Map.of("ok",false,"error",error.code().equals("RATE_LIMIT")?"RATE_LIMIT":"DENIED"));}catch(Exception ignored){}}

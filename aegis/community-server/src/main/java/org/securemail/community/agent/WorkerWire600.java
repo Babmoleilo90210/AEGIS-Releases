@@ -11,6 +11,13 @@ public final class WorkerWire600 {
   public static final int MAX_BODY=262144;
   public static final Set<String> ACTIONS=Set.of("agent.worker.claim","agent.worker.complete","agent.worker.fail");
   private WorkerWire600(){}
+  /** A public worker key must never alias an account identity using the same key. */
+  public static String serviceActor(byte[] publicKey)throws IOException {
+    if(publicKey==null||publicKey.length!=44)throw new IOException("Worker public key");
+    byte[] domain="AEGIS-NEWS-WORKER-SERVICE/v6".getBytes(StandardCharsets.US_ASCII);
+    byte[] input=new byte[domain.length+publicKey.length];System.arraycopy(domain,0,input,0,domain.length);System.arraycopy(publicKey,0,input,domain.length,publicKey.length);
+    return CommunityAuth.id(input);
+  }
   public static byte[] requestBytes(String audience,long time,String nonce,byte[]body)throws IOException {
     return canonical("AEGIS-NEWS-WORKER-REQUEST/v6",audience,time,nonce,CommunityAuth.id(body),"");
   }

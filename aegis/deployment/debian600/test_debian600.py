@@ -1,4 +1,5 @@
 import hashlib, importlib.util, json, pathlib, sqlite3, sys, tempfile, unittest
+from unittest.mock import patch
 from test_validator_sandbox import trusted_synthetic_validator
 
 ROOT=pathlib.Path(__file__).resolve().parent
@@ -58,8 +59,26 @@ class Debian600Tests(unittest.TestCase):
     def test_runtime_dependency_ambiguity_and_missing_files_are_rejected(self):
         first=self.home/"a";second=self.home/"b";first.mkdir();second.mkdir()
         for name in staging.DEPENDENCIES:(first/name).write_bytes(b"same")
-        self.assertEqual(6,len(staging.dependency_files([first])));(second/staging.DEPENDENCIES[0]).write_bytes(b"other")
-        with self.assertRaises(ValueError):staging.dependency_files([first,second])
+        with patch.object(staging,'dependency_pins',return_value={name:{hashlib.sha256(b"same").hexdigest()} for name in staging.DEPENDENCIES}):
+            self.assertEqual(6,len(staging.dependency_files([first])));(second/staging.DEPENDENCIES[0]).write_bytes(b"other")
+            with self.assertRaises(ValueError):staging.dependency_files([first,second])
+            target=first/staging.DEPENDENCIES[1];target.unlink();target.symlink_to(first/staging.DEPENDENCIES[0])
+            with self.assertRaises(ValueError):staging.dependency_files([first])
+        with self.assertRaises(ValueError):staging.dependency_files([second])
+    def test_server_build_proof_binds_clean_frozen_commit_and_all_eight_jars(self):
+        commit='a'*40;proof=self.home/'build.json';jars=self.home/'jars';jars.mkdir();rows=[]
+        for name,version in staging.PROJECT_VERSIONS.items():
+            blob=('synthetic-jar-receipt-'+name).encode();(jars/(name+'.jar')).write_bytes(blob);rows.append({'file':name+'-'+version+'.jar','sha256':hashlib.sha256(blob).hexdigest(),'zipCRC':'PASS'})
+        receipt={'sourceCommit':commit,'gradleExitCode':0,'sourceUnchanged':True,'sourceDirtyAtStart':False,'jars':rows};proof.write_text(json.dumps(receipt))
+        self.assertEqual(8,len(staging.checked_build_proof(proof,commit,jars)))
+        for field,value in [('sourceCommit','b'*40),('gradleExitCode',1),('sourceUnchanged',False),('sourceDirtyAtStart',True)]:
+            invalid=dict(receipt);invalid[field]=value;proof.write_text(json.dumps(invalid))
+            with self.assertRaises(ValueError):staging.checked_build_proof(proof,commit,jars)
+        proof.write_text(json.dumps(receipt));(jars/'community-server.jar').write_bytes(b'tamper')
+        with self.assertRaises(ValueError):staging.checked_build_proof(proof,commit,jars)
+        with self.assertRaises(ValueError):staging.checked_build_proof(None,commit,jars)
+    def test_six_worker_launcher_never_connects_to_legacy_coordinator(self):
+        source=(ROOT/'start-news-worker.py').read_text();self.assertIn('/agent-worker/v6',source);self.assertIn('"--coordinator-mode","service6"',source);self.assertNotIn('/api/v1',source)
     def test_community_staging_uses_identity_gated_six_entrypoint(self):
         launch=staging.launcher('community',staging.COMPONENTS['community'])
         self.assertIn('org.securemail.community.gateway600.CommunityMain600',launch)

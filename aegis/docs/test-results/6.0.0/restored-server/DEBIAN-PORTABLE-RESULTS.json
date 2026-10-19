@@ -1,0 +1,106 @@
+{
+  "startedAt": "2026-10-19T06:19:45.523005+00:00",
+  "finishedAt": "2026-10-19T06:19:46.173600+00:00",
+  "tests": 26,
+  "passed": 22,
+  "failed": 0,
+  "notRun": 4,
+  "sourceUnchanged": true,
+  "sourceFiles": {
+    "deployment/debian600/backup_restore.py": "ee4942bac41299f17fff3e70778b30768a9b9923289f2e6290865b4fb8fc4d12",
+    "deployment/debian600/deploy.py": "0a18dab34e5c3f08907b60a30dbcf9567bd3d441bc218e590d4646a6061e82ae",
+    "deployment/debian600/monitoring.py": "9e2cf48a7dbbf82db15cfe55710f9eaa907972939298a54b08c93b8e2d2181bd",
+    "deployment/debian600/preflight.py": "46c07fc71bbe2dbcafb63fd5c40815fb52efe6435afade9af5eac9d5b3080201",
+    "deployment/debian600/sqlite_validator.py": "b4c82987bd8af469c2c7777c7c6d54c70ded6813c028ae021b8515c0a7061272",
+    "deployment/debian600/staging.py": "501133e7b7aed09c7bdb265f883c3fc4d8cee82310cf8235a442991cdebc866a",
+    "deployment/debian600/start-news-worker.py": "69c64b83f52e9d9f2bee4d3bee43fb3018054799fb24104effedb898dc545afd",
+    "deployment/debian600/test_debian600.py": "482a0da126202e4c690fde9f37fafe1a55c68555fc0bc67d7522bd91c93a5677",
+    "deployment/debian600/test_validator_sandbox.py": "1a8ffa67c18993455d6cc0de6563d3011d872066cd73cef19fc25a23c9e6803e"
+  },
+  "results": {
+    "test_debian600.Debian600Tests.test_backup_and_preflight_never_claim_native_or_offsite_restore_by_default": {
+      "status": "PASS"
+    },
+    "test_debian600.Debian600Tests.test_backup_config_requires_offsite_and_owner_only_credential_files": {
+      "status": "PASS"
+    },
+    "test_debian600.Debian600Tests.test_backup_restarts_every_writer_before_parser_and_cleans_failed_snapshot": {
+      "status": "PASS"
+    },
+    "test_debian600.Debian600Tests.test_community_staging_uses_identity_gated_six_entrypoint": {
+      "status": "PASS"
+    },
+    "test_debian600.Debian600Tests.test_deploy_rejects_manifest_traversal_and_privileged_file_mode_before_writes": {
+      "status": "PASS"
+    },
+    "test_debian600.Debian600Tests.test_monitoring_atomic_private_snapshot_rejects_symlink_state": {
+      "status": "PASS"
+    },
+    "test_debian600.Debian600Tests.test_monitoring_drops_environment_and_unexpected_systemd_values": {
+      "status": "PASS"
+    },
+    "test_debian600.Debian600Tests.test_privileged_root_helper_never_imports_sqlite_and_copies_malformed_db_opaque": {
+      "status": "PASS"
+    },
+    "test_debian600.Debian600Tests.test_restore_budget_bounds_bytes_objects_and_symlinks": {
+      "status": "PASS"
+    },
+    "test_debian600.Debian600Tests.test_restore_inventory_cannot_escape_root": {
+      "status": "PASS"
+    },
+    "test_debian600.Debian600Tests.test_restore_process_is_stopped_at_deadline_or_oversized_output_tree": {
+      "status": "PASS"
+    },
+    "test_debian600.Debian600Tests.test_runtime_dependency_ambiguity_and_missing_files_are_rejected": {
+      "status": "PASS"
+    },
+    "test_debian600.Debian600Tests.test_server_build_proof_binds_clean_frozen_commit_and_all_eight_jars": {
+      "status": "PASS"
+    },
+    "test_debian600.Debian600Tests.test_six_worker_launcher_never_connects_to_legacy_coordinator": {
+      "status": "PASS"
+    },
+    "test_debian600.Debian600Tests.test_snapshot_is_consistent_sqlite_online_backup_with_encrypted_chunk_bytes": {
+      "status": "PASS"
+    },
+    "test_debian600.Debian600Tests.test_snapshot_prunes_its_own_staging_subtree_instead_of_recursive_copy": {
+      "status": "PASS"
+    },
+    "test_debian600.Debian600Tests.test_snapshot_rejects_symlink_tamper_and_owner_release_key_without_read": {
+      "status": "PASS"
+    },
+    "test_debian600.Debian600Tests.test_staging_refuses_existing_root_and_symlink_destination": {
+      "status": "PASS"
+    },
+    "test_debian600.Debian600Tests.test_units_preserve_nnp_and_distinct_management_runtime_and_legacy_relay": {
+      "status": "PASS"
+    },
+    "test_debian600.Debian600Tests.test_validator_transient_plan_has_no_root_network_or_other_state_mount": {
+      "status": "PASS"
+    },
+    "test_validator_sandbox.ValidatorPortableProcessTests.test_actual_kernel_seccomp_denies_network_and_preserves_memory_limit": {
+      "status": "PASS"
+    },
+    "test_validator_sandbox.ValidatorPortableProcessTests.test_real_worker_rejects_unsandboxed_root_process": {
+      "status": "PASS"
+    },
+    "test_validator_sandbox.ValidatorSandboxTests.test_actual_sandbox_cannot_read_host_secret_or_modify_input_or_open_socket": {
+      "status": "NOT_RUN",
+      "reason": "NOT_RUN: Work removes CAP_SYS_CHROOT/CAP_SETUID/CAP_SETGID; full native sandbox fixture unavailable"
+    },
+    "test_validator_sandbox.ValidatorSandboxTests.test_corrupt_or_symlinked_database_cannot_produce_validated_result": {
+      "status": "NOT_RUN",
+      "reason": "NOT_RUN: Work removes CAP_SYS_CHROOT/CAP_SETUID/CAP_SETGID; full native sandbox fixture unavailable"
+    },
+    "test_validator_sandbox.ValidatorSandboxTests.test_missing_socket_filter_and_root_uid_are_rejected_before_parsing": {
+      "status": "NOT_RUN",
+      "reason": "NOT_RUN: Work removes CAP_SYS_CHROOT/CAP_SETUID/CAP_SETGID; full native sandbox fixture unavailable"
+    },
+    "test_validator_sandbox.ValidatorSandboxTests.test_real_drop_uid_chroot_seccomp_sqlite_backup": {
+      "status": "NOT_RUN",
+      "reason": "NOT_RUN: Work removes CAP_SYS_CHROOT/CAP_SETUID/CAP_SETGID; full native sandbox fixture unavailable"
+    }
+  },
+  "nativeDebianAcceptance": "NOT_RUN",
+  "productionReady": false
+}

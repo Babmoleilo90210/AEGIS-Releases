@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="JUnit Jupiter" tests="33" skipped="0" failures="0" errors="0" time="5.013" hostname="86667f55c355" timestamp="2026-10-19T11:49:12">
+<properties>
+<property name="file.encoding" value="UTF-8"/>
+<property name="file.separator" value="/"/>
+<property name="java.class.path" value="/workspace/scratch/aa629f360927/audit600/restored-server/classes:/workspace/scratch/aa629f360927/inputs600/maven-deps/gson-2.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/sqlite-jdbc-3.53.4.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/slf4j-api-2.0.17.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/slf4j-nop-2.0.17.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/error_prone_annotations-2.48.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-platform-console-standalone-1.13.4.jar"/>
+<property name="java.class.version" value="65.0"/>
+<property name="java.home" value="/workspace/scratch/aa629f360927/inputs600/toolchain/jdk-21.0.12.1+1"/>
+<property name="java.io.tmpdir" value="/tmp"/>
+<property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/>
+<property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+<property name="java.runtime.version" value="21.0.12.1+1-LTS"/>
+<property name="java.specification.name" value="Java Platform API Specification"/>
+<property name="java.specification.vendor" value="Oracle Corporation"/>
+<property name="java.specification.version" value="21"/>
+<property name="java.vendor" value="Eclipse Adoptium"/>
+<property name="java.vendor.url" value="https://adoptium.net/"/>
+<property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
+<property name="java.vendor.version" value="Temurin-21.0.12.1+1"/>
+<property name="java.version" value="21.0.12.1"/>
+<property name="java.version.date" value="2026-08-18"/>
+<property name="java.vm.compressedOopsMode" value="32-bit"/>
+<property name="java.vm.info" value="mixed mode, sharing"/>
+<property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+<property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+<property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+<property name="java.vm.specification.version" value="21"/>
+<property name="java.vm.vendor" value="Eclipse Adoptium"/>
+<property name="java.vm.version" value="21.0.12.1+1-LTS"/>
+<property name="jdk.debug" value="release"/>
+<property name="jdk.httpserver.maxConnections" value="32"/>
+<property name="junit.docs.version" value="1.13.4"/>
+<property name="line.separator" value="&#10;"/>
+<property name="native.encoding" value="UTF-8"/>
+<property name="os.arch" value="amd64"/>
+<property name="os.name" value="Linux"/>
+<property name="os.version" value="6.18.55"/>
+<property name="path.separator" value=":"/>
+<property name="stderr.encoding" value="UTF-8"/>
+<property name="stdout.encoding" value="UTF-8"/>
+<property name="sun.arch.data.model" value="64"/>
+<property name="sun.boot.library.path" value="/workspace/scratch/aa629f360927/inputs600/toolchain/jdk-21.0.12.1+1/lib"/>
+<property name="sun.cpu.endian" value="little"/>
+<property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+<property name="sun.java.command" value="org.junit.platform.console.ConsoleLauncher execute --disable-ansi-colors --select-package org.securemail.worker --reports-dir /workspace/scratch/aa629f360927/audit600/restored-server/junit"/>
+<property name="sun.java.launcher" value="SUN_STANDARD"/>
+<property name="sun.jnu.encoding" value="UTF-8"/>
+<property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+<property name="sun.net.httpserver.maxReqHeaders" value="16"/>
+<property name="sun.net.httpserver.maxReqTime" value="30"/>
+<property name="sun.net.httpserver.maxRspTime" value="30"/>
+<property name="user.dir" value="/workspace/scratch/aa629f360927"/>
+<property name="user.home" value="/root"/>
+<property name="user.language" value="en"/>
+<property name="user.name" value="root"/>
+<property name="user.timezone" value="Asia/Kolkata"/>
+</properties>
+<testcase name="rawBudgetIncludesUnauthenticatedWorkerTraffic()" classname="org.securemail.worker.ServiceCoordinator600Test" time="1.457">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.worker.ServiceCoordinator600Test]/[method:rawBudgetIncludesUnauthenticatedWorkerTraffic()]
+display-name: rawBudgetIncludesUnauthenticatedWorkerTraffic()
+]]></system-out>
+</testcase>
+<testcase name="persistentAuthenticatedBudgetAndRoleRevocationApplyBeforeEveryOperation()" classname="org.securemail.worker.ServiceCoordinator600Test" time="0.603">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.worker.ServiceCoordinator600Test]/[method:persistentAuthenticatedBudgetAndRoleRevocationApplyBeforeEveryOperation()]
+display-name: persistentAuthenticatedBudgetAndRoleRevocationApplyBeforeEveryOperation()
+]]></system-out>
+</testcase>
+<testcase name="absoluteDeadlineClosesAStalledCoordinatorSocket()" classname="org.securemail.worker.WorkerCoordinatorClientTest" time="0.507">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.worker.WorkerCoordinatorClientTest]/[method:absoluteDeadlineClosesAStalledCoordinatorSocket()]
+display-name: absoluteDeadlineClosesAStalledCoordinatorSocket()
+]]></system-out>
+</testcase>
+<testcase name="xmlExternalEntityAndExpansionBombRejected()" classname="org.securemail.worker.SourceSecurityTest" time="0.007">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.worker.SourceSecurityTest]/[method:xmlExternalEntityAndExpansionBombRejected()]
+display-name: xmlExternalEntityAndExpansionBombRejected()
+]]></system-out>
+</testcase>
+<testcase name="exactProofReplayAudienceTimeActionAndSizeAreEnforcedAcrossRestart()" classname="org.securemail.worker.ServiceCoordinator600Test" time="0.32">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.worker.ServiceCoordinator600Test]/[method:exactProofReplayAudienceTimeActionAndSizeAreEnforcedAcrossRestart()]
+display-name: exactProofReplayAudienceTimeActionAndSizeAreEnforcedAcrossRestart()
+]]></system-out>
+</testcase>
+<testcase name="badModelJsonOrExcessTokenUsageIsRejected()" classname="org.securemail.worker.ModelHttpFixtureTest" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.worker.ModelHttpFixtureTest]/[method:badModelJsonOrExcessTokenUsageIsRejected()]
+display-name: badModelJsonOrExcessTokenUsageIsRejected()
+]]></system-out>
+</testcase>
+<testcase name="requestAndExactResponseAreAuthenticated()" classname="org.securemail.worker.WorkerCoordinatorClientTest" time="0.009">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.worker.WorkerCoordinatorClientTest]/[method:requestAndExactResponseAreAuthenticated()]
+display-name: requestAndExactResponseAreAuthenticated()
+]]></system-out>
+</testcase>
+<testcase name="boundedHttpRejectsSmugglingAndCompressedBombs()" classname="org.securemail.worker.SourceSecurityTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.worker.SourceSecurityTest]/[method:boundedHttpRejectsSmugglingAndCompressedBombs()]
+display-name: boundedHttpRejectsSmugglingAndCompressedBombs()
+]]></system-out>
+</testcase>
+<testcase name="modelRedirectIsRejectedWithoutFollowingTarget()" classname="org.securemail.worker.ModelHttpFixtureTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.worker.ModelHttpFixtureTest]/[method:modelRedirectIsRejectedWithoutFollowingTarget()]
+display-name: modelRedirectIsRejectedWithoutFollowingTarget()
+]]></system-out>
+</testcase>
+<testcase name="authenticatedInvalidActionsConsumePersistentBudgetBeforeDispatch()" classname="org.securemail.worker.ServiceCoordinator600Test" time="0.513">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.worker.ServiceCoordinator600Test]/[method:authenticatedInvalidActionsConsumePersistentBudgetBeforeDispatch()]
+display-name: authenticatedInvalidActionsConsumePersistentBudgetBeforeDispatch()
+]]></system-out>
+</testcase>
+<testcase name="explicitOperatorAllowlistNeverElevatesExistingUserAndLiveRevokeSurvivesRestart()" classname="org.securemail.worker.ServiceCoordinator600Test" time="0.197">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.worker.ServiceCoordinator600Test]/[method:explicitOperatorAllowlistNeverElevatesExistingUserAndLiveRevokeSurvivesRestart()]
+display-name: explicitOperatorAllowlistNeverElevatesExistingUserAndLiveRevokeSurvivesRestart()
+]]></system-out>
+</testcase>
+<testcase name="dnsIsPinnedAndRebindingCannotReachPrivateTarget()" classname="org.securemail.worker.SourceSecurityTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.worker.SourceSecurityTest]/[method:dnsIsPinnedAndRebindingCannotReachPrivateTarget()]
+display-name: dnsIsPinnedAndRebindingCannotReachPrivateTarget()
+]]></system-out>
+</testcase>
+<testcase name="rssAndAtomAreParsedWithoutFetchingArticleLinks()" classname="org.securemail.worker.SourceSecurityTest" time="0.007">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.worker.SourceSecurityTest]/[method:rssAndAtomAreParsedWithoutFetchingArticleLinks()]
+display-name: rssAndAtomAreParsedWithoutFetchingArticleLinks()
+]]></system-out>
+</testcase>
+<testcase name="unavailableTorNeverFallsBackToDirectNetwork()" classname="org.securemail.worker.WorkerCoordinatorClientTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.worker.WorkerCoordinatorClientTest]/[method:unavailableTorNeverFallsBackToDirectNetwork()]
+display-name: unavailableTorNeverFallsBackToDirectNetwork()
+]]></system-out>
+</testcase>
+<testcase name="coordinatorCannotBeSilentlyChangedToClearnetOrLocalhost()" classname="org.securemail.worker.WorkerCoordinatorClientTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.worker.WorkerCoordinatorClientTest]/[method:coordinatorCannotBeSilentlyChangedToClearnetOrLocalhost()]
+display-name: coordinatorCannotBeSilentlyChangedToClearnetOrLocalhost()
+]]></system-out>
+</testcase>
+<testcase name="missingModelProducesExplicitRetryWithoutPretendPublication()" classname="org.securemail.worker.NewsWorkerTest" time="0.063">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.worker.NewsWorkerTest]/[method:missingModelProducesExplicitRetryWithoutPretendPublication()]
+display-name: missingModelProducesExplicitRetryWithoutPretendPublication()
+]]></system-out>
+</testcase>
+<testcase name="unsignedTamperedOrWrongIdentityResponseIsRejected()" classname="org.securemail.worker.WorkerCoordinatorClientTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.worker.WorkerCoordinatorClientTest]/[method:unsignedTamperedOrWrongIdentityResponseIsRejected()]
+display-name: unsignedTamperedOrWrongIdentityResponseIsRejected()
+]]></system-out>
+</testcase>
+<testcase name="boundedChunkedHttpParsesRealWireFormat()" classname="org.securemail.worker.SourceSecurityTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.worker.SourceSecurityTest]/[method:boundedChunkedHttpParsesRealWireFormat()]
+display-name: boundedChunkedHttpParsesRealWireFormat()
+]]></system-out>
+</testcase>
+<testcase name="signedClaimFailAndRetryUseActualDurableCoordinator()" classname="org.securemail.worker.ServiceCoordinator600Test" time="0.153">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.worker.ServiceCoordinator600Test]/[method:signedClaimFailAndRetryUseActualDurableCoordinator()]
+display-name: signedClaimFailAndRetryUseActualDurableCoordinator()
+]]></system-out>
+</testcase>
+<testcase name="robotRulesAndMaliciousRegexAreDataOnly()" classname="org.securemail.worker.SourceSecurityTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.worker.SourceSecurityTest]/[method:robotRulesAndMaliciousRegexAreDataOnly()]
+display-name: robotRulesAndMaliciousRegexAreDataOnly()
+]]></system-out>
+</testcase>
+<testcase name="mixedDnsAnswerOrRedirectCannotReachMetadataService()" classname="org.securemail.worker.SourceSecurityTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.worker.SourceSecurityTest]/[method:mixedDnsAnswerOrRedirectCannotReachMetadataService()]
+display-name: mixedDnsAnswerOrRedirectCannotReachMetadataService()
+]]></system-out>
+</testcase>
+<testcase name="actualCollectorPipelineParsesAllowlistedRssAndPassesOnlyPublicDataToModel()" classname="org.securemail.worker.NewsWorkerTest" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.worker.NewsWorkerTest]/[method:actualCollectorPipelineParsesAllowlistedRssAndPassesOnlyPublicDataToModel()]
+display-name: actualCollectorPipelineParsesAllowlistedRssAndPassesOnlyPublicDataToModel()
+]]></system-out>
+</testcase>
+<testcase name="realOllamaJsonRequestAndResponseUsesNoToolsOrCommands()" classname="org.securemail.worker.ModelHttpFixtureTest" time="0.061">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.worker.ModelHttpFixtureTest]/[method:realOllamaJsonRequestAndResponseUsesNoToolsOrCommands()]
+display-name: realOllamaJsonRequestAndResponseUsesNoToolsOrCommands()
+]]></system-out>
+</testcase>
+<testcase name="rejectsProtocolsCredentialsIpLiteralsAndNonallowlistedRedirects()" classname="org.securemail.worker.SourceSecurityTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.worker.SourceSecurityTest]/[method:rejectsProtocolsCredentialsIpLiteralsAndNonallowlistedRedirects()]
+display-name: rejectsProtocolsCredentialsIpLiteralsAndNonallowlistedRedirects()
+]]></system-out>
+</testcase>
+<testcase name="sourceSizeAndFeedEntryCountAreBounded()" classname="org.securemail.worker.SourceSecurityTest" time="0.007">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.worker.SourceSecurityTest]/[method:sourceSizeAndFeedEntryCountAreBounded()]
+display-name: sourceSizeAndFeedEntryCountAreBounded()
+]]></system-out>
+</testcase>
+<testcase name="validServerSignatureForDifferentRequestOrActorCannotBeSubstituted()" classname="org.securemail.worker.WorkerCoordinatorClientTest" time="0.02">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.worker.WorkerCoordinatorClientTest]/[method:validServerSignatureForDifferentRequestOrActorCannotBeSubstituted()]
+display-name: validServerSignatureForDifferentRequestOrActorCannotBeSubstituted()
+]]></system-out>
+</testcase>
+<testcase name="completeValidatesLeasedSourceAndLivePermissionsWithoutPretendModelPublication()" classname="org.securemail.worker.ServiceCoordinator600Test" time="0.16">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.worker.ServiceCoordinator600Test]/[method:completeValidatesLeasedSourceAndLivePermissionsWithoutPretendModelPublication()]
+display-name: completeValidatesLeasedSourceAndLivePermissionsWithoutPretendModelPublication()
+]]></system-out>
+</testcase>
+<testcase name="identityMirrorOfSamePublicKeyNeverInheritsServiceRights()" classname="org.securemail.worker.ServiceCoordinator600Test" time="0.226">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.worker.ServiceCoordinator600Test]/[method:identityMirrorOfSamePublicKeyNeverInheritsServiceRights()]
+display-name: identityMirrorOfSamePublicKeyNeverInheritsServiceRights()
+]]></system-out>
+</testcase>
+<testcase name="serviceClientRejectsForgedResponseAndWrongPinnedService()" classname="org.securemail.worker.ServiceCoordinator600Test" time="0.479">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.worker.ServiceCoordinator600Test]/[method:serviceClientRejectsForgedResponseAndWrongPinnedService()]
+display-name: serviceClientRejectsForgedResponseAndWrongPinnedService()
+]]></system-out>
+</testcase>
+<testcase name="rejectsPrivateSpecialIpv4AndIpv6Ranges()" classname="org.securemail.worker.SourceSecurityTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.worker.SourceSecurityTest]/[method:rejectsPrivateSpecialIpv4AndIpv6Ranges()]
+display-name: rejectsPrivateSpecialIpv4AndIpv6Ranges()
+]]></system-out>
+</testcase>
+<testcase name="externalAndLocalEndpointsCannotDowngradeOrRedirectToPrivateHosts()" classname="org.securemail.worker.ModelHttpFixtureTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.worker.ModelHttpFixtureTest]/[method:externalAndLocalEndpointsCannotDowngradeOrRedirectToPrivateHosts()]
+display-name: externalAndLocalEndpointsCannotDowngradeOrRedirectToPrivateHosts()
+]]></system-out>
+</testcase>
+<testcase name="htmlNeverExecutesScriptAndDangerousLinksAreDiscarded()" classname="org.securemail.worker.SourceSecurityTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.worker.SourceSecurityTest]/[method:htmlNeverExecutesScriptAndDangerousLinksAreDiscarded()]
+display-name: htmlNeverExecutesScriptAndDangerousLinksAreDiscarded()
+]]></system-out>
+</testcase>
+<testcase name="privateInputCannotEnterPublicNewsModel()" classname="org.securemail.worker.ModelHttpFixtureTest" time="0.126">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.worker.ModelHttpFixtureTest]/[method:privateInputCannotEnterPublicNewsModel()]
+display-name: privateInputCannotEnterPublicNewsModel()
+]]></system-out>
+</testcase>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]
+display-name: JUnit Jupiter
+]]></system-out>
+</testsuite>
