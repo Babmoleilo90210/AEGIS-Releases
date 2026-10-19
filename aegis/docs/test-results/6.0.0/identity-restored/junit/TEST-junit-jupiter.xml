@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="JUnit Jupiter" tests="87" skipped="0" failures="0" errors="0" time="8.018" hostname="86667f55c355" timestamp="2026-10-19T11:49:51">
+<properties>
+<property name="file.encoding" value="UTF-8"/>
+<property name="file.separator" value="/"/>
+<property name="java.class.path" value="/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-platform-console-standalone-1.13.4.jar"/>
+<property name="java.class.version" value="65.0"/>
+<property name="java.home" value="/workspace/scratch/aa629f360927/inputs600/toolchain/jdk-21.0.12.1+1"/>
+<property name="java.io.tmpdir" value="/tmp"/>
+<property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/>
+<property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+<property name="java.runtime.version" value="21.0.12.1+1-LTS"/>
+<property name="java.specification.name" value="Java Platform API Specification"/>
+<property name="java.specification.vendor" value="Oracle Corporation"/>
+<property name="java.specification.version" value="21"/>
+<property name="java.vendor" value="Eclipse Adoptium"/>
+<property name="java.vendor.url" value="https://adoptium.net/"/>
+<property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
+<property name="java.vendor.version" value="Temurin-21.0.12.1+1"/>
+<property name="java.version" value="21.0.12.1"/>
+<property name="java.version.date" value="2026-08-18"/>
+<property name="java.vm.compressedOopsMode" value="32-bit"/>
+<property name="java.vm.info" value="mixed mode, sharing"/>
+<property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+<property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+<property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+<property name="java.vm.specification.version" value="21"/>
+<property name="java.vm.vendor" value="Eclipse Adoptium"/>
+<property name="java.vm.version" value="21.0.12.1+1-LTS"/>
+<property name="jdk.debug" value="release"/>
+<property name="jdk.httpserver.maxConnections" value="32"/>
+<property name="junit.docs.version" value="1.13.4"/>
+<property name="line.separator" value="&#10;"/>
+<property name="native.encoding" value="UTF-8"/>
+<property name="os.arch" value="amd64"/>
+<property name="os.name" value="Linux"/>
+<property name="os.version" value="6.18.55"/>
+<property name="path.separator" value=":"/>
+<property name="stderr.encoding" value="UTF-8"/>
+<property name="stdout.encoding" value="UTF-8"/>
+<property name="sun.arch.data.model" value="64"/>
+<property name="sun.boot.library.path" value="/workspace/scratch/aa629f360927/inputs600/toolchain/jdk-21.0.12.1+1/lib"/>
+<property name="sun.cpu.endian" value="little"/>
+<property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+<property name="sun.java.command" value="/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-platform-console-standalone-1.13.4.jar execute --class-path /workspace/scratch/aa629f360927/audit600/identity-restored/classes:/workspace/scratch/aa629f360927/inputs600/maven-deps/gson-2.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/sqlite-jdbc-3.53.4.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/slf4j-api-2.0.17.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/slf4j-nop-2.0.17.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-platform-console-standalone-1.13.4.jar --select-package org.securemail.identity --select-class org.securemail.client.ecosystemauth.IdentityAdministrationFlow600Test --reports-dir /workspace/scratch/aa629f360927/audit600/identity-restored/junit --details summary --disable-ansi-colors"/>
+<property name="sun.java.launcher" value="SUN_STANDARD"/>
+<property name="sun.jnu.encoding" value="UTF-8"/>
+<property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+<property name="sun.net.httpserver.maxReqHeaders" value="16"/>
+<property name="sun.net.httpserver.maxReqTime" value="15"/>
+<property name="sun.net.httpserver.maxRspTime" value="15"/>
+<property name="user.dir" value="/workspace/scratch/aa629f360927/aegis600/aegis"/>
+<property name="user.home" value="/root"/>
+<property name="user.language" value="en"/>
+<property name="user.name" value="root"/>
+<property name="user.timezone" value="Asia/Kolkata"/>
+</properties>
+<testcase name="rotatingApplicationProofKeyRevokesPriorTokensOfThatApplication()" classname="org.securemail.identity.IdentityStoreTest" time="0.03">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:rotatingApplicationProofKeyRevokesPriorTokensOfThatApplication()]
+display-name: rotatingApplicationProofKeyRevokesPriorTokensOfThatApplication()
+]]></system-out>
+</testcase>
+<testcase name="missingStepUpAndLocalLockPreventAdministrativeOperation()" classname="org.securemail.client.ecosystemauth.IdentityAdministrationFlow600Test" time="0.823">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.IdentityAdministrationFlow600Test]/[method:missingStepUpAndLocalLockPreventAdministrativeOperation()]
+display-name: missingStepUpAndLocalLockPreventAdministrativeOperation()
+]]></system-out>
+</testcase>
+<testcase name="recoveredAccountCanRegainLibraryOnlyAfterTwoAdministratorReview()" classname="org.securemail.identity.FirstDelegationTest" time="0.092">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.FirstDelegationTest]/[method:recoveredAccountCanRegainLibraryOnlyAfterTwoAdministratorReview()]
+display-name: recoveredAccountCanRegainLibraryOnlyAfterTwoAdministratorReview()
+]]></system-out>
+</testcase>
+<testcase name="bootstrapInspectionRequiresExistingOperatorChallengeAndNeverCompletesOverHttp()" classname="org.securemail.identity.IdentityHttpServerTest" time="0.114">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityHttpServerTest]/[method:bootstrapInspectionRequiresExistingOperatorChallengeAndNeverCompletesOverHttp()]
+display-name: bootstrapInspectionRequiresExistingOperatorChallengeAndNeverCompletesOverHttp()
+]]></system-out>
+</testcase>
+<testcase name="capabilityCodecCanonicalAndExpiryAndTamperSafe()" classname="org.securemail.identity.IdentityStoreTest" time="0.027">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:capabilityCodecCanonicalAndExpiryAndTamperSafe()]
+display-name: capabilityCodecCanonicalAndExpiryAndTamperSafe()
+]]></system-out>
+</testcase>
+<testcase name="auditTailTruncationWithoutChangingAnchorIsDetected()" classname="org.securemail.identity.IdentityStoreTest" time="0.033">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:auditTailTruncationWithoutChangingAnchorIsDetected()]
+display-name: auditTailTruncationWithoutChangingAnchorIsDetected()
+]]></system-out>
+</testcase>
+<testcase name="configuredServiceIdentityCannotBeSilentlyReplaced()" classname="org.securemail.identity.IdentityStoreTest" time="0.021">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:configuredServiceIdentityCannotBeSilentlyReplaced()]
+display-name: configuredServiceIdentityCannotBeSilentlyReplaced()
+]]></system-out>
+</testcase>
+<testcase name="generationRevokesAllOldTokensAndOldTrustedDeviceCannotUseNewGeneration()" classname="org.securemail.identity.IdentityStoreTest" time="0.062">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:generationRevokesAllOldTokensAndOldTrustedDeviceCannotUseNewGeneration()]
+display-name: generationRevokesAllOldTokensAndOldTrustedDeviceCannotUseNewGeneration()
+]]></system-out>
+</testcase>
+<testcase name="normalSubsequentAssignmentRequiresTwoCurrentAdministrators()" classname="org.securemail.identity.FirstDelegationTest" time="0.087">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.FirstDelegationTest]/[method:normalSubsequentAssignmentRequiresTwoCurrentAdministrators()]
+display-name: normalSubsequentAssignmentRequiresTwoCurrentAdministrators()
+]]></system-out>
+</testcase>
+<testcase name="rootDeviceRecoveryAndApplicationKeysCannotBeReusedAcrossDomains()" classname="org.securemail.identity.IdentityStoreTest" time="0.038">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:rootDeviceRecoveryAndApplicationKeysCannotBeReusedAcrossDomains()]
+display-name: rootDeviceRecoveryAndApplicationKeysCannotBeReusedAcrossDomains()
+]]></system-out>
+</testcase>
+<testcase name="twoSqlConnectionsConsumeInspectionNonceOnlyOnce()" classname="org.securemail.identity.DeviceRecoveryInspectionTest" time="0.028">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.DeviceRecoveryInspectionTest]/[method:twoSqlConnectionsConsumeInspectionNonceOnlyOnce()]
+display-name: twoSqlConnectionsConsumeInspectionNonceOnlyOnce()
+]]></system-out>
+</testcase>
+<testcase name="eachWrongKeyIsRejectedWithoutConsumingValidPermit()" classname="org.securemail.identity.OwnerTransferTest" time="0.111">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.OwnerTransferTest]/[method:eachWrongKeyIsRejectedWithoutConsumingValidPermit()]
+display-name: eachWrongKeyIsRejectedWithoutConsumingValidPermit()
+]]></system-out>
+</testcase>
+<testcase name="recoveryNeedsSeparateRootAndRecoveryProofAndInvalidatesPriorDevices()" classname="org.securemail.identity.IdentityStoreTest" time="0.075">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:recoveryNeedsSeparateRootAndRecoveryProofAndInvalidatesPriorDevices()]
+display-name: recoveryNeedsSeparateRootAndRecoveryProofAndInvalidatesPriorDevices()
+]]></system-out>
+</testcase>
+<testcase name="newDeviceProofCannotBeReusedForDifferentKeyAccountAudienceOrExpiry()" classname="org.securemail.identity.DeviceRecoveryInspectionTest" time="0.035">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.DeviceRecoveryInspectionTest]/[method:newDeviceProofCannotBeReusedForDifferentKeyAccountAudienceOrExpiry()]
+display-name: newDeviceProofCannotBeReusedForDifferentKeyAccountAudienceOrExpiry()
+]]></system-out>
+</testcase>
+<testcase name="firstDelegationRequiresFourProofsAndGrantsNamedCustomAdministratorOnlyOnce()" classname="org.securemail.identity.FirstDelegationTest" time="0.077">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.FirstDelegationTest]/[method:firstDelegationRequiresFourProofsAndGrantsNamedCustomAdministratorOnlyOnce()]
+display-name: firstDelegationRequiresFourProofsAndGrantsNamedCustomAdministratorOnlyOnce()
+]]></system-out>
+</testcase>
+<testcase name="expiredOwnerChallengeAndStepUpCannotBeReplayed()" classname="org.securemail.identity.IdentityStoreTest" time="0.035">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:expiredOwnerChallengeAndStepUpCannotBeReplayed()]
+display-name: expiredOwnerChallengeAndStepUpCannotBeReplayed()
+]]></system-out>
+</testcase>
+<testcase name="revokedIndependentApproverInvalidatesAlreadyApprovedPermit()" classname="org.securemail.identity.OwnerTransferTest" time="0.089">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.OwnerTransferTest]/[method:revokedIndependentApproverInvalidatesAlreadyApprovedPermit()]
+display-name: revokedIndependentApproverInvalidatesAlreadyApprovedPermit()
+]]></system-out>
+</testcase>
+<testcase name="twoIndependentCurrentAdministratorsExactPayloadOneUse()" classname="org.securemail.identity.CriticalApprovalTest" time="0.07">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.CriticalApprovalTest]/[method:twoIndependentCurrentAdministratorsExactPayloadOneUse()]
+display-name: twoIndependentCurrentAdministratorsExactPayloadOneUse()
+]]></system-out>
+</testcase>
+<testcase name="lastIndependentAdministratorCannotApproveTheirOwnRevocationOrResetFirstBootstrap()" classname="org.securemail.identity.FirstDelegationTest" time="0.079">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.FirstDelegationTest]/[method:lastIndependentAdministratorCannotApproveTheirOwnRevocationOrResetFirstBootstrap()]
+display-name: lastIndependentAdministratorCannotApproveTheirOwnRevocationOrResetFirstBootstrap()
+]]></system-out>
+</testcase>
+<testcase name="assignmentAndRevocationUseTheSamePersistedTwoAdminPermit()" classname="org.securemail.client.ecosystemauth.IdentityAdministrationFlow600Test" time="0.677">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.IdentityAdministrationFlow600Test]/[method:assignmentAndRevocationUseTheSamePersistedTwoAdminPermit()]
+display-name: assignmentAndRevocationUseTheSamePersistedTwoAdminPermit()
+]]></system-out>
+</testcase>
+<testcase name="ownerAdminRequiresStepUpWhileOrdinaryBadgeDoesNotImplyAdmin()" classname="org.securemail.identity.IdentityStoreTest" time="0.04">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:ownerAdminRequiresStepUpWhileOrdinaryBadgeDoesNotImplyAdmin()]
+display-name: ownerAdminRequiresStepUpWhileOrdinaryBadgeDoesNotImplyAdmin()
+]]></system-out>
+</testcase>
+<testcase name="operatorRelayAllowAndRevokeUseOnlyPinnedPublicFile()" classname="org.securemail.identity.IdentityMainTest" time="0.041">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityMainTest]/[method:operatorRelayAllowAndRevokeUseOnlyPinnedPublicFile()]
+display-name: operatorRelayAllowAndRevokeUseOnlyPinnedPublicFile()
+]]></system-out>
+</testcase>
+<testcase name="revokeCannotRemoveEitherInitiatorOrIndependentApprover()" classname="org.securemail.identity.IdentityAdministration600Test" time="0.073">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityAdministration600Test]/[method:revokeCannotRemoveEitherInitiatorOrIndependentApprover()]
+display-name: revokeCannotRemoveEitherInitiatorOrIndependentApprover()
+]]></system-out>
+</testcase>
+<testcase name="ownerCannotBeOwnIndependentSecondConfirmation()" classname="org.securemail.identity.FirstDelegationTest" time="0.039">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.FirstDelegationTest]/[method:ownerCannotBeOwnIndependentSecondConfirmation()]
+display-name: ownerCannotBeOwnIndependentSecondConfirmation()
+]]></system-out>
+</testcase>
+<testcase name="consentExpiresAfter120Seconds()" classname="org.securemail.identity.FirstDelegationTest" time="0.052">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.FirstDelegationTest]/[method:consentExpiresAfter120Seconds()]
+display-name: consentExpiresAfter120Seconds()
+]]></system-out>
+</testcase>
+<testcase name="staleRecoveryFileCannotChangeDeviceTrustBeforeCorrectRegisteredProof()" classname="org.securemail.identity.DeviceRecoveryInspectionTest" time="0.028">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.DeviceRecoveryInspectionTest]/[method:staleRecoveryFileCannotChangeDeviceTrustBeforeCorrectRegisteredProof()]
+display-name: staleRecoveryFileCannotChangeDeviceTrustBeforeCorrectRegisteredProof()
+]]></system-out>
+</testcase>
+<testcase name="actualHttpFirstDelegationAndReauthenticationUseOnlyTypedProofs()" classname="org.securemail.identity.IdentityHttpServerTest" time="0.156">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityHttpServerTest]/[method:actualHttpFirstDelegationAndReauthenticationUseOnlyTypedProofs()]
+display-name: actualHttpFirstDelegationAndReauthenticationUseOnlyTypedProofs()
+]]></system-out>
+</testcase>
+<testcase name="explicitLogoutAtomicallyRevokesAllApplications()" classname="org.securemail.identity.IdentityStoreTest" time="0.038">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:explicitLogoutAtomicallyRevokesAllApplications()]
+display-name: explicitLogoutAtomicallyRevokesAllApplications()
+]]></system-out>
+</testcase>
+<testcase name="clockRollbackFailsClosedAndCannotExtendSignedLease()" classname="org.securemail.identity.IdentityStoreTest" time="0.03">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:clockRollbackFailsClosedAndCannotExtendSignedLease()]
+display-name: clockRollbackFailsClosedAndCannotExtendSignedLease()
+]]></system-out>
+</testcase>
+<testcase name="actualHttpFirstDelegationInspectionIsParticipantBoundAndOneUse()" classname="org.securemail.identity.OwnerTransferTest" time="0.141">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.OwnerTransferTest]/[method:actualHttpFirstDelegationInspectionIsParticipantBoundAndOneUse()]
+display-name: actualHttpFirstDelegationInspectionIsParticipantBoundAndOneUse()
+]]></system-out>
+</testcase>
+<testcase name="duplicateRegistrationCannotResetRecoveryOrTrust()" classname="org.securemail.identity.IdentityStoreTest" time="0.022">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:duplicateRegistrationCannotResetRecoveryOrTrust()]
+display-name: duplicateRegistrationCannotResetRecoveryOrTrust()
+]]></system-out>
+</testcase>
+<testcase name="loginRaceOnlyOneGenerationActiveAcrossIndependentConnections()" classname="org.securemail.identity.IdentityStoreTest" time="0.045">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:loginRaceOnlyOneGenerationActiveAcrossIndependentConnections()]
+display-name: loginRaceOnlyOneGenerationActiveAcrossIndependentConnections()
+]]></system-out>
+</testcase>
+<testcase name="exactExpiryAndClockRollbackFailClosed()" classname="org.securemail.identity.DeviceRecoveryInspectionTest" time="0.022">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.DeviceRecoveryInspectionTest]/[method:exactExpiryAndClockRollbackFailClosed()]
+display-name: exactExpiryAndClockRollbackFailClosed()
+]]></system-out>
+</testcase>
+<testcase name="isActiveRecheckGivesNoIdentityMetadataAndTurnsFalseAfterLogin()" classname="org.securemail.identity.IdentityHttpServerTest" time="0.071">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityHttpServerTest]/[method:isActiveRecheckGivesNoIdentityMetadataAndTurnsFalseAfterLogin()]
+display-name: isActiveRecheckGivesNoIdentityMetadataAndTurnsFalseAfterLogin()
+]]></system-out>
+</testcase>
+<testcase name="actualOperatorCliBootstrapUsesOnlyPublicChallengeAndProof()" classname="org.securemail.identity.IdentityMainTest" time="0.069">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityMainTest]/[method:actualOperatorCliBootstrapUsesOnlyPublicChallengeAndProof()]
+display-name: actualOperatorCliBootstrapUsesOnlyPublicChallengeAndProof()
+]]></system-out>
+</testcase>
+<testcase name="tamperedAuditBlocksReopen()" classname="org.securemail.identity.IdentityStoreTest" time="0.041">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:tamperedAuditBlocksReopen()]
+display-name: tamperedAuditBlocksReopen()
+]]></system-out>
+</testcase>
+<testcase name="unsteppedTargetCannotAcceptEvenWithValidRootAndDeviceProofs()" classname="org.securemail.identity.OwnerTransferTest" time="0.078">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.OwnerTransferTest]/[method:unsteppedTargetCannotAcceptEvenWithValidRootAndDeviceProofs()]
+display-name: unsteppedTargetCannotAcceptEvenWithValidRootAndDeviceProofs()
+]]></system-out>
+</testcase>
+<testcase name="targetStepUpCanExpireBeforeStillLiveTransferChallenge()" classname="org.securemail.identity.OwnerTransferTest" time="0.105">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.OwnerTransferTest]/[method:targetStepUpCanExpireBeforeStillLiveTransferChallenge()]
+display-name: targetStepUpCanExpireBeforeStillLiveTransferChallenge()
+]]></system-out>
+</testcase>
+<testcase name="pendingPermitCannotCompleteButFailedAttemptDoesNotSpendIt()" classname="org.securemail.identity.OwnerTransferTest" time="0.106">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.OwnerTransferTest]/[method:pendingPermitCannotCompleteButFailedAttemptDoesNotSpendIt()]
+display-name: pendingPermitCannotCompleteButFailedAttemptDoesNotSpendIt()
+]]></system-out>
+</testcase>
+<testcase name="actualSignedHttpPublicOnlyInspectionThenRegisteredDualProofRecovery()" classname="org.securemail.identity.DeviceRecoveryInspectionTest" time="0.058">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.DeviceRecoveryInspectionTest]/[method:actualSignedHttpPublicOnlyInspectionThenRegisteredDualProofRecovery()]
+display-name: actualSignedHttpPublicOnlyInspectionThenRegisteredDualProofRecovery()
+]]></system-out>
+</testcase>
+<testcase name="replayRejectedAndDigestDomainCannotBeReusedAsBodyProof()" classname="org.securemail.identity.IdentityStoreTest" time="0.032">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:replayRejectedAndDigestDomainCannotBeReusedAsBodyProof()]
+display-name: replayRejectedAndDigestDomainCannotBeReusedAsBodyProof()
+]]></system-out>
+</testcase>
+<testcase name="exactCodecDomainsAndTrailingBytesCannotBeConfused()" classname="org.securemail.identity.OwnerTransferTest" time="0.053">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.OwnerTransferTest]/[method:exactCodecDomainsAndTrailingBytesCannotBeConfused()]
+display-name: exactCodecDomainsAndTrailingBytesCannotBeConfused()
+]]></system-out>
+</testcase>
+<testcase name="wrongMethodDuplicateKeysMassAssignmentAndMalformedUtf8Refused()" classname="org.securemail.identity.IdentityHttpServerTest" time="0.176">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityHttpServerTest]/[method:wrongMethodDuplicateKeysMassAssignmentAndMalformedUtf8Refused()]
+display-name: wrongMethodDuplicateKeysMassAssignmentAndMalformedUtf8Refused()
+]]></system-out>
+</testcase>
+<testcase name="actualCliNeedsOnlyBoundedPublicProofImportsAndPreservesRootKeys()" classname="org.securemail.identity.OwnerAdministrationCliTest" time="0.174">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.OwnerAdministrationCliTest]/[method:actualCliNeedsOnlyBoundedPublicProofImportsAndPreservesRootKeys()]
+display-name: actualCliNeedsOnlyBoundedPublicProofImportsAndPreservesRootKeys()
+]]></system-out>
+</testcase>
+<testcase name="strictJsonRejectsHugeNumbersFractionsDeepTreesAndLoneSurrogate()" classname="org.securemail.identity.IdentityHttpServerTest" time="0.022">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityHttpServerTest]/[method:strictJsonRejectsHugeNumbersFractionsDeepTreesAndLoneSurrogate()]
+display-name: strictJsonRejectsHugeNumbersFractionsDeepTreesAndLoneSurrogate()
+]]></system-out>
+</testcase>
+<testcase name="boundedPendingChallengeSelfUnknownAndDuplicateFailClosed()" classname="org.securemail.identity.OwnerTransferTest" time="0.163">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.OwnerTransferTest]/[method:boundedPendingChallengeSelfUnknownAndDuplicateFailClosed()]
+display-name: boundedPendingChallengeSelfUnknownAndDuplicateFailClosed()
+]]></system-out>
+</testcase>
+<testcase name="exactExpiryAndMissingFreshTargetStepUpFailClosed()" classname="org.securemail.identity.OwnerTransferTest" time="0.065">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.OwnerTransferTest]/[method:exactExpiryAndMissingFreshTargetStepUpFailClosed()]
+display-name: exactExpiryAndMissingFreshTargetStepUpFailClosed()
+]]></system-out>
+</testcase>
+<testcase name="signedLoopbackRegisterIssueAndDigestAuthorizationActuallyWork()" classname="org.securemail.identity.IdentityHttpServerTest" time="0.087">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityHttpServerTest]/[method:signedLoopbackRegisterIssueAndDigestAuthorizationActuallyWork()]
+display-name: signedLoopbackRegisterIssueAndDigestAuthorizationActuallyWork()
+]]></system-out>
+</testcase>
+<testcase name="registrationRequiresBothAccountAndDeviceOwnership()" classname="org.securemail.identity.IdentityStoreTest" time="0.026">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:registrationRequiresBothAccountAndDeviceOwnership()]
+display-name: registrationRequiresBothAccountAndDeviceOwnership()
+]]></system-out>
+</testcase>
+<testcase name="ownerBootstrapOneUseBoundToExistingAccountProofAndService()" classname="org.securemail.identity.IdentityStoreTest" time="0.038">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:ownerBootstrapOneUseBoundToExistingAccountProofAndService()]
+display-name: ownerBootstrapOneUseBoundToExistingAccountProofAndService()
+]]></system-out>
+</testcase>
+<testcase name="releasesRemainOwnerOnlyWithoutSecondApproval()" classname="org.securemail.identity.CriticalApprovalTest" time="0.066">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.CriticalApprovalTest]/[method:releasesRemainOwnerOnlyWithoutSecondApproval()]
+display-name: releasesRemainOwnerOnlyWithoutSecondApproval()
+]]></system-out>
+</testcase>
+<testcase name="managedAccountQueryRequiresSeparateOperatorPinnedRelayProofAndOneUseNonce()" classname="org.securemail.identity.IdentityStoreTest" time="0.042">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:managedAccountQueryRequiresSeparateOperatorPinnedRelayProofAndOneUseNonce()]
+display-name: managedAccountQueryRequiresSeparateOperatorPinnedRelayProofAndOneUseNonce()
+]]></system-out>
+</testcase>
+<testcase name="targetLoginGenerationChangeInvalidatesConsent()" classname="org.securemail.identity.FirstDelegationTest" time="0.049">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.FirstDelegationTest]/[method:targetLoginGenerationChangeInvalidatesConsent()]
+display-name: targetLoginGenerationChangeInvalidatesConsent()
+]]></system-out>
+</testcase>
+<testcase name="targetGenerationChangeRejectsPendingTransfer()" classname="org.securemail.identity.OwnerTransferTest" time="0.068">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.OwnerTransferTest]/[method:targetGenerationChangeRejectsPendingTransfer()]
+display-name: targetGenerationChangeRejectsPendingTransfer()
+]]></system-out>
+</testcase>
+<testcase name="registrationPreservesLegacyIdWithoutExportAndOnlyTwoSystemRoles()" classname="org.securemail.identity.IdentityStoreTest" time="0.018">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:registrationPreservesLegacyIdWithoutExportAndOnlyTwoSystemRoles()]
+display-name: registrationPreservesLegacyIdWithoutExportAndOnlyTwoSystemRoles()
+]]></system-out>
+</testcase>
+<testcase name="consumedTrustedDeviceApprovalChallengeCannotBeInspected()" classname="org.securemail.identity.DeviceRecoveryInspectionTest" time="0.028">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.DeviceRecoveryInspectionTest]/[method:consumedTrustedDeviceApprovalChallengeCannotBeInspected()]
+display-name: consumedTrustedDeviceApprovalChallengeCannotBeInspected()
+]]></system-out>
+</testcase>
+<testcase name="managedAccountQueryRejectsWrongServicePurposeExpiryAndClockRollback()" classname="org.securemail.identity.IdentityStoreTest" time="0.025">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:managedAccountQueryRejectsWrongServicePurposeExpiryAndClockRollback()]
+display-name: managedAccountQueryRejectsWrongServicePurposeExpiryAndClockRollback()
+]]></system-out>
+</testcase>
+<testcase name="concurrentCompletionCannotCreateTwoFirstDelegates()" classname="org.securemail.identity.FirstDelegationTest" time="0.083">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.FirstDelegationTest]/[method:concurrentCompletionCannotCreateTwoFirstDelegates()]
+display-name: concurrentCompletionCannotCreateTwoFirstDelegates()
+]]></system-out>
+</testcase>
+<testcase name="capabilityIsNarrowAppAndProofBound()" classname="org.securemail.identity.IdentityStoreTest" time="0.039">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:capabilityIsNarrowAppAndProofBound()]
+display-name: capabilityIsNarrowAppAndProofBound()
+]]></system-out>
+</testcase>
+<testcase name="unrecognizedOptionsAndSymlinkHomesRefused()" classname="org.securemail.identity.IdentityMainTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityMainTest]/[method:unrecognizedOptionsAndSymlinkHomesRefused()]
+display-name: unrecognizedOptionsAndSymlinkHomesRefused()
+]]></system-out>
+</testcase>
+<testcase name="changedTargetInitiatorOperationAndExpiryAreRejectedBeforeApproval()" classname="org.securemail.client.ecosystemauth.IdentityAdministrationFlow600Test" time="0.385">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.IdentityAdministrationFlow600Test]/[method:changedTargetInitiatorOperationAndExpiryAreRejectedBeforeApproval()]
+display-name: changedTargetInitiatorOperationAndExpiryAreRejectedBeforeApproval()
+]]></system-out>
+</testcase>
+<testcase name="newInitiatorSessionCannotReuseAnOlderPendingPermit()" classname="org.securemail.identity.IdentityAdministration600Test" time="0.072">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityAdministration600Test]/[method:newInitiatorSessionCannotReuseAnOlderPendingPermit()]
+display-name: newInitiatorSessionCannotReuseAnOlderPendingPermit()
+]]></system-out>
+</testcase>
+<testcase name="dtoDefensiveKeyAndCanonicalDomainRemainExact()" classname="org.securemail.identity.DeviceRecoveryInspectionTest" time="0.02">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.DeviceRecoveryInspectionTest]/[method:dtoDefensiveKeyAndCanonicalDomainRemainExact()]
+display-name: dtoDefensiveKeyAndCanonicalDomainRemainExact()
+]]></system-out>
+</testcase>
+<testcase name="administrativeFreshCheckExpiresWithStepUpRatherThanLongerTokenLease()" classname="org.securemail.identity.CriticalApprovalTest" time="0.051">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.CriticalApprovalTest]/[method:administrativeFreshCheckExpiresWithStepUpRatherThanLongerTokenLease()]
+display-name: administrativeFreshCheckExpiresWithStepUpRatherThanLongerTokenLease()
+]]></system-out>
+</testcase>
+<testcase name="oppositeConsentRoleAndChangedCanonicalFieldsCannotBeReused()" classname="org.securemail.identity.OwnerTransferTest" time="0.08">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.OwnerTransferTest]/[method:oppositeConsentRoleAndChangedCanonicalFieldsCannotBeReused()]
+display-name: oppositeConsentRoleAndChangedCanonicalFieldsCannotBeReused()
+]]></system-out>
+</testcase>
+<testcase name="successorCannotAlsoApproveTheAdministrativePermit()" classname="org.securemail.identity.OwnerTransferTest" time="0.1">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.OwnerTransferTest]/[method:successorCannotAlsoApproveTheAdministrativePermit()]
+display-name: successorCannotAlsoApproveTheAdministrativePermit()
+]]></system-out>
+</testcase>
+<testcase name="actualRecoveryApprovalLiftsOnlyThePendingSensitiveRestriction()" classname="org.securemail.client.ecosystemauth.IdentityAdministrationFlow600Test" time="0.401">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.IdentityAdministrationFlow600Test]/[method:actualRecoveryApprovalLiftsOnlyThePendingSensitiveRestriction()]
+display-name: actualRecoveryApprovalLiftsOnlyThePendingSensitiveRestriction()
+]]></system-out>
+</testcase>
+<testcase name="boundedParserRejectsAmbiguousFieldsAndWrongPayloadDomain()" classname="org.securemail.client.ecosystemauth.IdentityAdministrationFlow600Test" time="0.307">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.IdentityAdministrationFlow600Test]/[method:boundedParserRejectsAmbiguousFieldsAndWrongPayloadDomain()]
+display-name: boundedParserRejectsAmbiguousFieldsAndWrongPayloadDomain()
+]]></system-out>
+</testcase>
+<testcase name="applicationAndDeviceKeysCannotBeReusedAcrossDifferentAccounts()" classname="org.securemail.identity.IdentityStoreTest" time="0.043">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:applicationAndDeviceKeysCannotBeReusedAcrossDifferentAccounts()]
+display-name: applicationAndDeviceKeysCannotBeReusedAcrossDifferentAccounts()
+]]></system-out>
+</testcase>
+<testcase name="revokedExternalAdminRemainsRevokedAcrossReopenUntilTwoAdminAssignment()" classname="org.securemail.identity.IdentityAdministration600Test" time="0.092">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityAdministration600Test]/[method:revokedExternalAdminRemainsRevokedAcrossReopenUntilTwoAdminAssignment()]
+display-name: revokedExternalAdminRemainsRevokedAcrossReopenUntilTwoAdminAssignment()
+]]></system-out>
+</testcase>
+<testcase name="unknownDeviceCannotLoginAndEnrollmentNeedsFreshStepUp()" classname="org.securemail.identity.IdentityStoreTest" time="0.029">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:unknownDeviceCannotLoginAndEnrollmentNeedsFreshStepUp()]
+display-name: unknownDeviceCannotLoginAndEnrollmentNeedsFreshStepUp()
+]]></system-out>
+</testcase>
+<testcase name="managedAccountUsesSignedHttpAndExposesOnlyBooleanToPinnedRelay()" classname="org.securemail.identity.IdentityHttpServerTest" time="0.066">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityHttpServerTest]/[method:managedAccountUsesSignedHttpAndExposesOnlyBooleanToPinnedRelay()]
+display-name: managedAccountUsesSignedHttpAndExposesOnlyBooleanToPinnedRelay()
+]]></system-out>
+</testcase>
+<testcase name="ownerRecoveryNeedsTwoOtherAdminsBeforeAdministrativeUse()" classname="org.securemail.identity.OwnerTransferTest" time="0.094">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.OwnerTransferTest]/[method:ownerRecoveryNeedsTwoOtherAdminsBeforeAdministrativeUse()]
+display-name: ownerRecoveryNeedsTwoOtherAdminsBeforeAdministrativeUse()
+]]></system-out>
+</testcase>
+<testcase name="fourProofsAndIndependentPermitAtomicallySwitchOwnerAndRevokeBothSessions()" classname="org.securemail.identity.OwnerTransferTest" time="0.117">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.OwnerTransferTest]/[method:fourProofsAndIndependentPermitAtomicallySwitchOwnerAndRevokeBothSessions()]
+display-name: fourProofsAndIndependentPermitAtomicallySwitchOwnerAndRevokeBothSessions()
+]]></system-out>
+</testcase>
+<testcase name="ownerLoginGenerationChangeInvalidatesConsent()" classname="org.securemail.identity.FirstDelegationTest" time="0.056">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.FirstDelegationTest]/[method:ownerLoginGenerationChangeInvalidatesConsent()]
+display-name: ownerLoginGenerationChangeInvalidatesConsent()
+]]></system-out>
+</testcase>
+<testcase name="roleEpochChangeInvalidatesExactPendingConsent()" classname="org.securemail.identity.OwnerTransferTest" time="0.101">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.OwnerTransferTest]/[method:roleEpochChangeInvalidatesExactPendingConsent()]
+display-name: roleEpochChangeInvalidatesExactPendingConsent()
+]]></system-out>
+</testcase>
+<testcase name="changedRoleNameOrWrongDeviceProofInvalidatesAllConsent()" classname="org.securemail.identity.FirstDelegationTest" time="0.067">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.FirstDelegationTest]/[method:changedRoleNameOrWrongDeviceProofInvalidatesAllConsent()]
+display-name: changedRoleNameOrWrongDeviceProofInvalidatesAllConsent()
+]]></system-out>
+</testcase>
+<testcase name="remoteListeningAddressAndWrongServiceKeyForbidden()" classname="org.securemail.identity.IdentityHttpServerTest" time="0.022">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityHttpServerTest]/[method:remoteListeningAddressAndWrongServiceKeyForbidden()]
+display-name: remoteListeningAddressAndWrongServiceKeyForbidden()
+]]></system-out>
+</testcase>
+<testcase name="replayedInspectionDoesNotEnrollOrConsumeTheActualRecoveryChallenge()" classname="org.securemail.identity.DeviceRecoveryInspectionTest" time="0.025">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.DeviceRecoveryInspectionTest]/[method:replayedInspectionDoesNotEnrollOrConsumeTheActualRecoveryChallenge()]
+display-name: replayedInspectionDoesNotEnrollOrConsumeTheActualRecoveryChallenge()
+]]></system-out>
+</testcase>
+<testcase name="revokedSecondAdministratorCannotConfirmOrCompleteExistingPermit()" classname="org.securemail.identity.CriticalApprovalTest" time="0.103">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.CriticalApprovalTest]/[method:revokedSecondAdministratorCannotConfirmOrCompleteExistingPermit()]
+display-name: revokedSecondAdministratorCannotConfirmOrCompleteExistingPermit()
+]]></system-out>
+</testcase>
+<testcase name="twoSqlConnectionsCannotConsumeTransferTwice()" classname="org.securemail.identity.OwnerTransferTest" time="0.111">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.OwnerTransferTest]/[method:twoSqlConnectionsCannotConsumeTransferTwice()]
+display-name: twoSqlConnectionsCannotConsumeTransferTwice()
+]]></system-out>
+</testcase>
+<testcase name="offlineLeaseUsesMonotonicTimeRejectsClockRollbackAndAlwaysDeniesClosedData()" classname="org.securemail.identity.IdentityStoreTest" time="0.031">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:offlineLeaseUsesMonotonicTimeRejectsClockRollbackAndAlwaysDeniesClosedData()]
+display-name: offlineLeaseUsesMonotonicTimeRejectsClockRollbackAndAlwaysDeniesClosedData()
+]]></system-out>
+</testcase>
+<testcase name="ownerBootstrapRaceAtomicAcrossConnections()" classname="org.securemail.identity.IdentityStoreTest" time="0.033">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:ownerBootstrapRaceAtomicAcrossConnections()]
+display-name: ownerBootstrapRaceAtomicAcrossConnections()
+]]></system-out>
+</testcase>
+<testcase name="inspectionReadsPersistedMetadataAndRequiresSeparateFreshProof()" classname="org.securemail.identity.IdentityAdministration600Test" time="0.069">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityAdministration600Test]/[method:inspectionReadsPersistedMetadataAndRequiresSeparateFreshProof()]
+display-name: inspectionReadsPersistedMetadataAndRequiresSeparateFreshProof()
+]]></system-out>
+</testcase>
+<testcase name="ownerGenerationChangeRejectsPendingTransfer()" classname="org.securemail.identity.OwnerTransferTest" time="0.092">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.OwnerTransferTest]/[method:ownerGenerationChangeRejectsPendingTransfer()]
+display-name: ownerGenerationChangeRejectsPendingTransfer()
+]]></system-out>
+</testcase>
+<testcase name="expiredStepUpAndNewSessionOfApproverInvalidatePermit()" classname="org.securemail.identity.CriticalApprovalTest" time="0.07">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.CriticalApprovalTest]/[method:expiredStepUpAndNewSessionOfApproverInvalidatePermit()]
+display-name: expiredStepUpAndNewSessionOfApproverInvalidatePermit()
+]]></system-out>
+</testcase>
+<testcase name="actualSignedHttpInspectCompletionAndReplay()" classname="org.securemail.identity.OwnerTransferTest" time="0.162">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.OwnerTransferTest]/[method:actualSignedHttpInspectCompletionAndReplay()]
+display-name: actualSignedHttpInspectCompletionAndReplay()
+]]></system-out>
+</testcase>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]
+display-name: JUnit Jupiter
+]]></system-out>
+</testsuite>

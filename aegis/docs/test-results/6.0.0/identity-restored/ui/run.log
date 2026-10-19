@@ -1,0 +1,3 @@
+Oct 19, 2026 11:54:30 AM com.sun.javafx.application.PlatformImpl startup
+WARNING: Unsupported JavaFX configuration: classes were loaded from 'unnamed module @78e03bb5'
+PASS_HEADLESS Identity administration: exact public permit, actual two-admin assignment, fresh reauthentication on every action, closed-view cleanup.

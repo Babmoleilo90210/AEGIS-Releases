@@ -1,0 +1,32 @@
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+Identity подготовлен. Отпечаток сервиса: 21d2ab94bb48cc19576f7628b1896d5fd421c4c1f32a8efaadc9f648b34de070
+Одноразовое публичное задание записано. Подпишите точные proofBytes через Почту после повторной аутентификации; приватный ключ не передавайте серверу.
+Владелец АЕГИС назначен. Повторный Owner Bootstrap запрещён.
+Публичное одноразовое задание создано. Корневые подтверждения выполняются только фиксированным согласием Почты.
+Первый независимый администратор назначен. Повтор начальной процедуры запрещён.
+Публичное одноразовое задание создано. Корневые подтверждения выполняются только фиксированным согласием Почты.
+Владелец изменён. Обе сессии отозваны; требуется новый вход.
+Identity подготовлен. Отпечаток сервиса: 1513e28c3f1e60f77aceb6481671ea898a01743e49bfaa4114c75fcc08e023f6
+Одноразовое публичное задание записано. Подпишите точные proofBytes через Почту после повторной аутентификации; приватный ключ не передавайте серверу.
+Владелец АЕГИС назначен. Повторный Owner Bootstrap запрещён.
+{"auditIntegrity":true,"audience":"1513e28c3f1e60f77aceb6481671ea898a01743e49bfaa4114c75fcc08e023f6","productionDeployed":false}
+Identity подготовлен. Отпечаток сервиса: bf254081a3aef8d4d4b3959d50a742ad1ce19c4b5ba538319274ce4bc31f95be
+Публичный ключ Relay разрешён только для защищённого запроса managedAccount.
+Разрешение ключа Relay отозвано.
+
+Test run finished after 8112 ms
+[        13 containers found      ]
+[         0 containers skipped    ]
+[        13 containers started    ]
+[         0 containers aborted    ]
+[        13 containers successful ]
+[         0 containers failed     ]
+[        87 tests found           ]
+[         0 tests skipped         ]
+[        87 tests started         ]
+[         0 tests aborted         ]
+[        87 tests successful      ]
+[         0 tests failed          ]
+

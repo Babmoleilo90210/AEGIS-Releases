@@ -1,0 +1,11 @@
+{
+  "closedViewCleared": true,
+  "screenshots": [
+    "identity-admin-request.png",
+    "identity-admin-approved.png"
+  ],
+  "scope": "Actual JavaFX/signed HTTP/SQLite through explicit local SOCKS fixture; native platforms, real Tor and independent Mail UI NOT_RUN",
+  "twoAdminMutation": true,
+  "status": "PASS_HEADLESS",
+  "freshStepUpPerAction": true
+}

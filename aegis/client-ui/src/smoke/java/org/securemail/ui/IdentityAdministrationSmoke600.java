@@ -1,0 +1,64 @@
+package org.securemail.ui;
+
+import com.google.gson.*;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.lang.reflect.Field;
+import java.net.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.*;
+import java.security.*;
+import java.time.Clock;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.BooleanSupplier;
+import javax.imageio.ImageIO;
+import javafx.application.Platform;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.image.WritableImage;
+import javafx.stage.Stage;
+import org.securemail.client.ecosystemauth.*;
+import org.securemail.client.net.TorTransport;
+import org.securemail.ecosystem.protocol.IdentityProtocol;
+import org.securemail.identity.*;
+
+/** Actual JavaFX and signed Identity HTTP/SQLite via explicit local SOCKS fixture. Not native/Tor acceptance. */
+public final class IdentityAdministrationSmoke600 {
+ private static final String ONION="a".repeat(56)+".onion";
+ private static final List<CoreAccountSession600> sessions=new ArrayList<>();
+ private record Person(KeyPair root,KeyPair device,KeyPair recovery,CoreAccountSession600 session){}
+ private static KeyPair key()throws Exception{return KeyPairGenerator.getInstance("Ed25519").generateKeyPair();}
+ private static String id(Person p){return IdentityProtocol.id(p.root.getPublic().getEncoded());}
+ private static void check(boolean condition,String message){if(!condition)throw new AssertionError(message);}
+ private static <T>T fx(Callable<T> action)throws Exception{FutureTask<T> task=new FutureTask<>(action);Platform.runLater(task);return task.get(10,TimeUnit.SECONDS);}
+ private static void await(BooleanSupplier condition)throws Exception{long until=System.nanoTime()+TimeUnit.SECONDS.toNanos(10);while(!condition.getAsBoolean()){if(System.nanoTime()>until)throw new AssertionError("UI deadline");Thread.sleep(20);}}
+ @SuppressWarnings("unchecked") private static <T>T field(Object view,String name)throws Exception{Field f=view.getClass().getDeclaredField(name);f.setAccessible(true);return (T)f.get(view);}
+ private static Person register(IdentityClient600 client,byte[] server)throws Exception{KeyPair root=key(),device=key(),recovery=key();var s=new CoreAccountSession600(client,server,new DeviceCredentials600(root.getPublic().getEncoded(),device,recovery.getPublic().getEncoded()));long t=System.currentTimeMillis();String n=IdentityProtocol.nonce();s.register("Участник",t,n,IdentityProtocol.sign(root.getPrivate(),IdentityProtocol.registration(client.audience(),root.getPublic().getEncoded(),device.getPublic().getEncoded(),recovery.getPublic().getEncoded(),"Участник",t,n)));sessions.add(s);return new Person(root,device,recovery,s);}
+ private static Person relogin(Person p,IdentityClient600 client,byte[] server)throws Exception{p.session.close();var s=new CoreAccountSession600(client,server,new DeviceCredentials600(p.root.getPublic().getEncoded(),p.device,p.recovery.getPublic().getEncoded()));s.login();sessions.add(s);return new Person(p.root,p.device,p.recovery,s);}
+ private static void step(IdentityStore store,Person p)throws Exception{var c=store.stepUpChallenge(id(p),p.session.deviceId(),p.session.generation());p.session.completeStepUp(c.challenge(),c.expiresAt(),IdentityProtocol.sign(p.root.getPrivate(),IdentityProtocol.stepUp(store.audience(),id(p),p.session.deviceId(),c.challenge(),c.expiresAt())));}
+ private static long criticalCount(Path home)throws Exception{try(var db=java.sql.DriverManager.getConnection("jdbc:sqlite:"+home.resolve("identity.db"));var statement=db.createStatement();var rows=statement.executeQuery("SELECT count(*) FROM critical")){rows.next();return rows.getLong(1);}}
+ private static void shot(Stage stage,Path file)throws Exception{fx(()->{stage.getScene().getRoot().applyCss();stage.getScene().getRoot().layout();WritableImage image=stage.getScene().snapshot(null);BufferedImage png=new BufferedImage((int)image.getWidth(),(int)image.getHeight(),BufferedImage.TYPE_INT_ARGB);for(int y=0;y<png.getHeight();y++)for(int x=0;x<png.getWidth();x++)png.setRGB(x,y,image.getPixelReader().getArgb(x,y));ImageIO.write(png,"png",file.toFile());return null;});}
+ public static void main(String[] args)throws Exception{
+  Path output=Path.of(args[0]);Files.createDirectories(output);Path home=Files.createTempDirectory("aegis-admin-smoke-");CountDownLatch boot=new CountDownLatch(1);Platform.startup(boot::countDown);check(boot.await(10,TimeUnit.SECONDS),"FX startup");Platform.setImplicitExit(false);KeyPair service=key();Set<String> external=new HashSet<>();
+  try(var store=new IdentityStore(home.resolve("identity.db"),service,new byte[32],Clock.systemUTC(),external::contains);var http=new IdentityHttpServer(new InetSocketAddress("127.0.0.1",0),store,service)){
+   http.start();try(var socks=new Socks(http.port());var client=new IdentityClient600(ONION,80,service.getPublic().getEncoded(),new TorTransport("127.0.0.1",socks.port()))){
+    Person original=register(client,service.getPublic().getEncoded()),reviewer0=register(client,service.getPublic().getEncoded()),target=register(client,service.getPublic().getEncoded());var b=store.ownerChallenge(id(original));store.bootstrapOwner(id(original),b.challenge(),IdentityProtocol.sign(original.root.getPrivate(),IdentityProtocol.ownerBootstrap(store.audience(),id(original),b.challenge(),b.expiresAt())));Person owner=relogin(original,client,service.getPublic().getEncoded());external.add(id(reviewer0));Person reviewer=relogin(reviewer0,client,service.getPublic().getEncoded());AtomicInteger ownerSteps=new AtomicInteger(),reviewerSteps=new AtomicInteger();
+    var first=fx(()->new IdentityAdministrationView600(new IdentityAdministrationFlow600(client,owner.session),()->{ownerSteps.incrementAndGet();step(store,owner);}));var second=fx(()->new IdentityAdministrationView600(new IdentityAdministrationFlow600(client,reviewer.session),()->{reviewerSteps.incrementAndGet();step(store,reviewer);}));Stage stage=fx(()->{Stage s=new Stage();s.setScene(new Scene(CommunityUi.scroll(first.node()),1024,768));s.show();return s;});
+    TextField recipient=field(first,"target"),role=field(first,"role");Button prepare=field(first,"prepare");TextArea firstCode=field(first,"code"),secondCode=field(second,"code");Label firstStatus=field(first,"status"),secondDetails=field(second,"details"),secondStatus=field(second,"status");CheckBox comparedFirst=field(first,"compared"),comparedSecond=field(second,"compared");Button inspect=field(second,"inspect"),approve=field(second,"approve"),execute=field(first,"execute");
+    fx(()->{recipient.setText(id(target));role.setText("Смотритель инфраструктуры");prepare.fire();return null;});await(()->{try{return fx(()->!firstCode.getText().isEmpty());}catch(Exception e){throw new RuntimeException(e);}});String publicCode=fx(firstCode::getText);check(ownerSteps.get()==1,"Prepare requires one fresh reauthentication");shot(stage,output.resolve("identity-admin-request.png"));
+    fx(()->{stage.getScene().setRoot(CommunityUi.scroll(second.node()));secondCode.setText(publicCode);inspect.fire();return null;});await(()->{try{return fx(()->secondDetails.getText().contains(id(target)));}catch(Exception e){throw new RuntimeException(e);}});check(reviewerSteps.get()==1,"Inspect must reauthenticate independently");fx(()->{comparedSecond.setSelected(true);approve.fire();return null;});await(()->{try{return fx(()->secondStatus.getText().contains("подтверждение принято"));}catch(Exception e){throw new RuntimeException(e);}});check(reviewerSteps.get()==2,"Approval must perform another fresh reauthentication");shot(stage,output.resolve("identity-admin-approved.png"));
+    fx(()->{stage.getScene().setRoot(CommunityUi.scroll(first.node()));comparedFirst.setSelected(true);execute.fire();return null;});await(()->{try{return fx(()->firstStatus.getText().contains("Сервер выполнил"));}catch(Exception e){throw new RuntimeException(e);}});check(ownerSteps.get()==2,"Execution must reauthenticate again");check(Boolean.TRUE.equals(store.profile(id(target)).get("delegatedAdministrator")),"Actual server mutation");
+    long beforeClosing=criticalCount(home);CountDownLatch entered=new CountDownLatch(1),release=new CountDownLatch(1);var closing=fx(()->new IdentityAdministrationView600(new IdentityAdministrationFlow600(client,owner.session),()->{entered.countDown();if(!release.await(5,TimeUnit.SECONDS))throw new IOException("Cancellation deadline");step(store,owner);}));TextField closingTarget=field(closing,"target"),closingRole=field(closing,"role");TextArea closingCode=field(closing,"code");Button closingPrepare=field(closing,"prepare");fx(()->{closingTarget.setText(id(reviewer));closingRole.setText("Не выполнять после закрытия");closingPrepare.fire();return null;});check(entered.await(5,TimeUnit.SECONDS),"Consent began");fx(()->{check(closingTarget.isDisabled()&&closingRole.isDisabled()&&closingCode.isDisabled(),"Pending operation inputs are disabled");closing.close();return null;});release.countDown();ExecutorService closedLane=field(closing,"owned");check(closedLane.awaitTermination(5,TimeUnit.SECONDS),"Closed worker terminated");check(criticalCount(home)==beforeClosing,"No permit created after closing during Mail reauthentication");fx(()->{check(closingTarget.getText().isEmpty()&&closingCode.getText().isEmpty()&&closingPrepare.isDisabled()&&closingTarget.isDisabled()&&closingRole.isDisabled()&&closingCode.isDisabled(),"Closed view fields stay cleared and disabled");return null;});check(store.verifyAudit(),"Audit chain");
+    fx(()->{first.close();second.close();stage.close();return null;});Files.writeString(output.resolve("RESULT.json"),new GsonBuilder().setPrettyPrinting().create().toJson(Map.of("status","PASS_HEADLESS","scope","Actual JavaFX/signed HTTP/SQLite through explicit local SOCKS fixture; native platforms, real Tor and independent Mail UI NOT_RUN","freshStepUpPerAction",true,"twoAdminMutation",true,"closedViewCleared",true,"screenshots",List.of("identity-admin-request.png","identity-admin-approved.png"))));System.out.println("PASS_HEADLESS Identity administration: exact public permit, actual two-admin assignment, fresh reauthentication on every action, closed-view cleanup.");
+   }finally{for(var session:sessions)session.close();}
+  }finally{Platform.exit();}
+ }
+ private static final class Socks implements AutoCloseable{
+  private final ServerSocket server;private final int target;private final ThreadPoolExecutor workers=new ThreadPoolExecutor(4,4,0,TimeUnit.SECONDS,new ArrayBlockingQueue<>(16),r->{Thread t=new Thread(r,"admin-smoke-socks");t.setDaemon(true);return t;});private final Thread accept;
+  Socks(int target)throws Exception{this.target=target;server=new ServerSocket(0,8,InetAddress.getByAddress(new byte[]{127,0,0,1}));accept=new Thread(()->{while(!server.isClosed())try{Socket c=server.accept();try{workers.execute(()->forward(c));}catch(RejectedExecutionException full){c.close();}}catch(IOException ignored){}},"admin-smoke-accept");accept.setDaemon(true);accept.start();}int port(){return server.getLocalPort();}
+  private void forward(Socket c){try(c){c.setSoTimeout(10000);DataInputStream in=new DataInputStream(c.getInputStream());OutputStream out=c.getOutputStream();check(in.readUnsignedByte()==5&&in.readUnsignedByte()==1&&in.readUnsignedByte()==0,"SOCKS greeting");out.write(new byte[]{5,0});out.flush();check(in.readUnsignedByte()==5&&in.readUnsignedByte()==1&&in.readUnsignedByte()==0&&in.readUnsignedByte()==3,"SOCKS domain");check(new String(in.readNBytes(in.readUnsignedByte()),StandardCharsets.US_ASCII).equals(ONION)&&in.readUnsignedShort()==80,"Onion route");try(Socket remote=new Socket(InetAddress.getByAddress(new byte[]{127,0,0,1}),target)){out.write(new byte[]{5,0,0,1,127,0,0,1,0,0});out.flush();ByteArrayOutputStream header=new ByteArrayOutputStream();int end=0;byte[] marker={13,10,13,10};while(end<4){int value=in.read();if(value<0)throw new EOFException();header.write(value);end=value==marker[end]?end+1:(value==13?1:0);if(header.size()>8192)throw new IOException("HTTP headers");}int length=-1;for(String h:header.toString(StandardCharsets.US_ASCII).split("\r\n"))if(h.toLowerCase(Locale.ROOT).startsWith("content-length:"))length=Integer.parseInt(h.substring(h.indexOf(':')+1).strip());if(length<0||length>65536)throw new IOException("HTTP size");remote.getOutputStream().write(header.toByteArray());remote.getOutputStream().write(in.readNBytes(length));remote.getOutputStream().flush();remote.getInputStream().transferTo(out);out.flush();}}catch(Exception ignored){/* Fixture shutdown or protocol rejection; test clients still fail their deadlines. */}}
+  public void close()throws Exception{server.close();workers.shutdownNow();accept.join(1000);}
+ }
+}
