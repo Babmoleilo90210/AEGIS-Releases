@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "result": "VERIFIED_RECONSTRUCTED",
+  "canonicalOfficialArchiveManifestAndPrimaryTree": {
+    "dpkg-debFresh": [
+      "ac336f4a59d9ae10461dec1af55327b979175bae24bc511ca9f988af3575c9c8",
+      4820
+    ],
+    "streamedArchiveAtCreation": [
+      "ac336f4a59d9ae10461dec1af55327b979175bae24bc511ca9f988af3575c9c8",
+      4820
+    ],
+    "streamedArchiveLaterState": "REJECTED_EXTRA_FILE_AND_DISCARDED"
+  },
+  "oldRegistryPinRejected": "46aa22feda412f060bae7c7f1af857190c1923bfaa968f01413a9fe219537e1e",
+  "newExactTreePin": "ac336f4a59d9ae10461dec1af55327b979175bae24bc511ca9f988af3575c9c8",
+  "allFourteenPackagePinsUnchanged": true,
+  "freshSignatureAndIndexVerification": true,
+  "unlistedTemporaryFile": "Rejected and quarantined outside input. Current tree must match all archive members and contain no extra files. Cause of external/temp creation not proven.",
+  "productionReady": false,
+  "scope": "Pinned build tool restoration only. Native application/installer acceptance NOT_RUN."
+}

@@ -103,7 +103,14 @@
       "bytes": 3153084
     }
   ],
-  "payloadTreeSha256": "46aa22feda412f060bae7c7f1af857190c1923bfaa968f01413a9fe219537e1e",
+  "payloadTreeSha256": "ac336f4a59d9ae10461dec1af55327b979175bae24bc511ca9f988af3575c9c8",
   "payloadRegularFiles": 4820,
-  "scope": "Extracted authenticated official Ubuntu package data only. No maintainer scripts/system install. Host C compiler and host dynamic system libraries remain separately recorded build inputs; not a hermetic build."
+  "scope": "Extracted authenticated official Ubuntu package data only. No maintainer scripts/system install. Host C compiler and host dynamic system libraries remain separately recorded build inputs; not a hermetic build.",
+  "reconstruction": {
+    "policy": "Exact signed-archive member SHA256, symlink targets and executable/directory bits; data-only extraction, declared directory modes applied after extraction",
+    "previousUnreproducedTreeSha256": "46aa22feda412f060bae7c7f1af857190c1923bfaa968f01413a9fe219537e1e",
+    "canonicalManifestEvidence": "docs/test-results/6.0.0/native-tools-restored19/CANONICAL-EXTRACTION.json",
+    "repeatExtraction": "Independent dpkg-deb -x and streamed archive extraction match after applying official directory modes",
+    "unknownHistoricalDifference": "The old mutable tool directory was lost; its differing tree pin cannot be explained from the exact signed archives."
+  }
 }

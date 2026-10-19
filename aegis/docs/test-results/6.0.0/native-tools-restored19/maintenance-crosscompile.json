@@ -1,0 +1,24 @@
+{
+  "command": [
+    "/workspace/scratch/aa629f360927/inputs600/packaging-tools/root/usr/bin/x86_64-w64-mingw32-gcc-posix",
+    "-Os",
+    "-static",
+    "-static-libgcc",
+    "-municode",
+    "-mwindows",
+    "-finput-charset=UTF-8",
+    "/workspace/scratch/aa629f360927/aegis600/aegis/packaging/windows/maintenance600.c",
+    "-Wl,--dynamicbase,--nxcompat,--high-entropy-va,--no-insert-timestamp",
+    "-luser32",
+    "-lshell32",
+    "-ladvapi32",
+    "-o",
+    "/workspace/scratch/aa629f360927/audit600/recovery-native-tools/AEGIS-Maintenance-restored.exe"
+  ],
+  "exit": 0,
+  "sha256": "d86a63381d45b36f0602efd8807d67b5179553d11da12c7bf187a4dce5ef9808",
+  "nativeAcceptance": "NOT_RUN",
+  "nativeToolTreeSha256Before": "ac336f4a59d9ae10461dec1af55327b979175bae24bc511ca9f988af3575c9c8",
+  "nativeToolTreeSha256After": "ac336f4a59d9ae10461dec1af55327b979175bae24bc511ca9f988af3575c9c8",
+  "treeVerificationBeforeAndAfter": "PASS"
+}
