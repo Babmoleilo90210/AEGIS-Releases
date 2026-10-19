@@ -53,7 +53,7 @@ public final class DeviceCredentialStore600 {
         var temporary=new DeviceCredentialStore600(staged);temporary.create(updated,password);
         try(var verified=temporary.unlock(password)){if(!verified.accountId().equals(expectedAccount)||!verified.deviceId().equals(expectedDevice)||!Arrays.equals(verified.recoveryPublic(),recoveryPublic))throw new IOException("Проверка публичных данных восстановления не пройдена");}
         Files.createLink(backup,file);AtomicFiles.syncDirectory(file.getParent());
-        AtomicFiles.write(file,AtomicFiles.read(staged,1024));published=true;
+        published=true;AtomicFiles.write(file,AtomicFiles.read(staged,1024));
         try(var verified=unlock(password)){if(!verified.accountId().equals(expectedAccount)||!verified.deviceId().equals(expectedDevice)||!Arrays.equals(verified.recoveryPublic(),recoveryPublic))throw new IOException("Проверка обновлённого хранилища не пройдена");}
       }catch(IOException|RuntimeException failure){if(published&&Files.isRegularFile(backup,LinkOption.NOFOLLOW_LINKS))try{AtomicFiles.write(file,AtomicFiles.read(backup,1024));}catch(IOException restore){failure.addSuppressed(restore);}throw failure;}
     }finally{Files.deleteIfExists(staged);}

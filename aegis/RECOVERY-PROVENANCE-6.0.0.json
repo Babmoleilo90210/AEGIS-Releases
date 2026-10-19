@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Recover existing 6.0.0 development, not certify a release",
+  "recoveredOn": "2026-10-19",
+  "publishedBaseCommit": "38a3e6469a40e6edcb1b0448f906a488c73feb5d",
+  "baseBinarySourceCommit": "37779c113553bf5e1a42642e7ca7a010db9bdd4e",
+  "savedCheckpointSha256": "11b8b2de70c10508725c510f77c46ef10643d9bd6f867b6907b17e0a221bea2f",
+  "savedCheckpointCreatedAt": "2026-10-18T14:18:27.743316+00:00",
+  "savedCheckpointOriginalLocalHead": "8402a03327636b614716e158912d6cd52a0e713b",
+  "savedCheckpointHadUncommittedSources": true,
+  "newRecoveryImportCommit": "a60162862c0f1e0e693599dc3145a2a01288c012",
+  "newRecoveryImportTree": "11d564ac27006199aaef54b7c00a7fbbd6b22ff2",
+  "originalLaterLocalObjectsAvailable": false,
+  "recoveryMethod": "Fetched actual published base, imported immutable saved source using an independent Git index, then reconstructed later scoped changes. No working files reset and no fabricated original commit identities.",
+  "specSha256": "b8228c320c3a3962eeb1912bf5217e4df2ed9d01929fd7c79a8010c3fc0b546f",
+  "productionReady": false,
+  "historicalReceiptsAreFinalAcceptance": false,
+  "productionInfrastructureChanged": false,
+  "ownerPrivateKeysUsed": false
+}
