@@ -1,0 +1,39 @@
+package org.securemail.ui;
+
+import java.util.concurrent.Callable;import java.util.function.Consumer;
+import javafx.application.Platform;import javafx.scene.control.*;import javafx.scene.layout.*;
+import org.securemail.client.ecosystemauth.*;import org.securemail.ecosystem.protocol.IdentityProtocol.*;
+import static org.securemail.ui.CommunityUi.*;
+
+/** Public request exchange for operator bootstrap and one-time first quorum creation. */
+public final class AuthoritySetupView600 extends VBox implements AutoCloseable {
+ public interface Operations{
+  String bootstrap(OwnerBootstrap request)throws Exception;
+  FirstDelegationFlow600.Request prepare(String target,String role)throws Exception;
+  FirstDelegationFlow600.Consent consent(FirstDelegationFlow600.Request request)throws Exception;
+  void complete(FirstDelegationFlow600.Consent owner,FirstDelegationFlow600.Consent target)throws Exception;
+ }
+ private record Reply(Object value,Exception failure){}
+ private final Operations ops;private final OwnerAdministrationView600.Tasks tasks;private final Label status=label(""),bootstrapDetail=label(""),delegateDetail=label("");
+ private final TextArea bootstrapInput=area("Публичный JSON-запрос, созданный оператором VPS",8192),bootstrapProof=area("Публичное доказательство для оператора VPS",4096),request=area("Публичный запрос первого делегирования",4096),own=area("Ваше публичное подтверждение",8192),incoming=area("Подтверждение второго участника",8192);
+ private final TextField target=field("Постоянный account ID первого администратора"),role=field("Название административной роли");
+ private final CheckBox bootstrapCompared=new CheckBox("Сверены мой account ID и полный отпечаток сервера Identity"),delegateCompared=new CheckBox("Сверены оба account ID, название роли и отпечаток сервера");
+ private final Button bootstrapSign,prepare,delegateSign,finish;private boolean busy;private volatile boolean closed;private long generation;
+ public AuthoritySetupView600(Operations ops,OwnerAdministrationView600.Tasks tasks){
+  this.ops=java.util.Objects.requireNonNull(ops);this.tasks=java.util.Objects.requireNonNull(tasks);setId("core600-authority-setup");setSpacing(12);setMaxWidth(960);bootstrapCompared.setWrapText(true);delegateCompared.setWrapText(true);bootstrapProof.setEditable(false);own.setEditable(false);
+  Button showBootstrap=button("Показать назначение",()->{try{var b=OwnerBootstrapFlow600.parse(bootstrapInput.getText());bootstrapDetail.setText("Аккаунт: "+b.accountId+"\nСервер Identity: "+b.audience+"\nСрок: "+java.time.Instant.ofEpochMilli(b.expiresAt)+"\nСервер проверит существование операторского запроса до подписи.");bootstrapCompared.setSelected(false);}catch(Exception invalid){status.setText("Операторский запрос повреждён или содержит лишние поля.");}});
+  bootstrapSign=button("Подтвердить назначение в Почте",()->{try{var b=OwnerBootstrapFlow600.parse(bootstrapInput.getText());task(()->ops.bootstrap(b),proof->{bootstrapProof.setText(proof);status.setText("Передайте публичное доказательство оператору. Завершение назначения выполняет только локальная команда aegis-admin на сервере. После назначения войдите заново.");});}catch(Exception invalid){status.setText("Сначала проверьте операторский запрос.");}});
+  prepare=button("Подготовить первое делегирование",()->{String id=target.getText().strip(),name=role.getText().strip();task(()->ops.prepare(id,name),value->{request.setText(value.encode());showDelegation(value);});});
+  Button show=button("Показать участников и роль",()->{try{showDelegation(FirstDelegationFlow600.Request.parse(request.getText()));}catch(Exception invalid){status.setText("Публичный запрос делегирования повреждён.");}});
+  delegateSign=button("Подтвердить делегирование в Почте",()->{try{var r=FirstDelegationFlow600.Request.parse(request.getText());task(()->ops.consent(r),value->{own.setText(value.encode());status.setText("Передайте публичное подтверждение владельцу. Оба участника подписывают одну точную роль и пару устройств.");});}catch(Exception invalid){status.setText("Сначала проверьте публичный запрос.");}});
+  finish=button("Назначить первого администратора",()->{try{var a=FirstDelegationFlow600.Consent.parse(own.getText());var b=FirstDelegationFlow600.Consent.parse(incoming.getText());task(()->{ops.complete(a,b);return true;},value->{request.clear();own.clear();incoming.clear();status.setText("Сервер подтвердил первое делегирование. Новому администратору необходимо войти заново. Дальнейшие критические назначения требуют двух независимых администраторов.");});}catch(Exception invalid){status.setText("Необходимы два действующих подтверждения одного делегирования.");}});
+  bootstrapInput.textProperty().addListener((o,a,b)->{bootstrapCompared.setSelected(false);bootstrapDetail.setText("");bootstrapProof.clear();});request.textProperty().addListener((o,a,b)->{delegateCompared.setSelected(false);delegateDetail.setText("");own.clear();});bootstrapCompared.selectedProperty().addListener((o,a,b)->enable());delegateCompared.selectedProperty().addListener((o,a,b)->enable());
+  getChildren().setAll(heading("Первоначальная настройка полномочий"),label("Здесь передаются только публичные задания и подписи. Пароль и корневой приватный ключ остаются в отдельном процессе Почты."),fold("Первоначальное назначение владельца",card(label("Оператор создаёт одноразовое задание на VPS командой aegis-admin owner bootstrap. Этот экран не может самостоятельно назначить владельца."),bootstrapInput,showBootstrap,bootstrapDetail,bootstrapCompared,bootstrapSign,bootstrapProof)),fold("Первый независимый администратор",card(label("Одноразовая процедура создания административного кворума после назначения владельца. Названия ролей задаёт владелец; получатель должен иметь действующую сессию."),target,role,prepare,request,show,delegateDetail,delegateCompared,delegateSign,fold("Ваше подтверждение",own),fold("Завершение владельцем",card(incoming,finish)))),status);enable();
+ }
+ public javafx.scene.Node node(){return this;}
+ private void showDelegation(FirstDelegationFlow600.Request r){var d=r.delegation();delegateDetail.setText("Владелец: "+d.ownerAccountId+"\nПолучатель: "+d.targetAccountId+"\nРоль: "+d.roleName+"\nСервер: "+d.audience+"\nСрок: "+java.time.Instant.ofEpochMilli(d.expiresAt));delegateCompared.setSelected(false);}
+ private <T>void task(Callable<T> action,Consumer<T> done){if(closed||busy)return;busy=true;enable();long epoch=generation;tasks.execute(()->{try{return new Reply(action.call(),null);}catch(Exception failure){return new Reply(null,failure);}},answer->{if(closed||epoch!=generation)return;busy=false;enable();var result=(Reply)answer;if(result.failure!=null){status.setText("Подтверждение отклонено. Проверьте Tor, участника, полномочия и срок задания.");return;}@SuppressWarnings("unchecked")T value=(T)result.value;done.accept(value);});}
+ private void enable(){prepare.setDisable(busy||closed);bootstrapSign.setDisable(busy||closed||!bootstrapCompared.isSelected());delegateSign.setDisable(busy||closed||!delegateCompared.isSelected());finish.setDisable(busy||closed||!delegateCompared.isSelected());}
+ private static TextArea area(String prompt,int maximum){var a=new TextArea();a.setPromptText(prompt);a.setWrapText(true);a.setPrefRowCount(3);a.setTextFormatter(new TextFormatter<String>(change->change.getControlNewText().length()<=maximum?change:null));return a;}
+ @Override public void close(){if(closed)return;closed=true;Runnable clear=()->{generation++;for(var area:new TextArea[]{bootstrapInput,bootstrapProof,request,own,incoming})area.clear();target.clear();role.clear();bootstrapDetail.setText("");delegateDetail.setText("");status.setText("Подтверждения заблокированы.");enable();};if(Platform.isFxApplicationThread())clear.run();else Platform.runLater(clear);}
+}

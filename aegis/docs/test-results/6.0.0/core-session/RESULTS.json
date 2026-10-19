@@ -1,0 +1,28 @@
+{
+  "compileExit": 0,
+  "testExit": 0,
+  "sourceUnchanged": true,
+  "sources": {
+    "common-protocol/src/main/java/org/securemail/ecosystem/protocol/IdentityProtocol.java": "8d37f41f3560d50b8b01f28bf2e8bf8336af2b3c59c3cc3345f90796782a4aee",
+    "identity-server/src/main/java/org/securemail/identity/PosixFilePermissions600.java": "bf7121a84c0eed4c4f50460eeec768b49b6d65f93a72d03ae71e89520f461266",
+    "identity-server/src/main/java/org/securemail/identity/IdentityMain.java": "2aede76fb96d56ef069bc58f74356966a495e4b19e0ecd0719164350453297c5",
+    "identity-server/src/main/java/org/securemail/identity/IdentityHttpServer.java": "13324ddf8d423ccfbdf3ee059b2f4a8cf34bcd067d32554884f8f9dad4bfff96",
+    "identity-server/src/main/java/org/securemail/identity/IdentityException.java": "fd92944880c4eb3017d0674df124daa7241ef1e66d26281eaf1c961eaf83aac3",
+    "identity-server/src/main/java/org/securemail/identity/IdentityStore.java": "b5c7812d7d6515327ea1cb533fbf752d4ef4e4fdd28d2ca66a3171e2749637f3",
+    "identity-server/src/main/java/org/securemail/identity/IdentityJson.java": "f16789db0c2b9af09b5c81f1ef93991be8a401f7b77181fca7b9d58067f99829",
+    "client-core/src/main/java/org/securemail/client/ecosystemauth/IdentityClient600.java": "f93af745317791053da9bde08b10f335bd6fceccea37485a31c2af7acd9d0a0c",
+    "client-core/src/main/java/org/securemail/client/ecosystemauth/InstallationInventory600.java": "e5c011610bab48469fe971e56f96ec63d85784d0f7a3da7b30a7d74b643a2826",
+    "client-core/src/main/java/org/securemail/client/ecosystemauth/DeviceCredentials600.java": "19ac7696c04df52b937b5d1064cb548f70599f403a1d190b0fda49c9228eec93",
+    "client-core/src/main/java/org/securemail/client/ecosystemauth/DeviceCredentialStore600.java": "40562cd53824a61899bbbb0e27ae44ba57899a2f9e9a994b080d0851b9e83137",
+    "client-core/src/main/java/org/securemail/client/ecosystemauth/CoreAccountSession600.java": "b60abcaba7f424d88b36d4467ae07dc2113d2ea2385a9a23ed43f0ef87dd5d87",
+    "client-core/src/main/java/org/securemail/client/ecosystemauth/CorePublicConfig600.java": "29938b7ba0f543d848b17dba3d714e7bc13939c7010111c285d55f26212a3154",
+    "client-core/src/main/java/org/securemail/client/crypto/Secrets.java": "7eee72a9378ba06c3a6466dab9d234e38b9ae7d200b9bc51337c6a6e14b309b6",
+    "client-core/src/main/java/org/securemail/client/ecosystem/ComponentLease.java": "f2d6ecc990542c94e9dd0760df188ceb26ec549628381bb296381ae42e117a3c",
+    "client-core/src/main/java/org/securemail/client/ecosystem/ComponentId.java": "28d0b16af8c15286c9b269b9562100d6244f782a673d824df0820f51e6b1b09c",
+    "client-core/src/main/java/org/securemail/client/ecosystem/SessionAuthority.java": "72b3355057e58b2ecf8f1d707ade9d2b1b4508741d052d13ec2679bad712b93c",
+    "client-core/src/test/java/org/securemail/client/ecosystemauth/CoreAccountSession600Test.java": "9a348a2ba73c0ce4a1874f0578f7d33be379de2b0facafb1204b6ab50e844f36",
+    "client-core/src/test/java/org/securemail/client/ecosystemauth/IdentityClient600Test.java": "6c4de67471d288372e499e265a74286bfdd1e286e7fdea744643e89776f1e139",
+    "client-core/src/main/java/org/securemail/client/ecosystem/ComponentInstallation.java": "caee8b89d01d6b90ddc2b6cd2a90819364795ee0b4d8367e4d7bb74bd810a995"
+  },
+  "scope": "Actual Identity HTTP/SQLite/JCA and real filesystem; loopback fixture not Tor/native acceptance"
+}

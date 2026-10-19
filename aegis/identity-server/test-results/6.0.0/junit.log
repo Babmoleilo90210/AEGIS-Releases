@@ -1,0 +1,76 @@
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+Identity подготовлен. Отпечаток сервиса: 98d64611d43c699b710679752a5ffae5ffe468be0d5062fc9b36b3e09b32e2e9
+Одноразовое публичное задание записано. Подпишите точные proofBytes через Почту после повторной аутентификации; приватный ключ не передавайте серверу.
+Владелец АЕГИС назначен. Повторный Owner Bootstrap запрещён.
+{"audience":"98d64611d43c699b710679752a5ffae5ffe468be0d5062fc9b36b3e09b32e2e9","productionDeployed":false,"auditIntegrity":true}
+╷
+├─ JUnit Jupiter ✔
+│  ├─ CriticalApprovalTest ✔
+│  │  ├─ administrativeFreshCheckExpiresWithStepUpRatherThanLongerTokenLease() ✔
+│  │  ├─ expiredStepUpAndNewSessionOfApproverInvalidatePermit() ✔
+│  │  ├─ twoIndependentCurrentAdministratorsExactPayloadOneUse() ✔
+│  │  ├─ revokedSecondAdministratorCannotConfirmOrCompleteExistingPermit() ✔
+│  │  └─ releasesRemainOwnerOnlyWithoutSecondApproval() ✔
+│  ├─ IdentityHttpServerTest ✔
+│  │  ├─ wrongMethodDuplicateKeysMassAssignmentAndMalformedUtf8Refused() ✔
+│  │  ├─ remoteListeningAddressAndWrongServiceKeyForbidden() ✔
+│  │  ├─ isActiveRecheckGivesNoIdentityMetadataAndTurnsFalseAfterLogin() ✔
+│  │  ├─ strictJsonRejectsHugeNumbersFractionsDeepTreesAndLoneSurrogate() ✔
+│  │  ├─ actualHttpFirstDelegationAndReauthenticationUseOnlyTypedProofs() ✔
+│  │  └─ signedLoopbackRegisterIssueAndDigestAuthorizationActuallyWork() ✔
+│  ├─ IdentityStoreTest ✔
+│  │  ├─ capabilityCodecCanonicalAndExpiryAndTamperSafe() ✔
+│  │  ├─ rotatingApplicationProofKeyRevokesPriorTokensOfThatApplication() ✔
+│  │  ├─ configuredServiceIdentityCannotBeSilentlyReplaced() ✔
+│  │  ├─ explicitLogoutAtomicallyRevokesAllApplications() ✔
+│  │  ├─ replayRejectedAndDigestDomainCannotBeReusedAsBodyProof() ✔
+│  │  ├─ auditTailTruncationWithoutChangingAnchorIsDetected() ✔
+│  │  ├─ registrationPreservesLegacyIdWithoutExportAndOnlyTwoSystemRoles() ✔
+│  │  ├─ registrationRequiresBothAccountAndDeviceOwnership() ✔
+│  │  ├─ duplicateRegistrationCannotResetRecoveryOrTrust() ✔
+│  │  ├─ ownerAdminRequiresStepUpWhileOrdinaryBadgeDoesNotImplyAdmin() ✔
+│  │  ├─ ownerBootstrapRaceAtomicAcrossConnections() ✔
+│  │  ├─ offlineLeaseUsesMonotonicTimeRejectsClockRollbackAndAlwaysDeniesClosedData() ✔
+│  │  ├─ loginRaceOnlyOneGenerationActiveAcrossIndependentConnections() ✔
+│  │  ├─ tamperedAuditBlocksReopen() ✔
+│  │  ├─ unknownDeviceCannotLoginAndEnrollmentNeedsFreshStepUp() ✔
+│  │  ├─ rootDeviceRecoveryAndApplicationKeysCannotBeReusedAcrossDomains() ✔
+│  │  ├─ recoveryNeedsSeparateRootAndRecoveryProofAndInvalidatesPriorDevices() ✔
+│  │  ├─ capabilityIsNarrowAppAndProofBound() ✔
+│  │  ├─ generationRevokesAllOldTokensAndOldTrustedDeviceCannotUseNewGeneration() ✔
+│  │  ├─ expiredOwnerChallengeAndStepUpCannotBeReplayed() ✔
+│  │  ├─ clockRollbackFailsClosedAndCannotExtendSignedLease() ✔
+│  │  └─ ownerBootstrapOneUseBoundToExistingAccountProofAndService() ✔
+│  ├─ IdentityMainTest ✔
+│  │  ├─ actualOperatorCliBootstrapUsesOnlyPublicChallengeAndProof() ✔
+│  │  └─ unrecognizedOptionsAndSymlinkHomesRefused() ✔
+│  └─ FirstDelegationTest ✔
+│     ├─ recoveredAccountCanRegainLibraryOnlyAfterTwoAdministratorReview() ✔
+│     ├─ ownerCannotBeOwnIndependentSecondConfirmation() ✔
+│     ├─ targetLoginGenerationChangeInvalidatesConsent() ✔
+│     ├─ consentExpiresAfter120Seconds() ✔
+│     ├─ normalSubsequentAssignmentRequiresTwoCurrentAdministrators() ✔
+│     ├─ revokingAllDelegatesDoesNotResetOneTimeFirstBootstrap() ✔
+│     ├─ firstDelegationRequiresFourProofsAndGrantsNamedCustomAdministratorOnlyOnce() ✔
+│     ├─ concurrentCompletionCannotCreateTwoFirstDelegates() ✔
+│     ├─ ownerLoginGenerationChangeInvalidatesConsent() ✔
+│     └─ changedRoleNameOrWrongDeviceProofInvalidatesAllConsent() ✔
+├─ JUnit Platform Suite ✔
+└─ JUnit Vintage ✔
+
+Test run finished after 4882 ms
+[         8 containers found      ]
+[         0 containers skipped    ]
+[         8 containers started    ]
+[         0 containers aborted    ]
+[         8 containers successful ]
+[         0 containers failed     ]
+[        45 tests found           ]
+[         0 tests skipped         ]
+[        45 tests started         ]
+[         0 tests aborted         ]
+[        45 tests successful      ]
+[         0 tests failed          ]
+

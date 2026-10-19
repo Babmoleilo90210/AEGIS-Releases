@@ -1,0 +1,21 @@
+plugins { id 'application' }
+dependencies {
+    implementation project(':common-protocol')
+    implementation 'org.xerial:sqlite-jdbc:3.53.4.0'
+    implementation 'com.google.code.gson:gson:2.14.0'
+    runtimeOnly 'org.slf4j:slf4j-nop:2.0.17'
+    testImplementation project(':identity-server')
+    testImplementation project(':client-core')
+}
+application {
+    mainClass = 'org.securemail.attachments.AttachmentMain'
+    applicationDefaultJvmArgs = ['-Xms32m', '-Xmx96m', '-XX:+DisableAttachMechanism', '-XX:-HeapDumpOnOutOfMemoryError']
+}
+tasks.withType(Test).configureEach { maxHeapSize = '96m' }
+tasks.register('verifyIsolation') {
+    doLast {
+        def names = configurations.runtimeClasspath.files.collect { it.name }
+        assert !names.any { it.contains('client-') || it.contains('tink-') || it.contains('bcprov') || it.contains('javafx') }
+    }
+}
+check.dependsOn verifyIsolation

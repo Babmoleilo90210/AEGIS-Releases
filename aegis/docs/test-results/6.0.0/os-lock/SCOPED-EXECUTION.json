@@ -1,0 +1,84 @@
+{
+  "counts": {
+    "tests": 18,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 1
+  },
+  "commands": [
+    {
+      "phase": "javac-main",
+      "command": [
+        "/workspace/scratch/aa629f360927/inputs600/toolchain/jdk-21.0.12.1+1/bin/javac",
+        "--release",
+        "21",
+        "-Xlint:all",
+        "-encoding",
+        "UTF-8",
+        "-cp",
+        "/workspace/scratch/aa629f360927/inputs600/maven-deps/jna-5.19.1.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/jna-platform-5.19.1.jar",
+        "-d",
+        "/workspace/scratch/aa629f360927/audit600/os-lock/classes",
+        "/workspace/scratch/aa629f360927/aegis600/aegis/client-core/src/main/java/org/securemail/client/security600/OperatingSystemLockMonitor600.java",
+        "/workspace/scratch/aa629f360927/aegis600/aegis/client-core/src/main/java/org/securemail/client/security600/WindowsLockProbe600.java"
+      ],
+      "exitCode": 0,
+      "seconds": 3.368
+    },
+    {
+      "phase": "javac-test",
+      "command": [
+        "/workspace/scratch/aa629f360927/inputs600/toolchain/jdk-21.0.12.1+1/bin/javac",
+        "--release",
+        "21",
+        "-encoding",
+        "UTF-8",
+        "-cp",
+        "/workspace/scratch/aa629f360927/inputs600/test-deps/junit-platform-console-standalone-1.13.4.jar:/workspace/scratch/aa629f360927/audit600/os-lock/classes:/workspace/scratch/aa629f360927/inputs600/maven-deps/jna-5.19.1.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/jna-platform-5.19.1.jar",
+        "-d",
+        "/workspace/scratch/aa629f360927/audit600/os-lock/test-classes",
+        "/workspace/scratch/aa629f360927/aegis600/aegis/client-core/src/test/java/org/securemail/client/security600/LockCommandFixture600.java",
+        "/workspace/scratch/aa629f360927/aegis600/aegis/client-core/src/test/java/org/securemail/client/security600/OperatingSystemLock600Test.java"
+      ],
+      "exitCode": 0,
+      "seconds": 2.105
+    },
+    {
+      "phase": "junit",
+      "command": [
+        "/workspace/scratch/aa629f360927/inputs600/toolchain/jdk-21.0.12.1+1/bin/java",
+        "-jar",
+        "/workspace/scratch/aa629f360927/inputs600/test-deps/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--class-path",
+        "/workspace/scratch/aa629f360927/audit600/os-lock/test-classes:/workspace/scratch/aa629f360927/audit600/os-lock/classes:/workspace/scratch/aa629f360927/inputs600/maven-deps/jna-5.19.1.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/jna-platform-5.19.1.jar",
+        "--select-package",
+        "org.securemail.client.security600",
+        "--reports-dir",
+        "/workspace/scratch/aa629f360927/audit600/os-lock/junit",
+        "--details=summary"
+      ],
+      "exitCode": 0,
+      "seconds": 4.15
+    }
+  ],
+  "sources": [
+    {
+      "path": "client-core/src/main/java/org/securemail/client/security600/OperatingSystemLockMonitor600.java",
+      "sha256": "9a9332dce894c5317922d607bea840c0e79f4107aed4eecfb657fa380f3a22ba"
+    },
+    {
+      "path": "client-core/src/main/java/org/securemail/client/security600/WindowsLockProbe600.java",
+      "sha256": "de1551ac9faaf9ff2c997fc9720c3c0960240f23e7a70eab1a78b0cc9773ad92"
+    },
+    {
+      "path": "client-core/src/test/java/org/securemail/client/security600/LockCommandFixture600.java",
+      "sha256": "e38268f428e03108e0b626793439f3041279dc389aab9f43d7a11ffb684a1b75"
+    },
+    {
+      "path": "client-core/src/test/java/org/securemail/client/security600/OperatingSystemLock600Test.java",
+      "sha256": "1b9f61c8a994217f5ec18f4f71ad72990166075f9dcad9442d770830021389d2"
+    }
+  ],
+  "scope": "ActualWin64-layout/parser tests and realownedJVMcommand/deadline/pollingfixtures; nativeWindowsWTS+KDEWayland+KDEX11NOT_RUN."
+}

@@ -1,0 +1,38 @@
+{
+  "collectedAt": "2026-10-18T13:55:16.581773+00:00",
+  "productionReady": false,
+  "tests": {
+    "total": 24,
+    "pass": 20,
+    "fail": 0,
+    "notRun": 4
+  },
+  "actualPortableProcesses": [
+    "Kernel libseccomp filter rejects AF_INET/AF_INET6/AF_UNIX creation",
+    "Worker CLI rejects unsandboxed root before parsing"
+  ],
+  "syntheticFunctionalOnly": [
+    "WAL consolidation of trusted synthetic DB",
+    "Recorded fixed systemctl order and failed snapshot cleanup"
+  ],
+  "nativeNotRun": [
+    "Real DynamicUser/systemd RootDirectory",
+    "Full UID/chroot/seccomp SQLite fixture: CAP_SYS_CHROOT/CAP_SETUID/CAP_SETGID unavailable",
+    "AppArmor enforce",
+    "Offsite restic restore",
+    "Debian13 system SQLite patch level"
+  ],
+  "rootParsesSqlite": false,
+  "sourceFiles": {
+    "deployment/debian600/backup_restore.py": "ee4942bac41299f17fff3e70778b30768a9b9923289f2e6290865b4fb8fc4d12",
+    "deployment/debian600/deploy.py": "0a18dab34e5c3f08907b60a30dbcf9567bd3d441bc218e590d4646a6061e82ae",
+    "deployment/debian600/monitoring.py": "9e2cf48a7dbbf82db15cfe55710f9eaa907972939298a54b08c93b8e2d2181bd",
+    "deployment/debian600/preflight.py": "46c07fc71bbe2dbcafb63fd5c40815fb52efe6435afade9af5eac9d5b3080201",
+    "deployment/debian600/sqlite_validator.py": "b4c82987bd8af469c2c7777c7c6d54c70ded6813c028ae021b8515c0a7061272",
+    "deployment/debian600/staging.py": "5d9498e816dd7729a59a1d65566928c7d8e32cec4336db40010afec977b20157",
+    "deployment/debian600/start-news-worker.py": "d11b5b1f1096fe4688a2762757ff47e042b5b44169b5f0a38190000064ad1e03",
+    "deployment/debian600/test_debian600.py": "1bbda442581787127d5f1f5fef22ff131bb65755d33d6156d7b2695df6ddf080",
+    "deployment/debian600/test_validator_sandbox.py": "1a8ffa67c18993455d6cc0de6563d3011d872066cd73cef19fc25a23c9e6803e"
+  },
+  "lastPortableRerunAt": "2026-10-18T14:13:38.167292+00:00"
+}

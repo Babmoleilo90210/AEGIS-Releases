@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="JUnit Jupiter" tests="30" skipped="0" failures="0" errors="1" time="75.746" hostname="2ac91939697e" timestamp="2026-10-18T15:45:22">
+<properties>
+<property name="aegis.load.report" value="/workspace/scratch/aa629f360927/audit600/server/SERVER-LOCAL-LOAD-6.0.0.json"/>
+<property name="aegis.native.root" value="/workspace/scratch/aa629f360927/aegis600/aegis/.native-test"/>
+<property name="file.encoding" value="UTF-8"/>
+<property name="file.separator" value="/"/>
+<property name="java.class.path" value="/workspace/scratch/aa629f360927/inputs600/test-deps/junit-platform-console-standalone-1.13.4.jar"/>
+<property name="java.class.version" value="65.0"/>
+<property name="java.home" value="/workspace/scratch/aa629f360927/inputs600/toolchain/jdk-21.0.12.1+1"/>
+<property name="java.io.tmpdir" value="/tmp"/>
+<property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/>
+<property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+<property name="java.runtime.version" value="21.0.12.1+1-LTS"/>
+<property name="java.specification.name" value="Java Platform API Specification"/>
+<property name="java.specification.vendor" value="Oracle Corporation"/>
+<property name="java.specification.version" value="21"/>
+<property name="java.vendor" value="Eclipse Adoptium"/>
+<property name="java.vendor.url" value="https://adoptium.net/"/>
+<property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
+<property name="java.vendor.version" value="Temurin-21.0.12.1+1"/>
+<property name="java.version" value="21.0.12.1"/>
+<property name="java.version.date" value="2026-08-18"/>
+<property name="java.vm.compressedOopsMode" value="32-bit"/>
+<property name="java.vm.info" value="mixed mode, sharing"/>
+<property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+<property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+<property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+<property name="java.vm.specification.version" value="21"/>
+<property name="java.vm.vendor" value="Eclipse Adoptium"/>
+<property name="java.vm.version" value="21.0.12.1+1-LTS"/>
+<property name="jdk.debug" value="release"/>
+<property name="jdk.httpserver.maxConnections" value="32"/>
+<property name="jna.loaded" value="true"/>
+<property name="jna.platform.library.path" value="/usr/lib/x86_64-linux-gnu:/lib/x86_64-linux-gnu:/usr/lib64:/lib64:/usr/lib:/lib"/>
+<property name="jnidispatch.path" value="/root/.cache/JNA/temp/jna15207372191513723530.tmp"/>
+<property name="junit.docs.version" value="1.13.4"/>
+<property name="line.separator" value="&#10;"/>
+<property name="native.encoding" value="UTF-8"/>
+<property name="os.arch" value="amd64"/>
+<property name="os.name" value="Linux"/>
+<property name="os.version" value="6.18.55"/>
+<property name="path.separator" value=":"/>
+<property name="stderr.encoding" value="UTF-8"/>
+<property name="stdout.encoding" value="UTF-8"/>
+<property name="sun.arch.data.model" value="64"/>
+<property name="sun.boot.library.path" value="/workspace/scratch/aa629f360927/inputs600/toolchain/jdk-21.0.12.1+1/lib"/>
+<property name="sun.cpu.endian" value="little"/>
+<property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+<property name="sun.java.command" value="/workspace/scratch/aa629f360927/inputs600/test-deps/junit-platform-console-standalone-1.13.4.jar execute --class-path /workspace/scratch/aa629f360927/audit600/server/final-focused-classes:/workspace/scratch/aa629f360927/inputs600/maven-deps/apiguardian-api-1.1.2.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/bcpg-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/bcprov-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/bcutil-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/common-image-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/common-io-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/common-lang-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/commons-codec-1.19.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/commons-compress-1.28.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/commons-io-2.20.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/commons-lang3-3.18.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/commons-logging-1.4.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/error_prone_annotations-2.48.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/fontbox-3.0.8.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/gson-2.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/imageio-core-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/imageio-metadata-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/imageio-webp-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/javafx-base-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/javafx-controls-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/javafx-graphics-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/jna-5.19.1.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/jna-platform-5.19.1.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/jsr305-3.0.2.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-jupiter-5.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-jupiter-api-5.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-jupiter-engine-5.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-jupiter-params-5.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-platform-commons-1.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-platform-engine-1.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-platform-launcher-1.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/opentest4j-1.3.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/password4j-1.8.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/pdfbox-3.0.8.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/pdfbox-io-3.0.8.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/protobuf-java-4.33.6.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/slf4j-api-2.0.12.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/slf4j-api-2.0.17.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/slf4j-nop-2.0.17.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/sqlite-jdbc-3.53.4.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/tink-1.23.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/xz-1.12.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/zip4j-2.11.6.jar:/workspace/scratch/aa629f360927/inputs600/test-deps/junit-platform-console-standalone-1.13.4.jar --select-class org.securemail.client.management600.ManagementClientIntegration600Test --select-class org.securemail.management.ManagementIdentityIntegrationTest --select-class org.securemail.attachments.AttachmentStoreTest --select-class org.securemail.management.ServerLoadSecurity600Test --select-method org.securemail.attachments.MailAttachmentHttpIntegration600Test#multipleFilesCommitWithoutExhaustingConcurrentUploadSlotsAndRemainReopenable --select-method org.securemail.attachments.MailAttachmentHttpIntegration600Test#protectedManagerDescriptorUsesExistingLetterPasswordAndFf1WithoutEarlyPlaintext --reports-dir /workspace/scratch/aa629f360927/audit600/server/final-focused-test-results --details tree"/>
+<property name="sun.java.launcher" value="SUN_STANDARD"/>
+<property name="sun.jnu.encoding" value="UTF-8"/>
+<property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+<property name="sun.net.httpserver.maxReqHeaders" value="16"/>
+<property name="sun.net.httpserver.maxReqTime" value="45"/>
+<property name="sun.net.httpserver.maxRspTime" value="45"/>
+<property name="user.dir" value="/workspace/scratch/aa629f360927/aegis600/aegis"/>
+<property name="user.home" value="/root"/>
+<property name="user.language" value="en"/>
+<property name="user.name" value="root"/>
+<property name="user.timezone" value="Europe/Stockholm"/>
+</properties>
+<testcase name="measuredOneHundredSessionsConcurrentRevocationQuotasAndSignedBusy()" classname="org.securemail.management.ServerLoadSecurity600Test" time="16.164">
+<error message="/workspace/scratch/aa629f360927/audit600/server/SERVER-LOCAL-LOAD-6.0.0.json" type="java.nio.file.FileAlreadyExistsException"><![CDATA[java.nio.file.FileAlreadyExistsException: /workspace/scratch/aa629f360927/audit600/server/SERVER-LOCAL-LOAD-6.0.0.json
+	at java.base/sun.nio.fs.UnixException.translateToIOException(UnixException.java:94)
+	at java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:106)
+	at java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:111)
+	at java.base/sun.nio.fs.UnixFileSystemProvider.newByteChannel(UnixFileSystemProvider.java:261)
+	at java.base/java.nio.file.spi.FileSystemProvider.newOutputStream(FileSystemProvider.java:482)
+	at java.base/java.nio.file.Files.newOutputStream(Files.java:228)
+	at java.base/java.nio.file.Files.write(Files.java:3505)
+	at java.base/java.nio.file.Files.writeString(Files.java:3727)
+	at java.base/java.nio.file.Files.writeString(Files.java:3667)
+	at org.securemail.management.ServerLoadSecurity600Test.measuredOneHundredSessionsConcurrentRevocationQuotasAndSignedBusy(ServerLoadSecurity600Test.java:84)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+]]></error>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.management.ServerLoadSecurity600Test]/[method:measuredOneHundredSessionsConcurrentRevocationQuotasAndSignedBusy()]
+display-name: measuredOneHundredSessionsConcurrentRevocationQuotasAndSignedBusy()
+]]></system-out>
+</testcase>
+<testcase name="modifiedSnapshotAndSwappedActionCannotReuseApproval()" classname="org.securemail.management.ManagementIdentityIntegrationTest" time="0.105">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.management.ManagementIdentityIntegrationTest]/[method:modifiedSnapshotAndSwappedActionCannotReuseApproval()]
+display-name: modifiedSnapshotAndSwappedActionCannotReuseApproval()
+]]></system-out>
+</testcase>
+<testcase name="immutableResumableChunksSurviveRestartAndAckFreesQuota()" classname="org.securemail.attachments.AttachmentStoreTest" time="1.224">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.attachments.AttachmentStoreTest]/[method:immutableResumableChunksSurviveRestartAndAckFreesQuota()]
+display-name: immutableResumableChunksSurviveRestartAndAckFreesQuota()
+]]></system-out>
+</testcase>
+<testcase name="revokedGenerationAndWrongServicePinDenyBeforeCommand()" classname="org.securemail.management.ManagementIdentityIntegrationTest" time="0.15">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.management.ManagementIdentityIntegrationTest]/[method:revokedGenerationAndWrongServicePinDenyBeforeCommand()]
+display-name: revokedGenerationAndWrongServicePinDenyBeforeCommand()
+]]></system-out>
+</testcase>
+<testcase name="committedFilesReleaseConcurrentSlotsWhileRetainedObjectsStayBounded()" classname="org.securemail.attachments.AttachmentStoreTest" time="11.443">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.attachments.AttachmentStoreTest]/[method:committedFilesReleaseConcurrentSlotsWhileRetainedObjectsStayBounded()]
+display-name: committedFilesReleaseConcurrentSlotsWhileRetainedObjectsStayBounded()
+]]></system-out>
+</testcase>
+<testcase name="multipleFilesCommitWithoutExhaustingConcurrentUploadSlotsAndRemainReopenable()" classname="org.securemail.attachments.MailAttachmentHttpIntegration600Test" time="4.725">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.attachments.MailAttachmentHttpIntegration600Test]/[method:multipleFilesCommitWithoutExhaustingConcurrentUploadSlotsAndRemainReopenable()]
+display-name: multipleFilesCommitWithoutExhaustingConcurrentUploadSlotsAndRemainReopenable()
+]]></system-out>
+</testcase>
+<testcase name="protectedManagerDescriptorUsesExistingLetterPasswordAndFf1WithoutEarlyPlaintext()" classname="org.securemail.attachments.MailAttachmentHttpIntegration600Test" time="28.491">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.attachments.MailAttachmentHttpIntegration600Test]/[method:protectedManagerDescriptorUsesExistingLetterPasswordAndFf1WithoutEarlyPlaintext()]
+display-name: protectedManagerDescriptorUsesExistingLetterPasswordAndFf1WithoutEarlyPlaintext()
+]]></system-out>
+</testcase>
+<testcase name="oneAdministratorCannotSupplyTwoProofsOrClientRoleFlags()" classname="org.securemail.management.ManagementIdentityIntegrationTest" time="0.242">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.management.ManagementIdentityIntegrationTest]/[method:oneAdministratorCannotSupplyTwoProofsOrClientRoleFlags()]
+display-name: oneAdministratorCannotSupplyTwoProofsOrClientRoleFlags()
+]]></system-out>
+</testcase>
+<testcase name="ordinaryOwnerOperationUsesFreshRealHttpAuthorityAndExactFixedUnit()" classname="org.securemail.management.ManagementIdentityIntegrationTest" time="0.112">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.management.ManagementIdentityIntegrationTest]/[method:ordinaryOwnerOperationUsesFreshRealHttpAuthorityAndExactFixedUnit()]
+display-name: ordinaryOwnerOperationUsesFreshRealHttpAuthorityAndExactFixedUnit()
+]]></system-out>
+</testcase>
+<testcase name="actualIdentityGenerationRevokeDeniesBeforeAnyCommand()" classname="org.securemail.client.management600.ManagementClientIntegration600Test" time="0.315">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.management600.ManagementClientIntegration600Test]/[method:actualIdentityGenerationRevokeDeniesBeforeAnyCommand()]
+display-name: actualIdentityGenerationRevokeDeniesBeforeAnyCommand()
+]]></system-out>
+</testcase>
+<testcase name="metadataTamperDuplicateAdministratorAndWrongAppProofAreRejectedLocally()" classname="org.securemail.client.management600.ManagementClientIntegration600Test" time="0.138">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.management600.ManagementClientIntegration600Test]/[method:metadataTamperDuplicateAdministratorAndWrongAppProofAreRejectedLocally()]
+display-name: metadataTamperDuplicateAdministratorAndWrongAppProofAreRejectedLocally()
+]]></system-out>
+</testcase>
+<testcase name="actualFourProofDelegatedSecondAdministratorApprovesCriticalRestoreExactlyOnce()" classname="org.securemail.management.ManagementIdentityIntegrationTest" time="0.157">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.management.ManagementIdentityIntegrationTest]/[method:actualFourProofDelegatedSecondAdministratorApprovesCriticalRestoreExactlyOnce()]
+display-name: actualFourProofDelegatedSecondAdministratorApprovesCriticalRestoreExactlyOnce()
+]]></system-out>
+</testcase>
+<testcase name="pathTraversalSymlinkAndTwoProcessOpenAreRejected()" classname="org.securemail.attachments.AttachmentStoreTest" time="0.111">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.attachments.AttachmentStoreTest]/[method:pathTraversalSymlinkAndTwoProcessOpenAreRejected()]
+display-name: pathTraversalSymlinkAndTwoProcessOpenAreRejected()
+]]></system-out>
+</testcase>
+<testcase name="modifiedOnDiskChunkAndIncompleteCommitAreRejected()" classname="org.securemail.attachments.AttachmentStoreTest" time="0.212">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.attachments.AttachmentStoreTest]/[method:modifiedOnDiskChunkAndIncompleteCommitAreRejected()]
+display-name: modifiedOnDiskChunkAndIncompleteCommitAreRejected()
+]]></system-out>
+</testcase>
+<testcase name="signedRateRefusalBindsRequestAndDoesNotRunThirtyFirstCommand()" classname="org.securemail.client.management600.ManagementClientIntegration600Test" time="6.387">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.management600.ManagementClientIntegration600Test]/[method:signedRateRefusalBindsRequestAndDoesNotRunThirtyFirstCommand()]
+display-name: signedRateRefusalBindsRequestAndDoesNotRunThirtyFirstCommand()
+]]></system-out>
+</testcase>
+<testcase name="duplicateConflictAndChangedManifestCannotOverwrite()" classname="org.securemail.attachments.AttachmentStoreTest" time="0.978">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.attachments.AttachmentStoreTest]/[method:duplicateConflictAndChangedManifestCannotOverwrite()]
+display-name: duplicateConflictAndChangedManifestCannotOverwrite()
+]]></system-out>
+</testcase>
+<testcase name="publicConfigurationHasOnlyExactKeysAndNoSymlinkOrDuplicatePin()" classname="org.securemail.client.management600.ManagementClientIntegration600Test" time="0.105">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.management600.ManagementClientIntegration600Test]/[method:publicConfigurationHasOnlyExactKeysAndNoSymlinkOrDuplicatePin()]
+display-name: publicConfigurationHasOnlyExactKeysAndNoSymlinkOrDuplicatePin()
+]]></system-out>
+</testcase>
+<testcase name="canonicalFrameRejectsTrailingBytesAndChangedOperationFields()" classname="org.securemail.attachments.AttachmentStoreTest" time="0.044">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.attachments.AttachmentStoreTest]/[method:canonicalFrameRejectsTrailingBytesAndChangedOperationFields()]
+display-name: canonicalFrameRejectsTrailingBytesAndChangedOperationFields()
+]]></system-out>
+</testcase>
+<testcase name="twoDistinctActualAdministratorsApproveExactlyOneImmutableRestore()" classname="org.securemail.client.management600.ManagementClientIntegration600Test" time="0.354">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.management600.ManagementClientIntegration600Test]/[method:twoDistinctActualAdministratorsApproveExactlyOneImmutableRestore()]
+display-name: twoDistinctActualAdministratorsApproveExactlyOneImmutableRestore()
+]]></system-out>
+</testcase>
+<testcase name="noRecipientMetadataBeforeCommitAndNoForeignAccessOrWrite()" classname="org.securemail.attachments.AttachmentStoreTest" time="0.201">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.attachments.AttachmentStoreTest]/[method:noRecipientMetadataBeforeCommitAndNoForeignAccessOrWrite()]
+display-name: noRecipientMetadataBeforeCommitAndNoForeignAccessOrWrite()
+]]></system-out>
+</testcase>
+<testcase name="partialUploadsExpireWithinOneDayAndAbortIsBoundToSender()" classname="org.securemail.attachments.AttachmentStoreTest" time="0.113">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.attachments.AttachmentStoreTest]/[method:partialUploadsExpireWithinOneDayAndAbortIsBoundToSender()]
+display-name: partialUploadsExpireWithinOneDayAndAbortIsBoundToSender()
+]]></system-out>
+</testcase>
+<testcase name="realClientStatusRestartAndAsyncBackupUseOnlyFixedCommands()" classname="org.securemail.client.management600.ManagementClientIntegration600Test" time="0.599">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.management600.ManagementClientIntegration600Test]/[method:realClientStatusRestartAndAsyncBackupUseOnlyFixedCommands()]
+display-name: realClientStatusRestartAndAsyncBackupUseOnlyFixedCommands()
+]]></system-out>
+</testcase>
+<testcase name="auditTamperBlocksReopenAndFailedIntentCannotBeSilentlyRetried()" classname="org.securemail.management.ManagementIdentityIntegrationTest" time="0.128">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.management.ManagementIdentityIntegrationTest]/[method:auditTamperBlocksReopenAndFailedIntentCannotBeSilentlyRetried()]
+display-name: auditTamperBlocksReopenAndFailedIntentCannotBeSilentlyRetried()
+]]></system-out>
+</testcase>
+<testcase name="authorityIsRecheckedDuringWriteAndNoChunkPublishedAfterRevoke()" classname="org.securemail.attachments.AttachmentStoreTest" time="0.239">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.attachments.AttachmentStoreTest]/[method:authorityIsRecheckedDuringWriteAndNoChunkPublishedAfterRevoke()]
+display-name: authorityIsRecheckedDuringWriteAndNoChunkPublishedAfterRevoke()
+]]></system-out>
+</testcase>
+<testcase name="exactClientMetadataMatchesActualServerParserForEveryServiceAndAction()" classname="org.securemail.client.management600.ManagementClientIntegration600Test" time="0.084">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.management600.ManagementClientIntegration600Test]/[method:exactClientMetadataMatchesActualServerParserForEveryServiceAndAction()]
+display-name: exactClientMetadataMatchesActualServerParserForEveryServiceAndAction()
+]]></system-out>
+</testcase>
+<testcase name="expiryAndClockRollbackNeverExtendThirtyDayDeadline()" classname="org.securemail.attachments.AttachmentStoreTest" time="0.129">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.attachments.AttachmentStoreTest]/[method:expiryAndClockRollbackNeverExtendThirtyDayDeadline()]
+display-name: expiryAndClockRollbackNeverExtendThirtyDayDeadline()
+]]></system-out>
+</testcase>
+<testcase name="quotasReserveFullDeclaredSizeAtomicallyAndCannotDoubleCountRetry()" classname="org.securemail.attachments.AttachmentStoreTest" time="0.177">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.attachments.AttachmentStoreTest]/[method:quotasReserveFullDeclaredSizeAtomicallyAndCannotDoubleCountRetry()]
+display-name: quotasReserveFullDeclaredSizeAtomicallyAndCannotDoubleCountRetry()
+]]></system-out>
+</testcase>
+<testcase name="fixedCommandGrammarRejectsShellUnitPathAndNonCanonicalMetadata()" classname="org.securemail.management.ManagementIdentityIntegrationTest" time="0.091">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.management.ManagementIdentityIntegrationTest]/[method:fixedCommandGrammarRejectsShellUnitPathAndNonCanonicalMetadata()]
+display-name: fixedCommandGrammarRejectsShellUnitPathAndNonCanonicalMetadata()
+]]></system-out>
+</testcase>
+<testcase name="wrongServicePinAndMissingSocksNeverCauseDirectFallback()" classname="org.securemail.client.management600.ManagementClientIntegration600Test" time="0.3">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.management600.ManagementClientIntegration600Test]/[method:wrongServicePinAndMissingSocksNeverCauseDirectFallback()]
+display-name: wrongServicePinAndMissingSocksNeverCauseDirectFallback()
+]]></system-out>
+</testcase>
+<testcase name="oversizedUndersizedAndWrongDigestDoNotBecomeStoredChunks()" classname="org.securemail.attachments.AttachmentStoreTest" time="1.583">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.attachments.AttachmentStoreTest]/[method:oversizedUndersizedAndWrongDigestDoNotBecomeStoredChunks()]
+display-name: oversizedUndersizedAndWrongDigestDoNotBecomeStoredChunks()
+]]></system-out>
+</testcase>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]
+display-name: JUnit Jupiter
+]]></system-out>
+</testsuite>

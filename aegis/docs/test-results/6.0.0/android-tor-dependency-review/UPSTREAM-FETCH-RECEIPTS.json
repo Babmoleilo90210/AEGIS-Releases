@@ -1,0 +1,37 @@
+{
+  "when": "2026-10-18T13:49:34.634781+00:00",
+  "sources": [
+    {
+      "name": "tor-android-tags.json",
+      "url": "https://api.github.com/repos/guardianproject/tor-android/tags?per_page=30",
+      "status": 200,
+      "finalUrl": "https://api.github.com/repos/guardianproject/tor-android/tags?per_page=30",
+      "bytes": 15836,
+      "sha256": "829e65b3e67e3a85e732604da8d7828d65ead049d877b287e67ae07618bba794"
+    },
+    {
+      "name": "tor-android-master-build.gradle.kts",
+      "url": "https://raw.githubusercontent.com/guardianproject/tor-android/master/build.gradle.kts",
+      "status": 200,
+      "finalUrl": "https://raw.githubusercontent.com/guardianproject/tor-android/master/build.gradle.kts",
+      "bytes": 937,
+      "sha256": "3cf56f577e42fa0c4d0f36207112e2bd751669d5852fd51cf16b1b567b2d5351"
+    },
+    {
+      "name": "tor-android-master-tor-droid-make.sh",
+      "url": "https://raw.githubusercontent.com/guardianproject/tor-android/master/tor-droid-make.sh",
+      "status": 200,
+      "finalUrl": "https://raw.githubusercontent.com/guardianproject/tor-android/master/tor-droid-make.sh",
+      "bytes": 8681,
+      "sha256": "72d033f5455995eff249bb4ae5698742c3724d227075c1c9d9f4319a92795660"
+    },
+    {
+      "name": "tor-android-master-.gitmodules",
+      "url": "https://raw.githubusercontent.com/guardianproject/tor-android/master/.gitmodules",
+      "status": 200,
+      "finalUrl": "https://raw.githubusercontent.com/guardianproject/tor-android/master/.gitmodules",
+      "bytes": 692,
+      "sha256": "509eaa73e9f3f72c1dd3db12829354e21e5f25b3546fa62ae828383b2353a918"
+    }
+  ]
+}

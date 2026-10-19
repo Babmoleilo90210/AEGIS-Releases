@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "version": "6.0.0-test",
+  "productionReady": false,
+  "date": "2026-10-18",
+  "checks": [
+    {
+      "id": "ANDROID-JVM",
+      "status": "PASS",
+      "evidence": "145 host policy/socket/JNI/native-stack/media/TLS checks; no device claims"
+    },
+    {
+      "id": "LIBSODIUM-HOST",
+      "status": "PASS",
+      "evidence": "101 upstream tests on x86-64"
+    },
+    {
+      "id": "ANDROID-ARM64-BUILD",
+      "status": "PASS",
+      "evidence": "NDK r29 ARM64 ELF, 16 KiB alignment; execution NOT_RUN"
+    },
+    {
+      "id": "FOUR-APKS",
+      "status": "PASS",
+      "evidence": "Four TEST and four unsigned APKs; SDK + embedded apksig verifies actual files"
+    },
+    {
+      "id": "APK-TAMPER",
+      "status": "PASS",
+      "evidence": "Actually modified APK rejected by both verifiers"
+    },
+    {
+      "id": "ANDROID-NATIVE",
+      "status": "NOT_RUN",
+      "evidence": "No device/emulator/USB/KVM"
+    },
+    {
+      "id": "BINDER-NATIVE",
+      "status": "NOT_RUN",
+      "evidence": "Framework spoof tests require device"
+    },
+    {
+      "id": "TOR-MAIL-E2E",
+      "status": "NOT_RUN",
+      "evidence": "No live staging/Tor/device test"
+    },
+    {
+      "id": "FULL-MAIL",
+      "status": "BLOCKED",
+      "evidence": "Archive/full old protection UI/P2P/background/500MiB attachments incomplete"
+    },
+    {
+      "id": "VOICE",
+      "status": "BLOCKED",
+      "evidence": "Native network voice adapter/incoming screen not implemented"
+    },
+    {
+      "id": "DOZE",
+      "status": "NOT_RUN",
+      "evidence": "No Android device"
+    },
+    {
+      "id": "OWNER-SIGNING",
+      "status": "NOT_RUN",
+      "evidence": "Owner key never accessed"
+    },
+    {
+      "id": "REAL-SERVICE-MAIL",
+      "status": "PASS_LOCAL",
+      "evidence": "7 real Identity HTTP + SQLite Relay + Android MailRelay6/E2EE scenarios; loopback SOCKS fixture, not Tor"
+    },
+    {
+      "id": "TCP-DNS-ENGINE",
+      "status": "PASS",
+      "evidence": "Actual native hev/lwIP raw-IP and gateway host forwarding; Android OS protect/leaks NOT_RUN"
+    },
+    {
+      "id": "BCJSSE-DESKTOP-INTEROP",
+      "status": "PASS",
+      "evidence": "31 actual TLS1.3/v2 loopback checks in both roles; physical Android provider NOT_RUN"
+    },
+    {
+      "id": "FULL-TOR-VPN",
+      "status": "BLOCKED",
+      "evidence": "Constrained local TCP/DNS mode implemented; mixed per-app Tor, Always-on, lockdown unfinished"
+    },
+    {
+      "id": "OWNER-PUBLIC-APK-VERIFY",
+      "status": "PASS",
+      "evidence": "11 tests incl actual SDK signed/tampered APK and 10 explicit parser fixtures"
+    }
+  ],
+  "testCertificateSha256": "a520a96ed433a309757c8193a9f38a356459b55c4bbf81398da85e7c32c22d58",
+  "nativeAcceptanceClaimed": false,
+  "externalArtifacts": "android600-artifacts",
+  "externalNative": "android600-native",
+  "externalTun": "android600-tun",
+  "externalAudio": "android600-audio",
+  "externalMailIntegration": "android600-mail-integration"
+}

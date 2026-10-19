@@ -34,7 +34,7 @@ public final class UpdateService implements AutoCloseable {
   public void automatic(BooleanSupplier enabled,BooleanSupplier download){automaticCheck=Objects.requireNonNull(enabled);automaticDownload=Objects.requireNonNull(download);}
   public Snapshot snapshot(){return snapshot;}public void listener(Consumer<Snapshot> value){listener=Objects.requireNonNull(value);}
   public void channel(String value){if(!Set.of("stable","beta").contains(value))throw new IllegalArgumentException("Invalid update channel");if(working)throw new IllegalStateException("Update in progress");channel=value;artifact=null;exact=null;signature=null;emit(State.UP_TO_DATE,0,0,null,false,"Обновления ещё не проверялись");}
-  public synchronized void check(boolean autoDownload){if(closed||working)return;working=true;cancelled.set(false);String selected=channel;executor.execute(()->{UpdateDiagnostic.Phase phase=UpdateDiagnostic.Phase.FETCH;try{
+  public synchronized void check(boolean autoDownload){if(closed||working)return;working=true;cancelled.set(false);String selected=channel;executor.execute(()->{UpdateDiagnostic.Phase phase=UpdateDiagnostic.Phase.FETCH;SignedManifest accepted=null;try{
     artifact=null;exact=null;signature=null;
     emit(State.CHECKING,0,0,snapshot.manifest(),false,"Проверка обновлений…");URI base=URI.create("https://raw.githubusercontent.com/"+SignedManifest.REPOSITORY+"/main/updates/"+selected+".json");
     byte[] json=downloads.bytes(base,SignedManifest.MAX_BYTES),sig=downloads.bytes(URI.create(base.toString()+".sig"),64);
@@ -46,9 +46,9 @@ public final class UpdateService implements AutoCloseable {
     phase=UpdateDiagnostic.Phase.POLICY;manifest.requireInstallable(SignedManifest.CURRENT,store.highest(selected));
     if(closed||cancelled.get())throw new InterruptedIOException("Update cancelled");
     phase=UpdateDiagnostic.Phase.STORE;boolean announcement=store.remember(manifest,json,sig);exact=json;signature=sig;events.record(manifest,UpdateEvents.Kind.AVAILABLE,selected,"");
-    if(manifest.newerThan(SignedManifest.CURRENT)){emit(State.AVAILABLE,0,manifest.clientAsset(windows).size(),manifest,announcement,"Доступно обновление АЕГИС "+manifest.version());if(autoDownload){phase=UpdateDiagnostic.Phase.DOWNLOAD;downloadNow(manifest);}}
+    if(manifest.newerThan(SignedManifest.CURRENT)){emit(State.AVAILABLE,0,manifest.clientAsset(windows).size(),manifest,announcement,"Доступно обновление АЕГИС "+manifest.version());if(autoDownload){phase=UpdateDiagnostic.Phase.DOWNLOAD;accepted=manifest;downloadNow(manifest);}}
     else emit(State.UP_TO_DATE,0,0,manifest,false,"У вас последняя версия АЕГИС "+SignedManifest.CURRENT);
-  }catch(Exception failure){failed(failure,phase,null);}finally{working=false;}});}
+  }catch(Exception failure){failed(failure,phase,accepted);}finally{working=false;}});}
   public synchronized void download(){if(closed||working||snapshot.manifest()==null||snapshot.state()!=State.AVAILABLE&&snapshot.state()!=State.FAILED)return;working=true;cancelled.set(false);SignedManifest manifest=snapshot.manifest();executor.execute(()->{try{downloadNow(manifest);}catch(Exception failure){failed(failure,UpdateDiagnostic.Phase.DOWNLOAD,manifest);}finally{working=false;}});}
   private void downloadNow(SignedManifest manifest)throws Exception {
     manifest.requireInstallable(SignedManifest.CURRENT,store.highest(channel));

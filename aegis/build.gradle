@@ -1,7 +1,7 @@
 plugins { id 'base' }
 allprojects {
     group = 'org.securemail'
-    version = project.name in ['client-core','client-ui','integration-tests','community-server','news-worker'] ? '5.0.0' : (project.name == 'relay-server' ? '0.3.0' : '0.2.0')
+    version = project.name in ['client-core','client-ui','integration-tests','community-server','news-worker','identity-server','attachment-service','management-agent','glas-signaling'] ? '6.0.0' : (project.name == 'relay-server' ? '0.3.0' : '0.2.0')
     repositories { mavenCentral() }
 }
 subprojects {

@@ -1,0 +1,1153 @@
+{
+  "scope": "Numeric exact/range comparison only for exact SQLite, SQLite-JDBC, SLF4J and Gson CPE products in actual downloaded NVD records; not exhaustive CPE/NVD coverage",
+  "assessedCpeEntries": 73,
+  "matchingEntries": [],
+  "unresolvedEntries": [],
+  "entries": [
+    {
+      "id": "CVE-2008-6589",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:1.2.2:*:*:*:*:*:*:*",
+        "matchCriteriaId": "65EA4824-622E-4A2E-969F-05AF2C5B1F8C"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2008-6590",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:1.2.2:*:*:*:*:*:*:*",
+        "matchCriteriaId": "65EA4824-622E-4A2E-969F-05AF2C5B1F8C"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2008-6592",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:1.2.2:*:*:*:*:*:*:*",
+        "matchCriteriaId": "65EA4824-622E-4A2E-969F-05AF2C5B1F8C"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2008-6593",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:1.2.2:*:*:*:*:*:*:*",
+        "matchCriteriaId": "65EA4824-622E-4A2E-969F-05AF2C5B1F8C"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2013-7443",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:3.8.2:*:*:*:*:*:*:*",
+        "matchCriteriaId": "FDFE183D-49BD-4C8F-882D-5B0438F251AD"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2015-3414",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:*:*:*:*:*:*:*:*",
+        "versionEndIncluding": "3.8.8.3",
+        "matchCriteriaId": "E85F71C2-BD0B-4836-9592-FFAF0ED69A1A"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2015-3415",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:*:*:*:*:*:*:*:*",
+        "versionEndIncluding": "3.8.8.3",
+        "matchCriteriaId": "E85F71C2-BD0B-4836-9592-FFAF0ED69A1A"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2015-3416",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:*:*:*:*:*:*:*:*",
+        "versionEndIncluding": "3.8.8.3",
+        "matchCriteriaId": "E85F71C2-BD0B-4836-9592-FFAF0ED69A1A"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2015-3717",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:*:*:*:*:*:*:*:*",
+        "versionEndExcluding": "3.8.9",
+        "matchCriteriaId": "CD392CB9-FD3B-4021-B31A-77157B107A07"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2015-5895",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:*:*:*:*:*:*:*:*",
+        "versionEndIncluding": "3.8.10.1",
+        "matchCriteriaId": "76108C0E-2392-4FF1-B092-DD933BF4D135"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2015-6607",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:*:*:*:*:*:*:*:*",
+        "versionEndIncluding": "3.8.8.3",
+        "matchCriteriaId": "E85F71C2-BD0B-4836-9592-FFAF0ED69A1A"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2016-6153",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:*:*:*:*:*:*:*:*",
+        "versionEndIncluding": "3.12.2",
+        "matchCriteriaId": "575E53A9-1BF3-4059-A69D-11A46817D040"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2017-10989",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:*:*:*:*:*:*:*:*",
+        "versionEndIncluding": "3.19.3",
+        "matchCriteriaId": "F0D613CD-BB15-4C73-AC3C-3E43B3FB03B7"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2017-13685",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:3.20.0:*:*:*:*:*:*:*",
+        "matchCriteriaId": "2F4F8750-6CAD-4F1D-9B1B-5F0736AD3B9D"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2017-15286",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:3.20.1:*:*:*:*:*:*:*",
+        "matchCriteriaId": "BFDBAFB4-A76C-4DAF-B346-57E0524BBE98"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2018-20346",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:*:*:*:*:*:*:*:*",
+        "versionEndExcluding": "3.25.3",
+        "matchCriteriaId": "00D1E0B0-910B-4661-9E93-64746C0441A4"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2018-20505",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:*:*:*:*:*:*:*:*",
+        "versionEndIncluding": "3.25.2",
+        "matchCriteriaId": "020C961B-427C-4598-9EB0-0042020C54B3"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2018-20506",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:*:*:*:*:*:*:*:*",
+        "versionEndExcluding": "3.25.3",
+        "matchCriteriaId": "00D1E0B0-910B-4661-9E93-64746C0441A4"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2018-8088",
+      "targetCpe": [
+        "qos",
+        "slf4j"
+      ],
+      "version": "2.0.17",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:qos:slf4j:*:*:*:*:*:*:*:*",
+        "versionEndExcluding": "1.7.26",
+        "matchCriteriaId": "D42F1233-D2BD-4CF0-94F9-8BE35346BC1F"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2018-8088",
+      "targetCpe": [
+        "qos",
+        "slf4j"
+      ],
+      "version": "2.0.17",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:qos:slf4j:1.8.0:alpha1:*:*:*:*:*:*",
+        "matchCriteriaId": "53E5592F-9FFB-4ABE-82B9-D6A130359C6C"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2018-8088",
+      "targetCpe": [
+        "qos",
+        "slf4j"
+      ],
+      "version": "2.0.17",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:qos:slf4j:1.8.0:alpha2:*:*:*:*:*:*",
+        "matchCriteriaId": "51E52584-4E04-40CE-AD6D-7D2B9A97DF2C"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2018-8088",
+      "targetCpe": [
+        "qos",
+        "slf4j"
+      ],
+      "version": "2.0.17",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:qos:slf4j:1.8.0:beta1:*:*:*:*:*:*",
+        "matchCriteriaId": "9EA01C6A-4A37-436E-939E-A4C6E29D0F81"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2018-8088",
+      "targetCpe": [
+        "qos",
+        "slf4j"
+      ],
+      "version": "2.0.17",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:qos:slf4j:1.8.0:beta2:*:*:*:*:*:*",
+        "matchCriteriaId": "BA0E73F4-0197-422E-B454-A6090BD1D911"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2018-8740",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:*:*:*:*:*:*:*:*",
+        "versionEndIncluding": "3.22.0",
+        "matchCriteriaId": "DD121220-95FB-4775-9C24-C93451AB9AF9"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2019-16168",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:*:*:*:*:*:*:*:*",
+        "versionStartIncluding": "3.8.5",
+        "versionEndIncluding": "3.29.0",
+        "matchCriteriaId": "199DADF1-CA17-4BA1-B94D-251AD1F5FB63"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2019-19242",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:3.30.1:*:*:*:*:*:*:*",
+        "matchCriteriaId": "0175D7DA-13DD-44A4-91BB-77489F76C878"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2019-19244",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:3.30.1:*:*:*:*:*:*:*",
+        "matchCriteriaId": "0175D7DA-13DD-44A4-91BB-77489F76C878"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2019-19317",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:3.30.1:*:*:*:*:*:*:*",
+        "matchCriteriaId": "0175D7DA-13DD-44A4-91BB-77489F76C878"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2019-19603",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:3.30.1:*:*:*:*:*:*:*",
+        "matchCriteriaId": "0175D7DA-13DD-44A4-91BB-77489F76C878"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2019-19645",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:*:*:*:*:*:*:*:*",
+        "versionEndIncluding": "3.30.1",
+        "matchCriteriaId": "9234ECCF-E771-485D-B89B-9F67AAB332A1"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2019-19646",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:*:*:*:*:*:*:*:*",
+        "versionEndIncluding": "3.30.1",
+        "matchCriteriaId": "9234ECCF-E771-485D-B89B-9F67AAB332A1"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2019-19880",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:3.30.1:*:*:*:*:*:*:*",
+        "matchCriteriaId": "0175D7DA-13DD-44A4-91BB-77489F76C878"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2019-19923",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:3.30.1:*:*:*:*:*:*:*",
+        "matchCriteriaId": "0175D7DA-13DD-44A4-91BB-77489F76C878"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2019-19924",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:3.30.1:*:*:*:*:*:*:*",
+        "matchCriteriaId": "0175D7DA-13DD-44A4-91BB-77489F76C878"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2019-19925",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:3.30.1:*:*:*:*:*:*:*",
+        "matchCriteriaId": "0175D7DA-13DD-44A4-91BB-77489F76C878"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2019-19926",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:3.30.1:*:*:*:*:*:*:*",
+        "matchCriteriaId": "0175D7DA-13DD-44A4-91BB-77489F76C878"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2019-19959",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:3.30.1:*:*:*:*:*:*:*",
+        "matchCriteriaId": "0175D7DA-13DD-44A4-91BB-77489F76C878"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2019-20218",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:3.30.1:*:*:*:*:*:*:*",
+        "matchCriteriaId": "0175D7DA-13DD-44A4-91BB-77489F76C878"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2019-5018",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:3.26.0:*:*:*:*:*:*:*",
+        "matchCriteriaId": "113334DC-B486-485E-BFB5-B33ED904B818"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2019-8457",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:*:*:*:*:*:*:*:*",
+        "versionStartIncluding": "3.6.0",
+        "versionEndIncluding": "3.27.2",
+        "matchCriteriaId": "BC066C9B-59DF-4E24-99F1-8B544D023B06"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2019-9936",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:3.27.2:*:*:*:*:*:*:*",
+        "matchCriteriaId": "C1D25C0F-15FD-444C-A0BC-D390862CFD15"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2019-9937",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:3.27.2:*:*:*:*:*:*:*",
+        "matchCriteriaId": "C1D25C0F-15FD-444C-A0BC-D390862CFD15"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2020-11655",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:*:*:*:*:*:*:*:*",
+        "versionEndIncluding": "3.31.1",
+        "matchCriteriaId": "207373A2-D1D0-4A2B-BC38-B6674613AE68"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2020-11656",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:*:*:*:*:*:*:*:*",
+        "versionEndIncluding": "3.31.1",
+        "matchCriteriaId": "207373A2-D1D0-4A2B-BC38-B6674613AE68"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2020-13434",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:*:*:*:*:*:*:*:*",
+        "versionEndIncluding": "3.32.0",
+        "matchCriteriaId": "2AC3C207-F607-4B3C-AAAF-76190CB0839A"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2020-13435",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:*:*:*:*:*:*:*:*",
+        "versionEndIncluding": "3.32.0",
+        "matchCriteriaId": "2AC3C207-F607-4B3C-AAAF-76190CB0839A"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2020-13630",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:*:*:*:*:*:*:*:*",
+        "versionEndExcluding": "3.32.0",
+        "matchCriteriaId": "7B0C3C64-D3B1-4B06-B792-F2E07743D0FE"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2020-13631",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:*:*:*:*:*:*:*:*",
+        "versionEndExcluding": "3.32.0",
+        "matchCriteriaId": "7B0C3C64-D3B1-4B06-B792-F2E07743D0FE"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2020-13632",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:*:*:*:*:*:*:*:*",
+        "versionEndExcluding": "3.32.0",
+        "matchCriteriaId": "7B0C3C64-D3B1-4B06-B792-F2E07743D0FE"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2020-13871",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:3.32.2:*:*:*:*:*:*:*",
+        "matchCriteriaId": "00BF25B1-7417-4FAA-A436-AD6D5C980ECD"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2020-15358",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:*:*:*:*:*:*:*:*",
+        "versionEndExcluding": "3.32.3",
+        "matchCriteriaId": "025A1F8C-8487-4BA6-8574-39B76273D7D2"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2020-35525",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:3.31.1:*:*:*:*:*:*:*",
+        "matchCriteriaId": "1051CFB3-05F7-4B95-A816-C88C78A825CF"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2020-35527",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:3.31.1:*:*:*:*:*:*:*",
+        "matchCriteriaId": "1051CFB3-05F7-4B95-A816-C88C78A825CF"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2020-9327",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:3.31.1:*:*:*:*:*:*:*",
+        "matchCriteriaId": "1051CFB3-05F7-4B95-A816-C88C78A825CF"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2021-20227",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:*:*:*:*:*:*:*:*",
+        "versionStartIncluding": "3.33.0",
+        "versionEndExcluding": "3.34.1",
+        "matchCriteriaId": "4323F972-6CFE-4E59-A82B-FB5621827BE3"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2021-31239",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:3.35.4:*:*:*:*:*:*:*",
+        "matchCriteriaId": "49CC71C1-9555-4A7A-A2F5-76A6E94E9AD1"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2021-36690",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:3.36.0:*:*:*:*:*:*:*",
+        "matchCriteriaId": "8A125D02-6347-4B7A-B929-5B95821AD58E"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2021-45346",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:3.35.1:*:*:*:*:*:*:*",
+        "matchCriteriaId": "957B4E14-84C0-45C8-96C3-C78D17FB4DA5"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2021-45346",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:3.37.0:*:*:*:*:*:*:*",
+        "matchCriteriaId": "3CB2AF7E-0D10-47B6-B2F1-751A599A3E96"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2022-25647",
+      "targetCpe": [
+        "google",
+        "gson"
+      ],
+      "version": "2.14.0",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:google:gson:*:*:*:*:*:*:*:*",
+        "versionStartIncluding": "2.2.3",
+        "versionEndExcluding": "2.8.9",
+        "matchCriteriaId": "BDD6E481-96F1-4FE9-9283-775786501464"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2022-35737",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:*:*:*:*:*:*:*:*",
+        "versionStartIncluding": "1.0.12",
+        "versionEndExcluding": "3.39.2",
+        "matchCriteriaId": "675F5C51-DC71-4C65-AD31-219ED847D4A1"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2022-46908",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:*:*:*:*:*:*:*:*",
+        "versionStartIncluding": "3.37.0",
+        "versionEndExcluding": "3.40.1",
+        "matchCriteriaId": "B163FB3C-EDA0-4A12-9617-9593654FB0D4"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2023-32697",
+      "targetCpe": [
+        "sqlite_jdbc_project",
+        "sqlite_jdbc"
+      ],
+      "version": "3.53.4.0",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite_jdbc_project:sqlite_jdbc:*:*:*:*:*:*:*:*",
+        "versionStartIncluding": "3.6.14.1",
+        "versionEndExcluding": "3.41.2.2",
+        "matchCriteriaId": "47BF8145-F503-4906-B97C-F58153E21309"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2023-7104",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:*:*:*:*:*:*:*:*",
+        "versionEndIncluding": "3.43.0",
+        "matchCriteriaId": "EC1BE020-C867-4652-B2D1-ADB77D8B7E07"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2024-0232",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:*:*:*:*:*:*:*:*",
+        "versionStartIncluding": "3.43.0",
+        "versionEndExcluding": "3.43.2",
+        "matchCriteriaId": "9842FCEC-A370-42A4-8CA6-FD4043F28BA9"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2025-29087",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:*:*:*:*:*:*:*:*",
+        "versionStartIncluding": "3.44.0",
+        "versionEndExcluding": "3.49.1",
+        "matchCriteriaId": "42F127F3-9545-4944-86C7-38FE88E9DEBA"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2025-29088",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:3.49.0:*:*:*:*:*:*:*",
+        "matchCriteriaId": "1F1B8A95-014A-42AB-BA8C-B8C3C2AF4C8C"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2025-3277",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:*:*:*:*:*:*:*:*",
+        "versionStartIncluding": "3.44.0",
+        "versionEndExcluding": "3.49.1",
+        "matchCriteriaId": "42F127F3-9545-4944-86C7-38FE88E9DEBA"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2025-6965",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:*:*:*:*:*:*:*:*",
+        "versionEndExcluding": "3.50.2",
+        "matchCriteriaId": "C1739DFA-8AEF-4CDE-9CB8-A1B601EA6FDB"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2025-70873",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:*:*:*:*:*:*:*:*",
+        "versionEndExcluding": "3.51.1",
+        "matchCriteriaId": "54521FEC-81AF-4A3A-9F7C-005CF0336189"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2025-7458",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:*:*:*:*:*:*:*:*",
+        "versionStartIncluding": "3.39.2",
+        "versionEndExcluding": "3.41.2",
+        "matchCriteriaId": "E8000E25-7180-46AF-B398-C5AE68BCCBCD"
+      },
+      "nvdStatus": "Analyzed"
+    },
+    {
+      "id": "CVE-2026-11822",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:*:*:*:*:*:*:*:*",
+        "versionEndExcluding": "3.53.2",
+        "matchCriteriaId": "69DA84C5-3281-4906-BB2A-0B16619D334C"
+      },
+      "nvdStatus": "Modified"
+    },
+    {
+      "id": "CVE-2026-11824",
+      "targetCpe": [
+        "sqlite",
+        "sqlite"
+      ],
+      "version": "3.53.4",
+      "vulnerableRangeMatches": false,
+      "criteria": {
+        "vulnerable": true,
+        "criteria": "cpe:2.3:a:sqlite:sqlite:*:*:*:*:*:*:*:*",
+        "versionEndExcluding": "3.53.2",
+        "matchCriteriaId": "69DA84C5-3281-4906-BB2A-0B16619D334C"
+      },
+      "nvdStatus": "Modified"
+    }
+  ]
+}

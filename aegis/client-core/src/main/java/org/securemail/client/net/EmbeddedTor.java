@@ -13,12 +13,15 @@ public final class EmbeddedTor implements TorConnection.Attempt {
   public enum Mode{DIRECT,SNOWFLAKE}
   public static final class BootstrapFailure extends IOException { private static final long serialVersionUID=1L; public BootstrapFailure(){super("Tor не смог подключиться");} }
   private final ClientConfig config;private final Path root,bundle;private volatile Process child;private volatile boolean ready,closed;private volatile SnowflakeProcess transport;
-  public EmbeddedTor(ClientConfig config){this.config=config;root=AppPaths.root().resolve("tor");bundle=AppPaths.bundle().resolve("tor");}
+  public EmbeddedTor(ClientConfig config){this(config,AppPaths.root().resolve("tor"));}
+  /** Separate runtime state for Core; never shares Mail's Tor lock/cookie/DataDirectory. */
+  public EmbeddedTor(ClientConfig config,Path runtimeRoot){this.config=java.util.Objects.requireNonNull(config);root=java.util.Objects.requireNonNull(runtimeRoot).toAbsolutePath().normalize();bundle=AppPaths.bundle().resolve("tor");}
   public boolean ready(){Process running=child;SnowflakeProcess bridge=transport;return ready&&running!=null&&running.isAlive()&&(bridge==null||bridge.alive())&&!closed;}
   public void start(Mode mode,Duration timeout,IntConsumer progress)throws Exception{
     if(child!=null)throw new IOException("Tor уже запущен");if(closed)throw new IOException("Приложение закрывается");
     Path exe=bundle.resolve(AppPaths.windows()?"tor.exe":"tor");if(!Files.isRegularFile(exe))throw new IOException("Встроенный Tor отсутствует. Распакуйте полный пакет АЕГИС.");
     freePort(config.torSocksPort());freePort(config.torUpdateSocksPort());freePort(config.torControlPort());
+    for(Path parent=root;parent!=null;parent=parent.getParent())if(Files.isSymbolicLink(parent))throw new IOException("Ссылка в каталоге Tor запрещена");
     AtomicFiles.directory(root);AtomicFiles.directory(root.resolve("state"));
     // Explicitly replaces both default and regular torrc, including on systems with a global User option.
     AtomicFiles.write(root.resolve("defaults-torrc"),new byte[0]);

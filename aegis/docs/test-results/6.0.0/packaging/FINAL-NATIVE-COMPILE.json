@@ -1,0 +1,33 @@
+{
+  "commands": [
+    {
+      "command": [
+        "/workspace/scratch/aa629f360927/inputs600/packaging-tools/root/usr/bin/x86_64-w64-mingw32-gcc-posix",
+        "-Os",
+        "-static",
+        "-static-libgcc",
+        "-municode",
+        "-mwindows",
+        "/workspace/scratch/aa629f360927/aegis600/aegis/packaging/windows/maintenance600.c",
+        "-Wl,--dynamicbase,--nxcompat,--high-entropy-va,--no-insert-timestamp",
+        "-luser32",
+        "-lshell32",
+        "-ladvapi32",
+        "-o",
+        "/workspace/scratch/aa629f360927/audit600/packaging-tools/AEGIS-Maintenance.exe"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "/workspace/scratch/aa629f360927/inputs600/packaging-tools/root/usr/bin/makensis",
+        "-V2",
+        "-DPAYLOAD=/workspace/scratch/aa629f360927/audit600/packaging-tools/nsis-fixture",
+        "-DOUTFILE=/workspace/scratch/aa629f360927/audit600/packaging-tools/NSIS-COMPILER-FIXTURE.exe",
+        "installer600.nsi"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "scope": "Actual compiler/NSIS output and PE inspection only; Windows native launch/install/rollback acceptance NOT_RUN"
+}

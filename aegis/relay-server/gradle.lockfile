@@ -2,6 +2,8 @@
 # Manual edits can break the build and are not advised.
 # This file is expected to be part of source control.
 # To regenerate this file, run: ./gradlew :relay-server:dependencies --write-locks
+com.google.code.gson:gson:2.14.0=compileClasspath
+com.google.errorprone:error_prone_annotations:2.48.0=compileClasspath
 com.password4j:password4j:1.8.4=compileClasspath,runtimeClasspath,testCompileClasspath,testRuntimeClasspath
 org.apiguardian:apiguardian-api:1.1.2=testCompileClasspath
 org.junit.jupiter:junit-jupiter-api:5.13.4=testCompileClasspath,testRuntimeClasspath

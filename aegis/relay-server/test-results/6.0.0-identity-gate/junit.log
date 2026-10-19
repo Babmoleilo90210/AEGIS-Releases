@@ -1,0 +1,43 @@
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+Relay6 identity pin: 4ab8c66f3a6b0588f1c7054c469293e977a15e514f21c3a0dae0a50b09052a28; service fingerprint: 613a2eac10f102f34b83e0ee8e87b4351460dc8304a8496010140b271f99075f; productionDeployed=false
+╷
+├─ JUnit Jupiter ✔
+│  ├─ RelayIdentity600Test ✔
+│  │  ├─ fetchStreamStopsAfterGenerationRevocationAndDoesNotDeletePendingPacket() ✔
+│  │  ├─ legacyUnenrolledAccountWorksButEnrollmentInvalidatesOldLoginAndAlreadyIssuedBear... ✔
+│  │  ├─ revokedPublishedRouteIsNotReturnedFromRelayCache() ✔
+│  │  ├─ actualNetworkServiceRegisters6LogsInFindsAndRevokesViaIdentityGeneration() ✔
+│  │  ├─ registrationRollsBackIfFreshAuthorizationFailsAfterPasswordKdf() ✔
+│  │  ├─ storeWriteRollsBackIfGenerationCheckFailsAtCommit() ✔
+│  │  ├─ readOnlyCapabilityCannotRegisterOrStoreOrModifyPublicProfile() ✔
+│  │  └─ loginProofIsOneUseAndBindsPasswordNicknameServiceAndAccount() ✔
+│  ├─ IdentityLoopback600Test ✔
+│  │  ├─ slowDripCannotExtendAbsoluteSixSecondDeadline() ✔
+│  │  ├─ duplicateLengthChunkedEncodingAndOversizedHeadersAreRejectedEvenWithValidSignatu... ✔
+│  │  ├─ closedTransportDoesNotStartAnyFurtherRequest() ✔
+│  │  └─ exactSignedResponseWorksButWrongPinNonceRequestOrBodyCannotAuthenticate() ✔
+│  ├─ OpenRegistrationTest ✔
+│  │  ├─ openAcceptsUnlistedNicknameAndEnforcesUniqueAndLimit() ✔
+│  │  └─ closedRejectsWithoutCreatingUser() ✔
+│  └─ RelayMain600Test ✔
+│     ├─ operatorInitializationPinsIdentityCreatesOwnServiceKeyAndStartsOnlyExplicit6Mode... ✔
+│     └─ wrongIdentityFingerprintSymlinkAndChangedServicePublicKeyAreRejected() ✔
+├─ JUnit Platform Suite ✔
+└─ JUnit Vintage ✔
+
+Test run finished after 22305 ms
+[         7 containers found      ]
+[         0 containers skipped    ]
+[         7 containers started    ]
+[         0 containers aborted    ]
+[         7 containers successful ]
+[         0 containers failed     ]
+[        16 tests found           ]
+[         0 tests skipped         ]
+[        16 tests started         ]
+[         0 tests aborted         ]
+[        16 tests successful      ]
+[         0 tests failed          ]
+

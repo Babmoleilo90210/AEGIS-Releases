@@ -1,0 +1,37 @@
+{
+  "collectedAt": "2026-10-18T13:55:16.581773+00:00",
+  "productionReady": false,
+  "largeScenario": {
+    "result": "PASS",
+    "plaintextBytes": 524288000,
+    "heapMaxBytes": 100663296,
+    "durationMillis": 373521,
+    "classTotalDurationMillis": 382281,
+    "testsInInitialClass": 2,
+    "steps": [
+      "Real MailAttachmentManager600",
+      "Recipient actual LocalStore identity enrolled in Identity",
+      "Root-signed peer attachment feature",
+      "Source file streaming through Tink",
+      "Encrypted LocalStore queue close/reopen",
+      "Actual Attachment HTTP/store restart and resume",
+      "PlainMessage v6 manifest inside existing libsodium-wrapped E2EE packet",
+      "Durable local encrypted carrier storage and local recipient accept",
+      "Recipient manager streaming download, atomic authenticated plaintext publication, SHA256 equality"
+    ],
+    "scope": "Production client through local SOCKS fixture, actual Identity/Attachment HTTP/SQLite; no real Relay packet transport, public Tor or physical devices"
+  },
+  "additionalRegression": {
+    "multiFileManagerActualHttp": "PASS",
+    "files": 4,
+    "reopenBeforeTtl": "PASS",
+    "protectedLetterAndFf1ActualHttp": "PASS",
+    "wrongCodePublishesPlaintext": false,
+    "inactiveViewPublishesPlaintext": false,
+    "store128RetainedObjectLimit": "PASS",
+    "storeTwoConcurrentUncommittedLimit": "PASS"
+  },
+  "resolvedFixtureError": "Initial synthetic nickname values violated existing Latin nickname grammar; corrected test data only before successful run. Initial failure log retained.",
+  "retentionPolicy": "Successful save does not auto-ACK/delete the server object; repeated saves remain possible until TTL/explicit deletion. Quotas include retained ciphertext.",
+  "sourceBinding": "Component checkpoints and exact logs, not a final common frozen source commit. The initial large-class compilation preceded later cancellation/Owner changes. Current root-integrated build is separately gated."
+}

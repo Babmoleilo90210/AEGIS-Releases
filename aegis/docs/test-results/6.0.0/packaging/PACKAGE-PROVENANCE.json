@@ -1,0 +1,133 @@
+{
+  "trustChain": "Existing Ubuntu archive keyring -> gpgv-verified InRelease -> SHA256-verified Packages.xz -> SHA256/size-verified .deb -> data-only dpkg-deb extraction, no system installation or maintainer scripts",
+  "metadataProvenanceSHA256": "d94b8e603b368066708e10cb2fad763fae72374153e4aa9dfb00b12bcd5ce447",
+  "packages": [
+    {
+      "package": "squashfs-tools",
+      "version": "1:4.6.1-1build1",
+      "url": "https://snapshot.ubuntu.com/ubuntu/20260828T000000Z/pool/main/s/squashfs-tools/squashfs-tools_4.6.1-1build1_amd64.deb",
+      "file": "/workspace/scratch/aa629f360927/inputs600/packaging-tools/debs/squashfs-tools_4.6.1-1build1_amd64.deb",
+      "sha256": "87fae263846bab255d4a51ad9fc623685497ad830db60758dde39589c9fdadcb",
+      "bytes": 189326,
+      "signedIndexHash": "PASS"
+    },
+    {
+      "package": "nsis",
+      "version": "3.09-4ubuntu1",
+      "url": "https://snapshot.ubuntu.com/ubuntu/20260828T000000Z/pool/universe/n/nsis/nsis_3.09-4ubuntu1_amd64.deb",
+      "file": "/workspace/scratch/aa629f360927/inputs600/packaging-tools/debs/nsis_3.09-4ubuntu1_amd64.deb",
+      "sha256": "9e061bef1a8b611aeb2ea76d9a3bd7722b960ca1a9dff8e38d2ab51e5a8f5e5b",
+      "bytes": 319510,
+      "signedIndexHash": "PASS"
+    },
+    {
+      "package": "nsis-common",
+      "version": "3.09-4ubuntu1",
+      "url": "https://snapshot.ubuntu.com/ubuntu/20260828T000000Z/pool/universe/n/nsis/nsis-common_3.09-4ubuntu1_all.deb",
+      "file": "/workspace/scratch/aa629f360927/inputs600/packaging-tools/debs/nsis-common_3.09-4ubuntu1_all.deb",
+      "sha256": "49471b9debdee4751ebb4caf6b705cc4c678eebfaecefbe56362258893f85859",
+      "bytes": 968106,
+      "signedIndexHash": "PASS"
+    },
+    {
+      "package": "binutils-mingw-w64-x86-64",
+      "version": "2.41.90.20240122-1ubuntu1+11.4",
+      "url": "https://snapshot.ubuntu.com/ubuntu/20260828T000000Z/pool/universe/b/binutils-mingw-w64/binutils-mingw-w64-x86-64_2.41.90.20240122-1ubuntu1+11.4_amd64.deb",
+      "file": "/workspace/scratch/aa629f360927/inputs600/packaging-tools/debs/binutils-mingw-w64-x86-64_2.41.90.20240122-1ubuntu1+11.4_amd64.deb",
+      "sha256": "28bfabbf64a68813a56360bca056072af9ff71ef4090a4b8a8a085afcda3e4dd",
+      "bytes": 6053282,
+      "signedIndexHash": "PASS"
+    },
+    {
+      "package": "gcc-mingw-w64-x86-64-posix",
+      "version": "13.2.0-6ubuntu1+26.1",
+      "url": "https://snapshot.ubuntu.com/ubuntu/20260828T000000Z/pool/universe/g/gcc-mingw-w64/gcc-mingw-w64-x86-64-posix_13.2.0-6ubuntu1+26.1_amd64.deb",
+      "file": "/workspace/scratch/aa629f360927/inputs600/packaging-tools/debs/gcc-mingw-w64-x86-64-posix_13.2.0-6ubuntu1+26.1_amd64.deb",
+      "sha256": "0855fa1d4a618550faac3a3e4352aa3226833b28184ad3c3b496a68a22c4eda2",
+      "bytes": 35401298,
+      "signedIndexHash": "PASS"
+    },
+    {
+      "package": "gcc-mingw-w64-x86-64-posix-runtime",
+      "version": "13.2.0-6ubuntu1+26.1",
+      "url": "https://snapshot.ubuntu.com/ubuntu/20260828T000000Z/pool/universe/g/gcc-mingw-w64/gcc-mingw-w64-x86-64-posix-runtime_13.2.0-6ubuntu1+26.1_amd64.deb",
+      "file": "/workspace/scratch/aa629f360927/inputs600/packaging-tools/debs/gcc-mingw-w64-x86-64-posix-runtime_13.2.0-6ubuntu1+26.1_amd64.deb",
+      "sha256": "aca6b438e0b55b11cedcf1170a1ee26e7979e34192e34f6e6389e560908a5bfc",
+      "bytes": 14036962,
+      "signedIndexHash": "PASS"
+    },
+    {
+      "package": "gcc-mingw-w64-base",
+      "version": "13.2.0-6ubuntu1+26.1",
+      "url": "https://snapshot.ubuntu.com/ubuntu/20260828T000000Z/pool/universe/g/gcc-mingw-w64/gcc-mingw-w64-base_13.2.0-6ubuntu1+26.1_amd64.deb",
+      "file": "/workspace/scratch/aa629f360927/inputs600/packaging-tools/debs/gcc-mingw-w64-base_13.2.0-6ubuntu1+26.1_amd64.deb",
+      "sha256": "a30c07e807e9874ea93909448c5d6d37f9569ebe60ad32de8e490aad198538a3",
+      "bytes": 188046,
+      "signedIndexHash": "PASS"
+    },
+    {
+      "package": "mingw-w64-common",
+      "version": "11.0.1-3build1",
+      "url": "https://snapshot.ubuntu.com/ubuntu/20260828T000000Z/pool/universe/m/mingw-w64/mingw-w64-common_11.0.1-3build1_all.deb",
+      "file": "/workspace/scratch/aa629f360927/inputs600/packaging-tools/debs/mingw-w64-common_11.0.1-3build1_all.deb",
+      "sha256": "4a42fd30fbc3838c58c929d8a4882682fc12408bb7a0e6cafa913c0f0a57c187",
+      "bytes": 5580230,
+      "signedIndexHash": "PASS"
+    },
+    {
+      "package": "mingw-w64-x86-64-dev",
+      "version": "11.0.1-3build1",
+      "url": "https://snapshot.ubuntu.com/ubuntu/20260828T000000Z/pool/universe/m/mingw-w64/mingw-w64-x86-64-dev_11.0.1-3build1_all.deb",
+      "file": "/workspace/scratch/aa629f360927/inputs600/packaging-tools/debs/mingw-w64-x86-64-dev_11.0.1-3build1_all.deb",
+      "sha256": "018480a62907fcca19c6bf2975ae01f5c92c23dee8c3cf7a8355c10bf7d42c6f",
+      "bytes": 3786378,
+      "signedIndexHash": "PASS"
+    },
+    {
+      "package": "liblzo2-2",
+      "version": "2.10-2build4",
+      "url": "https://snapshot.ubuntu.com/ubuntu/20260828T000000Z/pool/main/l/lzo2/liblzo2-2_2.10-2build4_amd64.deb",
+      "file": "/workspace/scratch/aa629f360927/inputs600/packaging-tools/debs/liblzo2-2_2.10-2build4_amd64.deb",
+      "sha256": "e0d13be155013138b8db4cfe68212b866080af661c78302c2eab0d2f9d0d454e",
+      "bytes": 54148,
+      "signedIndexHash": "PASS"
+    },
+    {
+      "package": "binutils-mingw-w64-i686",
+      "version": "2.41.90.20240122-1ubuntu1+11.4",
+      "url": "https://snapshot.ubuntu.com/ubuntu/20260828T000000Z/pool/universe/b/binutils-mingw-w64/binutils-mingw-w64-i686_2.41.90.20240122-1ubuntu1+11.4_amd64.deb",
+      "file": "/workspace/scratch/aa629f360927/inputs600/packaging-tools/debs/binutils-mingw-w64-i686_2.41.90.20240122-1ubuntu1+11.4_amd64.deb",
+      "sha256": "5236ef254532c1f4ebddbce898e884fe9cc1ac4803092211ec615cbdeba7aafb",
+      "bytes": 2974884,
+      "signedIndexHash": "PASS"
+    },
+    {
+      "package": "gcc-mingw-w64-i686-posix",
+      "version": "13.2.0-6ubuntu1+26.1",
+      "url": "https://snapshot.ubuntu.com/ubuntu/20260828T000000Z/pool/universe/g/gcc-mingw-w64/gcc-mingw-w64-i686-posix_13.2.0-6ubuntu1+26.1_amd64.deb",
+      "file": "/workspace/scratch/aa629f360927/inputs600/packaging-tools/debs/gcc-mingw-w64-i686-posix_13.2.0-6ubuntu1+26.1_amd64.deb",
+      "sha256": "8c63daeb59c96044c2a5c26b5a3a2b793237f3e10d3428bb659401122b8e501c",
+      "bytes": 35221632,
+      "signedIndexHash": "PASS"
+    },
+    {
+      "package": "gcc-mingw-w64-i686-posix-runtime",
+      "version": "13.2.0-6ubuntu1+26.1",
+      "url": "https://snapshot.ubuntu.com/ubuntu/20260828T000000Z/pool/universe/g/gcc-mingw-w64/gcc-mingw-w64-i686-posix-runtime_13.2.0-6ubuntu1+26.1_amd64.deb",
+      "file": "/workspace/scratch/aa629f360927/inputs600/packaging-tools/debs/gcc-mingw-w64-i686-posix-runtime_13.2.0-6ubuntu1+26.1_amd64.deb",
+      "sha256": "650bcd76e0c56c713428950aec8823fd517f911eaad80406907379a69d36ad0a",
+      "bytes": 13146552,
+      "signedIndexHash": "PASS"
+    },
+    {
+      "package": "mingw-w64-i686-dev",
+      "version": "11.0.1-3build1",
+      "url": "https://snapshot.ubuntu.com/ubuntu/20260828T000000Z/pool/universe/m/mingw-w64/mingw-w64-i686-dev_11.0.1-3build1_all.deb",
+      "file": "/workspace/scratch/aa629f360927/inputs600/packaging-tools/debs/mingw-w64-i686-dev_11.0.1-3build1_all.deb",
+      "sha256": "903e09f47c0e441f9476a32efc745430a0cc39b1c33a13ea1f1d0414a24b7970",
+      "bytes": 3153084,
+      "signedIndexHash": "PASS"
+    }
+  ],
+  "extractionRoot": "/workspace/scratch/aa629f360927/inputs600/packaging-tools/root"
+}

@@ -1,0 +1,275 @@
+{
+  "queriedAt": "2026-10-18T12:44:27.140388+00:00",
+  "url": "https://services.nvd.nist.gov/rest/json/cves/2.0?keywordSearch=gson&resultsPerPage=2000",
+  "status": 200,
+  "bytes": 6289,
+  "link": null,
+  "contentType": "application/json",
+  "response": {
+    "resultsPerPage": 2,
+    "startIndex": 0,
+    "totalResults": 2,
+    "format": "NVD_CVE",
+    "version": "2.0",
+    "timestamp": "2026-10-18T12:44:33.084",
+    "vulnerabilities": [
+      {
+        "cve": {
+          "id": "CVE-2025-53864",
+          "sourceIdentifier": "cve@mitre.org",
+          "published": "2025-07-11T03:16:03.563",
+          "lastModified": "2026-06-17T09:39:02.917",
+          "vulnStatus": "Deferred",
+          "cveTags": [],
+          "descriptions": [
+            {
+              "lang": "en",
+              "value": "Connect2id Nimbus JOSE + JWT 10.0.x before 10.0.2 and 9.37.x before 9.37.4 allows a remote attacker to cause a denial of service via a deeply nested JSON object supplied in a JWT claim set, because of uncontrolled recursion. NOTE: this is independent of the Gson 2.11.0 issue because the Connect2id product could have checked the JSON object nesting depth, regardless of what limits (if any) were imposed by Gson."
+            },
+            {
+              "lang": "es",
+              "value": "Connect2id Nimbus JOSE + JWT anterior a la versión 10.0.2 permite a un atacante remoto provocar una denegación de servicio mediante un objeto JSON profundamente anidado, suministrado en un conjunto de notificaciones JWT, debido a una recursión incontrolada. NOTA: Esto es independiente del problema de Gson 2.11.0, ya que Connect2id podría haber comprobado la profundidad de anidación de objetos JSON, independientemente de los límites (si los hubiera) impuestos por Gson."
+            }
+          ],
+          "affected": [
+            {
+              "source": "cve@mitre.org",
+              "affectedData": [
+                {
+                  "vendor": "Connect2id",
+                  "product": "Nimbus JOSE+JWT",
+                  "defaultStatus": "unaffected",
+                  "versions": [
+                    {
+                      "version": "0",
+                      "lessThan": "10.0.2",
+                      "versionType": "custom",
+                      "status": "affected"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "metrics": {
+            "cvssMetricV31": [
+              {
+                "source": "cve@mitre.org",
+                "type": "Secondary",
+                "cvssData": {
+                  "version": "3.1",
+                  "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:N/I:N/A:L",
+                  "baseScore": 5.8,
+                  "baseSeverity": "MEDIUM",
+                  "attackVector": "NETWORK",
+                  "attackComplexity": "LOW",
+                  "privilegesRequired": "NONE",
+                  "userInteraction": "NONE",
+                  "scope": "CHANGED",
+                  "confidentialityImpact": "NONE",
+                  "integrityImpact": "NONE",
+                  "availabilityImpact": "LOW"
+                },
+                "exploitabilityScore": 3.9,
+                "impactScore": 1.4
+              }
+            ],
+            "ssvcV203": [
+              {
+                "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
+                "ssvcData": {
+                  "timestamp": "2025-07-11T13:28:35.322634Z",
+                  "id": "CVE-2025-53864",
+                  "options": [
+                    {
+                      "exploitation": "poc"
+                    },
+                    {
+                      "automatable": "yes"
+                    },
+                    {
+                      "technicalImpact": "partial"
+                    }
+                  ],
+                  "role": "CISA Coordinator",
+                  "version": "2.0.3"
+                }
+              }
+            ]
+          },
+          "weaknesses": [
+            {
+              "source": "cve@mitre.org",
+              "type": "Secondary",
+              "description": [
+                {
+                  "lang": "en",
+                  "value": "CWE-674"
+                }
+              ]
+            }
+          ],
+          "references": [
+            {
+              "url": "https://bitbucket.org/connect2id/nimbus-jose-jwt/commits/f7fb882cc08f027c9ceb874acec3b51c6222861c",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://bitbucket.org/connect2id/nimbus-jose-jwt/issues/583/stackoverflowerror-due-to-deeply-nested",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://bitbucket.org/connect2id/nimbus-jose-jwt/issues/593/back-port-cve-2025-53864-fix-to-9x-branch",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://github.com/google/gson/commit/1039427ff0100293dd3cf967a53a55282c0fef6b",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://github.com/google/gson/compare/gson-parent-2.11.0...gson-parent-2.12.0",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://bitbucket.org/connect2id/nimbus-jose-jwt/issues/583/stackoverflowerror-due-to-deeply-nested",
+              "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0"
+            }
+          ]
+        }
+      },
+      {
+        "cve": {
+          "id": "CVE-2026-4735",
+          "sourceIdentifier": "cve_disclosure@tech.gov.sg",
+          "published": "2026-03-24T04:17:26.117",
+          "lastModified": "2026-06-17T10:57:08.700",
+          "vulnStatus": "Deferred",
+          "cveTags": [],
+          "descriptions": [
+            {
+              "lang": "en",
+              "value": "Deserialization of Untrusted Data vulnerability in DTStack chunjun (‎chunjun-core/src/main/java/com/dtstack/chunjun/util modules). This vulnerability is associated with program files GsonUtil.Java.\n\nThis issue affects chunjun: before 1.16.1."
+            },
+            {
+              "lang": "es",
+              "value": "Vulnerabilidad de Deserialización de Datos No Confiables en DTStack chunjun (módulos chunjun-core/src/main/java/com/dtstack/chunjun/util). Esta vulnerabilidad está asociada con los archivos de programa GsonUtil.Java.\n\nEste problema afecta a chunjun: anterior a 1.16.1."
+            }
+          ],
+          "affected": [
+            {
+              "source": "cve_disclosure@tech.gov.sg",
+              "affectedData": [
+                {
+                  "vendor": "DTStack",
+                  "product": "chunjun",
+                  "defaultStatus": "affected",
+                  "collectionURL": "https://github.com/DTStack/chunjun",
+                  "modules": [
+                    "‎chunjun-core/src/main/java/com/dtstack/chunjun/util"
+                  ],
+                  "programFiles": [
+                    "GsonUtil.java"
+                  ],
+                  "versions": [
+                    {
+                      "version": "0",
+                      "lessThan": "1.16.1",
+                      "versionType": "git",
+                      "status": "affected"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "metrics": {
+            "cvssMetricV40": [
+              {
+                "source": "cve_disclosure@tech.gov.sg",
+                "type": "Secondary",
+                "cvssData": {
+                  "version": "4.0",
+                  "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:H/E:P/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:N/AU:Y/R:U/V:C/RE:M/U:Amber",
+                  "baseScore": 8.7,
+                  "baseSeverity": "HIGH",
+                  "attackVector": "NETWORK",
+                  "attackComplexity": "LOW",
+                  "attackRequirements": "NONE",
+                  "privilegesRequired": "NONE",
+                  "userInteraction": "NONE",
+                  "vulnConfidentialityImpact": "NONE",
+                  "vulnIntegrityImpact": "NONE",
+                  "vulnAvailabilityImpact": "HIGH",
+                  "subConfidentialityImpact": "NONE",
+                  "subIntegrityImpact": "NONE",
+                  "subAvailabilityImpact": "HIGH",
+                  "exploitMaturity": "PROOF_OF_CONCEPT",
+                  "confidentialityRequirement": "NOT_DEFINED",
+                  "integrityRequirement": "NOT_DEFINED",
+                  "availabilityRequirement": "NOT_DEFINED",
+                  "modifiedAttackVector": "NOT_DEFINED",
+                  "modifiedAttackComplexity": "NOT_DEFINED",
+                  "modifiedAttackRequirements": "NOT_DEFINED",
+                  "modifiedPrivilegesRequired": "NOT_DEFINED",
+                  "modifiedUserInteraction": "NOT_DEFINED",
+                  "modifiedVulnConfidentialityImpact": "NOT_DEFINED",
+                  "modifiedVulnIntegrityImpact": "NOT_DEFINED",
+                  "modifiedVulnAvailabilityImpact": "NOT_DEFINED",
+                  "modifiedSubConfidentialityImpact": "NOT_DEFINED",
+                  "modifiedSubIntegrityImpact": "NOT_DEFINED",
+                  "modifiedSubAvailabilityImpact": "NOT_DEFINED",
+                  "Safety": "NEGLIGIBLE",
+                  "Automatable": "YES",
+                  "Recovery": "USER",
+                  "valueDensity": "CONCENTRATED",
+                  "vulnerabilityResponseEffort": "MODERATE",
+                  "providerUrgency": "AMBER"
+                }
+              }
+            ],
+            "ssvcV203": [
+              {
+                "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
+                "ssvcData": {
+                  "timestamp": "2026-03-24T14:36:35.935783Z",
+                  "id": "CVE-2026-4735",
+                  "options": [
+                    {
+                      "exploitation": "none"
+                    },
+                    {
+                      "automatable": "yes"
+                    },
+                    {
+                      "technicalImpact": "partial"
+                    }
+                  ],
+                  "role": "CISA Coordinator",
+                  "version": "2.0.3"
+                }
+              }
+            ]
+          },
+          "weaknesses": [
+            {
+              "source": "cve_disclosure@tech.gov.sg",
+              "type": "Secondary",
+              "description": [
+                {
+                  "lang": "en",
+                  "value": "CWE-502"
+                }
+              ]
+            }
+          ],
+          "references": [
+            {
+              "url": "https://github.com/DTStack/chunjun/pull/1939",
+              "source": "cve_disclosure@tech.gov.sg"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

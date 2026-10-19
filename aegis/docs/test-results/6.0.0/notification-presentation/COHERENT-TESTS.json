@@ -1,0 +1,29 @@
+{
+  "result": "PASS",
+  "tests": 12,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "suites": [
+    {
+      "name": "org.securemail.client.ecosystemauth.CoreNotificationArrivals600Test",
+      "tests": "7",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.022"
+    },
+    {
+      "name": "org.securemail.client.ecosystemauth.CoreNotificationPreferences600Test",
+      "tests": "5",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.019"
+    }
+  ],
+  "gradleSourceUnchanged": true,
+  "gradleSourceCommit": "9ca0034baf1db44f1a8f3804828e2d8d9742914d",
+  "sourceDirty": true,
+  "scope": "Focused automated development tests, not final release or native audible acceptance."
+}

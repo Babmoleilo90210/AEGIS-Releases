@@ -1,0 +1,273 @@
+{
+  "atUtc": "2026-10-18T13:06:28.894880+00:00",
+  "httpStatus": 200,
+  "requestSha256": "36fb6d1eb189e771445e9c000b77899a9009b9591be73cc671eed2539101b802",
+  "responseSha256": "64f1c6b2af1f550b97719da740700287dfd5c632d62b38a32f68c0bd65971062",
+  "runtimeCoordinates": [
+    "com.google.code.findbugs:jsr305:3.0.2",
+    "com.google.code.gson:gson:2.14.0",
+    "com.google.crypto.tink:tink:1.23.0",
+    "com.google.errorprone:error_prone_annotations:2.48.0",
+    "com.google.protobuf:protobuf-java:4.33.6",
+    "com.twelvemonkeys.common:common-image:3.14.0",
+    "com.twelvemonkeys.common:common-io:3.14.0",
+    "com.twelvemonkeys.common:common-lang:3.14.0",
+    "com.twelvemonkeys.imageio:imageio-core:3.14.0",
+    "com.twelvemonkeys.imageio:imageio-metadata:3.14.0",
+    "com.twelvemonkeys.imageio:imageio-webp:3.14.0",
+    "commons-codec:commons-codec:1.19.0",
+    "commons-io:commons-io:2.20.0",
+    "commons-logging:commons-logging:1.4.0",
+    "net.java.dev.jna:jna-platform:5.19.1",
+    "net.java.dev.jna:jna:5.19.1",
+    "net.lingala.zip4j:zip4j:2.11.6",
+    "org.apache.commons:commons-compress:1.28.0",
+    "org.apache.commons:commons-lang3:3.18.0",
+    "org.apache.pdfbox:fontbox:3.0.8",
+    "org.apache.pdfbox:pdfbox-io:3.0.8",
+    "org.apache.pdfbox:pdfbox:3.0.8",
+    "org.bouncycastle:bcpg-jdk18on:1.86",
+    "org.bouncycastle:bcprov-jdk18on:1.86",
+    "org.bouncycastle:bcutil-jdk18on:1.86",
+    "org.openjfx:javafx-base:21.0.12",
+    "org.openjfx:javafx-controls:21.0.12",
+    "org.openjfx:javafx-graphics:21.0.12",
+    "org.tukaani:xz:1.12"
+  ],
+  "results": [
+    {
+      "package": {
+        "ecosystem": "Maven",
+        "name": "com.google.code.findbugs:jsr305"
+      },
+      "version": "3.0.2",
+      "result": {}
+    },
+    {
+      "package": {
+        "ecosystem": "Maven",
+        "name": "com.google.code.gson:gson"
+      },
+      "version": "2.14.0",
+      "result": {}
+    },
+    {
+      "package": {
+        "ecosystem": "Maven",
+        "name": "com.google.crypto.tink:tink"
+      },
+      "version": "1.23.0",
+      "result": {}
+    },
+    {
+      "package": {
+        "ecosystem": "Maven",
+        "name": "com.google.errorprone:error_prone_annotations"
+      },
+      "version": "2.48.0",
+      "result": {}
+    },
+    {
+      "package": {
+        "ecosystem": "Maven",
+        "name": "com.google.protobuf:protobuf-java"
+      },
+      "version": "4.33.6",
+      "result": {}
+    },
+    {
+      "package": {
+        "ecosystem": "Maven",
+        "name": "com.twelvemonkeys.common:common-image"
+      },
+      "version": "3.14.0",
+      "result": {}
+    },
+    {
+      "package": {
+        "ecosystem": "Maven",
+        "name": "com.twelvemonkeys.common:common-io"
+      },
+      "version": "3.14.0",
+      "result": {}
+    },
+    {
+      "package": {
+        "ecosystem": "Maven",
+        "name": "com.twelvemonkeys.common:common-lang"
+      },
+      "version": "3.14.0",
+      "result": {}
+    },
+    {
+      "package": {
+        "ecosystem": "Maven",
+        "name": "com.twelvemonkeys.imageio:imageio-core"
+      },
+      "version": "3.14.0",
+      "result": {}
+    },
+    {
+      "package": {
+        "ecosystem": "Maven",
+        "name": "com.twelvemonkeys.imageio:imageio-metadata"
+      },
+      "version": "3.14.0",
+      "result": {}
+    },
+    {
+      "package": {
+        "ecosystem": "Maven",
+        "name": "com.twelvemonkeys.imageio:imageio-webp"
+      },
+      "version": "3.14.0",
+      "result": {}
+    },
+    {
+      "package": {
+        "ecosystem": "Maven",
+        "name": "commons-codec:commons-codec"
+      },
+      "version": "1.19.0",
+      "result": {}
+    },
+    {
+      "package": {
+        "ecosystem": "Maven",
+        "name": "commons-io:commons-io"
+      },
+      "version": "2.20.0",
+      "result": {}
+    },
+    {
+      "package": {
+        "ecosystem": "Maven",
+        "name": "commons-logging:commons-logging"
+      },
+      "version": "1.4.0",
+      "result": {}
+    },
+    {
+      "package": {
+        "ecosystem": "Maven",
+        "name": "net.java.dev.jna:jna-platform"
+      },
+      "version": "5.19.1",
+      "result": {}
+    },
+    {
+      "package": {
+        "ecosystem": "Maven",
+        "name": "net.java.dev.jna:jna"
+      },
+      "version": "5.19.1",
+      "result": {}
+    },
+    {
+      "package": {
+        "ecosystem": "Maven",
+        "name": "net.lingala.zip4j:zip4j"
+      },
+      "version": "2.11.6",
+      "result": {}
+    },
+    {
+      "package": {
+        "ecosystem": "Maven",
+        "name": "org.apache.commons:commons-compress"
+      },
+      "version": "1.28.0",
+      "result": {}
+    },
+    {
+      "package": {
+        "ecosystem": "Maven",
+        "name": "org.apache.commons:commons-lang3"
+      },
+      "version": "3.18.0",
+      "result": {}
+    },
+    {
+      "package": {
+        "ecosystem": "Maven",
+        "name": "org.apache.pdfbox:fontbox"
+      },
+      "version": "3.0.8",
+      "result": {}
+    },
+    {
+      "package": {
+        "ecosystem": "Maven",
+        "name": "org.apache.pdfbox:pdfbox-io"
+      },
+      "version": "3.0.8",
+      "result": {}
+    },
+    {
+      "package": {
+        "ecosystem": "Maven",
+        "name": "org.apache.pdfbox:pdfbox"
+      },
+      "version": "3.0.8",
+      "result": {}
+    },
+    {
+      "package": {
+        "ecosystem": "Maven",
+        "name": "org.bouncycastle:bcpg-jdk18on"
+      },
+      "version": "1.86",
+      "result": {}
+    },
+    {
+      "package": {
+        "ecosystem": "Maven",
+        "name": "org.bouncycastle:bcprov-jdk18on"
+      },
+      "version": "1.86",
+      "result": {}
+    },
+    {
+      "package": {
+        "ecosystem": "Maven",
+        "name": "org.bouncycastle:bcutil-jdk18on"
+      },
+      "version": "1.86",
+      "result": {}
+    },
+    {
+      "package": {
+        "ecosystem": "Maven",
+        "name": "org.openjfx:javafx-base"
+      },
+      "version": "21.0.12",
+      "result": {}
+    },
+    {
+      "package": {
+        "ecosystem": "Maven",
+        "name": "org.openjfx:javafx-controls"
+      },
+      "version": "21.0.12",
+      "result": {}
+    },
+    {
+      "package": {
+        "ecosystem": "Maven",
+        "name": "org.openjfx:javafx-graphics"
+      },
+      "version": "21.0.12",
+      "result": {}
+    },
+    {
+      "package": {
+        "ecosystem": "Maven",
+        "name": "org.tukaani:xz"
+      },
+      "version": "1.12",
+      "result": {}
+    }
+  ],
+  "complete": true,
+  "claim": "Exact Maven version index lookup only; does not prove absence of vulnerabilities."
+}

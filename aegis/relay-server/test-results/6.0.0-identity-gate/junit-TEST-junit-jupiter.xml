@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="JUnit Jupiter" tests="16" skipped="0" failures="0" errors="0" time="22.221" hostname="2ac91939697e" timestamp="2026-10-18T14:59:04">
+<testcase name="closedRejectsWithoutCreatingUser()" classname="org.securemail.relay.OpenRegistrationTest" time="0.016">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.relay.OpenRegistrationTest]/[method:closedRejectsWithoutCreatingUser()]
+display-name: closedRejectsWithoutCreatingUser()
+</system-out>
+</testcase>
+<testcase name="registrationRollsBackIfFreshAuthorizationFailsAfterPasswordKdf()" classname="org.securemail.relay.RelayIdentity600Test" time="0.583">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.relay.RelayIdentity600Test]/[method:registrationRollsBackIfFreshAuthorizationFailsAfterPasswordKdf()]
+display-name: registrationRollsBackIfFreshAuthorizationFailsAfterPasswordKdf()
+</system-out>
+</testcase>
+<testcase name="legacyUnenrolledAccountWorksButEnrollmentInvalidatesOldLoginAndAlreadyIssuedBearer()" classname="org.securemail.relay.RelayIdentity600Test" time="2.697">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.relay.RelayIdentity600Test]/[method:legacyUnenrolledAccountWorksButEnrollmentInvalidatesOldLoginAndAlreadyIssuedBearer()]
+display-name: legacyUnenrolledAccountWorksButEnrollmentInvalidatesOldLoginAndAlreadyIssuedBearer()
+</system-out>
+</testcase>
+<testcase name="actualNetworkServiceRegisters6LogsInFindsAndRevokesViaIdentityGeneration()" classname="org.securemail.relay.RelayIdentity600Test" time="1.518">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.relay.RelayIdentity600Test]/[method:actualNetworkServiceRegisters6LogsInFindsAndRevokesViaIdentityGeneration()]
+display-name: actualNetworkServiceRegisters6LogsInFindsAndRevokesViaIdentityGeneration()
+</system-out>
+</testcase>
+<testcase name="storeWriteRollsBackIfGenerationCheckFailsAtCommit()" classname="org.securemail.relay.RelayIdentity600Test" time="0.649">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.relay.RelayIdentity600Test]/[method:storeWriteRollsBackIfGenerationCheckFailsAtCommit()]
+display-name: storeWriteRollsBackIfGenerationCheckFailsAtCommit()
+</system-out>
+</testcase>
+<testcase name="loginProofIsOneUseAndBindsPasswordNicknameServiceAndAccount()" classname="org.securemail.relay.RelayIdentity600Test" time="2.675">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.relay.RelayIdentity600Test]/[method:loginProofIsOneUseAndBindsPasswordNicknameServiceAndAccount()]
+display-name: loginProofIsOneUseAndBindsPasswordNicknameServiceAndAccount()
+</system-out>
+</testcase>
+<testcase name="openAcceptsUnlistedNicknameAndEnforcesUniqueAndLimit()" classname="org.securemail.relay.OpenRegistrationTest" time="0.692">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.relay.OpenRegistrationTest]/[method:openAcceptsUnlistedNicknameAndEnforcesUniqueAndLimit()]
+display-name: openAcceptsUnlistedNicknameAndEnforcesUniqueAndLimit()
+</system-out>
+</testcase>
+<testcase name="duplicateLengthChunkedEncodingAndOversizedHeadersAreRejectedEvenWithValidSignature()" classname="org.securemail.relay.IdentityLoopback600Test" time="0.017">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.relay.IdentityLoopback600Test]/[method:duplicateLengthChunkedEncodingAndOversizedHeadersAreRejectedEvenWithValidSignature()]
+display-name: duplicateLengthChunkedEncodingAndOversizedHeadersAreRejectedEvenWithValidSignature()
+</system-out>
+</testcase>
+<testcase name="wrongIdentityFingerprintSymlinkAndChangedServicePublicKeyAreRejected()" classname="org.securemail.relay.RelayMain600Test" time="0.006">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.relay.RelayMain600Test]/[method:wrongIdentityFingerprintSymlinkAndChangedServicePublicKeyAreRejected()]
+display-name: wrongIdentityFingerprintSymlinkAndChangedServicePublicKeyAreRejected()
+</system-out>
+</testcase>
+<testcase name="fetchStreamStopsAfterGenerationRevocationAndDoesNotDeletePendingPacket()" classname="org.securemail.relay.RelayIdentity600Test" time="3.634">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.relay.RelayIdentity600Test]/[method:fetchStreamStopsAfterGenerationRevocationAndDoesNotDeletePendingPacket()]
+display-name: fetchStreamStopsAfterGenerationRevocationAndDoesNotDeletePendingPacket()
+</system-out>
+</testcase>
+<testcase name="slowDripCannotExtendAbsoluteSixSecondDeadline()" classname="org.securemail.relay.IdentityLoopback600Test" time="6.011">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.relay.IdentityLoopback600Test]/[method:slowDripCannotExtendAbsoluteSixSecondDeadline()]
+display-name: slowDripCannotExtendAbsoluteSixSecondDeadline()
+</system-out>
+</testcase>
+<testcase name="exactSignedResponseWorksButWrongPinNonceRequestOrBodyCannotAuthenticate()" classname="org.securemail.relay.IdentityLoopback600Test" time="0.025">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.relay.IdentityLoopback600Test]/[method:exactSignedResponseWorksButWrongPinNonceRequestOrBodyCannotAuthenticate()]
+display-name: exactSignedResponseWorksButWrongPinNonceRequestOrBodyCannotAuthenticate()
+</system-out>
+</testcase>
+<testcase name="revokedPublishedRouteIsNotReturnedFromRelayCache()" classname="org.securemail.relay.RelayIdentity600Test" time="2.551">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.relay.RelayIdentity600Test]/[method:revokedPublishedRouteIsNotReturnedFromRelayCache()]
+display-name: revokedPublishedRouteIsNotReturnedFromRelayCache()
+</system-out>
+</testcase>
+<testcase name="closedTransportDoesNotStartAnyFurtherRequest()" classname="org.securemail.relay.IdentityLoopback600Test" time="0.001">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.relay.IdentityLoopback600Test]/[method:closedTransportDoesNotStartAnyFurtherRequest()]
+display-name: closedTransportDoesNotStartAnyFurtherRequest()
+</system-out>
+</testcase>
+<testcase name="readOnlyCapabilityCannotRegisterOrStoreOrModifyPublicProfile()" classname="org.securemail.relay.RelayIdentity600Test" time="1.051">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.relay.RelayIdentity600Test]/[method:readOnlyCapabilityCannotRegisterOrStoreOrModifyPublicProfile()]
+display-name: readOnlyCapabilityCannotRegisterOrStoreOrModifyPublicProfile()
+</system-out>
+</testcase>
+<testcase name="operatorInitializationPinsIdentityCreatesOwnServiceKeyAndStartsOnlyExplicit6Mode()" classname="org.securemail.relay.RelayMain600Test" time="0.026">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.relay.RelayMain600Test]/[method:operatorInitializationPinsIdentityCreatesOwnServiceKeyAndStartsOnlyExplicit6Mode()]
+display-name: operatorInitializationPinsIdentityCreatesOwnServiceKeyAndStartsOnlyExplicit6Mode()
+</system-out>
+</testcase>
+<system-out>
+unique-id: [engine:junit-jupiter]
+display-name: JUnit Jupiter
+</system-out>
+</testsuite>

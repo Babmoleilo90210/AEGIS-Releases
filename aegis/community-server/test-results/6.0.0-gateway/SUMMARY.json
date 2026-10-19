@@ -1,0 +1,18 @@
+{
+  "tests": 55,
+  "passed": 55,
+  "failed": 0,
+  "skipped": 0,
+  "breakdown": {
+    "Identity": 46,
+    "Gateway": 9
+  },
+  "scope": "local real HTTP/SQL/JCA/production client; no Tor/native/production claim",
+  "productionReady": false,
+  "sha256": {
+    "RESULTS.json": "e632693d3363751a8eca59e0a616ad80495171fbcc35f428d564c7df8f74e1d0",
+    "TEST-gateway-identity.xml": "73892a4c2109ec945013a132f22d8362342295c99e0ce55faacc0b5f21a4e3fc",
+    "javac.log": "220c6cd50907a04b803e78b76313e7dbfda96f373619b6d7c947f65bef4f3b15",
+    "junit.log": "b3a0cdae0d50de57a6c8ea5b1614e372bdb7c247bf5179233c88d7c0d7b41eb3"
+  }
+}

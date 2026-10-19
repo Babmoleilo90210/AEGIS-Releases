@@ -1,0 +1,38 @@
+{
+  "reviewedAt": "2026-10-18T13:12:37.018834+00:00",
+  "scope": "Source inspection and referenced real HTTP tests of live identity/app/generation/role checks; not an independent security certification",
+  "productionReady": false,
+  "sourceSha256": {
+    "identity-server/src/main/java/org/securemail/identity/IdentityStore.java": "f1cde9833fd77b7f02bdbde531d56248894598f76622a57a4b5503e19abc0aa9",
+    "attachment-service/src/main/java/org/securemail/attachments/IdentityRemoteAuthority.java": "479f8c840c99188b7e35e1c8768fd4b2e4303fcbc67b0110c06f5e1fd6f1c397",
+    "attachment-service/src/main/java/org/securemail/attachments/AttachmentStore.java": "fc2be5702d3c8f0a99bb86918db7ab07582bd06fb6f2e3f4f2dd7a5655509690",
+    "management-agent/src/main/java/org/securemail/management/ManagementService.java": "26e3ce85258379b9b4918b7e7d02850a8576a024b553768380fd951c5848aeab",
+    "glas-signaling/src/main/java/org/securemail/glas/signaling/GlasRegistry600.java": "a5563c349e99d09f0b71d9a028880a477761b35f2286e39c7c032c7a98241ca1"
+  },
+  "observations": [
+    "Identity active() checks exact current generation, exact active device, trusted device and session expiry.",
+    "Capability is signed, persisted as exact canonical payload, bound to app proof key, required scope and consumed nonce.",
+    "authorityCurrent checks persisted issued owner/admin truth against current server DB/callback values; token roles are not client flags.",
+    "ADMIN authorize/isActive additionally require current administrator, current step-up and absence of sensitive recovery pending.",
+    "Management separately enforces AEGIS+ADMIN, two distinct account IDs for restore, exact request body, fresh approval lifetime, persistent one-use operation ID and intent audit before fixed commands.",
+    "Attachment server checks exact metadata digest then actual immutable cipherchunk length/hash; app is MAIL with required scope and bounded live recheck.",
+    "Glas root delegation binds existing account root to current GLAS app/device/generation; endpoint binds service pin; both directional contact policies and target live token are checked."
+  ],
+  "limitations": [
+    {
+      "id": "SERVER-AUTH-ENV-01",
+      "status": "DOCUMENTED_SINGLE_LOGICAL_SERVICE_CONSTRAINT",
+      "detail": "Management/Attachment signed request body has typed protocol domain but no receiving-instance public-key audience. One logical service/storage per Identity issuer is assumed; independently isolated environments must use different Identity issuer or add service audience binding before sharing issuer."
+    },
+    {
+      "id": "SERVER-BACKUP-PARSER-01",
+      "status": "ROOT_PARSER_REMOVED_NATIVE_SANDBOX_ACCEPTANCE_NOT_RUN",
+      "detail": "Root helper now performs fixed quiesce, bounded opaque copies and SHA inventory only. SQLite is parsed per database by a DynamicUser systemd RootDirectory validator, with no network, no foreign DB or secret mounts, memory/CPU/time limits, seccomp and AppArmor. Portable real kernel socket denial and actual unsandboxed worker refusal PASS. Full UID/chroot fixtures and Debian13 systemd/AppArmor remain NOT_RUN because Work has no required kernel capabilities/PID1; the exact Debian system Python SQLite is outside JDBC SBOM and requires native patch validation. No production backup or offsite restore ran."
+    },
+    {
+      "id": "SERVER-RELAY-01",
+      "status": "SEPARATE_ROOT_IDENTITY_INTEGRATION",
+      "detail": "Legacy Relay LOGIN6/generation bridge belongs to root/identity agent and is not proven by these attachment/signaling tests."
+    }
+  ]
+}

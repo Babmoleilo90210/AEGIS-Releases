@@ -1,0 +1,22 @@
+{
+  "status": "PASS_HEADLESS",
+  "nativeAcceptance": "NOT_RUN",
+  "scope": "Actual JavaFX + production Library/Identity HTTP/SQLite; production TorTransport via loopback SOCKS fixture. No real Tor or official Obsidian launch.",
+  "screenshots": [
+    "library-1024-dark-100.png",
+    "library-document-1024-dark-100.png",
+    "library-document-800-dark-200.png",
+    "library-document-1024-light-100.png",
+    "library-create-topic.png",
+    "library-locked.png"
+  ],
+  "closedBodyNotRendered": true,
+  "protectedObsidianLauncher": "NOT_EXERCISED_BY_HEADLESS_FIXTURE",
+  "signedSessionGuard": true,
+  "acknowledgedPlaintextCleanup": true,
+  "independentCleanupWhileWorkerBlocked": true,
+  "perMaterialReadRevocation": true,
+  "actualUiTopicCreationAndPublication": true,
+  "ordinarySelectionPreservesCiphertext": true,
+  "expiryWhileReadAuthorizeStalled": true
+}

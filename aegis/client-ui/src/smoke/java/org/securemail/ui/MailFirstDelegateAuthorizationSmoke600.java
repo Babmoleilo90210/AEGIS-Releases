@@ -1,0 +1,30 @@
+package org.securemail.ui;
+
+import java.io.IOException;
+import java.security.*;
+import org.securemail.client.ecosystem.*;
+import org.securemail.client.ecosystemauth.CorePublicConfig600;
+import org.securemail.ecosystem.protocol.IdentityProtocol;
+
+/** Actual Mail local fixed-domain guards; not a claim of live four-party/native acceptance. */
+public final class MailFirstDelegateAuthorizationSmoke600 {
+  interface Action{void run()throws Exception;}static int checks;
+  static void denied(Action action)throws Exception{try{action.run();throw new AssertionError("First delegate guard accepted invalid input");}catch(IOException|IllegalArgumentException expected){checks++;}}
+  static MailPairing600.FirstDelegateRequest request(IdentityProtocol.Capability cap,KeyPair app,IdentityProtocol.FirstDelegation delegation,IdentityProtocol.FirstDelegateRole role){long now=System.currentTimeMillis();String nonce=IdentityProtocol.nonce();byte[] body=IdentityProtocol.firstDelegationInspection(delegation.audience,delegation.challenge,now,nonce);return new MailPairing600.FirstDelegateRequest(IdentityProtocol.encodeCapability(cap),delegation,role,now,nonce,IdentityProtocol.sign(app.getPrivate(),IdentityProtocol.requestDigest(cap,"account.read",IdentityProtocol.digest(body),now,nonce)));}
+  public static void main(String[] args)throws Exception{
+    var keys=KeyPairGenerator.getInstance("Ed25519");KeyPair server=keys.generateKeyPair(),other=keys.generateKeyPair(),owner=keys.generateKeyPair(),target=keys.generateKeyPair(),ownerApp=keys.generateKeyPair(),targetApp=keys.generateKeyPair();String ownerDevice="ab".repeat(32),targetDevice="cd".repeat(32);var a=MailOwnerTransferAuthorizationSmoke600.cap(server,owner,ownerApp,ownerDevice);var b=MailOwnerTransferAuthorizationSmoke600.cap(server,target,targetApp,targetDevice);long expires=System.currentTimeMillis()+100000;var delegation=new IdentityProtocol.FirstDelegation(a.audience,a.accountId,ownerDevice,3,b.accountId,targetDevice,3,"Первый администратор",IdentityProtocol.nonce(),expires);var config=new CorePublicConfig600("a".repeat(56)+".onion",80,server.getPublic().getEncoded(),19350);var ownerRequest=request(a,ownerApp,delegation,IdentityProtocol.FirstDelegateRole.OWNER_APPROVE);var targetRequest=request(b,targetApp,delegation,IdentityProtocol.FirstDelegateRole.DELEGATE_ACCEPT);
+    var encode=MailPairing600.class.getDeclaredMethod("requestBytes",MailPairing600.Request.class);encode.setAccessible(true);byte[] payload=(byte[])encode.invoke(null,ownerRequest);var purpose=MailPairingEntrypoint600.class.getDeclaredMethod("verifyPurpose",ComponentLease.class,CorePublicConfig600.class);purpose.setAccessible(true);
+    try{purpose.invoke(null,new ComponentLease(ComponentId.MAIL,MailPairing600.PURPOSE_FIRST_DELEGATE,1,payload),config);checks++;}catch(java.lang.reflect.InvocationTargetException failed){throw (Exception)failed.getCause();}
+    denied(()->{try{purpose.invoke(null,new ComponentLease(ComponentId.MAIL,MailPairing600.PURPOSE_REGISTER,1,payload),config);}catch(java.lang.reflect.InvocationTargetException failed){throw (Exception)failed.getCause();}});
+    denied(()->{try{purpose.invoke(null,new ComponentLease(ComponentId.GLAS,MailPairing600.PURPOSE_FIRST_DELEGATE,1,payload),config);}catch(java.lang.reflect.InvocationTargetException failed){throw (Exception)failed.getCause();}});
+    denied(()->{try{purpose.invoke(null,new ComponentLease(ComponentId.MAIL,MailPairing600.PURPOSE_FIRST_DELEGATE,1,payload,new byte[0],new byte[0],new byte[]{1}),config);}catch(java.lang.reflect.InvocationTargetException failed){throw (Exception)failed.getCause();}});
+    MailPairingEntrypoint600.verifyFirstDelegate(ownerRequest,config);checks++;MailPairingEntrypoint600.verifyFirstDelegate(targetRequest,config);checks++;MailPairingEntrypoint600.verifyFirstDelegateInspection(ownerRequest,IdentityProtocol.firstDelegationBytes(delegation));checks++;
+    denied(()->MailPairingEntrypoint600.verifyFirstDelegate(ownerRequest,new CorePublicConfig600("a".repeat(56)+".onion",80,other.getPublic().getEncoded(),19350)));
+    byte[] proof=ownerRequest.appProof();proof[0]^=1;denied(()->MailPairingEntrypoint600.verifyFirstDelegate(new MailPairing600.FirstDelegateRequest(ownerRequest.aegisCapability(),delegation,ownerRequest.intent(),ownerRequest.requestTime(),ownerRequest.requestNonce(),proof),config));
+    denied(()->new MailPairing600.FirstDelegateRequest(ownerRequest.aegisCapability(),delegation,IdentityProtocol.FirstDelegateRole.DELEGATE_ACCEPT,ownerRequest.requestTime(),ownerRequest.requestNonce(),ownerRequest.appProof()));
+    var expired=new IdentityProtocol.FirstDelegation(a.audience,a.accountId,ownerDevice,3,b.accountId,targetDevice,3,delegation.roleName,delegation.challenge,System.currentTimeMillis()-1);denied(()->MailPairingEntrypoint600.verifyFirstDelegate(request(a,ownerApp,expired,IdentityProtocol.FirstDelegateRole.OWNER_APPROVE),config));
+    var changed=new IdentityProtocol.FirstDelegation(a.audience,a.accountId,ownerDevice,3,b.accountId,targetDevice,3,"Другая роль",delegation.challenge,expires);denied(()->MailPairingEntrypoint600.verifyFirstDelegateInspection(ownerRequest,IdentityProtocol.firstDelegationBytes(changed)));denied(()->MailPairingEntrypoint600.verifyFirstDelegateInspection(ownerRequest,new byte[0]));
+    long oldTime=ownerRequest.requestTime()-120000;String nonce=IdentityProtocol.nonce();byte[] body=IdentityProtocol.firstDelegationInspection(a.audience,delegation.challenge,oldTime,nonce);var oldRequest=new MailPairing600.FirstDelegateRequest(ownerRequest.aegisCapability(),delegation,ownerRequest.intent(),oldTime,nonce,IdentityProtocol.sign(ownerApp.getPrivate(),IdentityProtocol.requestDigest(a,"account.read",IdentityProtocol.digest(body),oldTime,nonce)));denied(()->MailPairingEntrypoint600.verifyFirstDelegate(oldRequest,config));
+    System.out.println("PASS: "+checks+" actual Mail first-delegate local guards: both roles, exact purpose/component, pin, app proof, age/expiry and canonical live-inspection comparison. Scope=local signed fixtures; live server/four-party transaction/native consent NOT_RUN here.");
+  }
+}

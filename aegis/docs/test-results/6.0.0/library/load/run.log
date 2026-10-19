@@ -1,0 +1,35 @@
+{
+  "scope": "Actual Identity/Library HTTP, signatures, SQLite and production client through loopback SOCKS; NOT Tor/native throughput or production target",
+  "closedReadDenied": true,
+  "status": "PASS_LOCAL_MEASUREMENT",
+  "publicDocuments": 100,
+  "materialRevocationDenied": true,
+  "maxHeapBytes": 2147483648,
+  "runs": [
+    {
+      "graphPageBound": 50,
+      "concurrency": 4,
+      "p95Millis": 462.995161,
+      "requests": 20,
+      "heapAfterBytes": 76315848,
+      "closedNodesLeaked": 0,
+      "elapsedMillis": 1303.201292,
+      "p50Millis": 204.223513,
+      "heapBeforeBytes": 21212824
+    },
+    {
+      "graphPageBound": 50,
+      "concurrency": 16,
+      "p95Millis": 696.275565,
+      "requests": 80,
+      "heapAfterBytes": 17420080,
+      "closedNodesLeaked": 0,
+      "elapsedMillis": 3161.871945,
+      "p50Millis": 590.64217,
+      "heapBeforeBytes": 79032768
+    }
+  ],
+  "java": "21.0.12.1",
+  "closedDocuments": 20,
+  "processors": 8
+}

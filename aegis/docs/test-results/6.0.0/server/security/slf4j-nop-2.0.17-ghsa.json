@@ -1,0 +1,9 @@
+{
+  "queriedAt": "2026-10-18T12:44:19.366562+00:00",
+  "url": "https://api.github.com/advisories?ecosystem=maven&affects=org.slf4j%3Aslf4j-nop%402.0.17&per_page=100",
+  "status": 200,
+  "bytes": 2,
+  "link": null,
+  "contentType": "application/json; charset=utf-8",
+  "response": []
+}

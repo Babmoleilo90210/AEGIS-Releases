@@ -1,0 +1,6 @@
+[
+  "LICENSE.txt",
+  "crypto/x509/v3_usernotice.c",
+  "external/perl/Text-Template-1.56/LICENSE",
+  "test/certs/ext-userNotice.pem"
+]

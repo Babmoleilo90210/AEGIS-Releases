@@ -1,0 +1,7 @@
+{
+  "queriedAt": "2026-10-18T12:44:13.672212+00:00",
+  "url": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/2.0.17/slf4j-api-2.0.17.jar.sha256",
+  "status": "UNAVAILABLE",
+  "errorType": "HTTPError",
+  "error": "HTTP Error 404: Not Found"
+}

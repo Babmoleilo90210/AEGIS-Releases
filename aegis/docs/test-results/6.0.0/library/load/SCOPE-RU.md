@@ -1,0 +1,5 @@
+# Измеренный локальный прогон Library
+
+LibraryLoadSmoke600 запускает реальные IdentityHttpServer/LibraryHttpServer600, SQLite и production HttpLibraryTransport600/TorTransport через явный loopback SOCKS fixture. Созданы 100 опубликованных и20 закрытых документов. Проверены graph/catalog/read при concurrency4/16, 20/80 запросов соответственно, предел50 nodes/page, отсутствие закрытых узлов/неявных title grants. После нагрузки закрытый READ и отзыв material ACL действительно отклонены. Результаты и точные команды приведены в RESULT.json/RUN.json.
+
+Измерено p50/p95: 204.22/463.00ms при4 параллельных клиентах; 590.64/696.28ms при16. Длительность1.303/3.162s. Heap snapshots — наблюдения до/после, не доказательство отсутствия утечек памяти; GC не принуждался. Среда Java21.0.12.1, 8 доступных CPU, max heap2GiB. CPU utilisation и60-minute soak здесь не измерялись. Нагрузка небольшая и локальная: это не Tor latency, не нативная приёмка, не production capacity и не установленная целевая производительность.

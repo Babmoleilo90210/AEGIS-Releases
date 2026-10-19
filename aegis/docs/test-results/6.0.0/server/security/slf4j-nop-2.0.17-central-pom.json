@@ -1,0 +1,9 @@
+{
+  "queriedAt": "2026-10-18T12:44:19.269969+00:00",
+  "url": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-nop/2.0.17/slf4j-nop-2.0.17.pom",
+  "status": 200,
+  "bytes": 1294,
+  "link": null,
+  "contentType": "text/xml",
+  "response": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\r\n\r\n  <modelVersion>4.0.0</modelVersion>\r\n\r\n  <parent>\r\n    <groupId>org.slf4j</groupId>\r\n    <artifactId>slf4j-parent</artifactId>\r\n    <version>2.0.17</version>\r\n    <relativePath>../parent/pom.xml</relativePath>\r\n  </parent>\r\n\r\n  <artifactId>slf4j-nop</artifactId>\r\n\r\n  <packaging>jar</packaging>\r\n  <name>SLF4J NOP Provider</name>\r\n  <description>SLF4J NOP Provider</description>\r\n  <url>http://www.slf4j.org</url>\r\n\r\n  <properties>\r\n    <module-name>org.slf4j.nop</module-name>\r\n    <slf4j.provider.implementation>org.slf4j.nop.NOPServiceProvider</slf4j.provider.implementation>\r\n    <slf4j.provider.type>nop</slf4j.provider.type>\r\n  </properties>\r\n\r\n  <dependencies>\r\n    <dependency>\r\n      <groupId>org.slf4j</groupId>\r\n      <artifactId>slf4j-api</artifactId>\r\n    </dependency>\r\n\r\n    <dependency>\r\n      <groupId>org.slf4j</groupId>\r\n      <artifactId>slf4j-api</artifactId>\r\n      <type>test-jar</type>\r\n      <version>${project.version}</version>\r\n      <scope>test</scope>\r\n    </dependency>\r\n  </dependencies>\r\n\r\n</project>\r\n"
+}

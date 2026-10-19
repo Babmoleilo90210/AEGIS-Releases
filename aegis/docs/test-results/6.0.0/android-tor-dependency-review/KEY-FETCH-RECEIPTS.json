@@ -1,0 +1,29 @@
+{
+  "when": "2026-10-18T13:49:09.818531+00:00",
+  "sources": [
+    {
+      "name": "guardian-signing-keys.html",
+      "url": "https://guardianproject.info/signing-keys/",
+      "finalUrl": "https://guardianproject.info/signing-keys/",
+      "httpStatus": 200,
+      "bytes": 68742,
+      "sha256": "d6f4002cd2340a841ac37af03b676f883e830c1803514b7eb595e215a12cf45d"
+    },
+    {
+      "name": "keys/hans-current.asc",
+      "url": "https://keys.openpgp.org/vks/v1/by-fingerprint/EE6620C7136B0D2C456C0A4DE9E28DEA00AA5556",
+      "finalUrl": "https://keys.openpgp.org/vks/v1/by-fingerprint/EE6620C7136B0D2C456C0A4DE9E28DEA00AA5556",
+      "httpStatus": 200,
+      "bytes": 14927,
+      "sha256": "46f65f3ad5911744859f61f4ffc4756c460e380e7be9b495ef439e6fc9d1cc6d"
+    },
+    {
+      "name": "keys/hans-deprecated.asc",
+      "url": "https://keys.openpgp.org/vks/v1/by-fingerprint/5E61C8780F86295CE17D86779F0FE587374BBE81",
+      "finalUrl": "https://keys.openpgp.org/vks/v1/by-fingerprint/5E61C8780F86295CE17D86779F0FE587374BBE81",
+      "httpStatus": 200,
+      "bytes": 3121,
+      "sha256": "d5063ffc73df9dee22be06f9bccd4d8d43529cf7833a80098493103a0af2d270"
+    }
+  ]
+}

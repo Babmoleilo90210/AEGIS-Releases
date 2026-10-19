@@ -1,0 +1,6 @@
+{
+  "sourceJarTorServiceSha256": "9a80508dc2e0c9a6f18d9edee88541446f268d6f47bc8b187f79545ea5ebdb62",
+  "upstreamTaggedTorServiceSha256": "9a80508dc2e0c9a6f18d9edee88541446f268d6f47bc8b187f79545ea5ebdb62",
+  "exactBytesMatch": true,
+  "tagCommit": "0340ba1609cb73e663e202a316d083803e399db4"
+}

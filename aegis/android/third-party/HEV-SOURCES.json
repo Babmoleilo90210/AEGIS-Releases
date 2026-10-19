@@ -1,0 +1,19 @@
+{
+  "upstream": "https://github.com/heiher/hev-socks5-tunnel",
+  "commits": {
+    ".": "780b396b0fc3d0355fc0614e221e3446933669c4",
+    "src/core": "9f1cf0bfca0c003dd0cf0fbdcf6912a2b46a8d05",
+    "third-part/hev-task-system": "b2f2250371c1bd436a42f3c380ee46d4ac3bada8",
+    "third-part/lwip": "7f51e51c72d088481af972c3a115cec41c043d49",
+    "third-part/yaml": "94441ec8777eb319936735a58b376963d09c73d4"
+  },
+  "trackedSourceCompositeSha256": "19f96049d2882add6b5b713d85f5d297b8140243e5bd7d7db94dad8ee226339c",
+  "authentication": "Downloaded over HTTPS from official repositories; exact commit and composite SHA pinned; no upstream release signature claimed",
+  "licenses": {
+    "tunnel": "MIT",
+    "socks5-core": "MIT",
+    "hev-task-system": "MIT",
+    "lwip": "BSD-3-Clause",
+    "yaml": "MIT"
+  }
+}

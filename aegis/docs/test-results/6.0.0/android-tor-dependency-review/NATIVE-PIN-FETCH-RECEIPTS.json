@@ -1,0 +1,53 @@
+{
+  "when": "2026-10-18T13:54:58.694845+00:00",
+  "sources": [
+    {
+      "name": "native-tag-libevent.json",
+      "url": "https://api.github.com/repos/libevent/libevent/git/tags/211c4234e44e0e7df720f744a0c70be017e39622",
+      "status": 200,
+      "sha256": "4931698643d4b9f5fec1df24abfe7b308938220292e41ab29e029a0ea1975617"
+    },
+    {
+      "name": "native-tag-openssl.json",
+      "url": "https://api.github.com/repos/openssl/openssl/git/tags/d0ca66a1abe52545f14eca635c648932fcde5615",
+      "status": 200,
+      "sha256": "24c1c028d2d367a83285d82b434ff9665350ee31ee4c1a0ecc6c11b93c21fed5"
+    },
+    {
+      "name": "native-tag-zlib.json",
+      "url": "https://api.github.com/repos/madler/zlib/git/tags/216c70c020aa53f0c40920d155f808b6b59c9acb",
+      "status": 200,
+      "sha256": "7eebdcd983b779c22114350daefd49dea5da785a2bd19a26113e24e6fc60f928"
+    },
+    {
+      "name": "native-tag-zstd.json",
+      "url": "https://api.github.com/repos/facebook/zstd/git/tags/ac66b19e6bd6b83238bf008eecc1298105298532",
+      "status": 200,
+      "sha256": "8777a52ed68b5e300a853f8d2410951b97d990d95b17436717f58825ed718aeb"
+    },
+    {
+      "name": "native-pinned-openssl-tree.json",
+      "url": "https://api.github.com/repos/openssl/openssl/git/trees/45e844fa2a14ec92d146bd8f5778ac130b6625fb?recursive=1",
+      "status": 200,
+      "sha256": "c12d233a1fa029040aceaebf808bcb9f91a20299803ca1e1cf6fcb350974ce1e"
+    },
+    {
+      "name": "native-pinned-libevent-tree.json",
+      "url": "https://api.github.com/repos/libevent/libevent/git/trees/79ddfb460847999b807cba76d04e73891f29c6ee?recursive=1",
+      "status": 200,
+      "sha256": "ac527b0e76e8755eed7dc0a0a13812ebe2be77cdaa896515cfeb08473dd935ed"
+    },
+    {
+      "name": "native-pinned-zlib-tree.json",
+      "url": "https://api.github.com/repos/madler/zlib/git/trees/da607da739fa6047df13e66a2af6b8bec7c2a498?recursive=1",
+      "status": 200,
+      "sha256": "de39cf58376b5d71856408d128e647b7ff9f8269de8657b56eec27f3a97669b4"
+    },
+    {
+      "name": "native-pinned-zstd-tree.json",
+      "url": "https://api.github.com/repos/facebook/zstd/git/trees/f8745da6ff1ad1e7bab384bd1f9d742439278e99?recursive=1",
+      "status": 200,
+      "sha256": "24600443c183100dba4052c88c541a5e36d38a84bb7ffeffb37ef4667cdfd755"
+    }
+  ]
+}

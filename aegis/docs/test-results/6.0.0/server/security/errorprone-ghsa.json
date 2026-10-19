@@ -1,0 +1,8 @@
+{
+  "queriedAt": "2026-10-18T13:59:09.083805+00:00",
+  "url": "https://api.github.com/advisories?ecosystem=maven&affects=com.google.errorprone%3Aerror_prone_annotations%402.48.0&per_page=100",
+  "status": 200,
+  "bytes": 2,
+  "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "response": []
+}

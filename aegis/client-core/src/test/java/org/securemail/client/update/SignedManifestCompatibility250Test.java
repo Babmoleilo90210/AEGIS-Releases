@@ -48,7 +48,7 @@ class SignedManifestCompatibility250Test {
     testKey=KeyPairGenerator.getInstance("Ed25519").generateKeyPair();
     var compiler=ToolProvider.getSystemJavaCompiler();assertNotNull(compiler,"Java 21 JDK is required for the historical parser check");
     JsonObject provenance=JsonParser.parseString(new String(resource("PROVENANCE.json"),StandardCharsets.UTF_8)).getAsJsonObject().getAsJsonObject("snapshots");
-    for(String label:List.of("v150","v200")){
+    for(String label:List.of("v150","v200","v500")){
       Path folder=Files.createDirectories(scratch.resolve(label)),classes=Files.createDirectories(folder.resolve("classes"));
       List<String> args=new ArrayList<>(List.of("--release","21","-encoding","UTF-8","-cp",Path.of(Gson.class.getProtectionDomain().getCodeSource().getLocation().toURI()).toString(),"-d",classes.toString()));
       JsonObject description=provenance.getAsJsonObject(label);
@@ -135,6 +135,11 @@ class SignedManifestCompatibility250Test {
     byte[] exact=generate("5.0.0","stable").exact();assertEquals("v5.0.0",JsonData.object(exact,65536).get("tag").getAsString());
     for(String installed:List.of("1.5.0","2.0.0","2.5.0"))acceptedEverywhere(exact,"stable",installed);
   }
+  @Test void generated600StableIsAcceptedByActualFrozen500AndHistoricalParsers()throws Exception {
+    byte[] exact=generate("6.0.0","stable").exact();assertEquals("v6.0.0",JsonData.object(exact,65536).get("tag").getAsString());
+    for(String installed:List.of("1.5.0","2.0.0","2.5.0","5.0.0"))acceptedEverywhere(exact,"stable",installed);
+    rejectedEverywhere(exact,sign(exact),"stable","5.0.0","6.0.1",IOException.class);
+  }
   @Test void explicitPrereleaseRetainsItsExactTagAndCannotEnterStableChannel()throws Exception {
     byte[] exact=generate("2.5.0-beta.1","beta").exact();assertEquals("v2.5.0-beta.1",JsonData.object(exact,65536).get("tag").getAsString());acceptedEverywhere(exact,"beta","2.0.0");
     rejectedEverywhere(exact,sign(exact),"stable","2.0.0","2.0.0",IOException.class);
@@ -167,14 +172,14 @@ class SignedManifestCompatibility250Test {
     Path manifest=Path.of(arguments[0]).toAbsolutePath();scratch=Files.createTempDirectory("aegis-final-manifest500-");
     try{
       freezeAndCompileHistoricalSources();byte[] exact=Files.readAllBytes(manifest);
-      assertEquals("5.0.0",JsonData.object(exact,65536).get("version").getAsString());
+      String finalVersion=JsonData.object(exact,65536).get("version").getAsString();assertTrue(List.of("5.0.0","6.0.0").contains(finalVersion));
       for(String installed:List.of("1.5.0","2.0.0","2.5.0"))acceptedEverywhere(exact,"stable",installed);
       SignedManifest parsed=SignedManifest.verifyWithKey(exact,sign(exact),"stable","2.5.0","2.5.0",testKey.getPublic());
       for(SignedManifest.Asset asset:parsed.artifacts())UpdateService.verifyFile(manifest.getParent().resolve(asset.fileName()),asset);
       UpdateService.verifyFile(manifest.getParent().resolve("SHA256SUMS"),parsed.checksums());
-      UpdateService.verifyFile(manifest.getParent().resolve("CHANGELOG-5.0.0.md"),parsed.changelog());
+      UpdateService.verifyFile(manifest.getParent().resolve("CHANGELOG-"+finalVersion+".md"),parsed.changelog());
       assertThrows(GeneralSecurityException.class,()->SignedManifest.verify(exact,sign(exact),"stable","2.5.0","2.5.0"));
-      System.out.println("{\"status\":\"PASS_LOCAL_COMPATIBILITY\",\"parsers\":[\"current\",\"frozen1.5.0\",\"frozen2.0.0\"],\"installedVersions\":[\"1.5.0\",\"2.0.0\",\"2.5.0\"],\"allReferencedFileHashesVerified\":true,\"ownerKeyUsed\":false,\"productionSignatureGenerated\":false,\"updaterEndToEnd\":\"NOT_RUN\"}");
+      System.out.println("{\"status\":\"PASS_LOCAL_COMPATIBILITY\",\"parsers\":[\"current\",\"frozen1.5.0\",\"frozen2.0.0\",\"frozen5.0.0\"],\"installedVersions\":[\"1.5.0\",\"2.0.0\",\"2.5.0\"],\"allReferencedFileHashesVerified\":true,\"ownerKeyUsed\":false,\"productionSignatureGenerated\":false,\"updaterEndToEnd\":\"NOT_RUN\"}");
     }finally{closeLoaders();try(var files=Files.walk(scratch)){for(Path p:files.sorted(java.util.Comparator.reverseOrder()).toList())Files.deleteIfExists(p);}}
   }
 }

@@ -1,0 +1,17 @@
+{
+  "when": "2026-10-18T13:55:00.569910+00:00",
+  "sources": [
+    {
+      "name": "licenses/OpenSSL-pinned-NOTICE.txt",
+      "url": "https://raw.githubusercontent.com/openssl/openssl/45e844fa2a14ec92d146bd8f5778ac130b6625fb/NOTICE",
+      "error": "<HTTPError 404: 'Not Found'>"
+    },
+    {
+      "name": "licenses/zlib-pinned-README.txt",
+      "url": "https://raw.githubusercontent.com/madler/zlib/da607da739fa6047df13e66a2af6b8bec7c2a498/README",
+      "status": 200,
+      "sha256": "4026d921213bb2e311d8d42b44ef53361c102d5d45ae32f93f8e52eaee8d068f",
+      "bytes": 5291
+    }
+  ]
+}

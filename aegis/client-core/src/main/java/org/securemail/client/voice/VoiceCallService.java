@@ -34,8 +34,7 @@ public final class VoiceCallService implements AutoCloseable {
   @FunctionalInterface interface MediaFactory {Media open(GlasAudioSession.Config config,EncodedSink sink,java.util.function.Consumer<String> failure)throws IOException;}
   private static final long RING_MILLIS=60_000,RECONNECT_MILLIS=45_000;
   private final Object lock=new Object();
-  private final LocalStore local;
-  private final LocalFeatures features;
+  private final VoiceLocalStore600 local;
   private final Connector connector;
   private final MediaFactory mediaFactory;
   private final VoiceHistory history;
@@ -48,7 +47,7 @@ public final class VoiceCallService implements AutoCloseable {
   private final Set<Socket> handshakes=ConcurrentHashMap.newKeySet();
   private final Semaphore authenticationSlots=new Semaphore(2);
   private final LinkedHashMap<UUID,Long> seenCalls=new LinkedHashMap<>();
-  private volatile boolean closed,routeReady;
+  private volatile boolean closed,routeReady,restricted;
   private volatile boolean voiceStateDamaged;
   private volatile boolean cleanupPending;
   private volatile VoiceOrganizationAuthorizer organizationAuthorizer=VoiceOrganizationAuthorizer.DENY;
@@ -61,7 +60,14 @@ public final class VoiceCallService implements AutoCloseable {
   }
   /** Test seams replace network/device I/O only. Public construction always uses TorTransport and real audio. */
   VoiceCallService(LocalStore local,LocalFeatures features,Connector connector,MediaFactory mediaFactory)throws IOException,GeneralSecurityException {
-    this.local=Objects.requireNonNull(local);this.features=Objects.requireNonNull(features);this.connector=Objects.requireNonNull(connector);this.mediaFactory=Objects.requireNonNull(mediaFactory);VoiceHistory loaded;
+    this(VoiceLocalStore600.legacy(local,features),connector,mediaFactory);
+  }
+  /** Separate-process Glas uses this narrow store and its Tor-only connector; no ClientSession or Mail root is accepted. */
+  public VoiceCallService(VoiceLocalStore600 local,org.securemail.client.voice600.GlasOnionTransport600 connector)throws IOException,GeneralSecurityException {
+    this(local,connector::connect,VoiceCallService::openMedia);
+  }
+  VoiceCallService(VoiceLocalStore600 local,Connector connector,MediaFactory mediaFactory)throws IOException,GeneralSecurityException {
+    this.local=Objects.requireNonNull(local);this.connector=Objects.requireNonNull(connector);this.mediaFactory=Objects.requireNonNull(mediaFactory);VoiceHistory loaded;
     try{loaded=new VoiceHistory(local);}catch(IOException|GeneralSecurityException damaged){loaded=VoiceHistory.empty(local);voiceStateDamaged=true;}
     history=loaded;snapshot=new Snapshot(voiceStateDamaged?State.UNAVAILABLE:State.IDLE,"",null,null,voiceStateDamaged?"Настройки звонков повреждены. Очистите историю звонков для восстановления":"Звонки через Tor · микрофон выключен",false,0,0,"","",history.enabled());
     timer.setRemoveOnCancelPolicy(true);timer.scheduleWithFixedDelay(this::tick,1,1,TimeUnit.SECONDS);
@@ -89,7 +95,7 @@ public final class VoiceCallService implements AutoCloseable {
   public GlasAudioSession.Stats audioStats(){synchronized(lock){return current==null||current.media==null?null:current.media.stats();}}
   public List<HistoryEntry> history(){return history.entries();}
   public void setHistoryEnabled(boolean enabled)throws IOException,GeneralSecurityException {requireVoiceState();history.enabled(enabled);synchronized(lock){if(!enabled&&current!=null)current.recordHistory=false;publish();}}
-  public void clearHistory()throws IOException,GeneralSecurityException {history.clear();boolean repaired=voiceStateDamaged;voiceStateDamaged=false;synchronized(lock){publish();}if(repaired)idleStatus("Настройки звонков восстановлены · история отключена");}
+  public void clearHistory()throws IOException,GeneralSecurityException {if(restricted)throw new IOException("История Гласа заблокирована");history.clear();boolean repaired=voiceStateDamaged;voiceStateDamaged=false;synchronized(lock){publish();}if(repaired)idleStatus("Настройки звонков восстановлены · история отключена");}
   public VoiceCallPolicy callPolicy(){return history.policy();}
   public void setCallPolicy(VoiceCallPolicy policy)throws IOException,GeneralSecurityException {
     requireVoiceState();history.policy(Objects.requireNonNull(policy));recheckCurrentPermissions();
@@ -101,13 +107,16 @@ public final class VoiceCallService implements AutoCloseable {
     if(voiceStateDamaged||direction==Direction.INCOMING&&!history.incomingEnabled())return false;
     VoiceCallPolicy.Rule rule=history.policy().rule(direction);if(rule.allowsLocally(contact.userId()))return true;
     if(!rule.permitsOrganizationCheck(contact.userId()))return false;
-    try{var decision=organizationAuthorizer.authorize(local.identity().userId(),contact.userId(),direction);return decision!=null&&decision.permits(local.identity().userId(),contact.userId(),direction,local.now());}catch(RuntimeException denied){return false;}
+    try{var decision=organizationAuthorizer.authorize(local.accountId(),contact.userId(),direction);return decision!=null&&decision.permits(local.accountId(),contact.userId(),direction,local.now());}catch(RuntimeException denied){return false;}
   }
+  /** Lock retains only authenticated incoming routing/policy and releases full history/outgoing access. */
+  public void lockRestricted(){Call active;synchronized(lock){restricted=true;active=current;if(active!=null)active.recordHistory=false;history.lockProtected();publish();}if(active!=null&&(active.direction==Direction.OUTGOING||active.state!=State.INCOMING))requestEnd(active,State.ENDED,"Глас заблокирован","ended");}
+  public boolean restricted(){return restricted;}
   public boolean incomingEnabled(){return !voiceStateDamaged&&history.incomingEnabled();}
   public void setIncomingEnabled(boolean enabled)throws IOException,GeneralSecurityException {requireVoiceState();history.incomingEnabled(enabled);Call call;synchronized(lock){call=current;publish();}if(!enabled&&call!=null&&call.direction==Direction.INCOMING)requestEnd(call,State.UNAVAILABLE,"Входящие звонки отключены","unavailable");}
   public boolean notificationsEnabled(){return history.notificationsEnabled();}
   public void setNotificationsEnabled(boolean enabled)throws IOException,GeneralSecurityException {requireVoiceState();history.notificationsEnabled(enabled);synchronized(lock){publish();}}
-  private void requireVoiceState()throws IOException {if(voiceStateDamaged)throw new IOException("Очистите повреждённую историю звонков для восстановления");}
+  private void requireVoiceState()throws IOException {if(restricted)throw new IOException("Настройки Гласа заблокированы главным АЕГИС");if(voiceStateDamaged)throw new IOException("Очистите повреждённую историю звонков для восстановления");}
   public void configureAudio(GlasAudioSession.Config config){
     Objects.requireNonNull(config);for(String id:List.of(config.inputDeviceId(),config.outputDeviceId()))if(id.getBytes(java.nio.charset.StandardCharsets.UTF_8).length>256||id.codePoints().anyMatch(Character::isISOControl))throw new IllegalArgumentException("Audio device identifier");submitAudio(()->{
       Call call;Media media;synchronized(lock){call=current;media=call==null?null:call.media;}
@@ -116,7 +125,7 @@ public final class VoiceCallService implements AutoCloseable {
     });
   }
   public void start(UserInfo contact)throws IOException {
-    requireVoiceState();UserInfo pinned=trusted(contact);if(!permitted(pinned,Direction.OUTGOING))throw new IOException("Звонок не разрешён настройками доступа");Call call;
+    if(restricted)throw new IOException("Исходящие вызовы заблокированы главным АЕГИС");requireVoiceState();UserInfo pinned=trusted(contact);if(!permitted(pinned,Direction.OUTGOING))throw new IOException("Звонок не разрешён настройками доступа");Call call;
     synchronized(lock){if(closed)throw new IOException("Приложение закрывается");if(current!=null||cleanupPending)throw new IOException("Сначала завершите текущий звонок");if(!routeReady)throw new IOException("Дождитесь подключения Tor и P2P");
       call=new Call(UUID.randomUUID(),pinned,Direction.OUTGOING,local.now());call.recordHistory=history.enabled();current=call;call.state=State.PREPARING;call.status="Подготовка звонка через Tor";publish();}
     if(!submit(()->connect(call,false)))finish(call,State.UNAVAILABLE,"Звонок сейчас недоступен","unavailable",false);
@@ -160,17 +169,17 @@ public final class VoiceCallService implements AutoCloseable {
     try{
       raw.setSoTimeout(15_000);var in=new DataInputStream(raw.getInputStream());var out=new DataOutputStream(raw.getOutputStream());
       VoiceTls.Offer remote=VoiceTls.read(in);UserInfo contact=trustedKey(remote.identityPublicKey());
-      remote.verify(contact.publicKey(),local.identity().publicKey(),remote.callId(),VoiceTls.Role.CALLER,local.now());
+      local.verifyRemote(remote,contact.publicKey(),remote.callId(),VoiceTls.Role.CALLER);
       synchronized(lock){pruneSeen();if(current==null&&seenCalls.containsKey(remote.callId()))throw new IOException("Call replay");}
       // A verified known contact may be outside the bounded background prefetch set.
       // Refresh only its explicitly permitted organizational exception on this existing
       // handshake worker. All audio/timer checks continue to read the cache only.
       VoiceCallPolicy.Rule incomingRule=history.policy().incoming();
       if(history.incomingEnabled()&&!incomingRule.allowsLocally(contact.userId())&&incomingRule.permitsOrganizationCheck(contact.userId()))
-        organizationAuthorizer.prepare(local.identity().userId(),contact.userId(),Direction.INCOMING);
+        organizationAuthorizer.prepare(local.accountId(),contact.userId(),Direction.INCOMING);
       // Fail before returning our signed offer or establishing voice TLS. No denial reason is sent.
       if(!permitted(contact,Direction.INCOMING))throw new IOException("Voice unavailable");
-      try(var pending=VoiceTls.create(local.identity(),remote.callId(),VoiceTls.Role.CALLEE,contact.publicKey())){
+      try(var pending=local.createTls(remote.callId(),VoiceTls.Role.CALLEE,contact.publicKey())){
         pending.offer().write(out);out.flush();SSLSocket tls=pending.handshake(raw,remote,contact.publicKey(),false);
         link=new Link(raw,tls,VoiceTls.shortCode(pending.offer(),remote));VoiceFrames.Frame first=VoiceFrames.read(link.in);boolean resume;
         try{resume=VoiceFrames.start(first);}finally{first.wipe();}
@@ -199,10 +208,10 @@ public final class VoiceCallService implements AutoCloseable {
     try{
       synchronized(lock){if(current!=call||closed||!stillTrusted(call))return;}
       raw=connector.connect(call.contact);handshakes.add(raw);Socket owned=raw;var deadline=timer.schedule(()->closeSocket(owned),30,TimeUnit.SECONDS);
-      try(var pending=VoiceTls.create(local.identity(),call.id,VoiceTls.Role.CALLER,call.contact.publicKey())){
+      try(var pending=local.createTls(call.id,VoiceTls.Role.CALLER,call.contact.publicKey())){
         raw.setSoTimeout(15_000);var out=new DataOutputStream(raw.getOutputStream());var in=new DataInputStream(raw.getInputStream());
         Binary.header(out);out.writeByte(VoiceFrames.OPERATION);Binary.text(out,"");pending.offer().write(out);out.flush();
-        VoiceTls.Offer remote=VoiceTls.read(in);remote.verify(call.contact.publicKey(),local.identity().publicKey(),call.id,VoiceTls.Role.CALLEE,local.now());
+        VoiceTls.Offer remote=VoiceTls.read(in);local.verifyRemote(remote,call.contact.publicKey(),call.id,VoiceTls.Role.CALLEE);
         synchronized(lock){if(current!=call||closed||!stillTrusted(call))return;call.state=State.ENCRYPTING;call.status="Проверка личности и шифрования";publish();}
         SSLSocket tls=pending.handshake(raw,remote,call.contact.publicKey(),true);deadline.cancel(false);handshakes.remove(raw);
         link=new Link(raw,tls,VoiceTls.shortCode(pending.offer(),remote));
@@ -302,10 +311,10 @@ public final class VoiceCallService implements AutoCloseable {
     try{if(call.recordHistory)history.add(entry);}catch(IOException|GeneralSecurityException failure){synchronized(lock){if(current==null){Snapshot previous=snapshot;snapshot=new Snapshot(previous.state(),previous.callId(),previous.contact(),previous.direction(),message+" · история не сохранена",false,previous.startedAt(),previous.durationMillis(),previous.fingerprint(),previous.safetyCode(),history.enabled());notifyListeners();}}}finally{cleanupPending=false;}
   }
   private Call matching(String id){return current!=null&&current.id.toString().equals(id)?current:null;}
-  private UserInfo trusted(UserInfo candidate)throws IOException {if(candidate==null)throw new IOException("Выберите проверенный контакт");UserInfo pinned=local.contact(candidate.nickname());if(pinned==null||!same(pinned,candidate)||!stillTrusted(pinned)||pinned.userId().equals(local.identity().userId()))throw new IOException("Добавьте и проверьте контакт; заблокированные контакты не могут звонить");return pinned;}
+  private UserInfo trusted(UserInfo candidate)throws IOException {if(candidate==null)throw new IOException("Выберите проверенный контакт");UserInfo pinned=local.contact(candidate.nickname());if(pinned==null||!same(pinned,candidate)||!stillTrusted(pinned)||pinned.userId().equals(local.accountId()))throw new IOException("Добавьте и проверьте контакт; заблокированные контакты не могут звонить");return pinned;}
   private UserInfo trustedKey(byte[] key)throws IOException {String id=Identity.id(key);UserInfo contact=local.contacts().stream().filter(person->person.userId().equals(id)&&MessageDigest.isEqual(person.publicKey(),key)).findFirst().orElseThrow(()->new IOException("Unknown voice identity"));return trusted(contact);}
-  private boolean stillTrusted(Call call){return stillTrusted(call.contact)&&permitted(call.contact,call.direction);}
-  private boolean stillTrusted(UserInfo contact){UserInfo pinned=local.contact(contact.nickname());return pinned!=null&&same(pinned,contact)&&!features.blockedSender(contact.userId());}
+  private boolean stillTrusted(Call call){return stillTrusted(call.contact)&&permitted(call.contact,call.direction)&&((call.link==null&&!call.accepted)||local.sessionAuthorized(call.contact));}
+  private boolean stillTrusted(UserInfo contact){UserInfo pinned=local.contact(contact.nickname());return pinned!=null&&same(pinned,contact)&&!local.blocked(contact.userId());}
   private static boolean same(UserInfo first,UserInfo second){return first.userId().equals(second.userId())&&MessageDigest.isEqual(first.publicKey(),second.publicKey());}
   private void remember(UUID id){seenCalls.put(id,local.now()+300_000);pruneSeen();while(seenCalls.size()>256)seenCalls.remove(seenCalls.keySet().iterator().next());}
   private void pruneSeen(){long now=local.now();seenCalls.entrySet().removeIf(entry->entry.getValue()<=now);}

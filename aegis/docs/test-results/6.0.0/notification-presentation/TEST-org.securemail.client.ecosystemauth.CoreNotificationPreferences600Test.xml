@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.securemail.client.ecosystemauth.CoreNotificationPreferences600Test" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-10-18T14:11:33.937Z" hostname="2ac91939697e" time="0.019">
+  <properties/>
+  <testcase name="atomicRoundTripContainsOnlyThreePresentationBooleans()" classname="org.securemail.client.ecosystemauth.CoreNotificationPreferences600Test" time="0.009"/>
+  <testcase name="rejectsAmbiguousTypesUnknownFieldsDuplicateKeysAndOversizeWithoutOverwriting()" classname="org.securemail.client.ecosystemauth.CoreNotificationPreferences600Test" time="0.003"/>
+  <testcase name="missingFileUsesNeutralPrivateDefaultsWithoutCreatingAnything()" classname="org.securemail.client.ecosystemauth.CoreNotificationPreferences600Test" time="0.001"/>
+  <testcase name="linkedSettingsCannotReadOrReplaceAnotherFile()" classname="org.securemail.client.ecosystemauth.CoreNotificationPreferences600Test" time="0.002"/>
+  <testcase name="failedPersistenceCanKeepOnlyMoreRestrictiveInMemoryChoices()" classname="org.securemail.client.ecosystemauth.CoreNotificationPreferences600Test" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

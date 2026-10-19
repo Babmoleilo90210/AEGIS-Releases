@@ -78,7 +78,8 @@ class LifecycleDeliveryTest {
         bl.accept(outer);assertTrue(b.inbox().isEmpty(),"The legacy TTL store must not own the new countdown");assertTrue(bl.expiring(outer.messageId()));assertEquals(Long.MAX_VALUE,bl.remaining(outer.messageId()));
         var found=LocalMailSearch.find(b,bf,bl,new LocalMailSearch.Query("","",0,Long.MAX_VALUE,LocalMailSearch.Scope.ALL),200000);assertEquals(1,found.size());assertEquals("",found.getFirst().snippet());assertFalse(found.getFirst().subject().contains(marker));
         bl.readReceipts(false);var item=bl.loadHistory(outer.messageId(),false);assertThrows(IOException.class,()->bl.open(item,200000,false));try(var opened=bl.open(item,200000,true)){assertEquals(marker,opened.text());bl.displayed(outer.messageId());}
-        clock.now+=61_000;bl.cleanup();assertTrue(bl.expired(outer.messageId()));assertFalse(Files.exists(b.root().resolve("lifecycle/mail-"+outer.messageId()+".enc")));assertEquals("Письмо исчезло",bl.mailboxIndex(false).getFirst().status());assertThrows(IOException.class,()->bl.loadHistory(outer.messageId(),false));
+        // LocalStore.now() includes elapsed setup time; advance from the effective display clock.
+        clock.now=Math.addExact(b.now(),61_000);bl.cleanup();assertTrue(bl.expired(outer.messageId()));assertFalse(Files.exists(b.root().resolve("lifecycle/mail-"+outer.messageId()+".enc")));assertEquals("Письмо исчезло",bl.mailboxIndex(false).getFirst().status());assertThrows(IOException.class,()->bl.loadHistory(outer.messageId(),false));
       }
     }
   }

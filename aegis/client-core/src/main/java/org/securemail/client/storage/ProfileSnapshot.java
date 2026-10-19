@@ -19,8 +19,13 @@ public final class ProfileSnapshot {
     if(Files.isDirectory(profile.getParent()))try(var siblings=Files.list(profile.getParent())){
       for(Path p:siblings.toList())if(p.getFileName().toString().matches(java.util.regex.Pattern.quote(prefix)+"\\.archive-(?:restored|diagnostic)-[a-f0-9-]{36}"))result.put("personal-archives/"+p.getFileName(),p);
     }
-    for(String name:List.of("ui-preferences.json","theme.txt","appearance","updates/events","mail-mode.txt","tor-mode.txt","update-preferences.json","session","tor/state","tor/transport-state"))
+    for(String name:List.of("ui-preferences.json","theme.txt","appearance","updates/events","mail-mode.txt","tor-mode.txt","update-preferences.json","session","glas600","tor/state","tor/transport-state"))
       result.put("app/"+name,AppPaths.root().resolve(name));
+    // Persistent Core credentials/settings only: no live Tor cookie, cache, socket or runtime guard.
+    for(String name:List.of("device.vault","navigation.json","notification-preferences.json","identity.properties","community.properties","library.properties","glas600.properties","relay600.properties","management.properties","attachments600.properties","tor-mode.txt","obsidian-control/linux-distribution.json"))
+      result.put("app/core600/"+name,AppPaths.root().resolve("core600").resolve(name));
+    for(String name:List.of("migration.properties","migration.mac"))
+      result.put("app/mail600/migrated-profile6/"+name,AppPaths.root().resolve("mail600/migrated-profile6").resolve(name));
     Path updates=AppPaths.root().resolve("updates");
     if(Files.isSymbolicLink(updates))throw new IOException("Snapshot symlink rejected");
     if(Files.isDirectory(updates))try(var files=Files.list(updates)){
@@ -28,14 +33,19 @@ public final class ProfileSnapshot {
     }
     return result;
   }
-  public static Path create(ClientConfig config,Path backups)throws IOException{
+  public static Path create(ClientConfig config,Path backups)throws IOException{return create(config,backups,true);}
+  /** Mail migration owns only legacy Mail sources, never Core/Glas device credentials. */
+  public static Path createMailMigration600(ClientConfig config,Path backups)throws IOException{return create(config,backups,false);}
+  private static Path create(ClientConfig config,Path backups,boolean ecosystem)throws IOException{
     ClientUpgrade.recover(config.storagePath());AtomicFiles.directory(backups);
     Path snapshot=backups.resolve("pre-update-"+System.currentTimeMillis()+"-"+UUID.randomUUID());AtomicFiles.directory(snapshot);
     var inventory=new Properties();inventory.setProperty("schema","1");inventory.setProperty("storage",config.storagePath().toAbsolutePath().normalize().toString());
     try{
       for(var entry:sources(config).entrySet()){
+        if(!ecosystem&&newState600(entry.getKey()))continue;
         Path source=entry.getValue().toAbsolutePath().normalize();
         if(snapshot.toAbsolutePath().normalize().startsWith(source))throw new IOException("Backup overlaps source");
+        if(newState600(entry.getKey()))inventory.setProperty("managed/"+entry.getKey(),"true");
         if(!Files.exists(source,LinkOption.NOFOLLOW_LINKS))continue;
         copy(source,snapshot.resolve(entry.getKey()));inventory.setProperty("present/"+entry.getKey(),"true");
       }
@@ -67,9 +77,12 @@ public final class ProfileSnapshot {
     }
     for(var target:targets.values()){Path parent=target.toAbsolutePath().normalize();while(parent!=null){if(Files.isSymbolicLink(parent))throw new IOException("Profile restore symlink rejected");parent=parent.getParent();}}
     for(var entry:targets.entrySet()){
-      Path target=entry.getValue().toAbsolutePath().normalize();AtomicFiles.directory(target.getParent());
-      Path candidate=target.resolveSibling(target.getFileName()+".restore-"+UUID.randomUUID());
-      boolean present="true".equals(p.getProperty("present/"+entry.getKey()));if(present)copy(snapshot.resolve(entry.getKey()),candidate);
+      // A pre-6 snapshot never owned Core/Glas state; restoring it must not remove a newly paired identity.
+      if((newState600(entry.getKey()))&&!p.containsKey("managed/"+entry.getKey())&&!p.containsKey("present/"+entry.getKey()))continue;
+      Path target=entry.getValue().toAbsolutePath().normalize();boolean present="true".equals(p.getProperty("present/"+entry.getKey()));
+      if(!present&&!Files.exists(target,LinkOption.NOFOLLOW_LINKS))continue;
+      AtomicFiles.directory(target.getParent());Path candidate=target.resolveSibling(target.getFileName()+".restore-"+UUID.randomUUID());
+      if(present)copy(snapshot.resolve(entry.getKey()),candidate);
       if(Files.exists(target,LinkOption.NOFOLLOW_LINKS)){
         if(Files.isSymbolicLink(target))throw new IOException("Profile restore symlink rejected");
         Files.move(target,target.resolveSibling(target.getFileName()+".failed-update-"+UUID.randomUUID()),StandardCopyOption.ATOMIC_MOVE);
@@ -77,7 +90,8 @@ public final class ProfileSnapshot {
       if(present)Files.move(candidate,target,StandardCopyOption.ATOMIC_MOVE);AtomicFiles.syncDirectory(target.getParent());
     }
   }
-  private static boolean excluded(Path p){String n=p.getFileName().toString();return n.endsWith(".lock")||n.startsWith(".atomic-")||n.equals("control_auth_cookie")||n.equals("lock");}
+  private static boolean newState600(String key){return key.startsWith("app/core600/")||key.equals("app/glas600")||key.startsWith("app/mail600/migrated-profile6/");}
+  private static boolean excluded(Path p){String n=p.getFileName().toString();return n.endsWith(".lock")||n.startsWith(".atomic-")||n.equals("control_auth_cookie")||n.equals("lock")||n.equals("library-cache")||n.startsWith(".verify-identity-");}
   private static void copy(Path source,Path target)throws IOException{
     if(Files.isSymbolicLink(source))throw new IOException("Snapshot symlink rejected");
     if(Files.isDirectory(source,LinkOption.NOFOLLOW_LINKS)){

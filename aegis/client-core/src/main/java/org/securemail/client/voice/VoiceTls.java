@@ -6,6 +6,7 @@ import org.bouncycastle.asn1.x500.X500Name;
 import org.bouncycastle.asn1.x509.*;
 import org.securemail.client.crypto.Identity;
 import org.securemail.protocol.Binary;
+import org.securemail.glas.protocol600.GlasProtocol600;
 
 import javax.net.ssl.*;
 import java.io.*;
@@ -24,7 +25,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * See GLAS-CRYPTOGRAPHY-2.5.0.md, written before this implementation.
  */
 public final class VoiceTls {
-    public static final String ALPN = "aegis-glas/1";
+    public static final String ALPN = "aegis-glas/1", DELEGATED_ALPN = "aegis-glas/2";
     public static final int MAX_OFFER_BYTES = 8192;
     public static final int HANDSHAKE_TIMEOUT_MILLIS = 15_000;
     public static final long OFFER_LIFETIME_MILLIS = 120_000;
@@ -60,9 +61,33 @@ public final class VoiceTls {
         return new Pending(signed, expectedPeerPublicKey, ephemeral.getPrivate(), clock);
     }
 
+    /** Mail signs only the bounded delegation. This component signs its fresh TLS certificate using its separate app key. */
+    public static Pending createDelegated(GlasProtocol600.Delegation delegation, PrivateKey appPrivate,
+            UUID callId, Role role, byte[] expectedPeerPublicKey, String pinnedIdentityAudience)
+            throws GeneralSecurityException, IOException {
+        return createDelegated(delegation,appPrivate,callId,role,expectedPeerPublicKey,pinnedIdentityAudience,Clock.systemUTC());
+    }
+    static Pending createDelegated(GlasProtocol600.Delegation delegation, PrivateKey appPrivate,
+            UUID callId, Role role, byte[] expectedPeerPublicKey, String pinnedIdentityAudience, Clock clock)
+            throws GeneralSecurityException, IOException {
+        Objects.requireNonNull(delegation);Objects.requireNonNull(appPrivate);Objects.requireNonNull(clock);
+        byte[] localPublic=delegation.accountPublic();publicIdentity(localPublic);publicIdentity(expectedPeerPublicKey);
+        long now=clock.millis();
+        if(MessageDigest.isEqual(localPublic,expectedPeerPublicKey)||!GlasProtocol600.verifyDelegation(delegation,localPublic,pinnedIdentityAudience,now))throw new GeneralSecurityException("Invalid local voice delegation");
+        byte[] probe=new byte[32];new SecureRandom().nextBytes(probe);Signature signer=Signature.getInstance("Ed25519");signer.initSign(appPrivate);signer.update(probe);
+        if(!Identity.verify(delegation.appPublic(),probe,signer.sign()))throw new GeneralSecurityException("Voice app proof key mismatch");
+        KeyPair ephemeral=KeyPairGenerator.getInstance("Ed25519").generateKeyPair();byte[] certificate=certificate(ephemeral,now);
+        String localId=Identity.id(localPublic),remoteId=Identity.id(expectedPeerPublicKey);
+        Offer unsigned=new Offer(callId,role,role==Role.CALLER?localId:remoteId,role==Role.CALLER?remoteId:localId,now,Math.min(Math.addExact(now,OFFER_LIFETIME_MILLIS),delegation.expiresAt),localPublic,certificate,new byte[64],delegation);
+        signer.initSign(appPrivate);signer.update(unsigned.signingBytes());
+        Offer signed=new Offer(callId,role,unsigned.callerId(),unsigned.calleeId(),now,unsigned.expiresAtMillis(),localPublic,certificate,signer.sign(),delegation);
+        return new Pending(signed,expectedPeerPublicKey,ephemeral.getPrivate(),clock,pinnedIdentityAudience);
+    }
+
     /** Bounded, immutable public advertisement. It creates no trust until verify uses contact keys. */
     public record Offer(UUID callId, Role role, String callerId, String calleeId, long issuedAtMillis,
-                        long expiresAtMillis, byte[] identityPublicKey, byte[] certificate, byte[] signature) {
+                        long expiresAtMillis, byte[] identityPublicKey, byte[] certificate, byte[] signature, GlasProtocol600.Delegation delegation) {
+        public Offer(UUID callId,Role role,String callerId,String calleeId,long issuedAtMillis,long expiresAtMillis,byte[] identityPublicKey,byte[] certificate,byte[] signature){this(callId,role,callerId,calleeId,issuedAtMillis,expiresAtMillis,identityPublicKey,certificate,signature,null);}
         public Offer {
             Objects.requireNonNull(callId); Objects.requireNonNull(role);
             if (callerId == null || calleeId == null || !callerId.matches("[a-f0-9]{64}")
@@ -70,6 +95,7 @@ public final class VoiceTls {
             if (identityPublicKey == null || identityPublicKey.length != 44 || certificate == null
                     || certificate.length == 0 || certificate.length > 4096 || signature == null || signature.length != 64)
                 throw new IllegalArgumentException("Invalid voice certificate advertisement");
+            if(delegation!=null&&!MessageDigest.isEqual(delegation.accountPublic(),identityPublicKey))throw new IllegalArgumentException("Voice delegation root mismatch");
             identityPublicKey = identityPublicKey.clone(); certificate = certificate.clone(); signature = signature.clone();
         }
         @Override public byte[] identityPublicKey() { return identityPublicKey.clone(); }
@@ -78,16 +104,20 @@ public final class VoiceTls {
 
         byte[] signingBytes() throws IOException {
             return Binary.encode(out -> {
-                Binary.text(out, DOMAIN); out.writeInt(MAGIC); out.writeInt(VERSION); Binary.text(out, ALPN);
+                Binary.text(out, delegation==null?DOMAIN:"AEGIS/GLAS/CERT-BINDING/v2"); out.writeInt(MAGIC); out.writeInt(delegation==null?VERSION:2); Binary.text(out, delegation==null?ALPN:DELEGATED_ALPN);
                 out.writeLong(callId.getMostSignificantBits()); out.writeLong(callId.getLeastSignificantBits());
                 out.writeByte(role.ordinal()); Binary.text(out, callerId); Binary.text(out, calleeId);
                 out.writeLong(issuedAtMillis); out.writeLong(expiresAtMillis);
                 Binary.bytes(out, identityPublicKey); Binary.bytes(out, certificate); Binary.bytes(out, digest(certificate));
+                if(delegation!=null)Binary.bytes(out,delegation.encode());
             });
         }
 
         public void verify(byte[] expectedRemoteKey, byte[] expectedLocalKey, UUID expectedCallId,
                            Role expectedRemoteRole, long nowMillis) throws GeneralSecurityException, IOException {
+            verify(expectedRemoteKey,expectedLocalKey,expectedCallId,expectedRemoteRole,nowMillis,null);
+        }
+        public void verify(byte[] expectedRemoteKey,byte[] expectedLocalKey,UUID expectedCallId,Role expectedRemoteRole,long nowMillis,String pinnedIdentityAudience)throws GeneralSecurityException,IOException {
             publicIdentity(expectedRemoteKey); publicIdentity(expectedLocalKey); publicIdentity(identityPublicKey);
             if (!MessageDigest.isEqual(expectedRemoteKey, identityPublicKey) || !callId.equals(expectedCallId)
                     || role != expectedRemoteRole) throw new GeneralSecurityException("Voice identity, role or call ID mismatch");
@@ -98,16 +128,19 @@ public final class VoiceTls {
             if (issuedAtMillis < 0 || issuedAtMillis > nowMillis + CLOCK_SKEW_MILLIS || expiresAtMillis <= nowMillis
                     || expiresAtMillis <= issuedAtMillis || expiresAtMillis - issuedAtMillis > OFFER_LIFETIME_MILLIS)
                 throw new GeneralSecurityException("Expired or future voice advertisement");
-            if (!Identity.verify(expectedRemoteKey, signingBytes(), signature)) throw new GeneralSecurityException("Invalid voice identity signature");
+            byte[] signingPublic=expectedRemoteKey;
+            if(delegation!=null){if(pinnedIdentityAudience==null||!GlasProtocol600.verifyDelegation(delegation,expectedRemoteKey,pinnedIdentityAudience,nowMillis)||issuedAtMillis<delegation.issuedAt-30_000||expiresAtMillis>delegation.expiresAt)throw new GeneralSecurityException("Invalid delegated voice identity");signingPublic=delegation.appPublic();}
+            if (!Identity.verify(signingPublic, signingBytes(), signature)) throw new GeneralSecurityException("Invalid voice identity signature");
             validateCertificate(parseCertificate(certificate), nowMillis);
         }
 
         public void write(DataOutput output) throws IOException {
             byte[] bytes = Binary.encode(out -> {
-                out.writeInt(MAGIC); out.writeInt(VERSION);
+                out.writeInt(MAGIC); out.writeInt(delegation==null?VERSION:2);
                 out.writeLong(callId.getMostSignificantBits()); out.writeLong(callId.getLeastSignificantBits()); out.writeByte(role.ordinal());
                 Binary.text(out, callerId); Binary.text(out, calleeId); out.writeLong(issuedAtMillis); out.writeLong(expiresAtMillis);
                 Binary.bytes(out, identityPublicKey); Binary.bytes(out, certificate); Binary.bytes(out, signature);
+                if(delegation!=null)Binary.bytes(out,delegation.encode());
             });
             if (bytes.length > MAX_OFFER_BYTES) throw new IOException("Voice offer is too large");
             Binary.bytes(output, bytes);
@@ -117,12 +150,12 @@ public final class VoiceTls {
     public static Offer read(DataInput input) throws IOException {
         byte[] bytes = Binary.bytes(input, MAX_OFFER_BYTES);
         try (var in = new DataInputStream(new ByteArrayInputStream(bytes))) {
-            if (in.readInt() != MAGIC || in.readInt() != VERSION) throw new IOException("Unsupported voice certificate protocol");
+            if(in.readInt()!=MAGIC)throw new IOException("Unsupported voice certificate protocol");int version=in.readInt();if(version!=1&&version!=2)throw new IOException("Unsupported voice certificate protocol");
             UUID id = new UUID(in.readLong(), in.readLong());
             int role = in.readUnsignedByte();
             if (role >= Role.values().length) throw new IOException("Unsupported voice role");
-            Offer offer = new Offer(id, Role.values()[role], Binary.text(in, 64), Binary.text(in, 64),
-                    in.readLong(), in.readLong(), Binary.bytes(in, 44), Binary.bytes(in, 4096), Binary.bytes(in, 64));
+            String caller=Binary.text(in,64),callee=Binary.text(in,64);long issued=in.readLong(),expires=in.readLong();byte[] root=Binary.bytes(in,44),certificate=Binary.bytes(in,4096),signature=Binary.bytes(in,64);
+            Offer offer = new Offer(id,Role.values()[role],caller,callee,issued,expires,root,certificate,signature,version==2?GlasProtocol600.decodeDelegation(Binary.bytes(in,1024)):null);
             Binary.end(in);
             return offer;
         } catch (IllegalArgumentException invalid) { throw new IOException("Invalid voice certificate offer", invalid); }
@@ -131,12 +164,14 @@ public final class VoiceTls {
     public static final class Pending implements AutoCloseable {
         private final Offer offer;
         private final byte[] expectedPeer;
-        private final Clock clock;
+        private final Clock clock;private final String identityAudience;
         private final AtomicBoolean used = new AtomicBoolean(), closed = new AtomicBoolean();
         private volatile PrivateKey key;
         private volatile SSLSocket negotiating;
         private Pending(Offer offer, byte[] expectedPeer, PrivateKey key, Clock clock) {
-            this.offer = offer; this.expectedPeer = expectedPeer.clone(); this.key = key; this.clock = clock;
+            this(offer,expectedPeer,key,clock,null);
+        }
+        private Pending(Offer offer,byte[] expectedPeer,PrivateKey key,Clock clock,String identityAudience){this.offer=offer;this.expectedPeer=expectedPeer.clone();this.key=key;this.clock=clock;this.identityAudience=identityAudience;
         }
         public Offer offer() { return offer; }
 
@@ -151,8 +186,10 @@ public final class VoiceTls {
                 if (clientMode != (offer.role() == Role.CALLER)) throw new GeneralSecurityException("TLS role does not match the authenticated call role");
                 if (!MessageDigest.isEqual(expectedPeer, expectedRemoteKey)) throw new GeneralSecurityException("Voice contact changed during setup");
                 long now = clock.millis();
-                offer.verify(offer.identityPublicKey(), expectedPeer, offer.callId(), offer.role(), now);
-                remote.verify(expectedPeer, offer.identityPublicKey(), offer.callId(), offer.role().peer(), now);
+                if((offer.delegation()==null)!=(remote.delegation()==null))throw new GeneralSecurityException("Voice protocol downgrade denied");
+                String alpn=offer.delegation()==null?ALPN:DELEGATED_ALPN;
+                offer.verify(offer.identityPublicKey(), expectedPeer, offer.callId(), offer.role(), now,identityAudience);
+                remote.verify(expectedPeer, offer.identityPublicKey(), offer.callId(), offer.role().peer(), now,identityAudience);
                 PrivateKey signingKey = key;
                 if (signingKey == null || closed.get()) throw new GeneralSecurityException("Voice TLS attempt was closed");
                 SSLContext context = SSLContext.getInstance("TLSv1.3", "SunJSSE");
@@ -165,13 +202,13 @@ public final class VoiceTls {
                 SSLParameters parameters = tls.getSSLParameters();
                 parameters.setProtocols(new String[] {"TLSv1.3"});
                 parameters.setCipherSuites(Arrays.stream(context.getSupportedSSLParameters().getCipherSuites()).filter(CIPHERS::contains).toArray(String[]::new));
-                parameters.setApplicationProtocols(new String[] {ALPN});
+                parameters.setApplicationProtocols(new String[] {alpn});
                 parameters.setServerNames(List.of());
                 parameters.setEndpointIdentificationAlgorithm(""); // Exact authenticated certificate pin replaces DNS identity.
                 if (!clientMode) parameters.setNeedClientAuth(true);
                 tls.setSSLParameters(parameters);
                 tls.startHandshake();
-                if (!"TLSv1.3".equals(tls.getSession().getProtocol()) || !ALPN.equals(tls.getApplicationProtocol())
+                if (!"TLSv1.3".equals(tls.getSession().getProtocol()) || !alpn.equals(tls.getApplicationProtocol())
                         || !CIPHERS.contains(tls.getSession().getCipherSuite())) throw new SSLHandshakeException("Voice TLS protocol mismatch");
                 if (!MessageDigest.isEqual(remote.certificate(), tls.getSession().getPeerCertificates()[0].getEncoded()))
                     throw new SSLPeerUnverifiedException("Voice TLS peer certificate mismatch");
@@ -179,7 +216,7 @@ public final class VoiceTls {
                 tls.getOutputStream().write(binding); tls.getOutputStream().flush();
                 byte[] received = tls.getInputStream().readNBytes(binding.length);
                 if (!MessageDigest.isEqual(binding, received)) throw new SSLHandshakeException("Voice call context mismatch");
-                remote.verify(expectedPeer, offer.identityPublicKey(), offer.callId(), offer.role().peer(), clock.millis());
+                remote.verify(expectedPeer, offer.identityPublicKey(), offer.callId(), offer.role().peer(), clock.millis(),identityAudience);
                 if (closed.get()) throw new IOException("Voice call setup was cancelled");
                 tls.getSession().invalidate(); // Current connection continues; this attempt/context is never reused.
                 negotiating = null; key = null; success = true;
@@ -203,7 +240,7 @@ public final class VoiceTls {
 
     /** Standard SunJSSE TLS 1.3 post-handshake KeyUpdate; no custom key schedule. */
     public static void requestKeyUpdate(SSLSocket socket) throws IOException {
-        if (socket.isClosed() || !"TLSv1.3".equals(socket.getSession().getProtocol()) || !ALPN.equals(socket.getApplicationProtocol()))
+        if (socket.isClosed() || !"TLSv1.3".equals(socket.getSession().getProtocol()) || !Set.of(ALPN,DELEGATED_ALPN).contains(socket.getApplicationProtocol()))
             throw new SSLException("KeyUpdate requires an established Glas TLS 1.3 connection");
         if (!socket.getClass().getName().startsWith("sun.security.ssl."))
             throw new SSLException("Explicit Glas KeyUpdate requires the supported SunJSSE provider");
@@ -222,7 +259,8 @@ public final class VoiceTls {
                 || !caller.callerId().equals(callee.callerId()) || !caller.calleeId().equals(callee.calleeId()))
             throw new IOException("Voice offers belong to different call contexts");
         return digest(Binary.encode(out -> {
-            Binary.text(out, "AEGIS/GLAS/TLS-CONTEXT/v1"); caller.write(out); callee.write(out);
+            if((caller.delegation()==null)!=(callee.delegation()==null))throw new IOException("Voice protocol downgrade denied");
+            Binary.text(out,caller.delegation()==null?"AEGIS/GLAS/TLS-CONTEXT/v1":"AEGIS/GLAS/TLS-CONTEXT/v2"); caller.write(out); callee.write(out);
         }));
     }
 

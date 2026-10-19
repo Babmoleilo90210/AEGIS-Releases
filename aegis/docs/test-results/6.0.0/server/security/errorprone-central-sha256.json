@@ -1,0 +1,8 @@
+{
+  "queriedAt": "2026-10-18T13:59:09.082374+00:00",
+  "url": "https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.48.0/error_prone_annotations-2.48.0.jar.sha256",
+  "status": 200,
+  "bytes": 64,
+  "sha256": "1d6f4ffbdba3d6d613a27a836fb8bdb84ebf9a2e108f667f157883027c362697",
+  "response": "b49c5c958316ed67a09c699dda9aa749caf434d51d863dea599ef36a49b9c855"
+}

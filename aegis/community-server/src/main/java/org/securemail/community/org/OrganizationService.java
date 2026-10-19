@@ -35,7 +35,7 @@ public final class OrganizationService {
  private static String org(Map<String,Object>d)throws Exception{return Values.string(d,d.containsKey("org")?"org":"id",36);}
  private static String city(Map<String,Object>d)throws Exception{String s=Values.optional(d,"city",160);if(!s.isEmpty()&&!s.matches("[a-z]{2}/[a-z0-9_-]{1,64}/[a-z0-9_-]{1,80}"))throw CommunityException.invalid();return s;}
  private static String policy(Map<String,Object>d)throws Exception{String s=Values.string(d,"joinPolicy",12);if(!Set.of("OPEN","REQUEST","INVITE").contains(s))throw CommunityException.invalid();return s;}
- private void step(String actor,Map<String,Object>d)throws Exception{access.requireStepUp(actor,Values.string(d,"stepUp",86));}
+ private void step(String actor,Map<String,Object>d)throws Exception{access.requireStepUp(actor,d);}
  private Map<String,Object>apply(Connection c,String actor,Map<String,Object>d)throws Exception{
   String name=Values.string(d,"name",120),description=Values.string(d,"description",8000),purpose=Values.string(d,"purpose",2000),city=city(d),join=policy(d);byte[]emblem=ImageSanitizer.emblem(Values.optional(d,"emblemBase64",700000));
   try(var q=c.prepareStatement("SELECT count(*) FROM org_applications WHERE owner=? AND status='PENDING'")){q.setString(1,actor);try(var r=q.executeQuery()){r.next();if(r.getInt(1)>=5)throw new CommunityException("LIMIT","Дождитесь рассмотрения предыдущих заявок");}}

@@ -1,0 +1,47 @@
+{
+  "result": "PASS_HEADLESS",
+  "realPngs": 111,
+  "sourceUnchanged": true,
+  "cases": [
+    {
+      "geometry": "800x600",
+      "result": "PASS",
+      "realPngs": 37,
+      "checks": [
+        "Actual CoreApp600.start unconfigured configuration/login, without Mail vault",
+        "Actual encrypted device vault unlock, signed Identity HTTP login/profile through bounded local SOCKS fixture",
+        "Actual Community Gateway/Identity authorization/SQLite read responses rendered through local SOCKS fixture",
+        "Real separate-JVM public consent fixture: anonymous pipe + MAC READY/HEARTBEAT/PONG, Core.lock returned in 11 ms, authenticated SHUTDOWN, actual Process.onExit/kernel lock release, cancelled Future and no late UI restoration",
+        "Actual Core authority/bootstrap pages render and clear all public challenge inputs after lock (no Mail signing claimed)",
+        "Actual signed Identity profile response queued before lock cannot restore private page afterward"
+      ]
+    },
+    {
+      "geometry": "1024x768",
+      "result": "PASS",
+      "realPngs": 37,
+      "checks": [
+        "Actual CoreApp600.start unconfigured configuration/login, without Mail vault",
+        "Actual encrypted device vault unlock, signed Identity HTTP login/profile through bounded local SOCKS fixture",
+        "Actual Community Gateway/Identity authorization/SQLite read responses rendered through local SOCKS fixture",
+        "Real separate-JVM public consent fixture: anonymous pipe + MAC READY/HEARTBEAT/PONG, Core.lock returned in 15 ms, authenticated SHUTDOWN, actual Process.onExit/kernel lock release, cancelled Future and no late UI restoration",
+        "Actual Core authority/bootstrap pages render and clear all public challenge inputs after lock (no Mail signing claimed)",
+        "Actual signed Identity profile response queued before lock cannot restore private page afterward"
+      ]
+    },
+    {
+      "geometry": "1920x1080",
+      "result": "PASS",
+      "realPngs": 37,
+      "checks": [
+        "Actual CoreApp600.start unconfigured configuration/login, without Mail vault",
+        "Actual encrypted device vault unlock, signed Identity HTTP login/profile through bounded local SOCKS fixture",
+        "Actual Community Gateway/Identity authorization/SQLite read responses rendered through local SOCKS fixture",
+        "Real separate-JVM public consent fixture: anonymous pipe + MAC READY/HEARTBEAT/PONG, Core.lock returned in 14 ms, authenticated SHUTDOWN, actual Process.onExit/kernel lock release, cancelled Future and no late UI restoration",
+        "Actual Core authority/bootstrap pages render and clear all public challenge inputs after lock (no Mail signing claimed)",
+        "Actual signed Identity profile response queued before lock cannot restore private page afterward"
+      ]
+    }
+  ],
+  "scope": "Actual Core Monocle/signed HTTP/SQL and real separate JVM public-consent fixture; native desktop/public Tor/private Mail GUI/audio NOT_RUN."
+}

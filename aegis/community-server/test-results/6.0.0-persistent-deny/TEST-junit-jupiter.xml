@@ -1,0 +1,691 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="JUnit Jupiter" tests="114" skipped="0" failures="0" errors="0" time="20.038" hostname="2ac91939697e" timestamp="2026-10-18T14:40:17">
+<testcase name="rotatingApplicationProofKeyRevokesPriorTokensOfThatApplication()" classname="org.securemail.identity.IdentityStoreTest" time="0.048">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:rotatingApplicationProofKeyRevokesPriorTokensOfThatApplication()]
+display-name: rotatingApplicationProofKeyRevokesPriorTokensOfThatApplication()
+</system-out>
+</testcase>
+<testcase name="inheritedRoleManagerCannotAuthorizeNewAncestorRightsThroughOwnAssignedDescendant()" classname="org.securemail.community.access.AccessControlTest" time="0.212">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:inheritedRoleManagerCannotAuthorizeNewAncestorRightsThroughOwnAssignedDescendant()]
+display-name: inheritedRoleManagerCannotAuthorizeNewAncestorRightsThroughOwnAssignedDescendant()
+</system-out>
+</testcase>
+<testcase name="recoveredAccountCanRegainLibraryOnlyAfterTwoAdministratorReview()" classname="org.securemail.identity.FirstDelegationTest" time="0.102">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.FirstDelegationTest]/[method:recoveredAccountCanRegainLibraryOnlyAfterTwoAdministratorReview()]
+display-name: recoveredAccountCanRegainLibraryOnlyAfterTwoAdministratorReview()
+</system-out>
+</testcase>
+<testcase name="capabilityCodecCanonicalAndExpiryAndTamperSafe()" classname="org.securemail.identity.IdentityStoreTest" time="0.032">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:capabilityCodecCanonicalAndExpiryAndTamperSafe()]
+display-name: capabilityCodecCanonicalAndExpiryAndTamperSafe()
+</system-out>
+</testcase>
+<testcase name="generationRevokesAllOldTokensAndOldTrustedDeviceCannotUseNewGeneration()" classname="org.securemail.identity.IdentityStoreTest" time="0.05">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:generationRevokesAllOldTokensAndOldTrustedDeviceCannotUseNewGeneration()]
+display-name: generationRevokesAllOldTokensAndOldTrustedDeviceCannotUseNewGeneration()
+</system-out>
+</testcase>
+<testcase name="normalSubsequentAssignmentRequiresTwoCurrentAdministrators()" classname="org.securemail.identity.FirstDelegationTest" time="0.107">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.FirstDelegationTest]/[method:normalSubsequentAssignmentRequiresTwoCurrentAdministrators()]
+display-name: normalSubsequentAssignmentRequiresTwoCurrentAdministrators()
+</system-out>
+</testcase>
+<testcase name="officialRfc6238Sha256Vectors()" classname="org.securemail.community.access.TotpTest" time="0.001">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.TotpTest]/[method:officialRfc6238Sha256Vectors()]
+display-name: officialRfc6238Sha256Vectors()
+</system-out>
+</testcase>
+<testcase name="ordinaryMembershipChangeCannotInvalidateAdministratorSecondFactor()" classname="org.securemail.community.access.AccessControlTest" time="0.106">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:ordinaryMembershipChangeCannotInvalidateAdministratorSecondFactor()]
+display-name: ordinaryMembershipChangeCannotInvalidateAdministratorSecondFactor()
+</system-out>
+</testcase>
+<testcase name="selfEnrollmentCannotReplaceExistingFactorOrEnrollAdministratorOrDifferentAccount()" classname="org.securemail.community.access.AccessControlTest" time="0.108">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:selfEnrollmentCannotReplaceExistingFactorOrEnrollAdministratorOrDifferentAccount()]
+display-name: selfEnrollmentCannotReplaceExistingFactorOrEnrollAdministratorOrDifferentAccount()
+</system-out>
+</testcase>
+<testcase name="realOwnerCanApproveOrganizationWithoutLegacyRolesTOTPOrRootInCore()" classname="org.securemail.client.community600.GatewayIntegration600Test" time="1.105">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.community600.GatewayIntegration600Test]/[method:realOwnerCanApproveOrganizationWithoutLegacyRolesTOTPOrRootInCore()]
+display-name: realOwnerCanApproveOrganizationWithoutLegacyRolesTOTPOrRootInCore()
+</system-out>
+</testcase>
+<testcase name="encryptedTotpAndServerCounterRejectWrongOrReusedCode()" classname="org.securemail.community.access.AccessControlTest" time="0.115">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:encryptedTotpAndServerCounterRejectWrongOrReusedCode()]
+display-name: encryptedTotpAndServerCounterRejectWrongOrReusedCode()
+</system-out>
+</testcase>
+<testcase name="auditHashChainDetectsTampering()" classname="org.securemail.community.access.AccessControlTest" time="0.101">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:auditHashChainDetectsTampering()]
+display-name: auditHashChainDetectsTampering()
+</system-out>
+</testcase>
+<testcase name="twoIndependentCurrentAdministratorsExactPayloadOneUse()" classname="org.securemail.identity.CriticalApprovalTest" time="0.088">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.CriticalApprovalTest]/[method:twoIndependentCurrentAdministratorsExactPayloadOneUse()]
+display-name: twoIndependentCurrentAdministratorsExactPayloadOneUse()
+</system-out>
+</testcase>
+<testcase name="failedCriticalCallbackRollsBackConsumptionAndMutation()" classname="org.securemail.community.access.AccessControlTest" time="0.13">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:failedCriticalCallbackRollsBackConsumptionAndMutation()]
+display-name: failedCriticalCallbackRollsBackConsumptionAndMutation()
+</system-out>
+</testcase>
+<testcase name="memberRemovalRevokesRolePermissionAndAdvancesEpoch()" classname="org.securemail.community.access.AccessControlTest" time="0.206">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:memberRemovalRevokesRolePermissionAndAdvancesEpoch()]
+display-name: memberRemovalRevokesRolePermissionAndAdvancesEpoch()
+</system-out>
+</testcase>
+<testcase name="dedicatedWorkerIdentityCannotBePromotedToAdministrator()" classname="org.securemail.community.access.AccessControlTest" time="0.205">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:dedicatedWorkerIdentityCannotBePromotedToAdministrator()]
+display-name: dedicatedWorkerIdentityCannotBePromotedToAdministrator()
+</system-out>
+</testcase>
+<testcase name="authorizedDeletionClearsPersistentRestrictionAndAdvancesEpoch()" classname="org.securemail.community.access.RoleDeny600Test" time="0.211">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.RoleDeny600Test]/[method:authorizedDeletionClearsPersistentRestrictionAndAdvancesEpoch()]
+display-name: authorizedDeletionClearsPersistentRestrictionAndAdvancesEpoch()
+</system-out>
+</testcase>
+<testcase name="ownerAdminRequiresStepUpWhileOrdinaryBadgeDoesNotImplyAdmin()" classname="org.securemail.identity.IdentityStoreTest" time="0.053">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:ownerAdminRequiresStepUpWhileOrdinaryBadgeDoesNotImplyAdmin()]
+display-name: ownerAdminRequiresStepUpWhileOrdinaryBadgeDoesNotImplyAdmin()
+</system-out>
+</testcase>
+<testcase name="stepUpProofBindsConfiguredServiceIdentityAndBindingCannotChange()" classname="org.securemail.community.access.AccessControlTest" time="0.122">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:stepUpProofBindsConfiguredServiceIdentityAndBindingCannotChange()]
+display-name: stepUpProofBindsConfiguredServiceIdentityAndBindingCannotChange()
+</system-out>
+</testcase>
+<testcase name="actualHttpFirstDelegationAndReauthenticationUseOnlyTypedProofs()" classname="org.securemail.identity.IdentityHttpServerTest" time="0.203">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityHttpServerTest]/[method:actualHttpFirstDelegationAndReauthenticationUseOnlyTypedProofs()]
+display-name: actualHttpFirstDelegationAndReauthenticationUseOnlyTypedProofs()
+</system-out>
+</testcase>
+<testcase name="clockRollbackFailsClosedAndCannotExtendSignedLease()" classname="org.securemail.identity.IdentityStoreTest" time="0.033">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:clockRollbackFailsClosedAndCannotExtendSignedLease()]
+display-name: clockRollbackFailsClosedAndCannotExtendSignedLease()
+</system-out>
+</testcase>
+<testcase name="duplicateRegistrationCannotResetRecoveryOrTrust()" classname="org.securemail.identity.IdentityStoreTest" time="0.032">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:duplicateRegistrationCannotResetRecoveryOrTrust()]
+display-name: duplicateRegistrationCannotResetRecoveryOrTrust()
+</system-out>
+</testcase>
+<testcase name="loginRaceOnlyOneGenerationActiveAcrossIndependentConnections()" classname="org.securemail.identity.IdentityStoreTest" time="0.06">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:loginRaceOnlyOneGenerationActiveAcrossIndependentConnections()]
+display-name: loginRaceOnlyOneGenerationActiveAcrossIndependentConnections()
+</system-out>
+</testcase>
+<testcase name="isActiveRecheckGivesNoIdentityMetadataAndTurnsFalseAfterLogin()" classname="org.securemail.identity.IdentityHttpServerTest" time="0.083">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityHttpServerTest]/[method:isActiveRecheckGivesNoIdentityMetadataAndTurnsFalseAfterLogin()]
+display-name: isActiveRecheckGivesNoIdentityMetadataAndTurnsFalseAfterLogin()
+</system-out>
+</testcase>
+<testcase name="tamperedAuditBlocksReopen()" classname="org.securemail.identity.IdentityStoreTest" time="0.05">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:tamperedAuditBlocksReopen()]
+display-name: tamperedAuditBlocksReopen()
+</system-out>
+</testcase>
+<testcase name="roleManagerCannotRemoveOwnDenyThroughUpdateDeleteRevokeOrInheritanceUnlink()" classname="org.securemail.community.access.RoleDeny600Test" time="0.25">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.RoleDeny600Test]/[method:roleManagerCannotRemoveOwnDenyThroughUpdateDeleteRevokeOrInheritanceUnlink()]
+display-name: roleManagerCannotRemoveOwnDenyThroughUpdateDeleteRevokeOrInheritanceUnlink()
+</system-out>
+</testcase>
+<testcase name="replayRejectedAndDigestDomainCannotBeReusedAsBodyProof()" classname="org.securemail.identity.IdentityStoreTest" time="0.053">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:replayRejectedAndDigestDomainCannotBeReusedAsBodyProof()]
+display-name: replayRejectedAndDigestDomainCannotBeReusedAsBodyProof()
+</system-out>
+</testcase>
+<testcase name="missingSecondFactorFailsClosedForCorrectIdentitySignature()" classname="org.securemail.community.access.AccessControlTest" time="0.108">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:missingSecondFactorFailsClosedForCorrectIdentitySignature()]
+display-name: missingSecondFactorFailsClosedForCorrectIdentitySignature()
+</system-out>
+</testcase>
+<testcase name="ownDisplayNameUpdateUsesExistingIdentityAndNeverAssignsAuthority()" classname="org.securemail.community.access.AccessControlTest" time="0.181">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:ownDisplayNameUpdateUsesExistingIdentityAndNeverAssignsAuthority()]
+display-name: ownDisplayNameUpdateUsesExistingIdentityAndNeverAssignsAuthority()
+</system-out>
+</testcase>
+<testcase name="signedLoopbackRegisterIssueAndDigestAuthorizationActuallyWork()" classname="org.securemail.identity.IdentityHttpServerTest" time="0.113">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityHttpServerTest]/[method:signedLoopbackRegisterIssueAndDigestAuthorizationActuallyWork()]
+display-name: signedLoopbackRegisterIssueAndDigestAuthorizationActuallyWork()
+</system-out>
+</testcase>
+<testcase name="windowReplayAndMalformedRejection()" classname="org.securemail.community.access.TotpTest" time="0.001">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.TotpTest]/[method:windowReplayAndMalformedRejection()]
+display-name: windowReplayAndMalformedRejection()
+</system-out>
+</testcase>
+<testcase name="releasesRemainOwnerOnlyWithoutSecondApproval()" classname="org.securemail.identity.CriticalApprovalTest" time="0.064">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.CriticalApprovalTest]/[method:releasesRemainOwnerOnlyWithoutSecondApproval()]
+display-name: releasesRemainOwnerOnlyWithoutSecondApproval()
+</system-out>
+</testcase>
+<testcase name="managedAccountQueryRequiresSeparateOperatorPinnedRelayProofAndOneUseNonce()" classname="org.securemail.identity.IdentityStoreTest" time="0.042">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:managedAccountQueryRequiresSeparateOperatorPinnedRelayProofAndOneUseNonce()]
+display-name: managedAccountQueryRequiresSeparateOperatorPinnedRelayProofAndOneUseNonce()
+</system-out>
+</testcase>
+<testcase name="organizationCallAuthorizationRequiresBothIndependentPermissions()" classname="org.securemail.community.access.AccessControlTest" time="0.339">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:organizationCallAuthorizationRequiresBothIndependentPermissions()]
+display-name: organizationCallAuthorizationRequiresBothIndependentPermissions()
+</system-out>
+</testcase>
+<testcase name="concurrentCompletionCannotCreateTwoFirstDelegates()" classname="org.securemail.identity.FirstDelegationTest" time="0.109">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.FirstDelegationTest]/[method:concurrentCompletionCannotCreateTwoFirstDelegates()]
+display-name: concurrentCompletionCannotCreateTwoFirstDelegates()
+</system-out>
+</testcase>
+<testcase name="capabilityIsNarrowAppAndProofBound()" classname="org.securemail.identity.IdentityStoreTest" time="0.041">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:capabilityIsNarrowAppAndProofBound()]
+display-name: capabilityIsNarrowAppAndProofBound()
+</system-out>
+</testcase>
+<testcase name="unrecognizedOptionsAndSymlinkHomesRefused()" classname="org.securemail.identity.IdentityMainTest" time="0.001">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityMainTest]/[method:unrecognizedOptionsAndSymlinkHomesRefused()]
+display-name: unrecognizedOptionsAndSymlinkHomesRefused()
+</system-out>
+</testcase>
+<testcase name="operatorMainCreatesEmptyRolesAndRunsAgainstPinnedIdentity()" classname="org.securemail.client.community600.GatewayIntegration600Test" time="0.317">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.community600.GatewayIntegration600Test]/[method:operatorMainCreatesEmptyRolesAndRunsAgainstPinnedIdentity()]
+display-name: operatorMainCreatesEmptyRolesAndRunsAgainstPinnedIdentity()
+</system-out>
+</testcase>
+<testcase name="officialIdentityAndPositionAreIndependentFromClearanceAndRevokeHasHistory()" classname="org.securemail.community.access.AccessControlTest" time="0.678">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:officialIdentityAndPositionAreIndependentFromClearanceAndRevokeHasHistory()]
+display-name: officialIdentityAndPositionAreIndependentFromClearanceAndRevokeHasHistory()
+</system-out>
+</testcase>
+<testcase name="roleListingUsesBoundedStablePagination()" classname="org.securemail.community.access.AccessControlTest" time="0.086">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:roleListingUsesBoundedStablePagination()]
+display-name: roleListingUsesBoundedStablePagination()
+</system-out>
+</testcase>
+<testcase name="rejectedOptimisticChangePreservesRoleNameAndCounters()" classname="org.securemail.community.access.AccessControlTest" time="0.138">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:rejectedOptimisticChangePreservesRoleNameAndCounters()]
+display-name: rejectedOptimisticChangePreservesRoleNameAndCounters()
+</system-out>
+</testcase>
+<testcase name="malformedUnicodeCannotAliasAnotherCriticalOperation()" classname="org.securemail.community.access.CoreInputTest" time="0">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.CoreInputTest]/[method:malformedUnicodeCannotAliasAnotherCriticalOperation()]
+display-name: malformedUnicodeCannotAliasAnotherCriticalOperation()
+</system-out>
+</testcase>
+<testcase name="unknownDeviceCannotLoginAndEnrollmentNeedsFreshStepUp()" classname="org.securemail.identity.IdentityStoreTest" time="0.032">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:unknownDeviceCannotLoginAndEnrollmentNeedsFreshStepUp()]
+display-name: unknownDeviceCannotLoginAndEnrollmentNeedsFreshStepUp()
+</system-out>
+</testcase>
+<testcase name="managedAccountUsesSignedHttpAndExposesOnlyBooleanToPinnedRelay()" classname="org.securemail.identity.IdentityHttpServerTest" time="0.076">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityHttpServerTest]/[method:managedAccountUsesSignedHttpAndExposesOnlyBooleanToPinnedRelay()]
+display-name: managedAccountUsesSignedHttpAndExposesOnlyBooleanToPinnedRelay()
+</system-out>
+</testcase>
+<testcase name="revokingAllDelegatesDoesNotResetOneTimeFirstBootstrap()" classname="org.securemail.identity.FirstDelegationTest" time="0.128">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.FirstDelegationTest]/[method:revokingAllDelegatesDoesNotResetOneTimeFirstBootstrap()]
+display-name: revokingAllDelegatesDoesNotResetOneTimeFirstBootstrap()
+</system-out>
+</testcase>
+<testcase name="changedRoleNameOrWrongDeviceProofInvalidatesAllConsent()" classname="org.securemail.identity.FirstDelegationTest" time="0.083">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.FirstDelegationTest]/[method:changedRoleNameOrWrongDeviceProofInvalidatesAllConsent()]
+display-name: changedRoleNameOrWrongDeviceProofInvalidatesAllConsent()
+</system-out>
+</testcase>
+<testcase name="notificationFailureRollsBackApplicationAndAuditAtomically()" classname="org.securemail.community.access.AccessControlTest" time="0.143">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:notificationFailureRollsBackApplicationAndAuditAtomically()]
+display-name: notificationFailureRollsBackApplicationAndAuditAtomically()
+</system-out>
+</testcase>
+<testcase name="remoteListeningAddressAndWrongServiceKeyForbidden()" classname="org.securemail.identity.IdentityHttpServerTest" time="0.032">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityHttpServerTest]/[method:remoteListeningAddressAndWrongServiceKeyForbidden()]
+display-name: remoteListeningAddressAndWrongServiceKeyForbidden()
+</system-out>
+</testcase>
+<testcase name="ownerPublishesRealNewsAndOrdinaryUserCannotClaimAdminByNicknameOrData()" classname="org.securemail.client.community600.GatewayIntegration600Test" time="0.363">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.community600.GatewayIntegration600Test]/[method:ownerPublishesRealNewsAndOrdinaryUserCannotClaimAdminByNicknameOrData()]
+display-name: ownerPublishesRealNewsAndOrdinaryUserCannotClaimAdminByNicknameOrData()
+</system-out>
+</testcase>
+<testcase name="requestAndInvitationJoiningAreNotClientFlags()" classname="org.securemail.community.access.AccessControlTest" time="0.321">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:requestAndInvitationJoiningAreNotClientFlags()]
+display-name: requestAndInvitationJoiningAreNotClientFlags()
+</system-out>
+</testcase>
+<testcase name="ownerBootstrapRaceAtomicAcrossConnections()" classname="org.securemail.identity.IdentityStoreTest" time="0.039">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:ownerBootstrapRaceAtomicAcrossConnections()]
+display-name: ownerBootstrapRaceAtomicAcrossConnections()
+</system-out>
+</testcase>
+<testcase name="criticalRequestPagesBoundMaximumUnicodePayloadAndExposeEveryRowThroughProductionParser()" classname="org.securemail.community.access.AccessControlTest" time="1.161">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:criticalRequestPagesBoundMaximumUnicodePayloadAndExposeEveryRowThroughProductionParser()]
+display-name: criticalRequestPagesBoundMaximumUnicodePayloadAndExposeEveryRowThroughProductionParser()
+</system-out>
+</testcase>
+<testcase name="expiredStepUpAndNewSessionOfApproverInvalidatePermit()" classname="org.securemail.identity.CriticalApprovalTest" time="0.08">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.CriticalApprovalTest]/[method:expiredStepUpAndNewSessionOfApproverInvalidatePermit()]
+display-name: expiredStepUpAndNewSessionOfApproverInvalidatePermit()
+</system-out>
+</testcase>
+<testcase name="optimisticRoleUpdateAllowsOnlyOneConcurrentRevision()" classname="org.securemail.community.access.AccessControlTest" time="0.175">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:optimisticRoleUpdateAllowsOnlyOneConcurrentRevision()]
+display-name: optimisticRoleUpdateAllowsOnlyOneConcurrentRevision()
+</system-out>
+</testcase>
+<testcase name="failedStepUpAttemptsPersistDespiteRequestRollbackAndLockoutExpires()" classname="org.securemail.community.access.AccessControlTest" time="0.103">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:failedStepUpAttemptsPersistDespiteRequestRollbackAndLockoutExpires()]
+display-name: failedStepUpAttemptsPersistDespiteRequestRollbackAndLockoutExpires()
+</system-out>
+</testcase>
+<testcase name="auditTailTruncationWithoutChangingAnchorIsDetected()" classname="org.securemail.identity.IdentityStoreTest" time="0.056">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:auditTailTruncationWithoutChangingAnchorIsDetected()]
+display-name: auditTailTruncationWithoutChangingAnchorIsDetected()
+</system-out>
+</testcase>
+<testcase name="configuredServiceIdentityCannotBeSilentlyReplaced()" classname="org.securemail.identity.IdentityStoreTest" time="0.034">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:configuredServiceIdentityCannotBeSilentlyReplaced()]
+display-name: configuredServiceIdentityCannotBeSilentlyReplaced()
+</system-out>
+</testcase>
+<testcase name="bootstrapIsTwoVerifiedKeysAndCannotRepeat()" classname="org.securemail.community.access.AccessControlTest" time="0.162">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:bootstrapIsTwoVerifiedKeysAndCannotRepeat()]
+display-name: bootstrapIsTwoVerifiedKeysAndCannotRepeat()
+</system-out>
+</testcase>
+<testcase name="rootDeviceRecoveryAndApplicationKeysCannotBeReusedAcrossDomains()" classname="org.securemail.identity.IdentityStoreTest" time="0.037">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:rootDeviceRecoveryAndApplicationKeysCannotBeReusedAcrossDomains()]
+display-name: rootDeviceRecoveryAndApplicationKeysCannotBeReusedAcrossDomains()
+</system-out>
+</testcase>
+<testcase name="recoveryNeedsSeparateRootAndRecoveryProofAndInvalidatesPriorDevices()" classname="org.securemail.identity.IdentityStoreTest" time="0.05">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:recoveryNeedsSeparateRootAndRecoveryProofAndInvalidatesPriorDevices()]
+display-name: recoveryNeedsSeparateRootAndRecoveryProofAndInvalidatesPriorDevices()
+</system-out>
+</testcase>
+<testcase name="firstDelegationRequiresFourProofsAndGrantsNamedCustomAdministratorOnlyOnce()" classname="org.securemail.identity.FirstDelegationTest" time="0.118">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.FirstDelegationTest]/[method:firstDelegationRequiresFourProofsAndGrantsNamedCustomAdministratorOnlyOnce()]
+display-name: firstDelegationRequiresFourProofsAndGrantsNamedCustomAdministratorOnlyOnce()
+</system-out>
+</testcase>
+<testcase name="inheritedPermissionsAndCycleAndCrossScopeAreEnforcedInDatabaseTransaction()" classname="org.securemail.community.access.AccessControlTest" time="0.211">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:inheritedPermissionsAndCycleAndCrossScopeAreEnforcedInDatabaseTransaction()]
+display-name: inheritedPermissionsAndCycleAndCrossScopeAreEnforcedInDatabaseTransaction()
+</system-out>
+</testcase>
+<testcase name="assignedRoleManagerCannotAuthorizeOwnNewPermissionsOrClearanceAfterWriting()" classname="org.securemail.community.access.AccessControlTest" time="0.368">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:assignedRoleManagerCannotAuthorizeOwnNewPermissionsOrClearanceAfterWriting()]
+display-name: assignedRoleManagerCannotAuthorizeOwnNewPermissionsOrClearanceAfterWriting()
+</system-out>
+</testcase>
+<testcase name="expiredOwnerChallengeAndStepUpCannotBeReplayed()" classname="org.securemail.identity.IdentityStoreTest" time="0.037">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:expiredOwnerChallengeAndStepUpCannotBeReplayed()]
+display-name: expiredOwnerChallengeAndStepUpCannotBeReplayed()
+</system-out>
+</testcase>
+<testcase name="globalDenyOverridesInheritedAndIndependentAssignedAllows()" classname="org.securemail.community.access.RoleDeny600Test" time="0.196">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.RoleDeny600Test]/[method:globalDenyOverridesInheritedAndIndependentAssignedAllows()]
+display-name: globalDenyOverridesInheritedAndIndependentAssignedAllows()
+</system-out>
+</testcase>
+<testcase name="administrativeOverrideDoesNotGrantRequiredClosedResourceReadPermission()" classname="org.securemail.community.access.RoleDeny600Test" time="0.248">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.RoleDeny600Test]/[method:administrativeOverrideDoesNotGrantRequiredClosedResourceReadPermission()]
+display-name: administrativeOverrideDoesNotGrantRequiredClosedResourceReadPermission()
+</system-out>
+</testcase>
+<testcase name="clientCanonicalCommitmentMatchesServerUnicodeAndLargeIntegers()" classname="org.securemail.client.community600.GatewayIntegration600Test" time="0.145">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.community600.GatewayIntegration600Test]/[method:clientCanonicalCommitmentMatchesServerUnicodeAndLargeIntegers()]
+display-name: clientCanonicalCommitmentMatchesServerUnicodeAndLargeIntegers()
+</system-out>
+</testcase>
+<testcase name="independentLevelAssignmentDoesNotIssueVerificationOrAdministrativeRights()" classname="org.securemail.community.access.AccessControlTest" time="0.152">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:independentLevelAssignmentDoesNotIssueVerificationOrAdministrativeRights()]
+display-name: independentLevelAssignmentDoesNotIssueVerificationOrAdministrativeRights()
+</system-out>
+</testcase>
+<testcase name="nonceReplayIsAtomicAcrossConcurrentRequests()" classname="org.securemail.community.access.AccessControlTest" time="0.084">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:nonceReplayIsAtomicAcrossConcurrentRequests()]
+display-name: nonceReplayIsAtomicAcrossConcurrentRequests()
+</system-out>
+</testcase>
+<testcase name="persistentDenyChangesAdvanceAffectedEpochAfterMemberHasLeft()" classname="org.securemail.community.access.RoleDeny600Test" time="0.14">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.RoleDeny600Test]/[method:persistentDenyChangesAdvanceAffectedEpochAfterMemberHasLeft()]
+display-name: persistentDenyChangesAdvanceAffectedEpochAfterMemberHasLeft()
+</system-out>
+</testcase>
+<testcase name="workerRoleCannotLockOutAdministratorThroughAssignmentOrInheritanceChange()" classname="org.securemail.community.access.AccessControlTest" time="0.272">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:workerRoleCannotLockOutAdministratorThroughAssignmentOrInheritanceChange()]
+display-name: workerRoleCannotLockOutAdministratorThroughAssignmentOrInheritanceChange()
+</system-out>
+</testcase>
+<testcase name="displayNameApiRejectsMassAssignmentOtherIdentityAndInvalidNickname()" classname="org.securemail.community.access.AccessControlTest" time="0.107">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:displayNameApiRejectsMassAssignmentOtherIdentityAndInvalidNickname()]
+display-name: displayNameApiRejectsMassAssignmentOtherIdentityAndInvalidNickname()
+</system-out>
+</testcase>
+<testcase name="operatorRelayAllowAndRevokeUseOnlyPinnedPublicFile()" classname="org.securemail.identity.IdentityMainTest" time="0.032">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityMainTest]/[method:operatorRelayAllowAndRevokeUseOnlyPinnedPublicFile()]
+display-name: operatorRelayAllowAndRevokeUseOnlyPinnedPublicFile()
+</system-out>
+</testcase>
+<testcase name="scopedDelegationRejectsGlobalPowerAndUnheldPermissions()" classname="org.securemail.community.access.AccessControlTest" time="0.224">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:scopedDelegationRejectsGlobalPowerAndUnheldPermissions()]
+display-name: scopedDelegationRejectsGlobalPowerAndUnheldPermissions()
+</system-out>
+</testcase>
+<testcase name="ownerCannotBeOwnIndependentSecondConfirmation()" classname="org.securemail.identity.FirstDelegationTest" time="0.054">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.FirstDelegationTest]/[method:ownerCannotBeOwnIndependentSecondConfirmation()]
+display-name: ownerCannotBeOwnIndependentSecondConfirmation()
+</system-out>
+</testcase>
+<testcase name="consentExpiresAfter120Seconds()" classname="org.securemail.identity.FirstDelegationTest" time="0.059">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.FirstDelegationTest]/[method:consentExpiresAfter120Seconds()]
+display-name: consentExpiresAfter120Seconds()
+</system-out>
+</testcase>
+<testcase name="scopedOrganizationOwnerUsesRealRoleConstructorAndDenyWithoutIdentityAdmin()" classname="org.securemail.client.community600.GatewayIntegration600Test" time="0.652">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.community600.GatewayIntegration600Test]/[method:scopedOrganizationOwnerUsesRealRoleConstructorAndDenyWithoutIdentityAdmin()]
+display-name: scopedOrganizationOwnerUsesRealRoleConstructorAndDenyWithoutIdentityAdmin()
+</system-out>
+</testcase>
+<testcase name="explicitLogoutAtomicallyRevokesAllApplications()" classname="org.securemail.identity.IdentityStoreTest" time="0.048">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:explicitLogoutAtomicallyRevokesAllApplications()]
+display-name: explicitLogoutAtomicallyRevokesAllApplications()
+</system-out>
+</testcase>
+<testcase name="libraryAndLegacyFactorRoutesCannotBypassStandaloneApplicationAuthority()" classname="org.securemail.client.community600.GatewayIntegration600Test" time="1.06">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.community600.GatewayIntegration600Test]/[method:libraryAndLegacyFactorRoutesCannotBypassStandaloneApplicationAuthority()]
+display-name: libraryAndLegacyFactorRoutesCannotBypassStandaloneApplicationAuthority()
+</system-out>
+</testcase>
+<testcase name="actualOperatorCliBootstrapUsesOnlyPublicChallengeAndProof()" classname="org.securemail.identity.IdentityMainTest" time="0.065">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityMainTest]/[method:actualOperatorCliBootstrapUsesOnlyPublicChallengeAndProof()]
+display-name: actualOperatorCliBootstrapUsesOnlyPublicChallengeAndProof()
+</system-out>
+</testcase>
+<testcase name="gatewayServiceBindingAndDifferentAppCapabilityAreRejected()" classname="org.securemail.client.community600.GatewayIntegration600Test" time="0.171">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.community600.GatewayIntegration600Test]/[method:gatewayServiceBindingAndDifferentAppCapabilityAreRejected()]
+display-name: gatewayServiceBindingAndDifferentAppCapabilityAreRejected()
+</system-out>
+</testcase>
+<testcase name="leavingAndRejoiningCannotClearScopedDenyOrRestorePreviousGrants()" classname="org.securemail.community.access.RoleDeny600Test" time="0.261">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.RoleDeny600Test]/[method:leavingAndRejoiningCannotClearScopedDenyOrRestorePreviousGrants()]
+display-name: leavingAndRejoiningCannotClearScopedDenyOrRestorePreviousGrants()
+</system-out>
+</testcase>
+<testcase name="criticalOperationCannotBeSelfApprovedAlteredReplayedOrExpired()" classname="org.securemail.community.access.AccessControlTest" time="0.168">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:criticalOperationCannotBeSelfApprovedAlteredReplayedOrExpired()]
+display-name: criticalOperationCannotBeSelfApprovedAlteredReplayedOrExpired()
+</system-out>
+</testcase>
+<testcase name="wrongMethodDuplicateKeysMassAssignmentAndMalformedUtf8Refused()" classname="org.securemail.identity.IdentityHttpServerTest" time="0.335">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityHttpServerTest]/[method:wrongMethodDuplicateKeysMassAssignmentAndMalformedUtf8Refused()]
+display-name: wrongMethodDuplicateKeysMassAssignmentAndMalformedUtf8Refused()
+</system-out>
+</testcase>
+<testcase name="wholeAuditRewriteWithoutMacAndWrongServerKekAreRejected()" classname="org.securemail.community.access.AccessControlTest" time="0.173">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:wholeAuditRewriteWithoutMacAndWrongServerKekAreRejected()]
+display-name: wholeAuditRewriteWithoutMacAndWrongServerKekAreRejected()
+</system-out>
+</testcase>
+<testcase name="pendingEnrollmentExpiresAndUsedEnrollmentCodeCannotStepUpAgain()" classname="org.securemail.community.access.AccessControlTest" time="0.096">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:pendingEnrollmentExpiresAndUsedEnrollmentCodeCannotStepUpAgain()]
+display-name: pendingEnrollmentExpiresAndUsedEnrollmentCodeCannotStepUpAgain()
+</system-out>
+</testcase>
+<testcase name="strictJsonRejectsHugeNumbersFractionsDeepTreesAndLoneSurrogate()" classname="org.securemail.identity.IdentityHttpServerTest" time="0.021">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityHttpServerTest]/[method:strictJsonRejectsHugeNumbersFractionsDeepTreesAndLoneSurrogate()]
+display-name: strictJsonRejectsHugeNumbersFractionsDeepTreesAndLoneSurrogate()
+</system-out>
+</testcase>
+<testcase name="ordinaryOwnerCanEnrollFirstFactorAndManageWithoutAdministratorProvisioning()" classname="org.securemail.community.access.AccessControlTest" time="0.139">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:ordinaryOwnerCanEnrollFirstFactorAndManageWithoutAdministratorProvisioning()]
+display-name: ordinaryOwnerCanEnrollFirstFactorAndManageWithoutAdministratorProvisioning()
+</system-out>
+</testcase>
+<testcase name="canonicalNumbersPreserveFractionsAndBoundExpansionBeforeAllocation()" classname="org.securemail.community.access.CoreInputTest" time="0">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.CoreInputTest]/[method:canonicalNumbersPreserveFractionsAndBoundExpansionBeforeAllocation()]
+display-name: canonicalNumbersPreserveFractionsAndBoundExpansionBeforeAllocation()
+</system-out>
+</testcase>
+<testcase name="registrationRequiresBothAccountAndDeviceOwnership()" classname="org.securemail.identity.IdentityStoreTest" time="0.042">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:registrationRequiresBothAccountAndDeviceOwnership()]
+display-name: registrationRequiresBothAccountAndDeviceOwnership()
+</system-out>
+</testcase>
+<testcase name="ownerBootstrapOneUseBoundToExistingAccountProofAndService()" classname="org.securemail.identity.IdentityStoreTest" time="0.035">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:ownerBootstrapOneUseBoundToExistingAccountProofAndService()]
+display-name: ownerBootstrapOneUseBoundToExistingAccountProofAndService()
+</system-out>
+</testcase>
+<testcase name="targetLoginGenerationChangeInvalidatesConsent()" classname="org.securemail.identity.FirstDelegationTest" time="0.085">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.FirstDelegationTest]/[method:targetLoginGenerationChangeInvalidatesConsent()]
+display-name: targetLoginGenerationChangeInvalidatesConsent()
+</system-out>
+</testcase>
+<testcase name="registrationPreservesLegacyIdWithoutExportAndOnlyTwoSystemRoles()" classname="org.securemail.identity.IdentityStoreTest" time="0.033">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:registrationPreservesLegacyIdWithoutExportAndOnlyTwoSystemRoles()]
+display-name: registrationPreservesLegacyIdWithoutExportAndOnlyTwoSystemRoles()
+</system-out>
+</testcase>
+<testcase name="applicationsCannotSelfApproveAndNoCityDoesNotBecomeRegional()" classname="org.securemail.community.access.AccessControlTest" time="0.15">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:applicationsCannotSelfApproveAndNoCityDoesNotBecomeRegional()]
+display-name: applicationsCannotSelfApproveAndNoCityDoesNotBecomeRegional()
+</system-out>
+</testcase>
+<testcase name="noRoleHasNoMutationAndClearanceDoesNotGrantPermission()" classname="org.securemail.community.access.AccessControlTest" time="0.148">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:noRoleHasNoMutationAndClearanceDoesNotGrantPermission()]
+display-name: noRoleHasNoMutationAndClearanceDoesNotGrantPermission()
+</system-out>
+</testcase>
+<testcase name="managedAccountQueryRejectsWrongServicePurposeExpiryAndClockRollback()" classname="org.securemail.identity.IdentityStoreTest" time="0.04">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:managedAccountQueryRejectsWrongServicePurposeExpiryAndClockRollback()]
+display-name: managedAccountQueryRejectsWrongServicePurposeExpiryAndClockRollback()
+</system-out>
+</testcase>
+<testcase name="activeClearanceRankCannotBeRenumberedImplicitly()" classname="org.securemail.community.access.AccessControlTest" time="0.198">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:activeClearanceRankCannotBeRenumberedImplicitly()]
+display-name: activeClearanceRankCannotBeRenumberedImplicitly()
+</system-out>
+</testcase>
+<testcase name="revokedGenerationAndDifferentApplicationCannotUseCoreGateway()" classname="org.securemail.client.community600.GatewayIntegration600Test" time="0.426">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.community600.GatewayIntegration600Test]/[method:revokedGenerationAndDifferentApplicationCannotUseCoreGateway()]
+display-name: revokedGenerationAndDifferentApplicationCannotUseCoreGateway()
+</system-out>
+</testcase>
+<testcase name="organizationDenyAlsoRestrictsImplicitOwnerDelegationsButNotAnotherScope()" classname="org.securemail.community.access.RoleDeny600Test" time="0.198">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.RoleDeny600Test]/[method:organizationDenyAlsoRestrictsImplicitOwnerDelegationsButNotAnotherScope()]
+display-name: organizationDenyAlsoRestrictsImplicitOwnerDelegationsButNotAnotherScope()
+</system-out>
+</testcase>
+<testcase name="administrativeFreshCheckExpiresWithStepUpRatherThanLongerTokenLease()" classname="org.securemail.identity.CriticalApprovalTest" time="0.045">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.CriticalApprovalTest]/[method:administrativeFreshCheckExpiresWithStepUpRatherThanLongerTokenLease()]
+display-name: administrativeFreshCheckExpiresWithStepUpRatherThanLongerTokenLease()
+</system-out>
+</testcase>
+<testcase name="roleDeletionRemovesInheritedPermissionAndInvalidatesOnlyAffectedCaches()" classname="org.securemail.community.access.AccessControlTest" time="0.183">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:roleDeletionRemovesInheritedPermissionAndInvalidatesOnlyAffectedCaches()]
+display-name: roleDeletionRemovesInheritedPermissionAndInvalidatesOnlyAffectedCaches()
+</system-out>
+</testcase>
+<testcase name="applicationAndDeviceKeysCannotBeReusedAcrossDifferentAccounts()" classname="org.securemail.identity.IdentityStoreTest" time="0.053">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:applicationAndDeviceKeysCannotBeReusedAcrossDifferentAccounts()]
+display-name: applicationAndDeviceKeysCannotBeReusedAcrossDifferentAccounts()
+</system-out>
+</testcase>
+<testcase name="legacyUpdateWithoutDenialsPreservesSecurityPolicyAndListReturnsExplicitDenials()" classname="org.securemail.community.access.RoleDeny600Test" time="0.141">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.RoleDeny600Test]/[method:legacyUpdateWithoutDenialsPreservesSecurityPolicyAndListReturnsExplicitDenials()]
+display-name: legacyUpdateWithoutDenialsPreservesSecurityPolicyAndListReturnsExplicitDenials()
+</system-out>
+</testcase>
+<testcase name="exactIntegerFieldsRejectFractionHiddenByDoubleRoundingAndOverflow()" classname="org.securemail.community.access.CoreInputTest" time="0.002">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.CoreInputTest]/[method:exactIntegerFieldsRejectFractionHiddenByDoubleRoundingAndOverflow()]
+display-name: exactIntegerFieldsRejectFractionHiddenByDoubleRoundingAndOverflow()
+</system-out>
+</testcase>
+<testcase name="criticalRoleCreationUsesRealIndependentIdentityPermitsAndCannotSelfApprove()" classname="org.securemail.client.community600.GatewayIntegration600Test" time="0.679">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.community600.GatewayIntegration600Test]/[method:criticalRoleCreationUsesRealIndependentIdentityPermitsAndCannotSelfApprove()]
+display-name: criticalRoleCreationUsesRealIndependentIdentityPermitsAndCannotSelfApprove()
+</system-out>
+</testcase>
+<testcase name="ownerLoginGenerationChangeInvalidatesConsent()" classname="org.securemail.identity.FirstDelegationTest" time="0.066">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.FirstDelegationTest]/[method:ownerLoginGenerationChangeInvalidatesConsent()]
+display-name: ownerLoginGenerationChangeInvalidatesConsent()
+</system-out>
+</testcase>
+<testcase name="serverOuterSnapshotTransactionCannotRollbackSecondFactorFailureCounter()" classname="org.securemail.community.access.AccessControlTest" time="0.131">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:serverOuterSnapshotTransactionCannotRollbackSecondFactorFailureCounter()]
+display-name: serverOuterSnapshotTransactionCannotRollbackSecondFactorFailureCounter()
+</system-out>
+</testcase>
+<testcase name="batchCallAuthorizationIsBoundedAndDoesNotDiscloseOrganizationNames()" classname="org.securemail.community.access.AccessControlTest" time="0.142">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:batchCallAuthorizationIsBoundedAndDoesNotDiscloseOrganizationNames()]
+display-name: batchCallAuthorizationIsBoundedAndDoesNotDiscloseOrganizationNames()
+</system-out>
+</testcase>
+<testcase name="assignedRoleManagerCanRenameOwnRoleButCannotRaiseOnlyItsClearance()" classname="org.securemail.community.access.AccessControlTest" time="0.248">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:assignedRoleManagerCanRenameOwnRoleButCannotRaiseOnlyItsClearance()]
+display-name: assignedRoleManagerCanRenameOwnRoleButCannotRaiseOnlyItsClearance()
+</system-out>
+</testcase>
+<testcase name="resourceConstraintsAreConjoinedAndClosedResourceConcealed()" classname="org.securemail.community.access.AccessControlTest" time="0.108">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:resourceConstraintsAreConjoinedAndClosedResourceConcealed()]
+display-name: resourceConstraintsAreConjoinedAndClosedResourceConcealed()
+</system-out>
+</testcase>
+<testcase name="revokedSecondAdministratorCannotConfirmOrCompleteExistingPermit()" classname="org.securemail.identity.CriticalApprovalTest" time="0.086">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.CriticalApprovalTest]/[method:revokedSecondAdministratorCannotConfirmOrCompleteExistingPermit()]
+display-name: revokedSecondAdministratorCannotConfirmOrCompleteExistingPermit()
+</system-out>
+</testcase>
+<testcase name="offlineLeaseUsesMonotonicTimeRejectsClockRollbackAndAlwaysDeniesClosedData()" classname="org.securemail.identity.IdentityStoreTest" time="0.036">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.identity.IdentityStoreTest]/[method:offlineLeaseUsesMonotonicTimeRejectsClockRollbackAndAlwaysDeniesClosedData()]
+display-name: offlineLeaseUsesMonotonicTimeRejectsClockRollbackAndAlwaysDeniesClosedData()
+</system-out>
+</testcase>
+<testcase name="inheritedRoleGrantAndRevocationUseRealServerAcl()" classname="org.securemail.client.community600.GatewayIntegration600Test" time="1.616">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.community600.GatewayIntegration600Test]/[method:inheritedRoleGrantAndRevocationUseRealServerAcl()]
+display-name: inheritedRoleGrantAndRevocationUseRealServerAcl()
+</system-out>
+</testcase>
+<testcase name="realGlobalRoleNeedsIndependentApprovalAndAppliesAfterAssignment()" classname="org.securemail.community.access.AccessControlTest" time="0.17">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.access.AccessControlTest]/[method:realGlobalRoleNeedsIndependentApprovalAndAppliesAfterAssignment()]
+display-name: realGlobalRoleNeedsIndependentApprovalAndAppliesAfterAssignment()
+</system-out>
+</testcase>
+<system-out>
+unique-id: [engine:junit-jupiter]
+display-name: JUnit Jupiter
+</system-out>
+</testsuite>

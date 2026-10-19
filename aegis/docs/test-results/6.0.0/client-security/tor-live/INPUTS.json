@@ -1,0 +1,7 @@
+{
+  "sourceSha256": "39e13f97e33ee95fe5c7423a0691874c16c9840d813da3903ee8646f3e40a83b",
+  "torSha256": "39c9db0654d2ec218892bd00f75eccb5b641a7222754436c2e4a8d2f764a57d3",
+  "coreJarSha256": "9824aa715dad42a30b6470dacf25b3de0b9a5f263c8e3bbea1b421d7f8d5c2a8",
+  "publicOnionSource": "https://onion.torproject.org/",
+  "nativeTargetAcceptance": false
+}

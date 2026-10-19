@@ -1,0 +1,34 @@
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+╷
+├─ JUnit Platform Suite ✔
+├─ JUnit Jupiter ✔
+│  └─ GlasSignalingIntegration600Test ✔
+│     ├─ endpointExpiryAndUnregisterImmediatelyRemoveVisibility() ✔
+│     ├─ bothIncomingAndOutgoingPoliciesAreEnforcedServerSide() ✔
+│     ├─ modifiedBodyCannotReuseExactSignedOperation() ✔
+│     ├─ rootSignatureWrongAppGenerationAndServicePinCannotRegister() ✔
+│     ├─ targetNewLoginInvalidatesLookupAndCallerNewLoginInvalidatesOldCapability() ✔
+│     ├─ canonicalProtocolRejectsExtraBytesOversizedContactSetsAndBadOnionChecksum() ✔
+│     ├─ capacityPersistsAcrossRestartAndSymlinksAreRejected() ✔
+│     ├─ realHttpRegistrationLookupAndAttestationsRemainBoundToPinnedRootAndApp() ✔
+│     ├─ clockRollbackAndConcurrentRegistryOpeningFailClosed() ✔
+│     ├─ unknownAndNonPermittedContactsGetIdenticalFailureWithoutEndpointOrPolicies() ✔
+│     └─ mailCapabilityAndReplayCannotBypassGlasScope() ✔
+└─ JUnit Vintage ✔
+
+Test run finished after 4872 ms
+[         4 containers found      ]
+[         0 containers skipped    ]
+[         4 containers started    ]
+[         0 containers aborted    ]
+[         4 containers successful ]
+[         0 containers failed     ]
+[        11 tests found           ]
+[         0 tests skipped         ]
+[        11 tests started         ]
+[         0 tests aborted         ]
+[        11 tests successful      ]
+[         0 tests failed          ]
+

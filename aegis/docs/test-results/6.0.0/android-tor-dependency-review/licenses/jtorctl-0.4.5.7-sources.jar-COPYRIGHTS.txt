@@ -1,0 +1,24 @@
+Source: net/freehaven/tor/control/Bytes.java
+// Copyright 2005 Nick Mathewson, Roger Dingledine
+Source: net/freehaven/tor/control/ConfigEntry.java
+// Copyright 2005 Nick Mathewson, Roger Dingledine
+Source: net/freehaven/tor/control/EventHandler.java
+// Copyright 2005 Nick Mathewson, Roger Dingledine
+Source: net/freehaven/tor/control/EventListener.java
+Source: net/freehaven/tor/control/NullEventHandler.java
+// Copyright 2005 Nick Mathewson, Roger Dingledine
+Source: net/freehaven/tor/control/PasswordDigest.java
+// Copyright 2005 Nick Mathewson, Roger Dingledine
+Source: net/freehaven/tor/control/RawEventListener.java
+Source: net/freehaven/tor/control/TorControlCommands.java
+ * Copyright 2005 Nick Mathewson, Roger Dingledine
+Source: net/freehaven/tor/control/TorControlConnection.java
+// Copyright 2005 Nick Mathewson, Roger Dingledine
+Source: net/freehaven/tor/control/TorControlError.java
+// Copyright 2005 Nick Mathewson, Roger Dingledine
+Source: net/freehaven/tor/control/TorControlSyntaxError.java
+// Copyright 2005 Nick Mathewson, Roger Dingledine
+Source: net/freehaven/tor/control/examples/DebuggingEventHandler.java
+// Copyright 2005 Nick Mathewson, Roger Dingledine
+Source: net/freehaven/tor/control/examples/Main.java
+// Copyright 2005 Nick Mathewson, Roger Dingledine

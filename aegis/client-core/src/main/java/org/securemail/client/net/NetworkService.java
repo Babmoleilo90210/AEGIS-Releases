@@ -30,6 +30,9 @@ public final class NetworkService {
   private volatile String token = "";
   private volatile boolean registrationAccepted;
   private volatile int capabilities=-1;
+  private volatile org.securemail.client.ecosystemauth.IdentityRelayCredentials600 identity6;
+  /** Installed by the authorized Mail host before account authentication. No account root private key crosses IPC. */
+  public void identitySession6(org.securemail.client.ecosystemauth.IdentityRelayCredentials600 credentials){if(loggedIn())throw new IllegalStateException("Сначала завершите предыдущую сессию Почты");identity6=java.util.Objects.requireNonNull(credentials);}
   public boolean registrationAccepted(){return registrationAccepted;}
 
   public NetworkService(TorTransport tor, String relay, int port, LocalStore local, int max) {
@@ -51,16 +54,18 @@ public final class NetworkService {
       throw new IllegalArgumentException("Пароль аккаунта: 12–1024 символа");
     }
     try {
+      var bound=identity6;if(bound!=null)bound.requireCurrent(local.identity().userId());
       if (register) {
         exchange(
             relayOnion,
             relayPort,
-            Operation.REGISTER,
+            bound==null?Operation.REGISTER:Operation.REGISTER6,
             "",
             o -> {
               Binary.text(o, nick);
               Binary.bytes(o, pass);
               Binary.bytes(o, local.identity().publicKey());
+              if(bound!=null)bound.writeRegistrationProof(o,local.identity().userId(),nick,pass,local.identity().publicKey());
             },
             UserInfo::read);
         registrationAccepted=true;
@@ -68,11 +73,12 @@ public final class NetworkService {
       exchange(
           relayOnion,
           relayPort,
-          Operation.LOGIN,
+          bound==null?Operation.LOGIN:Operation.LOGIN6,
           "",
           o -> {
             Binary.text(o, nick);
             Binary.bytes(o, pass);
+            if(bound!=null)bound.writeProof(o,local.identity().userId(),nick,pass);
           },
           in -> {
             String session = Binary.text(in, 64);
@@ -112,7 +118,7 @@ public final class NetworkService {
 
   /** Reuses only a current, root-signed route of an already verified contact. */
   public UserInfo resolveTrusted(UserInfo contact)throws IOException {
-    if(validRoute(signedRoutes.get(contact.userId()),contact,local.now()))return new UserInfo(contact.userId(),contact.nickname(),contact.publicKey(),signedRoutes.get(contact.userId()));
+    if(identity6==null&&validRoute(signedRoutes.get(contact.userId()),contact,local.now()))return new UserInfo(contact.userId(),contact.nickname(),contact.publicKey(),signedRoutes.get(contact.userId()));
     UserInfo remote=find(contact.nickname());if(!remote.userId().equals(contact.userId())||!MessageDigest.isEqual(remote.publicKey(),contact.publicKey()))throw new IOException("Ключ контакта изменился");return remote;
   }
 
@@ -155,7 +161,8 @@ public final class NetworkService {
    * This does not add a contact or change its trust status. */
   public DeliveryResult deliverControl(EncryptedPacket p,UserInfo contact)throws IOException {
     if(!p.senderId().equals(local.identity().userId())||!p.recipientId().equals(contact.userId())||!Identity.verifyPacket(p))throw new IOException("Invalid encrypted reply");
-    Route cached=signedRoutes.get(contact.userId());
+    // Identity6 must obtain a current Relay route before every new P2P operation.
+    Route cached=identity6==null?signedRoutes.get(contact.userId()):null;
     DeliveryResult direct=peer(p,contact,cached);
     if(direct!=null){local.deliveryRoute(p.messageId(),"P2P");return direct;}
     UserInfo remote = find(contact.nickname());
@@ -265,6 +272,7 @@ public final class NetworkService {
 
   private <T> T request(Operation op, Binary.Writer w, Reader<T> r) throws IOException {
     if (token.isEmpty()) throw new IOException("Сначала войдите в аккаунт");
+    var bound=identity6;if(bound!=null)bound.requireCurrent(local.identity().userId());
     return exchange(relayOnion, relayPort, op, token, w, r);
   }
 

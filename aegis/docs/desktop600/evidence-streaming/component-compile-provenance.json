@@ -1,0 +1,22 @@
+{
+  "sourceStable": true,
+  "sources": {
+    "client-core/src/main/java/org/securemail/client/attachments600/AttachmentManifest600.java": "be9003f38a071a8d9a1663fc84715286282e16865d2b02c12d08ebe37642102a",
+    "client-core/src/main/java/org/securemail/client/attachments600/AttachmentFeatures600.java": "8706d5e9a3fc7333751de443bb6ad13ad8fd6230d6d7489ef7aa6467a5d5d722",
+    "client-core/src/main/java/org/securemail/client/attachments600/MailAttachmentManager600.java": "06f87c8dc6686d1f2c489381d3cd6ad9463f800f986c9ce13196dac309e5c57f",
+    "client-core/src/main/java/org/securemail/client/crypto/PlainMessage.java": "6389f8eab14a792a65cf1e92b02286d53f37634f36982e2ba2dd3caa8f868f24",
+    "client-core/src/main/java/org/securemail/client/storage/LocalStore.java": "8bc91f97aa5026181214908c76b9d4a59c06a221a01bb3344c9d41f90bf13913",
+    "client-core/src/main/java/org/securemail/client/storage/LocalMailSearch.java": "5df3885fddad8a734e6889e0536e2e15d2a5244435f44aa7d31fa21269640fdb",
+    "client-core/src/main/java/org/securemail/client/storage/ProfileSnapshot.java": "1c07ac2da4097010e260c9751c1f1dded0b5ca5a72d122c4486841f7fe5f37fa",
+    "client-core/src/main/java/org/securemail/client/ecosystem/ProfileMigration600.java": "2127541f9466fc41eefbc5644d9bb56d15561c99beeae3136cafe4569137f21e",
+    "client-core/src/main/java/org/securemail/client/net/PeerServer.java": "58adc5f27b3f7988d1e166e9b88c047fc74bcd0319106bbf9c88e122d2a6364c",
+    "client-core/src/main/java/org/securemail/client/ClientSession.java": "1716acae23cfe136ea7fddba759557a7fdadcc7342611ebf28a9800c6d1da089",
+    "client-core/src/main/java/org/securemail/client/lifecycle/LifecycleService.java": "bf3fe2df2b67d948192ce3ebc285ee59b1e02b0f3e411279021311b46ce63a5d",
+    "client-core/src/test/java/org/securemail/client/attachments600/MailAttachmentManager600Test.java": "315007cd24b10ddfc93dbd07f525c2378212fdcb92fb19e5cc7b83b21d495279",
+    "common-protocol/src/main/java/org/securemail/ecosystem/protocol/IdentityProtocol.java": "08c91bdbfffd27772f7250cef34e72b1d167a992786c45f0058f1574ce6ef182",
+    "client-core/src/main/java/org/securemail/client/ecosystem/MailPairing600.java": "ea758369247118a1bec39653c3c8f3428c0436bb06da2bc2782586f0b99b23c6",
+    "client-core/src/main/java/org/securemail/client/ecosystem/MailPairingBroker600.java": "8ace2b823b7477be5a094100ad151d64e5048885e4a2d4adf5ede67a746f1b14"
+  },
+  "exitCode": 0,
+  "note": "Scoped manual Java21 compile against audited main-ui-clean-compile6 JAR dependency snapshot; source ProfileSnapshot/IdentityProtocol/MailPairing included from identity600. Full integrated build owned root."
+}

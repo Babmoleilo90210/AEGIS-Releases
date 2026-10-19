@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "status": "PASS_LOCAL",
+  "productionReady": false,
+  "javaTests": 55,
+  "javaSkipped": 0,
+  "javaSourceStable": true,
+  "pythonReleaseTests": 40,
+  "apkVerifierTests": 11,
+  "scope": [
+    "JCA ephemeral Ed25519 test signatures",
+    "actual loopback HTTP truncation/range/hash",
+    "actual independent JVM runtime and legacy file locks/copy/rename/rollback",
+    "frozen published 5.0.0 and historical parser sources",
+    "real temporary Git source exports and provenance/hash policy",
+    "official apksigner verification and tampered actual TEST APK plus explicitly labeled parser fixtures"
+  ],
+  "notProven": [
+    "native Windows 11/CachyOS updater installation and restart",
+    "Tor network E2E",
+    "physical devices",
+    "owner signing",
+    "production feed",
+    "full release readiness"
+  ],
+  "evidenceSha256": {
+    "RESULTS.json": "54dad8fe510ffe2524f5ebc4f2bd2f26186a5f64fa9c44a5642afcce4fd44a0a",
+    "python-release.log": "12037c73ea4f77c6a1d0ca3c774efc0996ae5f47490d71116eb376c70fa401ea",
+    "javac.log": "220c6cd50907a04b803e78b76313e7dbfda96f373619b6d7c947f65bef4f3b15",
+    "apk-public-verify.log": "d0167a75ec82d0ea3f8119d8bd64ad4b1559ef8fb54b8737e5a0fb00d3ebbf8b",
+    "junit.log": "e10fc676183220db0cd35b51e6086f8c08519d4b7b490e01c3133121d46fb858"
+  }
+}

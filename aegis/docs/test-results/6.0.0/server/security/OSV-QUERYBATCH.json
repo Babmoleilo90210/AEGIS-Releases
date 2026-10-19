@@ -1,0 +1,45 @@
+{
+  "queriedAt": "2026-10-18T12:42:42.742508+00:00",
+  "endpoint": "https://api.osv.dev/v1/querybatch",
+  "request": {
+    "queries": [
+      {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "com.google.code.gson:gson"
+        },
+        "version": "2.14.0"
+      },
+      {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.xerial:sqlite-jdbc"
+        },
+        "version": "3.53.4.0"
+      },
+      {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.slf4j:slf4j-api"
+        },
+        "version": "2.0.17"
+      },
+      {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.slf4j:slf4j-nop"
+        },
+        "version": "2.0.17"
+      }
+    ]
+  },
+  "status": 200,
+  "response": {
+    "results": [
+      {},
+      {},
+      {},
+      {}
+    ]
+  }
+}

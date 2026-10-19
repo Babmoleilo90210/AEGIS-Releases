@@ -1,0 +1,50 @@
+{
+  "when": "2026-10-18T13:53:25.818786+00:00",
+  "sources": [
+    {
+      "name": "native-ref-openssl-3.5.9.json",
+      "url": "https://api.github.com/repos/openssl/openssl/git/ref/tags/openssl-3.5.9",
+      "status": 200,
+      "finalUrl": "https://api.github.com/repos/openssl/openssl/git/ref/tags/openssl-3.5.9",
+      "bytes": 355,
+      "sha256": "97e6d08148c7bde4a8aa80b6f4dcb265672e0c79a7d019e5de8826cb0f660c3f"
+    },
+    {
+      "name": "licenses/OpenSSL-3.5.9-LICENSE.txt",
+      "url": "https://raw.githubusercontent.com/openssl/openssl/openssl-3.5.9/LICENSE.txt",
+      "status": 200,
+      "finalUrl": "https://raw.githubusercontent.com/openssl/openssl/openssl-3.5.9/LICENSE.txt",
+      "bytes": 10175,
+      "sha256": "7d5450cb2d142651b8afa315b5f238efc805dad827d91ba367d8516bc9d49e7a"
+    },
+    {
+      "name": "licenses/OpenSSL-3.5.9-NOTICE.txt",
+      "url": "https://raw.githubusercontent.com/openssl/openssl/openssl-3.5.9/NOTICE.md",
+      "error": "<HTTPError 404: 'Not Found'>"
+    },
+    {
+      "name": "licenses/Tor-pinned-LICENSE.txt",
+      "url": "https://raw.githubusercontent.com/bitmold/tor/4a522a3ca491c6c04d4a44cb006b92101c42efc1/LICENSE",
+      "status": 200,
+      "finalUrl": "https://raw.githubusercontent.com/bitmold/tor/4a522a3ca491c6c04d4a44cb006b92101c42efc1/LICENSE",
+      "bytes": 21086,
+      "sha256": "5dc29ea302cc75db6db4a7c88d7b5d4638b4e0f5f1d2e6d21ce71f707470b766"
+    },
+    {
+      "name": "native-pinned-tor-tree.json",
+      "url": "https://api.github.com/repos/bitmold/tor/git/trees/4a522a3ca491c6c04d4a44cb006b92101c42efc1?recursive=1",
+      "status": 200,
+      "finalUrl": "https://api.github.com/repos/bitmold/tor/git/trees/4a522a3ca491c6c04d4a44cb006b92101c42efc1?recursive=1",
+      "bytes": 542970,
+      "sha256": "e7ecfbf6c6ba3e67eacf05dcf580258757df3a2b76eeaba4dfcbd7d7259b0695"
+    },
+    {
+      "name": "openssl-security-notes.html",
+      "url": "https://openssl-library.org/news/openssl-3.5-notes/",
+      "status": 200,
+      "finalUrl": "https://openssl-library.org/news/openssl-3.5-notes/",
+      "bytes": 54560,
+      "sha256": "4d8de0c3b21f9b3a08ef6352dc342afe280d9f5a250d4f64988f196c97771fa7"
+    }
+  ]
+}

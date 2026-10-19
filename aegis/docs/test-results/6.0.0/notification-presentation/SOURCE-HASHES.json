@@ -1,0 +1,8 @@
+{
+  "client-core/src/main/java/org/securemail/client/ecosystemauth/CoreNotificationPreferences600.java": "9c1e33daf6578b478a2bd225db8b6e0de0afa0a2dab0a4093069d988ee73f429",
+  "client-core/src/main/java/org/securemail/client/ecosystemauth/CoreNotificationArrivals600.java": "34ad150fd508217a8c5b14ed4c67529f36b57209bf646c386feff92aff16cd32",
+  "client-core/src/test/java/org/securemail/client/ecosystemauth/CoreNotificationPreferences600Test.java": "3c0fafba91e872287220e3c788f6c3919faee4c444fca12641ec69098cf9fa58",
+  "client-core/src/test/java/org/securemail/client/ecosystemauth/CoreNotificationArrivals600Test.java": "8c2d1520c830967006be3490a7246900d3a64d64c6ac2c0aacb6a8705a2081f1",
+  "client-ui/src/main/java/org/securemail/ui/CoreNotificationsView600.java": "41363ef6e242c5c1c4aa37e928a3609c6941b325ab30c092c594edf15bf07ee9",
+  "client-ui/src/smoke/java/org/securemail/ui/CoreNotificationPresentationSmoke600.java": "3499609b5e53c260a47dbebe61bcbcbeb107076316cd2cd9ddb33af01619ba48"
+}

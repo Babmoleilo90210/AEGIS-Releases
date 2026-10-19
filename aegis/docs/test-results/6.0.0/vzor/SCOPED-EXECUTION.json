@@ -1,0 +1,121 @@
+{
+  "counts": {
+    "tests": 19,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "commands": [
+    {
+      "phase": "javac-main",
+      "command": [
+        "/workspace/scratch/aa629f360927/inputs600/toolchain/jdk-21.0.12.1+1/bin/javac",
+        "--release",
+        "21",
+        "-encoding",
+        "UTF-8",
+        "-Xlint:all",
+        "-cp",
+        "/workspace/scratch/aa629f360927/aegis600/aegis/client-core/build/classes/java/main:/workspace/scratch/aa629f360927/aegis600/aegis/common-protocol/build/classes/java/main:/workspace/scratch/aa629f360927/inputs600/maven-deps/imageio-metadata-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/javafx-graphics-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-platform-launcher-1.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-jupiter-params-5.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/tink-1.23.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/pdfbox-io-3.0.8.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/common-image-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/pdfbox-3.0.8.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/fontbox-3.0.8.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-platform-commons-1.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/commons-compress-1.28.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/password4j-1.8.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/bcpg-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/common-io-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/bcprov-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/apiguardian-api-1.1.2.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/imageio-core-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/xz-1.12.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/jna-platform-5.19.1.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/jna-5.19.1.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-jupiter-engine-5.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-platform-engine-1.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/sqlite-jdbc-3.53.4.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/zip4j-2.11.6.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/imageio-webp-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-jupiter-api-5.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/slf4j-api-2.0.12.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/slf4j-nop-2.0.17.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/commons-lang3-3.18.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-jupiter-5.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/common-lang-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/commons-codec-1.19.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/commons-logging-1.4.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/slf4j-api-2.0.17.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/opentest4j-1.3.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/jsr305-3.0.2.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/commons-io-2.20.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/javafx-controls-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/error_prone_annotations-2.48.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/protobuf-java-4.33.6.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/gson-2.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/javafx-base-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/bcutil-jdk18on-1.86.jar",
+        "-d",
+        "/workspace/scratch/aa629f360927/audit600/vzor/classes",
+        "/workspace/scratch/aa629f360927/aegis600/aegis/client-core/src/main/java/org/securemail/client/safeweb600/VzorBootstrap600.java",
+        "/workspace/scratch/aa629f360927/aegis600/aegis/client-core/src/main/java/org/securemail/client/safeweb600/VzorFailure600.java",
+        "/workspace/scratch/aa629f360927/aegis600/aegis/client-core/src/main/java/org/securemail/client/safeweb600/VzorLaunch600.java",
+        "/workspace/scratch/aa629f360927/aegis600/aegis/client-core/src/main/java/org/securemail/client/safeweb600/VzorManager600.java",
+        "/workspace/scratch/aa629f360927/aegis600/aegis/client-core/src/main/java/org/securemail/client/safeweb600/VzorState600.java"
+      ],
+      "exitCode": 0,
+      "seconds": 2.036
+    },
+    {
+      "phase": "javac-test",
+      "command": [
+        "/workspace/scratch/aa629f360927/inputs600/toolchain/jdk-21.0.12.1+1/bin/javac",
+        "--release",
+        "21",
+        "-encoding",
+        "UTF-8",
+        "-cp",
+        "/workspace/scratch/aa629f360927/audit600/vzor/classes:/workspace/scratch/aa629f360927/inputs600/test-deps/junit-platform-console-standalone-1.13.4.jar:/workspace/scratch/aa629f360927/aegis600/aegis/client-core/build/classes/java/main:/workspace/scratch/aa629f360927/aegis600/aegis/common-protocol/build/classes/java/main:/workspace/scratch/aa629f360927/inputs600/maven-deps/imageio-metadata-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/javafx-graphics-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-platform-launcher-1.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-jupiter-params-5.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/tink-1.23.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/pdfbox-io-3.0.8.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/common-image-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/pdfbox-3.0.8.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/fontbox-3.0.8.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-platform-commons-1.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/commons-compress-1.28.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/password4j-1.8.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/bcpg-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/common-io-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/bcprov-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/apiguardian-api-1.1.2.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/imageio-core-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/xz-1.12.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/jna-platform-5.19.1.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/jna-5.19.1.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-jupiter-engine-5.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-platform-engine-1.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/sqlite-jdbc-3.53.4.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/zip4j-2.11.6.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/imageio-webp-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-jupiter-api-5.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/slf4j-api-2.0.12.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/slf4j-nop-2.0.17.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/commons-lang3-3.18.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-jupiter-5.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/common-lang-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/commons-codec-1.19.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/commons-logging-1.4.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/slf4j-api-2.0.17.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/opentest4j-1.3.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/jsr305-3.0.2.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/commons-io-2.20.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/javafx-controls-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/error_prone_annotations-2.48.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/protobuf-java-4.33.6.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/gson-2.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/javafx-base-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/bcutil-jdk18on-1.86.jar",
+        "-d",
+        "/workspace/scratch/aa629f360927/audit600/vzor/test-classes",
+        "/workspace/scratch/aa629f360927/aegis600/aegis/client-core/src/test/java/org/securemail/client/safeweb600/VzorDetachedFixture600.java",
+        "/workspace/scratch/aa629f360927/aegis600/aegis/client-core/src/test/java/org/securemail/client/safeweb600/VzorIndependent600Test.java"
+      ],
+      "exitCode": 0,
+      "seconds": 5.063
+    },
+    {
+      "phase": "junit",
+      "command": [
+        "/workspace/scratch/aa629f360927/inputs600/toolchain/jdk-21.0.12.1+1/bin/java",
+        "-jar",
+        "/workspace/scratch/aa629f360927/inputs600/test-deps/junit-platform-console-standalone-1.13.4.jar",
+        "execute",
+        "--class-path",
+        "/workspace/scratch/aa629f360927/audit600/vzor/test-classes:/workspace/scratch/aa629f360927/audit600/vzor/classes:/workspace/scratch/aa629f360927/aegis600/aegis/client-core/build/classes/java/main:/workspace/scratch/aa629f360927/aegis600/aegis/common-protocol/build/classes/java/main:/workspace/scratch/aa629f360927/inputs600/maven-deps/imageio-metadata-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/javafx-graphics-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-platform-launcher-1.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-jupiter-params-5.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/tink-1.23.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/pdfbox-io-3.0.8.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/common-image-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/pdfbox-3.0.8.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/fontbox-3.0.8.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-platform-commons-1.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/commons-compress-1.28.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/password4j-1.8.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/bcpg-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/common-io-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/bcprov-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/apiguardian-api-1.1.2.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/imageio-core-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/xz-1.12.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/jna-platform-5.19.1.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/jna-5.19.1.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-jupiter-engine-5.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-platform-engine-1.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/sqlite-jdbc-3.53.4.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/zip4j-2.11.6.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/imageio-webp-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-jupiter-api-5.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/slf4j-api-2.0.12.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/slf4j-nop-2.0.17.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/commons-lang3-3.18.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-jupiter-5.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/common-lang-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/commons-codec-1.19.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/commons-logging-1.4.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/slf4j-api-2.0.17.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/opentest4j-1.3.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/jsr305-3.0.2.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/commons-io-2.20.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/javafx-controls-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/error_prone_annotations-2.48.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/protobuf-java-4.33.6.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/gson-2.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/javafx-base-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/bcutil-jdk18on-1.86.jar",
+        "--select-package",
+        "org.securemail.client.safeweb600",
+        "--reports-dir",
+        "/workspace/scratch/aa629f360927/audit600/vzor/junit",
+        "--details=summary"
+      ],
+      "exitCode": 0,
+      "seconds": 5.122
+    },
+    {
+      "phase": "javac-ui",
+      "command": [
+        "/workspace/scratch/aa629f360927/inputs600/toolchain/jdk-21.0.12.1+1/bin/javac",
+        "--release",
+        "21",
+        "-encoding",
+        "UTF-8",
+        "-Xlint:all",
+        "-cp",
+        "/workspace/scratch/aa629f360927/audit600/vzor/classes:/workspace/scratch/aa629f360927/aegis500-baseline/aegis/client-ui/build/classes/java/main:/workspace/scratch/aa629f360927/aegis600/aegis/client-core/build/classes/java/main:/workspace/scratch/aa629f360927/aegis600/aegis/common-protocol/build/classes/java/main:/workspace/scratch/aa629f360927/inputs600/maven-deps/imageio-metadata-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/javafx-graphics-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-platform-launcher-1.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-jupiter-params-5.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/tink-1.23.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/pdfbox-io-3.0.8.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/common-image-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/pdfbox-3.0.8.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/fontbox-3.0.8.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-platform-commons-1.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/commons-compress-1.28.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/password4j-1.8.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/bcpg-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/common-io-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/bcprov-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/apiguardian-api-1.1.2.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/imageio-core-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/xz-1.12.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/jna-platform-5.19.1.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/jna-5.19.1.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-jupiter-engine-5.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-platform-engine-1.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/sqlite-jdbc-3.53.4.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/zip4j-2.11.6.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/imageio-webp-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-jupiter-api-5.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/slf4j-api-2.0.12.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/slf4j-nop-2.0.17.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/commons-lang3-3.18.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-jupiter-5.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/common-lang-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/commons-codec-1.19.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/commons-logging-1.4.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/slf4j-api-2.0.17.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/opentest4j-1.3.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/jsr305-3.0.2.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/commons-io-2.20.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/javafx-controls-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/error_prone_annotations-2.48.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/protobuf-java-4.33.6.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/gson-2.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/javafx-base-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/bcutil-jdk18on-1.86.jar",
+        "-d",
+        "/workspace/scratch/aa629f360927/audit600/vzor/ui-classes",
+        "/workspace/scratch/aa629f360927/aegis600/aegis/client-ui/src/main/java/org/securemail/ui/VzorApp600.java"
+      ],
+      "exitCode": 0,
+      "seconds": 2.625
+    }
+  ],
+  "sourceFiles": [
+    {
+      "path": "client-core/src/main/java/org/securemail/client/safeweb600/VzorBootstrap600.java",
+      "sha256": "565cb6b68aff62e2a930e87838cb534ab394ab2f8f81ac718efca22967e8305b"
+    },
+    {
+      "path": "client-core/src/main/java/org/securemail/client/safeweb600/VzorFailure600.java",
+      "sha256": "ca31eae3e6d08978cd1d968843cf806154b876a02aa2ade01dffce8b2d0ae650"
+    },
+    {
+      "path": "client-core/src/main/java/org/securemail/client/safeweb600/VzorLaunch600.java",
+      "sha256": "9fc49800933da81edc7072d1e01baaa5eddaf840c0f95f58c6ab7ec7d4c04da9"
+    },
+    {
+      "path": "client-core/src/main/java/org/securemail/client/safeweb600/VzorManager600.java",
+      "sha256": "42f10b48e61ef09dba8b82c1f07d01d6516c2019a5518c6067a1816fab9efdcb"
+    },
+    {
+      "path": "client-core/src/main/java/org/securemail/client/safeweb600/VzorState600.java",
+      "sha256": "5e07cef5951337b143127e31b61a542c567cf6851319e48a8bac141aa461f6bf"
+    },
+    {
+      "path": "client-core/src/test/java/org/securemail/client/safeweb600/VzorDetachedFixture600.java",
+      "sha256": "40fa7f96e4e4e6a94630e512db85a6586acc4bb88efd228cc4c9a8a3fa0aa86a"
+    },
+    {
+      "path": "client-core/src/test/java/org/securemail/client/safeweb600/VzorIndependent600Test.java",
+      "sha256": "9f2a112ce94a210f08ae088da786c1b187f551569e6373834f4e9df0bff65900"
+    },
+    {
+      "path": "client-ui/src/main/java/org/securemail/ui/VzorApp600.java",
+      "sha256": "c4c9e1894f4b0d831298cafb7f42cab01f253060891b04bb741d21ffa634b337"
+    }
+  ],
+  "scope": "New independentVzor600 package actualJVMunit/lifecyclefixtures and UIcompile against verified5VzorView; nativebrowser/Tor/UIacceptance NOT_RUN."
+}

@@ -1,0 +1,9 @@
+{
+  "queriedAt": "2026-10-18T12:44:06.354947+00:00",
+  "url": "https://api.github.com/advisories?ecosystem=maven&affects=com.google.code.gson%3Agson%402.14.0&per_page=100",
+  "status": 200,
+  "bytes": 2,
+  "link": null,
+  "contentType": "application/json; charset=utf-8",
+  "response": []
+}

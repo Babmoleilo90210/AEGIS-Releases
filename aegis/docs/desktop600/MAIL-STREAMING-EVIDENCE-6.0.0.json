@@ -1,0 +1,111 @@
+{
+  "collectedAt": "2026-10-18T14:03:49.868814+00:00",
+  "productionReady": false,
+  "scope": "Desktop Mail streaming/critical-consent component checkpoint; not final full release acceptance",
+  "baseDesktopCommit": "aca628b",
+  "currentSourceSha256": {
+    "client-core/src/main/java/org/securemail/client/attachments600/AttachmentManifest600.java": "be9003f38a071a8d9a1663fc84715286282e16865d2b02c12d08ebe37642102a",
+    "client-core/src/main/java/org/securemail/client/attachments600/AttachmentFeatures600.java": "8706d5e9a3fc7333751de443bb6ad13ad8fd6230d6d7489ef7aa6467a5d5d722",
+    "client-core/src/main/java/org/securemail/client/attachments600/MailAttachmentManager600.java": "06f87c8dc6686d1f2c489381d3cd6ad9463f800f986c9ce13196dac309e5c57f",
+    "client-core/src/main/java/org/securemail/client/ClientSession.java": "1716acae23cfe136ea7fddba759557a7fdadcc7342611ebf28a9800c6d1da089",
+    "client-core/src/main/java/org/securemail/client/crypto/PlainMessage.java": "6389f8eab14a792a65cf1e92b02286d53f37634f36982e2ba2dd3caa8f868f24",
+    "client-core/src/main/java/org/securemail/client/ecosystem/ProfileMigration600.java": "2127541f9466fc41eefbc5644d9bb56d15561c99beeae3136cafe4569137f21e",
+    "client-core/src/main/java/org/securemail/client/lifecycle/LifecycleService.java": "bf3fe2df2b67d948192ce3ebc285ee59b1e02b0f3e411279021311b46ce63a5d",
+    "client-core/src/main/java/org/securemail/client/net/PeerServer.java": "58adc5f27b3f7988d1e166e9b88c047fc74bcd0319106bbf9c88e122d2a6364c",
+    "client-core/src/main/java/org/securemail/client/storage/LocalStore.java": "8bc91f97aa5026181214908c76b9d4a59c06a221a01bb3344c9d41f90bf13913",
+    "client-core/src/main/java/org/securemail/client/storage/LocalMailSearch.java": "5df3885fddad8a734e6889e0536e2e15d2a5244435f44aa7d31fa21269640fdb",
+    "client-core/src/test/java/org/securemail/client/attachments600/MailAttachmentManager600Test.java": "315007cd24b10ddfc93dbd07f525c2378212fdcb92fb19e5cc7b83b21d495279",
+    "client-ui/src/main/java/org/securemail/ui/MessengerApp.java": "7c2f8ad8fc8cb70660c27b8c56f199e43bec7b0fa8cc795b67a3ee16db6e33f3",
+    "client-ui/src/main/java/org/securemail/ui/MailViewer.java": "6d14143443ce8d67de7ea3ee8f5261f6ac3d3bd207b5d813d2c975a1fcf48182",
+    "client-ui/src/main/java/org/securemail/ui/MailPairingEntrypoint600.java": "52ee28e9cf777824106adb044bc1070f26c67651502c9a3973fdf4a20eaf8dd9",
+    "client-ui/src/main/java/org/securemail/ui/ecosystem/ComponentEntrypoint.java": "7f1dbc7009949ac518acbcc125e32c8539dafe608e0ec0bdf03265a987a40695",
+    "client-ui/src/smoke/java/org/securemail/ui/MailStreamingSmoke600.java": "46da2753d3d72709580412f1733c3d58e99e842766a228a5ec3e35e39be03357",
+    "client-ui/src/smoke/java/org/securemail/ui/MailOwnerTransferAuthorizationSmoke600.java": "9d555964f348e3af47ebb29870e673b5c1578ae9c9fbd93651dc07fbcf9f851d",
+    "client-ui/src/smoke/java/org/securemail/ui/MailFirstDelegateAuthorizationSmoke600.java": "6b5557392c51e6b46aa74a2a4dda96d975bf2fbdd8ef91f5b3158f63f7b1544d",
+    "client-ui/src/smoke/java/org/securemail/ui/MailOwnerBootstrapAuthorizationSmoke600.java": "e8492a3248a8e4daa65c5aadaa4f2a5b4f5a5beea729148dba6d0eaf80a65962",
+    "client-ui/src/smoke/java/org/securemail/ui/MailCriticalConsentSmoke600.java": "1f6894fc896abba8b66065e8783d29393c01e67bb1d9c81b08f54ff384836be7"
+  },
+  "scopedRegression": {
+    "result": "PASS",
+    "tests": 117,
+    "skips": 0,
+    "sourceStableDuringRun": true,
+    "sourceChangedSinceCompile": [
+      "client-core/src/main/java/org/securemail/client/storage/ProfileSnapshot.java"
+    ],
+    "details": "evidence-streaming/component-junit.xml"
+  },
+  "attachmentFocused": {
+    "result": "PASS",
+    "tests": 11,
+    "scope": "Actual vault/files/Tink/E2EE and explicit DiskRemote unit fixture"
+  },
+  "actualManagerHttp": {
+    "result": "PASS",
+    "details": "../test-results/6.0.0/server/MAIL-MANAGER-E2E-6.0.0.json",
+    "bytes": 524288000,
+    "heapBytes": 100663296,
+    "millis": 373521,
+    "scope": "Actual Identity/Attachment HTTP+SQLite through explicit local SOCKS fixture; no real Relay transport/Tor/physical devices",
+    "sourceBinding": "Initial large checkpoint preceded cancellation/Owner additions; root final integrated build separately gated"
+  },
+  "hostAuthorizationChecks": 18,
+  "criticalConsentLocalChecks": {
+    "ownerTransfer": 14,
+    "firstDelegate": 14,
+    "ownerBootstrap": 14,
+    "scope": "Production local verifiers with signed synthetic fixtures; live server completion not substituted"
+  },
+  "visual": {
+    "streamingPngs": 8,
+    "criticalConsentPngs": 3,
+    "scope": "Actual JavaFX Monocle rendering + real protected letter/vault fixtures; native acceptance NOT_RUN"
+  },
+  "notRun": [
+    "Windows11",
+    "CachyOS KDE Wayland",
+    "CachyOS KDE X11",
+    "real public Tor and Relay message transport",
+    "two physical devices and independent networks",
+    "native microphone/audio",
+    "full owner-signed updater E2E"
+  ],
+  "limitations": [
+    "New large upload requires online peer with fresh root-signed operation102; no offline persistent feature cache",
+    "No autoACK deletion after save; retained ciphertext bounded by server TTL/quotas",
+    "No explicit remote-delete/deferred ACK UI",
+    "Protected file export fails closed if filesystem cannot support secure atomic publication",
+    "Nondefault external archive migration remains blocked as stated in primary desktop report"
+  ],
+  "evidenceSha256": {
+    "docs/desktop600/evidence-streaming/attachment-manager-focused.log": "b54c83c74013492d0f63b8db260b95124a7cc1c8e98b362be00acbe3568c3c42",
+    "docs/desktop600/evidence-streaming/attachment-manager-junit.xml": "a11506792dd55de1d1304f34d54f648f98c461b493faefacbbd603b1d2ff1c20",
+    "docs/desktop600/evidence-streaming/component-before-snapshot-fix.log": "e209c7f815fb92609aebc316410e13562d8d5e79d01feccc8fdb6419bc1828a8",
+    "docs/desktop600/evidence-streaming/component-compile-provenance.json": "bea397e7cf5634e20a5dd3966d83e8d9905e11b302eccff3dfb8ab780e94f07f",
+    "docs/desktop600/evidence-streaming/component-junit.xml": "4bbda993c815a3701d327b6300983b4a58ecac99f533b31ca486554a0c30f3de",
+    "docs/desktop600/evidence-streaming/component-regression.log": "b536ef654c021d6182aee9bececa0e3e0c82ec99282addd23861b7ad8960d6f5",
+    "docs/desktop600/evidence-streaming/critical-consent-ui.log": "4b01f95cce660b0aa241a1b06b607023d0bd672887b15234315f6f928587aca7",
+    "docs/desktop600/evidence-streaming/first-delegate-authorization.log": "49ad31bba9ebb4ccfbd0026eae17a3e396644c5d44467216a96dc29ceb7bd2bc",
+    "docs/desktop600/evidence-streaming/first-delegate-consent.png": "097aae6ae5bbff752ae2006d41d113a939ee5f7bb8af5a023c353d590f43bcaf",
+    "docs/desktop600/evidence-streaming/host-authorization.log": "570774e751eb8c18a14d228bb773d6b622a610e04a70eaf571576b868c195873",
+    "docs/desktop600/evidence-streaming/migration-after-fix.log": "b5333ceb83404e6a48da36a33cf7de7afc617b30667f8abbb982119c1796b574",
+    "docs/desktop600/evidence-streaming/migration-junit.xml": "89ca7ed23deda7e36d5233befb5ddd30fb77add2ac2484814f40598a273c12ac",
+    "docs/desktop600/evidence-streaming/owner-bootstrap-authorization.log": "3201267038432ba9ca320e688dd0d22e196f02c9bdf4a8f5ef1c9dc4868722b5",
+    "docs/desktop600/evidence-streaming/owner-bootstrap-consent.png": "b8fd8e933e5b4e2b74cbb16bdb9314742e99a1dc64810e3d144f481feddc1401",
+    "docs/desktop600/evidence-streaming/owner-transfer-authorization.log": "2b259e162a47cb9e0662ba6fad47257397de2d93a357e1c3698a03f1e0087329",
+    "docs/desktop600/evidence-streaming/owner-transfer-consent.png": "a3faed6f6176a615eaf6a62edd21cd108d0146d5785543f81960beb08851b4af",
+    "docs/desktop600/evidence-streaming/streamed-minimal-dark-100-1024x768.png": "459b3dcde23b2706339e1c87c8bab79a3cc7b9bd75fa18a36dac78356ec97c50",
+    "docs/desktop600/evidence-streaming/streamed-minimal-dark-100-800x600.png": "64c2c59535af1847658252a4d719ed7014d3d1b95085749369831b1d1cc2bc67",
+    "docs/desktop600/evidence-streaming/streamed-minimal-dark-200-1024x768.png": "c855b98371f23b0b145e3406bd5abafd2e4f2d908594efce026a109b42a329d4",
+    "docs/desktop600/evidence-streaming/streamed-minimal-dark-200-800x600.png": "9b247b9164fd23d5e97593aec1903be90858693763c524e75c6158bbe81c00d6",
+    "docs/desktop600/evidence-streaming/streamed-minimal-light-100-1024x768.png": "e0add8e6f1e31ca6eccc797ccad6f8f7f4be897858b7846dec71983c20742404",
+    "docs/desktop600/evidence-streaming/streamed-minimal-light-100-800x600.png": "4b3a83d747ebde71b47055f2f811d1abb7d12e926ac9ad4b486802c6816e8a01",
+    "docs/desktop600/evidence-streaming/streamed-minimal-light-200-1024x768.png": "1caadb96b290fed08f180af4f20a4931da1b7716abe91eae954ab17005dc0fc1",
+    "docs/desktop600/evidence-streaming/streamed-minimal-light-200-800x600.png": "60fe1cda93d6bdf514802b4ee294c2a53e59d5b6301a10b00b08a27f07dc66c8",
+    "docs/desktop600/evidence-streaming/streaming-ui.log": "ae03058e30a9c76879f262e1ae9cc10c88b1e3c9c22ac8d1e500992290ed0ffb"
+  },
+  "sharedDependencyChangedSinceScopedRun": {
+    "path": "client-core/src/main/java/org/securemail/client/storage/ProfileSnapshot.java",
+    "note": "Shared updater snapshot allowlist changed after the scoped run; root integrated build and Identity updater regression gate it separately."
+  }
+}

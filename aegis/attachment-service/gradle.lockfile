@@ -1,0 +1,8 @@
+# This is a Gradle generated file for dependency locking.
+# Manual edits can break the build and are not advised.
+# This file is expected to be part of source control.
+# To regenerate this file, run: ./gradlew :attachment-service:dependencies --write-locks
+com.google.code.gson:gson:2.14.0=compileClasspath
+com.google.errorprone:error_prone_annotations:2.48.0=compileClasspath
+org.xerial:sqlite-jdbc:3.53.4.0=compileClasspath
+empty=annotationProcessor

@@ -1,0 +1,34 @@
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+
+Failures (1):
+  JUnit Jupiter:Legacy500Rollback600Test:exactReleased500CreatesRealIdentityLetterArchiveAndReadsVerifiedRestoredSnapshot()
+    MethodSource [className = 'org.securemail.client.ecosystem.Legacy500Rollback600Test', methodName = 'exactReleased500CreatesRealIdentityLetterArchiveAndReadsVerifiedRestoredSnapshot', methodParameterTypes = '']
+    => java.nio.file.NoSuchFileException: /tmp/junit-1996620409237502560/profile/mail600/migrated-profile6/migration.properties
+       java.base/sun.nio.fs.UnixException.translateToIOException(UnixException.java:92)
+       java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:106)
+       java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:111)
+       java.base/sun.nio.fs.UnixFileAttributeViews$Basic.readAttributes(UnixFileAttributeViews.java:55)
+       java.base/sun.nio.fs.UnixFileSystemProvider.readAttributes(UnixFileSystemProvider.java:171)
+       java.base/sun.nio.fs.LinuxFileSystemProvider.readAttributes(LinuxFileSystemProvider.java:99)
+       java.base/java.nio.file.Files.readAttributes(Files.java:1854)
+       java.base/java.nio.file.Files.size(Files.java:2463)
+       org.securemail.client.storage.AtomicFiles.read(AtomicFiles.java:64)
+       org.securemail.client.ecosystem.ProfileMigration600.existing(ProfileMigration600.java:75)
+       [...]
+
+Test run finished after 88080 ms
+[        19 containers found      ]
+[         0 containers skipped    ]
+[        19 containers started    ]
+[         0 containers aborted    ]
+[        19 containers successful ]
+[         0 containers failed     ]
+[       116 tests found           ]
+[         0 tests skipped         ]
+[       116 tests started         ]
+[         0 tests aborted         ]
+[       115 tests successful      ]
+[         1 tests failed          ]
+

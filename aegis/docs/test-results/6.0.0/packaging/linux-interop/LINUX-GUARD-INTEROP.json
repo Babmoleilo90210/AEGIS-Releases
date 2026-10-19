@@ -1,0 +1,17 @@
+{
+  "tests": [
+    {
+      "case": "native-shared",
+      "result": "PASS"
+    },
+    {
+      "case": "java-exclusive",
+      "result": "PASS"
+    },
+    {
+      "case": "native-bad-symlink",
+      "result": "PASS"
+    }
+  ],
+  "scope": "Real compiled Linux parent fcntl guard, child JVM FileChannel interop and symlink rejection on this host. Native CachyOS/Windows installer acceptance NOT_RUN."
+}

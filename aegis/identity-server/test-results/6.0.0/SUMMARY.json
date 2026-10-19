@@ -1,0 +1,29 @@
+{
+  "status": "PASS_LOCAL",
+  "tests": 45,
+  "pass": 45,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "timestamp": "2026-10-18T13:59:51",
+  "scope": "JDK21 Linux local SQLite/JCA/loopback HTTP/CLI; shared codec javac --release 8",
+  "productionReady": false,
+  "notProven": [
+    "real Tor",
+    "Windows11 native",
+    "CachyOS Wayland/X11 native",
+    "Android physical",
+    "all services enforced single-session",
+    "Mail typed proof UI",
+    "Owner emergency recovery/transfer",
+    "trusted full Community role bridge"
+  ],
+  "sanitizedXml": "JVM properties/system output removed, real testcase names/status/times retained",
+  "sha256": {
+    "TEST-identity.xml": "7043a0328535caaf0a1d7dd2b614718a24c0979e873c4cca90cb287c0dc816ec",
+    "RESULTS.json": "4f160a011e369d7028996ef188dfcc9ce52666bd2adf27057c7f529962275983",
+    "shared-java8.log": "312e9bd919c699a2f8409f70240177012720c94095f0f4374d44152defc50f7e",
+    "javac.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "junit.log": "dcc5240255dc22b2f6831fef2e6d41f27bf9aaafd6fca46ada7d852347f71cae"
+  }
+}

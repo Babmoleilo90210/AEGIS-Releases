@@ -1,0 +1,26 @@
+{
+  "when": "2026-10-18T13:56:08.452262+00:00",
+  "sources": [
+    {
+      "name": "tor-android-sources.jar.asc",
+      "url": "https://raw.githubusercontent.com/guardianproject/gpmaven/master/info/guardianproject/tor-android/0.4.9.14/tor-android-0.4.9.14-sources.jar.asc",
+      "status": 200,
+      "sha256": "d5c20c8d8d09537654993730fb0445cb2b5ef02cd798a711dae2bfb9806b8880",
+      "bytes": 801
+    },
+    {
+      "name": "jtorctl-sources.jar.asc",
+      "url": "https://repo.maven.apache.org/maven2/info/guardianproject/jtorctl/0.4.5.7/jtorctl-0.4.5.7-sources.jar.asc",
+      "status": 200,
+      "sha256": "b6aa4d39749c58d8a02be260971856a2859072430f7c98b762da8869f40387fe",
+      "bytes": 488
+    },
+    {
+      "name": "licenses/OpenSSL-pinned-crypto-init-source.txt",
+      "url": "https://raw.githubusercontent.com/openssl/openssl/45e844fa2a14ec92d146bd8f5778ac130b6625fb/crypto/init.c",
+      "status": 200,
+      "sha256": "6cfee5b1325e54764094e8ad3145c701e825352be18df319ab9b0f90aedf5feb",
+      "bytes": 22807
+    }
+  ]
+}

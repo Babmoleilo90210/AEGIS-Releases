@@ -1,0 +1,44 @@
+{
+  "reviewDate": "2026-10-18",
+  "sources": [
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/wtsapi32/ns-wtsapi32-wtsinfoexw",
+      "usedFor": "WTSINFOEXW Level and union layout"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/wtsapi32/ns-wtsapi32-wtsinfoex_level1_w",
+      "usedFor": "SessionState, SessionFlags, and documented Windows 7 inversion; adapter restricts modern Windows semantics"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/wtsapi32/nf-wtsapi32-wtsquerysessioninformationw",
+      "usedFor": "WTS current-session query and WTSFreeMemory ownership"
+    },
+    {
+      "url": "https://www.freedesktop.org/software/systemd/man/latest/loginctl.html",
+      "usedFor": "show-session self, LockedHint property, --value, no pager/authorization prompts"
+    },
+    {
+      "url": "https://www.freedesktop.org/software/systemd/man/latest/org.freedesktop.login1.html",
+      "usedFor": "LockedHint is desktop-maintained hint; not sufficient alone for UNLOCKED"
+    },
+    {
+      "url": "https://www.freedesktop.org/software/systemd/man/latest/busctl.html",
+      "usedFor": "Fixed local user bus address, call, timeout, disabled service activation/interactive authorization"
+    },
+    {
+      "url": "https://github.com/KDE/kscreenlocker/blob/master/dbus/org.freedesktop.ScreenSaver.xml",
+      "usedFor": "KDE GetActive interface signature",
+      "retrievedSHA256": "e0c71fcb6b85b6e7b6b17219df2d35ea4af008c3dbdc23597c39c7737dae78a3"
+    },
+    {
+      "url": "https://github.com/KDE/kscreenlocker/blob/master/interface.cpp",
+      "usedFor": "KDE service/object registration and GetActive mapped to actual Locked state",
+      "retrievedSHA256": "b65f75e7a45324b4bd8e7812a2fc21aa1283a18a88e5148996250bb624cf3e25"
+    },
+    {
+      "url": "https://specifications.freedesktop.org/basedir/latest/",
+      "usedFor": "XDG_RUNTIME_DIR must be owned by its user and have Unix access mode 0700; reject shared runtime directory instead of trusting an injected bus"
+    }
+  ],
+  "nativeAcceptance": "NOT_RUN"
+}

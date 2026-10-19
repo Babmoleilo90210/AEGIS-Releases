@@ -1,0 +1,7 @@
+{
+  "checkedAt": "2026-10-18T12:46:05.575379+00:00",
+  "scope": "Actual SQLite JDBC native library loaded only into empty in-memory database, no user database",
+  "sqliteVersion": "3.53.4",
+  "sqliteSourceId": "2026-07-24 19:02:57 bf7c7f30031888f4e796e429ab3978879485813aaca6f641c7b33e4e09459bcc",
+  "javaRuntime": "21.0.12.1+1-LTS"
+}

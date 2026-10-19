@@ -1,0 +1,69 @@
+{
+  "checkedAt": "2026-10-18T11:31:41.404268+00:00",
+  "scope": "Actual pinned-public-key Ed25519 verification of main/updates/beta.json and exact signed artifact/checksum/changelog bytes from recovered owner ZIP, not runtime/native acceptance",
+  "manifestVersion": "5.0.0",
+  "manifestChannel": "beta",
+  "manifestTag": "v5.0.0",
+  "manifestSha256": "d9bf1dcf40a1c1e03e3a96df79421a1e02e015313a9f044346542d844b25bc34",
+  "signatureSha256": "cb19da32107aac339996aadae7625c656a78f2bace7dd84cf1b9fcf9d13b3f96",
+  "signatureBytes": 64,
+  "pinnedPublicKeySha256": "26a6c1ada0253d1dd54e45fcead17b2a65703f09b90474e82da460759c5d3174",
+  "publishedKeyEqualsPinnedBaseKey": true,
+  "ed25519SignatureVerified": true,
+  "verificationCommand": "openssl pkeyutl -verify -pubin -inkey PINNED-BASE-release-public.pem -rawin -in PUBLISHED-beta.json -sigfile PUBLISHED-beta.json.sig",
+  "verificationStdout": "Signature Verified Successfully",
+  "verificationStderr": "",
+  "artifacts": [
+    {
+      "fileName": "AEGIS-Setup-5.0.0-x64.exe",
+      "size": 80745648,
+      "sha256": "ebc47479510ccf2b1fd3d7c894f6354323bc978672b06294f214f1b2924314e1",
+      "expectedSize": 80745648,
+      "expectedSha256": "ebc47479510ccf2b1fd3d7c894f6354323bc978672b06294f214f1b2924314e1",
+      "match": true
+    },
+    {
+      "fileName": "AEGIS-5.0.0-Windows-x64.zip",
+      "size": 108339566,
+      "sha256": "17b2ffa567ffe4fd9aef149ccaf39a3dc56ad0312db931dda3ae727cf7a31523",
+      "expectedSize": 108339566,
+      "expectedSha256": "17b2ffa567ffe4fd9aef149ccaf39a3dc56ad0312db931dda3ae727cf7a31523",
+      "match": true
+    },
+    {
+      "fileName": "AEGIS-5.0.0-CachyOS-x86_64.AppImage",
+      "size": 90962424,
+      "sha256": "d27209621b936ff9445d5263c9c3bbf9366b00f9fc200704d00d9682d5bbc270",
+      "expectedSize": 90962424,
+      "expectedSha256": "d27209621b936ff9445d5263c9c3bbf9366b00f9fc200704d00d9682d5bbc270",
+      "match": true
+    },
+    {
+      "fileName": "AEGIS-5.0.0-client-source.zip",
+      "size": 24882383,
+      "sha256": "eeb9e59d772c220eba833553c5faaa88d26883cd0698960f38eaacd900ebd5a2",
+      "expectedSize": 24882383,
+      "expectedSha256": "eeb9e59d772c220eba833553c5faaa88d26883cd0698960f38eaacd900ebd5a2",
+      "match": true
+    },
+    {
+      "fileName": "SHA256SUMS",
+      "size": 3955,
+      "sha256": "7a11d343242b43d4c0a29062bb4663d36ab1f7bc6fe40a193882e01129060016",
+      "expectedSize": 3955,
+      "expectedSha256": "7a11d343242b43d4c0a29062bb4663d36ab1f7bc6fe40a193882e01129060016",
+      "match": true
+    },
+    {
+      "fileName": "CHANGELOG-5.0.0.md",
+      "size": 4688,
+      "sha256": "d79a4b79bacdf52530f588fbd11173769dbbd1150e4dcda1947696acb05b5786",
+      "expectedSize": 4688,
+      "expectedSha256": "d79a4b79bacdf52530f588fbd11173769dbbd1150e4dcda1947696acb05b5786",
+      "match": true
+    }
+  ],
+  "allSignedBytesMatch": true,
+  "ownerPrivateKeyAccessed": false,
+  "productionModified": false
+}

@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="JUnit Jupiter" tests="75" skipped="0" failures="0" errors="0" time="20.925" hostname="2ac91939697e" timestamp="2026-10-18T15:33:51">
+<properties>
+<property name="file.encoding" value="UTF-8"/>
+<property name="file.separator" value="/"/>
+<property name="java.class.path" value="/workspace/scratch/aa629f360927/audit600/library/actual-tests/classes:/workspace/scratch/aa629f360927/audit600/library/test-deps/community-server.jar:/workspace/scratch/aa629f360927/audit600/library/test-deps/sqlite-jdbc-3.53.4.0.jar:/workspace/scratch/aa629f360927/audit600/library/test-deps/slf4j-nop-2.0.17.jar:/workspace/scratch/aa629f360927/audit600/library/test-deps/slf4j-api-2.0.17.jar:/workspace/scratch/aa629f360927/audit600/library/test-deps/common-protocol.jar:/workspace/scratch/aa629f360927/audit600/library/test-deps/gson-2.14.0.jar:/workspace/scratch/aa629f360927/inputs600/linux500/squashfs-root/app/imageio-metadata-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/linux500/squashfs-root/app/javafx-graphics-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs600/linux500/squashfs-root/app/tink-1.23.0.jar:/workspace/scratch/aa629f360927/inputs600/linux500/squashfs-root/app/pdfbox-io-3.0.8.jar:/workspace/scratch/aa629f360927/inputs600/linux500/squashfs-root/app/common-image-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/linux500/squashfs-root/app/pdfbox-3.0.8.jar:/workspace/scratch/aa629f360927/inputs600/linux500/squashfs-root/app/fontbox-3.0.8.jar:/workspace/scratch/aa629f360927/inputs600/linux500/squashfs-root/app/commons-compress-1.28.0.jar:/workspace/scratch/aa629f360927/inputs600/linux500/squashfs-root/app/bcpg-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs600/linux500/squashfs-root/app/common-io-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/linux500/squashfs-root/app/bcprov-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs600/linux500/squashfs-root/app/imageio-core-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/linux500/squashfs-root/app/xz-1.12.jar:/workspace/scratch/aa629f360927/inputs600/linux500/squashfs-root/app/jna-platform-5.19.1.jar:/workspace/scratch/aa629f360927/inputs600/linux500/squashfs-root/app/jna-5.19.1.jar:/workspace/scratch/aa629f360927/inputs600/linux500/squashfs-root/app/zip4j-2.11.6.jar:/workspace/scratch/aa629f360927/inputs600/linux500/squashfs-root/app/imageio-webp-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/linux500/squashfs-root/app/client-core-5.0.0.jar:/workspace/scratch/aa629f360927/inputs600/linux500/squashfs-root/app/commons-lang3-3.18.0.jar:/workspace/scratch/aa629f360927/inputs600/linux500/squashfs-root/app/common-lang-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/linux500/squashfs-root/app/commons-codec-1.19.0.jar:/workspace/scratch/aa629f360927/inputs600/linux500/squashfs-root/app/commons-logging-1.4.0.jar:/workspace/scratch/aa629f360927/inputs600/linux500/squashfs-root/app/jsr305-3.0.2.jar:/workspace/scratch/aa629f360927/inputs600/linux500/squashfs-root/app/commons-io-2.20.0.jar:/workspace/scratch/aa629f360927/inputs600/linux500/squashfs-root/app/javafx-controls-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs600/linux500/squashfs-root/app/error_prone_annotations-2.48.0.jar:/workspace/scratch/aa629f360927/inputs600/linux500/squashfs-root/app/common-protocol-0.2.0.jar:/workspace/scratch/aa629f360927/inputs600/linux500/squashfs-root/app/protobuf-java-4.33.6.jar:/workspace/scratch/aa629f360927/inputs600/linux500/squashfs-root/app/gson-2.14.0.jar:/workspace/scratch/aa629f360927/inputs600/linux500/squashfs-root/app/client-ui-5.0.0.jar:/workspace/scratch/aa629f360927/inputs600/linux500/squashfs-root/app/javafx-base-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs600/linux500/squashfs-root/app/bcutil-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs600/test-deps/junit-platform-console-standalone-1.13.4.jar"/>
+<property name="java.class.version" value="65.0"/>
+<property name="java.home" value="/workspace/scratch/aa629f360927/inputs600/toolchain/jdk-21.0.12.1+1"/>
+<property name="java.io.tmpdir" value="/tmp"/>
+<property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/>
+<property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+<property name="java.runtime.version" value="21.0.12.1+1-LTS"/>
+<property name="java.specification.name" value="Java Platform API Specification"/>
+<property name="java.specification.vendor" value="Oracle Corporation"/>
+<property name="java.specification.version" value="21"/>
+<property name="java.vendor" value="Eclipse Adoptium"/>
+<property name="java.vendor.url" value="https://adoptium.net/"/>
+<property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
+<property name="java.vendor.version" value="Temurin-21.0.12.1+1"/>
+<property name="java.version" value="21.0.12.1"/>
+<property name="java.version.date" value="2026-08-18"/>
+<property name="java.vm.compressedOopsMode" value="32-bit"/>
+<property name="java.vm.info" value="mixed mode, sharing"/>
+<property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+<property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+<property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+<property name="java.vm.specification.version" value="21"/>
+<property name="java.vm.vendor" value="Eclipse Adoptium"/>
+<property name="java.vm.version" value="21.0.12.1+1-LTS"/>
+<property name="jdk.debug" value="release"/>
+<property name="jdk.httpserver.maxConnections" value="32"/>
+<property name="junit.docs.version" value="1.13.4"/>
+<property name="line.separator" value="&#10;"/>
+<property name="native.encoding" value="UTF-8"/>
+<property name="os.arch" value="amd64"/>
+<property name="os.name" value="Linux"/>
+<property name="os.version" value="6.18.55"/>
+<property name="path.separator" value=":"/>
+<property name="stderr.encoding" value="UTF-8"/>
+<property name="stdout.encoding" value="UTF-8"/>
+<property name="sun.arch.data.model" value="64"/>
+<property name="sun.boot.library.path" value="/workspace/scratch/aa629f360927/inputs600/toolchain/jdk-21.0.12.1+1/lib"/>
+<property name="sun.cpu.endian" value="little"/>
+<property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+<property name="sun.java.command" value="org.junit.platform.console.ConsoleLauncher execute --scan-classpath=/workspace/scratch/aa629f360927/audit600/library/actual-tests/classes --include-package org.securemail.client.library600 --include-package org.securemail.community.library600 --include-package org.securemail.client.safeweb --reports-dir /workspace/scratch/aa629f360927/audit600/library/actual-tests/xml --details tree"/>
+<property name="sun.java.launcher" value="SUN_STANDARD"/>
+<property name="sun.jnu.encoding" value="UTF-8"/>
+<property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+<property name="sun.net.httpserver.maxReqHeaders" value="16"/>
+<property name="sun.net.httpserver.maxReqTime" value="30"/>
+<property name="sun.net.httpserver.maxRspTime" value="30"/>
+<property name="user.dir" value="/workspace/scratch/aa629f360927"/>
+<property name="user.home" value="/root"/>
+<property name="user.language" value="en"/>
+<property name="user.name" value="root"/>
+<property name="user.timezone" value="Europe/Stockholm"/>
+</properties>
+<testcase name="syncthingPolicyHasNoProxyFallbackOrDiscovery()" classname="org.securemail.client.library600.LibraryProtection600Test" time="0.024">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.LibraryProtection600Test]/[method:syncthingPolicyHasNoProxyFallbackOrDiscovery()]
+display-name: syncthingPolicyHasNoProxyFallbackOrDiscovery()
+]]></system-out>
+</testcase>
+<testcase name="officialSourceAndEveryRedirectAreNarrowlyBound()" classname="org.securemail.client.library600.ObsidianBoundary600Test" time="0.035">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.ObsidianBoundary600Test]/[method:officialSourceAndEveryRedirectAreNarrowlyBound()]
+display-name: officialSourceAndEveryRedirectAreNarrowlyBound()
+]]></system-out>
+</testcase>
+<testcase name="freshReadAuthorizationDoesNotRequireExportAndDetectsPerMaterialRevocation()" classname="org.securemail.community.library600.LibraryHttpIntegration600Test" time="2.017">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.library600.LibraryHttpIntegration600Test]/[method:freshReadAuthorizationDoesNotRequireExportAndDetectsPerMaterialRevocation()]
+display-name: freshReadAuthorizationDoesNotRequireExportAndDetectsPerMaterialRevocation()
+]]></system-out>
+</testcase>
+<testcase name="noClearnetConstructorOrTorUnavailableFallback()" classname="org.securemail.community.library600.LibraryHttpIntegration600Test" time="0.368">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.library600.LibraryHttpIntegration600Test]/[method:noClearnetConstructorOrTorUnavailableFallback()]
+display-name: noClearnetConstructorOrTorUnavailableFallback()
+]]></system-out>
+</testcase>
+<testcase name="monotonicExpiryCannotBeExtendedByWallClock()" classname="org.securemail.client.library600.LibraryProtection600Test" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.LibraryProtection600Test]/[method:monotonicExpiryCannotBeExtendedByWallClock()]
+display-name: monotonicExpiryCannotBeExtendedByWallClock()
+]]></system-out>
+</testcase>
+<testcase name="personalProcessGetsOnlyItsOwnWritableVaultAndConfigurationInSeparateNetworkNamespace()" classname="org.securemail.client.library600.ObsidianBoundary600Test" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.ObsidianBoundary600Test]/[method:personalProcessGetsOnlyItsOwnWritableVaultAndConfigurationInSeparateNetworkNamespace()]
+display-name: personalProcessGetsOnlyItsOwnWritableVaultAndConfigurationInSeparateNetworkNamespace()
+]]></system-out>
+</testcase>
+<testcase name="actualSignedIdentityBridgeAllowsPublicReadButDeniesClosedContent()" classname="org.securemail.community.library600.LibraryHttpIntegration600Test" time="1.323">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.library600.LibraryHttpIntegration600Test]/[method:actualSignedIdentityBridgeAllowsPublicReadButDeniesClosedContent()]
+display-name: actualSignedIdentityBridgeAllowsPublicReadButDeniesClosedContent()
+]]></system-out>
+</testcase>
+<testcase name="plaintextProjectionRequiresOfflinePolicyAndIndependentExportPermission()" classname="org.securemail.community.library600.LibraryController600Test" time="0.11">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.library600.LibraryController600Test]/[method:plaintextProjectionRequiresOfflinePolicyAndIndependentExportPermission()]
+display-name: plaintextProjectionRequiresOfflinePolicyAndIndependentExportPermission()
+]]></system-out>
+</testcase>
+<testcase name="accessRequestIsScopedIdempotentAndDecisionCannotBypassAcl()" classname="org.securemail.community.library600.LibraryController600Test" time="0.118">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.library600.LibraryController600Test]/[method:accessRequestIsScopedIdempotentAndDecisionCannotBypassAcl()]
+display-name: accessRequestIsScopedIdempotentAndDecisionCannotBypassAcl()
+]]></system-out>
+</testcase>
+<testcase name="explicitlyPermittedOfflineSnapshotRemainsMonotonicallyBounded()" classname="org.securemail.client.library600.LibraryReadPermit600Test" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.LibraryReadPermit600Test]/[method:explicitlyPermittedOfflineSnapshotRemainsMonotonicallyBounded()]
+display-name: explicitlyPermittedOfflineSnapshotRemainsMonotonicallyBounded()
+]]></system-out>
+</testcase>
+<testcase name="rollbackAndUnreasonableTransitFailClosed()" classname="org.securemail.client.library600.LibraryReadPermit600Test" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.LibraryReadPermit600Test]/[method:rollbackAndUnreasonableTransitFailClosed()]
+display-name: rollbackAndUnreasonableTransitFailClosed()
+]]></system-out>
+</testcase>
+<testcase name="remoteEmbedsAndMalformedUnicodeRejected()" classname="org.securemail.client.library600.LibraryProtection600Test" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.LibraryProtection600Test]/[method:remoteEmbedsAndMalformedUnicodeRejected()]
+display-name: remoteEmbedsAndMalformedUnicodeRejected()
+]]></system-out>
+</testcase>
+<testcase name="reviewedPackageIsAtomicAndEveryExecutableResourceIsReverified()" classname="org.securemail.client.library600.ObsidianBoundary600Test" time="0.021">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.ObsidianBoundary600Test]/[method:reviewedPackageIsAtomicAndEveryExecutableResourceIsReverified()]
+display-name: reviewedPackageIsAtomicAndEveryExecutableResourceIsReverified()
+]]></system-out>
+</testcase>
+<testcase name="proposalPaginationExcludesBodyAndReturnsEveryOwnedProposal()" classname="org.securemail.community.library600.LibraryController600Test" time="0.154">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.library600.LibraryController600Test]/[method:proposalPaginationExcludesBodyAndReturnsEveryOwnedProposal()]
+display-name: proposalPaginationExcludesBodyAndReturnsEveryOwnedProposal()
+]]></system-out>
+</testcase>
+<testcase name="changedRetryPayloadRejectedAndProposalsDoNotLeakAcrossUsers()" classname="org.securemail.community.library600.LibraryController600Test" time="0.13">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.library600.LibraryController600Test]/[method:changedRetryPayloadRejectedAndProposalsDoNotLeakAcrossUsers()]
+display-name: changedRetryPayloadRejectedAndProposalsDoNotLeakAcrossUsers()
+]]></system-out>
+</testcase>
+<testcase name="exactOperationBindingRejectsMutationReplayAndDuplicateJson()" classname="org.securemail.community.library600.LibraryHttpIntegration600Test" time="2.201">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.library600.LibraryHttpIntegration600Test]/[method:exactOperationBindingRejectsMutationReplayAndDuplicateJson()]
+display-name: exactOperationBindingRejectsMutationReplayAndDuplicateJson()
+]]></system-out>
+</testcase>
+<testcase name="actualPerMaterialCacheAuthorizationHasNoBodyAndRevocationDeniesStoredCiphertext()" classname="org.securemail.community.library600.LibraryHttpIntegration600Test" time="0.95">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.library600.LibraryHttpIntegration600Test]/[method:actualPerMaterialCacheAuthorizationHasNoBodyAndRevocationDeniesStoredCiphertext()]
+display-name: actualPerMaterialCacheAuthorizationHasNoBodyAndRevocationDeniesStoredCiphertext()
+]]></system-out>
+</testcase>
+<testcase name="validProjectionAndIdenticalRetryRenewOnlyFreshVerifiedLease()" classname="org.securemail.client.library600.LibraryConnector600Test" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.LibraryConnector600Test]/[method:validProjectionAndIdenticalRetryRenewOnlyFreshVerifiedLease()]
+display-name: validProjectionAndIdenticalRetryRenewOnlyFreshVerifiedLease()
+]]></system-out>
+</testcase>
+<testcase name="requestBoundsAndStrictIntegerInputRejectMalformedValues()" classname="org.securemail.community.library600.LibraryController600Test" time="0.096">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.library600.LibraryController600Test]/[method:requestBoundsAndStrictIntegerInputRejectMalformedValues()]
+display-name: requestBoundsAndStrictIntegerInputRejectMalformedValues()
+]]></system-out>
+</testcase>
+<testcase name="wallRollbackAndForwardJumpFailClosed()" classname="org.securemail.client.library600.LibraryProtection600Test" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.LibraryProtection600Test]/[method:wallRollbackAndForwardJumpFailClosed()]
+display-name: wallRollbackAndForwardJumpFailClosed()
+]]></system-out>
+</testcase>
+<testcase name="generationDeviceEpochAndRevocationBound()" classname="org.securemail.client.library600.LibraryProtection600Test" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.LibraryProtection600Test]/[method:generationDeviceEpochAndRevocationBound()]
+display-name: generationDeviceEpochAndRevocationBound()
+]]></system-out>
+</testcase>
+<testcase name="policyDenialEpochChangeAndDifferentAccountFailClosed()" classname="org.securemail.client.library600.LibraryEncryptedCache600Test" time="0.01">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.LibraryEncryptedCache600Test]/[method:policyDenialEpochChangeAndDifferentAccountFailClosed()]
+display-name: policyDenialEpochChangeAndDifferentAccountFailClosed()
+]]></system-out>
+</testcase>
+<testcase name="wrongIdentityDeviceOrGenerationClearsPriorPlaintext()" classname="org.securemail.client.library600.LibraryConnector600Test" time="0.008">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.LibraryConnector600Test]/[method:wrongIdentityDeviceOrGenerationClearsPriorPlaintext()]
+display-name: wrongIdentityDeviceOrGenerationClearsPriorPlaintext()
+]]></system-out>
+</testcase>
+<testcase name="epochChangeClearsPreviouslyProjectedMaterials()" classname="org.securemail.client.library600.LibraryConnector600Test" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.LibraryConnector600Test]/[method:epochChangeClearsPreviouslyProjectedMaterials()]
+display-name: epochChangeClearsPreviouslyProjectedMaterials()
+]]></system-out>
+</testcase>
+<testcase name="restartNeverRestoresPermitsAndRequiresFreshMaterialAuthorization()" classname="org.securemail.client.library600.LibraryEncryptedCache600Test" time="0.01">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.LibraryEncryptedCache600Test]/[method:restartNeverRestoresPermitsAndRequiresFreshMaterialAuthorization()]
+display-name: restartNeverRestoresPermitsAndRequiresFreshMaterialAuthorization()
+]]></system-out>
+</testcase>
+<testcase name="personalVmHasOnlyTwoNarrowWritablePersonalMappingsAndNoProtectedProfile()" classname="org.securemail.client.safeweb.ObsidianWindowsBoundary600Test" time="0.047">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.ObsidianWindowsBoundary600Test]/[method:personalVmHasOnlyTwoNarrowWritablePersonalMappingsAndNoProtectedProfile()]
+display-name: personalVmHasOnlyTwoNarrowWritablePersonalMappingsAndNoProtectedProfile()
+]]></system-out>
+</testcase>
+<testcase name="renewalCannotTurnPreviouslyPermittedCopyIntoUnboundedOfflineAccess()" classname="org.securemail.client.library600.LibraryReadPermit600Test" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.LibraryReadPermit600Test]/[method:renewalCannotTurnPreviouslyPermittedCopyIntoUnboundedOfflineAccess()]
+display-name: renewalCannotTurnPreviouslyPermittedCopyIntoUnboundedOfflineAccess()
+]]></system-out>
+</testcase>
+<testcase name="stalledRpcDoesNotPreventExpiryOrRevocationMaintenance()" classname="org.securemail.client.library600.LibraryConnector600Test" time="0.009">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.LibraryConnector600Test]/[method:stalledRpcDoesNotPreventExpiryOrRevocationMaintenance()]
+display-name: stalledRpcDoesNotPreventExpiryOrRevocationMaintenance()
+]]></system-out>
+</testcase>
+<testcase name="measuredRoundTripAndLocalSignedExpiryAreSubtracted()" classname="org.securemail.client.library600.LibraryReadPermit600Test" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.LibraryReadPermit600Test]/[method:measuredRoundTripAndLocalSignedExpiryAreSubtracted()]
+display-name: measuredRoundTripAndLocalSignedExpiryAreSubtracted()
+]]></system-out>
+</testcase>
+<testcase name="newLoginAtomicallyRevokesGenerationForFreshLibraryRequests()" classname="org.securemail.community.library600.LibraryHttpIntegration600Test" time="0.405">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.library600.LibraryHttpIntegration600Test]/[method:newLoginAtomicallyRevokesGenerationForFreshLibraryRequests()]
+display-name: newLoginAtomicallyRevokesGenerationForFreshLibraryRequests()
+]]></system-out>
+</testcase>
+<testcase name="unavailableOsStoreNeverCreatesAPlaintextKeyFallback()" classname="org.securemail.client.library600.LibraryEncryptedCache600Test" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.LibraryEncryptedCache600Test]/[method:unavailableOsStoreNeverCreatesAPlaintextKeyFallback()]
+display-name: unavailableOsStoreNeverCreatesAPlaintextKeyFallback()
+]]></system-out>
+</testcase>
+<testcase name="revokeAndCloseStopProjection()" classname="org.securemail.client.library600.LibraryConnector600Test" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.LibraryConnector600Test]/[method:revokeAndCloseStopProjection()]
+display-name: revokeAndCloseStopProjection()
+]]></system-out>
+</testcase>
+<testcase name="largeActualDocumentExceedsIdentity64kFramingWithoutWeakeningSignatures()" classname="org.securemail.community.library600.LibraryHttpIntegration600Test" time="0.377">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.library600.LibraryHttpIntegration600Test]/[method:largeActualDocumentExceedsIdentity64kFramingWithoutWeakeningSignatures()]
+display-name: largeActualDocumentExceedsIdentity64kFramingWithoutWeakeningSignatures()
+]]></system-out>
+</testcase>
+<testcase name="actualHttpDiscoveryRequestsAndProposalApprovalPersistAndDoNotGrantReadImplicitly()" classname="org.securemail.community.library600.LibraryHttpIntegration600Test" time="1.633">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.library600.LibraryHttpIntegration600Test]/[method:actualHttpDiscoveryRequestsAndProposalApprovalPersistAndDoNotGrantReadImplicitly()]
+display-name: actualHttpDiscoveryRequestsAndProposalApprovalPersistAndDoNotGrantReadImplicitly()
+]]></system-out>
+</testcase>
+<testcase name="expiredOrStaleAuthorityEpochDeniedEvenIfCallerIsEditor()" classname="org.securemail.community.library600.LibraryController600Test" time="0.105">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.library600.LibraryController600Test]/[method:expiredOrStaleAuthorityEpochDeniedEvenIfCallerIsEditor()]
+display-name: expiredOrStaleAuthorityEpochDeniedEvenIfCallerIsEditor()
+]]></system-out>
+</testcase>
+<testcase name="explicitDiscoveryContainsOnlyApprovedTitleAndNoBodyOrInternalMaterialId()" classname="org.securemail.community.library600.LibraryController600Test" time="0.126">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.library600.LibraryController600Test]/[method:explicitDiscoveryContainsOnlyApprovedTitleAndNoBodyOrInternalMaterialId()]
+display-name: explicitDiscoveryContainsOnlyApprovedTitleAndNoBodyOrInternalMaterialId()
+]]></system-out>
+</testcase>
+<testcase name="noRoleCannotGrantDiscoveryAndClientActorFieldRejected()" classname="org.securemail.community.library600.LibraryController600Test" time="0.1">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.library600.LibraryController600Test]/[method:noRoleCannotGrantDiscoveryAndClientActorFieldRejected()]
+display-name: noRoleCannotGrantDiscoveryAndClientActorFieldRejected()
+]]></system-out>
+</testcase>
+<testcase name="existingUserDirectoryNeverAdopted()" classname="org.securemail.client.library600.LibraryProtection600Test" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.LibraryProtection600Test]/[method:existingUserDirectoryNeverAdopted()]
+display-name: existingUserDirectoryNeverAdopted()
+]]></system-out>
+</testcase>
+<testcase name="approvedScriptChangedOrExtraCodeFailsProfileCheck()" classname="org.securemail.client.library600.LibraryProtection600Test" time="0.01">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.LibraryProtection600Test]/[method:approvedScriptChangedOrExtraCodeFailsProfileCheck()]
+display-name: approvedScriptChangedOrExtraCodeFailsProfileCheck()
+]]></system-out>
+</testcase>
+<testcase name="protectedProfilePinsExecutableAndRefusesUnexpectedPlugins()" classname="org.securemail.client.library600.LibraryProtection600Test" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.LibraryProtection600Test]/[method:protectedProfilePinsExecutableAndRefusesUnexpectedPlugins()]
+display-name: protectedProfilePinsExecutableAndRefusesUnexpectedPlugins()
+]]></system-out>
+</testcase>
+<testcase name="encryptsBodyAndMetadataAndRejectsTampering()" classname="org.securemail.client.library600.LibraryEncryptedCache600Test" time="0.008">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.LibraryEncryptedCache600Test]/[method:encryptsBodyAndMetadataAndRejectsTampering()]
+display-name: encryptsBodyAndMetadataAndRejectsTampering()
+]]></system-out>
+</testcase>
+<testcase name="expiryPrunesAndCloseClearsPlaintext()" classname="org.securemail.client.library600.LibraryProtection600Test" time="0.01">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.LibraryProtection600Test]/[method:expiryPrunesAndCloseClearsPlaintext()]
+display-name: expiryPrunesAndCloseClearsPlaintext()
+]]></system-out>
+</testcase>
+<testcase name="identityContextNotArbitraryClientObjectAndDefaultAuthorityMissing()" classname="org.securemail.community.library600.LibraryController600Test" time="0.112">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.library600.LibraryController600Test]/[method:identityContextNotArbitraryClientObjectAndDefaultAuthorityMissing()]
+display-name: identityContextNotArbitraryClientObjectAndDefaultAuthorityMissing()
+]]></system-out>
+</testcase>
+<testcase name="missingOfflineGrantFailsClosedAndNoFileIsWritten()" classname="org.securemail.client.library600.LibraryConnector600Test" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.LibraryConnector600Test]/[method:missingOfflineGrantFailsClosedAndNoFileIsWritten()]
+display-name: missingOfflineGrantFailsClosedAndNoFileIsWritten()
+]]></system-out>
+</testcase>
+<testcase name="vmConfigUsesOnlyReadOnlyMappingsAndNoHostNetworkClipboardOrAudio()" classname="org.securemail.client.safeweb.ObsidianWindowsBoundary600Test" time="0.041">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.ObsidianWindowsBoundary600Test]/[method:vmConfigUsesOnlyReadOnlyMappingsAndNoHostNetworkClipboardOrAudio()]
+display-name: vmConfigUsesOnlyReadOnlyMappingsAndNoHostNetworkClipboardOrAudio()
+]]></system-out>
+</testcase>
+<testcase name="staleEpochAndInvalidIntegerRejectRatherThanRound()" classname="org.securemail.client.library600.LibraryConnector600Test" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.LibraryConnector600Test]/[method:staleEpochAndInvalidIntegerRejectRatherThanRound()]
+display-name: staleEpochAndInvalidIntegerRejectRatherThanRound()
+]]></system-out>
+</testcase>
+<testcase name="proposalRequiresSeparateRightAndNeverPublishesBeforeApproval()" classname="org.securemail.community.library600.LibraryController600Test" time="0.138">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.library600.LibraryController600Test]/[method:proposalRequiresSeparateRightAndNeverPublishesBeforeApproval()]
+display-name: proposalRequiresSeparateRightAndNeverPublishesBeforeApproval()
+]]></system-out>
+</testcase>
+<testcase name="dedicatedCliActuallyInitializesInspectsStartsAndSharesAuthenticatedCommunityAudit()" classname="org.securemail.community.library600.LibraryHttpIntegration600Test" time="1.882">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.library600.LibraryHttpIntegration600Test]/[method:dedicatedCliActuallyInitializesInspectsStartsAndSharesAuthenticatedCommunityAudit()]
+display-name: dedicatedCliActuallyInitializesInspectsStartsAndSharesAuthenticatedCommunityAudit()
+]]></system-out>
+</testcase>
+<testcase name="actualHttpProjectionAndPermissionRevocationClearManagedPlaintext()" classname="org.securemail.community.library600.LibraryHttpIntegration600Test" time="0.686">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.library600.LibraryHttpIntegration600Test]/[method:actualHttpProjectionAndPermissionRevocationClearManagedPlaintext()]
+display-name: actualHttpProjectionAndPermissionRevocationClearManagedPlaintext()
+]]></system-out>
+</testcase>
+<testcase name="forgedAppProofAndWrongServicePinsRejected()" classname="org.securemail.community.library600.LibraryHttpIntegration600Test" time="1.497">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.library600.LibraryHttpIntegration600Test]/[method:forgedAppProofAndWrongServicePinsRejected()]
+display-name: forgedAppProofAndWrongServicePinsRejected()
+]]></system-out>
+</testcase>
+<testcase name="revisionBodyEpochAndIdentityChangesInvalidateDisplayedSnapshot()" classname="org.securemail.client.library600.LibraryReadPermit600Test" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.LibraryReadPermit600Test]/[method:revisionBodyEpochAndIdentityChangesInvalidateDisplayedSnapshot()]
+display-name: revisionBodyEpochAndIdentityChangesInvalidateDisplayedSnapshot()
+]]></system-out>
+</testcase>
+<testcase name="onlineReadNeedsNoExportButCannotUseOfflineAndRequiresRefreshWithinMinute()" classname="org.securemail.client.library600.LibraryReadPermit600Test" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.LibraryReadPermit600Test]/[method:onlineReadNeedsNoExportButCannotUseOfflineAndRequiresRefreshWithinMinute()]
+display-name: onlineReadNeedsNoExportButCannotUseOfflineAndRequiresRefreshWithinMinute()
+]]></system-out>
+</testcase>
+<testcase name="leaseRejectsOnlineOnlyAndOver24hours()" classname="org.securemail.client.library600.LibraryProtection600Test" time="0.022">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.LibraryProtection600Test]/[method:leaseRejectsOnlineOnlyAndOver24hours()]
+display-name: leaseRejectsOnlineOnlyAndOver24hours()
+]]></system-out>
+</testcase>
+<testcase name="retractedProposalAuthorCannotContinueReadingAfterAclRevocation()" classname="org.securemail.community.library600.LibraryController600Test" time="0.148">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.library600.LibraryController600Test]/[method:retractedProposalAuthorCannotContinueReadingAfterAclRevocation()]
+display-name: retractedProposalAuthorCannotContinueReadingAfterAclRevocation()
+]]></system-out>
+</testcase>
+<testcase name="actualSqlitePersistenceAndMigrationAreIdempotent()" classname="org.securemail.community.library600.LibraryController600Test" time="0.097">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.library600.LibraryController600Test]/[method:actualSqlitePersistenceAndMigrationAreIdempotent()]
+display-name: actualSqlitePersistenceAndMigrationAreIdempotent()
+]]></system-out>
+</testcase>
+<testcase name="guestBootstrapHasFixedInstallerArgumentsIndependentProfileAndLeaseButNoHostCommandInput()" classname="org.securemail.client.safeweb.ObsidianWindowsBoundary600Test" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.safeweb.ObsidianWindowsBoundary600Test]/[method:guestBootstrapHasFixedInstallerArgumentsIndependentProfileAndLeaseButNoHostCommandInput()]
+display-name: guestBootstrapHasFixedInstallerArgumentsIndependentProfileAndLeaseButNoHostCommandInput()
+]]></system-out>
+</testcase>
+<testcase name="protectedSettingsCopyOnlyPinnedCodeAndCannotEnableUnapprovedPlugins()" classname="org.securemail.client.library600.ObsidianBoundary600Test" time="0.124">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.ObsidianBoundary600Test]/[method:protectedSettingsCopyOnlyPinnedCodeAndCannotEnableUnapprovedPlugins()]
+display-name: protectedSettingsCopyOnlyPinnedCodeAndCannotEnableUnapprovedPlugins()
+]]></system-out>
+</testcase>
+<testcase name="wrongPinAndCancelledPreparationNeverPublishBundle()" classname="org.securemail.client.library600.ObsidianBoundary600Test" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.ObsidianBoundary600Test]/[method:wrongPinAndCancelledPreparationNeverPublishBundle()]
+display-name: wrongPinAndCancelledPreparationNeverPublishBundle()
+]]></system-out>
+</testcase>
+<testcase name="nanoTimeWrapRemainsBounded()" classname="org.securemail.client.library600.LibraryProtection600Test" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.LibraryProtection600Test]/[method:nanoTimeWrapRemainsBounded()]
+display-name: nanoTimeWrapRemainsBounded()
+]]></system-out>
+</testcase>
+<testcase name="revokedSessionOrGenerationNeverReachesContent()" classname="org.securemail.community.library600.LibraryController600Test" time="0.082">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.library600.LibraryController600Test]/[method:revokedSessionOrGenerationNeverReachesContent()]
+display-name: revokedSessionOrGenerationNeverReachesContent()
+]]></system-out>
+</testcase>
+<testcase name="discoveryRevocationInvalidatesTitleAndRequests()" classname="org.securemail.community.library600.LibraryController600Test" time="0.075">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.library600.LibraryController600Test]/[method:discoveryRevocationInvalidatesTitleAndRequests()]
+display-name: discoveryRevocationInvalidatesTitleAndRequests()
+]]></system-out>
+</testcase>
+<testcase name="originalMonotonicLeaseExpiresAndCannotBeRecreatedFromDisk()" classname="org.securemail.client.library600.LibraryEncryptedCache600Test" time="0.009">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.LibraryEncryptedCache600Test]/[method:originalMonotonicLeaseExpiresAndCannotBeRecreatedFromDisk()]
+display-name: originalMonotonicLeaseExpiresAndCannotBeRecreatedFromDisk()
+]]></system-out>
+</testcase>
+<testcase name="protectedCommandHasNoNetworkHostIpcOrChromiumSandboxBypass()" classname="org.securemail.client.library600.ObsidianBoundary600Test" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.ObsidianBoundary600Test]/[method:protectedCommandHasNoNetworkHostIpcOrChromiumSandboxBypass()]
+display-name: protectedCommandHasNoNetworkHostIpcOrChromiumSandboxBypass()
+]]></system-out>
+</testcase>
+<testcase name="fileSwapAndWrongCurrentRevisionOrHashCannotRevealCachedContent()" classname="org.securemail.client.library600.LibraryEncryptedCache600Test" time="0.012">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.LibraryEncryptedCache600Test]/[method:fileSwapAndWrongCurrentRevisionOrHashCannotRevealCachedContent()]
+display-name: fileSwapAndWrongCurrentRevisionOrHashCannotRevealCachedContent()
+]]></system-out>
+</testcase>
+<testcase name="proposalLimitsMatchExistingContentBeforePersistingUnapprovableDraft()" classname="org.securemail.community.library600.LibraryController600Test" time="0.209">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.library600.LibraryController600Test]/[method:proposalLimitsMatchExistingContentBeforePersistingUnapprovableDraft()]
+display-name: proposalLimitsMatchExistingContentBeforePersistingUnapprovableDraft()
+]]></system-out>
+</testcase>
+<testcase name="postDispatchIdentityRecheckRollsBackMutation()" classname="org.securemail.community.library600.LibraryController600Test" time="0.099">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.library600.LibraryController600Test]/[method:postDispatchIdentityRecheckRollsBackMutation()]
+display-name: postDispatchIdentityRecheckRollsBackMutation()
+]]></system-out>
+</testcase>
+<testcase name="writesOnlyUuidAtomicallyAndPreservesPreviousOnFailure()" classname="org.securemail.client.library600.LibraryProtection600Test" time="0.069">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.LibraryProtection600Test]/[method:writesOnlyUuidAtomicallyAndPreservesPreviousOnFailure()]
+display-name: writesOnlyUuidAtomicallyAndPreservesPreviousOnFailure()
+]]></system-out>
+</testcase>
+<testcase name="restartClearsOnlyOwnedProjectionAndNeedsFreshPermit()" classname="org.securemail.client.library600.LibraryProtection600Test" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.LibraryProtection600Test]/[method:restartClearsOnlyOwnedProjectionAndNeedsFreshPermit()]
+display-name: restartClearsOnlyOwnedProjectionAndNeedsFreshPermit()
+]]></system-out>
+</testcase>
+<testcase name="identityOwnerAuthorityIsRequestScopedWithoutLocalAdminRowAndDoesNotBypassClosedRead()" classname="org.securemail.community.library600.LibraryHttpIntegration600Test" time="4.572">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.library600.LibraryHttpIntegration600Test]/[method:identityOwnerAuthorityIsRequestScopedWithoutLocalAdminRowAndDoesNotBypassClosedRead()]
+display-name: identityOwnerAuthorityIsRequestScopedWithoutLocalAdminRowAndDoesNotBypassClosedRead()
+]]></system-out>
+</testcase>
+<testcase name="hiddenContentNotReturnedByReadFileExportCatalogOrGraph()" classname="org.securemail.community.library600.LibraryController600Test" time="0.1">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.library600.LibraryController600Test]/[method:hiddenContentNotReturnedByReadFileExportCatalogOrGraph()]
+display-name: hiddenContentNotReturnedByReadFileExportCatalogOrGraph()
+]]></system-out>
+</testcase>
+<testcase name="traversalSymlinksAndDuplicateArchiveNamesAreRejectedBeforePublication()" classname="org.securemail.client.library600.ObsidianBoundary600Test" time="0.011">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.ObsidianBoundary600Test]/[method:traversalSymlinksAndDuplicateArchiveNamesAreRejectedBeforePublication()]
+display-name: traversalSymlinksAndDuplicateArchiveNamesAreRejectedBeforePublication()
+]]></system-out>
+</testcase>
+<testcase name="cacheCapacityAndInputBoundsAreEnforced()" classname="org.securemail.client.library600.LibraryEncryptedCache600Test" time="0.094">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.LibraryEncryptedCache600Test]/[method:cacheCapacityAndInputBoundsAreEnforced()]
+display-name: cacheCapacityAndInputBoundsAreEnforced()
+]]></system-out>
+</testcase>
+<testcase name="fileDownloadsRecheckLibraryAclAndCannotReadNewsFiles()" classname="org.securemail.community.library600.LibraryController600Test" time="0.117">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.library600.LibraryController600Test]/[method:fileDownloadsRecheckLibraryAclAndCannotReadNewsFiles()]
+display-name: fileDownloadsRecheckLibraryAclAndCannotReadNewsFiles()
+]]></system-out>
+</testcase>
+<testcase name="symlinkTargetAndAncestorRejected()" classname="org.securemail.client.library600.LibraryProtection600Test" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.library600.LibraryProtection600Test]/[method:symlinkTargetAndAncestorRejected()]
+display-name: symlinkTargetAndAncestorRejected()
+]]></system-out>
+</testcase>
+<testcase name="staleProposalDoesNotOverwriteNewerRevision()" classname="org.securemail.community.library600.LibraryController600Test" time="0.105">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.community.library600.LibraryController600Test]/[method:staleProposalDoesNotOverwriteNewerRevision()]
+display-name: staleProposalDoesNotOverwriteNewerRevision()
+]]></system-out>
+</testcase>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]
+display-name: JUnit Jupiter
+]]></system-out>
+</testsuite>

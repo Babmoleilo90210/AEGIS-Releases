@@ -77,7 +77,7 @@ public final class CommunityStore implements AutoCloseable {
  public static long count(Connection c,String table)throws SQLException{if(!Set.of("identities","roles","organizations","org_applications","critical_requests").contains(table))throw new IllegalArgumentException();try(var s=c.createStatement();var r=s.executeQuery("SELECT count(*) FROM "+table)){r.next();return r.getLong(1);}}
  public void bumpEpoch(Connection c)throws SQLException{try(var q=c.createStatement()){q.executeUpdate("UPDATE identities SET epoch=epoch+1");}}
  public void bumpEpoch(Connection c,String identity)throws SQLException{try(var q=c.prepareStatement("UPDATE identities SET epoch=epoch+1 WHERE identity=?")){q.setString(1,identity);q.executeUpdate();}}
- public void bumpRoleEpoch(Connection c,String role)throws SQLException{try(var q=c.prepareStatement("WITH RECURSIVE descendants(id) AS (SELECT ? UNION SELECT p.role FROM role_parents p JOIN descendants d ON p.parent=d.id) UPDATE identities SET epoch=epoch+1 WHERE identity IN (SELECT a.identity FROM assignments a JOIN descendants d ON d.id=a.role)")){q.setString(1,role);q.executeUpdate();}}
+ public void bumpRoleEpoch(Connection c,String role)throws SQLException{try(var q=c.prepareStatement("WITH RECURSIVE descendants(id) AS (SELECT ? UNION SELECT p.role FROM role_parents p JOIN descendants d ON p.parent=d.id) UPDATE identities SET epoch=epoch+1 WHERE identity IN (SELECT a.identity FROM assignments a JOIN descendants d ON d.id=a.role UNION SELECT a.identity FROM role_restrictions a JOIN descendants d ON d.id=a.role)")){q.setString(1,role);q.executeUpdate();}}
  public void revokeStepUp(Connection c,String identity)throws SQLException{try(var q=c.prepareStatement("DELETE FROM stepup_tokens WHERE identity=?")){q.setString(1,identity);q.executeUpdate();}try(var q=c.prepareStatement("DELETE FROM stepup_challenges WHERE identity=?")){q.setString(1,identity);q.executeUpdate();}}
  @Override public synchronized void close()throws SQLException{if(auditKey!=null)Arrays.fill(auditKey,(byte)0);db.close();}
  private static final List<String>SCHEMA=List.of(
@@ -86,8 +86,13 @@ public final class CommunityStore implements AutoCloseable {
  "CREATE TABLE IF NOT EXISTS access_levels(id TEXT PRIMARY KEY,name TEXT NOT NULL UNIQUE,rank INTEGER NOT NULL UNIQUE,revision INTEGER NOT NULL DEFAULT 1)",
  "CREATE TABLE IF NOT EXISTS roles(id TEXT PRIMARY KEY,scope TEXT NOT NULL,name TEXT NOT NULL,clearance INTEGER NOT NULL DEFAULT 0,revision INTEGER NOT NULL DEFAULT 1,UNIQUE(scope,name))",
  "CREATE TABLE IF NOT EXISTS role_permissions(role TEXT NOT NULL REFERENCES roles(id) ON DELETE CASCADE,permission TEXT NOT NULL,PRIMARY KEY(role,permission))",
+ "CREATE TABLE IF NOT EXISTS role_denials(role TEXT NOT NULL REFERENCES roles(id) ON DELETE CASCADE,permission TEXT NOT NULL,PRIMARY KEY(role,permission))",
  "CREATE TABLE IF NOT EXISTS role_parents(role TEXT NOT NULL REFERENCES roles(id) ON DELETE CASCADE,parent TEXT NOT NULL REFERENCES roles(id) ON DELETE CASCADE,PRIMARY KEY(role,parent),CHECK(role<>parent))",
  "CREATE TABLE IF NOT EXISTS assignments(identity TEXT NOT NULL REFERENCES identities(identity),role TEXT NOT NULL REFERENCES roles(id) ON DELETE CASCADE,PRIMARY KEY(identity,role))",
+ "CREATE TABLE IF NOT EXISTS role_restrictions(identity TEXT NOT NULL REFERENCES identities(identity),role TEXT NOT NULL REFERENCES roles(id) ON DELETE CASCADE,PRIMARY KEY(identity,role))",
+ "CREATE INDEX IF NOT EXISTS role_restrictions_role ON role_restrictions(role,identity)",
+ "INSERT OR IGNORE INTO role_restrictions(identity,role) SELECT identity,role FROM assignments",
+ "CREATE TRIGGER IF NOT EXISTS assigned_role_restriction AFTER INSERT ON assignments BEGIN INSERT OR IGNORE INTO role_restrictions(identity,role) VALUES(NEW.identity,NEW.role); END",
  "CREATE INDEX IF NOT EXISTS roles_scope ON roles(scope,id)",
  "CREATE INDEX IF NOT EXISTS role_parent_parent ON role_parents(parent,role)",
  "CREATE INDEX IF NOT EXISTS assignments_role ON assignments(role,identity)",

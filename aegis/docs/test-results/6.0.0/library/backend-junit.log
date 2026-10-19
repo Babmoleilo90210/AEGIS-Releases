@@ -1,0 +1,105 @@
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+╷
+├─ JUnit Platform Suite ✔
+├─ JUnit Jupiter ✔
+│  ├─ LibraryProtection600Test ✔
+│  │  ├─ leaseRejectsOnlineOnlyAndOver24hours() ✔
+│  │  ├─ wallRollbackAndForwardJumpFailClosed() ✔
+│  │  ├─ monotonicExpiryCannotBeExtendedByWallClock() ✔
+│  │  ├─ writesOnlyUuidAtomicallyAndPreservesPreviousOnFailure() ✔
+│  │  ├─ nanoTimeWrapRemainsBounded() ✔
+│  │  ├─ restartClearsOnlyOwnedProjectionAndNeedsFreshPermit() ✔
+│  │  ├─ symlinkTargetAndAncestorRejected() ✔
+│  │  ├─ existingUserDirectoryNeverAdopted() ✔
+│  │  ├─ remoteEmbedsAndMalformedUnicodeRejected() ✔
+│  │  ├─ syncthingPolicyHasNoProxyFallbackOrDiscovery() ✔
+│  │  ├─ approvedScriptChangedOrExtraCodeFailsProfileCheck() ✔
+│  │  ├─ generationDeviceEpochAndRevocationBound() ✔
+│  │  ├─ protectedProfilePinsExecutableAndRefusesUnexpectedPlugins() ✔
+│  │  └─ expiryPrunesAndCloseClearsPlaintext() ✔
+│  ├─ LibraryReadPermit600Test ✔
+│  │  ├─ onlineReadNeedsNoExportButCannotUseOfflineAndRequiresRefreshWithinMinute() ✔
+│  │  ├─ explicitlyPermittedOfflineSnapshotRemainsMonotonicallyBounded() ✔
+│  │  ├─ revisionBodyEpochAndIdentityChangesInvalidateDisplayedSnapshot() ✔
+│  │  ├─ measuredRoundTripAndLocalSignedExpiryAreSubtracted() ✔
+│  │  ├─ renewalCannotTurnPreviouslyPermittedCopyIntoUnboundedOfflineAccess() ✔
+│  │  └─ rollbackAndUnreasonableTransitFailClosed() ✔
+│  ├─ ObsidianBoundary600Test ✔
+│  │  ├─ officialSourceAndEveryRedirectAreNarrowlyBound() ✔
+│  │  ├─ personalProcessGetsOnlyItsOwnWritableVaultAndConfigurationInSeparateNetworkNames... ✔
+│  │  ├─ protectedCommandHasNoNetworkHostIpcOrChromiumSandboxBypass() ✔
+│  │  ├─ protectedSettingsCopyOnlyPinnedCodeAndCannotEnableUnapprovedPlugins() ✔
+│  │  ├─ traversalSymlinksAndDuplicateArchiveNamesAreRejectedBeforePublication() ✔
+│  │  ├─ wrongPinAndCancelledPreparationNeverPublishBundle() ✔
+│  │  └─ reviewedPackageIsAtomicAndEveryExecutableResourceIsReverified() ✔
+│  ├─ ObsidianWindowsBoundary600Test ✔
+│  │  ├─ personalVmHasOnlyTwoNarrowWritablePersonalMappingsAndNoProtectedProfile() ✔
+│  │  ├─ guestBootstrapHasFixedInstallerArgumentsIndependentProfileAndLeaseButNoHostComma... ✔
+│  │  └─ vmConfigUsesOnlyReadOnlyMappingsAndNoHostNetworkClipboardOrAudio() ✔
+│  ├─ LibraryHttpIntegration600Test ✔
+│  │  ├─ forgedAppProofAndWrongServicePinsRejected() ✔
+│  │  ├─ dedicatedCliActuallyInitializesInspectsStartsAndSharesAuthenticatedCommunityAudi... ✔
+│  │  ├─ exactOperationBindingRejectsMutationReplayAndDuplicateJson() ✔
+│  │  ├─ actualHttpProjectionAndPermissionRevocationClearManagedPlaintext() ✔
+│  │  ├─ freshReadAuthorizationDoesNotRequireExportAndDetectsPerMaterialRevocation() ✔
+│  │  ├─ actualSignedIdentityBridgeAllowsPublicReadButDeniesClosedContent() ✔
+│  │  ├─ noClearnetConstructorOrTorUnavailableFallback() ✔
+│  │  ├─ identityOwnerAuthorityIsRequestScopedWithoutLocalAdminRowAndDoesNotBypassClosedR... ✔
+│  │  ├─ newLoginAtomicallyRevokesGenerationForFreshLibraryRequests() ✔
+│  │  ├─ largeActualDocumentExceedsIdentity64kFramingWithoutWeakeningSignatures() ✔
+│  │  ├─ actualPerMaterialCacheAuthorizationHasNoBodyAndRevocationDeniesStoredCiphertext(... ✔
+│  │  └─ actualHttpDiscoveryRequestsAndProposalApprovalPersistAndDoNotGrantReadImplicitly... ✔
+│  ├─ LibraryController600Test ✔
+│  │  ├─ hiddenContentNotReturnedByReadFileExportCatalogOrGraph() ✔
+│  │  ├─ noRoleCannotGrantDiscoveryAndClientActorFieldRejected() ✔
+│  │  ├─ staleProposalDoesNotOverwriteNewerRevision() ✔
+│  │  ├─ discoveryRevocationInvalidatesTitleAndRequests() ✔
+│  │  ├─ expiredOrStaleAuthorityEpochDeniedEvenIfCallerIsEditor() ✔
+│  │  ├─ changedRetryPayloadRejectedAndProposalsDoNotLeakAcrossUsers() ✔
+│  │  ├─ explicitDiscoveryContainsOnlyApprovedTitleAndNoBodyOrInternalMaterialId() ✔
+│  │  ├─ proposalRequiresSeparateRightAndNeverPublishesBeforeApproval() ✔
+│  │  ├─ requestBoundsAndStrictIntegerInputRejectMalformedValues() ✔
+│  │  ├─ postDispatchIdentityRecheckRollsBackMutation() ✔
+│  │  ├─ revokedSessionOrGenerationNeverReachesContent() ✔
+│  │  ├─ proposalPaginationExcludesBodyAndReturnsEveryOwnedProposal() ✔
+│  │  ├─ fileDownloadsRecheckLibraryAclAndCannotReadNewsFiles() ✔
+│  │  ├─ retractedProposalAuthorCannotContinueReadingAfterAclRevocation() ✔
+│  │  ├─ accessRequestIsScopedIdempotentAndDecisionCannotBypassAcl() ✔
+│  │  ├─ proposalLimitsMatchExistingContentBeforePersistingUnapprovableDraft() ✔
+│  │  ├─ actualSqlitePersistenceAndMigrationAreIdempotent() ✔
+│  │  ├─ plaintextProjectionRequiresOfflinePolicyAndIndependentExportPermission() ✔
+│  │  └─ identityContextNotArbitraryClientObjectAndDefaultAuthorityMissing() ✔
+│  ├─ LibraryConnector600Test ✔
+│  │  ├─ wrongIdentityDeviceOrGenerationClearsPriorPlaintext() ✔
+│  │  ├─ revokeAndCloseStopProjection() ✔
+│  │  ├─ staleEpochAndInvalidIntegerRejectRatherThanRound() ✔
+│  │  ├─ missingOfflineGrantFailsClosedAndNoFileIsWritten() ✔
+│  │  ├─ stalledRpcDoesNotPreventExpiryOrRevocationMaintenance() ✔
+│  │  ├─ validProjectionAndIdenticalRetryRenewOnlyFreshVerifiedLease() ✔
+│  │  └─ epochChangeClearsPreviouslyProjectedMaterials() ✔
+│  └─ LibraryEncryptedCache600Test ✔
+│     ├─ originalMonotonicLeaseExpiresAndCannotBeRecreatedFromDisk() ✔
+│     ├─ fileSwapAndWrongCurrentRevisionOrHashCannotRevealCachedContent() ✔
+│     ├─ unavailableOsStoreNeverCreatesAPlaintextKeyFallback() ✔
+│     ├─ restartNeverRestoresPermitsAndRequiresFreshMaterialAuthorization() ✔
+│     ├─ encryptsBodyAndMetadataAndRejectsTampering() ✔
+│     ├─ policyDenialEpochChangeAndDifferentAccountFailClosed() ✔
+│     └─ cacheCapacityAndInputBoundsAreEnforced() ✔
+└─ JUnit Vintage ✔
+
+Test run finished after 21057 ms
+[        11 containers found      ]
+[         0 containers skipped    ]
+[        11 containers started    ]
+[         0 containers aborted    ]
+[        11 containers successful ]
+[         0 containers failed     ]
+[        75 tests found           ]
+[         0 tests skipped         ]
+[        75 tests started         ]
+[         0 tests aborted         ]
+[        75 tests successful      ]
+[         0 tests failed          ]
+

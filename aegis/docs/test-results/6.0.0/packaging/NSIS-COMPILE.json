@@ -1,0 +1,30 @@
+{
+  "scope": "Compilation-only fixture; Windows native install, rollback, LockFileEx Java interop NOT_RUN",
+  "commands": [
+    {
+      "command": [
+        "/workspace/scratch/aa629f360927/inputs600/packaging-tools/root/usr/bin/i686-w64-mingw32-gcc-posix",
+        "-Os",
+        "-static",
+        "-static-libgcc",
+        "-shared",
+        "/workspace/scratch/aa629f360927/aegis600/aegis/packaging/windows/runtimeguard600.c",
+        "-Wl,--dynamicbase,--nxcompat,--no-insert-timestamp",
+        "-ladvapi32",
+        "-o",
+        "/workspace/scratch/aa629f360927/audit600/packaging-tools/nsis-fixture/AEGIS-RuntimeGuard.dll"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "/workspace/scratch/aa629f360927/inputs600/packaging-tools/root/usr/bin/makensis",
+        "-V3",
+        "-DPAYLOAD=/workspace/scratch/aa629f360927/audit600/packaging-tools/nsis-fixture",
+        "-DOUTFILE=/workspace/scratch/aa629f360927/audit600/packaging-tools/NSIS-COMPILER-FIXTURE.exe",
+        "installer600.nsi"
+      ],
+      "exitCode": 0
+    }
+  ]
+}

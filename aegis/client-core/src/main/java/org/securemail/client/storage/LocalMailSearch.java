@@ -41,7 +41,7 @@ public final class LocalMailSearch {
         String subject="Письмо 0.1.0",thread=item.id(),snippet="";boolean bodyMatches=false;boolean protectedLetter=true;int fileCount=0;
         if(lifecycle!=null&&lifecycle.expiring(item.id()))subject="Исчезающее письмо";
         else if(AutomaticEncryption.supports(p))try(var plain=automatic.decrypt(p,local.identity(),maxFile)){
-          subject=plain.subject();protectedLetter=plain.protectedLetter();fileCount=plain.files().size();if(plain.context()!=null&&!plain.context().forwarded()&&!plain.context().threadId().isEmpty())thread=plain.context().threadId();
+          subject=plain.subject();protectedLetter=plain.protectedLetter();fileCount=plain.attachmentCount();if(plain.context()!=null&&!plain.context().forwarded()&&!plain.context().threadId().isEmpty())thread=plain.context().threadId();
           // Only an authenticated ordinary letter may provide a memory-only snippet.
           // Additional letter password/FF1 content is never unlocked by list rendering.
           if(!protectedLetter&&assessment.signatureValid()){String body=plain.text();bodyMatches=body.toLowerCase(Locale.ROOT).contains(query.text().toLowerCase(Locale.ROOT));snippet=body.substring(0,Math.min(240,body.length())).replaceAll("[\\r\\n\\t]+"," ");}

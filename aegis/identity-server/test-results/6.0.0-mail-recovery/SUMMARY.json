@@ -1,0 +1,13 @@
+{
+  "status": "PASS_LOCAL",
+  "tests": 7,
+  "skipped": 0,
+  "sourceStable": true,
+  "productionReady": false,
+  "scope": "actual JCA/SQLite/signed loopback HTTP/canonical public consent; no Tor/native/owner keys",
+  "evidenceSha256": {
+    "RESULTS.json": "4883f6bc32ba57740604f9f9f4ccb51c2176959d980e5ef3c17fd4d8dd1b00b3",
+    "javac.log": "220c6cd50907a04b803e78b76313e7dbfda96f373619b6d7c947f65bef4f3b15",
+    "junit.log": "8fe5afa9e8d66dc2a8ec07c3136c43e42a86fd4ef80f7f02680fbb4ea9ed2c67"
+  }
+}

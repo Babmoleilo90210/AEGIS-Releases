@@ -1,0 +1,202 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-10-18T14:01:00.310765+00:00",
+    "component": {
+      "type": "application",
+      "name": "AEGIS server runtime dependency subset",
+      "version": "6.0.0",
+      "properties": [
+        {
+          "name": "scope",
+          "value": "Six external server runtime JARs including Gson runtime Error Prone annotations; Password4j only in isolated mail-relay; observed embedded SQLite. OS/JDK/build/test/client dependencies excluded"
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.google.code.gson/gson@2.14.0",
+      "group": "com.google.code.gson",
+      "name": "gson",
+      "version": "2.14.0",
+      "purl": "pkg:maven/com.google.code.gson/gson@2.14.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "Apache-2.0"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://repo.maven.apache.org/maven2/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/org.xerial/sqlite-jdbc@3.53.4.0",
+      "group": "org.xerial",
+      "name": "sqlite-jdbc",
+      "version": "3.53.4.0",
+      "purl": "pkg:maven/org.xerial/sqlite-jdbc@3.53.4.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "bcb1f51e36f940867e83342f9efbf5968ac44a6bef4d397bb4af7b17b45cd2fb"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "Apache-2.0 AND BSD-2-Clause"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://repo.maven.apache.org/maven2/org/xerial/sqlite-jdbc/3.53.4.0/sqlite-jdbc-3.53.4.0.jar"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/org.slf4j/slf4j-api@2.0.17",
+      "group": "org.slf4j",
+      "name": "slf4j-api",
+      "version": "2.0.17",
+      "purl": "pkg:maven/org.slf4j/slf4j-api@2.0.17",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "7b751d952061954d5abfed7181c1f645d336091b679891591d63329c622eb832"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/2.0.17/slf4j-api-2.0.17.jar"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/org.slf4j/slf4j-nop@2.0.17",
+      "group": "org.slf4j",
+      "name": "slf4j-nop",
+      "version": "2.0.17",
+      "purl": "pkg:maven/org.slf4j/slf4j-nop@2.0.17",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "3716f83649ec66161a2edefd4f49df34d1dd1c51cdcf941996c6987260f0a829"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-nop/2.0.17/slf4j-nop-2.0.17.jar"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:generic/sqlite@3.53.4",
+      "name": "SQLite core embedded in SQLite JDBC",
+      "version": "3.53.4",
+      "purl": "pkg:generic/sqlite@3.53.4",
+      "licenses": [
+        {
+          "license": {
+            "name": "SQLite public domain dedication",
+            "url": "https://www.sqlite.org/copyright.html"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "sqlite.source_id",
+          "value": "2026-07-24 19:02:57 bf7c7f30031888f4e796e429ab3978879485813aaca6f641c7b33e4e09459bcc"
+        },
+        {
+          "name": "observed.runtime",
+          "value": "Actual loaded Linux JNI, empty in-memory database only; other native variants not individually exercised"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.password4j/password4j@1.8.4",
+      "group": "com.password4j",
+      "name": "password4j",
+      "version": "1.8.4",
+      "purl": "pkg:maven/com.password4j/password4j@1.8.4",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "d1406a158533b65bda7c20cebf7bf2a9a0626f8931fd1dc3d39243af5849edf5"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "Apache-2.0"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://repo.maven.apache.org/maven2/com/password4j/password4j/1.8.4/password4j-1.8.4.jar"
+        }
+      ],
+      "properties": [
+        {
+          "name": "runtime-scope",
+          "value": "isolated mail-relay600 only; existing Relay runtime remains unchanged"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:maven/com.google.errorprone/error_prone_annotations@2.48.0",
+      "group": "com.google.errorprone",
+      "name": "error_prone_annotations",
+      "version": "2.48.0",
+      "purl": "pkg:maven/com.google.errorprone/error_prone_annotations@2.48.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "b49c5c958316ed67a09c699dda9aa749caf434d51d863dea599ef36a49b9c855"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "Apache-2.0"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.48.0/error_prone_annotations-2.48.0.jar"
+        }
+      ]
+    }
+  ]
+}

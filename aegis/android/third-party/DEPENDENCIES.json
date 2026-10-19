@@ -1,0 +1,141 @@
+{
+  "gson": {
+    "version": "2.14.0",
+    "jarSha256": "2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f",
+    "artifactSource": "https://repo.maven.apache.org/maven2/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar",
+    "licenseSource": "https://raw.githubusercontent.com/google/gson/main/LICENSE",
+    "licenseSha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+  },
+  "apksig": {
+    "version": "9.4.1",
+    "jarSha256": "7ae2e5980c77d853e3513074ee7c822bbdcdcde1668889d17faa7fe8bc8aa821",
+    "artifactSource": "https://dl.google.com/dl/android/maven2/com/android/tools/build/apksig/9.4.1/apksig-9.4.1.jar",
+    "licenseSource": "LICENSE entry inside the exact pinned JAR"
+  },
+  "bcprov": {
+    "version": "1.86",
+    "jarSha256": "2af190b300cbb0b35e248ccf5f4a06b6072030aeb3da7a98ec73abe5b4cb371f",
+    "artifactSource": "https://repo.maven.apache.org/maven2/org/bouncycastle/bcprov-jdk18on/1.86/bcprov-jdk18on-1.86.jar",
+    "license": "BCPROV-LICENSE.md",
+    "use": "Existing Argon2id and FF1 primitives; no provider replacement"
+  },
+  "zip4j": {
+    "version": "2.11.6",
+    "jarSha256": "5f1eb1e9d67cfee200a695e4079751b49e73a226b154193e13f7c602efbe72fb",
+    "artifactSource": "https://repo.maven.apache.org/maven2/net/lingala/zip4j/zip4j/2.11.6/zip4j-2.11.6.jar",
+    "license": "ZIP4J-LICENSE.txt"
+  },
+  "libsodium": {
+    "version": "1.0.22 separately verified stable snapshot 2026-10-18",
+    "sourceSha256": "0a7f69b065b82afdb1470375ffa1cee4ecb066180cca05a71e44e3268cd8470d",
+    "sourceUrl": "https://download.libsodium.org/libsodium/releases/libsodium-1.0.22-stable.tar.gz",
+    "officialMinisignPublicKey": "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3",
+    "officialKeySource": "https://doc.libsodium.org/installation",
+    "license": "LIBSODIUM-LICENSE.txt",
+    "ndk": "r29 29.0.14206865",
+    "ndkArchiveSha256": "4abbbcdc842f3d4879206e9695d52709603e52dd68d3c1fff04b3b5e7a308ecf"
+  },
+  "hevTunnel": {
+    "upstream": "https://github.com/heiher/hev-socks5-tunnel",
+    "commits": {
+      ".": "780b396b0fc3d0355fc0614e221e3446933669c4",
+      "src/core": "9f1cf0bfca0c003dd0cf0fbdcf6912a2b46a8d05",
+      "third-part/hev-task-system": "b2f2250371c1bd436a42f3c380ee46d4ac3bada8",
+      "third-part/lwip": "7f51e51c72d088481af972c3a115cec41c043d49",
+      "third-part/yaml": "94441ec8777eb319936735a58b376963d09c73d4"
+    },
+    "trackedSourceCompositeSha256": "19f96049d2882add6b5b713d85f5d297b8140243e5bd7d7db94dad8ee226339c",
+    "authentication": "Downloaded over HTTPS from official repositories; exact commit and composite SHA pinned; no upstream release signature claimed",
+    "licenses": {
+      "tunnel": "MIT",
+      "socks5-core": "MIT",
+      "hev-task-system": "MIT",
+      "lwip": "BSD-3-Clause",
+      "yaml": "MIT"
+    }
+  },
+  "opus": {
+    "version": "1.6.1",
+    "sourceUrl": "https://downloads.xiph.org/releases/opus/opus-1.6.1.tar.gz",
+    "sourceSha256": "6ffcb593207be92584df15b32466ed64bbec99109f007c82205f0194572411a1",
+    "license": "OPUS-LICENSE.txt",
+    "authentication": "Official HTTPS source and exact existing desktop source SHA pin"
+  },
+  "speexdsp": {
+    "version": "1.2.1",
+    "sourceUrl": "https://downloads.xiph.org/releases/speex/speexdsp-1.2.1.tar.gz",
+    "sourceSha256": "8c777343e4a6399569c72abc38a95b24db56882c83dbdb6c6424a5f4aeb54d3d",
+    "license": "SPEEXDSP-LICENSE.txt",
+    "authentication": "Official HTTPS source and exact existing desktop source SHA pin"
+  },
+  "bctls": {
+    "version": "1.86",
+    "jarSha256": "418e46d6ffd27c3226268533b6321daec899129b1ec8ede35331c7d78e11e535",
+    "artifactSource": "https://repo.maven.apache.org/maven2/org/bouncycastle/bctls-jdk18on/1.86/bctls-jdk18on-1.86.jar",
+    "officialRepositorySha256Checked": true,
+    "license": "BCPROV-LICENSE.md",
+    "providerPolicy": "Android-only explicit BC crypto + BCJSSE instance, no global provider registration or replacement"
+  },
+  "bcutil": {
+    "version": "1.86",
+    "jarSha256": "1c268e15f785aafb1e4670d8d6e5f856f69475e96c162dadcd1ff9b350e9139f",
+    "artifactSource": "https://repo.maven.apache.org/maven2/org/bouncycastle/bcutil-jdk18on/1.86/bcutil-jdk18on-1.86.jar",
+    "officialRepositorySha256Checked": true,
+    "license": "BCPROV-LICENSE.md",
+    "providerPolicy": "Android-only explicit BC crypto + BCJSSE instance, no global provider registration or replacement"
+  },
+  "tink": {
+    "version": "1.23.0",
+    "jarSha256": "5bcdc8798ce106f5145acb4a0e993c5e5861337b1e75ca88ceb6ab9da10fa512",
+    "artifactSource": "https://repo.maven.apache.org/maven2/com/google/crypto/tink/tink/1.23.0/tink-1.23.0.jar",
+    "repositorySHA256Checked": true,
+    "license": "TINK-LICENSE.txt",
+    "use": "Existing v6 streamed attachment manifest validation dependency, not a claim of Android 500MiB transfer"
+  },
+  "protobuf": {
+    "version": "4.33.6",
+    "jarSha256": "c24b2464ecfe9ac1d44e3a8fe281fca09e6ad2ca73dbd689dd7d6d719df987b5",
+    "artifactSource": "https://repo.maven.apache.org/maven2/com/google/protobuf/protobuf-java/4.33.6/protobuf-java-4.33.6.jar",
+    "repositorySHA1Checked": true,
+    "repositorySHA1": "50aca45558a75c421a381c801936d34dbaf8f96b",
+    "provenance": "Exact existing published 5.0.0 dependency SHA256; official Maven SHA1 matches, repository SHA256 not offered",
+    "license": "PROTOBUF-LICENSE.txt"
+  },
+  "torAndroid": {
+    "version": "0.4.9.14",
+    "aarSha256": "28ff2bb6d4d42eabe57183dedd7a97fce77e8ce4b6f5af6fa03993b3ca054edd",
+    "upstreamCommit": "0340ba1609cb73e663e202a316d083803e399db4",
+    "pgpPrimaryFingerprint": "BBE20FD6DA48A3DD4CC7DF41A801183E69B37AA9",
+    "licenseNotice": "ANDROID-TOR-NOTICES.txt",
+    "jniIncludedOnly": "Core arm64-v8a/libtor.so",
+    "nativeVersions": {
+      "tor": "0.4.9.14",
+      "openssl": "3.5.9",
+      "libevent": "2.1.13-stable",
+      "zlib": "1.3.2",
+      "zstd": "1.5.7"
+    },
+    "kotlinStdlib": "POM-only: exact shipped Java class constant pools have no Kotlin dependency; excluded from APK",
+    "review": "docs/test-results/6.0.0/android-tor-dependency-review"
+  },
+  "jtorctl": {
+    "version": "0.4.5.7",
+    "jarSha256": "51bbed22de9fe0028095223ceeb4694d8731eda2fc01edee07b8c0c8a46681c3",
+    "pgpPrimaryFingerprint": "EE6620C7136B0D2C456C0A4DE9E28DEA00AA5556",
+    "licenseNotice": "ANDROID-TOR-NOTICES.txt"
+  },
+  "localbroadcastmanager": {
+    "version": "1.1.0",
+    "aarSha256": "a22b94a77789f3b34becd24082231300524011ccc83f026142c49ad60131379b",
+    "licenseNotice": "ANDROID-TOR-NOTICES.txt",
+    "use": "Deprecated upstream component used only internally by official TorService; never ecosystem IPC security boundary"
+  },
+  "androidxAnnotation": {
+    "version": "1.1.0",
+    "jarSha256": "d38d63edb30f1467818d50aaf05f8a692dea8b31392a049bfa991b159ad5b692",
+    "source": "https://dl.google.com/dl/android/maven2/androidx/annotation/annotation/1.1.0/annotation-1.1.0.jar",
+    "officialSha1": "e3a6fb2f40e3a3842e6b7472628ba4ce416ea4c8",
+    "license": "Apache-2.0, same AndroidX notices included",
+    "use": "Nullable annotation for exact signed-source TorService recompilation; no generated stub"
+  }
+}

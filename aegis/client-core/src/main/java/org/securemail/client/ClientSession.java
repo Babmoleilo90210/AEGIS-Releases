@@ -23,6 +23,10 @@ public final class ClientSession implements AutoCloseable {
   private final EncryptionService crypto = new EncryptionService(Clock.systemUTC());
   private final ScheduledExecutorService poll = Executors.newSingleThreadScheduledExecutor(),
       cleanup = Executors.newSingleThreadScheduledExecutor();
+  private volatile org.securemail.client.attachments600.MailAttachmentManager600 attachmentManager;
+  public org.securemail.client.attachments600.MailAttachmentManager600 attachments600(){return attachmentManager;}
+  public void attachments600(org.securemail.client.attachments600.MailAttachmentManager600 manager){synchronized(routingLock){if(closed){manager.close();return;}if(attachmentManager!=null)throw new IllegalStateException("Вложения уже подключены");attachmentManager=manager;if(peer!=null)configureAttachmentFeatures(peer);}}
+  private void configureAttachmentFeatures(PeerServer server){server.attachmentFeatures(challenge->{var manager=attachmentManager;if(manager==null)throw new IllegalStateException("Потоковые вложения не настроены");try{return manager.features(challenge);}catch(Exception denied){throw new IllegalStateException("Возможности вложений недоступны");}});}
   private PeerServer peer;
   private TorControl control;
   private String onion;
@@ -88,7 +92,7 @@ public final class ClientSession implements AutoCloseable {
     closeRouting();if(closed||network==null||!network.loggedIn())return;
     try {
       peer = new PeerServer(config.localServicePort(), local, config.maxCiphertext(),p->{var receipt=lifecycle.accept(p);local.deliveryRoute(p.messageId(),"P2P");return receipt;},lifecycle::capabilities,calls::handleIncoming);
-      peer.start();
+      configureAttachmentFeatures(peer);peer.start();
       control = new TorControl(config.torControlPort(), config.torCookiePath());
       onion = control.publish(peer.port());
     } catch (Exception e) {
@@ -230,6 +234,7 @@ public final class ClientSession implements AutoCloseable {
     voiceGrants.close();
     community.close();
     calls.close();
+    var transfers=attachmentManager;if(transfers!=null)transfers.close();
     poll.shutdownNow();
     cleanup.shutdownNow();
     if (network != null) network.forgetSession();

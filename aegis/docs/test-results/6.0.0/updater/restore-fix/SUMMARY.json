@@ -1,0 +1,13 @@
+{
+  "status": "PASS_LOCAL",
+  "javaTests": 56,
+  "skipped": 0,
+  "sourceStable": true,
+  "productionReady": false,
+  "change": "Restore skips absent/nonexistent targets before creating parent directories; prevents false incomplete Mail migration destination",
+  "evidenceSha256": {
+    "RESULTS.json": "4ce684e8ba98aaea3c376034434bc9168493f70391efd3ead1615fc6fa44fd22",
+    "javac.log": "220c6cd50907a04b803e78b76313e7dbfda96f373619b6d7c947f65bef4f3b15",
+    "junit.log": "30ca549786c34068928b8653bb59e9d1855bddf4a4bae2d9a16682b1a3e53c9b"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "cases": [
+    {
+      "case": "reject gradleExitCode",
+      "result": "PASS"
+    },
+    {
+      "case": "reject sourceUnchanged",
+      "result": "PASS"
+    },
+    {
+      "case": "reject sourceDirtyAtStart",
+      "result": "PASS"
+    },
+    {
+      "case": "reject sourceCommit",
+      "result": "PASS"
+    },
+    {
+      "case": "clean matching proof parsed (JAR coverage checked separately)",
+      "result": "PASS"
+    },
+    {
+      "case": "exact locked linux production classpath excludes tests/server",
+      "result": "PASS",
+      "jarCount": 32
+    },
+    {
+      "case": "exact locked win production classpath excludes tests/server",
+      "result": "PASS",
+      "jarCount": 32
+    }
+  ],
+  "scope": "Actual local proof parser and locked runtime inventory checks; no release artifacts emitted or native acceptance claimed"
+}

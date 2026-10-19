@@ -1,6 +1,8 @@
 plugins { id 'application' }
 dependencies {
     implementation project(':common-protocol')
+    testImplementation project(':identity-server')
+    testImplementation project(':client-core')
     implementation 'com.google.code.gson:gson:2.14.0'
     implementation 'org.xerial:sqlite-jdbc:3.53.4.0'
     runtimeOnly 'org.slf4j:slf4j-nop:2.0.17'

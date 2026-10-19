@@ -22,5 +22,6 @@ final class NavigationGlyph {
     case "search"->"M3 10 A7 7 0 1 0 17 10 A7 7 0 1 0 3 10 M15 15 L22 22";
     case "profile"->"M9 7 A3 3 0 1 0 15 7 A3 3 0 1 0 9 7 M4 22 Q4 13 12 13 Q20 13 20 22";
     case "settings"->"M3 6 H21 M3 12 H21 M3 18 H21 M7 3 V9 M17 9 V15 M10 15 V21";
+    case "applications"->"M3 3 H10 V10 H3 Z M14 3 H21 V10 H14 Z M3 14 H10 V21 H3 Z M14 14 H21 V21 H14 Z";
     default->"M4 4 H20 V20 H4 Z";});path.setFill(Color.TRANSPARENT);path.setStroke(Color.GRAY);path.setStrokeWidth(1.7);path.setStrokeLineCap(StrokeLineCap.ROUND);path.setStrokeLineJoin(StrokeLineJoin.ROUND);path.getStyleClass().add("glyph");path.setScaleX(size/24.0);path.setScaleY(size/24.0);StackPane icon=new StackPane(path);icon.setMinSize(size+10,size+10);icon.setPrefSize(size+10,size+10);icon.setMaxSize(size+10,size+10);icon.getStyleClass().add("nav-icon");return icon;}
 }

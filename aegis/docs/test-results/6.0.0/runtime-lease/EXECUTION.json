@@ -1,0 +1,47 @@
+{
+  "commands": [
+    {
+      "command": [
+        "/workspace/scratch/aa629f360927/inputs600/toolchain/jdk-21.0.12.1+1/bin/javac",
+        "--release",
+        "21",
+        "-encoding",
+        "UTF-8",
+        "-cp",
+        "/workspace/scratch/aa629f360927/inputs600/test-deps/junit-platform-console-standalone-1.13.4.jar",
+        "-d",
+        "/workspace/scratch/aa629f360927/audit600/runtime-lease/classes",
+        "/workspace/scratch/aa629f360927/aegis600/aegis/client-core/src/main/java/org/securemail/client/storage/AtomicFiles.java",
+        "/workspace/scratch/aa629f360927/aegis600/aegis/client-core/src/main/java/org/securemail/client/maintenance600/RuntimeLease600.java",
+        "/workspace/scratch/aa629f360927/aegis600/aegis/client-core/src/test/java/org/securemail/client/maintenance600/RuntimeLease600Test.java",
+        "/workspace/scratch/aa629f360927/aegis600/aegis/client-core/src/test/java/org/securemail/client/maintenance600/RuntimeLeaseFixture600.java"
+      ],
+      "exitCode": 0,
+      "seconds": 1.472394111995527
+    },
+    {
+      "command": [
+        "/workspace/scratch/aa629f360927/inputs600/toolchain/jdk-21.0.12.1+1/bin/java",
+        "-cp",
+        "/workspace/scratch/aa629f360927/audit600/runtime-lease/classes:/workspace/scratch/aa629f360927/inputs600/test-deps/junit-platform-console-standalone-1.13.4.jar",
+        "org.junit.platform.console.ConsoleLauncher",
+        "execute",
+        "--select-class",
+        "org.securemail.client.maintenance600.RuntimeLease600Test",
+        "--reports-dir",
+        "/workspace/scratch/aa629f360927/audit600/runtime-lease/xml",
+        "--disable-banner"
+      ],
+      "exitCode": 0,
+      "seconds": 1.679860019001353
+    }
+  ],
+  "sourceSha256": {
+    "client-core/src/main/java/org/securemail/client/storage/AtomicFiles.java": "bed41a93ea517847bb369e639326a53ec2800d24bb00267c17b95eae7e8d90a6",
+    "client-core/src/main/java/org/securemail/client/maintenance600/RuntimeLease600.java": "01a60884eb9249027959fb8ff166c8f15eead3d014b69050ce46b9994bd0a5f5",
+    "client-core/src/test/java/org/securemail/client/maintenance600/RuntimeLease600Test.java": "864b97b519adb40f53f5f56742251d60162717ef19d1e4c0917559d4cba7d048",
+    "client-core/src/test/java/org/securemail/client/maintenance600/RuntimeLeaseFixture600.java": "4f66a7a232c9b5ae898b8b83742ecd7033395bf4cd72ee4e4ef322c1367415aa"
+  },
+  "nativeWindowsLockFileExInterop": "NOT_RUN",
+  "scope": "Actual retained child JVM FileChannel lock interoperability on this Linux host; no native installer acceptance claim"
+}

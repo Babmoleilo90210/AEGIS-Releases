@@ -1,0 +1,4 @@
+/workspace/scratch/aa629f360927/aegis600/aegis/client-core/src/test/java/org/securemail/client/ecosystemauth/CoreAccountSession600Test.java:86: error: unreported exception SQLException; must be caught or declared to be thrown
+    public void close(){session.close();client.close();http.close();store.close();}
+                                                                               ^
+1 error

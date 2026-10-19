@@ -1,0 +1,154 @@
+{
+  "when": "2026-10-18T13:52:00.948661+00:00",
+  "sources": [
+    {
+      "name": "upstream/tag-0.4.9.14.json",
+      "url": "https://api.github.com/repos/guardianproject/tor-android/git/ref/tags/0.4.9.14",
+      "status": 200,
+      "finalUrl": "https://api.github.com/repos/guardianproject/tor-android/git/ref/tags/0.4.9.14",
+      "bytes": 371,
+      "sha256": "059ea855ee65ac6fd56e1e500ca1543b99e251d7f3266d11930a22e9a337a012"
+    },
+    {
+      "name": "upstream/commit.json",
+      "url": "https://api.github.com/repos/guardianproject/tor-android/commits/0340ba1609cb73e663e202a316d083803e399db4",
+      "status": 200,
+      "finalUrl": "https://api.github.com/repos/guardianproject/tor-android/commits/0340ba1609cb73e663e202a316d083803e399db4",
+      "bytes": 8184,
+      "sha256": "02be598415e4a1ae261996cae9ecea9186d03f09f53d7c25aea013df4723dd04"
+    },
+    {
+      "name": "upstream/tree.json",
+      "url": "https://api.github.com/repos/guardianproject/tor-android/git/trees/0340ba1609cb73e663e202a316d083803e399db4?recursive=1",
+      "status": 200,
+      "finalUrl": "https://api.github.com/repos/guardianproject/tor-android/git/trees/0340ba1609cb73e663e202a316d083803e399db4?recursive=1",
+      "bytes": 19225,
+      "sha256": "6eb58bce49681363e667c91f34138b4676d1ce9097242eea4b6282e7b9c06ce5"
+    },
+    {
+      "name": "upstream/.gitmodules",
+      "url": "https://raw.githubusercontent.com/guardianproject/tor-android/0340ba1609cb73e663e202a316d083803e399db4/.gitmodules",
+      "status": 200,
+      "finalUrl": "https://raw.githubusercontent.com/guardianproject/tor-android/0340ba1609cb73e663e202a316d083803e399db4/.gitmodules",
+      "bytes": 692,
+      "sha256": "509eaa73e9f3f72c1dd3db12829354e21e5f25b3546fa62ae828383b2353a918"
+    },
+    {
+      "name": "upstream/README.md",
+      "url": "https://raw.githubusercontent.com/guardianproject/tor-android/0340ba1609cb73e663e202a316d083803e399db4/README.md",
+      "status": 200,
+      "finalUrl": "https://raw.githubusercontent.com/guardianproject/tor-android/0340ba1609cb73e663e202a316d083803e399db4/README.md",
+      "bytes": 7115,
+      "sha256": "1db525c43864f6e14129617bd15cdb871f706ca8043a7bffca66998854d0dca7"
+    },
+    {
+      "name": "upstream/external_Makefile",
+      "url": "https://raw.githubusercontent.com/guardianproject/tor-android/0340ba1609cb73e663e202a316d083803e399db4/external/Makefile",
+      "status": 200,
+      "finalUrl": "https://raw.githubusercontent.com/guardianproject/tor-android/0340ba1609cb73e663e202a316d083803e399db4/external/Makefile",
+      "bytes": 10102,
+      "sha256": "6952bb716e176a28158a626d125dd4979f98a15447b6217da34ed188ccc147f2"
+    },
+    {
+      "name": "upstream/LICENSE",
+      "url": "https://raw.githubusercontent.com/guardianproject/tor-android/0340ba1609cb73e663e202a316d083803e399db4/LICENSE",
+      "status": 200,
+      "finalUrl": "https://raw.githubusercontent.com/guardianproject/tor-android/0340ba1609cb73e663e202a316d083803e399db4/LICENSE",
+      "bytes": 7331,
+      "sha256": "ead918e4ca90496c08cae119d90ddd832753139c89d61d0718e8b48bc97d7802"
+    },
+    {
+      "name": "upstream/tor-android-binary_src_main_java_org_torproject_jni_TorService.java",
+      "url": "https://raw.githubusercontent.com/guardianproject/tor-android/0340ba1609cb73e663e202a316d083803e399db4/tor-android-binary/src/main/java/org/torproject/jni/TorService.java",
+      "status": 200,
+      "finalUrl": "https://raw.githubusercontent.com/guardianproject/tor-android/0340ba1609cb73e663e202a316d083803e399db4/tor-android-binary/src/main/java/org/torproject/jni/TorService.java",
+      "bytes": 20829,
+      "sha256": "9a80508dc2e0c9a6f18d9edee88541446f268d6f47bc8b187f79545ea5ebdb62"
+    },
+    {
+      "name": "licenses/OpenSSL-3.5.7-LICENSE.txt",
+      "url": "https://raw.githubusercontent.com/openssl/openssl/openssl-3.5.7/LICENSE.txt",
+      "status": 200,
+      "finalUrl": "https://raw.githubusercontent.com/openssl/openssl/openssl-3.5.7/LICENSE.txt",
+      "bytes": 10175,
+      "sha256": "7d5450cb2d142651b8afa315b5f238efc805dad827d91ba367d8516bc9d49e7a"
+    },
+    {
+      "name": "licenses/zlib-1.3.2-LICENSE.txt",
+      "url": "https://raw.githubusercontent.com/madler/zlib/v1.3.2/LICENSE",
+      "status": 200,
+      "finalUrl": "https://raw.githubusercontent.com/madler/zlib/v1.3.2/LICENSE",
+      "bytes": 1002,
+      "sha256": "e32ff4e00d9d94930537635291da39e7e612703334bf6fde8c7f1686fe8a45a2"
+    },
+    {
+      "name": "licenses/libevent-2.1.13-LICENSE.txt",
+      "url": "https://raw.githubusercontent.com/libevent/libevent/release-2.1.13-stable/LICENSE",
+      "status": 200,
+      "finalUrl": "https://raw.githubusercontent.com/libevent/libevent/release-2.1.13-stable/LICENSE",
+      "bytes": 4528,
+      "sha256": "ff02effc9b331edcdac387d198691bfa3e575e7d244ad10cb826aa51ef085670"
+    },
+    {
+      "name": "licenses/Tor-0.4.9.14-LICENSE.txt",
+      "url": "https://raw.githubusercontent.com/torproject/tor/tor-0.4.9.14/LICENSE",
+      "error": "<HTTPError 404: 'Not Found'>"
+    },
+    {
+      "name": "native-ref-libevent.json",
+      "url": "https://api.github.com/repos/libevent/libevent/git/ref/tags/release-2.1.13-stable",
+      "status": 200,
+      "finalUrl": "https://api.github.com/repos/libevent/libevent/git/ref/tags/release-2.1.13-stable",
+      "bytes": 383,
+      "sha256": "1d59989fa90b84b2ae0a76cfed448d22f5adfe33b50af17d933837b35691e448"
+    },
+    {
+      "name": "licenses/zstd-1.5.7-LICENSE.txt",
+      "url": "https://raw.githubusercontent.com/facebook/zstd/v1.5.7/LICENSE",
+      "status": 200,
+      "finalUrl": "https://raw.githubusercontent.com/facebook/zstd/v1.5.7/LICENSE",
+      "bytes": 1549,
+      "sha256": "7055266497633c9025b777c78eb7235af13922117480ed5c674677adc381c9d8"
+    },
+    {
+      "name": "licenses/androidx-localbroadcastmanager-LICENSE.txt",
+      "url": "https://raw.githubusercontent.com/androidx/androidx/androidx-main/LICENSE.txt",
+      "status": 200,
+      "finalUrl": "https://raw.githubusercontent.com/androidx/androidx/androidx-main/LICENSE.txt",
+      "bytes": 10175,
+      "sha256": "809fa1ed21450f59827d1e9aec720bbc4b687434fa22283c6cb5dd82a47ab9c0"
+    },
+    {
+      "name": "licenses/zstd-1.5.7-COPYING.txt",
+      "url": "https://raw.githubusercontent.com/facebook/zstd/v1.5.7/COPYING",
+      "status": 200,
+      "finalUrl": "https://raw.githubusercontent.com/facebook/zstd/v1.5.7/COPYING",
+      "bytes": 18091,
+      "sha256": "f9c375a1be4a41f7b70301dd83c91cb89e41567478859b77eef375a52d782505"
+    },
+    {
+      "name": "native-ref-zstd.json",
+      "url": "https://api.github.com/repos/facebook/zstd/git/ref/tags/v1.5.7",
+      "status": 200,
+      "finalUrl": "https://api.github.com/repos/facebook/zstd/git/ref/tags/v1.5.7",
+      "bytes": 329,
+      "sha256": "b14db262e29beebfa04703f4f11b108eb7a584401c5d9bf046fe2f0d16aefd3b"
+    },
+    {
+      "name": "native-ref-zlib.json",
+      "url": "https://api.github.com/repos/madler/zlib/git/ref/tags/v1.3.2",
+      "status": 200,
+      "finalUrl": "https://api.github.com/repos/madler/zlib/git/ref/tags/v1.3.2",
+      "bytes": 321,
+      "sha256": "1f060666e370a18d7aa2ef0f8da8d4fd6609bf363acc1d0e7c92562116cdfd37"
+    },
+    {
+      "name": "native-ref-openssl.json",
+      "url": "https://api.github.com/repos/openssl/openssl/git/ref/tags/openssl-3.5.7",
+      "status": 200,
+      "finalUrl": "https://api.github.com/repos/openssl/openssl/git/ref/tags/openssl-3.5.7",
+      "bytes": 355,
+      "sha256": "4feb40e39c0ddb3e945b0a6cc16f1763b008b9b39629bee4bcc34b4ed424124f"
+    }
+  ]
+}

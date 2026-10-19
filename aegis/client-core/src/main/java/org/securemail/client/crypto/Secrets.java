@@ -35,6 +35,8 @@ public final class Secrets {
   public static byte[] deriveVault(char[] password,byte[] salt){return derive(password,salt,"AEGIS-VAULT-v1");}
   /** Independent archive password domain; existing account/vault derivations are unchanged. */
   public static byte[] deriveArchive(char[] password,byte[] salt){return derive(password,salt,"AEGIS-ARCHIVE-v1");}
+  /** Core device credentials are distinct from the Mail identity and archive domains. */
+  public static byte[] deriveDevice(char[] password,byte[] salt){return derive(password,salt,"AEGIS-CORE-DEVICE-v1");}
   private static synchronized byte[] derive(char[] password,byte[] salt,String context) {
     if (password.length < 12 || password.length > 1024 || salt.length != 16)
       throw new IllegalArgumentException("Пароль: от 12 до 1024 символов");

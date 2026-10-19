@@ -87,7 +87,9 @@ public final class LifecycleService implements AutoCloseable {
     Tracked t=new Tracked();t.id=p.messageId();t.peer=new UserInfo(peer.userId(),peer.nickname(),peer.publicKey(),null);t.digest=Identity.digest(p);t.outgoing=outgoing;t.created=p.createdAt();t.deadline=p.deliveryDeadline();t.ttl=p.ttlAfterDelivery();return t;
   }
   /** Persist encrypted outgoing mail before the first network attempt. Never accepts plaintext. */
-  public NetworkService.DeliveryResult send(EncryptedPacket packet,UserInfo recipient)throws Exception {
+  @FunctionalInterface public interface Persisted {void saved()throws Exception;}
+  public NetworkService.DeliveryResult send(EncryptedPacket packet,UserInfo recipient)throws Exception {return send(packet,recipient,()->{});}
+  public NetworkService.DeliveryResult send(EncryptedPacket packet,UserInfo recipient,Persisted persisted)throws Exception {
     Tracked tracked;NetworkService transport;
     synchronized(this){
       ensureOpen();transport=network;if(transport==null||!transport.loggedIn())throw new IOException("Нет соединения с сервером");
@@ -98,6 +100,7 @@ public final class LifecycleService implements AutoCloseable {
       byte[] data=PacketCodec.encode(packet);try{local.writeExtension("out-"+packet.messageId(),data,maxCipher+8192);}finally{Arrays.fill(data,(byte)0);}
       messages.put(tracked.id,tracked);save();if(!timed.containsKey(packet.messageId()))local.saveSent(packet,recipient.nickname(),0);
     }
+    persisted.saved();
     try {var result=transport.deliverDetailed(packet);synchronized(this){ensureOpen();confirmSent(tracked,result);}return result;}
     catch(IOException failure){synchronized(this){if(!closed){tracked.nextAttempt=local.now()+RETRY;save();}}throw failure;}
   }

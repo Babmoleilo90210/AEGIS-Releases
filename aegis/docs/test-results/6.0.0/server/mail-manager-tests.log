@@ -1,0 +1,26 @@
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+{"scope":"actual-Mail-manager-500MiB-local-SOCKS-HTTP-Identity-E2EE-not-Relay-public-Tor","plaintextBytes":524288000,"heapMaxBytes":100663296,"durationMillis":373521}
+╷
+├─ JUnit Platform Suite ✔
+├─ JUnit Jupiter ✔
+│  └─ MailAttachmentHttpIntegration600Test ✔
+│     ├─ actualMailManagerFiveHundredMiBDurableResumeE2eeDescriptorAndDownload() 376313 ms ✔
+│     └─ protectedManagerDescriptorUsesExistingLetterPasswordAndFf1WithoutEarlyPlaintext(... ✔
+└─ JUnit Vintage ✔
+
+Test run finished after 382281 ms
+[         4 containers found      ]
+[         0 containers skipped    ]
+[         4 containers started    ]
+[         0 containers aborted    ]
+[         4 containers successful ]
+[         0 containers failed     ]
+[         2 tests found           ]
+[         0 tests skipped         ]
+[         2 tests started         ]
+[         0 tests aborted         ]
+[         2 tests successful      ]
+[         0 tests failed          ]
+

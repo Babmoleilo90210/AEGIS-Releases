@@ -1,0 +1,4 @@
+#!/bin/sh
+set -eu
+base=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+exec "${JAVA_HOME:?Укажите JDK 21 в JAVA_HOME}/bin/java" -XX:+DisableAttachMechanism -XX:-HeapDumpOnOutOfMemoryError -cp "$base/lib/*" org.securemail.identity.IdentityMain "$@"

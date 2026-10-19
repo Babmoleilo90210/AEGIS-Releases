@@ -9,12 +9,14 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 import org.securemail.client.*;
 import org.securemail.client.storage.AtomicFiles;
+import org.securemail.client.maintenance600.RuntimeLease600;
 import com.sun.jna.platform.win32.*;
 
 /** Detached helper files are copied out of the old installation before its JVM exits. */
 public final class UpdateInstaller {
   private UpdateInstaller(){}
   public static Path prepare(Path updates,Path program,Path artifact,byte[] manifest,byte[] signature,SignedManifest release,long client,long launcher,boolean windows)throws Exception {
+    validateHelperLocation(updates,program);
     Path transaction=updates.resolve("install-"+UUID.randomUUID());AtomicFiles.directory(transaction);Path helper=transaction.resolve("helper");AtomicFiles.directory(helper);
     copyTree(program.resolve("runtime"),helper.resolve("runtime"));copyHelperLibraries(program.resolve("app"),helper.resolve("app"));
     AtomicFiles.directory(helper.resolve("resources"));Files.copy(program.resolve("resources/aegis.png"),helper.resolve("resources/aegis.png"));
@@ -24,6 +26,11 @@ public final class UpdateInstaller {
     AtomicFiles.write(transaction.resolve("manifest.json"),manifest);AtomicFiles.write(transaction.resolve("manifest.sig"),signature);
     JsonObject job=new JsonObject();job.addProperty("schema",1);job.addProperty("version",release.version());job.addProperty("channel",release.channel());job.addProperty("target",target.toAbsolutePath().toString());job.addProperty("oldProgram",program.toAbsolutePath().toString());job.addProperty("clientPid",client);job.addProperty("clientStart",ProcessHandle.of(client).flatMap(p->p.info().startInstant()).orElseThrow().toString());job.addProperty("launcherPid",windows?launcher:0);job.addProperty("launcherStart",windows?ProcessHandle.of(launcher).flatMap(p->p.info().startInstant()).orElseThrow().toString():"");job.addProperty("token",UUID.randomUUID().toString());job.addProperty("windows",windows);
     Path path=transaction.resolve("job.json");AtomicFiles.write(path,JsonData.encode(job));return path;
+  }
+  static void validateHelperLocation(Path updates,Path program)throws IOException {
+    Path destination=updates.toAbsolutePath().normalize(),bundle=program.toRealPath();
+    for(Path p=destination;p!=null;p=p.getParent())if(Files.isSymbolicLink(p))throw new IOException("Updater helper path contains a symbolic link");
+    if(destination.startsWith(program.toAbsolutePath().normalize())||destination.startsWith(bundle))throw new IOException("Updater helper must be outside the installed bundle");
   }
   static void copyTree(Path source,Path target)throws IOException {
     if(!Files.isDirectory(source,LinkOption.NOFOLLOW_LINKS)||Files.isSymbolicLink(source))throw new IOException("Invalid helper source");Files.createDirectories(target);long size=0;
@@ -57,32 +64,61 @@ public final class UpdateInstaller {
     JsonObject job=JsonData.object(AtomicFiles.read(path,16384),16384);String token=JsonData.text(job,"token",36);if(!token.matches("[a-f0-9-]{36}"))throw new IOException("Invalid confirmation token");
     String current=JsonData.text(job,"version",100);if(!current.equals(SignedManifest.CURRENT))throw new IOException("Installed version mismatch");AtomicFiles.write(path.getParent().resolve("confirmed"),(token+"\n").getBytes(java.nio.charset.StandardCharsets.US_ASCII));
   }
-  /** Same-filesystem rename and startup acknowledgement, with rollback on every failure. */
+  /** A detached updater never holds a running lease. Replacement and rollback each require exclusive ownership. */
   static void replace(Path candidate,Path target,String token,Path confirmation,Starter starter)throws Exception {
     replace(candidate,target,token,confirmation,starter,TimeUnit.MINUTES.toMillis(10));
   }
   static void replace(Path candidate,Path target,String token,Path confirmation,Starter starter,long timeoutMillis)throws Exception {
+    replace(candidate,target,token,confirmation,starter,timeoutMillis,()->{},()->{});
+  }
+  static void replace(Path candidate,Path target,String token,Path confirmation,Starter starter,long timeoutMillis,CheckedAction beforeReplace,CheckedAction afterRollback)throws Exception {
+    replace(candidate,target,token,confirmation,starter,timeoutMillis,beforeReplace,afterRollback,()->()->{});
+  }
+  static void replace(Path candidate,Path target,String token,Path confirmation,Starter starter,long timeoutMillis,CheckedAction beforeReplace,CheckedAction afterRollback,GuardFactory legacyGuard)throws Exception {
+    if(timeoutMillis<=0)throw new IOException("Invalid startup timeout");
     Path old=target.resolveSibling(target.getFileName()+".old"),next=target.resolveSibling(target.getFileName()+".new");
-    if(Files.exists(old)||Files.exists(next)||Files.isSymbolicLink(target))throw new IOException("Previous update needs recovery");
-    if(Files.isDirectory(candidate))copyTree(candidate,next);else{Files.copy(candidate,next);if(!next.toFile().setExecutable(true,true))throw new IOException("Executable permission denied");try(var ch=FileChannel.open(next,StandardOpenOption.WRITE)){ch.force(true);}}
-    boolean backed=false,replaced=false;
+    // In particular, never delete a candidate left by another updater before obtaining the lease.
+    RuntimeLease600.Lease exclusive=RuntimeLease600.updating();AutoCloseable legacy=null;
+    boolean backed=false,replaced=false,prepared=false,attemptedStart=false,ownedNext=false,committed=false;
     try {
+      legacy=legacyGuard.acquire();
+      if(Files.exists(old,LinkOption.NOFOLLOW_LINKS)||Files.exists(next,LinkOption.NOFOLLOW_LINKS)||Files.isSymbolicLink(target))throw new IOException("Previous update needs recovery");
+      beforeReplace.run();prepared=true;
+      ownedNext=true;
+      if(Files.isDirectory(candidate,LinkOption.NOFOLLOW_LINKS))copyTree(candidate,next);else{if(Files.isSymbolicLink(candidate)||!Files.isRegularFile(candidate,LinkOption.NOFOLLOW_LINKS))throw new IOException("Invalid update candidate");Files.copy(candidate,next);if(!next.toFile().setExecutable(true,true))throw new IOException("Executable permission denied");try(var ch=FileChannel.open(next,StandardOpenOption.WRITE)){ch.force(true);}}
       if(Files.exists(target)){Files.move(target,old,StandardCopyOption.ATOMIC_MOVE);backed=true;}
       Files.move(next,target,StandardCopyOption.ATOMIC_MOVE);replaced=true;AtomicFiles.syncDirectory(target.getParent());
+      // The newly launched Core must acquire its own shared lease before using runtime files.
+      legacy.close();legacy=null;exclusive.close();exclusive=null;attemptedStart=true;
       if(!starter.start(target))throw new IOException("New client failed to start");
       long end=System.nanoTime()+TimeUnit.MILLISECONDS.toNanos(timeoutMillis);boolean accepted=false;
       while(System.nanoTime()<end){if(Files.isRegularFile(confirmation)&&new String(AtomicFiles.read(confirmation,100),java.nio.charset.StandardCharsets.US_ASCII).trim().equals(token)){accepted=true;break;}Thread.sleep(100);}
       if(!accepted)throw new IOException("No startup acknowledgement");
-      // The acknowledged new application is now committed. Failed cleanup must not
-      // replace it with an old directory which may already be partly removed.
-      if(backed)try{deleteTree(old);}catch(IOException cleanup){/* Retain remaining .old for explicit recovery/cleanup. */}AtomicFiles.syncDirectory(target.getParent());
+      committed=true;
+      // Startup is committed. Cleanup of this transaction's old copy cannot roll back a working Core.
+      if(backed)try{deleteTree(old);}catch(IOException cleanup){/* Retain remaining .old for explicit recovery. */}
+      AtomicFiles.syncDirectory(target.getParent());
     }catch(Exception failure){
-      try{starter.stop();}catch(Exception stopping){failure.addSuppressed(stopping);throw failure;}
-      // A process with locked Windows binaries prevents deleting them: retain both copies and report recovery rather than destroying .old.
-      if(replaced)try{deleteTree(target);}catch(IOException locked){failure.addSuppressed(locked);}
-      if(backed&&!Files.exists(target))Files.move(old,target,StandardCopyOption.ATOMIC_MOVE);
-      throw failure;
-    }finally{if(Files.exists(next))deleteTree(next);}
+      if(committed)return; // An acknowledged working Core can never be removed by optional cleanup failure.
+      if(attemptedStart)try{starter.stop();}catch(Exception stopping){failure.addSuppressed(stopping);throw new InstallFailure(false,"Новый процесс не завершён. Обе версии сохранены для восстановления.",failure);}
+      if(exclusive==null)try{exclusive=RuntimeLease600.updating();}catch(IOException busy){failure.addSuppressed(busy);throw new InstallFailure(false,"Восстановление заблокировано запущенным компонентом. Обе версии сохранены.",failure);}
+      if(prepared&&legacy==null)try{legacy=legacyGuard.acquire();}catch(Exception busy){failure.addSuppressed(busy);throw new InstallFailure(false,"Восстановление заблокировано старым клиентом. Обе версии сохранены.",failure);}
+      try{
+        if(replaced)deleteTree(target);
+        if(backed)Files.move(old,target,StandardCopyOption.ATOMIC_MOVE);
+        if(ownedNext&&Files.exists(next,LinkOption.NOFOLLOW_LINKS))deleteTree(next);
+        if(prepared)afterRollback.run();
+        AtomicFiles.syncDirectory(target.getParent());
+      }catch(Exception blocked){failure.addSuppressed(blocked);throw new InstallFailure(false,"Автоматическое восстановление не завершено. Сохранена резервная версия.",failure);}
+      throw new InstallFailure(prepared,"Установка отменена; предыдущая версия сохранена.",failure);
+    }finally{try{if(legacy!=null)legacy.close();}finally{if(exclusive!=null)exclusive.close();}}
+  }
+  @FunctionalInterface interface GuardFactory{AutoCloseable acquire()throws Exception;}
+  @FunctionalInterface interface CheckedAction{void run()throws Exception;}
+  static final class InstallFailure extends IOException {
+    private final boolean rolledBack;
+    InstallFailure(boolean rolledBack,String message,Throwable cause){super(message,cause);this.rolledBack=rolledBack;}
+    boolean rolledBack(){return rolledBack;}
   }
   @FunctionalInterface interface Starter{boolean start(Path installed)throws Exception;default void stop()throws Exception{}}
   static void deleteTree(Path root)throws IOException {if(Files.isSymbolicLink(root))throw new IOException("Symlink cleanup rejected");if(Files.isDirectory(root)){try(var paths=Files.walk(root)){for(Path p:paths.sorted(Comparator.reverseOrder()).toList())Files.delete(p);}}else Files.deleteIfExists(root);}

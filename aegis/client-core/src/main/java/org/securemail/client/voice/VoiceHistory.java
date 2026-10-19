@@ -8,15 +8,16 @@ import org.securemail.protocol.*;
 
 /** Opt-in, encrypted, bounded metadata. Audio and network identifiers are never persisted. */
 final class VoiceHistory {
-  private final LocalStore local;
+  private final VoiceLocalStore600 local;
   private boolean enabled;
   private boolean incomingEnabled=true,notificationsEnabled=true;
   private VoiceCallPolicy policy=VoiceCallPolicy.defaults();
   private GlasAudioSession.Config config=GlasAudioSession.Config.defaults();
   private final ArrayDeque<VoiceCallService.HistoryEntry> entries=new ArrayDeque<>();
-  private VoiceHistory(LocalStore local,boolean empty){this.local=local;}
-  static VoiceHistory empty(LocalStore local){return new VoiceHistory(local,true);}
-  VoiceHistory(LocalStore local)throws IOException,GeneralSecurityException {
+  private VoiceHistory(VoiceLocalStore600 local,boolean empty){this.local=local;}
+  static VoiceHistory empty(VoiceLocalStore600 local){return new VoiceHistory(local,true);}
+  VoiceHistory(LocalStore local)throws IOException,GeneralSecurityException {this(VoiceLocalStore600.legacy(local,new org.securemail.client.storage.LocalFeatures(local)));}
+  VoiceHistory(VoiceLocalStore600 local)throws IOException,GeneralSecurityException {
     this.local=local;byte[] bytes=local.readVoiceState();if(bytes==null)return;
     try(var in=new DataInputStream(new ByteArrayInputStream(bytes))){
       int schema=in.readInt();if(schema<1||schema>3)throw new IOException("Call history schema");enabled=in.readBoolean();config=new GlasAudioSession.Config(Binary.text(in,256),Binary.text(in,256),in.readDouble(),in.readDouble(),in.readBoolean(),in.readBoolean());if(schema>=2){incomingEnabled=in.readBoolean();notificationsEnabled=in.readBoolean();}if(schema>=3)policy=new VoiceCallPolicy(readRule(in),readRule(in));int count=in.readInt();if(count<0||count>128)throw new IOException("Call history quota");
@@ -36,6 +37,7 @@ final class VoiceHistory {
   }
   private static Set<String> readIds(DataInputStream in)throws IOException {int count=in.readUnsignedShort();if(count>VoiceCallPolicy.MAX_CONTACTS)throw new IOException("Call policy quota");Set<String> ids=new HashSet<>();for(int n=0;n<count;n++)if(!ids.add(Binary.text(in,64)))throw new IOException("Duplicate call policy identity");return ids;}
   private static void writeRule(DataOutputStream out,VoiceCallPolicy.Rule rule)throws IOException {out.writeByte(rule.mode().ordinal());for(Set<String> ids:List.of(rule.selectedContactIds(),rule.deniedContactIds())){out.writeShort(ids.size());for(String id:new TreeSet<>(ids))Binary.text(out,id);}out.writeBoolean(rule.organizationGrantsAllowed());}
+  synchronized void lockProtected(){entries.clear();enabled=false;}
   synchronized boolean enabled(){return enabled;}
   synchronized boolean incomingEnabled(){return incomingEnabled;}
   synchronized boolean notificationsEnabled(){return notificationsEnabled;}

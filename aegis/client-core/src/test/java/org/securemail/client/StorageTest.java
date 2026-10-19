@@ -121,7 +121,9 @@ class StorageTest {
       assertEquals(1,local.inbox().size(),"Rolling the clock back must not destroy unrelated mail");
       assertTrue(local.now()>=original,"Persisted high-water time is retained");
       assertEquals(expiry,local.inbox().getFirst().expiresAt());
-      time.now=original+61_000;assertTrue(local.inbox().isEmpty(),"The signed TTL is not extended");
+      // Setup/KDF elapsed time contributes to LocalStore.now(); use the recorded delivery deadline.
+      time.now=Math.subtractExact(expiry,1);assertEquals(1,local.inbox().size(),"Mail remains before its deadline");
+      time.now=expiry;assertTrue(local.inbox().isEmpty(),"The signed TTL is not extended");
     }
   }
 
@@ -129,6 +131,7 @@ class StorageTest {
   void maintenanceDeletesWithoutVaultPassword() throws Exception {
     var time = new MutableClock();
     var sender = Identity.create();
+    long expiry;
     try (var local = new LocalStore(temp, VAULT, time, 200_000, 1_000_000)) {
       local.trust(new UserInfo(sender.userId(), "raven", sender.publicKey(), null));
       try (var m = PlainMessage.text("expires")) {
@@ -144,8 +147,12 @@ class StorageTest {
                     "raven",
                     local.identity().userId()));
       }
+      expiry=local.inbox().getFirst().expiresAt();
     }
-    LocalStore.cleanupLockedFiles(temp, time.now + 61_000);
+    // The maintenance path must enforce the same stored boundary without opening the vault.
+    LocalStore.cleanupLockedFiles(temp,Math.subtractExact(expiry,1));
+    try(var f=Files.list(temp.resolve("mail"))){assertEquals(1,f.count());}
+    LocalStore.cleanupLockedFiles(temp,expiry);
     try (var f = Files.list(temp.resolve("mail"))) {
       assertEquals(0, f.count());
     }

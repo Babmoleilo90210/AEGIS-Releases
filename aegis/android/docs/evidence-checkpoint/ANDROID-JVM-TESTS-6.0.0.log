@@ -1,0 +1,70 @@
+PASS package-to-app-fixed
+PASS unknown-package-denied
+PASS caller-all-checks-positive
+PASS caller-uid-mismatch
+PASS caller-package-mismatch
+PASS caller-certificate-mismatch
+PASS shared-uid-denied
+PASS badge-bounds
+PASS monotonic-valid
+PASS expiry-denied
+PASS clock-rollback-denied
+PASS reboot-denied
+PASS elapsed-rollback-denied
+PASS future-clock-jump-denied
+PASS offline-over-24-hours-denied
+PASS generation-forward-accepted
+PASS generation-rollback-rejected
+PASS logout-generation-reimport-rejected
+PASS actual-shared-server-capability-verifies
+PASS cross-app-capability-denied
+PASS wrong-proof-key-denied
+PASS wrong-authority-denied
+PASS expired-offline-grant-denied
+PASS binder-proof-domain-and-package-bound
+PASS valid-structural-fixture-only
+PASS zip-traversal-denied
+PASS backslash-path-denied
+PASS zip-bomb-ratio-denied
+PASS missing-dex-denied
+PASS copy-stream-limit-and-partial-removal
+PASS arm64-detected-without-claiming-elf-validation
+RESULT 31 PASS; Android device/IPC/window/VPN/audio tests NOT_RUN
+PASS typed-canonical-capability-request
+PASS other-app-proposal-denied
+PASS other-authority-denied
+PASS other-app-key-denied
+PASS stale-proposal-denied
+PASS future-proposal-denied
+PASS invalid-ttl-denied
+PASS invalid-generation-denied
+PASS administrative-escalation-denied
+PASS duplicate-permission-denied
+PASS generic-signature-payload-denied
+PASS duplicate-json-field-denied
+PASS ambiguous-number-denied
+RESULT 13 PASS; platform Binder tests NOT_RUN
+PASS onion-domain-sent-to-loopback-SOCKS
+PASS SOCKS-refusal-no-fallback
+PASS remote-SOCKS-host-denied
+PASS clearnet-identity-host-denied-before-connect
+RESULT 4 PASS; real Tor/DNS/native tests NOT_RUN
+PASS actual JNI/libsodium recipient decrypt
+PASS actual JNI/libsodium sender copy decrypt
+PASS unrelated identity cannot decrypt
+PASS existing packet codec wire roundtrip
+PASS AEGIS02A marker retained
+PASS ciphertext mutation signature rejected
+PASS authenticated invalid sealed box fails closed
+PASS invalid Ed25519 recipient point rejected by libsodium
+PASS fresh keys and nonce for independent messages
+PASS PlainMessage v1 unchanged wire body
+PASS AEB2 exact protected identity and contact import
+PASS AEB1 existing legacy KDF import
+PASS AEB2 wrong password rejected
+PASS cross-account root import forbidden
+PASS modified encrypted backup rejected
+PASS backup trailing data rejected
+PASS backup stream bound enforced
+PASS hex API33 formatting matches existing SHA256 identity
+MailCryptoTest: 18 actual host tests PASS; Android ARM64/device/Tor NOT_RUN

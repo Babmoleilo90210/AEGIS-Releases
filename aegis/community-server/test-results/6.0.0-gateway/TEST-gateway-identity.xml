@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="JUnit Jupiter" tests="55" skipped="0" failures="0" errors="0" time="8.834" hostname="2ac91939697e" timestamp="2026-10-18T14:23:29">
+<testcase name="rotatingApplicationProofKeyRevokesPriorTokensOfThatApplication()" classname="org.securemail.identity.IdentityStoreTest" time="0.038">
+</testcase>
+<testcase name="recoveredAccountCanRegainLibraryOnlyAfterTwoAdministratorReview()" classname="org.securemail.identity.FirstDelegationTest" time="0.142">
+</testcase>
+<testcase name="capabilityCodecCanonicalAndExpiryAndTamperSafe()" classname="org.securemail.identity.IdentityStoreTest" time="0.042">
+</testcase>
+<testcase name="auditTailTruncationWithoutChangingAnchorIsDetected()" classname="org.securemail.identity.IdentityStoreTest" time="0.048">
+</testcase>
+<testcase name="configuredServiceIdentityCannotBeSilentlyReplaced()" classname="org.securemail.identity.IdentityStoreTest" time="0.025">
+</testcase>
+<testcase name="generationRevokesAllOldTokensAndOldTrustedDeviceCannotUseNewGeneration()" classname="org.securemail.identity.IdentityStoreTest" time="0.053">
+</testcase>
+<testcase name="normalSubsequentAssignmentRequiresTwoCurrentAdministrators()" classname="org.securemail.identity.FirstDelegationTest" time="0.118">
+</testcase>
+<testcase name="rootDeviceRecoveryAndApplicationKeysCannotBeReusedAcrossDomains()" classname="org.securemail.identity.IdentityStoreTest" time="0.056">
+</testcase>
+<testcase name="recoveryNeedsSeparateRootAndRecoveryProofAndInvalidatesPriorDevices()" classname="org.securemail.identity.IdentityStoreTest" time="0.058">
+</testcase>
+<testcase name="firstDelegationRequiresFourProofsAndGrantsNamedCustomAdministratorOnlyOnce()" classname="org.securemail.identity.FirstDelegationTest" time="0.284">
+</testcase>
+<testcase name="expiredOwnerChallengeAndStepUpCannotBeReplayed()" classname="org.securemail.identity.IdentityStoreTest" time="0.04">
+</testcase>
+<testcase name="realOwnerCanApproveOrganizationWithoutLegacyRolesTOTPOrRootInCore()" classname="org.securemail.client.community600.GatewayIntegration600Test" time="0.759">
+</testcase>
+<testcase name="clientCanonicalCommitmentMatchesServerUnicodeAndLargeIntegers()" classname="org.securemail.client.community600.GatewayIntegration600Test" time="0.156">
+</testcase>
+<testcase name="twoIndependentCurrentAdministratorsExactPayloadOneUse()" classname="org.securemail.identity.CriticalApprovalTest" time="0.078">
+</testcase>
+<testcase name="ownerAdminRequiresStepUpWhileOrdinaryBadgeDoesNotImplyAdmin()" classname="org.securemail.identity.IdentityStoreTest" time="0.052">
+</testcase>
+<testcase name="ownerCannotBeOwnIndependentSecondConfirmation()" classname="org.securemail.identity.FirstDelegationTest" time="0.059">
+</testcase>
+<testcase name="consentExpiresAfter120Seconds()" classname="org.securemail.identity.FirstDelegationTest" time="0.073">
+</testcase>
+<testcase name="actualHttpFirstDelegationAndReauthenticationUseOnlyTypedProofs()" classname="org.securemail.identity.IdentityHttpServerTest" time="0.176">
+</testcase>
+<testcase name="explicitLogoutAtomicallyRevokesAllApplications()" classname="org.securemail.identity.IdentityStoreTest" time="0.034">
+</testcase>
+<testcase name="libraryAndLegacyFactorRoutesCannotBypassStandaloneApplicationAuthority()" classname="org.securemail.client.community600.GatewayIntegration600Test" time="0.851">
+</testcase>
+<testcase name="clockRollbackFailsClosedAndCannotExtendSignedLease()" classname="org.securemail.identity.IdentityStoreTest" time="0.04">
+</testcase>
+<testcase name="duplicateRegistrationCannotResetRecoveryOrTrust()" classname="org.securemail.identity.IdentityStoreTest" time="0.031">
+</testcase>
+<testcase name="loginRaceOnlyOneGenerationActiveAcrossIndependentConnections()" classname="org.securemail.identity.IdentityStoreTest" time="0.067">
+</testcase>
+<testcase name="isActiveRecheckGivesNoIdentityMetadataAndTurnsFalseAfterLogin()" classname="org.securemail.identity.IdentityHttpServerTest" time="0.061">
+</testcase>
+<testcase name="actualOperatorCliBootstrapUsesOnlyPublicChallengeAndProof()" classname="org.securemail.identity.IdentityMainTest" time="0.07">
+</testcase>
+<testcase name="gatewayServiceBindingAndDifferentAppCapabilityAreRejected()" classname="org.securemail.client.community600.GatewayIntegration600Test" time="0.176">
+</testcase>
+<testcase name="tamperedAuditBlocksReopen()" classname="org.securemail.identity.IdentityStoreTest" time="0.06">
+</testcase>
+<testcase name="replayRejectedAndDigestDomainCannotBeReusedAsBodyProof()" classname="org.securemail.identity.IdentityStoreTest" time="0.038">
+</testcase>
+<testcase name="wrongMethodDuplicateKeysMassAssignmentAndMalformedUtf8Refused()" classname="org.securemail.identity.IdentityHttpServerTest" time="0.22">
+</testcase>
+<testcase name="strictJsonRejectsHugeNumbersFractionsDeepTreesAndLoneSurrogate()" classname="org.securemail.identity.IdentityHttpServerTest" time="0.025">
+</testcase>
+<testcase name="signedLoopbackRegisterIssueAndDigestAuthorizationActuallyWork()" classname="org.securemail.identity.IdentityHttpServerTest" time="0.091">
+</testcase>
+<testcase name="registrationRequiresBothAccountAndDeviceOwnership()" classname="org.securemail.identity.IdentityStoreTest" time="0.032">
+</testcase>
+<testcase name="ownerBootstrapOneUseBoundToExistingAccountProofAndService()" classname="org.securemail.identity.IdentityStoreTest" time="0.031">
+</testcase>
+<testcase name="releasesRemainOwnerOnlyWithoutSecondApproval()" classname="org.securemail.identity.CriticalApprovalTest" time="0.069">
+</testcase>
+<testcase name="targetLoginGenerationChangeInvalidatesConsent()" classname="org.securemail.identity.FirstDelegationTest" time="0.063">
+</testcase>
+<testcase name="registrationPreservesLegacyIdWithoutExportAndOnlyTwoSystemRoles()" classname="org.securemail.identity.IdentityStoreTest" time="0.029">
+</testcase>
+<testcase name="concurrentCompletionCannotCreateTwoFirstDelegates()" classname="org.securemail.identity.FirstDelegationTest" time="0.101">
+</testcase>
+<testcase name="capabilityIsNarrowAppAndProofBound()" classname="org.securemail.identity.IdentityStoreTest" time="0.044">
+</testcase>
+<testcase name="unrecognizedOptionsAndSymlinkHomesRefused()" classname="org.securemail.identity.IdentityMainTest" time="0.002">
+</testcase>
+<testcase name="revokedGenerationAndDifferentApplicationCannotUseCoreGateway()" classname="org.securemail.client.community600.GatewayIntegration600Test" time="0.292">
+</testcase>
+<testcase name="administrativeFreshCheckExpiresWithStepUpRatherThanLongerTokenLease()" classname="org.securemail.identity.CriticalApprovalTest" time="0.049">
+</testcase>
+<testcase name="operatorMainCreatesEmptyRolesAndRunsAgainstPinnedIdentity()" classname="org.securemail.client.community600.GatewayIntegration600Test" time="0.253">
+</testcase>
+<testcase name="applicationAndDeviceKeysCannotBeReusedAcrossDifferentAccounts()" classname="org.securemail.identity.IdentityStoreTest" time="0.069">
+</testcase>
+<testcase name="unknownDeviceCannotLoginAndEnrollmentNeedsFreshStepUp()" classname="org.securemail.identity.IdentityStoreTest" time="0.04">
+</testcase>
+<testcase name="revokingAllDelegatesDoesNotResetOneTimeFirstBootstrap()" classname="org.securemail.identity.FirstDelegationTest" time="0.451">
+</testcase>
+<testcase name="criticalRoleCreationUsesRealIndependentIdentityPermitsAndCannotSelfApprove()" classname="org.securemail.client.community600.GatewayIntegration600Test" time="0.781">
+</testcase>
+<testcase name="ownerLoginGenerationChangeInvalidatesConsent()" classname="org.securemail.identity.FirstDelegationTest" time="0.081">
+</testcase>
+<testcase name="changedRoleNameOrWrongDeviceProofInvalidatesAllConsent()" classname="org.securemail.identity.FirstDelegationTest" time="0.086">
+</testcase>
+<testcase name="remoteListeningAddressAndWrongServiceKeyForbidden()" classname="org.securemail.identity.IdentityHttpServerTest" time="0.021">
+</testcase>
+<testcase name="revokedSecondAdministratorCannotConfirmOrCompleteExistingPermit()" classname="org.securemail.identity.CriticalApprovalTest" time="0.1">
+</testcase>
+<testcase name="ownerPublishesRealNewsAndOrdinaryUserCannotClaimAdminByNicknameOrData()" classname="org.securemail.client.community600.GatewayIntegration600Test" time="0.319">
+</testcase>
+<testcase name="offlineLeaseUsesMonotonicTimeRejectsClockRollbackAndAlwaysDeniesClosedData()" classname="org.securemail.identity.IdentityStoreTest" time="0.039">
+</testcase>
+<testcase name="inheritedRoleGrantAndRevocationUseRealServerAcl()" classname="org.securemail.client.community600.GatewayIntegration600Test" time="1.649">
+</testcase>
+<testcase name="ownerBootstrapRaceAtomicAcrossConnections()" classname="org.securemail.identity.IdentityStoreTest" time="0.043">
+</testcase>
+<testcase name="expiredStepUpAndNewSessionOfApproverInvalidatePermit()" classname="org.securemail.identity.CriticalApprovalTest" time="0.067">
+</testcase>
+</testsuite>

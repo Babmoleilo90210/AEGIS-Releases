@@ -1,0 +1,16 @@
+test_actual_apk_and_actual_tamper (test_apk_public_verify600.ActualOfficialApksigner.test_actual_apk_and_actual_tamper) ... ok
+test_duplicate_digest_fixture (test_apk_public_verify600.ParserFixtures.test_duplicate_digest_fixture) ... ok
+test_duplicate_scheme_fixture (test_apk_public_verify600.ParserFixtures.test_duplicate_scheme_fixture) ... ok
+test_duplicate_signer_fixture (test_apk_public_verify600.ParserFixtures.test_duplicate_signer_fixture) ... ok
+test_invalid_pin_before_process (test_apk_public_verify600.ParserFixtures.test_invalid_pin_before_process) ... ok
+test_output_bound_fixture (test_apk_public_verify600.ParserFixtures.test_output_bound_fixture) ... ok
+test_positive_parser_fixture (test_apk_public_verify600.ParserFixtures.test_positive_parser_fixture) ... ok
+test_process_rejection_fixture (test_apk_public_verify600.ParserFixtures.test_process_rejection_fixture) ... ok
+test_timeout_fixture (test_apk_public_verify600.ParserFixtures.test_timeout_fixture) ... ok
+test_v1_only_fixture (test_apk_public_verify600.ParserFixtures.test_v1_only_fixture) ... ok
+test_wrong_pin_fixture (test_apk_public_verify600.ParserFixtures.test_wrong_pin_fixture) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 1.657s
+
+OK

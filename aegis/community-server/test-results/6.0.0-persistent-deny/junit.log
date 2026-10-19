@@ -1,0 +1,153 @@
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+Identity подготовлен. Отпечаток сервиса: 9f25e75a601b47ddc6a3bdf8b2df54f204705b5aeef3c426e4c867cb10600da0
+Одноразовое публичное задание записано. Подпишите точные proofBytes через Почту после повторной аутентификации; приватный ключ не передавайте серверу.
+Владелец АЕГИС назначен. Повторный Owner Bootstrap запрещён.
+{"productionDeployed":false,"auditIntegrity":true,"audience":"9f25e75a601b47ddc6a3bdf8b2df54f204705b5aeef3c426e4c867cb10600da0"}
+Identity подготовлен. Отпечаток сервиса: 3cea38224f9b66ab16da46ade25e7ab7cd15fe60be835e5336c85e2a7248036c
+Публичный ключ Relay разрешён только для защищённого запроса managedAccount.
+Разрешение ключа Relay отозвано.
+╷
+├─ JUnit Jupiter ✔
+│  ├─ GatewayIntegration600Test ✔
+│  │  ├─ libraryAndLegacyFactorRoutesCannotBypassStandaloneApplicationAuthority() ✔
+│  │  ├─ revokedGenerationAndDifferentApplicationCannotUseCoreGateway() ✔
+│  │  ├─ realOwnerCanApproveOrganizationWithoutLegacyRolesTOTPOrRootInCore() ✔
+│  │  ├─ inheritedRoleGrantAndRevocationUseRealServerAcl() ✔
+│  │  ├─ criticalRoleCreationUsesRealIndependentIdentityPermitsAndCannotSelfApprove() ✔
+│  │  ├─ gatewayServiceBindingAndDifferentAppCapabilityAreRejected() ✔
+│  │  ├─ clientCanonicalCommitmentMatchesServerUnicodeAndLargeIntegers() ✔
+│  │  ├─ ownerPublishesRealNewsAndOrdinaryUserCannotClaimAdminByNicknameOrData() ✔
+│  │  ├─ scopedOrganizationOwnerUsesRealRoleConstructorAndDenyWithoutIdentityAdmin() ✔
+│  │  └─ operatorMainCreatesEmptyRolesAndRunsAgainstPinnedIdentity() ✔
+│  ├─ CriticalApprovalTest ✔
+│  │  ├─ administrativeFreshCheckExpiresWithStepUpRatherThanLongerTokenLease() ✔
+│  │  ├─ expiredStepUpAndNewSessionOfApproverInvalidatePermit() ✔
+│  │  ├─ twoIndependentCurrentAdministratorsExactPayloadOneUse() ✔
+│  │  ├─ revokedSecondAdministratorCannotConfirmOrCompleteExistingPermit() ✔
+│  │  └─ releasesRemainOwnerOnlyWithoutSecondApproval() ✔
+│  ├─ IdentityHttpServerTest ✔
+│  │  ├─ wrongMethodDuplicateKeysMassAssignmentAndMalformedUtf8Refused() ✔
+│  │  ├─ remoteListeningAddressAndWrongServiceKeyForbidden() ✔
+│  │  ├─ isActiveRecheckGivesNoIdentityMetadataAndTurnsFalseAfterLogin() ✔
+│  │  ├─ strictJsonRejectsHugeNumbersFractionsDeepTreesAndLoneSurrogate() ✔
+│  │  ├─ actualHttpFirstDelegationAndReauthenticationUseOnlyTypedProofs() ✔
+│  │  ├─ signedLoopbackRegisterIssueAndDigestAuthorizationActuallyWork() ✔
+│  │  └─ managedAccountUsesSignedHttpAndExposesOnlyBooleanToPinnedRelay() ✔
+│  ├─ IdentityStoreTest ✔
+│  │  ├─ capabilityCodecCanonicalAndExpiryAndTamperSafe() ✔
+│  │  ├─ rotatingApplicationProofKeyRevokesPriorTokensOfThatApplication() ✔
+│  │  ├─ configuredServiceIdentityCannotBeSilentlyReplaced() ✔
+│  │  ├─ explicitLogoutAtomicallyRevokesAllApplications() ✔
+│  │  ├─ replayRejectedAndDigestDomainCannotBeReusedAsBodyProof() ✔
+│  │  ├─ auditTailTruncationWithoutChangingAnchorIsDetected() ✔
+│  │  ├─ registrationPreservesLegacyIdWithoutExportAndOnlyTwoSystemRoles() ✔
+│  │  ├─ managedAccountQueryRejectsWrongServicePurposeExpiryAndClockRollback() ✔
+│  │  ├─ registrationRequiresBothAccountAndDeviceOwnership() ✔
+│  │  ├─ duplicateRegistrationCannotResetRecoveryOrTrust() ✔
+│  │  ├─ ownerAdminRequiresStepUpWhileOrdinaryBadgeDoesNotImplyAdmin() ✔
+│  │  ├─ ownerBootstrapRaceAtomicAcrossConnections() ✔
+│  │  ├─ offlineLeaseUsesMonotonicTimeRejectsClockRollbackAndAlwaysDeniesClosedData() ✔
+│  │  ├─ managedAccountQueryRequiresSeparateOperatorPinnedRelayProofAndOneUseNonce() ✔
+│  │  ├─ loginRaceOnlyOneGenerationActiveAcrossIndependentConnections() ✔
+│  │  ├─ tamperedAuditBlocksReopen() ✔
+│  │  ├─ unknownDeviceCannotLoginAndEnrollmentNeedsFreshStepUp() ✔
+│  │  ├─ applicationAndDeviceKeysCannotBeReusedAcrossDifferentAccounts() ✔
+│  │  ├─ rootDeviceRecoveryAndApplicationKeysCannotBeReusedAcrossDomains() ✔
+│  │  ├─ recoveryNeedsSeparateRootAndRecoveryProofAndInvalidatesPriorDevices() ✔
+│  │  ├─ capabilityIsNarrowAppAndProofBound() ✔
+│  │  ├─ generationRevokesAllOldTokensAndOldTrustedDeviceCannotUseNewGeneration() ✔
+│  │  ├─ expiredOwnerChallengeAndStepUpCannotBeReplayed() ✔
+│  │  ├─ clockRollbackFailsClosedAndCannotExtendSignedLease() ✔
+│  │  └─ ownerBootstrapOneUseBoundToExistingAccountProofAndService() ✔
+│  ├─ IdentityMainTest ✔
+│  │  ├─ actualOperatorCliBootstrapUsesOnlyPublicChallengeAndProof() ✔
+│  │  ├─ operatorRelayAllowAndRevokeUseOnlyPinnedPublicFile() ✔
+│  │  └─ unrecognizedOptionsAndSymlinkHomesRefused() ✔
+│  ├─ FirstDelegationTest ✔
+│  │  ├─ recoveredAccountCanRegainLibraryOnlyAfterTwoAdministratorReview() ✔
+│  │  ├─ ownerCannotBeOwnIndependentSecondConfirmation() ✔
+│  │  ├─ targetLoginGenerationChangeInvalidatesConsent() ✔
+│  │  ├─ consentExpiresAfter120Seconds() ✔
+│  │  ├─ normalSubsequentAssignmentRequiresTwoCurrentAdministrators() ✔
+│  │  ├─ revokingAllDelegatesDoesNotResetOneTimeFirstBootstrap() ✔
+│  │  ├─ firstDelegationRequiresFourProofsAndGrantsNamedCustomAdministratorOnlyOnce() ✔
+│  │  ├─ concurrentCompletionCannotCreateTwoFirstDelegates() ✔
+│  │  ├─ ownerLoginGenerationChangeInvalidatesConsent() ✔
+│  │  └─ changedRoleNameOrWrongDeviceProofInvalidatesAllConsent() ✔
+│  ├─ AccessControlTest ✔
+│  │  ├─ stepUpProofBindsConfiguredServiceIdentityAndBindingCannotChange() ✔
+│  │  ├─ inheritedRoleManagerCannotAuthorizeNewAncestorRightsThroughOwnAssignedDescendant... ✔
+│  │  ├─ pendingEnrollmentExpiresAndUsedEnrollmentCodeCannotStepUpAgain() ✔
+│  │  ├─ inheritedPermissionsAndCycleAndCrossScopeAreEnforcedInDatabaseTransaction() ✔
+│  │  ├─ workerRoleCannotLockOutAdministratorThroughAssignmentOrInheritanceChange() ✔
+│  │  ├─ applicationsCannotSelfApproveAndNoCityDoesNotBecomeRegional() ✔
+│  │  ├─ roleListingUsesBoundedStablePagination() ✔
+│  │  ├─ wholeAuditRewriteWithoutMacAndWrongServerKekAreRejected() ✔
+│  │  ├─ selfEnrollmentCannotReplaceExistingFactorOrEnrollAdministratorOrDifferentAccount... ✔
+│  │  ├─ activeClearanceRankCannotBeRenumberedImplicitly() ✔
+│  │  ├─ encryptedTotpAndServerCounterRejectWrongOrReusedCode() ✔
+│  │  ├─ scopedDelegationRejectsGlobalPowerAndUnheldPermissions() ✔
+│  │  ├─ bootstrapIsTwoVerifiedKeysAndCannotRepeat() ✔
+│  │  ├─ failedCriticalCallbackRollsBackConsumptionAndMutation() ✔
+│  │  ├─ memberRemovalRevokesRolePermissionAndAdvancesEpoch() ✔
+│  │  ├─ serverOuterSnapshotTransactionCannotRollbackSecondFactorFailureCounter() ✔
+│  │  ├─ displayNameApiRejectsMassAssignmentOtherIdentityAndInvalidNickname() ✔
+│  │  ├─ noRoleHasNoMutationAndClearanceDoesNotGrantPermission() ✔
+│  │  ├─ ownDisplayNameUpdateUsesExistingIdentityAndNeverAssignsAuthority() ✔
+│  │  ├─ officialIdentityAndPositionAreIndependentFromClearanceAndRevokeHasHistory() ✔
+│  │  ├─ criticalOperationCannotBeSelfApprovedAlteredReplayedOrExpired() ✔
+│  │  ├─ optimisticRoleUpdateAllowsOnlyOneConcurrentRevision() ✔
+│  │  ├─ resourceConstraintsAreConjoinedAndClosedResourceConcealed() ✔
+│  │  ├─ nonceReplayIsAtomicAcrossConcurrentRequests() ✔
+│  │  ├─ assignedRoleManagerCannotAuthorizeOwnNewPermissionsOrClearanceAfterWriting() ✔
+│  │  ├─ notificationFailureRollsBackApplicationAndAuditAtomically() ✔
+│  │  ├─ batchCallAuthorizationIsBoundedAndDoesNotDiscloseOrganizationNames() ✔
+│  │  ├─ auditHashChainDetectsTampering() ✔
+│  │  ├─ independentLevelAssignmentDoesNotIssueVerificationOrAdministrativeRights() ✔
+│  │  ├─ rejectedOptimisticChangePreservesRoleNameAndCounters() ✔
+│  │  ├─ organizationCallAuthorizationRequiresBothIndependentPermissions() ✔
+│  │  ├─ criticalRequestPagesBoundMaximumUnicodePayloadAndExposeEveryRowThroughProduction... ✔
+│  │  ├─ requestAndInvitationJoiningAreNotClientFlags() ✔
+│  │  ├─ ordinaryOwnerCanEnrollFirstFactorAndManageWithoutAdministratorProvisioning() ✔
+│  │  ├─ roleDeletionRemovesInheritedPermissionAndInvalidatesOnlyAffectedCaches() ✔
+│  │  ├─ assignedRoleManagerCanRenameOwnRoleButCannotRaiseOnlyItsClearance() ✔
+│  │  ├─ missingSecondFactorFailsClosedForCorrectIdentitySignature() ✔
+│  │  ├─ realGlobalRoleNeedsIndependentApprovalAndAppliesAfterAssignment() ✔
+│  │  ├─ ordinaryMembershipChangeCannotInvalidateAdministratorSecondFactor() ✔
+│  │  ├─ dedicatedWorkerIdentityCannotBePromotedToAdministrator() ✔
+│  │  └─ failedStepUpAttemptsPersistDespiteRequestRollbackAndLockoutExpires() ✔
+│  ├─ CoreInputTest ✔
+│  │  ├─ exactIntegerFieldsRejectFractionHiddenByDoubleRoundingAndOverflow() ✔
+│  │  ├─ canonicalNumbersPreserveFractionsAndBoundExpansionBeforeAllocation() ✔
+│  │  └─ malformedUnicodeCannotAliasAnotherCriticalOperation() ✔
+│  ├─ RoleDeny600Test ✔
+│  │  ├─ organizationDenyAlsoRestrictsImplicitOwnerDelegationsButNotAnotherScope() ✔
+│  │  ├─ leavingAndRejoiningCannotClearScopedDenyOrRestorePreviousGrants() ✔
+│  │  ├─ authorizedDeletionClearsPersistentRestrictionAndAdvancesEpoch() ✔
+│  │  ├─ administrativeOverrideDoesNotGrantRequiredClosedResourceReadPermission() ✔
+│  │  ├─ persistentDenyChangesAdvanceAffectedEpochAfterMemberHasLeft() ✔
+│  │  ├─ legacyUpdateWithoutDenialsPreservesSecurityPolicyAndListReturnsExplicitDenials() ✔
+│  │  ├─ roleManagerCannotRemoveOwnDenyThroughUpdateDeleteRevokeOrInheritanceUnlink() ✔
+│  │  └─ globalDenyOverridesInheritedAndIndependentAssignedAllows() ✔
+│  └─ TotpTest ✔
+│     ├─ officialRfc6238Sha256Vectors() ✔
+│     └─ windowReplayAndMalformedRejection() ✔
+├─ JUnit Platform Suite ✔
+└─ JUnit Vintage ✔
+
+Test run finished after 20243 ms
+[        13 containers found      ]
+[         0 containers skipped    ]
+[        13 containers started    ]
+[         0 containers aborted    ]
+[        13 containers successful ]
+[         0 containers failed     ]
+[       114 tests found           ]
+[         0 tests skipped         ]
+[       114 tests started         ]
+[         0 tests aborted         ]
+[       114 tests successful      ]
+[         0 tests failed          ]
+

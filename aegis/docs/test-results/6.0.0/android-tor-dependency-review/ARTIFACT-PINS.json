@@ -1,0 +1,44 @@
+{
+  "when": "2026-10-18T13:59:58.737134+00:00",
+  "artifacts": [
+    {
+      "name": "tor-android-0.4.9.14.aar",
+      "bytes": 12976254,
+      "sha256": "28ff2bb6d4d42eabe57183dedd7a97fce77e8ce4b6f5af6fa03993b3ca054edd"
+    },
+    {
+      "name": "tor-android-0.4.9.14-sources.jar",
+      "bytes": 6651,
+      "sha256": "095118a41782a91b9002038461c4c6a65f5c41bc6f5a37323362eceaf0088a2b"
+    },
+    {
+      "name": "jtorctl-0.4.5.7.jar",
+      "bytes": 32371,
+      "sha256": "51bbed22de9fe0028095223ceeb4694d8731eda2fc01edee07b8c0c8a46681c3"
+    },
+    {
+      "name": "jtorctl-0.4.5.7-sources.jar",
+      "bytes": 26111,
+      "sha256": "efb89629dcc1303885f03e010893ef5e3f8aaf934a77b3fc7fe765403597c188"
+    },
+    {
+      "name": "localbroadcastmanager-1.1.0.aar",
+      "bytes": 7607,
+      "sha256": "a22b94a77789f3b34becd24082231300524011ccc83f026142c49ad60131379b"
+    },
+    {
+      "name": "localbroadcastmanager-1.1.0-sources.jar",
+      "bytes": 4258,
+      "sha256": "d6c25fd6fe6dadf78986971c2158d1f15c56296eaaced9fc6eda5edbddabc746"
+    }
+  ],
+  "nativeVersions": {
+    "tor": "0.4.9.14",
+    "libevent": "2.1.13-stable",
+    "OpenSSL": "3.5.9",
+    "zlib": "1.3.2",
+    "zstd": "1.5.7"
+  },
+  "upstreamCommit": "0340ba1609cb73e663e202a316d083803e399db4",
+  "sourceRebuild": "NOT_RUN"
+}

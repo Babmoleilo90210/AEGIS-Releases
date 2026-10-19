@@ -1,0 +1,311 @@
+{
+  "collectedAt": "2026-10-18T13:55:16.581773+00:00",
+  "scope": "Focused attachments, Management, Glas Signaling and Debian deployment tests; full frozen-commit build is separate",
+  "productionReady": false,
+  "uniqueJavaTestsPassed": 59,
+  "pythonFixturesPassed": 20,
+  "realTransfers": [
+    {
+      "scope": "Tink encrypt/decrypt only",
+      "plaintextBytes": 524288000,
+      "ciphertextBytes": 524296056,
+      "maxHeapBytes": 100663296,
+      "durationMillis": 14602
+    },
+    {
+      "scope": "Immutable server store with restart/resume; direct unit authorization fixture",
+      "plaintextBytes": 524288000,
+      "maxHeapBytes": 100663296,
+      "durationMillis": 57001
+    },
+    {
+      "scope": "Actual production client/TorTransport via local SOCKS fixture + Identity HTTP + Attachment HTTP + SQLite + Tink; restart, upload/download resume, ACK, generation revoke",
+      "plaintextBytes": 524288000,
+      "ciphertextBytes": 524296056,
+      "chunks": 501,
+      "maxHeapBytes": 100663296,
+      "durationMillis": 328625
+    }
+  ],
+  "managementAuthority": "Actual Identity HTTP with Owner bootstrap, four-signature first delegated administrator, two independent current admin PoP; command recorder only, not native systemctl",
+  "revocationBound": "Initial authorizeDigest is online/fresh; one bounded request can reuse successful isActive check up to 250 ms monotonic, plus active operation time. No offline continuation after failure.",
+  "notRun": [
+    "Public Tor onion transfer",
+    "Two physical devices and separate networks",
+    "Debian 13 native installation",
+    "systemd running units",
+    "AF_UNIX root broker with actual peer UID",
+    "AppArmor enforce acceptance",
+    "Offsite restic backup/restore drill",
+    "Production Relay integration",
+    "Old client compatibility E2E",
+    "Complete Mail UI key/descriptor integration",
+    "Per-database DynamicUser/systemd/AppArmor validator",
+    "Full UID/chroot native validator adversarial fixtures"
+  ],
+  "sourceFilesAtCollection": [
+    {
+      "file": "attachment-service/CONTRACT-6.0.0.md",
+      "sha256": "084a2ea851b6a2f09e3f6536e244cb1428570718cf00c1aa7c11c077c4e29433",
+      "bytes": 5336
+    },
+    {
+      "file": "attachment-service/build.gradle",
+      "sha256": "a9c39bd38c0289940599876fb07e07c3131a0b2042466567631023142d364871",
+      "bytes": 893
+    },
+    {
+      "file": "attachment-service/src/main/java/org/securemail/attachments/AttachmentHttpServer.java",
+      "sha256": "81423567383ea2383f194251ae33b033dffd2ca403f81098f54b6a8655d22a05",
+      "bytes": 9463
+    },
+    {
+      "file": "attachment-service/src/main/java/org/securemail/attachments/AttachmentMain.java",
+      "sha256": "f65b15fe371dffd7c1e9d00b44f39ea2ee20cd0c146c9e8ef0e0b95534bcbff2",
+      "bytes": 4144
+    },
+    {
+      "file": "attachment-service/src/main/java/org/securemail/attachments/AttachmentStore.java",
+      "sha256": "56b6b91ab8104dede02cd4b55c6c24fd9110e0baa8e48672c0865d9d557192ec",
+      "bytes": 25079
+    },
+    {
+      "file": "attachment-service/src/main/java/org/securemail/attachments/IdentityRemoteAuthority.java",
+      "sha256": "479f8c840c99188b7e35e1c8768fd4b2e4303fcbc67b0110c06f5e1fd6f1c397",
+      "bytes": 9833
+    },
+    {
+      "file": "attachment-service/src/test/java/org/securemail/attachments/AttachmentHttpIntegrationTest.java",
+      "sha256": "e3192127b44a1a32df089702d8f644f2ada5357b83920f756490b8d79fcdfdf6",
+      "bytes": 17821
+    },
+    {
+      "file": "attachment-service/src/test/java/org/securemail/attachments/AttachmentStoreTest.java",
+      "sha256": "194340365213cc5cee1cee7dd7035f3a037cad9e330555e975459c83b2b81a14",
+      "bytes": 11303
+    },
+    {
+      "file": "attachment-service/src/test/java/org/securemail/attachments/LargeAttachmentStore600Test.java",
+      "sha256": "0c40e71290e0e5cfa19cfddc8ddb1c016cf5b27562cd707577d607abb8ee364a",
+      "bytes": 4726
+    },
+    {
+      "file": "management-agent/build.gradle",
+      "sha256": "681f665ffd186860917611790775beff58b9a455b0fcb6ccf752674db057d081",
+      "bytes": 542
+    },
+    {
+      "file": "management-agent/src/main/java/org/securemail/management/ManagementMain.java",
+      "sha256": "fff6685646e986b0597516c7051c09aa6d02e9c49496800dc1dd7dc9e32d3e47",
+      "bytes": 14219
+    },
+    {
+      "file": "management-agent/src/main/java/org/securemail/management/ManagementPolicy.java",
+      "sha256": "37a4d6eff0c0737f1f595edeb68d5e9c39147a59b011e42b12d5988e25f0481d",
+      "bytes": 4724
+    },
+    {
+      "file": "management-agent/src/main/java/org/securemail/management/ManagementService.java",
+      "sha256": "26e3ce85258379b9b4918b7e7d02850a8576a024b553768380fd951c5848aeab",
+      "bytes": 10561
+    },
+    {
+      "file": "management-agent/src/test/java/org/securemail/management/ManagementIdentityIntegrationTest.java",
+      "sha256": "bc6264daf9a359875732315684df68502299624797ceefe8493b03cbe7450f7d",
+      "bytes": 11945
+    },
+    {
+      "file": "glas-signaling/CONTRACT-6.0.0.md",
+      "sha256": "4ae99df71c11b1f2ac58e69cb3fe9f0e0d6efdea5bbe9d1f2ea3835933d66d95",
+      "bytes": 6796
+    },
+    {
+      "file": "glas-signaling/build.gradle",
+      "sha256": "e9973eedb07c4875df353ef19f1391d6e6556c5a07456e4dcaf93bcf172340d8",
+      "bytes": 879
+    },
+    {
+      "file": "glas-signaling/src/main/java/org/securemail/glas/signaling/GlasRegistry600.java",
+      "sha256": "a5563c349e99d09f0b71d9a028880a477761b35f2286e39c7c032c7a98241ca1",
+      "bytes": 9058
+    },
+    {
+      "file": "glas-signaling/src/main/java/org/securemail/glas/signaling/GlasSignalingHttp600.java",
+      "sha256": "9fdfab06ffd571365448e57ee1663e5bf5ad5bc614b98a3f4a4c2d6baa89afa3",
+      "bytes": 5182
+    },
+    {
+      "file": "glas-signaling/src/main/java/org/securemail/glas/signaling/GlasSignalingMain600.java",
+      "sha256": "aad61b460da198ba08e813153da38a7c5f7cb087c04332ac3ec014a6373504f7",
+      "bytes": 3864
+    },
+    {
+      "file": "glas-signaling/src/test/java/org/securemail/glas/signaling/GlasSignalingIntegration600Test.java",
+      "sha256": "8124b905070a313789c26531f80db22cf8e308956a7850009fc20da489cee6c9",
+      "bytes": 14833
+    },
+    {
+      "file": "deployment/debian600/README.md",
+      "sha256": "eb87c7c86580e719f066b3333dea4790a0d880823b535bb2eeb11a0cac15587d",
+      "bytes": 28307
+    },
+    {
+      "file": "deployment/debian600/backup_restore.py",
+      "sha256": "ee4942bac41299f17fff3e70778b30768a9b9923289f2e6290865b4fb8fc4d12",
+      "bytes": 18522
+    },
+    {
+      "file": "deployment/debian600/deploy.py",
+      "sha256": "0a18dab34e5c3f08907b60a30dbcf9567bd3d441bc218e590d4646a6061e82ae",
+      "bytes": 4710
+    },
+    {
+      "file": "deployment/debian600/monitoring.py",
+      "sha256": "9e2cf48a7dbbf82db15cfe55710f9eaa907972939298a54b08c93b8e2d2181bd",
+      "bytes": 2883
+    },
+    {
+      "file": "deployment/debian600/preflight.py",
+      "sha256": "46c07fc71bbe2dbcafb63fd5c40815fb52efe6435afade9af5eac9d5b3080201",
+      "bytes": 1229
+    },
+    {
+      "file": "deployment/debian600/staging.py",
+      "sha256": "5d9498e816dd7729a59a1d65566928c7d8e32cec4336db40010afec977b20157",
+      "bytes": 24124
+    },
+    {
+      "file": "deployment/debian600/start-news-worker.py",
+      "sha256": "d11b5b1f1096fe4688a2762757ff47e042b5b44169b5f0a38190000064ad1e03",
+      "bytes": 1447
+    },
+    {
+      "file": "deployment/debian600/test_debian600.py",
+      "sha256": "1bbda442581787127d5f1f5fef22ff131bb65755d33d6156d7b2695df6ddf080",
+      "bytes": 12214
+    },
+    {
+      "file": "client-core/src/main/java/org/securemail/client/attachments600/AttachmentClient600.java",
+      "sha256": "42512a396d2f4393146b1413a77caee3876ed77d06cf78aa6db165f6ddccd1d0",
+      "bytes": 18273
+    },
+    {
+      "file": "client-core/src/main/java/org/securemail/client/attachments600/StreamingAttachmentCipher.java",
+      "sha256": "9e41f64ae75aee9cf92123ee4d4cc9cf13ff3551f0810028a964d1fbfcdcef4e",
+      "bytes": 10805
+    },
+    {
+      "file": "client-core/src/test/java/org/securemail/client/attachments600/LargeStreamingAttachment600Test.java",
+      "sha256": "74325db2d305b799f57069b907e9b2b063fc7bab1186b5aabe623d715188088a",
+      "bytes": 2430
+    },
+    {
+      "file": "client-core/src/test/java/org/securemail/client/attachments600/StreamingAttachmentCipherTest.java",
+      "sha256": "cee2dead921731e1211069c27172944e833e0b6626b89532c1b1854467044079",
+      "bytes": 6532
+    },
+    {
+      "file": "common-protocol/src/main/java/org/securemail/attachments/protocol/AttachmentProtocol.java",
+      "sha256": "22c81b921deea806dd1bd938d3043bef755695ca41c6495a2d5033407f30ea2b",
+      "bytes": 5924
+    },
+    {
+      "file": "common-protocol/src/main/java/org/securemail/glas/protocol600/GlasProtocol600.java",
+      "sha256": "128959f90d4af1eea5336ee326a7b60f8bfc8317065d20ff4d5765b499987249",
+      "bytes": 12893
+    },
+    {
+      "file": "deployment/debian600/sqlite_validator.py",
+      "sha256": "b4c82987bd8af469c2c7777c7c6d54c70ded6813c028ae021b8515c0a7061272",
+      "bytes": 3608
+    },
+    {
+      "file": "deployment/debian600/test_validator_sandbox.py",
+      "sha256": "1a8ffa67c18993455d6cc0de6563d3011d872066cd73cef19fc25a23c9e6803e",
+      "bytes": 10445
+    },
+    {
+      "file": "client-core/src/main/java/org/securemail/client/management600/ManagementClient600.java",
+      "sha256": "091e1e39685d1d49f6cd346f24f8406ae00780484017d2781846e7a586b64be1",
+      "bytes": 14583
+    },
+    {
+      "file": "client-core/src/test/java/org/securemail/client/management600/ManagementClientIntegration600Test.java",
+      "sha256": "0d1eccbdb93e665aa35b42629aa3d81699b3c90c6a3966a90925c5b21e6c2d0c",
+      "bytes": 15355
+    },
+    {
+      "file": "client-ui/src/main/java/org/securemail/ui/ServerManagementView600.java",
+      "sha256": "e65f983e3995f01af898fc8098cd4acb67b8e3c18cf8ff7e9aeff4bc22fdb6c6",
+      "bytes": 7364
+    },
+    {
+      "file": "management-agent/src/main/java/org/securemail/management/ManagementHttpServer600.java",
+      "sha256": "5ff4fde438d13770e0e2ff408a27c5ef2e6c188c0875c42efc9051dfb84bee82",
+      "bytes": 4375
+    },
+    {
+      "file": "attachment-service/src/test/java/org/securemail/attachments/MailAttachmentHttpIntegration600Test.java",
+      "sha256": "019ed27e6338d3ade2cd2eeffc60a5e5bfb24f3d0396c9a71b1f26a34e11e895",
+      "bytes": 17796
+    },
+    {
+      "file": "management-agent/src/test/java/org/securemail/management/ServerLoadSecurity600Test.java",
+      "sha256": "dea3c05f64977cec5701331922cc276c0e60d7cc0be8114885ac103fba43d35a",
+      "bytes": 20134
+    }
+  ],
+  "productionModified": false,
+  "ownerPrivateKeyAccessed": false,
+  "glasSignalingAuthority": "Actual pinned Identity HTTP + separate signed Signaling HTTP + SQLite, root/app delegation/endpoint bindings, directional contact policies, expiry, generation revocation, replay and malformed input; no public Tor/audio/native claim",
+  "pythonFixturesNotRun": 4,
+  "pythonFixturesTotal": 23,
+  "backupIsolation": {
+    "rootSqliteParser": false,
+    "quiescedOpaqueCopy": true,
+    "perDatabaseUnprivilegedValidator": true,
+    "portableKernelSeccompTest": "PASS",
+    "unsandboxedRealWorkerRefusal": "PASS",
+    "nativeUidChrootFixture": "NOT_RUN",
+    "nativeSystemdAppArmor": "NOT_RUN",
+    "offsiteResticRestore": "NOT_RUN"
+  },
+  "managementClient": {
+    "testCount": 8,
+    "scope": "Production client/TorTransport via local SOCKS fixture + production HTTP boundary + ManagementService + actual Identity HTTP + SQLite. Fixed systemctl command recorder only; no native root broker/systemd/offsite claim.",
+    "jointClientServerTestsPassed": 15,
+    "uiCompilation": "PASS",
+    "uiNativeAcceptance": "NOT_RUN",
+    "productionClassPathIncludesServerClasses": false
+  },
+  "additionalTests": {
+    "mailManagerUnique": 3,
+    "attachmentStoreNewRetainedLimit": 1,
+    "serverLoadUnique": 1,
+    "combinedCheckpoint": {
+      "total": 30,
+      "passed": 29,
+      "failed": 1,
+      "failure": "Load JSON export FileAlreadyExistsException after all load assertions; rerun in unique output directory PASS",
+      "sourceUnchanged": false
+    },
+    "loadRerun": {
+      "passed": 1,
+      "sourceUnchanged": true,
+      "evidence": "load/RUN.json"
+    }
+  },
+  "sourceBinding": "Individual component checkpoints; final shared frozen-commit build is separate. Do not sum overlapping XML runs or infer native acceptance.",
+  "runtimeDependencyPackagingUpdate": {
+    "checkedAt": "2026-10-18T14:13:38.167292+00:00",
+    "externalRuntimeJars": 6,
+    "added": "Gson runtime error_prone_annotations:2.48.0; exact lockfile, official artifact SHA256, license, OSV/GHSA recorded",
+    "pythonTests": {
+      "total": 24,
+      "pass": 20,
+      "notRun": 4,
+      "fail": 0
+    }
+  },
+  "stagingCommunityEntrypoint": "gateway600.CommunityMain600; Identity app gateway, port configured during init, no legacy CommunityMain fallback"
+}

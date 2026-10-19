@@ -16,6 +16,7 @@ import org.securemail.protocol.*;
 public final class PlainMessage implements AutoCloseable {
   public static final int MAX_ATTACHMENTS=64;
   private final byte[] text,letter;
+  private byte[] streamingManifest=new byte[0];private int streamedCount;
   private final String subject;
   private final List<Attachment> attachments;
   private final int version;
@@ -52,6 +53,15 @@ public final class PlainMessage implements AutoCloseable {
     return new PlainMessage(text.getBytes(StandardCharsets.UTF_8),subject,envelope.clone(),readFiles(files,max),5,context);
   }
   public MailContext context(){return context;}
+  public boolean streamingAttachments(){return streamingManifest.length>0;}
+  public int attachmentCount(){return attachments.size()+streamedCount;}
+  public byte[] streamingManifest(){return streamingManifest.clone();}
+  public static PlainMessage streaming(String subject,String body,byte[] envelope,MailContext context,byte[] manifest)throws IOException {
+    try(var checked=org.securemail.client.attachments600.AttachmentManifest600.decode(manifest)){
+      if(checked.protectedKeys()!=(envelope.length>0))throw new IOException("Защита вложений не соответствует письму");
+      var result=new PlainMessage((envelope.length>0?"":body).getBytes(StandardCharsets.UTF_8),subject,envelope.clone(),List.of(),6,context);result.streamingManifest=manifest.clone();result.streamedCount=checked.files().size();return result;
+    }
+  }
   public static PlainMessage compose(String subject,String body,byte[] envelope,List<Path> paths,FileBundle forwarded,int max,MailContext context,boolean rich)throws IOException{
     byte[] text=(envelope.length>0?"":rich||subject.isBlank()?body:subject+"\n\n"+body).getBytes(StandardCharsets.UTF_8);
     List<Attachment> files=new ArrayList<>();boolean success=false;
@@ -100,22 +110,24 @@ public final class PlainMessage implements AutoCloseable {
   public byte[] attachmentBytes(String name)throws IOException {var file=attachments.stream().filter(a->a.name().equals(name)).findFirst().orElseThrow(()->new IOException("Вложение отсутствует"));return file.data().clone();}
   public int fileSize(){return attachments.stream().mapToInt(f->f.data().length).sum();}
   public byte[] encode()throws IOException {return Binary.encode(out->{
-    out.writeInt(version);if(version==1)Binary.bytes(out,text);else{Binary.text(out,subject);if(version==5)Binary.bytes(out,text);Binary.bytes(out,letter);}
-    if(version==5){out.writeBoolean(context!=null);if(context!=null)context.write(out);}
-    if(version==4||version==5){out.writeInt(attachments.size());for(var f:attachments){Binary.text(out,f.name());Binary.bytes(out,f.data());}}
+    out.writeInt(version);if(version==1)Binary.bytes(out,text);else{Binary.text(out,subject);if(version==5||version==6)Binary.bytes(out,text);Binary.bytes(out,letter);}
+    if(version==5||version==6){out.writeBoolean(context!=null);if(context!=null)context.write(out);}
+    if(version==6){Binary.bytes(out,streamingManifest);}
+    else if(version==4||version==5){out.writeInt(attachments.size());for(var f:attachments){Binary.text(out,f.name());Binary.bytes(out,f.data());}}
     else {Binary.text(out,filename());Binary.bytes(out,attachments.isEmpty()?new byte[0]:attachments.getFirst().data());}
   });}
   public static PlainMessage decode(byte[] encoded,int max)throws IOException {
-    byte[] text=new byte[0],letter=new byte[0];List<Attachment> files=new ArrayList<>();boolean success=false;
+    byte[] text=new byte[0],letter=new byte[0],manifest=new byte[0];List<Attachment> files=new ArrayList<>();boolean success=false;
     try(var in=new DataInputStream(new ByteArrayInputStream(encoded))){
-      int v=in.readInt();if(v!=1&&v!=3&&v!=4&&v!=5)throw new IOException("Bad content version");
-      String subject=v==1?"":Binary.text(in,1024);if(v==1)text=Binary.bytes(in,Limits.TEXT_BYTES);else {if(v==5)text=Binary.bytes(in,Limits.TEXT_BYTES);letter=Binary.bytes(in,LetterEnvelope.MAX_BYTES);if(v!=5&&letter.length==0)throw new IOException("Empty letter");}
-      MailContext context=v==5&&in.readBoolean()?MailContext.read(in):null;
-      int count=v==4||v==5?in.readInt():1;if(count<0||count>MAX_ATTACHMENTS)throw new IOException("Bad attachment count");
+      int v=in.readInt();if(v!=1&&v!=3&&v!=4&&v!=5&&v!=6)throw new IOException("Bad content version");
+      String subject=v==1?"":Binary.text(in,1024);if(v==1)text=Binary.bytes(in,Limits.TEXT_BYTES);else {if(v==5||v==6)text=Binary.bytes(in,Limits.TEXT_BYTES);letter=Binary.bytes(in,LetterEnvelope.MAX_BYTES);if(v!=5&&v!=6&&letter.length==0)throw new IOException("Empty letter");}
+      MailContext context=(v==5||v==6)&&in.readBoolean()?MailContext.read(in):null;
+      if(v==6)manifest=Binary.bytes(in,org.securemail.client.attachments600.AttachmentManifest600.MAX_BYTES);
+      int count=v==6?0:v==4||v==5?in.readInt():1;if(count<0||count>MAX_ATTACHMENTS)throw new IOException("Bad attachment count");
       int left=max;for(int n=0;n<count;n++){String name=Binary.text(in,800);byte[] data=Binary.bytes(in,left);left-=data.length;
         if(v!=4&&v!=5&&name.isEmpty()&&data.length==0)continue;files.add(new Attachment(name,data));}
-      Binary.end(in);PlainMessage result=new PlainMessage(text,subject,letter,files,v,context);success=true;return result;
-    }catch(IllegalArgumentException e){throw new IOException("Bad content",e);}finally{if(!success){Arrays.fill(text,(byte)0);Arrays.fill(letter,(byte)0);files.forEach(f->Arrays.fill(f.data(),(byte)0));}}
+      Binary.end(in);PlainMessage result=new PlainMessage(text,subject,letter,files,v,context);if(v==6){try(var checked=org.securemail.client.attachments600.AttachmentManifest600.decode(manifest)){if(checked.protectedKeys()!=(letter.length>0))throw new IOException("Защита вложений не соответствует письму");result.streamedCount=checked.files().size();}result.streamingManifest=manifest;}success=true;return result;
+    }catch(IllegalArgumentException e){throw new IOException("Bad content",e);}finally{if(!success){Arrays.fill(text,(byte)0);Arrays.fill(letter,(byte)0);Arrays.fill(manifest,(byte)0);files.forEach(f->Arrays.fill(f.data(),(byte)0));}}
   }
   /** Explicit legacy single-file export. Never executes or overwrites the destination. */
   public void exportTo(Path target)throws IOException {
@@ -141,6 +153,6 @@ public final class PlainMessage implements AutoCloseable {
       }channel.force(true);if(!permitted.getAsBoolean())throw new IOException("Письмо закрыто");success=true;
     }finally{Arrays.fill(secret,'\0');if(created&&!success)Files.deleteIfExists(target);}
   }
-  @Override public void close(){Arrays.fill(text,(byte)0);Arrays.fill(letter,(byte)0);attachments.forEach(f->Arrays.fill(f.data(),(byte)0));}
+  @Override public void close(){Arrays.fill(text,(byte)0);Arrays.fill(letter,(byte)0);Arrays.fill(streamingManifest,(byte)0);attachments.forEach(f->Arrays.fill(f.data(),(byte)0));}
   @Override public String toString(){return "PlainMessage[redacted]";}
 }

@@ -1,0 +1,14 @@
+{
+  "status": "PASS_LOCAL",
+  "productionReady": false,
+  "sourceStable": true,
+  "tests": 69,
+  "skipped": 0,
+  "scope": "actual JCA/SQLite/signed loopback HTTP/operator CLI/canonical public proof tests; no owner key, native/Tor production acceptance",
+  "evidenceSha256": {
+    "RESULTS.json": "7ef54e33dc8f8242b2bb275ce39cd48654177186ac9523b3cbee6cede9aea64e",
+    "shared-java8.log": "312e9bd919c699a2f8409f70240177012720c94095f0f4374d44152defc50f7e",
+    "javac.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "junit.log": "b67b6cd4f5e94dcb5344fd5c68623196a5d8fac34db032d73df8c46d53869a1a"
+  }
+}

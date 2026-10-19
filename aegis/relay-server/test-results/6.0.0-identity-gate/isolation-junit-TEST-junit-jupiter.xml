@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="JUnit Jupiter" tests="1" skipped="0" failures="0" errors="0" time="0.068" hostname="2ac91939697e" timestamp="2026-10-18T14:59:07">
+<testcase name="relayRuntimeHasNoClientOrMessageCrypto()" classname="org.securemail.relay.IsolationTest" time="0.025">
+<system-out>
+unique-id: [engine:junit-jupiter]/[class:org.securemail.relay.IsolationTest]/[method:relayRuntimeHasNoClientOrMessageCrypto()]
+display-name: relayRuntimeHasNoClientOrMessageCrypto()
+</system-out>
+</testcase>
+<system-out>
+unique-id: [engine:junit-jupiter]
+display-name: JUnit Jupiter
+</system-out>
+</testsuite>

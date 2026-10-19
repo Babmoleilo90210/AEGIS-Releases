@@ -1,0 +1,13 @@
+{
+  "sourceUrl": "https://download.libsodium.org/libsodium/releases/libsodium-1.0.22-stable.tar.gz",
+  "sha256": "0a7f69b065b82afdb1470375ffa1cee4ecb066180cca05a71e44e3268cd8470d",
+  "bytes": 2099827,
+  "officialMinisignPublicKey": "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3",
+  "keySource": "https://doc.libsodium.org/installation",
+  "signatureFile": "libsodium-current.minisig",
+  "dataAndTrustedCommentSignaturesVerified": true,
+  "trustedComment": "timestamp:1792280091\tfile:libsodium-stable.tar.gz\thashed",
+  "oldRepositoryPin": "4ed1a1353a0cc2426a25a63fbd9d69bb53fa293a50f3b2e59300ef951f096a31",
+  "oldArchiveRejectedByOldPin": true,
+  "whyNewSnapshot": "Official mutable 1.0.22 stable snapshot updated; new source separately verified and pinned for Android only. Desktop input unchanged."
+}

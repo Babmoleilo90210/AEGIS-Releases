@@ -1,0 +1,47 @@
+{
+  "when": "2026-10-18T13:57:40.459180+00:00",
+  "entries": [
+    {
+      "label": "Tor Android Java wrapper 0.4.9.14; BSD-3-Clause. Copyright notice from exact tagged upstream LICENSE.",
+      "sourceFile": "TorAndroid-wrapper-BSD3.txt",
+      "sha256": "c99a7186820a7db750c3a8a015a545a24556a6a5960b10244e1d62c53fb91f92"
+    },
+    {
+      "label": "Tor 0.4.9.14 + bundled Tor third-party notices; exact source gitlink4a522a3ca491c6c04d4a44cb006b92101c42efc1.",
+      "sourceFile": "Tor-pinned-LICENSE.txt",
+      "sha256": "5dc29ea302cc75db6db4a7c88d7b5d4638b4e0f5f1d2e6d21ce71f707470b766"
+    },
+    {
+      "label": "jtorctl 0.4.5.7; BSD-3-Clause; Copyright2005 Nick Mathewson, Roger Dingledine.",
+      "sourceFile": "jtorctl-BSD3.txt",
+      "sha256": "e79f2786595048b2a7549797538ccd3be788122188a53021ae6837371b7951c0"
+    },
+    {
+      "label": "AndroidX LocalBroadcastManager1.1.0; Apache-2.0; Copyright2018 The Android Open Source Project (exact sources.jar header).",
+      "sourceFile": "androidx-localbroadcastmanager-LICENSE.txt",
+      "sha256": "809fa1ed21450f59827d1e9aec720bbc4b687434fa22283c6cb5dd82a47ab9c0"
+    },
+    {
+      "label": "libevent2.1.13-stable; BSD-3-Clause with upstream included additional notices.",
+      "sourceFile": "libevent-2.1.13-LICENSE.txt",
+      "sha256": "ff02effc9b331edcdac387d198691bfa3e575e7d244ad10cb826aa51ef085670"
+    },
+    {
+      "label": "OpenSSL3.5.9; Apache-2.0; Copyright2016-2026 The OpenSSL Project Authors. All Rights Reserved.",
+      "sourceFile": "OpenSSL-3.5.9-LICENSE.txt",
+      "sha256": "7d5450cb2d142651b8afa315b5f238efc805dad827d91ba367d8516bc9d49e7a"
+    },
+    {
+      "label": "zlib1.3.2; Zlib license.",
+      "sourceFile": "zlib-1.3.2-LICENSE.txt",
+      "sha256": "e32ff4e00d9d94930537635291da39e7e612703334bf6fde8c7f1686fe8a45a2"
+    },
+    {
+      "label": "Zstandard1.5.7; BSD-3-Clause option selected. Upstream also offers GPLv2 as an alternative; this distribution selects BSD.",
+      "sourceFile": "zstd-1.5.7-LICENSE.txt",
+      "sha256": "7055266497633c9025b777c78eb7235af13922117480ed5c674677adc381c9d8"
+    }
+  ],
+  "noticeSha256": "d6f1d789af4d25bda50e2c78854d7e974600ac30118f1f1175f0a9f4c63a1398",
+  "scope": "Notices prepared for Android packager to include verbatim; this task does not modify APK/assets or attest legal completeness beyond reviewed component inventory."
+}

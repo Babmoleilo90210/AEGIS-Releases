@@ -1,0 +1,45 @@
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+╷
+├─ JUnit Platform Suite ✔
+├─ JUnit Jupiter ✔
+│  └─ MailAttachmentHttpIntegration600Test ✔
+│     ├─ actualMailManagerFiveHundredMiBDurableResumeE2eeDescriptorAndDownload() ✘ Nickname: 3–32 латинских букв, цифр или _
+│     └─ protectedManagerDescriptorUsesExistingLetterPasswordAndFf1WithoutEarlyPlaintext(... ✘ Nickname: 3–32 латинских букв, цифр или _
+└─ JUnit Vintage ✔
+
+Failures (2):
+  JUnit Jupiter:MailAttachmentHttpIntegration600Test:actualMailManagerFiveHundredMiBDurableResumeE2eeDescriptorAndDownload()
+    MethodSource [className = 'org.securemail.attachments.MailAttachmentHttpIntegration600Test', methodName = 'actualMailManagerFiveHundredMiBDurableResumeE2eeDescriptorAndDownload', methodParameterTypes = '']
+    => java.lang.IllegalArgumentException: Nickname: 3–32 латинских букв, цифр или _
+       org.securemail.protocol.Limits.nickname(Limits.java:18)
+       org.securemail.protocol.UserInfo.<init>(UserInfo.java:8)
+       org.securemail.attachments.MailAttachmentHttpIntegration600Test.actualMailManagerFiveHundredMiBDurableResumeE2eeDescriptorAndDownload(MailAttachmentHttpIntegration600Test.java:56)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+  JUnit Jupiter:MailAttachmentHttpIntegration600Test:protectedManagerDescriptorUsesExistingLetterPasswordAndFf1WithoutEarlyPlaintext()
+    MethodSource [className = 'org.securemail.attachments.MailAttachmentHttpIntegration600Test', methodName = 'protectedManagerDescriptorUsesExistingLetterPasswordAndFf1WithoutEarlyPlaintext', methodParameterTypes = '']
+    => java.lang.IllegalArgumentException: Nickname: 3–32 латинских букв, цифр или _
+       org.securemail.protocol.Limits.nickname(Limits.java:18)
+       org.securemail.protocol.UserInfo.<init>(UserInfo.java:8)
+       org.securemail.attachments.MailAttachmentHttpIntegration600Test.protectedManagerDescriptorUsesExistingLetterPasswordAndFf1WithoutEarlyPlaintext(MailAttachmentHttpIntegration600Test.java:78)
+       java.base/java.lang.reflect.Method.invoke(Method.java:580)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+Test run finished after 6189 ms
+[         4 containers found      ]
+[         0 containers skipped    ]
+[         4 containers started    ]
+[         0 containers aborted    ]
+[         4 containers successful ]
+[         0 containers failed     ]
+[         2 tests found           ]
+[         0 tests skipped         ]
+[         2 tests started         ]
+[         0 tests aborted         ]
+[         0 tests successful      ]
+[         2 tests failed          ]
+

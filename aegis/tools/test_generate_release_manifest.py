@@ -40,7 +40,7 @@ class GenerateReleaseManifestTest(unittest.TestCase):
         return generator.build_manifest(directory, number, channel, published_at='2026-10-15T09:00:00Z', **options)
 
     def test_150_200_and_250_exact_tags_urls_names_and_measured_bytes(self):
-        for number in ('1.5.0', '2.0.0', '2.5.0'):
+        for number in ('1.5.0', '2.0.0', '2.5.0', '5.0.0', '6.0.0'):
             with self.subTest(number=number):
                 directory = self.assets(number)
                 for channel in ('stable', 'beta'):

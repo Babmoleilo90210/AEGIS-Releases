@@ -1,0 +1,50 @@
+[
+  {
+    "entry": "jni/arm64-v8a/libtor.so",
+    "bytes": 7580256,
+    "sha256": "67ce86a6664c330f49037487f0931498e2a0f82099fbfaf3de7a62c32cf5e996",
+    "embeddedVersionStrings": [
+      "0.4.9.14",
+      "2.1.13-stable",
+      "1.5.7",
+      "1.3.2",
+      "OpenSSL 3.5.9 29 Sep 2026"
+    ]
+  },
+  {
+    "entry": "jni/armeabi-v7a/libtor.so",
+    "bytes": 6819684,
+    "sha256": "a27f80fc60f96d953c8251e9a3ba007a7da0ba941c51968962b525141d416f7c",
+    "embeddedVersionStrings": [
+      "0.4.9.14",
+      "2.1.13-stable",
+      "1.5.7",
+      "1.3.2",
+      "OpenSSL 3.5.9 29 Sep 2026"
+    ]
+  },
+  {
+    "entry": "jni/x86/libtor.so",
+    "bytes": 7229832,
+    "sha256": "982904d2fc050abc6d7deb4df93eb0ba9e501c3cecd8d30d155904bbb5cc6a97",
+    "embeddedVersionStrings": [
+      "0.4.9.14",
+      "2.1.13-stable",
+      "1.5.7",
+      "1.3.2",
+      "OpenSSL 3.5.9 29 Sep 2026"
+    ]
+  },
+  {
+    "entry": "jni/x86_64/libtor.so",
+    "bytes": 8445824,
+    "sha256": "dc7f0fecc47ed73397b2f7928ddf2b87d18fac7c6ba1d00d72e3d7772e5eb480",
+    "embeddedVersionStrings": [
+      "0.4.9.14",
+      "2.1.13-stable",
+      "1.5.7",
+      "1.3.2",
+      "OpenSSL 3.5.9 29 Sep 2026"
+    ]
+  }
+]

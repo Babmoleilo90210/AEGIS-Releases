@@ -22,7 +22,14 @@ public final class AccountLogin {
     private static final long serialVersionUID=1L;
     public MigrationFailed(Throwable cause){super("Не удалось обновить хранилище. Старые данные и резервная копия сохранены.",cause);}
   }
-  public static ClientSession open(ClientConfig config,String nick,char[] account,char[] oldPassword)throws Exception {
+  @FunctionalInterface public interface BeforeRelayLogin {void verify(ClientSession session)throws Exception;}
+  public static ClientSession open(ClientConfig config,String nick,char[] account,char[] oldPassword)throws Exception {return open(config,nick,account,oldPassword,session->{});}
+  @FunctionalInterface public interface BeforeNetworkLogin{void verify(LocalStore store,NetworkService network)throws Exception;}
+  /** Component account/proof checks and runtime voice suppression occur before Relay login or polling. */
+  public static ClientSession open(ClientConfig config,String nick,char[] account,char[] oldPassword,BeforeRelayLogin gate)throws Exception {
+    return open(config,nick,account,oldPassword,gate,(store,network)->{});
+  }
+  public static ClientSession open(ClientConfig config,String nick,char[] account,char[] oldPassword,BeforeRelayLogin gate,BeforeNetworkLogin networkGate)throws Exception {
     Path root=config.storagePath();ClientUpgrade.beforeOpen(root,AppPaths.root().resolve("backups"));
     if(!Files.exists(root.resolve("state.vault")))throw new java.io.IOException("Восстановите идентичность из резервной копии");
     boolean modern=LocalStore.modernVault(root);LocalStore local;
@@ -31,13 +38,13 @@ public final class AccountLogin {
     try{
       if(!modern){
         var auth=new NetworkService(new TorTransport(config.torSocksAddress(),config.torSocksPort()),config.relayOnionAddress(),config.relayPort(),local,config.maxCiphertext());
-        try{auth.authenticate(nick,account,false);}finally{auth.forgetSession();}
+        try{networkGate.verify(local,auth);auth.authenticate(nick,account,false);}finally{auth.forgetSession();}
         Path staged=root.resolveSibling(root.getFileName()+".migration-"+UUID.randomUUID());
         try{local.rekeyCopy(staged,account);local.close();local=null;ClientUpgrade.commit(root,staged);}catch(Exception failure){throw new MigrationFailed(failure);}
         local=new LocalStore(root,account,Clock.systemUTC(),config.maxCiphertext(),config.maxLocalStorage());
       }
       var session=new ClientSession(config,local);local=null;
-      try{session.login(nick,account,false);return session;}catch(Exception e){session.close();throw e;}
+      try{gate.verify(session);networkGate.verify(session.local(),session.network());session.login(nick,account,false);return session;}catch(Exception e){session.close();throw e;}
     }finally{if(local!=null)local.close();}
   }
 }

@@ -1,0 +1,2 @@
+# Keep exact captured compiler/JUnit bytes and their evidence hashes.
+*.log whitespace=-blank-at-eof

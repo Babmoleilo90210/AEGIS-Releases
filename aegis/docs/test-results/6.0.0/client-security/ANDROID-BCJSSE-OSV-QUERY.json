@@ -1,0 +1,23 @@
+{
+  "atUtc": "2026-10-18T13:16:15.604591+00:00",
+  "httpStatus": 200,
+  "request": {
+    "queries": [
+      {
+        "package": {
+          "ecosystem": "Maven",
+          "name": "org.bouncycastle:bctls-jdk18on"
+        },
+        "version": "1.86"
+      }
+    ]
+  },
+  "response": {
+    "results": [
+      {}
+    ]
+  },
+  "requestSha256": "cb539fe559c724a04fa2456db2db8ce7cd14a09d70ea69995a7f44182b58e9c6",
+  "responseSha256": "a0460b2895f6918d679db4ec8ceaa94dc85b501d9060c02839d05e919aac5e31",
+  "scope": "Android-only explicit BCJSSE adapter; physical runtime NOT_RUN"
+}

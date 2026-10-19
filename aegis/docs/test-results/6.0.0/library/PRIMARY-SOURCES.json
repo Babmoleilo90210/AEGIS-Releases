@@ -1,0 +1,98 @@
+{
+  "retrievedAt": "2026-10-18",
+  "scope": "READ_ONLY_PRIMARY_DOCUMENTATION_RESEARCH",
+  "sources": [
+    {
+      "url": "https://docs.syncthing.net/users/security.html",
+      "id": "turn78view0",
+      "facts": [
+        "Device identity is certificate fingerprint; approved peer access and folder model, not per-note user ACL.",
+        "Global/local discovery and public relaying have metadata/privacy consequences and defaults that are unsuitable without explicit configuration."
+      ]
+    },
+    {
+      "url": "https://docs.syncthing.net/users/untrusted.html",
+      "id": "turn78view1",
+      "facts": [
+        "Receive-encrypted uses folder-scoped encryption and still has beta/testing warning.",
+        "Trusted endpoints receive plaintext; this is not read/update/publish authorisation per document."
+      ]
+    },
+    {
+      "url": "https://docs.syncthing.net/users/proxying.html",
+      "id": "turn80view4",
+      "facts": [
+        "SOCKS5 supports outbound proxy connections.",
+        "Default proxy failure permits direct fallback; ALL_PROXY_NO_FALLBACK=1 is necessary for fail-closed operation."
+      ]
+    },
+    {
+      "url": "https://help.obsidian.md/Extending+Obsidian/Plugin+security",
+      "id": "turn78view2",
+      "facts": [
+        "Plugins inherit application permissions; no reliable per-plugin permission restriction.",
+        "Restricted mode disables community plugins; plugin review is not application sandboxing."
+      ]
+    },
+    {
+      "url": "https://help.obsidian.md/Files+and+folders/How+Obsidian+stores+data",
+      "id": "turn83view1",
+      "facts": [
+        "Vault files are local plaintext Markdown.",
+        "Vault .obsidian configuration is separate from global config and metadata/IndexedDB cache."
+      ]
+    },
+    {
+      "url": "https://help.obsidian.md/Extending+Obsidian/Obsidian+URI",
+      "id": "turn83view2",
+      "facts": [
+        "Official open URI supports percent-encoded vault/file or path; arbitrary actions must not be accepted from content."
+      ]
+    },
+    {
+      "url": "https://help.obsidian.md/Getting+started/Download+and+install+Obsidian",
+      "id": "turn78view4",
+      "facts": [
+        "Official Android APK download outside Play is documented.",
+        "Do not copy documented no-sandbox AppImage example as a protected-profile security control."
+      ]
+    },
+    {
+      "url": "https://obsidian.md/license",
+      "id": "turn78view3",
+      "facts": [
+        "Free personal/commercial/non-profit use does not make application open source."
+      ]
+    },
+    {
+      "url": "https://obsidian.md/terms",
+      "id": "turn79view0",
+      "facts": [
+        "Application code ownership retained by vendor; redistribution/repackaging cannot be assumed permitted.",
+        "Use direct official installation; do not place proprietary app inside AEGIS release without permission."
+      ]
+    },
+    {
+      "url": "https://developer.android.com/training/data-storage/app-specific",
+      "id": "turn80view2",
+      "facts": [
+        "Internal storage is inaccessible to other ordinary apps; explicit URI grant changes access."
+      ]
+    },
+    {
+      "url": "https://developer.android.com/training/data-storage/shared/documents-files",
+      "id": "turn80view0",
+      "facts": [
+        "SAF user selects directory tree; Android 11+ restricts Android/data and obb.",
+        "Shared tree permissions do not restore ciphertext after an authorised consumer copied plaintext."
+      ]
+    },
+    {
+      "url": "https://github.com/syncthing/syncthing/blob/main/LICENSE",
+      "id": "turn80view3",
+      "facts": [
+        "Syncthing source licence is MPL 2.0; distributed covered binaries need associated licence/source obligations reviewed."
+      ]
+    }
+  ]
+}

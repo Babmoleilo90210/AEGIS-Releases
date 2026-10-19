@@ -1,0 +1,2233 @@
+{
+  "queriedAt": "2026-10-18T12:44:27.140821+00:00",
+  "url": "https://services.nvd.nist.gov/rest/json/cves/2.0?keywordSearch=slf4j&resultsPerPage=2000",
+  "status": 200,
+  "bytes": 53189,
+  "link": null,
+  "contentType": "application/json",
+  "response": {
+    "resultsPerPage": 3,
+    "startIndex": 0,
+    "totalResults": 3,
+    "format": "NVD_CVE",
+    "version": "2.0",
+    "timestamp": "2026-10-18T12:44:33.052",
+    "vulnerabilities": [
+      {
+        "cve": {
+          "id": "CVE-2018-8088",
+          "sourceIdentifier": "cve@mitre.org",
+          "published": "2018-03-20T16:29:00.547",
+          "lastModified": "2026-06-17T02:04:14.477",
+          "vulnStatus": "Modified",
+          "cveTags": [],
+          "descriptions": [
+            {
+              "lang": "en",
+              "value": "org.slf4j.ext.EventData in the slf4j-ext module in QOS.CH SLF4J before 1.8.0-beta2 allows remote attackers to bypass intended access restrictions via crafted data. EventData in the slf4j-ext module in QOS.CH SLF4J, has been fixed in SLF4J versions 1.7.26 later and in the 2.0.x series."
+            },
+            {
+              "lang": "es",
+              "value": "org.slf4j.ext.EventData en el módulo slf4j-ext en QOS.CH SLF4J antes de la versión 1.8.0-beta2 permite a los atacantes remotos saltarse las restricciones de acceso previstas a través de datos manipulados. EventData en el módulo slf4j-ext en QOS.CH SLF4J, ha sido corregido en las versiones 1.7.26 posteriores de SLF4J y en la serie 2.0.x"
+            }
+          ],
+          "affected": [
+            {
+              "source": "cve@mitre.org",
+              "affectedData": [
+                {
+                  "vendor": "n/a",
+                  "product": "n/a",
+                  "versions": [
+                    {
+                      "version": "n/a",
+                      "status": "affected"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "metrics": {
+            "cvssMetricV31": [
+              {
+                "source": "nvd@nist.gov",
+                "type": "Primary",
+                "cvssData": {
+                  "version": "3.1",
+                  "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+                  "baseScore": 9.8,
+                  "baseSeverity": "CRITICAL",
+                  "attackVector": "NETWORK",
+                  "attackComplexity": "LOW",
+                  "privilegesRequired": "NONE",
+                  "userInteraction": "NONE",
+                  "scope": "UNCHANGED",
+                  "confidentialityImpact": "HIGH",
+                  "integrityImpact": "HIGH",
+                  "availabilityImpact": "HIGH"
+                },
+                "exploitabilityScore": 3.9,
+                "impactScore": 5.9
+              }
+            ],
+            "cvssMetricV2": [
+              {
+                "source": "nvd@nist.gov",
+                "type": "Primary",
+                "cvssData": {
+                  "version": "2.0",
+                  "vectorString": "AV:N/AC:L/Au:N/C:P/I:P/A:P",
+                  "baseScore": 7.5,
+                  "accessVector": "NETWORK",
+                  "accessComplexity": "LOW",
+                  "authentication": "NONE",
+                  "confidentialityImpact": "PARTIAL",
+                  "integrityImpact": "PARTIAL",
+                  "availabilityImpact": "PARTIAL"
+                },
+                "baseSeverity": "HIGH",
+                "exploitabilityScore": 10.0,
+                "impactScore": 6.4,
+                "acInsufInfo": false,
+                "obtainAllPrivilege": false,
+                "obtainUserPrivilege": false,
+                "obtainOtherPrivilege": false,
+                "userInteractionRequired": false
+              }
+            ]
+          },
+          "weaknesses": [
+            {
+              "source": "nvd@nist.gov",
+              "type": "Primary",
+              "description": [
+                {
+                  "lang": "en",
+                  "value": "NVD-CWE-noinfo"
+                }
+              ]
+            }
+          ],
+          "configurations": [
+            {
+              "nodes": [
+                {
+                  "operator": "OR",
+                  "negate": false,
+                  "cpeMatch": [
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:qos:slf4j:*:*:*:*:*:*:*:*",
+                      "versionEndExcluding": "1.7.26",
+                      "matchCriteriaId": "D42F1233-D2BD-4CF0-94F9-8BE35346BC1F"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:qos:slf4j:1.8.0:alpha1:*:*:*:*:*:*",
+                      "matchCriteriaId": "53E5592F-9FFB-4ABE-82B9-D6A130359C6C"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:qos:slf4j:1.8.0:alpha2:*:*:*:*:*:*",
+                      "matchCriteriaId": "51E52584-4E04-40CE-AD6D-7D2B9A97DF2C"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:qos:slf4j:1.8.0:beta1:*:*:*:*:*:*",
+                      "matchCriteriaId": "9EA01C6A-4A37-436E-939E-A4C6E29D0F81"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:qos:slf4j:1.8.0:beta2:*:*:*:*:*:*",
+                      "matchCriteriaId": "BA0E73F4-0197-422E-B454-A6090BD1D911"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "operator": "AND",
+              "nodes": [
+                {
+                  "operator": "OR",
+                  "negate": false,
+                  "cpeMatch": [
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:redhat:jboss_enterprise_application_platform:7.1:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "7117F117-D439-45EB-BB95-397E5E52C9BB"
+                    }
+                  ]
+                },
+                {
+                  "operator": "OR",
+                  "negate": false,
+                  "cpeMatch": [
+                    {
+                      "vulnerable": false,
+                      "criteria": "cpe:2.3:o:redhat:enterprise_linux:6.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "2F6AB192-9D7D-4A9A-8995-E53A9DE9EAFC"
+                    },
+                    {
+                      "vulnerable": false,
+                      "criteria": "cpe:2.3:o:redhat:enterprise_linux:7.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "142AD0DD-4CF3-4D74-9442-459CE3347E3A"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "operator": "AND",
+              "nodes": [
+                {
+                  "operator": "OR",
+                  "negate": false,
+                  "cpeMatch": [
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:redhat:jboss_enterprise_application_platform:6.0.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "B142ACCC-F7A9-4A3B-BE60-0D6691D5058D"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:redhat:jboss_enterprise_application_platform:6.4.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "B1ABA871-3271-48E2-A69C-5AD70AF94E53"
+                    }
+                  ]
+                },
+                {
+                  "operator": "OR",
+                  "negate": false,
+                  "cpeMatch": [
+                    {
+                      "vulnerable": false,
+                      "criteria": "cpe:2.3:o:redhat:enterprise_linux:5.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "1D8B549B-E57B-4DFE-8A13-CAB06B5356B3"
+                    },
+                    {
+                      "vulnerable": false,
+                      "criteria": "cpe:2.3:o:redhat:enterprise_linux:6.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "2F6AB192-9D7D-4A9A-8995-E53A9DE9EAFC"
+                    },
+                    {
+                      "vulnerable": false,
+                      "criteria": "cpe:2.3:o:redhat:enterprise_linux:7.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "142AD0DD-4CF3-4D74-9442-459CE3347E3A"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "operator": "AND",
+              "nodes": [
+                {
+                  "operator": "OR",
+                  "negate": false,
+                  "cpeMatch": [
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:redhat:virtualization:4.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "6BBD7A51-0590-4DDF-8249-5AFA8D645CB6"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:redhat:virtualization_host:4.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "BB28F9AF-3D06-4532-B397-96D7E4792503"
+                    }
+                  ]
+                },
+                {
+                  "operator": "OR",
+                  "negate": false,
+                  "cpeMatch": [
+                    {
+                      "vulnerable": false,
+                      "criteria": "cpe:2.3:o:redhat:enterprise_linux_server:7.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "51EF4996-72F4-4FA4-814F-F5991E7A8318"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "nodes": [
+                {
+                  "operator": "OR",
+                  "negate": false,
+                  "cpeMatch": [
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:o:redhat:enterprise_linux_desktop:7.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "33C068A4-3780-4EAB-A937-6082DF847564"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:o:redhat:enterprise_linux_eus:7.4:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "F96E3779-F56A-45FF-BB3D-4980527D721E"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:o:redhat:enterprise_linux_eus:7.5:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "0CF73560-2F5B-4723-A8A1-9AADBB3ADA00"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:o:redhat:enterprise_linux_eus:7.6:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "5BF3C7A5-9117-42C7-BEA1-4AA378A582EF"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:o:redhat:enterprise_linux_eus:7.7:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "83737173-E12E-4641-BC49-0BD84A6B29D0"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:o:redhat:enterprise_linux_server:7.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "51EF4996-72F4-4FA4-814F-F5991E7A8318"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:o:redhat:enterprise_linux_server_aus:7.4:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "D99A687E-EAE6-417E-A88E-D0082BC194CD"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:o:redhat:enterprise_linux_server_aus:7.6:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "B353CE99-D57C-465B-AAB0-73EF581127D1"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:o:redhat:enterprise_linux_server_aus:7.7:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "7431ABC1-9252-419E-8CC1-311B41360078"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:o:redhat:enterprise_linux_server_tus:7.4:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "D5F7E11E-FB34-4467-8919-2B6BEAABF665"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:o:redhat:enterprise_linux_server_tus:7.6:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "B76AA310-FEC7-497F-AF04-C3EC1E76C4CC"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:o:redhat:enterprise_linux_server_tus:7.7:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "17F256A9-D3B9-4C72-B013-4EFD878BFEA8"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:o:redhat:enterprise_linux_workstation:7.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "825ECE2D-E232-46E0-A047-074B34DB1E97"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "nodes": [
+                {
+                  "operator": "OR",
+                  "negate": false,
+                  "cpeMatch": [
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:goldengate_application_adapters:12.3.2.1.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "F6F259E6-10A8-4207-8FC2-85ABD70B04C0"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:goldengate_stream_analytics:*:*:*:*:*:*:*:*",
+                      "versionEndExcluding": "19.1.0.0.1",
+                      "matchCriteriaId": "F4E7F2AA-B851-4D85-9895-2CDD6BE9FCB4"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:utilities_framework:4.2.0.2.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "5435B365-BFF3-4A9E-B45C-42D8F1E20FB7"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:utilities_framework:4.2.0.3.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "1FAC3840-2CF8-44CE-81BB-EEEBDA00A34A"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:utilities_framework:4.3.0.2.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "F7715FC4-631E-462D-AD59-F44235C19837"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:utilities_framework:4.3.0.3.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "2224F133-2D7D-4F3A-995A-31599C579ADB"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:utilities_framework:4.3.0.4.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "EA3D0BC5-109D-4405-8566-3C91A20EA3A3"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:utilities_framework:4.3.0.5.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "A5BBA303-8D2B-48C5-B52A-4E192166699C"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:utilities_framework:4.3.0.6.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "8DF02546-3F0D-4FDD-89B1-8A3FE43FB5BF"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:utilities_framework:4.4.0.0.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "3F906F04-39E4-4BE4-8A73-9D058AAADB43"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "references": [
+            {
+              "url": "http://www.securityfocus.com/bid/103737",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory",
+                "VDB Entry"
+              ]
+            },
+            {
+              "url": "http://www.securitytracker.com/id/1040627",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory",
+                "VDB Entry"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:0582",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:0592",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:0627",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:0628",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:0629",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:0630",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:1247",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:1248",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:1249",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:1251",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:1323",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:1447",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:1448",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:1449",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:1450",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:1451",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:1525",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:1575",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:2143",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:2419",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:2420",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:2669",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:2930",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2019:2413",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2019:3140",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://github.com/qos-ch/slf4j/commit/d2b27fba88e983f921558da27fc29b5f5d269405",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Patch",
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://jira.qos.ch/browse/SLF4J-430",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Issue Tracking",
+                "Vendor Advisory"
+              ]
+            },
+            {
+              "url": "https://jira.qos.ch/browse/SLF4J-431",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Issue Tracking",
+                "Vendor Advisory"
+              ]
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/956ba8e76b6793a6670b2eb0129a5e3003ce2124ca3130fd57d48d0f%40%3Cdevnull.infra.apache.org%3E",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/95ce76613c869dbccf1d3d29327099ccc71aeec156f76c30853044fa%40%3Cdevnull.infra.apache.org%3E",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/r0f376559fd39cf1a53ac3afbc1fc5d62649dcac9916d4697445a94fa%40%3Cissues.zookeeper.apache.org%3E",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/r1660c72a660f0522947ca6ce329dcc74e1ee20c58bbe208472754489%40%3Ccommon-issues.hadoop.apache.org%3E",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/r17e7e6abc53d29c0e269153517d36f4bec2755b95900596e6df15cbe%40%3Cnotifications.iotdb.apache.org%3E",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/r2d05924f903403927a2f4e78d9b1249a42f0bd09f69a7c1954d74a42%40%3Creviews.iotdb.apache.org%3E",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/r32be21da011479df41468a62bc09d12f0d3b4e3a71679d33cb0e8c56%40%3Cissues.zookeeper.apache.org%3E",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/r37644f0a00aca9fbcbc21c0f9a91f927b63153ec3607be469cd515e5%40%3Creviews.iotdb.apache.org%3E",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/r48247c12cf652e95a01fc94ee5aa8641f3ec481235774790e53eb55e%40%3Creviews.iotdb.apache.org%3E",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/r573eb577a67503e72181eee637d9b0ac042197e632bcdfce76af06a3%40%3Cissues.flink.apache.org%3E",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/r5cf87a035b297c19f4043a37b73c341576dd92f819bd3e4aa27de541%40%3Cissues.flink.apache.org%3E",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/r767861f053c15f9e9201b939a0d508dd58475a072e76135eaaca17f0%40%3Ccommon-issues.hadoop.apache.org%3E",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/r81711cde77c2c5742b7b8533c978e79771b700af0ef4d3149d70df25%40%3Cnotifications.logging.apache.org%3E",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/r891761d5014f9ffd79d9737482de832462de538b6c4bdcef21aad729%40%3Cissues.flink.apache.org%3E",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/r9584c4304c888f651d214341a939bd264ed30c9e3d0d30fe85097ecf%40%3Ccommits.pulsar.apache.org%3E",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/r99a6552e45ca6ba1082031421f51799a4a665eda905ab2c2aa9d6ffa%40%3Cdev.flink.apache.org%3E",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/r9e25496608036573736cee484d8d03dae400f09e443b0000b6adc042%40%3Ccommits.iotdb.apache.org%3E",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/raabf1a00b2652575fca9fcb44166a828a0cab97a7d1594001eabc991%40%3Ccommon-issues.hadoop.apache.org%3E",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/rc378b97d52856f9f3c5ced14771fed8357e4187a3a0f9a2f0515931a%40%3Cissues.zookeeper.apache.org%3E",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/rc7de83170d3402af15bfed3d59f80aea20f250535bdce30e4cad24db%40%3Cissues.flink.apache.org%3E",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/rd0e44e8ef71eeaaa3cf3d1b8b41eb25894372e2995ec908ce7624d26%40%3Ccommits.pulsar.apache.org%3E",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/rd86db9679150e9297b5c0fcb6f0e80a8b81b54fcf423de5a914bca78%40%3Ccommon-commits.hadoop.apache.org%3E",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/re6fb6b0de9d679310437ff87fc94e39da5a14dce9c73864a41837462%40%3Ccommon-commits.hadoop.apache.org%3E",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/reb3eeb985afdead17fadb7c33d5d472c1015a85ea5c9b038ec77f378%40%3Ccommon-dev.hadoop.apache.org%3E",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/rf58e1bee31d66665437dde9acd9abed53f8483034b69fa9ca7cde09c%40%3Cdev.zookeeper.apache.org%3E",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/rfb45527bad7220ada9e30957762e1da254ce405e67cc3ddf6f3558d9%40%3Creviews.iotdb.apache.org%3E",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/rfe52b7cbba4dcba521e13130e5d28d5818b78d70db0af1b470fa0264%40%3Ccommon-issues.hadoop.apache.org%3E",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://security.netapp.com/advisory/ntap-20231227-0010/",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://www.oracle.com/security-alerts/cpujul2020.html",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://www.oracle.com/security-alerts/cpuoct2020.html",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://www.oracle.com/security-alerts/cpuoct2021.html",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://www.oracle.com/technetwork/security-advisory/cpuapr2019-5072813.html",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Patch",
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://www.slf4j.org/news.html",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "http://www.securityfocus.com/bid/103737",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory",
+                "VDB Entry"
+              ]
+            },
+            {
+              "url": "http://www.securitytracker.com/id/1040627",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory",
+                "VDB Entry"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:0582",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:0592",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:0627",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:0628",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:0629",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:0630",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:1247",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:1248",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:1249",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:1251",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:1323",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:1447",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:1448",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:1449",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:1450",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:1451",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:1525",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:1575",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:2143",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:2419",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:2420",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:2669",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2018:2930",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2019:2413",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2019:3140",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://github.com/qos-ch/slf4j/commit/d2b27fba88e983f921558da27fc29b5f5d269405",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Patch",
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://jira.qos.ch/browse/SLF4J-430",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Issue Tracking",
+                "Vendor Advisory"
+              ]
+            },
+            {
+              "url": "https://jira.qos.ch/browse/SLF4J-431",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Issue Tracking",
+                "Vendor Advisory"
+              ]
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/956ba8e76b6793a6670b2eb0129a5e3003ce2124ca3130fd57d48d0f%40%3Cdevnull.infra.apache.org%3E",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/95ce76613c869dbccf1d3d29327099ccc71aeec156f76c30853044fa%40%3Cdevnull.infra.apache.org%3E",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/r0f376559fd39cf1a53ac3afbc1fc5d62649dcac9916d4697445a94fa%40%3Cissues.zookeeper.apache.org%3E",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/r1660c72a660f0522947ca6ce329dcc74e1ee20c58bbe208472754489%40%3Ccommon-issues.hadoop.apache.org%3E",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/r17e7e6abc53d29c0e269153517d36f4bec2755b95900596e6df15cbe%40%3Cnotifications.iotdb.apache.org%3E",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/r2d05924f903403927a2f4e78d9b1249a42f0bd09f69a7c1954d74a42%40%3Creviews.iotdb.apache.org%3E",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/r32be21da011479df41468a62bc09d12f0d3b4e3a71679d33cb0e8c56%40%3Cissues.zookeeper.apache.org%3E",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/r37644f0a00aca9fbcbc21c0f9a91f927b63153ec3607be469cd515e5%40%3Creviews.iotdb.apache.org%3E",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/r48247c12cf652e95a01fc94ee5aa8641f3ec481235774790e53eb55e%40%3Creviews.iotdb.apache.org%3E",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/r573eb577a67503e72181eee637d9b0ac042197e632bcdfce76af06a3%40%3Cissues.flink.apache.org%3E",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/r5cf87a035b297c19f4043a37b73c341576dd92f819bd3e4aa27de541%40%3Cissues.flink.apache.org%3E",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/r767861f053c15f9e9201b939a0d508dd58475a072e76135eaaca17f0%40%3Ccommon-issues.hadoop.apache.org%3E",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/r81711cde77c2c5742b7b8533c978e79771b700af0ef4d3149d70df25%40%3Cnotifications.logging.apache.org%3E",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/r891761d5014f9ffd79d9737482de832462de538b6c4bdcef21aad729%40%3Cissues.flink.apache.org%3E",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/r9584c4304c888f651d214341a939bd264ed30c9e3d0d30fe85097ecf%40%3Ccommits.pulsar.apache.org%3E",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/r99a6552e45ca6ba1082031421f51799a4a665eda905ab2c2aa9d6ffa%40%3Cdev.flink.apache.org%3E",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/r9e25496608036573736cee484d8d03dae400f09e443b0000b6adc042%40%3Ccommits.iotdb.apache.org%3E",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/raabf1a00b2652575fca9fcb44166a828a0cab97a7d1594001eabc991%40%3Ccommon-issues.hadoop.apache.org%3E",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/rc378b97d52856f9f3c5ced14771fed8357e4187a3a0f9a2f0515931a%40%3Cissues.zookeeper.apache.org%3E",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/rc7de83170d3402af15bfed3d59f80aea20f250535bdce30e4cad24db%40%3Cissues.flink.apache.org%3E",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/rd0e44e8ef71eeaaa3cf3d1b8b41eb25894372e2995ec908ce7624d26%40%3Ccommits.pulsar.apache.org%3E",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/rd86db9679150e9297b5c0fcb6f0e80a8b81b54fcf423de5a914bca78%40%3Ccommon-commits.hadoop.apache.org%3E",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/re6fb6b0de9d679310437ff87fc94e39da5a14dce9c73864a41837462%40%3Ccommon-commits.hadoop.apache.org%3E",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/reb3eeb985afdead17fadb7c33d5d472c1015a85ea5c9b038ec77f378%40%3Ccommon-dev.hadoop.apache.org%3E",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/rf58e1bee31d66665437dde9acd9abed53f8483034b69fa9ca7cde09c%40%3Cdev.zookeeper.apache.org%3E",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/rfb45527bad7220ada9e30957762e1da254ce405e67cc3ddf6f3558d9%40%3Creviews.iotdb.apache.org%3E",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/rfe52b7cbba4dcba521e13130e5d28d5818b78d70db0af1b470fa0264%40%3Ccommon-issues.hadoop.apache.org%3E",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://security.netapp.com/advisory/ntap-20231227-0010/",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://www.oracle.com/security-alerts/cpujul2020.html",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://www.oracle.com/security-alerts/cpuoct2020.html",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://www.oracle.com/security-alerts/cpuoct2021.html",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://www.oracle.com/technetwork/security-advisory/cpuapr2019-5072813.html",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Patch",
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://www.slf4j.org/news.html",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            }
+          ]
+        }
+      },
+      {
+        "cve": {
+          "id": "CVE-2018-14718",
+          "sourceIdentifier": "cve@mitre.org",
+          "published": "2019-01-02T18:29:00.310",
+          "lastModified": "2026-10-08T21:17:08.153",
+          "vulnStatus": "Modified",
+          "cveTags": [],
+          "descriptions": [
+            {
+              "lang": "en",
+              "value": "FasterXML jackson-databind 2.x before 2.9.7 might allow remote attackers to execute arbitrary code by leveraging failure to block the slf4j-ext class from polymorphic deserialization."
+            },
+            {
+              "lang": "es",
+              "value": "Las versiones 2.x de FasterXML jackson-databind anteriores a la 2.9.7 podrían permitir a los atacantes remotos ejecutar código arbitrario aprovechando un fallo para bloquear la clase slf4j-ext de deserialización polimórfica."
+            }
+          ],
+          "affected": [
+            {
+              "source": "cve@mitre.org",
+              "affectedData": [
+                {
+                  "vendor": "n/a",
+                  "product": "n/a",
+                  "versions": [
+                    {
+                      "version": "n/a",
+                      "status": "affected"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "metrics": {
+            "cvssMetricV31": [
+              {
+                "source": "nvd@nist.gov",
+                "type": "Primary",
+                "cvssData": {
+                  "version": "3.1",
+                  "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+                  "baseScore": 9.8,
+                  "baseSeverity": "CRITICAL",
+                  "attackVector": "NETWORK",
+                  "attackComplexity": "LOW",
+                  "privilegesRequired": "NONE",
+                  "userInteraction": "NONE",
+                  "scope": "UNCHANGED",
+                  "confidentialityImpact": "HIGH",
+                  "integrityImpact": "HIGH",
+                  "availabilityImpact": "HIGH"
+                },
+                "exploitabilityScore": 3.9,
+                "impactScore": 5.9
+              }
+            ],
+            "cvssMetricV2": [
+              {
+                "source": "nvd@nist.gov",
+                "type": "Primary",
+                "cvssData": {
+                  "version": "2.0",
+                  "vectorString": "AV:N/AC:L/Au:N/C:P/I:P/A:P",
+                  "baseScore": 7.5,
+                  "accessVector": "NETWORK",
+                  "accessComplexity": "LOW",
+                  "authentication": "NONE",
+                  "confidentialityImpact": "PARTIAL",
+                  "integrityImpact": "PARTIAL",
+                  "availabilityImpact": "PARTIAL"
+                },
+                "baseSeverity": "HIGH",
+                "exploitabilityScore": 10.0,
+                "impactScore": 6.4,
+                "acInsufInfo": false,
+                "obtainAllPrivilege": false,
+                "obtainUserPrivilege": false,
+                "obtainOtherPrivilege": false,
+                "userInteractionRequired": false
+              }
+            ],
+            "ssvcV203": [
+              {
+                "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
+                "ssvcData": {
+                  "timestamp": "2026-10-08T20:58:59.176880Z",
+                  "id": "CVE-2018-14718",
+                  "options": [
+                    {
+                      "exploitation": "none"
+                    },
+                    {
+                      "automatable": "yes"
+                    },
+                    {
+                      "technicalImpact": "total"
+                    }
+                  ],
+                  "role": "CISA Coordinator",
+                  "version": "2.0.3"
+                }
+              }
+            ]
+          },
+          "weaknesses": [
+            {
+              "source": "nvd@nist.gov",
+              "type": "Primary",
+              "description": [
+                {
+                  "lang": "en",
+                  "value": "CWE-502"
+                }
+              ]
+            }
+          ],
+          "configurations": [
+            {
+              "nodes": [
+                {
+                  "operator": "OR",
+                  "negate": false,
+                  "cpeMatch": [
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:fasterxml:jackson-databind:*:*:*:*:*:*:*:*",
+                      "versionStartIncluding": "2.0.0",
+                      "versionEndExcluding": "2.6.7.3",
+                      "matchCriteriaId": "7036DA13-110D-40B3-8494-E361BBF4AFCD"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:fasterxml:jackson-databind:*:*:*:*:*:*:*:*",
+                      "versionStartIncluding": "2.7.0",
+                      "versionEndExcluding": "2.7.9.5",
+                      "matchCriteriaId": "B99066EB-FF79-4D9D-9466-B04AD4D3A814"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:fasterxml:jackson-databind:*:*:*:*:*:*:*:*",
+                      "versionStartIncluding": "2.8.0",
+                      "versionEndExcluding": "2.8.11.3",
+                      "matchCriteriaId": "F4D3858C-DAF3-4522-90EC-EFCD13BD121E"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:fasterxml:jackson-databind:*:*:*:*:*:*:*:*",
+                      "versionStartIncluding": "2.9.0",
+                      "versionEndExcluding": "2.9.7",
+                      "matchCriteriaId": "4DA01839-5250-43A7-AFB7-871DC9B8AB32"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "nodes": [
+                {
+                  "operator": "OR",
+                  "negate": false,
+                  "cpeMatch": [
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:o:debian:debian_linux:8.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "C11E6FB0-C8C0-4527-9AA0-CB9B316F8F43"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:o:debian:debian_linux:9.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "DEECE5FC-CACF-4496-A3E7-164736409252"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "nodes": [
+                {
+                  "operator": "OR",
+                  "negate": false,
+                  "cpeMatch": [
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:banking_platform:2.5.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "35AD0C07-9688-4397-8D45-FBB88C0F0C11"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:banking_platform:2.6.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "8972497F-6E24-45A9-9A18-EB0E842CB1D4"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:banking_platform:2.6.1:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "400509A8-D6F2-432C-A2F1-AD5B8778D0D9"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:banking_platform:2.6.2:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "132CE62A-FBFC-4001-81EC-35D81F73AF48"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:business_process_management_suite:12.1.3.0.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "B887E174-57AB-449D-AEE4-82DD1A3E5C84"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:business_process_management_suite:12.2.1.3.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "E869C417-C0E6-4FC3-B406-45598A1D1906"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:communications_billing_and_revenue_management:7.5:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "E6039DC7-08F2-4DD9-B5B5-B6B22DD2409F"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:communications_billing_and_revenue_management:12.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "7231AF76-3D46-41C4-83E9-6E9E12940BD9"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:communications_instant_messaging_server:10.0.1.3.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "FD945A04-174C-46A2-935D-4F92631D1018"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:enterprise_manager_for_virtualization:13.2.2:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "A9E97F04-00ED-48E9-AB40-7A02B3419641"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:enterprise_manager_for_virtualization:13.2.3:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "FCCE5A11-39E7-4BBB-9E1A-BA4B754103BB"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:enterprise_manager_for_virtualization:13.3.1:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "A5AEC7F5-C353-4CF5-96CE-8C713A2B0C92"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:financial_services_analytical_applications_infrastructure:8.0.2:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "BB79BB43-E0AB-4F0D-A6EA-000485757EEC"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:financial_services_analytical_applications_infrastructure:8.0.3:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "F238CB66-886D-47E8-8DC0-7FC2025771EB"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:financial_services_analytical_applications_infrastructure:8.0.4:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "59B7B8AD-1210-4C40-8EF7-E2E8156630A1"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:financial_services_analytical_applications_infrastructure:8.0.5:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "0DE4A291-4358-42A9-A68D-E59D9998A1CC"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:financial_services_analytical_applications_infrastructure:8.0.6:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "0D19CF00-FE20-4690-AAB7-8E9DBC68A94F"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:financial_services_analytical_applications_infrastructure:8.0.7:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "A030A498-3361-46F8-BB99-24A66CAE11CA"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:global_lifecycle_management_opatch:*:*:*:*:*:*:*:*",
+                      "versionEndExcluding": "11.2.0.3.23",
+                      "matchCriteriaId": "F6455EB1-C741-45E8-A53E-E7AD7A5D00EE"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:global_lifecycle_management_opatch:*:*:*:*:*:*:*:*",
+                      "versionStartIncluding": "12.2.0.1.0",
+                      "versionEndExcluding": "12.2.0.1.19",
+                      "matchCriteriaId": "BFD43191-E67F-4D1B-967B-3C7B20331945"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:global_lifecycle_management_opatch:*:*:*:*:*:*:*:*",
+                      "versionStartIncluding": "13.9.4.0.0",
+                      "versionEndExcluding": "13.9.4.2.1",
+                      "matchCriteriaId": "062C588A-CBBA-470F-8D11-2F961922E927"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:jd_edwards_enterpriseone_orchestrator:9.2:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "989598A3-7012-4F57-B172-02404E20D16D"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:jd_edwards_enterpriseone_tools:9.2:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "41684398-18A4-4DC6-B8A2-3EBAA0CBF9A6"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:jdeveloper:12.1.3.0.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "042C243F-EDFE-4A04-AB0B-26E73CC34837"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:jdeveloper:12.2.1.3.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "228DA523-4D6D-48C5-BDB0-DB1A60F23F8B"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:nosql_database:*:*:*:*:*:*:*:*",
+                      "versionEndExcluding": "19.3.12",
+                      "matchCriteriaId": "63C59FA7-F321-4475-9F71-D78E0C890866"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:nosql_database:19.3.12:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "9E215743-2B5D-4EA5-A8F5-BBEC4DC85C35"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:primavera_p6_enterprise_project_portfolio_management:*:*:*:*:*:*:*:*",
+                      "versionStartIncluding": "17.7",
+                      "versionEndIncluding": "17.12",
+                      "matchCriteriaId": "7A1E1023-2EB9-4334-9B74-CA71480F71C2"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:primavera_p6_enterprise_project_portfolio_management:15.1:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "93A4E178-0082-45C5-BBC0-0A4E51C8B1DE"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:primavera_p6_enterprise_project_portfolio_management:15.2:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "3F021C23-AB9B-4877-833F-D01359A98762"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:primavera_p6_enterprise_project_portfolio_management:16.1:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "2F8ED016-32A1-42EE-844E-3E6B2C116B74"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:primavera_p6_enterprise_project_portfolio_management:16.2:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "A046CC2C-445F-4336-8810-930570B4FEC6"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:primavera_p6_enterprise_project_portfolio_management:18.8:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "0745445C-EC43-4091-BA7C-5105AFCC6F1F"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:primavera_unifier:*:*:*:*:*:*:*:*",
+                      "versionStartIncluding": "17.7",
+                      "versionEndIncluding": "17.12",
+                      "matchCriteriaId": "08FA59A8-6A62-4B33-8952-D6E658F8DAC9"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:primavera_unifier:16.1:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "D55A54FD-7DD1-49CD-BE81-0BE73990943C"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:primavera_unifier:16.2:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "82EB08C0-2D46-4635-88DF-E54F6452D3A3"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:primavera_unifier:18.8:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "202AD518-2E9B-4062-B063-9858AE1F9CE2"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:retail_customer_management_and_segmentation_foundation:17.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "A7FBF5C7-EC73-4CE4-8CB7-E9CF5705DB25"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:retail_merchandising_system:15.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "792DF04A-2D1B-40B5-B960-3E7152732EB8"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:retail_merchandising_system:16.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "46525CA6-4226-4F6F-B899-D800D4DDE0B5"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:retail_workforce_management_software:1.60.9.0.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "9967AAFD-2199-4668-9105-207D4866B707"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:siebel_engineering_-_installer_\\&_deployment:*:*:*:*:*:*:*:*",
+                      "versionEndIncluding": "19.8",
+                      "matchCriteriaId": "25993ED6-D4C7-4B68-9F87-274B757A88CC"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:siebel_ui_framework:*:*:*:*:*:*:*:*",
+                      "versionEndIncluding": "19.10",
+                      "matchCriteriaId": "2F10FB4D-A29B-42B4-B70E-EB82A93F2218"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:oracle:webcenter_portal:12.2.1.3.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "D6A4F71A-4269-40FC-8F61-1D1301F2B728"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "nodes": [
+                {
+                  "operator": "OR",
+                  "negate": false,
+                  "cpeMatch": [
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:netapp:oncommand_workflow_automation:-:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "5735E553-9731-4AAC-BCFF-989377F817B3"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:netapp:snapcenter:-:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "BDFB1169-41A0-4A86-8E4F-FDA9730B1E94"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:netapp:steelstore_cloud_integrated_storage:-:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "E94F7F59-1785-493F-91A7-5F5EA5E87E4D"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "nodes": [
+                {
+                  "operator": "OR",
+                  "negate": false,
+                  "cpeMatch": [
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:redhat:openshift_container_platform:*:*:*:*:*:*:*:*",
+                      "versionStartIncluding": "3.11",
+                      "versionEndExcluding": "3.11.153",
+                      "matchCriteriaId": "3A76E5BF-01E4-46E7-8E3B-5ACE75657360"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:redhat:openshift_container_platform:*:*:*:*:*:*:*:*",
+                      "versionStartIncluding": "4.6",
+                      "versionEndExcluding": "4.6.26",
+                      "matchCriteriaId": "E9A6D103-9674-4B04-8397-86501F1D91CF"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:redhat:openshift_container_platform:3.10:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "4DBCD38F-BBE8-488C-A8C3-5782F191D915"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "operator": "AND",
+              "nodes": [
+                {
+                  "operator": "OR",
+                  "negate": false,
+                  "cpeMatch": [
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:redhat:openshift_container_platform:*:*:*:*:*:*:*:*",
+                      "versionStartIncluding": "4.1",
+                      "versionEndExcluding": "4.1.18",
+                      "matchCriteriaId": "D2452F48-6A8B-4274-B0CE-F1256F400170"
+                    }
+                  ]
+                },
+                {
+                  "operator": "OR",
+                  "negate": false,
+                  "cpeMatch": [
+                    {
+                      "vulnerable": false,
+                      "criteria": "cpe:2.3:o:redhat:enterprise_linux:7.0:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "142AD0DD-4CF3-4D74-9442-459CE3347E3A"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "references": [
+            {
+              "url": "http://www.securityfocus.com/bid/106601",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory",
+                "VDB Entry"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHBA-2019:0959",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2019:0782",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2019:0877",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2019:1782",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2019:1797",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2019:1822",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2019:1823",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2019:2804",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2019:2858",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2019:3002",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2019:3140",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2019:3149",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2019:3892",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2019:4037",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://github.com/FasterXML/jackson-databind/commit/87d29af25e82a249ea15858e2d4ecbf64091db44",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Patch",
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://github.com/FasterXML/jackson-databind/issues/2097",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Patch",
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://github.com/FasterXML/jackson/wiki/Jackson-Release-2.9.7",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Patch",
+                "Release Notes",
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/519eb0fd45642dcecd9ff74cb3e71c20a4753f7d82e2f07864b5108f%40%3Cdev.drill.apache.org%3E",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/6a78f88716c3c57aa74ec05764a37ab3874769a347805903b393b286%40%3Cdev.lucene.apache.org%3E",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/82b01bfb6787097427ce97cec6a7127e93718bc05d1efd5eaffc228f%40%3Cdev.lucene.apache.org%3E",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/b0656d359c7d40ec9f39c8cc61bca66802ef9a2a12ee199f5b0c1442%40%3Cdev.drill.apache.org%3E",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/ba973114605d936be276ee6ce09dfbdbf78aa56f6cdc6e79bfa7b8df%40%3Cdev.lucene.apache.org%3E",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/f9bc3e55f4e28d1dcd1a69aae6d53e609a758e34d2869b4d798e13cc%40%3Cissues.drill.apache.org%3E",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/r1d4a247329a8478073163567bbc8c8cb6b49c6bfc2bf58153a857af1%40%3Ccommits.druid.apache.org%3E",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://lists.debian.org/debian-lts-announce/2019/03/msg00005.html",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Mailing List",
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://seclists.org/bugtraq/2019/May/68",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Mailing List",
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://security.netapp.com/advisory/ntap-20190530-0003/",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://www.debian.org/security/2019/dsa-4452",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://www.oracle.com/security-alerts/cpuapr2020.html",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://www.oracle.com/security-alerts/cpujan2020.html",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://www.oracle.com/security-alerts/cpuoct2020.html",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://www.oracle.com/technetwork/security-advisory/cpuapr2019-5072813.html",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Patch",
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://www.oracle.com/technetwork/security-advisory/cpujan2019-5072801.html",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Patch",
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://www.oracle.com/technetwork/security-advisory/cpuoct2019-5072832.html",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Patch",
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "http://www.securityfocus.com/bid/106601",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory",
+                "VDB Entry"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHBA-2019:0959",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2019:0782",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2019:0877",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2019:1782",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2019:1797",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2019:1822",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2019:1823",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2019:2804",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2019:2858",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2019:3002",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2019:3140",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2019:3149",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2019:3892",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://access.redhat.com/errata/RHSA-2019:4037",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://github.com/FasterXML/jackson-databind/commit/87d29af25e82a249ea15858e2d4ecbf64091db44",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Patch",
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://github.com/FasterXML/jackson-databind/issues/2097",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Patch",
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://github.com/FasterXML/jackson/wiki/Jackson-Release-2.9.7",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Patch",
+                "Release Notes",
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/519eb0fd45642dcecd9ff74cb3e71c20a4753f7d82e2f07864b5108f%40%3Cdev.drill.apache.org%3E",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/6a78f88716c3c57aa74ec05764a37ab3874769a347805903b393b286%40%3Cdev.lucene.apache.org%3E",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/82b01bfb6787097427ce97cec6a7127e93718bc05d1efd5eaffc228f%40%3Cdev.lucene.apache.org%3E",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/b0656d359c7d40ec9f39c8cc61bca66802ef9a2a12ee199f5b0c1442%40%3Cdev.drill.apache.org%3E",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/ba973114605d936be276ee6ce09dfbdbf78aa56f6cdc6e79bfa7b8df%40%3Cdev.lucene.apache.org%3E",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/f9bc3e55f4e28d1dcd1a69aae6d53e609a758e34d2869b4d798e13cc%40%3Cissues.drill.apache.org%3E",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://lists.apache.org/thread.html/r1d4a247329a8478073163567bbc8c8cb6b49c6bfc2bf58153a857af1%40%3Ccommits.druid.apache.org%3E",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://lists.debian.org/debian-lts-announce/2019/03/msg00005.html",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Mailing List",
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://seclists.org/bugtraq/2019/May/68",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Mailing List",
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://security.netapp.com/advisory/ntap-20190530-0003/",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://www.debian.org/security/2019/dsa-4452",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://www.oracle.com/security-alerts/cpuapr2020.html",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://www.oracle.com/security-alerts/cpujan2020.html",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://www.oracle.com/security-alerts/cpuoct2020.html",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://www.oracle.com/technetwork/security-advisory/cpuapr2019-5072813.html",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Patch",
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://www.oracle.com/technetwork/security-advisory/cpujan2019-5072801.html",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Patch",
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://www.oracle.com/technetwork/security-advisory/cpuoct2019-5072832.html",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Patch",
+                "Third Party Advisory"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "cve": {
+          "id": "CVE-2026-84501",
+          "sourceIdentifier": "security@apache.org",
+          "published": "2026-09-16T10:16:53.557",
+          "lastModified": "2026-09-18T14:36:51.747",
+          "vulnStatus": "Analyzed",
+          "cveTags": [],
+          "descriptions": [
+            {
+              "lang": "en",
+              "value": "An unauthenticated attacker can inject arbitrary fake log lines into Apache ZooKeeper's operational log by sending a crafted add_auth(\"ensemble\", ...) request containing newline characters (\\n). When the ensemble name doesn't match, EnsembleAuthenticationProvider.handleAuthentication() logs the raw, unsanitized name via LOG.warn(). Because SLF4J's {} placeholder preserves embedded newlines, the attacker can forge complete log entries — with arbitrary timestamps, log levels, class names, and messages — that are visually indistinguishable from genuine ZooKeeper log output.\n\nThis issue affects Apache ZooKeeper: from 3.9.0 through 3.9.5, from 3.8.0 through 3.8.6.\n\nUsers are recommended to upgrade to version 3.8.7 or 3.9.6, which fixes the issue."
+            }
+          ],
+          "affected": [
+            {
+              "source": "security@apache.org",
+              "affectedData": [
+                {
+                  "vendor": "Apache Software Foundation",
+                  "product": "Apache ZooKeeper",
+                  "defaultStatus": "unaffected",
+                  "collectionURL": "https://repo.maven.apache.org/maven2",
+                  "packageName": "org.apache.zookeeper:zookeeper",
+                  "packageURL": "pkg:maven/org.apache.zookeeper/zookeeper",
+                  "versions": [
+                    {
+                      "version": "3.9.0",
+                      "lessThanOrEqual": "3.9.5",
+                      "versionType": "maven",
+                      "status": "affected"
+                    },
+                    {
+                      "version": "3.8.0",
+                      "lessThanOrEqual": "3.8.6",
+                      "versionType": "maven",
+                      "status": "affected"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "metrics": {
+            "cvssMetricV31": [
+              {
+                "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
+                "type": "Secondary",
+                "cvssData": {
+                  "version": "3.1",
+                  "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+                  "baseScore": 5.3,
+                  "baseSeverity": "MEDIUM",
+                  "attackVector": "NETWORK",
+                  "attackComplexity": "LOW",
+                  "privilegesRequired": "NONE",
+                  "userInteraction": "NONE",
+                  "scope": "UNCHANGED",
+                  "confidentialityImpact": "NONE",
+                  "integrityImpact": "LOW",
+                  "availabilityImpact": "NONE"
+                },
+                "exploitabilityScore": 3.9,
+                "impactScore": 1.4
+              }
+            ],
+            "ssvcV203": [
+              {
+                "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
+                "ssvcData": {
+                  "timestamp": "2026-09-16T19:42:27.138755Z",
+                  "id": "CVE-2026-84501",
+                  "options": [
+                    {
+                      "exploitation": "none"
+                    },
+                    {
+                      "automatable": "yes"
+                    },
+                    {
+                      "technicalImpact": "partial"
+                    }
+                  ],
+                  "role": "CISA Coordinator",
+                  "version": "2.0.3"
+                }
+              }
+            ]
+          },
+          "weaknesses": [
+            {
+              "source": "security@apache.org",
+              "type": "Secondary",
+              "description": [
+                {
+                  "lang": "en",
+                  "value": "CWE-117"
+                }
+              ]
+            }
+          ],
+          "configurations": [
+            {
+              "nodes": [
+                {
+                  "operator": "OR",
+                  "negate": false,
+                  "cpeMatch": [
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:apache:zookeeper:*:*:*:*:*:*:*:*",
+                      "versionStartIncluding": "3.8.0",
+                      "versionEndExcluding": "3.8.7",
+                      "matchCriteriaId": "4EB0BE5E-6F39-4D77-BBEC-89AE61429E31"
+                    },
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:apache:zookeeper:*:*:*:*:*:*:*:*",
+                      "versionStartIncluding": "3.9.0",
+                      "versionEndExcluding": "3.9.6",
+                      "matchCriteriaId": "78E0C560-E216-4628-9131-E8C919D8B937"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "references": [
+            {
+              "url": "https://lists.apache.org/thread/ohby1g6zjt72p0w79rhbr41nczzvr33y",
+              "source": "security@apache.org",
+              "tags": [
+                "Mailing List",
+                "Vendor Advisory"
+              ]
+            },
+            {
+              "url": "http://www.openwall.com/lists/oss-security/2026/09/15/7",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Mailing List"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

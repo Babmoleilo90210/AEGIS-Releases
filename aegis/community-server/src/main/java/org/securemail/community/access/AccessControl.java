@@ -53,18 +53,21 @@ public final class AccessControl implements AutoCloseable {
  }
  public boolean isServiceIdentity(String actor)throws Exception{return store.tx(c->permissions(actor,"GLOBAL").contains("AGENT_WORK")||(exists(c,"SELECT 1 FROM sqlite_master WHERE type='table' AND name='agent_worker'")&&exists(c,"SELECT 1 FROM agent_worker WHERE identity=?",actor)));}
  public boolean roleHasAdministratorAssignees(Connection c,String role)throws Exception{return exists(c,"WITH RECURSIVE descendants(id) AS (SELECT ? UNION SELECT p.role FROM role_parents p JOIN descendants d ON p.parent=d.id) SELECT 1 FROM assignments a JOIN descendants d ON d.id=a.role JOIN global_admins g ON g.identity=a.identity LIMIT 1",role);}
- public boolean isGlobalAdmin(String actor)throws Exception{return store.tx(c->exists(c,"SELECT 1 FROM global_admins WHERE identity=?",actor));}
+ public boolean isGlobalAdmin(String actor)throws Exception{var scoped=org.securemail.community.gateway600.TrustedContext600.current();if(scoped!=null)return scoped.isAdministrator(actor);return store.tx(c->exists(c,"SELECT 1 FROM global_admins WHERE identity=?",actor));}
  public boolean isMember(String actor,String org)throws Exception{return store.tx(c->exists(c,"SELECT 1 FROM memberships WHERE identity=? AND org=?",actor,org));}
  public long authorizationEpoch(String actor)throws Exception{return store.tx(c->{try(var q=c.prepareStatement("SELECT epoch FROM identities WHERE identity=?")){q.setString(1,actor);try(var r=q.executeQuery()){if(!r.next())throw CommunityException.denied();return r.getLong(1);}}});}
  public Set<String> permissions(String actor,String scope)throws Exception{
   Values.identity(actor);Values.scope(scope);
   return store.tx(c->{if(!exists(c,"SELECT 1 FROM identities WHERE identity=?",actor))return Set.of();
-   Set<String>result=new TreeSet<>();
-   try(var q=c.prepareStatement("SELECT role FROM assignments a JOIN roles r ON r.id=a.role WHERE a.identity=? AND (r.scope='GLOBAL' OR r.scope=?)")){q.setString(1,actor);q.setString(2,scope);try(var r=q.executeQuery()){while(r.next()){RoleRights rights=roleRights(c,r.getString(1));result.addAll(rights.permissions());}}}
+   Set<String>result=new TreeSet<>(),denied=new TreeSet<>();
+   try(var q=c.prepareStatement("SELECT role FROM assignments a JOIN roles r ON r.id=a.role WHERE a.identity=? AND (r.scope='GLOBAL' OR r.scope=?)")){q.setString(1,actor);q.setString(2,scope);try(var r=q.executeQuery()){while(r.next()){RoleRights rights=roleRights(c,r.getString(1));result.addAll(rights.permissions());denied.addAll(rights.deniedPermissions());}}}
+   // Negative bindings survive ordinary membership departure; only authorized role revocation clears them.
+   try(var q=c.prepareStatement("SELECT role FROM role_restrictions a JOIN roles r ON r.id=a.role WHERE a.identity=? AND (r.scope='GLOBAL' OR r.scope=?)")){q.setString(1,actor);q.setString(2,scope);try(var r=q.executeQuery()){while(r.next())denied.addAll(roleRights(c,r.getString(1)).deniedPermissions());}}
    if(scope.startsWith("ORG:")&&exists(c,"SELECT 1 FROM organizations WHERE id=? AND owner=?",scope.substring(4),actor)){
     result.addAll(Set.of("ORG_MANAGE","MEMBERS_MANAGE","ROLES_MANAGE"));
     try(var q=c.prepareStatement("SELECT permission FROM org_delegations WHERE org=?")){q.setString(1,scope.substring(4));try(var r=q.executeQuery()){while(r.next())result.add(r.getString(1));}}
    }
+   result.removeAll(denied);
    if(!scope.equals("GLOBAL"))result.removeAll(GLOBAL_ONLY);
    return Set.copyOf(result);});
  }
@@ -82,21 +85,25 @@ public final class AccessControl implements AutoCloseable {
   return store.tx(c->{if(!exists(c,"SELECT 1 FROM identities WHERE identity=?",actor))return false;Values.scope(policy.scope());
    if(policy.scope().startsWith("ORG:")&&!isMember(actor,policy.scope().substring(4)))return false;
    if(clearance(actor,policy.scope())<policy.minLevel())return false;
-   for(String p:policy.requiredPermissions())if(!has(actor,p,policy.scope()))return false;
+   for(String p:policy.requiredPermissions())if(!permissions(actor,policy.scope()).contains(p))return false;
    if(!policy.allowedOrgs().isEmpty()||!policy.allowedUsers().isEmpty()){
     boolean allow=policy.allowedUsers().contains(actor);for(String org:policy.allowedOrgs())allow|=isMember(actor,org);if(!allow)return false;
    }return true;});
  }
  public void requireRead(String actor,ResourcePolicy policy)throws Exception{if(!canRead(actor,policy))throw CommunityException.missing();}
- public record RoleRights(Set<String> permissions,int clearance){}
- public RoleRights roleRights(Connection c,String role)throws Exception{
-  Set<String>visited=new HashSet<>(),active=new HashSet<>(),perms=new TreeSet<>();int[]level={0};walk(c,role,null,visited,active,perms,level);return new RoleRights(Set.copyOf(perms),level[0]);
+ public record RoleRights(Set<String> permissions,int clearance,Set<String> deniedPermissions){
+  public RoleRights{permissions=Set.copyOf(permissions);deniedPermissions=Set.copyOf(deniedPermissions);}
+  public RoleRights(Set<String> permissions,int clearance){this(permissions,clearance,Set.of());}
  }
- private void walk(Connection c,String role,String expectedScope,Set<String>visited,Set<String>active,Set<String>perms,int[]level)throws Exception{
+ public RoleRights roleRights(Connection c,String role)throws Exception{
+  Set<String>visited=new HashSet<>(),active=new HashSet<>(),perms=new TreeSet<>(),denied=new TreeSet<>();int[]level={0};walk(c,role,null,visited,active,perms,denied,level);perms.removeAll(denied);return new RoleRights(perms,level[0],denied);
+ }
+ private void walk(Connection c,String role,String expectedScope,Set<String>visited,Set<String>active,Set<String>perms,Set<String>denied,int[]level)throws Exception{
   if(active.contains(role))throw CommunityException.invalid();if(visited.contains(role))return;if(visited.size()>=128)throw CommunityException.invalid();active.add(role);visited.add(role);String scope;
   try(var q=c.prepareStatement("SELECT scope,clearance FROM roles WHERE id=?")){q.setString(1,role);try(var r=q.executeQuery()){if(!r.next())throw CommunityException.invalid();scope=r.getString(1);if(expectedScope!=null&&!expectedScope.equals(scope))throw CommunityException.invalid();level[0]=Math.max(level[0],r.getInt(2));}}
   try(var q=c.prepareStatement("SELECT permission FROM role_permissions WHERE role=?")){q.setString(1,role);try(var r=q.executeQuery()){while(r.next())perms.add(r.getString(1));}}
-  try(var q=c.prepareStatement("SELECT parent FROM role_parents WHERE role=?")){q.setString(1,role);try(var r=q.executeQuery()){while(r.next())walk(c,r.getString(1),scope,visited,active,perms,level);}}
+  try(var q=c.prepareStatement("SELECT permission FROM role_denials WHERE role=?")){q.setString(1,role);try(var r=q.executeQuery()){while(r.next())denied.add(r.getString(1));}}
+  try(var q=c.prepareStatement("SELECT parent FROM role_parents WHERE role=?")){q.setString(1,role);try(var r=q.executeQuery()){while(r.next())walk(c,r.getString(1),scope,visited,active,perms,denied,level);}}
   active.remove(role);
  }
  public void bootstrap(byte[]first,String firstFingerprint,byte[]second,String secondFingerprint)throws Exception{
@@ -108,7 +115,9 @@ public final class AccessControl implements AutoCloseable {
    store.audit(c,a,"BOOTSTRAP",b,"Two independently verified Ed25519 fingerprints");return null;});
  }
  public long secondFactorVersion(String actor)throws Exception{return store.tx(c->{try(var q=c.prepareStatement("SELECT version FROM second_factors WHERE identity=?")){q.setString(1,actor);try(var r=q.executeQuery()){if(!r.next())throw CommunityException.denied();return r.getLong(1);}}});}
+ public void requireStepUp(String actor,Map<String,Object>data)throws Exception{var scoped=org.securemail.community.gateway600.TrustedContext600.current();if(scoped!=null){scoped.requireStepUp(actor);return;}requireStepUp(actor,Values.string(data,"stepUp",86));}
  public void requireStepUp(String actor,String token)throws Exception{
+  var scoped=org.securemail.community.gateway600.TrustedContext600.current();if(scoped!=null){scoped.requireStepUp(actor);return;}
   if(token==null||!token.matches("[A-Za-z0-9_-]{43}"))throw new CommunityException("REAUTH_REQUIRED","Подтвердите вход повторно");
   String hash=CommunityStore.hex(CommunityStore.hash(token.getBytes(StandardCharsets.US_ASCII)));
   boolean valid=store.tx(c->{try(var q=c.prepareStatement("SELECT 1 FROM stepup_tokens t JOIN second_factors f ON f.identity=t.identity WHERE t.identity=? AND t.token_hash=? AND t.expires>? AND t.epoch=f.version")){q.setString(1,actor);q.setString(2,hash);q.setLong(3,store.clock().millis());try(var r=q.executeQuery()){return r.next();}}});
@@ -116,6 +125,7 @@ public final class AccessControl implements AutoCloseable {
  }
  /** Approved requests bind exact payload and two current administrators. Callback and consumption are atomic. */
  public <T>T executeCritical(String actor,String id,String kind,String payload,CommunityStore.SqlWork<T> work)throws Exception{
+  var scoped=org.securemail.community.gateway600.TrustedContext600.current();if(scoped!=null)return scoped.executeCritical(actor,id,kind,payload,work);
   return store.tx(c->{if(!isGlobalAdmin(actor))throw CommunityException.denied();
    try(var q=c.prepareStatement("SELECT * FROM critical_requests WHERE id=?")){q.setString(1,id);try(var r=q.executeQuery()){
     if(!r.next()||!r.getString("state").equals("APPROVED")||r.getLong("expires")<=store.clock().millis()||!r.getString("kind").equals(kind)||!r.getString("payload").equals(payload)||!r.getString("initiator").equals(actor)||r.getString("approver").equals(actor)||!isGlobalAdmin(r.getString("approver")))throw CommunityException.denied();

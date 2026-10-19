@@ -1,0 +1,13 @@
+{
+  "scope": "Actual signed Identity/Community HTTP + SQLite + JavaFX and explicit SOCKS fixture. Sound-request callback tested, audible native sound/Tor/Windows/CachyOS NOT_RUN.",
+  "explicitTitleOptIn": true,
+  "result": "PASS_HEADLESS",
+  "disabledBannerHidden": true,
+  "newUnreadPresented": 4,
+  "initialSuppressed": true,
+  "soundRequests": 3,
+  "deduplicated": true,
+  "staleResponseAfterLockSuppressed": true,
+  "neutralDefault": true,
+  "localPreferencesPersisted": true
+}

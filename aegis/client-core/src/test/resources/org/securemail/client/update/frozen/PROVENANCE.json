@@ -52,6 +52,32 @@
           "sha256": "b2139ade7aa1ebc58f57fba0703a610e14cc5fe6210ebbc3e4b9b386444788af"
         }
       }
+    },
+    "v500": {
+      "signedManifestCommit": "38a3e6469a40e6edcb1b0448f906a488c73feb5d",
+      "clientVersion": "5.0.0",
+      "files": {
+        "SignedManifest.java": {
+          "sourceCommit": "38a3e6469a40e6edcb1b0448f906a488c73feb5d",
+          "repositoryPath": "aegis/client-core/src/main/java/org/securemail/client/update/SignedManifest.java",
+          "sha256": "2a58835334cbe6aa1801274497b171a6b5b3c7869aef478a2f49ab78daeab3e0"
+        },
+        "JsonData.java": {
+          "sourceCommit": "38a3e6469a40e6edcb1b0448f906a488c73feb5d",
+          "repositoryPath": "aegis/client-core/src/main/java/org/securemail/client/update/JsonData.java",
+          "sha256": "0b466866cf8fa0c5a1349ab9303027356fd45043ba4165d9e8341297a124c6a6"
+        },
+        "SemVersion.java": {
+          "sourceCommit": "38a3e6469a40e6edcb1b0448f906a488c73feb5d",
+          "repositoryPath": "aegis/client-core/src/main/java/org/securemail/client/update/SemVersion.java",
+          "sha256": "abcc7dae8e1a6224271487dd4110814fceb95c57e51073b71a229539287ea639"
+        },
+        "UpdateDiagnostic.java": {
+          "sourceCommit": "38a3e6469a40e6edcb1b0448f906a488c73feb5d",
+          "repositoryPath": "aegis/client-core/src/main/java/org/securemail/client/update/UpdateDiagnostic.java",
+          "sha256": "cff13c64d85c6065af56b6d0587fd62a0674cac1a09653b2a7b868da6855d916"
+        }
+      }
     }
   }
 }

@@ -26,27 +26,33 @@ public final class UpdaterMain {
     long pid=JsonData.number(o,"clientPid"),launcher=JsonData.number(o,"launcherPid");Instant birth=Instant.parse(JsonData.text(o,"clientStart",60));
     ProcessHandle client=pin(pid,birth);ProcessHandle parent=launcher==0?null:pin(launcher,Instant.parse(JsonData.text(o,"launcherStart",60)));
     phase="WAIT_FOR_CLIENT";AtomicFiles.write(dir.resolve("phase"),phase.getBytes(java.nio.charset.StandardCharsets.US_ASCII));AtomicFiles.write(dir.resolve("ready"),new byte[]{1});waitExit(client);if(parent!=null)waitExit(parent);
-    phase="BACKUP";AtomicFiles.write(dir.resolve("phase"),phase.getBytes(java.nio.charset.StandardCharsets.US_ASCII));
-    var previousConfig=org.securemail.client.ClientConfig.load(AppPaths.config());Path backup;
-    try(var appLock=AppPaths.lock()){
-      backup=org.securemail.client.storage.ProfileSnapshot.create(previousConfig,AppPaths.root().resolve("backups"));
-      org.securemail.client.storage.ProfileSnapshot.verify(backup,previousConfig);
-      AtomicFiles.write(dir.resolve("profile-backup"),backup.toString().getBytes(java.nio.charset.StandardCharsets.UTF_8));
-    }
+    // The helper runs outside the old bundle and takes no shared runtime lease.
+    var previousConfig=org.securemail.client.ClientConfig.load(AppPaths.config());Path[] backup={null};
     AtomicFiles.directory(target.getParent());Path candidate=artifact;
     if(AppPaths.windows()){candidate=dir.resolve("payload");PackageSanity.extractWindows(artifact,candidate);Path uninstall=target.resolve("Uninstall.exe");if(Files.isRegularFile(uninstall,LinkOption.NOFOLLOW_LINKS)&&!Files.isSymbolicLink(uninstall))Files.copy(uninstall,candidate.resolve("Uninstall.exe"));}
     Path confirmation=dir.resolve("confirmed");Path finalDir=dir;List<Process> started=new ArrayList<>();
     phase="INSTALL_AND_STARTUP";AtomicFiles.write(dir.resolve("phase"),phase.getBytes(java.nio.charset.StandardCharsets.US_ASCII));
     try{UpdateInstaller.replace(candidate,target,token,confirmation,new UpdateInstaller.Starter(){public boolean start(Path installed)throws Exception{
       Path command=AppPaths.windows()?installed.resolve("AEGIS.exe"):installed;ProcessBuilder builder=new ProcessBuilder(command.toString());builder.environment().put("AEGIS_UPDATE_JOB",job.toString());builder.redirectOutput(ProcessBuilder.Redirect.DISCARD).redirectError(ProcessBuilder.Redirect.DISCARD);Process process=builder.start();started.add(process);return process.isAlive();
-    }public void stop()throws Exception{stopOwned(started);}});}
-    catch(Exception failure){stopOwned(started);if(Files.exists(target.resolveSibling(target.getFileName()+".old"))){Path old=target.resolveSibling(target.getFileName()+".old");if(Files.exists(target))UpdateInstaller.deleteTree(target);Files.move(old,target,StandardCopyOption.ATOMIC_MOVE);}
-      try(var appLock=AppPaths.lock()){org.securemail.client.storage.ProfileSnapshot.restore(backup,previousConfig);}
-      AtomicFiles.write(dir.resolve("rolled-back"),new byte[]{1});
-      if(Files.exists(target)){new ProcessBuilder((AppPaths.windows()?target.resolve("AEGIS.exe"):target).toString()).start();}throw failure;}
+    }public void stop()throws Exception{stopOwned(started);}},TimeUnit.MINUTES.toMillis(10),()->{
+      {
+        backup[0]=org.securemail.client.storage.ProfileSnapshot.create(previousConfig,AppPaths.root().resolve("backups"));
+        org.securemail.client.storage.ProfileSnapshot.verify(backup[0],previousConfig);
+        AtomicFiles.write(finalDir.resolve("profile-backup"),backup[0].toString().getBytes(java.nio.charset.StandardCharsets.UTF_8));
+      }
+    },()->{
+      org.securemail.client.storage.ProfileSnapshot.restore(backup[0],previousConfig);
+    },AppPaths::lock);}
+    catch(UpdateInstaller.InstallFailure failure){
+      if(failure.rolledBack()){
+        AtomicFiles.write(dir.resolve("rolled-back"),new byte[]{1});
+        if(Files.exists(target))new ProcessBuilder((AppPaths.windows()?target.resolve("AEGIS.exe"):target).toString()).start();
+      }else AtomicFiles.write(dir.resolve("recovery-blocked"),new byte[]{1});
+      throw failure;
+    }
     // Metadata/shortcut cleanup follows the commit and cannot roll back a working client.
     try{AtomicFiles.write(finalDir.resolve("installed"),release.version().getBytes(java.nio.charset.StandardCharsets.US_ASCII));if(AppPaths.windows()){String registry="Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\AEGIS";if(com.sun.jna.platform.win32.Advapi32Util.registryKeyExists(com.sun.jna.platform.win32.WinReg.HKEY_CURRENT_USER,registry))com.sun.jna.platform.win32.Advapi32Util.registrySetStringValue(com.sun.jna.platform.win32.WinReg.HKEY_CURRENT_USER,registry,"DisplayVersion",release.version());}else integrateLinux(target,finalDir.resolve("helper/resources/aegis.png"),release.version());}catch(Exception|LinkageError optionalMetadata){/* Binary replacement and startup confirmation already succeeded. */}
-  }catch(Exception failure){if(dir!=null)try{AtomicFiles.write(dir.resolve("failed-code"),phase.getBytes(java.nio.charset.StandardCharsets.US_ASCII));AtomicFiles.write(dir.resolve("failed"),"Установка не завершена. Предыдущая версия сохранена.\n".getBytes(java.nio.charset.StandardCharsets.UTF_8));}catch(IOException ignored){}System.exit(1);}}
+  }catch(Exception failure){if(dir!=null)try{AtomicFiles.write(dir.resolve("failed-code"),phase.getBytes(java.nio.charset.StandardCharsets.US_ASCII));AtomicFiles.write(dir.resolve("failed"),"Установка не завершена. Данные и резервные файлы сохранены. Проверьте статус восстановления.\n".getBytes(java.nio.charset.StandardCharsets.UTF_8));}catch(IOException ignored){}System.exit(1);}}
   private static ProcessHandle pin(long pid,Instant start)throws IOException{if(pid<=0||pid==ProcessHandle.current().pid())throw new IOException("Invalid old client PID");ProcessHandle p=ProcessHandle.of(pid).orElseThrow(()->new IOException("Old client disappeared"));if(!p.info().startInstant().orElseThrow().equals(start))throw new IOException("PID identity changed");return p;}
   private static void waitExit(ProcessHandle p)throws Exception{if(p.isAlive())p.onExit().get(90,TimeUnit.SECONDS);}
   private static void stopOwned(List<Process> processes)throws Exception{

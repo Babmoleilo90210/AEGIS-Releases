@@ -1,0 +1,120 @@
+{
+  "schema": 1,
+  "scope": "Desktop Core/Mail/Glas IPC, delegated voice, profile migration. Not whole-product release acceptance.",
+  "productionReady": false,
+  "capturedAt": "2026-10-18T13:11:29.615240+00:00",
+  "checks": {
+    "junit": {
+      "status": "PASS",
+      "tests": 84,
+      "failed": 0,
+      "skipped": 0,
+      "scope": "Real separate JVM and TLS sockets, local synthetic Identity/media/OS-secret fixtures; exact released5 binary rollback/runtime probe included."
+    },
+    "hostAuthorization": {
+      "status": "PASS",
+      "checks": 18,
+      "scope": "Actual production host verifiers with local signed fixtures; no live Tor/server."
+    },
+    "mailJavaFx": {
+      "status": "PASS",
+      "scope": "Monocle real controls/vault/draft persistence; not native acceptance."
+    },
+    "windows11": {
+      "status": "NOT_RUN"
+    },
+    "cachyosWayland": {
+      "status": "NOT_RUN"
+    },
+    "cachyosX11": {
+      "status": "NOT_RUN"
+    },
+    "twoPhysicalDevicesAndNetworks": {
+      "status": "NOT_RUN"
+    },
+    "torVoiceRoutingAndAudioQuality": {
+      "status": "NOT_RUN"
+    },
+    "nativeDpapiAndSecretService": {
+      "status": "NOT_RUN"
+    },
+    "externalArchiveMigration": {
+      "status": "BLOCKED",
+      "reason": "Explicit fail-closed custom archive path boundary; no profile switch."
+    },
+    "organizationVoiceExceptionBridge": {
+      "status": "BLOCKED",
+      "reason": "Standalone provider defaults to DENY until live delegated authorization bridge is integrated."
+    }
+  },
+  "published5CoreJarSha256": "6d263ef70f5b159aa4458125ffc75bf55c71346baf52b01db3b7db00e155ebe2",
+  "evidenceFilesSha256": {
+    "junit-84.log": "986d585c07d447792d2a613a8fe13c408191ac8e2e48a562e6a90da8fd9ef323",
+    "junit-84.xml": "5e78377a7862edff227ed625834af7a40d3fe655ca136068be2310d2b36f9c2c",
+    "runtime-migration-and-revoke.log": "1aabad4eeed2eb3e5dfcff671e1b1eba7bd340502b2bc89d502af1e750a58047",
+    "host-authorization-18.log": "570774e751eb8c18a14d228bb773d6b622a610e04a70eaf571576b868c195873",
+    "mail-monocle.log": "b9b9a1235b0d749b1b8bc5f55da29ecf96671a87911046ed6c8a8b8031a55bb9",
+    "mail-component.png": "b93c8d6804b5b61e9f4aee70085ac1ead9923276a20abdb2f6e860c252d4ba6a",
+    "mail-settings.png": "961c848bff2f7025a811d1863fd21899c13630da02081238c0436edff64fe5f0",
+    "mail-locked.png": "32e92d8fd45c1af14c558046e1dffa232ff5f801c368b2af3ada3d6864d708e8"
+  },
+  "sourceFilesSha256": {
+    "aegis/client-core/src/main/java/org/securemail/client/AccountLogin.java": "6caf22a80544dcf3880faf591f2b6acd9d84975ce12f194e9f71ef8cc9c55071",
+    "aegis/client-core/src/main/java/org/securemail/client/ecosystem/ComponentId.java": "28d0b16af8c15286c9b269b9562100d6244f782a673d824df0820f51e6b1b09c",
+    "aegis/client-core/src/main/java/org/securemail/client/ecosystem/ComponentInstallation.java": "022718e57199eec3bbc43263812c46fade27a8ae34ae41403757ab8e2df8cddb",
+    "aegis/client-core/src/main/java/org/securemail/client/ecosystem/ComponentLease.java": "5e7447d32121a7ef583e89280885cc6ccd7b3da0dfd684146f6afccf539f39f3",
+    "aegis/client-core/src/main/java/org/securemail/client/ecosystem/ComponentRuntime.java": "813cbe56dbaa0a54597e6af2d7062bb1bcaf4467cef444ac35ccc5858e9d17fe",
+    "aegis/client-core/src/main/java/org/securemail/client/ecosystem/CoreLifecycle.java": "feb388b6864c82244d5d4cf7e5ebe2d8e3ccaadc6b3a3aced6435877433ae708",
+    "aegis/client-core/src/main/java/org/securemail/client/ecosystem/DesktopProcessBroker.java": "cfe82da797de651c8eb5c6f05b4a513863222fee5039cb9b3b3f5f6a1131c3fa",
+    "aegis/client-core/src/main/java/org/securemail/client/ecosystem/IdleLockGuard.java": "724a7b9e999b841c0bcf2f3cc6a698b05f1f38681cfb561f66023c2840d337b1",
+    "aegis/client-core/src/main/java/org/securemail/client/ecosystem/LocalIpc.java": "eb3922635f610cd787a42bf71ccbb7949db735a5b257fd56e6931438e919e597",
+    "aegis/client-core/src/main/java/org/securemail/client/ecosystem/MailComponentGate600.java": "893dba517c9f5b25f349be12fddef8b50134489ad9e28780ed68a112f87de776",
+    "aegis/client-core/src/main/java/org/securemail/client/ecosystem/MailNotificationCounter600.java": "e0e71c3dced319c870f8394d903cf592ae7d58f1c58c9da95a44de44badbb808",
+    "aegis/client-core/src/main/java/org/securemail/client/ecosystem/MailPairing600.java": "742280c803c393c16b5516daee8e80c3d720841395fc529c7e2ef75ec2c63cc0",
+    "aegis/client-core/src/main/java/org/securemail/client/ecosystem/MailPairingBroker600.java": "cc72936ab6544a6544e8ea2abc5fadd961166ca1e0ce28e3a3120dec8aa214a3",
+    "aegis/client-core/src/main/java/org/securemail/client/ecosystem/MailProfileMigration600.java": "0d0e3cac4ee39fafc9ab434a387a3740080d030f026bca2c0eeadd410fca49a0",
+    "aegis/client-core/src/main/java/org/securemail/client/ecosystem/MailRecoveryKey600.java": "c0dd0132bef805a6807c8b9b9c5e73a0de3381c07f66d8f9060c69d0e08ec9a9",
+    "aegis/client-core/src/main/java/org/securemail/client/ecosystem/ProfileMigration600.java": "32ce816962cbaa6555a6368be83b7a7040574b0d84971832b4d71f1306b89804",
+    "aegis/client-core/src/main/java/org/securemail/client/ecosystem/SessionAuthority.java": "72b3355057e58b2ecf8f1d707ade9d2b1b4508741d052d13ec2679bad712b93c",
+    "aegis/client-core/src/main/java/org/securemail/client/ecosystemauth/CorePublicConfig600.java": "29938b7ba0f543d848b17dba3d714e7bc13939c7010111c285d55f26212a3154",
+    "aegis/client-core/src/main/java/org/securemail/client/storage/LocalStore.java": "9f038a13aa855554330c6fb2dc12361ec4c3f0c1e205cdf01846e1f79b95b378",
+    "aegis/client-core/src/main/java/org/securemail/client/voice/VoiceCallService.java": "75394fe9f7c1eca8290299df6dd107126236f87a04e6b87ba3cfc06140a002c6",
+    "aegis/client-core/src/main/java/org/securemail/client/voice/VoiceHistory.java": "f506da88f96838fb0c89be8dbc2d83d07ddb133fc64eaf6322e9f9d771d8febd",
+    "aegis/client-core/src/main/java/org/securemail/client/voice/VoiceLocalStore600.java": "dff54a7bf844094ec5bb0119d7b1a2c5a39fde8d43769d7ba4863ad916ce9d86",
+    "aegis/client-core/src/main/java/org/securemail/client/voice/VoiceTls.java": "28630b2b5c2a32649983af1117f773a88109ec32fceacb8955ed0ef3b70cb883",
+    "aegis/client-core/src/main/java/org/securemail/client/voice600/GlasGrant600.java": "a6e7f6e68828ee8c4c3d572b30d6cc294cc8e1b172ae10a3577f55ff32e7d500",
+    "aegis/client-core/src/main/java/org/securemail/client/voice600/GlasOnionTransport600.java": "d01451419af0ab4ca9b88f28fc564c2219d817fe0b5e094ca114b7159072c5b9",
+    "aegis/client-core/src/main/java/org/securemail/client/voice600/GlasSignalingClient600.java": "050cedd736fc36fd0da1605611122cc57dd359673994011ef9e7261c21c8279f",
+    "aegis/client-core/src/main/java/org/securemail/client/voice600/GlasState600.java": "5523c50863e83058d55806d22c9440c41f5bef1a286b73dda430bf3ea023692a",
+    "aegis/client-core/src/test/java/org/securemail/client/ecosystem/DesktopProcessBrokerTest.java": "8b2240d6be2b9d0c15331f104db9b9ed926f78d205c03cc8d5bfd9586caba220",
+    "aegis/client-core/src/test/java/org/securemail/client/ecosystem/DetachedChild.java": "d43fb75d04002162750eb79287cb4716e79309675ac5539376852220f7fabdd4",
+    "aegis/client-core/src/test/java/org/securemail/client/ecosystem/IdleLockGuardTest.java": "5ad782a4c9026feb0e34c2199b1ae22ca50f41619ed8a09d48cd17d5105a7ec3",
+    "aegis/client-core/src/test/java/org/securemail/client/ecosystem/Legacy500Rollback600Test.java": "ba96d56482042d163bc8d8433fa2dd5899b1cf8f5de86ff5b2e33fe6f758ac28",
+    "aegis/client-core/src/test/java/org/securemail/client/ecosystem/Legacy500VaultProbe.java": "ba30183c4ca0a403499d364565ace5ad54778ffc8fceb80c53eeffaf6e4cf5e0",
+    "aegis/client-core/src/test/java/org/securemail/client/ecosystem/LocalIpcTest.java": "84637c58f093ad8fb67f512dd5d2450fdcdbcc9ec4bc021db734d52ac2b01aea",
+    "aegis/client-core/src/test/java/org/securemail/client/ecosystem/MailProfileMigration600Test.java": "6ccc3ea8d9be67040a98e2991ba54c675b15119600d19bcd1b4f52f7e555f20a",
+    "aegis/client-core/src/test/java/org/securemail/client/ecosystem/MailSecurity600Test.java": "a52ffd9d5adf676f57675b516740073288fb7a2047b0af300cb9bc23c7af91a6",
+    "aegis/client-core/src/test/java/org/securemail/client/ecosystem/ProfileMigration600Test.java": "f75d1a0cc7539703f2354b1f469d29ff800377c1f331fcc1469093bc7c03e8b7",
+    "aegis/client-core/src/test/java/org/securemail/client/voice/DelegatedVoiceTls600Test.java": "c3eba80cbb09e08bbec884b8e2eb6e7ca954553c52b897f08330710699a5b8dd",
+    "aegis/client-core/src/test/java/org/securemail/client/voice/StandaloneGlasCall600Test.java": "2773ae6538cf941fc0939c09fc2dcbb6a0dc110c515cec4c229d0549085b4271",
+    "aegis/client-core/src/test/java/org/securemail/ui/ecosystem/ComponentEntrypoint.java": "99ad2dd55e0246ca4d30e1894330aeb1b0dd5bf74941fb0bc4a7c6bc4f53d77c",
+    "aegis/client-ui/src/main/java/org/securemail/ui/GlasApp600.java": "ed369f9225c6bf6f277baebafbb32ceb2cac4d808afa9d8b0c4e86a03ccdfdc8",
+    "aegis/client-ui/src/main/java/org/securemail/ui/GlasView.java": "38ba00075cc36f87538cb8d9da996673ac05cdb5fdfae302f9a5b022a7060c4c",
+    "aegis/client-ui/src/main/java/org/securemail/ui/LegacyMailComponentHost600.java": "2ef81aba725c76024487aff80a37dbf36b375b7abaf328530fdcdb8b69c2f36d",
+    "aegis/client-ui/src/main/java/org/securemail/ui/MailPairingEntrypoint600.java": "f182ad516586012ac46cefc96cde23a233b68304e1f4b26b5218bad8045c1aef",
+    "aegis/client-ui/src/main/java/org/securemail/ui/MessengerApp.java": "b02d196fb67fa27665d58551f99c79b121d46eeed7a22badf39e52ea98a20e8f",
+    "aegis/client-ui/src/main/java/org/securemail/ui/StandaloneGlasComponentHost600.java": "6a6188b6cc4bf66a1d1e0aeec19f3c3c6504ac738be3c9c2b1825180d25496c2",
+    "aegis/client-ui/src/main/java/org/securemail/ui/ecosystem/ComponentEntrypoint.java": "b3520969831b7e1ecbd0681d18bd2867b6f715f4e68b738eb4a75ee640d1bce1",
+    "aegis/client-ui/src/main/java/org/securemail/ui/ecosystem/ComponentHost.java": "58b89056cacd55e9f12b6758bdd335541233f9d0d74bd19189633c29a53564e5",
+    "aegis/client-ui/src/main/java/org/securemail/ui/ecosystem/CoreLauncherView.java": "cadb3428c2017e1806832ff1fe1b7825ed4cd265341b94cc2f164163efacbb1d",
+    "aegis/client-ui/src/main/java/org/securemail/ui/ecosystem/DesktopLockBinding.java": "757fdab3e930c7e0ae6ad62087c30d03249589920f75b73baa776837766cd738",
+    "aegis/client-ui/src/main/resources/META-INF/services/org.securemail.ui.ecosystem.ComponentHost": "76da5e5ebf42b39bd6fdeca8db39ca81fb041d528e1fcfcc7f860b597f702490",
+    "aegis/client-ui/src/smoke/java/org/securemail/ui/ComponentAuthorizationSmoke600.java": "b14651415dc7b1809e45e578707aa53c4d872875c1660b03dfbe77a94037ad0d",
+    "aegis/client-ui/src/smoke/java/org/securemail/ui/MailComponentModeSmoke600.java": "97ae31d9eed2a1be8dbefb1e0ab380534425d6b62410b72dd1f8521b9d40c29b"
+  },
+  "notes": [
+    "Two Mail-only automatic-updater predicates were changed after the Mail UI smoke; core JUnit sources were unchanged by those predicates. Final integrated Gradle build remains parent-owned.",
+    "An earlier 81/82 run found a real accepted-call revoked-lease reconnect defect; production was fixed, related runtime tests and final 84/84 rerun passed.",
+    "Runtime fixture uses exact released5 client-core JAR and synthetic data. No owner profile or signing key used."
+  ]
+}

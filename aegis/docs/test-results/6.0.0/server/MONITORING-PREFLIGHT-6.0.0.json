@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "minute": 29872114,
+  "scope": "staging-service-properties-only",
+  "systemdIsPid1": false,
+  "units": {
+    "identity": {
+      "state": "NOT_RUN",
+      "reason": "systemd-not-pid1"
+    },
+    "attachments": {
+      "state": "NOT_RUN",
+      "reason": "systemd-not-pid1"
+    },
+    "glas-signaling": {
+      "state": "NOT_RUN",
+      "reason": "systemd-not-pid1"
+    },
+    "community": {
+      "state": "NOT_RUN",
+      "reason": "systemd-not-pid1"
+    },
+    "library": {
+      "state": "NOT_RUN",
+      "reason": "systemd-not-pid1"
+    },
+    "news-worker": {
+      "state": "NOT_RUN",
+      "reason": "systemd-not-pid1"
+    },
+    "management": {
+      "state": "NOT_RUN",
+      "reason": "systemd-not-pid1"
+    },
+    "management-broker": {
+      "state": "NOT_RUN",
+      "reason": "systemd-not-pid1"
+    },
+    "tor": {
+      "state": "NOT_RUN",
+      "reason": "systemd-not-pid1"
+    }
+  },
+  "nativeAcceptance": "NOT_RUN",
+  "productionReady": false
+}

@@ -1,0 +1,26 @@
+{
+  "scope": "local JDK21 SQLite/HTTP fixtures, not Tor/native/production",
+  "sources": {
+    "common-protocol/src/main/java/org/securemail/ecosystem/protocol/IdentityProtocol.java": "08c91bdbfffd27772f7250cef34e72b1d167a992786c45f0058f1574ce6ef182",
+    "common-protocol/src/main/java/org/securemail/ecosystem/protocol/MailSessionProtocol600.java": "5718ce9699bbad930c5cb776a19ce9b2e8be260494cf0d10288df2d8d2e72db4",
+    "common-protocol/src/main/java/org/securemail/ecosystem/protocol/OfflineLeaseGuard.java": "86d21afbb6a3d9f6886ef9c88d30ffd69633383ede1b386e2ee4549924171740",
+    "identity-server/src/main/java/org/securemail/identity/IdentityException.java": "fd92944880c4eb3017d0674df124daa7241ef1e66d26281eaf1c961eaf83aac3",
+    "identity-server/src/main/java/org/securemail/identity/IdentityHttpServer.java": "5c22bc10acec4d08defd1c4f6b240ac971a3c9fc0efd0f0438db318d07bbc56c",
+    "identity-server/src/main/java/org/securemail/identity/IdentityJson.java": "f16789db0c2b9af09b5c81f1ef93991be8a401f7b77181fca7b9d58067f99829",
+    "identity-server/src/main/java/org/securemail/identity/IdentityMain.java": "6cb6a064e0fe9e6fcb24a1d496e6fd4ebd6a74bd634f2cf26e8279c43210a867",
+    "identity-server/src/main/java/org/securemail/identity/IdentityStore.java": "de9341075277a8cfb6ff03520ca4202bd4ed1db3e3904b42413739dabfa025a5",
+    "identity-server/src/main/java/org/securemail/identity/PosixFilePermissions600.java": "bf7121a84c0eed4c4f50460eeec768b49b6d65f93a72d03ae71e89520f461266",
+    "identity-server/src/test/java/org/securemail/identity/CriticalApprovalTest.java": "4e6876326a5ca344d6b4351ac28a90f7f16fc2532409efa765217c69eef9fb6e",
+    "identity-server/src/test/java/org/securemail/identity/FirstDelegationTest.java": "e2b40c0e4052176789e0e9fa20b5803c667b8c444dab80c3d477643f35752d7f",
+    "identity-server/src/test/java/org/securemail/identity/IdentityHttpServerTest.java": "616253b68007ab532dedff06a121c2b07117db9bc062a07649b50d139150672b",
+    "identity-server/src/test/java/org/securemail/identity/IdentityMainTest.java": "472ddb6adcb6f9ffa5ac94b710f5cbacaf6f834c6ea2023a3f5870d0cdfa5909",
+    "identity-server/src/test/java/org/securemail/identity/IdentityStoreTest.java": "4e6e91861727874a22330ad1a09495310210c99a545c8d3b935c11de0bb92653",
+    "identity-server/src/test/java/org/securemail/identity/OwnerAdministrationCliTest.java": "ff59f67468199efb9a1bc693f538ea389d4fdfea82db01e08d091805d70cb12a",
+    "identity-server/src/test/java/org/securemail/identity/OwnerTransferTest.java": "252a16da823b7994f845d8492d168371b3c4d366a20442267000bb68cf96483d"
+  },
+  "compileExit": 0,
+  "sharedJava8Exit": 0,
+  "testExit": 0,
+  "sourceStable": true,
+  "status": "PASS_LOCAL"
+}

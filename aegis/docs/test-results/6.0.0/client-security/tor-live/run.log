@@ -1,0 +1,3 @@
+TOR DIRECT 0
+TOR SNOWFLAKE 10
+{"scope":"Real bundled Tor on Work Linux container; no browser/native target/DNS packet capture/voice or two-device acceptance","nativeTargetAcceptance":false,"blockedPhase":"BOOTSTRAP","observedBootstrapPercent":10,"exceptionType":"BootstrapFailure","networkAcceptance":"BLOCKED","bootstrap":"NOT_RUN","https":"NOT_RUN","signedPublicFeed":"NOT_RUN","onion":"NOT_RUN"}

@@ -1,0 +1,11 @@
+/workspace/scratch/aa629f360927/aegis600/aegis/client-core/src/main/java/org/securemail/client/ecosystemauth/CoreAccountSession600.java:56: error: cannot find symbol
+    if(gen<1||issued>now+60_000||issued<now-60_000||until<=now||until-issued>MAX_LEASE_MILLIS)throw new IOException("Недопустимый срок сессии");
+                                                                             ^
+  symbol:   variable MAX_LEASE_MILLIS
+  location: class CoreAccountSession600
+/workspace/scratch/aa629f360927/aegis600/aegis/client-core/src/main/java/org/securemail/client/ecosystemauth/CoreAccountSession600.java:69: error: cannot find symbol
+    ensureLive();long time=now(),ttl=Math.min(MAX_LEASE_MILLIS,expiresAt-time);String nonce=IdentityProtocol.nonce();
+                                              ^
+  symbol:   variable MAX_LEASE_MILLIS
+  location: class CoreAccountSession600
+2 errors

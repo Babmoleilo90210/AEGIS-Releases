@@ -1,0 +1,5 @@
+#!/bin/sh
+set -eu
+AEGIS_RELAY6_ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+if [ -n "${JAVA_HOME:-}" ]; then AEGIS_RELAY6_JAVA="$JAVA_HOME/bin/java"; else AEGIS_RELAY6_JAVA=java; fi
+exec "$AEGIS_RELAY6_JAVA" -Xms32m -Xmx256m -XX:+DisableAttachMechanism -XX:-HeapDumpOnOutOfMemoryError -cp "$AEGIS_RELAY6_ROOT/lib/*" org.securemail.relay.RelayMain600 "$@"

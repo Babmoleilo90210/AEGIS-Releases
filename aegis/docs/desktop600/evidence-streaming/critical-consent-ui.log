@@ -1,0 +1,3 @@
+PASS: actual Mail OwnerTransfer/FirstDelegate/OwnerBootstrap consent UI, full target fingerprint/role text and unchecked-required reversible consent. 3 real Monocle PNGs. Scope=real vault+local typed fixtures; live server, proof emission and native acceptance NOT_RUN here.
+Oct 18, 2026 4:00:52 PM com.sun.javafx.application.PlatformImpl startup
+WARNING: Unsupported JavaFX configuration: classes were loaded from 'unnamed module @15615099'

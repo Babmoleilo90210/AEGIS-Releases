@@ -1,0 +1,112 @@
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+Identity подготовлен. Отпечаток сервиса: fe2797c727d838cc7169612b49e3e9a49efd5af2abc86865ac98e43ed342ba65
+Одноразовое публичное задание записано. Подпишите точные proofBytes через Почту после повторной аутентификации; приватный ключ не передавайте серверу.
+Владелец АЕГИС назначен. Повторный Owner Bootstrap запрещён.
+Публичное одноразовое задание создано. Корневые подтверждения выполняются только фиксированным согласием Почты.
+Первый независимый администратор назначен. Повтор начальной процедуры запрещён.
+Публичное одноразовое задание создано. Корневые подтверждения выполняются только фиксированным согласием Почты.
+Владелец изменён. Обе сессии отозваны; требуется новый вход.
+Identity подготовлен. Отпечаток сервиса: 09023b564208a7fa260e8f2c34f94a08aa267d6cdb0f29e9ca207444facd9f1c
+Одноразовое публичное задание записано. Подпишите точные proofBytes через Почту после повторной аутентификации; приватный ключ не передавайте серверу.
+Владелец АЕГИС назначен. Повторный Owner Bootstrap запрещён.
+{"productionDeployed":false,"audience":"09023b564208a7fa260e8f2c34f94a08aa267d6cdb0f29e9ca207444facd9f1c","auditIntegrity":true}
+Identity подготовлен. Отпечаток сервиса: 5f334bf44dd2a46c341cc40cb73f9f027979e74533d394721eee5bb8b21f9713
+Публичный ключ Relay разрешён только для защищённого запроса managedAccount.
+Разрешение ключа Relay отозвано.
+╷
+├─ JUnit Jupiter ✔
+│  ├─ CriticalApprovalTest ✔
+│  │  ├─ administrativeFreshCheckExpiresWithStepUpRatherThanLongerTokenLease() ✔
+│  │  ├─ expiredStepUpAndNewSessionOfApproverInvalidatePermit() ✔
+│  │  ├─ twoIndependentCurrentAdministratorsExactPayloadOneUse() ✔
+│  │  ├─ revokedSecondAdministratorCannotConfirmOrCompleteExistingPermit() ✔
+│  │  └─ releasesRemainOwnerOnlyWithoutSecondApproval() ✔
+│  ├─ IdentityHttpServerTest ✔
+│  │  ├─ wrongMethodDuplicateKeysMassAssignmentAndMalformedUtf8Refused() ✔
+│  │  ├─ remoteListeningAddressAndWrongServiceKeyForbidden() ✔
+│  │  ├─ isActiveRecheckGivesNoIdentityMetadataAndTurnsFalseAfterLogin() ✔
+│  │  ├─ strictJsonRejectsHugeNumbersFractionsDeepTreesAndLoneSurrogate() ✔
+│  │  ├─ actualHttpFirstDelegationAndReauthenticationUseOnlyTypedProofs() ✔
+│  │  ├─ bootstrapInspectionRequiresExistingOperatorChallengeAndNeverCompletesOverHttp() ✔
+│  │  ├─ signedLoopbackRegisterIssueAndDigestAuthorizationActuallyWork() ✔
+│  │  └─ managedAccountUsesSignedHttpAndExposesOnlyBooleanToPinnedRelay() ✔
+│  ├─ IdentityStoreTest ✔
+│  │  ├─ capabilityCodecCanonicalAndExpiryAndTamperSafe() ✔
+│  │  ├─ rotatingApplicationProofKeyRevokesPriorTokensOfThatApplication() ✔
+│  │  ├─ configuredServiceIdentityCannotBeSilentlyReplaced() ✔
+│  │  ├─ explicitLogoutAtomicallyRevokesAllApplications() ✔
+│  │  ├─ replayRejectedAndDigestDomainCannotBeReusedAsBodyProof() ✔
+│  │  ├─ auditTailTruncationWithoutChangingAnchorIsDetected() ✔
+│  │  ├─ registrationPreservesLegacyIdWithoutExportAndOnlyTwoSystemRoles() ✔
+│  │  ├─ managedAccountQueryRejectsWrongServicePurposeExpiryAndClockRollback() ✔
+│  │  ├─ registrationRequiresBothAccountAndDeviceOwnership() ✔
+│  │  ├─ duplicateRegistrationCannotResetRecoveryOrTrust() ✔
+│  │  ├─ ownerAdminRequiresStepUpWhileOrdinaryBadgeDoesNotImplyAdmin() ✔
+│  │  ├─ ownerBootstrapRaceAtomicAcrossConnections() ✔
+│  │  ├─ offlineLeaseUsesMonotonicTimeRejectsClockRollbackAndAlwaysDeniesClosedData() ✔
+│  │  ├─ managedAccountQueryRequiresSeparateOperatorPinnedRelayProofAndOneUseNonce() ✔
+│  │  ├─ loginRaceOnlyOneGenerationActiveAcrossIndependentConnections() ✔
+│  │  ├─ tamperedAuditBlocksReopen() ✔
+│  │  ├─ unknownDeviceCannotLoginAndEnrollmentNeedsFreshStepUp() ✔
+│  │  ├─ applicationAndDeviceKeysCannotBeReusedAcrossDifferentAccounts() ✔
+│  │  ├─ rootDeviceRecoveryAndApplicationKeysCannotBeReusedAcrossDomains() ✔
+│  │  ├─ recoveryNeedsSeparateRootAndRecoveryProofAndInvalidatesPriorDevices() ✔
+│  │  ├─ capabilityIsNarrowAppAndProofBound() ✔
+│  │  ├─ generationRevokesAllOldTokensAndOldTrustedDeviceCannotUseNewGeneration() ✔
+│  │  ├─ expiredOwnerChallengeAndStepUpCannotBeReplayed() ✔
+│  │  ├─ clockRollbackFailsClosedAndCannotExtendSignedLease() ✔
+│  │  └─ ownerBootstrapOneUseBoundToExistingAccountProofAndService() ✔
+│  ├─ OwnerAdministrationCliTest ✔
+│  │  └─ actualCliNeedsOnlyBoundedPublicProofImportsAndPreservesRootKeys() ✔
+│  ├─ OwnerTransferTest ✔
+│  │  ├─ actualSignedHttpInspectCompletionAndReplay() ✔
+│  │  ├─ ownerRecoveryNeedsTwoOtherAdminsBeforeAdministrativeUse() ✔
+│  │  ├─ actualHttpFirstDelegationInspectionIsParticipantBoundAndOneUse() ✔
+│  │  ├─ fourProofsAndIndependentPermitAtomicallySwitchOwnerAndRevokeBothSessions() ✔
+│  │  ├─ pendingPermitCannotCompleteButFailedAttemptDoesNotSpendIt() ✔
+│  │  ├─ oppositeConsentRoleAndChangedCanonicalFieldsCannotBeReused() ✔
+│  │  ├─ revokedIndependentApproverInvalidatesAlreadyApprovedPermit() ✔
+│  │  ├─ ownerGenerationChangeRejectsPendingTransfer() ✔
+│  │  ├─ targetStepUpCanExpireBeforeStillLiveTransferChallenge() ✔
+│  │  ├─ twoSqlConnectionsCannotConsumeTransferTwice() ✔
+│  │  ├─ roleEpochChangeInvalidatesExactPendingConsent() ✔
+│  │  ├─ boundedPendingChallengeSelfUnknownAndDuplicateFailClosed() ✔
+│  │  ├─ exactExpiryAndMissingFreshTargetStepUpFailClosed() ✔
+│  │  ├─ targetGenerationChangeRejectsPendingTransfer() ✔
+│  │  ├─ eachWrongKeyIsRejectedWithoutConsumingValidPermit() ✔
+│  │  ├─ exactCodecDomainsAndTrailingBytesCannotBeConfused() ✔
+│  │  └─ unsteppedTargetCannotAcceptEvenWithValidRootAndDeviceProofs() ✔
+│  ├─ IdentityMainTest ✔
+│  │  ├─ actualOperatorCliBootstrapUsesOnlyPublicChallengeAndProof() ✔
+│  │  ├─ operatorRelayAllowAndRevokeUseOnlyPinnedPublicFile() ✔
+│  │  └─ unrecognizedOptionsAndSymlinkHomesRefused() ✔
+│  └─ FirstDelegationTest ✔
+│     ├─ recoveredAccountCanRegainLibraryOnlyAfterTwoAdministratorReview() ✔
+│     ├─ ownerCannotBeOwnIndependentSecondConfirmation() ✔
+│     ├─ targetLoginGenerationChangeInvalidatesConsent() ✔
+│     ├─ consentExpiresAfter120Seconds() ✔
+│     ├─ normalSubsequentAssignmentRequiresTwoCurrentAdministrators() ✔
+│     ├─ revokingAllDelegatesDoesNotResetOneTimeFirstBootstrap() ✔
+│     ├─ firstDelegationRequiresFourProofsAndGrantsNamedCustomAdministratorOnlyOnce() ✔
+│     ├─ concurrentCompletionCannotCreateTwoFirstDelegates() ✔
+│     ├─ ownerLoginGenerationChangeInvalidatesConsent() ✔
+│     └─ changedRoleNameOrWrongDeviceProofInvalidatesAllConsent() ✔
+├─ JUnit Platform Suite ✔
+└─ JUnit Vintage ✔
+
+Test run finished after 7743 ms
+[        10 containers found      ]
+[         0 containers skipped    ]
+[        10 containers started    ]
+[         0 containers aborted    ]
+[        10 containers successful ]
+[         0 containers failed     ]
+[        69 tests found           ]
+[         0 tests skipped         ]
+[        69 tests started         ]
+[         0 tests aborted         ]
+[        69 tests successful      ]
+[         0 tests failed          ]
+

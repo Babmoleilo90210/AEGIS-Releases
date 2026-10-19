@@ -1,0 +1,26 @@
+/workspace/scratch/aa629f360927/aegis600/aegis/client-core/src/main/java/org/securemail/client/ecosystemauth/InstallationInventory600.java:9: error: cannot find symbol
+import org.securemail.client.ecosystem.ComponentInstallation;
+                                      ^
+  symbol:   class ComponentInstallation
+  location: package org.securemail.client.ecosystem
+/workspace/scratch/aa629f360927/aegis600/aegis/client-core/src/main/java/org/securemail/client/ecosystemauth/InstallationInventory600.java:15: error: cannot find symbol
+  public static ComponentInstallation load(Path bundle)throws IOException {
+                ^
+  symbol:   class ComponentInstallation
+  location: class InstallationInventory600
+/workspace/scratch/aa629f360927/aegis600/aegis/client-core/src/main/java/org/securemail/client/ecosystemauth/InstallationInventory600.java:26: error: cannot find symbol
+      var installation=new ComponentInstallation(root.resolve(executable),runtime.get("sha256").getAsString(),entries);installation.verify();return installation;
+                           ^
+  symbol:   class ComponentInstallation
+  location: class InstallationInventory600
+/workspace/scratch/aa629f360927/aegis600/aegis/client-core/src/main/java/org/securemail/client/ecosystemauth/InstallationInventory600.java:31: error: cannot find symbol
+    Path root=bundle.toAbsolutePath().normalize();JsonObject json=new JsonObject();json.addProperty("schema",1);JsonObject runtime=new JsonObject();String java=Files.isRegularFile(root.resolve("runtime/bin/java.exe"))?"runtime/bin/java.exe":"runtime/bin/java";runtime.addProperty("path",java);runtime.addProperty("sha256",ComponentInstallation.sha256(root.resolve(java)));json.add("java",runtime);
+                                                                                                                                                                                                                                                                                                                                  ^
+  symbol:   variable ComponentInstallation
+  location: class InstallationInventory600
+/workspace/scratch/aa629f360927/aegis600/aegis/client-core/src/main/java/org/securemail/client/ecosystemauth/InstallationInventory600.java:32: error: cannot find symbol
+    JsonObject jars=new JsonObject();try(var files=Files.list(root.resolve("app"))){for(Path file:files.filter(p->p.getFileName().toString().endsWith(".jar")).sorted().toList()){if(Files.isSymbolicLink(file))throw new IOException("Ссылка в установленном комплекте");jars.addProperty("app/"+file.getFileName(),ComponentInstallation.sha256(file));}}
+                                                                                                                                                                                                                                                                                                                     ^
+  symbol:   variable ComponentInstallation
+  location: class InstallationInventory600
+5 errors

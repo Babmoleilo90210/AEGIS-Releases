@@ -2,3 +2,6 @@ rootProject.name='secure-mail'
 include 'common-protocol','client-core','client-ui','relay-server','integration-tests'
 
 include 'community-server','news-worker'
+
+// Additive 6.0 services; legacy Relay protocol 1 stays in its existing module.
+include 'identity-server','attachment-service','management-agent','glas-signaling'

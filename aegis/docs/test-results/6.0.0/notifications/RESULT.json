@@ -1,0 +1,14 @@
+{
+  "scope": "Actual Identity and Community signed HTTP + SQLite + JavaFX through loopback SOCKS fixture; NOT real Tor/native acceptance",
+  "screenshots": [
+    "notifications600.png",
+    "notifications600-locked.png"
+  ],
+  "disabledCategoryNotEmitted": true,
+  "categoryPreferencePersistedSql": true,
+  "readPersistedSql": true,
+  "status": "PASS_HEADLESS",
+  "pagination": 500,
+  "closedTitleFilteredByServer": true,
+  "staleResponseAfterLockRejected": true
+}

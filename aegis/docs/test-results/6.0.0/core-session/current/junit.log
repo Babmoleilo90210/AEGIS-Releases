@@ -1,0 +1,51 @@
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+╷
+├─ JUnit Platform Suite ✔
+├─ JUnit Jupiter ✔
+│  ├─ CoreAccountSession600Test ✔
+│  │  ├─ actualRegistrationSeparateApplicationProofKeysAndGenerationRevocation() ✔
+│  │  ├─ installedInventoryRejectsModifiedJarsAndEscapingNames() ✔
+│  │  ├─ deviceVaultRejectsRootReuseShortPasswordAndSymlink() ✔
+│  │  ├─ offlinePresenceHasOnlyPreviouslySignedReadScopeAndDoesNotCallNetwork() ✔
+│  │  ├─ forgedRootRegistrationNeverReachesServerAndUnprivilegedAdminIsDenied() ✔
+│  │  ├─ localLockDoesNotWaitForRemoteProfileOrGrantAndLateResultsAreRejected() ✔
+│  │  ├─ deviceVaultRoundtripContainsOnlyDevicePrivateAndDistinctPublicKeys() ✔
+│  │  ├─ alteredSignedCapabilityBindingIsRejectedAtEnrollment() ✔
+│  │  ├─ typedRootConsentIsNeededForAdministrativeStepUp() ✔
+│  │  ├─ newDeviceNeedsExplicitExistingDeviceStepUpAndCannotSubstituteFingerprint() ✔
+│  │  ├─ lockPreventsNewGrantsButRetainsBoundedExistingCallValidationAndLogoutRevokes() ✔
+│  │  └─ wallClockRollbackAndLongMonotonicElapsedDenyFurtherUse() ✔
+│  ├─ IdentityClient600Test ✔
+│  │  ├─ modifiedActualOperationIsRejectedBeforeAnyConnection() ✔
+│  │  ├─ forwardsDigestProofAndChecksReturnedAccountDeviceGeneration() ✔
+│  │  ├─ rejectsAmbiguousHttpAndJsonBeforeTrustingData() ✔
+│  │  ├─ outgoingRequestIsBoundedBeforeOpeningSocket() ✔
+│  │  ├─ verifiesExactSignedResponseAndNeverNeedsAccountPrivateKey() ✔
+│  │  ├─ rejectsClearnetAndClosingDisablesFurtherRequests() ✔
+│  │  ├─ rejectsSignatureNonceAndExactRequestSubstitution() ✔
+│  │  └─ signedRejectionHasOnlySafeCodeAndNoUntrustedRemoteMessage() ✔
+│  ├─ CoreNavigation600Test ✔
+│  │  ├─ migratesRelativeOrderWithoutWritingOldLayoutThenRoundtrips() ✔
+│  │  ├─ disallowsDuplicatesUnknownSectionsAndCrossBlockMoves() ✔
+│  │  └─ rejectsSymlinksAndCorruptStateWithoutOverwriting() ✔
+│  └─ CoreServiceEndpoints600Test ✔
+│     ├─ rejectsClearnetUnknownFieldsAndLinksWithoutOverwriting() ✔
+│     └─ persistsOnlyExplicitPublicPinsForFixedServiceNames() ✔
+└─ JUnit Vintage ✔
+
+Test run finished after 23290 ms
+[         7 containers found      ]
+[         0 containers skipped    ]
+[         7 containers started    ]
+[         0 containers aborted    ]
+[         7 containers successful ]
+[         0 containers failed     ]
+[        25 tests found           ]
+[         0 tests skipped         ]
+[        25 tests started         ]
+[         0 tests aborted         ]
+[        25 tests successful      ]
+[         0 tests failed          ]
+

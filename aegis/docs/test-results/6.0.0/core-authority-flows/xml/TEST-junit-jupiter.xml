@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="JUnit Jupiter" tests="20" skipped="0" failures="0" errors="0" time="4.081" hostname="2ac91939697e" timestamp="2026-10-18T15:59:13">
+<properties>
+<property name="file.encoding" value="UTF-8"/>
+<property name="file.separator" value="/"/>
+<property name="java.class.path" value="/workspace/scratch/aa629f360927/inputs600/test-deps/junit-platform-console-standalone-1.13.4.jar"/>
+<property name="java.class.version" value="65.0"/>
+<property name="java.home" value="/workspace/scratch/aa629f360927/inputs600/toolchain/jdk-21.0.12.1+1"/>
+<property name="java.io.tmpdir" value="/tmp"/>
+<property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/>
+<property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+<property name="java.runtime.version" value="21.0.12.1+1-LTS"/>
+<property name="java.specification.name" value="Java Platform API Specification"/>
+<property name="java.specification.vendor" value="Oracle Corporation"/>
+<property name="java.specification.version" value="21"/>
+<property name="java.vendor" value="Eclipse Adoptium"/>
+<property name="java.vendor.url" value="https://adoptium.net/"/>
+<property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
+<property name="java.vendor.version" value="Temurin-21.0.12.1+1"/>
+<property name="java.version" value="21.0.12.1"/>
+<property name="java.version.date" value="2026-08-18"/>
+<property name="java.vm.compressedOopsMode" value="32-bit"/>
+<property name="java.vm.info" value="mixed mode, sharing"/>
+<property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+<property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+<property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+<property name="java.vm.specification.version" value="21"/>
+<property name="java.vm.vendor" value="Eclipse Adoptium"/>
+<property name="java.vm.version" value="21.0.12.1+1-LTS"/>
+<property name="jdk.debug" value="release"/>
+<property name="jdk.httpserver.maxConnections" value="32"/>
+<property name="junit.docs.version" value="1.13.4"/>
+<property name="line.separator" value="&#10;"/>
+<property name="native.encoding" value="UTF-8"/>
+<property name="os.arch" value="amd64"/>
+<property name="os.name" value="Linux"/>
+<property name="os.version" value="6.18.55"/>
+<property name="path.separator" value=":"/>
+<property name="stderr.encoding" value="UTF-8"/>
+<property name="stdout.encoding" value="UTF-8"/>
+<property name="sun.arch.data.model" value="64"/>
+<property name="sun.boot.library.path" value="/workspace/scratch/aa629f360927/inputs600/toolchain/jdk-21.0.12.1+1/lib"/>
+<property name="sun.cpu.endian" value="little"/>
+<property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+<property name="sun.java.command" value="/workspace/scratch/aa629f360927/inputs600/test-deps/junit-platform-console-standalone-1.13.4.jar execute --class-path /workspace/scratch/aa629f360927/audit600/core-owner-flow/classes:/workspace/scratch/aa629f360927/inputs600/maven-deps/imageio-metadata-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/javafx-graphics-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-platform-launcher-1.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-jupiter-params-5.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/tink-1.23.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/pdfbox-io-3.0.8.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/common-image-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/pdfbox-3.0.8.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/fontbox-3.0.8.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-platform-commons-1.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/commons-compress-1.28.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/password4j-1.8.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/bcpg-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/common-io-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/bcprov-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/apiguardian-api-1.1.2.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/imageio-core-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/xz-1.12.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/jna-platform-5.19.1.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/jna-5.19.1.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-jupiter-engine-5.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-platform-engine-1.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/sqlite-jdbc-3.53.4.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/zip4j-2.11.6.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/imageio-webp-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-jupiter-api-5.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/slf4j-api-2.0.12.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/slf4j-nop-2.0.17.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/commons-lang3-3.18.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/junit-jupiter-5.13.4.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/common-lang-3.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/commons-codec-1.19.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/commons-logging-1.4.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/slf4j-api-2.0.17.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/opentest4j-1.3.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/jsr305-3.0.2.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/commons-io-2.20.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/javafx-controls-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/error_prone_annotations-2.48.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/protobuf-java-4.33.6.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/gson-2.14.0.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/javafx-base-21.0.12-linux.jar:/workspace/scratch/aa629f360927/inputs600/maven-deps/bcutil-jdk18on-1.86.jar:/workspace/scratch/aa629f360927/inputs600/test-deps/junit-platform-console-standalone-1.13.4.jar:/workspace/scratch/aa629f360927/audit600/build-baseline/validated-jars/common-protocol-0.2.0.jar:/workspace/scratch/aa629f360927/audit600/build-baseline/validated-jars/client-core-5.0.0.jar --select-class org.securemail.client.ecosystemauth.OwnerTransferFlow600Test --select-class org.securemail.client.ecosystemauth.AuthoritySetupFlow600Test --select-class org.securemail.client.ecosystemauth.IdentityClient600Test --select-class org.securemail.client.ecosystemauth.CoreNavigation600Test --select-class org.securemail.client.ecosystemauth.CoreServiceEndpoints600Test --reports-dir /workspace/scratch/aa629f360927/audit600/core-owner-flow/xml --disable-ansi-colors"/>
+<property name="sun.java.launcher" value="SUN_STANDARD"/>
+<property name="sun.jnu.encoding" value="UTF-8"/>
+<property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+<property name="sun.net.httpserver.maxReqHeaders" value="16"/>
+<property name="sun.net.httpserver.maxReqTime" value="15"/>
+<property name="sun.net.httpserver.maxRspTime" value="15"/>
+<property name="user.dir" value="/workspace/scratch/aa629f360927"/>
+<property name="user.home" value="/root"/>
+<property name="user.language" value="en"/>
+<property name="user.name" value="root"/>
+<property name="user.timezone" value="Europe/Stockholm"/>
+</properties>
+<testcase name="localTypedDeviceSignerRejectsChangedAudienceGenerationAndLock()" classname="org.securemail.client.ecosystemauth.OwnerTransferFlow600Test" time="1.218">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.OwnerTransferFlow600Test]/[method:localTypedDeviceSignerRejectsChangedAudienceGenerationAndLock()]
+display-name: localTypedDeviceSignerRejectsChangedAudienceGenerationAndLock()
+]]></system-out>
+</testcase>
+<testcase name="actualThreeParticipantHttpTransferRevokesBothSessionsWithoutReplacingRootKeys()" classname="org.securemail.client.ecosystemauth.OwnerTransferFlow600Test" time="0.495">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.OwnerTransferFlow600Test]/[method:actualThreeParticipantHttpTransferRevokesBothSessionsWithoutReplacingRootKeys()]
+display-name: actualThreeParticipantHttpTransferRevokesBothSessionsWithoutReplacingRootKeys()
+]]></system-out>
+</testcase>
+<testcase name="disallowsDuplicatesUnknownSectionsAndCrossBlockMoves()" classname="org.securemail.client.ecosystemauth.CoreNavigation600Test" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.CoreNavigation600Test]/[method:disallowsDuplicatesUnknownSectionsAndCrossBlockMoves()]
+display-name: disallowsDuplicatesUnknownSectionsAndCrossBlockMoves()
+]]></system-out>
+</testcase>
+<testcase name="forwardsDigestProofAndChecksReturnedAccountDeviceGeneration()" classname="org.securemail.client.ecosystemauth.IdentityClient600Test" time="0.047">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.IdentityClient600Test]/[method:forwardsDigestProofAndChecksReturnedAccountDeviceGeneration()]
+display-name: forwardsDigestProofAndChecksReturnedAccountDeviceGeneration()
+]]></system-out>
+</testcase>
+<testcase name="rejectsClearnetAndClosingDisablesFurtherRequests()" classname="org.securemail.client.ecosystemauth.IdentityClient600Test" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.IdentityClient600Test]/[method:rejectsClearnetAndClosingDisablesFurtherRequests()]
+display-name: rejectsClearnetAndClosingDisablesFurtherRequests()
+]]></system-out>
+</testcase>
+<testcase name="rejectsClearnetUnknownFieldsAndLinksWithoutOverwriting()" classname="org.securemail.client.ecosystemauth.CoreServiceEndpoints600Test" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.CoreServiceEndpoints600Test]/[method:rejectsClearnetUnknownFieldsAndLinksWithoutOverwriting()]
+display-name: rejectsClearnetUnknownFieldsAndLinksWithoutOverwriting()
+]]></system-out>
+</testcase>
+<testcase name="outgoingRequestIsBoundedBeforeOpeningSocket()" classname="org.securemail.client.ecosystemauth.IdentityClient600Test" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.IdentityClient600Test]/[method:outgoingRequestIsBoundedBeforeOpeningSocket()]
+display-name: outgoingRequestIsBoundedBeforeOpeningSocket()
+]]></system-out>
+</testcase>
+<testcase name="signedRejectionHasOnlySafeCodeAndNoUntrustedRemoteMessage()" classname="org.securemail.client.ecosystemauth.IdentityClient600Test" time="0.006">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.IdentityClient600Test]/[method:signedRejectionHasOnlySafeCodeAndNoUntrustedRemoteMessage()]
+display-name: signedRejectionHasOnlySafeCodeAndNoUntrustedRemoteMessage()
+]]></system-out>
+</testcase>
+<testcase name="publicExchangeRejectsDuplicateUnknownTypesAndOversizedFields()" classname="org.securemail.client.ecosystemauth.OwnerTransferFlow600Test" time="0.454">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.OwnerTransferFlow600Test]/[method:publicExchangeRejectsDuplicateUnknownTypesAndOversizedFields()]
+display-name: publicExchangeRejectsDuplicateUnknownTypesAndOversizedFields()
+]]></system-out>
+</testcase>
+<testcase name="verifiesExactSignedResponseAndNeverNeedsAccountPrivateKey()" classname="org.securemail.client.ecosystemauth.IdentityClient600Test" time="0.007">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.IdentityClient600Test]/[method:verifiesExactSignedResponseAndNeverNeedsAccountPrivateKey()]
+display-name: verifiesExactSignedResponseAndNeverNeedsAccountPrivateKey()
+]]></system-out>
+</testcase>
+<testcase name="operatorBootstrapAndTypedFirstDelegationCompleteWithoutExportingRootKeys()" classname="org.securemail.client.ecosystemauth.AuthoritySetupFlow600Test" time="0.431">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.AuthoritySetupFlow600Test]/[method:operatorBootstrapAndTypedFirstDelegationCompleteWithoutExportingRootKeys()]
+display-name: operatorBootstrapAndTypedFirstDelegationCompleteWithoutExportingRootKeys()
+]]></system-out>
+</testcase>
+<testcase name="bootstrapParserAndTypedConsentRejectAmbiguousOrDifferentRequests()" classname="org.securemail.client.ecosystemauth.AuthoritySetupFlow600Test" time="0.13">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.AuthoritySetupFlow600Test]/[method:bootstrapParserAndTypedConsentRejectAmbiguousOrDifferentRequests()]
+display-name: bootstrapParserAndTypedConsentRejectAmbiguousOrDifferentRequests()
+]]></system-out>
+</testcase>
+<testcase name="modifiedActualOperationIsRejectedBeforeAnyConnection()" classname="org.securemail.client.ecosystemauth.IdentityClient600Test" time="0.012">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.IdentityClient600Test]/[method:modifiedActualOperationIsRejectedBeforeAnyConnection()]
+display-name: modifiedActualOperationIsRejectedBeforeAnyConnection()
+]]></system-out>
+</testcase>
+<testcase name="persistsOnlyExplicitPublicPinsForFixedServiceNames()" classname="org.securemail.client.ecosystemauth.CoreServiceEndpoints600Test" time="0.023">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.CoreServiceEndpoints600Test]/[method:persistsOnlyExplicitPublicPinsForFixedServiceNames()]
+display-name: persistsOnlyExplicitPublicPinsForFixedServiceNames()
+]]></system-out>
+</testcase>
+<testcase name="rejectsSignatureNonceAndExactRequestSubstitution()" classname="org.securemail.client.ecosystemauth.IdentityClient600Test" time="0.018">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.IdentityClient600Test]/[method:rejectsSignatureNonceAndExactRequestSubstitution()]
+display-name: rejectsSignatureNonceAndExactRequestSubstitution()
+]]></system-out>
+</testcase>
+<testcase name="migratesRelativeOrderWithoutWritingOldLayoutThenRoundtrips()" classname="org.securemail.client.ecosystemauth.CoreNavigation600Test" time="0.028">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.CoreNavigation600Test]/[method:migratesRelativeOrderWithoutWritingOldLayoutThenRoundtrips()]
+display-name: migratesRelativeOrderWithoutWritingOldLayoutThenRoundtrips()
+]]></system-out>
+</testcase>
+<testcase name="targetGenerationRevocationBlocksLateMailConsent()" classname="org.securemail.client.ecosystemauth.OwnerTransferFlow600Test" time="0.538">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.OwnerTransferFlow600Test]/[method:targetGenerationRevocationBlocksLateMailConsent()]
+display-name: targetGenerationRevocationBlocksLateMailConsent()
+]]></system-out>
+</testcase>
+<testcase name="rejectsAmbiguousHttpAndJsonBeforeTrustingData()" classname="org.securemail.client.ecosystemauth.IdentityClient600Test" time="0.017">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.IdentityClient600Test]/[method:rejectsAmbiguousHttpAndJsonBeforeTrustingData()]
+display-name: rejectsAmbiguousHttpAndJsonBeforeTrustingData()
+]]></system-out>
+</testcase>
+<testcase name="exchangedCanonicalPayloadCannotApproveDifferentPermitOrConfuseConsentRole()" classname="org.securemail.client.ecosystemauth.OwnerTransferFlow600Test" time="0.569">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.OwnerTransferFlow600Test]/[method:exchangedCanonicalPayloadCannotApproveDifferentPermitOrConfuseConsentRole()]
+display-name: exchangedCanonicalPayloadCannotApproveDifferentPermitOrConfuseConsentRole()
+]]></system-out>
+</testcase>
+<testcase name="rejectsSymlinksAndCorruptStateWithoutOverwriting()" classname="org.securemail.client.ecosystemauth.CoreNavigation600Test" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:org.securemail.client.ecosystemauth.CoreNavigation600Test]/[method:rejectsSymlinksAndCorruptStateWithoutOverwriting()]
+display-name: rejectsSymlinksAndCorruptStateWithoutOverwriting()
+]]></system-out>
+</testcase>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]
+display-name: JUnit Jupiter
+]]></system-out>
+</testsuite>

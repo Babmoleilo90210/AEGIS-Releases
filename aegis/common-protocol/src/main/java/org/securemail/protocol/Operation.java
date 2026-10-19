@@ -15,7 +15,11 @@ public enum Operation {
   PROFILE_PUT(12),
   PROFILE_GET(13),
   CONTACT_PUT(14),
-  CONTACT_GET(15);
+  CONTACT_GET(15),
+  /** Additive device-bound authentication. Existing operation numbers and protocol header are unchanged. */
+  LOGIN6(16),
+  /** Identity6 first registration, separately domain-bound and still protocol 1. */
+  REGISTER6(17);
   public final int code;
 
   Operation(int code) {

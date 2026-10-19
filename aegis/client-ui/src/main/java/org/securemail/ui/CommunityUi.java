@@ -14,10 +14,14 @@ import java.util.function.*;
 final class CommunityUi implements AutoCloseable {
   @FunctionalInterface interface Rpc { JsonObject call(String action,JsonObject data)throws Exception; }
   @FunctionalInterface interface StepUp { String authenticate(char[] password,String otp)throws Exception; }
+  @FunctionalInterface interface DelegatedStepUp { String authenticate()throws Exception; }
   final ThemeManager themes;final Rpc rpc;final Consumer<String> openLink;final StepUp stepUp;
+  private DelegatedStepUp delegatedStepUp;
   private final ThreadPoolExecutor work=new ThreadPoolExecutor(1,1,30,TimeUnit.SECONDS,new ArrayBlockingQueue<>(16),r->{Thread t=new Thread(r,"aegis-community-ui");t.setDaemon(true);return t;},new ThreadPoolExecutor.AbortPolicy());
   private volatile boolean closed;
   CommunityUi(ThemeManager themes,Rpc rpc,StepUp stepUp,Consumer<String> openLink){this.themes=themes;this.rpc=rpc;this.stepUp=stepUp;this.openLink=openLink;}
+  /** Core 6 never requests the Mail password; consent and root proof stay inside Mail. */
+  CommunityUi(ThemeManager themes,Rpc rpc,DelegatedStepUp stepUp,Consumer<String> openLink){this(themes,rpc,(password,otp)->{throw new IllegalStateException("Требуется подтверждение в Почте");},openLink);this.delegatedStepUp=Objects.requireNonNull(stepUp);}
   void call(String action,JsonObject args,Label status,Consumer<JsonObject> done){
     if(closed)return;if(status!=null)status.setText("Выполняется…");
     try{work.execute(()->{try{JsonObject result=rpc.call(action,args.deepCopy());Platform.runLater(()->{if(!closed){if(status!=null)status.setText("");done.accept(result);}});}catch(Exception failure){Platform.runLater(()->{if(!closed&&status!=null)status.setText(message(failure));});}});}catch(RejectedExecutionException full){if(status!=null)status.setText("Очередь заполнена. Дождитесь завершения операции.");}
@@ -25,6 +29,7 @@ final class CommunityUi implements AutoCloseable {
   void prepared(String action,Callable<JsonObject> prepare,Label status,Consumer<JsonObject> done){task(()->rpc.call(action,prepare.call()),status,done);}
   <T> void task(Callable<T> action,Label status,Consumer<T> done){if(closed)return;if(status!=null)status.setText("Выполняется…");try{work.execute(()->{try{T result=action.call();Platform.runLater(()->{if(!closed){if(status!=null)status.setText("");done.accept(result);}});}catch(Exception failed){Platform.runLater(()->{if(!closed&&status!=null)status.setText(message(failed));});}});}catch(RejectedExecutionException full){if(status!=null)status.setText("Очередь заполнена. Дождитесь завершения операции.");}}
   void privileged(String action,JsonObject args,Label status,Consumer<JsonObject> done){
+    if(delegatedStepUp!=null){task(()->{delegatedStepUp.authenticate();return rpc.call(action,args.deepCopy());},status,done);return;}
     PasswordField password=new PasswordField();password.setPromptText("Пароль аккаунта");password.setMaxWidth(340);Label hint=label("Повторно подтвердите вход для административного действия. Пароль не передаётся общему серверу.");TextField otp=field("Одноразовый код администратора (8 цифр)");VBox form=new VBox(8,hint,password,otp);InWindowDialog<String> dialog=new InWindowDialog<>();dialog.setTitle("Подтверждение личности");dialog.getDialogPane().setContent(form);ButtonType confirm=new ButtonType("Подтвердить",ButtonBar.ButtonData.OK_DONE);dialog.getDialogPane().getButtonTypes().setAll(confirm,ButtonType.CANCEL);dialog.setResultConverter(b->b==confirm?password.getText():null);themes.apply(dialog.getDialogPane());Optional<String> result=dialog.showAndWait();password.clear();if(result.isEmpty())return;char[] secret=result.get().toCharArray();String oneTime=otp.getText().trim();otp.clear();if(status!=null)status.setText("Проверка личности…");
     try{work.execute(()->{try{String token=stepUp.authenticate(secret,oneTime);JsonObject data=args.deepCopy();data.addProperty("stepUp",token);JsonObject response=rpc.call(action,data);Platform.runLater(()->{if(!closed){if(status!=null)status.setText("");done.accept(response);}});}catch(Exception failed){Platform.runLater(()->{if(!closed&&status!=null)status.setText(message(failed));});}finally{Arrays.fill(secret,'\0');}});}catch(RejectedExecutionException busy){Arrays.fill(secret,'\0');if(status!=null)status.setText("Дождитесь завершения предыдущей операции.");}
   }

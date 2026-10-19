@@ -2,6 +2,7 @@ dependencies {
     testImplementation project(':client-core')
     testImplementation 'com.google.code.gson:gson:2.14.0'
     testImplementation project(':relay-server')
+    testImplementation project(':identity-server')
     testImplementation project(':community-server')
     testImplementation project(':news-worker')
     testImplementation 'net.lingala.zip4j:zip4j:2.11.6'

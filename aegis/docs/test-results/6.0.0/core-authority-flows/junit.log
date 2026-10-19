@@ -1,0 +1,47 @@
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+╷
+├─ JUnit Platform Suite ✔
+├─ JUnit Jupiter ✔
+│  ├─ OwnerTransferFlow600Test ✔
+│  │  ├─ localTypedDeviceSignerRejectsChangedAudienceGenerationAndLock() ✔
+│  │  ├─ targetGenerationRevocationBlocksLateMailConsent() ✔
+│  │  ├─ publicExchangeRejectsDuplicateUnknownTypesAndOversizedFields() ✔
+│  │  ├─ exchangedCanonicalPayloadCannotApproveDifferentPermitOrConfuseConsentRole() ✔
+│  │  └─ actualThreeParticipantHttpTransferRevokesBothSessionsWithoutReplacingRootKeys() ✔
+│  ├─ AuthoritySetupFlow600Test ✔
+│  │  ├─ operatorBootstrapAndTypedFirstDelegationCompleteWithoutExportingRootKeys() ✔
+│  │  └─ bootstrapParserAndTypedConsentRejectAmbiguousOrDifferentRequests() ✔
+│  ├─ IdentityClient600Test ✔
+│  │  ├─ modifiedActualOperationIsRejectedBeforeAnyConnection() ✔
+│  │  ├─ forwardsDigestProofAndChecksReturnedAccountDeviceGeneration() ✔
+│  │  ├─ rejectsAmbiguousHttpAndJsonBeforeTrustingData() ✔
+│  │  ├─ outgoingRequestIsBoundedBeforeOpeningSocket() ✔
+│  │  ├─ verifiesExactSignedResponseAndNeverNeedsAccountPrivateKey() ✔
+│  │  ├─ rejectsClearnetAndClosingDisablesFurtherRequests() ✔
+│  │  ├─ rejectsSignatureNonceAndExactRequestSubstitution() ✔
+│  │  └─ signedRejectionHasOnlySafeCodeAndNoUntrustedRemoteMessage() ✔
+│  ├─ CoreNavigation600Test ✔
+│  │  ├─ migratesRelativeOrderWithoutWritingOldLayoutThenRoundtrips() ✔
+│  │  ├─ disallowsDuplicatesUnknownSectionsAndCrossBlockMoves() ✔
+│  │  └─ rejectsSymlinksAndCorruptStateWithoutOverwriting() ✔
+│  └─ CoreServiceEndpoints600Test ✔
+│     ├─ rejectsClearnetUnknownFieldsAndLinksWithoutOverwriting() ✔
+│     └─ persistsOnlyExplicitPublicPinsForFixedServiceNames() ✔
+└─ JUnit Vintage ✔
+
+Test run finished after 4226 ms
+[         8 containers found      ]
+[         0 containers skipped    ]
+[         8 containers started    ]
+[         0 containers aborted    ]
+[         8 containers successful ]
+[         0 containers failed     ]
+[        20 tests found           ]
+[         0 tests skipped         ]
+[        20 tests started         ]
+[         0 tests aborted         ]
+[        20 tests successful      ]
+[         0 tests failed          ]
+

@@ -1,0 +1,22 @@
+{
+  "os": "Ubuntu 24.04.3 LTS",
+  "kernel": "6.18.55",
+  "systemdIsPid1": false,
+  "apparmorKernelEnabled": false,
+  "tools": {
+    "java": "/usr/bin/java",
+    "tor": null,
+    "apparmor_parser": null,
+    "aa-status": null,
+    "restic": null,
+    "systemctl": "/usr/local/bin/systemctl",
+    "systemd-analyze": "/usr/bin/systemd-analyze",
+    "sqlite3": null
+  },
+  "debian13NativeEnvironment": "BLOCKED",
+  "nativeServiceAcceptance": "NOT_RUN",
+  "torOnionConnectivity": "NOT_RUN",
+  "appArmorProfilesEnforced": "NOT_RUN",
+  "offsiteRestore": "NOT_RUN",
+  "productionReady": false
+}

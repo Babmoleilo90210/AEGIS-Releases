@@ -1,0 +1,17 @@
+[GNUPG:] NEWSIG
+[GNUPG:] KEY_CONSIDERED EE6620C7136B0D2C456C0A4DE9E28DEA00AA5556 0
+[GNUPG:] SIG_ID Tepl1GdkDjNyrX633j+TMr/Jt1k 2021-05-03 1620076474
+[GNUPG:] GOODSIG 3E177817BA1B9BFA Hans-Christoph Steiner <hans@guardianproject.info>
+[GNUPG:] VALIDSIG 972239DBE68699F526C06A053E177817BA1B9BFA 2021-05-03 1620076474 0 4 0 1 8 00 EE6620C7136B0D2C456C0A4DE9E28DEA00AA5556
+[GNUPG:] KEY_CONSIDERED EE6620C7136B0D2C456C0A4DE9E28DEA00AA5556 0
+[GNUPG:] TRUST_UNDEFINED 0 pgp
+gpg: Signature made Mon May  3 23:14:34 2021 CEST
+gpg:                using RSA key 972239DBE68699F526C06A053E177817BA1B9BFA
+gpg: Good signature from "Hans-Christoph Steiner <hans@guardianproject.info>" [unknown]
+gpg:                 aka "Hans-Christoph Steiner <eighthave@f-droid.org>" [unknown]
+gpg:                 aka "Hans-Christoph Steiner <hans@at.or.at>" [unknown]
+gpg:                 aka "Hans-Christoph Steiner <hans@eds.org>" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: EE66 20C7 136B 0D2C 456C  0A4D E9E2 8DEA 00AA 5556
+     Subkey fingerprint: 9722 39DB E686 99F5 26C0  6A05 3E17 7817 BA1B 9BFA

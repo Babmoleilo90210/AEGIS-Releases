@@ -1,0 +1,21 @@
+{
+  "when": "2026-10-18T13:50:03.041409+00:00",
+  "status": "VERIFIED_PUBLISHED_PRIMARY_AND_VALID_BOUND_SUBKEY",
+  "officialFingerprintSource": "https://guardianproject.info/signing-keys/",
+  "primaryFingerprint": "EE6620C7136B0D2C456C0A4DE9E28DEA00AA5556",
+  "signingSubkeyFingerprint": "972239DBE68699F526C06A053E177817BA1B9BFA",
+  "artifactSha256": "51bbed22de9fe0028095223ceeb4694d8731eda2fc01edee07b8c0c8a46681c3",
+  "command": [
+    "gpg",
+    "--homedir",
+    "/workspace/scratch/aa629f360927/audit600/android/tor-dependency-review600/gnupg",
+    "--batch",
+    "--status-fd",
+    "1",
+    "--verify",
+    "/workspace/scratch/aa629f360927/inputs600/android-sdk/jtorctl-0.4.5.7.jar.asc",
+    "/workspace/scratch/aa629f360927/inputs600/android-sdk/jtorctl-0.4.5.7.jar"
+  ],
+  "exitCode": 0,
+  "scope": "Detached signature over exact MavenCentral JAR; Guardian HTTPS published primary fingerprint pinned before import. Source/binary reproducibility not established by this signature."
+}

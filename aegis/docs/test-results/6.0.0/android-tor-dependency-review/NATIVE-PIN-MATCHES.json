@@ -1,0 +1,26 @@
+[
+  {
+    "component": "libevent",
+    "sourceGitlink": "79ddfb460847999b807cba76d04e73891f29c6ee",
+    "officialTagCommit": "79ddfb460847999b807cba76d04e73891f29c6ee",
+    "match": true
+  },
+  {
+    "component": "openssl",
+    "sourceGitlink": "45e844fa2a14ec92d146bd8f5778ac130b6625fb",
+    "officialTagCommit": "45e844fa2a14ec92d146bd8f5778ac130b6625fb",
+    "match": true
+  },
+  {
+    "component": "zlib",
+    "sourceGitlink": "da607da739fa6047df13e66a2af6b8bec7c2a498",
+    "officialTagCommit": "da607da739fa6047df13e66a2af6b8bec7c2a498",
+    "match": true
+  },
+  {
+    "component": "zstd",
+    "sourceGitlink": "f8745da6ff1ad1e7bab384bd1f9d742439278e99",
+    "officialTagCommit": "f8745da6ff1ad1e7bab384bd1f9d742439278e99",
+    "match": true
+  }
+]

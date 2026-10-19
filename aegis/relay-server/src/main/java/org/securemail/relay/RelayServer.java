@@ -9,13 +9,15 @@ import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicLong;
 import org.securemail.protocol.*;
 
-/** Bounded, loopback-only TCP server. No outbound socket creation. */
+/** Bounded loopback TCP server. Optional 6.0 gate contacts only a pinned literal-loopback Identity service. */
 public final class RelayServer implements AutoCloseable {
-  private record Session(UserInfo user, long expiresAt) {}
+  private record Session(UserInfo user, long expiresAt,RelaySessionGate600.Binding binding) {}
+  private record PublishedRoute(Route route,UserInfo owner,RelaySessionGate600.Binding binding) {}
 
   private final RelayConfig config;
   private final RelayStore store;
   private final Clock clock;
+  private final RelaySessionGate600 sessionGate;
   private final ServerSocket listener;
   private final ExecutorService workers =
       new ThreadPoolExecutor(
@@ -33,7 +35,7 @@ public final class RelayServer implements AutoCloseable {
 
   private final Set<Socket> sockets = ConcurrentHashMap.newKeySet();
   private final Map<String, Session> sessions = new ConcurrentHashMap<>();
-  private final Map<String, Route> routes = new ConcurrentHashMap<>();
+  private final Map<String, PublishedRoute> routes = new ConcurrentHashMap<>();
   private final Semaphore authSlot = new Semaphore(1), transferSlot = new Semaphore(1);
   private final ArrayDeque<Long> attempts = new ArrayDeque<>();
   private final Map<String, ArrayDeque<Long>> perAccount = new HashMap<>();
@@ -43,9 +45,13 @@ public final class RelayServer implements AutoCloseable {
   private volatile boolean closed;
 
   public RelayServer(RelayConfig config, RelayStore store, Clock clock) throws IOException {
+    this(config,store,clock,null);
+  }
+  public RelayServer(RelayConfig config,RelayStore store,Clock clock,RelaySessionGate600 sessionGate)throws IOException {
     this.config = config;
     this.store = store;
     this.clock = clock;
+    this.sessionGate=sessionGate;
     listener = new ServerSocket();
     listener.bind(
         new InetSocketAddress(
@@ -56,7 +62,7 @@ public final class RelayServer implements AutoCloseable {
           try {
             store.cleanup();
             sessions.entrySet().removeIf(e -> e.getValue().expiresAt() < clock.millis());
-            routes.entrySet().removeIf(e -> e.getValue().expiresAt() < clock.millis());
+            routes.entrySet().removeIf(e -> e.getValue().route().expiresAt() < clock.millis());
           } catch (Exception ignored) {
             rejected.incrementAndGet();
           }
@@ -115,11 +121,12 @@ public final class RelayServer implements AutoCloseable {
     try (socket;
         var in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
         var out = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()))) {
+      boolean responseStarted=false;
       try {
         Binary.header(in);
         Operation op = Operation.fromCode(in.readUnsignedByte());
         String token = Binary.text(in, 64);
-        if (op == Operation.REGISTER || op == Operation.LOGIN) {
+        if (op == Operation.REGISTER || op == Operation.LOGIN || op==Operation.LOGIN6||op==Operation.REGISTER6) {
           authenticate(op, in, out);
           return;
         }
@@ -127,39 +134,42 @@ public final class RelayServer implements AutoCloseable {
         if (session == null || session.expiresAt() <= clock.millis())
           throw new IOException("Unauthenticated");
         UserInfo user = session.user();
+        check(session);if(sessionGate!=null)sessionGate.authorizeOperation(user,session.binding(),op);
         switch (op) {
-          case CAPABILITIES -> {ok(out);out.writeInt(3);out.flush();}
-          case PROFILE_PUT -> {store.putProfile(user,PublicProfile.read(in));ok(out);}
-          case PROFILE_GET -> {var profile=store.profile(Binary.text(in,32));ok(out);out.writeBoolean(profile!=null);if(profile!=null)profile.write(out);out.flush();}
-          case CONTACT_PUT -> {store.putAssertion(user,ContactAssertion.read(in));ok(out);}
+          case CAPABILITIES -> {ok(out);out.writeInt(sessionGate==null?3:7);out.flush();}
+          case PROFILE_PUT -> {var profile=PublicProfile.read(in);check(session);store.putProfile(user,profile);ok(out);}
+          case PROFILE_GET -> {String target=Binary.text(in,32);check(session);var profile=store.profile(target);ok(out);out.writeBoolean(profile!=null);if(profile!=null)profile.write(out);out.flush();}
+          case CONTACT_PUT -> {var assertion=ContactAssertion.read(in);check(session);store.putAssertion(user,assertion);ok(out);}
           case CONTACT_GET -> {
             String target=Binary.text(in,64);Limits.userId(target);
+            check(session);
             var ours=store.assertion(user.userId(),target);var theirs=store.assertion(target,user.userId());
             ok(out);out.writeBoolean(ours!=null);if(ours!=null)ours.write(out);out.writeBoolean(theirs!=null);if(theirs!=null)theirs.write(out);out.flush();
           }
           case FIND -> {
-            var found = store.find(Binary.text(in, 32));
+            String nickname=Binary.text(in,32);check(session);var found = store.find(nickname);
             if (found == null) throw new IOException("Unknown user");
-            Route route = routes.get(found.userId());
-            if (route != null && route.expiresAt() <= clock.millis()) route = null;
+            PublishedRoute published=routes.get(found.userId());Route route=published==null?null:published.route();
+            if(route!=null&&(route.expiresAt()<=clock.millis()||!routeCurrent(published))){routes.remove(found.userId(),published);route=null;}
             ok(out);
             new UserInfo(found.userId(), found.nickname(), found.publicKey(), route).write(out);
           }
           case PUBLISH -> {
             Route r = Route.read(in);
+            check(session);
             long now = clock.millis();
             if (!r.userId().equals(user.userId())
                 || r.expiresAt() <= now
                 || r.expiresAt() > now + 120_000
                 || !Signatures.verify(user.publicKey(), r.signingBytes(), r.signature()))
               throw new IOException("Bad route");
-            routes.put(user.userId(), r);
+            routes.put(user.userId(), new PublishedRoute(r,user,session.binding()));
             ok(out);
           }
           case STORE -> {
             if (!transferSlot.tryAcquire()) throw new IOException("Busy");
             try {
-              store.store(user, PacketCodec.read(in, config.maxCiphertext()));
+              var packet=PacketCodec.read(in,config.maxCiphertext());check(session);store.store(user,packet,()->{if(sessionGate!=null)sessionGate.checkFresh(user,session.binding());});
               ok(out);
             } finally {
               transferSlot.release();
@@ -168,21 +178,20 @@ public final class RelayServer implements AutoCloseable {
           case FETCH -> {
             if (!transferSlot.tryAcquire()) throw new IOException("Busy");
             try {
-              var p = store.fetch(user);
-              ok(out);
-              out.writeBoolean(p != null);
-              if (p != null) PacketCodec.write(out, p);
+              var p = store.fetch(user);check(session);responseStarted=true;
+              ok(out);out.writeBoolean(p != null);
+              if(p!=null){DataOutputStream guarded=new DataOutputStream(new OutputStream(){@Override public void write(int value)throws IOException{check(session);out.write(value);}@Override public void write(byte[] value,int offset,int length)throws IOException{for(int start=offset;start<offset+length;){check(session);int n=Math.min(65536,offset+length-start);out.write(value,start,n);start+=n;}}});PacketCodec.write(guarded,p);check(session);}
               out.flush();
             } finally {
               transferSlot.release();
             }
           }
           case ACK -> {
-            store.acknowledge(user, Receipt.read(in));
+            var receipt=Receipt.read(in);check(session);store.acknowledge(user,receipt);
             ok(out);
           }
           case DELETE -> {
-            store.discard(user, Binary.text(in, 36));
+            String id=Binary.text(in,36);check(session);store.discard(user,id);
             ok(out);
           }
           case LOGOUT -> {
@@ -195,6 +204,7 @@ public final class RelayServer implements AutoCloseable {
         out.flush();
       } catch (Exception e) {
         rejected.incrementAndGet();
+        if(responseStarted)throw new IOException("Передача остановлена после отзыва сессии");
         Binary.header(out);
         out.writeInt(e instanceof Rejection r ? r.code : 1);
         out.flush();
@@ -214,19 +224,24 @@ public final class RelayServer implements AutoCloseable {
     byte[] password = null;
     try {
       password = Binary.bytes(in, 4096);
-      UserInfo user =
-          op == Operation.REGISTER
-              ? store.register(nick, password, Binary.bytes(in, 44))
-              : store.login(nick, password);
-      if (op == Operation.REGISTER) {
+      UserInfo user;RelaySessionGate600.Binding binding=new RelaySessionGate600.Binding("");
+      if(op==Operation.REGISTER||op==Operation.REGISTER6){byte[] pub=Binary.bytes(in,44);UserInfo candidate=new UserInfo(org.securemail.ecosystem.protocol.IdentityProtocol.id(pub),nick,pub,null);if(op==Operation.REGISTER6&&sessionGate==null)throw new IOException("Relay 6 не настроен");if(sessionGate!=null){if(op==Operation.REGISTER6)binding=sessionGate.register(candidate,nick,password,in);else sessionGate.checkFresh(candidate,binding);}final RelaySessionGate600.Binding checked=binding;user=store.register(nick,password,pub,()->{if(sessionGate!=null)sessionGate.checkFresh(candidate,checked);});}
+      else {
+        if(op==Operation.LOGIN6&&sessionGate==null)throw new IOException("Relay 6 не настроен");
+        user=store.login(nick,password);
+        if(sessionGate!=null){if(op==Operation.LOGIN6)binding=sessionGate.authenticate(user,nick,password,in);else sessionGate.check(user,binding);}
+      }
+      if (op == Operation.REGISTER||op==Operation.REGISTER6) {
         ok(out);
         user.write(out);
       } else {
         byte[] bytes = new byte[32];
         random.nextBytes(bytes);
         String token = HexFormat.of().formatHex(bytes);
+        if(sessionGate!=null)sessionGate.checkFresh(user,binding);
+        routes.remove(user.userId());
         sessions.entrySet().removeIf(e -> e.getValue().user().userId().equals(user.userId()));
-        sessions.put(tokenHash(token), new Session(user, clock.millis() + 12 * 3600_000L));
+        sessions.put(tokenHash(token), new Session(user, clock.millis() + 12 * 3600_000L,binding));
         ok(out);
         Binary.text(out, token);
         user.write(out);
@@ -237,6 +252,9 @@ public final class RelayServer implements AutoCloseable {
       authSlot.release();
     }
   }
+
+  private void check(Session session)throws IOException {if(session.expiresAt()<=clock.millis())throw new IOException("Сессия истекла");if(sessionGate!=null)sessionGate.check(session.user(),session.binding());}
+  private boolean routeCurrent(PublishedRoute route){if(sessionGate==null)return true;try{sessionGate.check(route.owner(),route.binding());return true;}catch(IOException denied){return false;}}
 
   private synchronized boolean allowAttempt(String nick) {
     long now = clock.millis();
@@ -277,5 +295,6 @@ public final class RelayServer implements AutoCloseable {
     timer.shutdownNow();
     sessions.clear();
     routes.clear();
+    if(sessionGate!=null)sessionGate.close();
   }
 }

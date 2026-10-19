@@ -1,0 +1,25 @@
+package org.securemail.relay;
+import org.junit.jupiter.api.*;
+import org.securemail.ecosystem.protocol.IdentityProtocol;
+import org.securemail.ecosystem.rpc600.PinnedIdentityLoopback600;
+import java.io.*;
+import java.net.*;
+import java.nio.charset.StandardCharsets;
+import java.security.*;
+import java.util.*;
+import java.util.concurrent.*;
+import static org.junit.jupiter.api.Assertions.*;
+/** Adversarial real TCP HTTP responses; these fixtures are not a production Identity authority. */
+class IdentityLoopback600Test {
+ static KeyPair pair()throws Exception{return KeyPairGenerator.getInstance("Ed25519").generateKeyPair();}
+ interface Answer {void write(Socket socket,byte[] request)throws Exception;}
+ static final class Fake implements AutoCloseable {final ServerSocket server=new ServerSocket(0,4,InetAddress.getLoopbackAddress());final ExecutorService workers=Executors.newSingleThreadExecutor();volatile Socket socket;
+  Fake(Answer answer)throws IOException{workers.submit(()->{try(Socket s=server.accept()){socket=s;s.setSoTimeout(2000);DataInputStream in=new DataInputStream(s.getInputStream());int content=0;for(int n=0;n<24;n++){String row=line(in);if(row.isEmpty())break;if(row.toLowerCase(Locale.ROOT).startsWith("content-length:"))content=Integer.parseInt(row.substring(row.indexOf(':')+1).trim());}if(content<2||content>65536)throw new IOException();answer.write(s,in.readNBytes(content));}catch(Exception ignored){}});}
+  int port(){return server.getLocalPort();}public void close()throws Exception{server.close();if(socket!=null)socket.close();workers.shutdownNow();workers.awaitTermination(2,TimeUnit.SECONDS);}}
+ static String line(DataInputStream in)throws IOException{ByteArrayOutputStream b=new ByteArrayOutputStream();for(int n=0;n<2048;n++){int c=in.read();if(c<0)throw new EOFException();if(c=='\r'){if(in.read()!='\n')throw new IOException();return b.toString(StandardCharsets.US_ASCII);}b.write(c);}throw new IOException();}
+ static void reply(Socket socket,KeyPair signer,String nonce,byte[] signedRequest,byte[] signatureBody,byte[] sentBody,String extra)throws Exception{byte[] signature=IdentityProtocol.sign(signer.getPrivate(),IdentityProtocol.response(IdentityProtocol.id(signer.getPublic().getEncoded()),nonce,signedRequest,signatureBody));String header="HTTP/1.1 200 OK\r\nContent-Type: application/json\r\nContent-Length: "+sentBody.length+"\r\nAEGIS-Signature: "+IdentityProtocol.b64(signature)+"\r\n"+extra+"\r\n";socket.getOutputStream().write(header.getBytes(StandardCharsets.US_ASCII));socket.getOutputStream().write(sentBody);socket.getOutputStream().flush();}
+ @Test void exactSignedResponseWorksButWrongPinNonceRequestOrBodyCannotAuthenticate()throws Exception{KeyPair service=pair(),other=pair();String n=IdentityProtocol.nonce();byte[] request="{\"request\":1}".getBytes(StandardCharsets.UTF_8),body="{\"ok\":true}".getBytes(StandardCharsets.UTF_8);for(int mode=0;mode<5;mode++){final int m=mode;try(Fake fake=new Fake((socket,actual)->reply(socket,m==1?other:service,m==2?IdentityProtocol.nonce():n,m==3?new byte[]{1,2}:actual,body,m==4?"{\"ok\":false}".getBytes(StandardCharsets.UTF_8):body,""));PinnedIdentityLoopback600 client=new PinnedIdentityLoopback600(fake.port(),service.getPublic().getEncoded())){if(m==0)assertArrayEquals(body,client.post(request,n).body());else assertThrows(IOException.class,()->client.post(request,n));}}}
+ @Test void duplicateLengthChunkedEncodingAndOversizedHeadersAreRejectedEvenWithValidSignature()throws Exception{KeyPair service=pair();String n=IdentityProtocol.nonce();byte[] request="{}".getBytes(StandardCharsets.UTF_8),body="{}".getBytes(StandardCharsets.UTF_8);for(String extra:List.of("Content-Length: 2\r\n","Transfer-Encoding: chunked\r\n","Content-Encoding: gzip\r\n","X-Padding: "+"x".repeat(2050)+"\r\n")){try(Fake fake=new Fake((socket,actual)->reply(socket,service,n,actual,body,body,extra));PinnedIdentityLoopback600 client=new PinnedIdentityLoopback600(fake.port(),service.getPublic().getEncoded())){assertThrows(IOException.class,()->client.post(request,n));}}}
+ @Test @Timeout(12) void slowDripCannotExtendAbsoluteSixSecondDeadline()throws Exception{KeyPair service=pair();String n=IdentityProtocol.nonce();try(Fake fake=new Fake((socket,actual)->{byte[] header="HTTP/1.1 200 OK\r\nContent-Length: 2\r\n".getBytes(StandardCharsets.US_ASCII);for(byte b:header){socket.getOutputStream().write(b);socket.getOutputStream().flush();Thread.sleep(200);}});PinnedIdentityLoopback600 client=new PinnedIdentityLoopback600(fake.port(),service.getPublic().getEncoded())){long start=System.nanoTime();assertThrows(IOException.class,()->client.post("{}".getBytes(StandardCharsets.UTF_8),n));long millis=TimeUnit.NANOSECONDS.toMillis(System.nanoTime()-start);assertTrue(millis>=5000&&millis<9500,"absolute socket close elapsed="+millis);}}
+ @Test void closedTransportDoesNotStartAnyFurtherRequest()throws Exception{try(PinnedIdentityLoopback600 client=new PinnedIdentityLoopback600(1,pair().getPublic().getEncoded())){client.close();assertThrows(IOException.class,()->client.post("{}".getBytes(StandardCharsets.UTF_8),IdentityProtocol.nonce()));}}
+}

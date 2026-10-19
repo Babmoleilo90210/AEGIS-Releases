@@ -1,0 +1,42 @@
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+{"scope":"actual-local-500MiB-crypto-store-restart-resume-read-decrypt-not-Tor","plaintextBytes":524288000,"ciphertextBytes":524296056,"chunks":501,"heapMaxBytes":100663296,"durationMillis":57001}
+╷
+├─ JUnit Platform Suite ✔
+├─ JUnit Jupiter ✔
+│  ├─ LargeAttachmentStore600Test ✔
+│  │  └─ fiveHundredMiBEncryptedObjectResumesAcrossStoreRestartWithBoundedHeap() 57119 ms ✔
+│  ├─ AttachmentStoreTest ✔
+│  │  ├─ duplicateConflictAndChangedManifestCannotOverwrite() ✔
+│  │  ├─ pathTraversalSymlinkAndTwoProcessOpenAreRejected() ✔
+│  │  ├─ authorityIsRecheckedDuringWriteAndNoChunkPublishedAfterRevoke() ✔
+│  │  ├─ modifiedOnDiskChunkAndIncompleteCommitAreRejected() ✔
+│  │  ├─ canonicalFrameRejectsTrailingBytesAndChangedOperationFields() ✔
+│  │  ├─ noRecipientMetadataBeforeCommitAndNoForeignAccessOrWrite() ✔
+│  │  ├─ immutableResumableChunksSurviveRestartAndAckFreesQuota() ✔
+│  │  ├─ expiryAndClockRollbackNeverExtendThirtyDayDeadline() ✔
+│  │  ├─ partialUploadsExpireWithinOneDayAndAbortIsBoundToSender() ✔
+│  │  ├─ oversizedUndersizedAndWrongDigestDoNotBecomeStoredChunks() ✔
+│  │  └─ quotasReserveFullDeclaredSizeAtomicallyAndCannotDoubleCountRetry() ✔
+│  └─ AttachmentHttpIntegrationTest ✔
+│     ├─ tamperedOperationReplayAndCipherChunkMismatchRejectedByRealServers() ✔
+│     ├─ newGenerationRevokesRemoteAuthorityAndOldUploadCapability() ✔
+│     ├─ actualRemoteIdentityAndChunkHttpRoundTripThenRecipientAck() ✔
+│     └─ servicePinAndPublicListenAreRejected() ✔
+└─ JUnit Vintage ✔
+
+Test run finished after 59986 ms
+[         6 containers found      ]
+[         0 containers skipped    ]
+[         6 containers started    ]
+[         0 containers aborted    ]
+[         6 containers successful ]
+[         0 containers failed     ]
+[        16 tests found           ]
+[         0 tests skipped         ]
+[        16 tests started         ]
+[         0 tests aborted         ]
+[        16 tests successful      ]
+[         0 tests failed          ]
+

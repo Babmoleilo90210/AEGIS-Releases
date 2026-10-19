@@ -91,7 +91,10 @@ public final class RelayStore implements AutoCloseable {
     }
   }
 
-  public synchronized UserInfo register(String nickname, byte[] password, byte[] pub)
+  @FunctionalInterface public interface CurrentCheck {void check()throws Exception;}
+  public synchronized UserInfo register(String nickname,byte[] password,byte[] pub)throws Exception {return register(nickname,password,pub,()->{});}
+  /** Identity6 rechecks after the expensive password KDF and immediately before the durable commit. */
+  public synchronized UserInfo register(String nickname, byte[] password, byte[] pub,CurrentCheck current)
       throws Exception {
     String nick = Limits.nickname(nickname);
     if(!config.allowRegistration())throw new Rejection(2);
@@ -103,16 +106,10 @@ public final class RelayStore implements AutoCloseable {
         .generatePublic(new java.security.spec.X509EncodedKeySpec(pub));
     byte[] salt = Authentication.salt(), hash = Authentication.hash(password, salt);
     String id = Signatures.id(pub);
-    try (var s = db.prepareStatement("INSERT INTO users VALUES(?,?,?,?,?)")) {
-      s.setString(1, id);
-      s.setString(2, nick);
-      s.setBytes(3, hash);
-      s.setBytes(4, salt);
-      s.setBytes(5, pub);
-      s.executeUpdate();
-    } finally {
-      Arrays.fill(hash, (byte) 0);
-    }
+    db.setAutoCommit(false);
+    try {current.check();try(var s=db.prepareStatement("INSERT INTO users VALUES(?,?,?,?,?)")){s.setString(1,id);s.setString(2,nick);s.setBytes(3,hash);s.setBytes(4,salt);s.setBytes(5,pub);s.executeUpdate();}current.check();db.commit();}
+    catch(Exception failure){db.rollback();throw failure;}
+    finally{Arrays.fill(hash,(byte)0);db.setAutoCommit(true);}
     return new UserInfo(id, nick, pub, null);
   }
 
@@ -156,7 +153,8 @@ public final class RelayStore implements AutoCloseable {
     }
   }
 
-  public synchronized void store(UserInfo sender, EncryptedPacket p) throws Exception {
+  public synchronized void store(UserInfo sender,EncryptedPacket packet)throws Exception {store(sender,packet,()->{});}
+  public synchronized void store(UserInfo sender, EncryptedPacket p,CurrentCheck current) throws Exception {
     cleanup();
     long now = clock.millis();
     if (!sender.userId().equals(p.senderId())
@@ -200,7 +198,8 @@ public final class RelayStore implements AutoCloseable {
     }
     if (scalar("SELECT COUNT(*) FROM receipts") >= 8192L * config.maxUsers())
       throw new IOException("Receipt quota reached");
-    try (var s = db.prepareStatement("INSERT INTO mailbox VALUES(?,?,?,?,?,?)")) {
+    db.setAutoCommit(false);
+    try {current.check();try (var s = db.prepareStatement("INSERT INTO mailbox VALUES(?,?,?,?,?,?)")) {
       s.setString(1, p.messageId());
       s.setString(2, p.recipientId());
       s.setBytes(3, encoded);
@@ -208,7 +207,7 @@ public final class RelayStore implements AutoCloseable {
       s.setLong(5, now);
       s.setLong(6, Math.min(p.deliveryDeadline(), now + config.maxMessageAge()));
       s.executeUpdate();
-    }
+    }current.check();db.commit();}catch(Exception failed){db.rollback();throw failed;}finally{db.setAutoCommit(true);}
   }
 
   public synchronized EncryptedPacket fetch(UserInfo recipient) throws Exception {

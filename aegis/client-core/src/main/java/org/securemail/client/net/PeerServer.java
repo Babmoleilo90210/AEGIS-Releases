@@ -15,6 +15,8 @@ public final class PeerServer implements AutoCloseable {
   private final java.util.function.Function<byte[],org.securemail.client.lifecycle.DeviceCapabilities> capabilities;
   @FunctionalInterface public interface Extension { void handle(Socket socket)throws Exception; }
   private final Extension voice;
+  private volatile java.util.function.Function<byte[],org.securemail.client.attachments600.AttachmentFeatures600> attachmentFeatures;
+  public void attachmentFeatures(java.util.function.Function<byte[],org.securemail.client.attachments600.AttachmentFeatures600> feature){attachmentFeatures=feature;}
   private final ExecutorService preface = new ThreadPoolExecutor(0,2,30,TimeUnit.SECONDS,new SynchronousQueue<>(),new ThreadPoolExecutor.AbortPolicy());
   private final ExecutorService voiceWorker = new ThreadPoolExecutor(0,2,30,TimeUnit.SECONDS,new SynchronousQueue<>(),new ThreadPoolExecutor.AbortPolicy());
   private final ExecutorService worker =
@@ -106,6 +108,7 @@ public final class PeerServer implements AutoCloseable {
       try {
         socket.setSoTimeout(30_000);
         if(operation==org.securemail.client.lifecycle.DeviceCapabilities.OPERATION&&capabilities!=null){byte[] challenge=Binary.bytes(in,32);if(challenge.length!=32)throw new IOException("Challenge length");var answer=capabilities.apply(challenge);Binary.header(out);out.writeInt(0);answer.write(out);out.flush();return;}
+        if(operation==org.securemail.client.attachments600.AttachmentFeatures600.OPERATION&&attachmentFeatures!=null){byte[] challenge=Binary.bytes(in,32);if(challenge.length!=32)throw new IOException("Challenge length");var answer=attachmentFeatures.apply(challenge);Binary.header(out);out.writeInt(0);answer.write(out);out.flush();return;}
         if(operation!=Operation.DELIVER.code)throw new IOException("Bad peer operation");
         var ack = acceptor.accept(PacketCodec.read(in, maxCiphertext()));
         Binary.header(out);

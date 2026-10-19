@@ -1,0 +1,13 @@
+[GNUPG:] NEWSIG
+[GNUPG:] KEY_CONSIDERED BBE20FD6DA48A3DD4CC7DF41A801183E69B37AA9 0
+[GNUPG:] SIG_ID gBNPzJNrjDLXk6/ZblX7uGH0Cq0 2026-10-09 1791571985
+[GNUPG:] GOODSIG A801183E69B37AA9 Nathan of Guardian <nathan@guardianproject.info>
+[GNUPG:] VALIDSIG BBE20FD6DA48A3DD4CC7DF41A801183E69B37AA9 2026-10-09 1791571985 0 4 0 1 10 00 BBE20FD6DA48A3DD4CC7DF41A801183E69B37AA9
+[GNUPG:] TRUST_UNDEFINED 0 pgp
+gpg: Signature made Fri Oct  9 20:53:05 2026 CEST
+gpg:                using RSA key A801183E69B37AA9
+gpg: Good signature from "Nathan of Guardian <nathan@guardianproject.info>" [unknown]
+gpg:                 aka "Nathan Freitas <nathanfreitas@gmail.com>" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: BBE2 0FD6 DA48 A3DD 4CC7  DF41 A801 183E 69B3 7AA9

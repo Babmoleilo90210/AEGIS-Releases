@@ -1,0 +1,9 @@
+{
+  "queriedAt": "2026-10-18T12:44:13.643206+00:00",
+  "url": "https://api.github.com/advisories?ecosystem=maven&affects=org.xerial%3Asqlite-jdbc%403.53.4.0&per_page=100",
+  "status": 200,
+  "bytes": 2,
+  "link": null,
+  "contentType": "application/json; charset=utf-8",
+  "response": []
+}

@@ -1,0 +1,7 @@
+build/
+local.properties
+*.jks
+*.keystore
+*.pk8
+*.idsig
+

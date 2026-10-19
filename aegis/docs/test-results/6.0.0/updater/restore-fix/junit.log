@@ -1,0 +1,87 @@
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+╷
+├─ JUnit Jupiter ✔
+│  ├─ UpdateSecurityTest ✔
+│  │  ├─ channelProtocolUrlAndDateAreStrict() ✔
+│  │  ├─ cancellationCannotReachReadyOrModifyInstallation() ✔
+│  │  ├─ downgradeAndSignedSameVersionReplacementRejected() ✔
+│  │  ├─ startupFailureRollsBackAndPreviousRecoveryCopyIsNeverOverwritten() ✔
+│  │  ├─ duplicateAndUnknownJsonFieldsRejectedEvenIfSigned() ✔
+│  │  ├─ wrongSignatureAndKeyRejected() ✔
+│  │  ├─ newlyAvailableFeedBelowRememberedFloorIsPolicyFailure() ✔
+│  │  ├─ interruptedDownloadLeavesOldBinaryAndRemovesPartial() ✔
+│  │  ├─ transportTlsSignatureAndSchemaDiagnosticsStaySeparateAndNeverLogRawMessages() ✔
+│  │  ├─ signedOldFeedIsNotATransportErrorAndCannotDownloadOrLowerFloor() ✔
+│  │  ├─ closeQuiescesDiagnosticsAndNeverRecreatesRemovedProfile() ✔
+│  │  ├─ invalidRuntimeSignatureCreatesNoAnnouncementOrFloor() ✔
+│  │  ├─ announcementDeduplicatesAndTamperingNeverEntersTrustedHistory() ✔
+│  │  ├─ requiredOnlySecurityOrIncompatibleAndOptionalDoesNotGate() ✔
+│  │  ├─ validExactSignatureAcceptsAndPinsProductionKey() ✔
+│  │  ├─ changedJsonAndUnparseableUnsignedDataFailSignatureFirst() ✔
+│  │  ├─ binaryChangedWrongSizeAndTraversalRejected() ✔
+│  │  ├─ manualCheckDownloadStatesRealProgressAndInstallFailure() ✔
+│  │  ├─ successfulInstallRequiresStartupAckAndRollsBackOnNoAck() ✔
+│  │  └─ semanticPrereleaseOrderingAndLimits() ✔
+│  ├─ SignedManifestCompatibility250Test ✔
+│  │  ├─ signatureFirstPinnedKeyShaFormatAndRollbackRemainStrict() ✔
+│  │  ├─ historical200BetaTagErrorIsRejectedEvenWithAValidTestSignature() ✔
+│  │  ├─ explicitPrereleaseRetainsItsExactTagAndCannotEnterStableChannel() ✔
+│  │  ├─ generated250StableAndBetaManifestsAreAcceptedForInstalled150And200() ✔
+│  │  ├─ generated500StableIsAcceptedByCurrentAndFrozenSupportedParsers() ✔
+│  │  ├─ generatedHashesDescribeActualFilesAndChangedSameSizeDownloadIsRejected() ✔
+│  │  └─ generated600StableIsAcceptedByActualFrozen500AndHistoricalParsers() ✔
+│  ├─ UpdateTransportTest ✔
+│  │  ├─ arbitraryHostsIpsCredentialsHttpAndPortsAreRejected() ✔
+│  │  ├─ updateHostnameUsesLoopbackSocksRemoteDnsOnly() ✔
+│  │  ├─ explicitDistributionAndRedirectHostsOnly() ✔
+│  │  └─ torFailurePreventsUpdateRequestAndClearnetFallback() ✔
+│  ├─ ResumeRangeTest ✔
+│  │  ├─ exactRangeRequired() ✔
+│  │  └─ mismatchedOrAmbiguousRangeRejected() ✔
+│  ├─ HelperIsolationTest ✔
+│  │  ├─ detachedHelperCannotBePreparedInsideOldRuntimeOrThroughAlias() ✔
+│  │  └─ helperCannotLoadJavaFxOrClientUi() ✔
+│  ├─ UpdateEventsTest ✔
+│  │  ├─ changedOrInvalidSignatureCannotCreateTrustedLetter() ✔
+│  │  ├─ stableAndBetaIdsDoNotCollide() ✔
+│  │  ├─ ackAndStartAloneNeverConfirmInstallation() ✔
+│  │  ├─ migratedHistoryRequiresSignatureAndFormerAcceptanceFloor() ✔
+│  │  ├─ wrongAckTokenAndRollbackPreventInstalledLetter() ✔
+│  │  ├─ errorsContainOnlyCodesAndNoPrivilegedSender() ✔
+│  │  └─ signedAvailableCreatesOfflineDeduplicatedLetter() ✔
+│  ├─ LocalHttpUpdate600Test ✔
+│  │  ├─ actualHttpSignedVersionBelowFloorNeverDownloadsAnyAsset() ✔
+│  │  ├─ interruptedActualHttpDownloadResumesWithExactRangeAndVerifiedSha() ✔
+│  │  ├─ actualHttpSameSizeChangedBytesCannotReachReadyOrTouchInstalledBinary() ✔
+│  │  └─ actualHttpUntrustedSignatureIsRejectedBeforeArtifactDownloadOrHistory() ✔
+│  ├─ UpdaterRuntimeLease600Test ✔
+│  │  ├─ failureStopsExactCoreThenReacquiresExclusiveBeforeRollback() ✔
+│  │  ├─ independentManagerRaceBlocksRollbackAndRetainsOldAndNew() ✔
+│  │  ├─ oldClientWithoutRuntimeLeaseStillBlocksBeforeBackupAndReplacement() ✔
+│  │  ├─ exclusiveCopyReleasesBeforeSharedNewCoreStartup() ✔
+│  │  ├─ previousUnownedCandidateIsNeverCleanedOnPreflightFailure() ✔
+│  │  └─ anotherRuntimeBlocksBeforeBackupAndPreservesEveryFile() ✔
+│  └─ ProfileSnapshot600Test ✔
+│     ├─ mailMigrationSnapshotNeverIncludesCoreGlasOrMigrationReceiptSources() ✔
+│     ├─ persistentCoreVoiceAndMigrationMetadataRestoreWithoutCacheCookiesOrBackupRecursi... ✔
+│     ├─ pre6SnapshotWithoutCoreOwnershipNeverRemovesLaterPairedDevice() ✔
+│     └─ absentUnownedMigrationTargetsDoNotCreateAnIncompleteMigrationDirectory() ✔
+├─ JUnit Platform Suite ✔
+└─ JUnit Vintage ✔
+
+Test run finished after 10170 ms
+[        12 containers found      ]
+[         0 containers skipped    ]
+[        12 containers started    ]
+[         0 containers aborted    ]
+[        12 containers successful ]
+[         0 containers failed     ]
+[        56 tests found           ]
+[         0 tests skipped         ]
+[        56 tests started         ]
+[         0 tests aborted         ]
+[        56 tests successful      ]
+[         0 tests failed          ]
+

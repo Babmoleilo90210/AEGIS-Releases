@@ -1,5 +1,8 @@
 dependencies {
     api project(':common-protocol')
+    testImplementation project(':identity-server')
+    testImplementation project(':management-agent')
+    testImplementation project(':attachment-service')
     implementation 'net.lingala.zip4j:zip4j:2.11.6'
     implementation 'net.java.dev.jna:jna:5.19.1'
     implementation 'net.java.dev.jna:jna-platform:5.19.1'

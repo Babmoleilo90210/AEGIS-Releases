@@ -8,7 +8,7 @@ public final class Launcher {
   private Launcher() {}
 
   public static void main(String[] args) {
-    try {
+    try (org.securemail.client.maintenance600.RuntimeLease600.Lease runtime=org.securemail.client.maintenance600.RuntimeLease600.running()) {
       if (args.length > 0 && args[0].equals("--cleanup")) {
         Path c = args.length > 1 ? Path.of(args[1]) : AegisApp.defaultConfig();
         LocalStore.cleanupLockedFiles(
@@ -21,9 +21,9 @@ public final class Launcher {
       System.setProperty("java.io.tmpdir",profile.resolve("tmp").toString());
       System.setProperty("jna.tmpdir",profile.resolve("native-cache").toString());
       System.setProperty("javafx.cachedir",profile.resolve("native-cache").toString());
-      javafx.application.Application.launch(MessengerApp.class, args);
+      javafx.application.Application.launch(CoreApp600.class, args);
     } catch (Exception e) {
-      System.err.println("AEGIS: startup failed. Check Java 21, display and configuration.");
+      System.err.println("АЕГИС: запуск не завершён. Проверьте Java 21, графическое окружение и установленный комплект.");
       System.exit(1);
     }
   }

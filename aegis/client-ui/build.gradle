@@ -20,7 +20,7 @@ sourceSets {
         runtimeClasspath += output + compileClasspath
     }
 }
-dependencies { smokeRuntimeOnly 'org.testfx:openjfx-monocle:21.0.2'; smokeImplementation project(':community-server') }
+dependencies { smokeRuntimeOnly 'org.testfx:openjfx-monocle:21.0.2'; smokeImplementation project(':community-server'); smokeImplementation project(':identity-server') }
 tasks.register('uiSmoke', JavaExec) {
     dependsOn smokeClasses
     classpath = sourceSets.smoke.runtimeClasspath
