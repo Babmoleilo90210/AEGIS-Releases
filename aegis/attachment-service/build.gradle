@@ -11,7 +11,11 @@ application {
     mainClass = 'org.securemail.attachments.AttachmentMain'
     applicationDefaultJvmArgs = ['-Xms32m', '-Xmx96m', '-XX:+DisableAttachMechanism', '-XX:-HeapDumpOnOutOfMemoryError']
 }
-tasks.withType(Test).configureEach { maxHeapSize = '96m' }
+tasks.withType(Test).configureEach {
+    maxHeapSize = '96m'
+    systemProperty 'aegis.native.root', rootProject.file('.native-test').absolutePath
+    dependsOn ':client-core:prepareNative'
+}
 tasks.register('verifyIsolation') {
     doLast {
         def names = configurations.runtimeClasspath.files.collect { it.name }

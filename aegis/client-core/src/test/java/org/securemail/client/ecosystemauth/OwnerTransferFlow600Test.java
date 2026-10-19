@@ -21,10 +21,12 @@ class OwnerTransferFlow600Test {
       byte[] old=f.owner.root.getPublic().getEncoded(),next=f.successor.root.getPublic().getEncoded();var request=f.owner.flow().prepare(f.successor.id());
       assertEquals(request.encode(),OwnerTransferFlow600.Request.parse(request.encode()).encode());assertArrayEquals(IdentityProtocol.ownerTransferBytes(request.transfer()),IdentityProtocol.ownerTransferBytes(f.successor.flow().inspect(request)));
       var first=f.owner.consent(request,OwnerTransferRole.OWNER_APPROVE);var second=f.successor.consent(request,OwnerTransferRole.SUCCESSOR_ACCEPT);
+      // A successful transfer locks the Owner locally; retain public wire tokens before that boundary.
+      String ownerCap=firstCap(f.owner),successorCap=firstCap(f.successor),administratorCap=firstCap(f.administrator);
       assertEquals(second.encode(),OwnerTransferFlow600.Consent.parse(second.encode()).encode());
       assertThrows(java.io.IOException.class,()->f.owner.flow().complete(first,second));f.administrator.flow().approve(request);f.owner.flow().complete(first,second);
       assertEquals(false,f.store.profile(f.owner.id()).get("ownerBadge"));assertEquals("Обычный пользователь",f.store.profile(f.owner.id()).get("systemRole"));assertEquals(true,f.store.profile(f.successor.id()).get("ownerBadge"));
-      assertFalse(f.client.isActive(firstCap(f.owner)));assertFalse(f.client.isActive(firstCap(f.successor)));assertTrue(f.client.isActive(firstCap(f.administrator)));
+      assertFalse(f.client.isActive(ownerCap));assertFalse(f.client.isActive(successorCap));assertTrue(f.client.isActive(administratorCap));
       assertArrayEquals(old,f.owner.session.accountPublic());assertArrayEquals(next,f.successor.session.accountPublic());assertTrue(f.store.verifyAudit());assertThrows(java.io.IOException.class,()->f.owner.flow().complete(first,second));
     }
   }
