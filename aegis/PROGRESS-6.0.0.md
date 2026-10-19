@@ -102,3 +102,12 @@ Production VPS/БД/Relay, Git push, release feeds и ключи владель�
 - Проверены подписи Android Tor AAR/source и jtorctl по опубликованным Guardian fingerprints. Найдено расхождение upstream README: фактический OpenSSL **3.5.9**, подтверждён тегом/gitlink и всеми ABI. OSV 14 dependency/native queries дал NO_INDEXED_HITS на момент запроса, что не является гарантией отсутствия уязвимостей. Точные hashes/licenses/receipts сохранены в `docs/test-results/6.0.0/android-tor-dependency-review`.
 
 Следующий обязательный шаг: закончить текущую Android/authority интеграцию и рассмотрение найденных ошибок, заморозить исходники, зафиксировать один commit, выполнить clean/nonincremental общий прогон и собрать все четыре конечных комплекта с provenance. До недоступной обязательной нативной/сетевой приёмки и подтверждения владельца **productionReady=false**.
+
+
+## Восстановление19.10.2026
+
+Среда была недоступна, затем временный каталог удалён обслуживанием. Проверенная резервная копия SHA11b8b2de70c10508725c510f77c46ef10643d9bd6f867b6907b17e0a221bea2f восстановлена с Git parent38a3e6469a40e6edcb1b0448f906a488c73feb5d. Recoveryimporta60162862c0f1e0e693599dc3145a2a01288c012 не имитирует утраченные прежние commit objects. Инструменты JDK21/Gradle9.8 повторно получены с официальными SHA; owner5ZIP eb44b087e8daa42c8cbd4dc108565d2c21783550ddd4e1cb632b3bae2ace6703/CRC проверены.
+
+Потерянные Core/Identity administration, Windows rollback и filesystem guards восстановлены. Новый обязательный Android security logout dispatcher реализован, late-login result после блокировки отклоняется. Текущие проверки:87 Identity/admin HTTP/SQL PASS,33 NewsWorker PASS,22 DebianPythonPASS/4NOT_RUN, build-focused74PASS/1AF_UNIXSKIP. Диагностическая компиляция всех11модулей и smoke sources прошла, но имела dirty/changed sources и не считается финальным build proof. Android собран диагностически, окончательная пересборка требует общего чистого commit.
+
+Новая копия Git bundle сохранена отдельно для восстановления неопубликованной ветки. Далее: freeze→полныйclean test assemble→четыре реальные поставки→хеши/provenance→unsigned owner kit. Недоступная обязательная нативная приёмка и реальные незавершённые функции остаются блокирующими, productionReady не меняется по прошедшему времени.
