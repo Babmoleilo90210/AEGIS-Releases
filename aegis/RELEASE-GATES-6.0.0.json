@@ -1,0 +1,355 @@
+{
+  "schemaVersion": 2,
+  "version": "6.0.0",
+  "stage": "RESTORED_DEVELOPMENT",
+  "sourceCommit": null,
+  "sourceTree": null,
+  "productionReady": false,
+  "publicationAuthorized": false,
+  "sourceBindingNote": "Заполнить точным окончательным commit/tree только после фиксации исходников; старый HEAD снимка не является источником всех незакоммиченных файлов.",
+  "artifacts": [],
+  "mandatory": [
+    {
+      "id": "SOURCE-PROVENANCE",
+      "status": "NOT_RUN",
+      "reason": "Восстановлен незавершённый снимок; конечный чистый commit/tree и происхождение всех итоговых бинарников ещё не проверены.",
+      "evidence": [
+        {
+          "path": "docs/test-results/6.0.0/restoration-security/ENVIRONMENT.json",
+          "sha256": "e08aabe5cf49c6d4fc728eb0dc4ec5306e5b53035b674d771b29fd170db13707"
+        }
+      ]
+    },
+    {
+      "id": "AUTOMATED-FULL",
+      "status": "NOT_RUN",
+      "reason": "После восстановления и последних исправлений не выполнен единый полный прогон фиксированного commit.",
+      "evidence": [
+        {
+          "path": "docs/test-results/6.0.0/restoration-security/ENVIRONMENT.json",
+          "sha256": "e08aabe5cf49c6d4fc728eb0dc4ec5306e5b53035b674d771b29fd170db13707"
+        }
+      ]
+    },
+    {
+      "id": "IDENTITY-AND-ADMINISTRATION",
+      "status": "NOT_RUN",
+      "reason": "Исторические scoped проверки сохранены; повторный согласованный прогон финальных Identity/Core/Mail и двух независимых администраторов ещё не завершён.",
+      "evidence": [
+        {
+          "path": "docs/test-results/6.0.0/restoration-security/ENVIRONMENT.json",
+          "sha256": "e08aabe5cf49c6d4fc728eb0dc4ec5306e5b53035b674d771b29fd170db13707"
+        }
+      ]
+    },
+    {
+      "id": "MAIL-AND-MIGRATION",
+      "status": "NOT_RUN",
+      "reason": "Нужен прогон новой сборки: сохранность старой identity/писем/контактов/архива/настроек, прерывание и безопасный откат.",
+      "evidence": [
+        {
+          "path": "docs/test-results/6.0.0/restoration-security/ENVIRONMENT.json",
+          "sha256": "e08aabe5cf49c6d4fc728eb0dc4ec5306e5b53035b674d771b29fd170db13707"
+        }
+      ]
+    },
+    {
+      "id": "ATTACHMENTS-500MIB",
+      "status": "NOT_RUN",
+      "reason": "Сохранён прежний локальный HTTP/SOCKS/SQL результат 500 МиБ; для конечных согласованных бинарников ещё требуется проверка.",
+      "evidence": [
+        {
+          "path": "docs/test-results/6.0.0/restoration-security/ENVIRONMENT.json",
+          "sha256": "e08aabe5cf49c6d4fc728eb0dc4ec5306e5b53035b674d771b29fd170db13707"
+        }
+      ]
+    },
+    {
+      "id": "LIBRARY-ACL-AND-REVOCATION",
+      "status": "NOT_RUN",
+      "reason": "Защищённый коннектор и серверные ACL сохранены; зависимые Identity/protocol/runtime исходники изменились после исторических 75 проверок.",
+      "evidence": [
+        {
+          "path": "docs/test-results/6.0.0/restoration-security/ENVIRONMENT.json",
+          "sha256": "e08aabe5cf49c6d4fc728eb0dc4ec5306e5b53035b674d771b29fd170db13707"
+        },
+        {
+          "path": "docs/test-results/6.0.0/restoration-security/LIBRARY-RESTORED-REVIEW.json",
+          "sha256": "ff21db323efe24f9e36737529162668c9a971cadf9a5d13f34920fffe457c4c0"
+        }
+      ]
+    },
+    {
+      "id": "INDEPENDENT-APPLICATION-LIFECYCLE",
+      "status": "NOT_RUN",
+      "reason": "Нужна повторная проверка Core lock/exit, сохранения очередей, завершения Почты/Гласа/защищённой Библиотеки и сохранения Взора/личного Obsidian.",
+      "evidence": [
+        {
+          "path": "docs/test-results/6.0.0/restoration-security/ENVIRONMENT.json",
+          "sha256": "e08aabe5cf49c6d4fc728eb0dc4ec5306e5b53035b674d771b29fd170db13707"
+        }
+      ]
+    },
+    {
+      "id": "ANDROID-FUNCTIONAL-COMPLETENESS",
+      "status": "BLOCKED",
+      "reason": "Восстановленные Android-компоненты требуют завершения и проверки полного требуемого поведения; наличие APK не доказывает полноту Почты/Сети/Стража/фоновой работы.",
+      "evidence": [
+        {
+          "path": "docs/test-results/6.0.0/restoration-security/ENVIRONMENT.json",
+          "sha256": "e08aabe5cf49c6d4fc728eb0dc4ec5306e5b53035b674d771b29fd170db13707"
+        }
+      ]
+    },
+    {
+      "id": "ANDROID-IPC-AND-SECURE-SCREENS",
+      "status": "NOT_RUN",
+      "reason": "Проверки Binder UID/package/certificate/nonce/generation, FLAG_SECURE и наложений требуют реального Android 13+ ARM64.",
+      "evidence": [
+        {
+          "path": "docs/test-results/6.0.0/restoration-security/ENVIRONMENT.json",
+          "sha256": "e08aabe5cf49c6d4fc728eb0dc4ec5306e5b53035b674d771b29fd170db13707"
+        }
+      ]
+    },
+    {
+      "id": "ANDROID-VPN-DNS-AND-LIFECYCLE",
+      "status": "NOT_RUN",
+      "reason": "protect(fd), DNS/IPv6/петли/смена сети/Always-on/lockdown/отсутствие прямого fallback не проверены на целевой ОС.",
+      "evidence": [
+        {
+          "path": "docs/test-results/6.0.0/restoration-security/ENVIRONMENT.json",
+          "sha256": "e08aabe5cf49c6d4fc728eb0dc4ec5306e5b53035b674d771b29fd170db13707"
+        }
+      ]
+    },
+    {
+      "id": "ANDROID-BACKGROUND-AND-DOZE",
+      "status": "NOT_RUN",
+      "reason": "Физические Doze/App Standby/foreground-service/battery/network/restart и входящие звонки без FCM не проверены.",
+      "evidence": [
+        {
+          "path": "docs/test-results/6.0.0/restoration-security/ENVIRONMENT.json",
+          "sha256": "e08aabe5cf49c6d4fc728eb0dc4ec5306e5b53035b674d771b29fd170db13707"
+        }
+      ]
+    },
+    {
+      "id": "APK-SIGNING-AND-ROTATION",
+      "status": "NOT_RUN",
+      "reason": "Не завершены физические установка/обновление/ротация и независимая проверка production-сертификата; ключ владельца не используется в Work.",
+      "evidence": [
+        {
+          "path": "docs/test-results/6.0.0/restoration-security/ENVIRONMENT.json",
+          "sha256": "e08aabe5cf49c6d4fc728eb0dc4ec5306e5b53035b674d771b29fd170db13707"
+        }
+      ]
+    },
+    {
+      "id": "VZOR-ISOLATION",
+      "status": "BLOCKED",
+      "reason": "В текущем Ubuntu namespace probe отклонён; Windows Sandbox и CachyOS Xephyr/bwrap/slirp не проверены нативно. Ослабленный запуск запрещён.",
+      "evidence": [
+        {
+          "path": "docs/test-results/6.0.0/restoration-security/ENVIRONMENT.json",
+          "sha256": "e08aabe5cf49c6d4fc728eb0dc4ec5306e5b53035b674d771b29fd170db13707"
+        }
+      ]
+    },
+    {
+      "id": "GLAS-E2EE-AND-AUDIO",
+      "status": "NOT_RUN",
+      "reason": "Требуется реальный микрофон/аудиоустройства, аутентификация, длительный Tor-разговор и измерения; localhost TLS/PCM недостаточны.",
+      "evidence": [
+        {
+          "path": "docs/test-results/6.0.0/restoration-security/ENVIRONMENT.json",
+          "sha256": "e08aabe5cf49c6d4fc728eb0dc4ec5306e5b53035b674d771b29fd170db13707"
+        }
+      ]
+    },
+    {
+      "id": "PUBLIC-TOR-NO-FALLBACK",
+      "status": "BLOCKED",
+      "reason": "Исторический публичный Tor bootstrap остановился на 0/10%; HTTPS/onion/DNS/WebRTC/direct-traffic приемка не состоялась.",
+      "evidence": [
+        {
+          "path": "docs/test-results/6.0.0/restoration-security/ENVIRONMENT.json",
+          "sha256": "e08aabe5cf49c6d4fc728eb0dc4ec5306e5b53035b674d771b29fd170db13707"
+        }
+      ]
+    },
+    {
+      "id": "NATIVE-WINDOWS11",
+      "status": "NOT_RUN",
+      "reason": "Windows 11 x64 недоступна; прежняя приёмка другой версии не связана с новыми хешами.",
+      "evidence": [
+        {
+          "path": "docs/test-results/6.0.0/restoration-security/ENVIRONMENT.json",
+          "sha256": "e08aabe5cf49c6d4fc728eb0dc4ec5306e5b53035b674d771b29fd170db13707"
+        }
+      ]
+    },
+    {
+      "id": "NATIVE-CACHYOS-WAYLAND",
+      "status": "NOT_RUN",
+      "reason": "CachyOS KDE Wayland недоступна; headless Ubuntu не является заменой.",
+      "evidence": [
+        {
+          "path": "docs/test-results/6.0.0/restoration-security/ENVIRONMENT.json",
+          "sha256": "e08aabe5cf49c6d4fc728eb0dc4ec5306e5b53035b674d771b29fd170db13707"
+        }
+      ]
+    },
+    {
+      "id": "NATIVE-CACHYOS-X11",
+      "status": "NOT_RUN",
+      "reason": "CachyOS KDE X11 недоступна; требуется отдельный результат.",
+      "evidence": [
+        {
+          "path": "docs/test-results/6.0.0/restoration-security/ENVIRONMENT.json",
+          "sha256": "e08aabe5cf49c6d4fc728eb0dc4ec5306e5b53035b674d771b29fd170db13707"
+        }
+      ]
+    },
+    {
+      "id": "NATIVE-DEBIAN13",
+      "status": "NOT_RUN",
+      "reason": "Нет Debian 13 staging с systemd/AppArmor/целевыми UID, onion и восстановлением.",
+      "evidence": [
+        {
+          "path": "docs/test-results/6.0.0/restoration-security/ENVIRONMENT.json",
+          "sha256": "e08aabe5cf49c6d4fc728eb0dc4ec5306e5b53035b674d771b29fd170db13707"
+        }
+      ]
+    },
+    {
+      "id": "NATIVE-ANDROID13-ARM64",
+      "status": "NOT_RUN",
+      "reason": "Нет физического Android 13+ ARM64 или подходящего эмулятора; host/JNI проверки не заменяют ART/Binder/OS.",
+      "evidence": [
+        {
+          "path": "docs/test-results/6.0.0/restoration-security/ENVIRONMENT.json",
+          "sha256": "e08aabe5cf49c6d4fc728eb0dc4ec5306e5b53035b674d771b29fd170db13707"
+        }
+      ]
+    },
+    {
+      "id": "TWO-PHYSICAL-DEVICES-TWO-NETWORKS",
+      "status": "NOT_RUN",
+      "reason": "Два физических устройства с независимыми сетями недоступны; два процесса не подменяют это условие.",
+      "evidence": [
+        {
+          "path": "docs/test-results/6.0.0/restoration-security/ENVIRONMENT.json",
+          "sha256": "e08aabe5cf49c6d4fc728eb0dc4ec5306e5b53035b674d771b29fd170db13707"
+        }
+      ]
+    },
+    {
+      "id": "UPDATER-END-TO-END-AND-ROLLBACK",
+      "status": "NOT_RUN",
+      "reason": "Не выполнены установка, закрытие, перезапуск, сохранность данных и откат конечных подписанных артефактов на целевых ОС.",
+      "evidence": [
+        {
+          "path": "docs/test-results/6.0.0/restoration-security/ENVIRONMENT.json",
+          "sha256": "e08aabe5cf49c6d4fc728eb0dc4ec5306e5b53035b674d771b29fd170db13707"
+        }
+      ]
+    },
+    {
+      "id": "LIBRARY-SYNC-POLICY",
+      "status": "BLOCKED",
+      "reason": "Реализован допустимый защищённый коннектор с ACL до содержимого; нативная межустройственная синхронизация и отдельная служба Sync не подтверждены.",
+      "evidence": [
+        {
+          "path": "docs/test-results/6.0.0/restoration-security/ENVIRONMENT.json",
+          "sha256": "e08aabe5cf49c6d4fc728eb0dc4ec5306e5b53035b674d771b29fd170db13707"
+        },
+        {
+          "path": "docs/test-results/6.0.0/restoration-security/LIBRARY-RESTORED-REVIEW.json",
+          "sha256": "ff21db323efe24f9e36737529162668c9a971cadf9a5d13f34920fffe457c4c0"
+        }
+      ]
+    },
+    {
+      "id": "NEWS-WORKER-LIVE",
+      "status": "BLOCKED",
+      "reason": "Сохранённый live RSS прогон заблокирован DNS, источник/модель/автономная публикация по правилам не подтверждены реальной внешней цепочкой.",
+      "evidence": [
+        {
+          "path": "docs/test-results/6.0.0/restoration-security/ENVIRONMENT.json",
+          "sha256": "e08aabe5cf49c6d4fc728eb0dc4ec5306e5b53035b674d771b29fd170db13707"
+        }
+      ]
+    },
+    {
+      "id": "SERVER-BACKUP-RESTORE-AND-RESOURCE-LIMITS",
+      "status": "NOT_RUN",
+      "reason": "Debian systemd/AppArmor/UID, реальные квоты/исчерпание ресурсов и аварийное восстановление VPS требуют staging.",
+      "evidence": [
+        {
+          "path": "docs/test-results/6.0.0/restoration-security/ENVIRONMENT.json",
+          "sha256": "e08aabe5cf49c6d4fc728eb0dc4ec5306e5b53035b674d771b29fd170db13707"
+        }
+      ]
+    },
+    {
+      "id": "VISUAL-AND-ACCESSIBILITY",
+      "status": "NOT_RUN",
+      "reason": "Сохранённые реальные JavaFX Monocle PNG полезны для регрессий, но нативная матрица размеров/масштабов/16 пресетов не пройдена.",
+      "evidence": [
+        {
+          "path": "docs/test-results/6.0.0/restoration-security/ENVIRONMENT.json",
+          "sha256": "e08aabe5cf49c6d4fc728eb0dc4ec5306e5b53035b674d771b29fd170db13707"
+        }
+      ]
+    },
+    {
+      "id": "LEGACY500-COMPATIBILITY",
+      "status": "NOT_RUN",
+      "reason": "Требуется проверка старого опубликованного клиента против новой согласованной серверной сборки; политика минимум 12 месяцев сохраняется.",
+      "evidence": [
+        {
+          "path": "docs/test-results/6.0.0/restoration-security/ENVIRONMENT.json",
+          "sha256": "e08aabe5cf49c6d4fc728eb0dc4ec5306e5b53035b674d771b29fd170db13707"
+        }
+      ]
+    },
+    {
+      "id": "SECURITY-AUDIT",
+      "status": "BLOCKED",
+      "reason": "Есть scoped code/dependency review; полный финальный аудит бинарников, маршрутов, parser/IPC/ACL и закрытие critical/high находок не завершены.",
+      "evidence": [
+        {
+          "path": "docs/test-results/6.0.0/restoration-security/ENVIRONMENT.json",
+          "sha256": "e08aabe5cf49c6d4fc728eb0dc4ec5306e5b53035b674d771b29fd170db13707"
+        },
+        {
+          "path": "docs/test-results/6.0.0/restoration-security/LIBRARY-RESTORED-REVIEW.json",
+          "sha256": "ff21db323efe24f9e36737529162668c9a971cadf9a5d13f34920fffe457c4c0"
+        }
+      ]
+    },
+    {
+      "id": "ALL-ARTIFACTS-AND-CHECKSUMS",
+      "status": "NOT_RUN",
+      "reason": "Полные четыре платформенных комплекта, исходники, SBOM и контрольные суммы одного frozen commit ещё не проверены.",
+      "evidence": [
+        {
+          "path": "docs/test-results/6.0.0/restoration-security/ENVIRONMENT.json",
+          "sha256": "e08aabe5cf49c6d4fc728eb0dc4ec5306e5b53035b674d771b29fd170db13707"
+        }
+      ]
+    },
+    {
+      "id": "OWNER-FINAL-ACCEPTANCE",
+      "status": "NOT_RUN",
+      "reason": "Финальная приёмка владельцем должна относиться к точным итоговым хешам 6.0.0; истекшее время её не заменяет.",
+      "evidence": [
+        {
+          "path": "docs/test-results/6.0.0/restoration-security/ENVIRONMENT.json",
+          "sha256": "e08aabe5cf49c6d4fc728eb0dc4ec5306e5b53035b674d771b29fd170db13707"
+        }
+      ]
+    }
+  ]
+}

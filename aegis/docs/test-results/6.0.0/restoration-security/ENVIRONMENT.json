@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-19T06:18:27.254658+00:00",
+  "hostOS": "Linux",
+  "architecture": "x86_64",
+  "distribution": "PRETTY_NAME=\"Ubuntu 24.04.3 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"24.04\"\nVERSION=\"24.04.3 LTS (Noble Numbat)\"\nVERSION_CODENAME=noble\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=noble\nLOGO=ubuntu-logo\n",
+  "pid1": "supervisord",
+  "availableTools": {
+    "bwrap": "/usr/bin/bwrap",
+    "slirp4netns": null,
+    "Xephyr": null,
+    "adb": null,
+    "java": "/usr/bin/java",
+    "systemctl": "/usr/local/bin/systemctl"
+  },
+  "namespaceProbe": {
+    "command": [
+      "/usr/bin/bwrap",
+      "--unshare-all",
+      "--ro-bind",
+      "/usr",
+      "/usr",
+      "--proc",
+      "/proc",
+      "--dev",
+      "/dev",
+      "--",
+      "/usr/bin/true"
+    ],
+    "exitCode": 1,
+    "stderr": "bwrap: loopback: Failed to create NETLINK_ROUTE socket: Operation not permitted\n"
+  },
+  "nativeAcceptance": {
+    "windows11-x64": "NOT_RUN",
+    "cachyos-kde-wayland-x86_64": "NOT_RUN",
+    "cachyos-kde-x11-x86_64": "NOT_RUN",
+    "debian13-x86_64": "NOT_RUN",
+    "android13plus-arm64": "NOT_RUN"
+  },
+  "note": "Observed restoration host only. Historical owner reports for older releases do not establish acceptance of new 6.0.0 bytes."
+}

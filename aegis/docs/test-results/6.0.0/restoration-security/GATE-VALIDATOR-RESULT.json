@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "executedAt": "2026-10-19T06:22:46.418215+00:00",
+  "command": [
+    "python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tools",
+    "-p",
+    "test_evaluate_release_gates*.py",
+    "-v"
+  ],
+  "exitCode": 0,
+  "tests": 20,
+  "newSourceBoundValidatorTests": 15,
+  "sourceUnchanged": true,
+  "sourceSha256": {
+    "tools/evaluate-release-gates.py": "84c1e0b4e92a3d245da571dc7f2bbd9c08b0252b384804ec2a427dfbd4ab301c",
+    "tools/evaluate-release-gates600.py": "2cd59bfb23b5958e46d6e50bee1b3fff9a5b111dd0073c9d8845a93ec9774db1",
+    "tools/test_evaluate_release_gates.py": "e1f5de48d4f8ddac8cd280d34e83360ba198850f1f582cc39c84bc7162f50b4f",
+    "tools/test_evaluate_release_gates600.py": "5d9cfe41cc14b80e11df13e7a01d49f8f4e308373e2ae5a3075cf472c51c6002"
+  },
+  "logSha256": "672e0635b83929814b7fa2052fa92dacda24ceeb22312ea0d319df4fba23d3e1",
+  "scope": "Synthetic receipt/legacy compatibility validator regressions only; no real release/native gate is promoted."
+}

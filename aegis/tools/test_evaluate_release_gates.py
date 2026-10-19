@@ -8,6 +8,11 @@ spec.loader.exec_module(gates)
 
 
 class ReleaseGatesTest(unittest.TestCase):
+    def test_legacy_api_cannot_shortcut_source_bound_600_gates(self):
+        with self.assertRaises(ValueError):
+            gates.evaluate({'version': '6.0.0', 'productionReady': True, 'mandatory': [
+                {'id': 'only-build', 'status': 'PASS', 'evidence': ['build.log']}]})
+
     def test_successful_build_cannot_promote_missing_native_acceptance(self):
         document = {'productionReady': False, 'mandatory': [
             {'id': 'build', 'status': 'PASS', 'evidence': ['build.xml']},

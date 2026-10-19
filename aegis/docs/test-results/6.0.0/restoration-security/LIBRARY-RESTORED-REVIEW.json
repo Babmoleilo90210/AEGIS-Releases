@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-19T06:18:27.254658+00:00",
+  "scope": "Read-only code/receipt review of restored files. No Java runtime, native sandbox, physical device or public Tor execution is claimed by this record.",
+  "codeReviewFindings": [
+    "Server read/export and graph ACL are enforced before content; explicit title-only discovery is separate from content permission.",
+    "Client per-document READ permit is separate from export/offline allowance; revision/SHA/account/device/generation/ACL epoch and monotonic clock checked.",
+    "Local expiry has a separate scheduled executor from network RPC and native cleanup; captured late responses cannot restore a changed selection.",
+    "Encrypted cache uses AES-GCM with OS secret storage and no plaintext key fallback; offline grant is RAM-only and not restored from disk.",
+    "Protected Obsidian maps one authorized projection and no network; personal Obsidian has separate vault/profile and explicit ordinary external network.",
+    "Linux uses nested Xephyr/bwrap and checkHiddenPaths; missing user namespaces fail closed. Windows Sandbox and Home limitation remain native gates.",
+    "Syncthing policy file alone is not a running synchronization service; no full protected vault is shared."
+  ],
+  "sourceSha256": {
+    "client-core/src/main/java/org/securemail/client/library600/LibraryEncryptedCache600.java": "b062fefd295481d2f3844f9be064cd0279a7f1d4540aaf6be76f6dfe322deea6",
+    "client-core/src/main/java/org/securemail/client/library600/LibraryConnector600.java": "2aa3f75e9153c2cfb11199ba9a8a86a07837a176e80af1b4a7abcdab2fdec2ce",
+    "client-core/src/main/java/org/securemail/client/library600/VaultProjection600.java": "2616946810b00c7d7d68ca94f4abe943b83cc0e179f24bc8cad07c0ce0e0f9dc",
+    "client-core/src/main/java/org/securemail/client/library600/WindowsObsidianPackage600.java": "a2b6024ef7122d748cdae2f6aa46bf86fa84b96a698b3fd493eed82a36b2007e",
+    "client-core/src/main/java/org/securemail/client/library600/ObsidianProfile600.java": "ac9a34dc5e511e24e101f33fe3406a5eaabc2dc19a54a3ac845ffe91ad40a8eb",
+    "client-core/src/main/java/org/securemail/client/library600/ObsidianHttps600.java": "8e6be8105211228b3ad660f8afc80b1e018b69ef3ec28386ef39e54de3e29ab8",
+    "client-core/src/main/java/org/securemail/client/library600/WindowsPersonalObsidianLauncher600.java": "9690126d22d324d1d89ed76cdff886d8b212564ff8ff481af6dca80cecd4aa40",
+    "client-core/src/main/java/org/securemail/client/library600/LinuxObsidianBoundary600.java": "b6ca744c57fd2e62f5d6661c11dae9b443c19c3f03a19d0e63815eb8374b92e7",
+    "client-core/src/main/java/org/securemail/client/library600/ObsidianCoordinator600.java": "eda288e4cd53ccb80428e3a902d69c65563b727e954fa3b4428ae96993ff41f2",
+    "client-core/src/main/java/org/securemail/client/library600/HttpLibraryTransport600.java": "6204642ba01f05969d7ff3876ce9759d1f3350978b31f0ef88acc7f676ba5e9d",
+    "client-core/src/main/java/org/securemail/client/library600/PersonalObsidianLauncher600.java": "97155b436242262399c6b63d2bcf5afebc58aa4f25364c936da06409bdc4484a",
+    "client-core/src/main/java/org/securemail/client/library600/ObsidianDistribution600.java": "81db13ad3942820aa47a663a90962c2b68fd39cb1d5dd8c065a7ee021f6f0b7e",
+    "client-core/src/main/java/org/securemail/client/library600/SyncthingPolicy600.java": "cb0fbf4d5e67a06c821df55adc8e5fc14692789884675ffc1bd418c812444356",
+    "client-core/src/main/java/org/securemail/client/library600/LibraryLease600.java": "ea6344f25d0d3faae0a17fab5064efabfc6f1cf16b01fa8dc89d89ce6761d0f5",
+    "client-core/src/main/java/org/securemail/client/library600/LibraryReadPermit600.java": "edbcdf9b5e3a005d5a718fdef82b2c0b9312de7d42bce2b97637a1d384aaa463",
+    "client-ui/src/main/java/org/securemail/ui/LibraryLauncherView600.java": "fbc3bb385fc3c5ce6a6e422ed1d182a7ab5cddc3594a2872909ac5d74d00deda",
+    "community-server/src/main/java/org/securemail/community/library600/LibraryController600.java": "b05fb4ebe9476f5764ef2f186caf75fb82935f7fc3e68f7143600fef1f598806",
+    "community-server/src/main/java/org/securemail/community/library600/LibraryIdentityBridge600.java": "9fe392a6250a6b1220c6b41cd60523de725be3677c48ca1627eaa6c309c5718a"
+  },
+  "historicalReceiptChecks": [
+    {
+      "path": "docs/test-results/6.0.0/library/BACKEND-RESULTS.json",
+      "sha256": "029ce6f2ee3e116d155992e547b5ad489a49dd36d37d18c792170acec4d1e302",
+      "matchingSourceFiles": [
+        "client-core/src/main/java/org/securemail/client/library600/ObsidianProfile600.java",
+        "client-core/src/main/java/org/securemail/client/library600/WindowsObsidianPackage600.java",
+        "client-core/src/main/java/org/securemail/client/library600/WindowsPersonalObsidianLauncher600.java",
+        "client-core/src/main/java/org/securemail/client/library600/LibraryEncryptedCache600.java",
+        "client-core/src/main/java/org/securemail/client/library600/PersonalObsidianLauncher600.java",
+        "client-core/src/main/java/org/securemail/client/library600/SyncthingPolicy600.java",
+        "client-core/src/main/java/org/securemail/client/library600/ObsidianCoordinator600.java",
+        "client-core/src/main/java/org/securemail/client/library600/HttpLibraryTransport600.java",
+        "client-core/src/main/java/org/securemail/client/library600/LibraryLease600.java",
+        "client-core/src/main/java/org/securemail/client/library600/LibraryConnector600.java",
+        "client-core/src/main/java/org/securemail/client/library600/ObsidianDistribution600.java",
+        "client-core/src/main/java/org/securemail/client/library600/LibraryReadPermit600.java",
+        "client-core/src/main/java/org/securemail/client/library600/LinuxObsidianBoundary600.java",
+        "client-core/src/main/java/org/securemail/client/library600/VaultProjection600.java",
+        "client-core/src/main/java/org/securemail/client/library600/ObsidianHttps600.java",
+        "client-core/src/test/java/org/securemail/client/library600/ObsidianWindowsBoundary600Test.java",
+        "client-core/src/test/java/org/securemail/client/library600/LibraryReadPermit600Test.java",
+        "client-core/src/test/java/org/securemail/client/library600/LibraryEncryptedCache600Test.java",
+        "client-core/src/test/java/org/securemail/client/library600/LibraryProtection600Test.java",
+        "client-core/src/test/java/org/securemail/client/library600/ObsidianBoundary600Test.java",
+        "client-core/src/test/java/org/securemail/client/library600/LibraryConnector600Test.java",
+        "client-core/src/test/java/org/securemail/client/library600/ObsidianOfficialPackageSmoke600.java",
+        "community-server/src/main/java/org/securemail/community/library600/LibraryHttpServer600.java",
+        "community-server/src/main/java/org/securemail/community/library600/LibraryServerMain600.java",
+        "community-server/src/main/java/org/securemail/community/library600/LibraryController600.java",
+        "community-server/src/main/java/org/securemail/community/library600/LibraryIdentityBridge600.java",
+        "community-server/src/test/java/org/securemail/community/library600/LibraryHttpIntegration600Test.java",
+        "community-server/src/test/java/org/securemail/community/library600/LibraryController600Test.java",
+        "common-protocol/src/main/java/org/securemail/library/protocol600/LibraryWire600.java",
+        "client-core/src/main/java/org/securemail/client/net/TorTransport.java",
+        "client-core/src/main/java/org/securemail/client/community/CommunityJson.java",
+        "identity-server/src/main/java/org/securemail/identity/PosixFilePermissions600.java",
+        "identity-server/src/main/java/org/securemail/identity/IdentityException.java",
+        "identity-server/src/main/java/org/securemail/identity/IdentityJson.java",
+        "community-server/src/main/java/org/securemail/community/access/AccessControl.java",
+        "community-server/src/main/java/org/securemail/community/core/CommunityStore.java",
+        "community-server/src/main/java/org/securemail/community/gateway600/TrustedContext600.java",
+        "client-core/src/main/java/org/securemail/client/safeweb/ObsidianWindowsBoundary600.java"
+      ],
+      "changedOrMissingSourceFiles": [
+        "common-protocol/src/main/java/org/securemail/ecosystem/protocol/IdentityProtocol.java",
+        "identity-server/src/main/java/org/securemail/identity/IdentityMain.java",
+        "identity-server/src/main/java/org/securemail/identity/IdentityHttpServer.java",
+        "identity-server/src/main/java/org/securemail/identity/IdentityStore.java",
+        "client-core/src/main/java/org/securemail/client/maintenance600/RuntimeLease600.java"
+      ],
+      "eligibleForFinalSourceGate": false,
+      "reason": "Historical scoped receipt; dependent source changed and final frozen whole release was not executed."
+    },
+    {
+      "path": "docs/test-results/6.0.0/library/UI-RUN.json",
+      "sha256": "0c9f00e921615cd0f40dff08179b058afebd421d95a73792eead51963f110699",
+      "matchingSourceFiles": [
+        "client-ui/src/main/java/org/securemail/ui/LibraryLauncherView600.java",
+        "client-ui/src/smoke/java/org/securemail/ui/LibraryLauncherSmoke600.java",
+        "client-core/src/main/java/org/securemail/client/ecosystemauth/IdentityClient600.java"
+      ],
+      "changedOrMissingSourceFiles": [],
+      "eligibleForFinalSourceGate": false,
+      "reason": "Historical scoped receipt; dependent source changed and final frozen whole release was not executed."
+    }
+  ],
+  "productionReady": false
+}
