@@ -77,8 +77,8 @@ public final class CoreApp600 extends Application {
   private void showLogin(){
     clearTransientPasswords();root.setLeft(null);PasswordField password=new PasswordField();transientPasswords.add(password);password.setPromptText("Пароль ключа устройства АЕГИС");password.setAccessibleText("Пароль ключа устройства АЕГИС");password.setMaxWidth(420);
     Label hint=label("АЕГИС хранит отдельный ключ устройства. Пароль и приватный ключ Почты вводятся только в процессе Почты.");
-    Button login=button("Войти",()->{char[] secret=password.getText().toCharArray();password.clear();work(()->{try{return openExisting(secret);}finally{Arrays.fill(secret,'\0');}},value->authenticated(),()->Arrays.fill(secret,'\0'));});login.setDefaultButton(true);
-    Button bind=button("Создать или привязать Почту",()->{char[] secret=password.getText().toCharArray();password.clear();work(()->{try{return enroll(secret);}finally{Arrays.fill(secret,'\0');}},value->authenticated(),()->Arrays.fill(secret,'\0'));});
+    Button login=button("Войти",()->{char[] secret=password.getText().toCharArray();password.clear();long epoch=uiEpoch.get();work(()->{try{return openExisting(secret,epoch);}finally{Arrays.fill(secret,'\0');}},value->authenticated(),()->Arrays.fill(secret,'\0'));});login.setDefaultButton(true);
+    Button bind=button("Создать или привязать Почту",()->{char[] secret=password.getText().toCharArray();password.clear();long epoch=uiEpoch.get();work(()->{try{return enroll(secret,epoch);}finally{Arrays.fill(secret,'\0');}},value->authenticated(),()->Arrays.fill(secret,'\0'));});
     Button device=button("Запросить подтверждение устройства",()->{char[] secret=password.getText().toCharArray();password.clear();work(()->{try{requireNetwork();try(var key=credentials.unlock(secret)){return DeviceApproval600.request(identity,key);}}finally{Arrays.fill(secret,'\0');}},this::showDeviceRequest,()->Arrays.fill(secret,'\0'));});
     VBox form=card(heading("АЕГИС — Экосистема"),hint,password,actions(login,bind),device,button("Восстановить доступ на этом устройстве",this::deviceRecovery),button("Подключить Tor",this::connectTor),actions(button("Сервер Identity",this::configuration),button("Серверы приложений",this::serviceConfiguration)));form.setMaxWidth(650);BorderPane.setMargin(form,new Insets(20));root.setCenter(scroll(form));
   }
@@ -126,12 +126,12 @@ public final class CoreApp600 extends Application {
     updatePreferences=UpdatePreferences.load(AppPaths.root());updates=new UpdateService(AppPaths.root(),base+2);updates.channel(updatePreferences.channel());updates.automatic(()->updatePreferences.automaticCheck(),()->updatePreferences.automaticDownload());updates.listener(change->Platform.runLater(()->{if(!stopping&&updatesView!=null&&updatesView.showing())updatesView.refresh(change);}));connectedConfig=config;if(updatePreferences.automaticCheck())updates.check(updatePreferences.automaticDownload());return true;
   },value->status.setText("Tor подключён"));}
   private void requireNetwork()throws IOException {if(config==null||tor==null||!tor.ready()||identity==null)throw new IOException("Сначала подключите Tor");}
-  private boolean openExisting(char[] password)throws Exception {
-    long epoch=uiEpoch.get();requireNetwork();closeSession();DeviceCredentials600 key=credentials.unlock(password);var candidate=new CoreAccountSession600(identity,config.identityPublicKey(),key);
+  private boolean openExisting(char[] password,long epoch)throws Exception {
+    requireAuthenticationEpoch(epoch);requireNetwork();closeSession();requireAuthenticationEpoch(epoch);DeviceCredentials600 key=credentials.unlock(password);var candidate=new CoreAccountSession600(identity,config.identityPublicKey(),key);
     try{candidate.login();synchronized(consentMutex){if(stopping||uiEpoch.get()!=epoch)throw new IOException("Вход отменён блокировкой");session=candidate;}return true;}catch(Exception error){candidate.close();throw error;}
   }
-  private boolean enroll(char[] password)throws Exception {
-    long epoch=uiEpoch.get();requireNetwork();closeSession();if(password.length<12)throw new IOException("Пароль ключа устройства: не менее 12 символов");
+  private boolean enroll(char[] password,long epoch)throws Exception {
+    requireAuthenticationEpoch(epoch);requireNetwork();closeSession();requireAuthenticationEpoch(epoch);if(password.length<12)throw new IOException("Пароль ключа устройства: не менее 12 символов");
     var consent=consentBroker(null,epoch);
     DeviceCredentials600 existing=credentials.exists()?credentials.unlock(password):null;
     KeyPair device=existing==null?KeyPairGenerator.getInstance("Ed25519").generateKeyPair():null;
@@ -285,6 +285,7 @@ public final class CoreApp600 extends Application {
     var coordinator=obsidian;if(coordinator!=null)try{protectedCleanup.execute(()->{try{coordinator.closeProtected();}catch(Exception failed){Platform.runLater(()->{if(session==current&&(current==null||current.locked()))status.setText("Не подтверждено завершение защищённой Библиотеки");});}});}catch(RejectedExecutionException busy){status.setText("Не подтверждена очистка защищённой Библиотеки");}
     if(broker!=null)broker.lock();if(library!=null)library.lock();if(management!=null){management.close();management=null;}if(notifications!=null){notifications.close();notifications=null;}if(ownerAdministration!=null){ownerAdministration.close();ownerAdministration=null;}if(authoritySetup!=null){authoritySetup.close();authoritySetup=null;}if(identityAdministration!=null){identityAdministration.close();identityAdministration=null;}if(community!=null){community.close();community=null;}if(applications!=null)applications.locked();identityLabel.setText("АЕГИС заблокирован");showLogin();status.setText("Для продолжения подтвердите вход");
   }
+  private void requireAuthenticationEpoch(long epoch)throws IOException {synchronized(consentMutex){if(stopping||uiEpoch.get()!=epoch)throw new IOException("Вход отменён блокировкой");}}
   private void publishSession(CoreAccountSession600 candidate,long epoch)throws IOException {synchronized(consentMutex){if(stopping||uiEpoch.get()!=epoch)throw new IOException("Вход отменён блокировкой");session=candidate;}}
   private MailPairingBroker600 consentBroker(CoreAccountSession600 active)throws IOException {return consentBroker(active,uiEpoch.get());}
   private MailPairingBroker600 consentBroker(CoreAccountSession600 active,long epoch)throws IOException {

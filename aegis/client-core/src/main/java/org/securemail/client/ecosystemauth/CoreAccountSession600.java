@@ -68,7 +68,7 @@ public final class CoreAccountSession600 implements SessionAuthority,AutoCloseab
   public byte[] accountPublic(){return credentials.accountPublic();}
   public byte[] devicePublic(){return credentials.devicePublic();}
   public long generation(){return generation;}
-  public AppGrant coreGrant()throws IOException {ensureLive();AppGrant value=core;if(value==null)throw new IOException("Вход ещё не завершён");return value;}
+  public AppGrant coreGrant()throws IOException {ensureUnlocked();AppGrant value=core;if(value==null)throw new IOException("Вход ещё не завершён");return value;}
   public synchronized AppGrant grant(App app,Set<Scope> scopes)throws IOException {
     ensureUnlocked();for(AppGrant grant:grants)if(grant.capability.appId==app&&grant.capability.capabilities.equals(scopes)&&grant.capability.expiresAt>now()+30_000)return grant;
     return issue(app,scopes);

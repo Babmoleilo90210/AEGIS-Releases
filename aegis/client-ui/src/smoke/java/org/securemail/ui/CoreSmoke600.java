@@ -145,7 +145,7 @@ public final class CoreSmoke600 {
       fx(()->{field(app,"config",new CorePublicConfig600(IDENTITY,80,service.service.getPublic().getEncoded(),service.socks.port()));field(app,"tor",tor);field(app,"transport",service.transport);field(app,"identity",service.client);field(app,"installation",installation());return null;});
       PasswordField recoveryPassword=recoveryPage(app,stage,out);stalledConsentCannotSurviveLock(app,stage,out,null);
       fx(()->{check(recoveryPassword.getText().isEmpty(),"Lock retained a detached recovery password field");check(!text(stage,"Восстановление устройства"),"Lock retained recovery page");return null;});checks.add("Pre-login Core lock cancels an actual owned consent child and clears detached recovery password controls");
-      check(Boolean.TRUE.equals(call(app,"openExisting",new Class<?>[]{char[].class},PASSWORD.clone())),"Actual Core device-vault login failed");
+      check(Boolean.TRUE.equals(call(app,"openExisting",new Class<?>[]{char[].class,long.class},PASSWORD.clone(),((AtomicLong)field(app,"uiEpoch")).get())),"Actual Core device-vault login failed");
       fx(()->{call(app,"authenticated");substituteOsObservation(app,stage);return null;});flush(app);noMailVault(profile);
       fx(()->{check(text(stage,"Приложения АЕГИС"),"Actual Core launcher was not installed");check(text(stage,"Испытатель Core 600"),"Signed remote profile nickname did not reach Core");check(!((CoreAccountSession600)field(app,"session")).locked(),"Explicit OS fixture did not hold the UI session");return null;});matrix(app,stage,out,"applications");
       fx(()->{call(app,"settings");return null;});matrix(app,stage,out,"settings");checks.add("Actual encrypted device vault unlock, signed Identity HTTP login/profile through bounded local SOCKS fixture");
@@ -155,7 +155,7 @@ public final class CoreSmoke600 {
       stalledConsentCannotSurviveLock(app,stage,out,active);ownerPagesCleared(pages);
       // The signed-response race also runs after an actual consent cancellation, while still locked.
       // Re-open the same device session solely through the ordinary authenticated login path.
-      check(Boolean.TRUE.equals(call(app,"openExisting",new Class<?>[]{char[].class},PASSWORD.clone())),"Reauthentication after consent cancellation failed");
+      check(Boolean.TRUE.equals(call(app,"openExisting",new Class<?>[]{char[].class,long.class},PASSWORD.clone(),((AtomicLong)field(app,"uiEpoch")).get())),"Reauthentication after consent cancellation failed");
       fx(()->{call(app,"authenticated");substituteOsObservation(app,stage);return null;});flush(app);
       queuedResponseCannotRestorePage(app,stage,out);noMailVault(profile);result="PASS";
     }finally{

@@ -54,7 +54,7 @@ class CoreAccountSession600Test {
   @Test void lockPreventsNewGrantsButRetainsBoundedExistingCallValidationAndLogoutRevokes()throws Exception {
     try(Fixture f=new Fixture()){
       f.register();assertTrue(f.session.canContinueOffline());var lease=f.session.authorize(ComponentId.GLAS);f.session.lock();assertTrue(f.session.locked());assertFalse(f.session.canContinueOffline());
-      assertThrows(java.io.IOException.class,()->f.session.authorize(ComponentId.MAIL));assertThrows(java.io.IOException.class,()->f.session.profile());f.session.validate(lease);
+      assertThrows(java.io.IOException.class,()->f.session.authorize(ComponentId.MAIL));assertThrows(java.io.IOException.class,()->f.session.coreGrant());assertThrows(java.io.IOException.class,()->f.session.profile());f.session.validate(lease);
       String token=new String(lease.capability(),java.nio.charset.StandardCharsets.US_ASCII);assertTrue(f.client.isActive(token));f.session.logout();assertFalse(f.client.isActive(token));assertThrows(java.io.IOException.class,()->f.session.validate(lease));
     }
   }
